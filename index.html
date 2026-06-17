@@ -2,342 +2,69 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Obsidian Sanctuary - RIRI</title>
+    <title>Sultana Sanctuary</title>
     <style>
-        /* جلب الخطوط الاحترافية ودعم إيموجيات الآيفون */
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Noto+Color+Emoji&display=swap');
-
-        /* قفل الشاشة مسمار لمنع أي اهتزاز أو حركة جانبية */
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            background: #010308;
-            color: #ffffff;
-            font-family: 'Cairo', sans-serif, 'Apple Color Emoji', 'Noto Color Emoji';
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;700;900&display=swap');
+        
         body {
+            margin: 0; padding: 0;
+            background: #050505;
+            height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            perspective: 1500px;
+            justify-content: center; align-items: center;
+            font-family: 'Cairo', sans-serif;
+            overflow: hidden;
         }
 
-        /* الخلفية الفضائية العميقة ستايل المجرة */
-        .galaxy-bg {
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(0, 191, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.18) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, #030611 0%, #010205 100%);
-            z-index: 0;
-            animation: galaxyRotate 30s infinite linear;
+        /* تأثير الغبار الذهبي الفخم */
+        .gold-dust {
+            position: absolute; width: 100%; height: 100%;
+            background-image: radial-gradient(circle, #ffd700 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
         }
 
-        @keyframes galaxyRotate {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.05); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
-
-        /* حاوية مطر الإيموجيات الفخم */
-        .cosmic-rain {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .premium-particle {
-            position: absolute;
-            font-size: 1.7rem;
-            will-change: transform, top;
-            filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.6));
-            font-family: 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
-            opacity: 0;
-        }
-
-        /* بطاقة الزجاج الملكية المستقيمة والمهندسة في الوسط */
-        .master-card {
-            background: linear-gradient(135deg, rgba(5, 12, 32, 0.85) 0%, rgba(1, 3, 9, 0.98) 100%);
-            border: 1px solid rgba(0, 191, 255, 0.35);
-            border-top: 1px solid rgba(0, 191, 255, 0.75);
-            border-bottom: 1px solid rgba(138, 43, 226, 0.55);
-            box-shadow: 
-                0 30px 70px rgba(0, 0, 0, 0.9),
-                0 0 50px rgba(0, 191, 255, 0.15),
-                inset 0 0 30px rgba(138, 43, 226, 0.1);
-            border-radius: 35px;
-            padding: 50px 30px;
-            max-width: 390px;
-            width: 88%;
-            z-index: 2;
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* وضع كل العناصر في السنتر الموزون */
-            justify-content: center;
-            text-align: center;
-            animation: borderPulse 4s infinite ease-in-out;
-        }
-
-        @keyframes borderPulse {
-            0%, 100% { border-color: rgba(0, 191, 255, 0.35); box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 191, 255, 0.15); }
-            50% { border-color: rgba(138, 43, 226, 0.6); box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 60px rgba(138, 43, 226, 0.3); }
-        }
-
-        /* حاوية التصميم النيوني البديل والمستحيل يفشل */
-        .neon-heart-core {
-            width: 130px;
-            height: 130px;
-            margin-bottom: 25px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: coreFloat 3.5s infinite ease-in-out;
-        }
-
-        /* الهالة الدائرية لتعويض إطار الصورة القديم */
-        .neon-heart-core::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 2px dashed rgba(0, 191, 255, 0.5);
-            animation: spinRing 12s infinite linear;
-            box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
-        }
-
-        @keyframes spinRing {
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes coreFloat {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-8px) scale(1.03); }
-        }
-
-        /* العناوين الموزونة في المنتصف تماماً */
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 900;
-            margin: 0 0 15px 0;
-            width: 100%;
-            text-align: center;
-            background: linear-gradient(to left, #ffffff, #00bfff, #8a2be2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 25px rgba(0, 191, 255, 0.35);
-        }
-
-        .main-p {
-            color: #c4d4fa;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin: 0 0 35px 0;
-            width: 100%;
-            text-align: center;
-            min-height: 60px;
-        }
-
-        /* زر النيون السائل الفخم */
-        .action-btn {
-            background: linear-gradient(135deg, #00bfff 0%, #4b0082 100%);
-            color: #ffffff;
-            border: none;
-            padding: 16px 0;
-            width: 90%;
-            font-size: 1.2rem;
-            font-weight: 700;
+        .card {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(20px);
+            border: 2px solid #ffd700;
             border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 0 25px rgba(0, 191, 255, 0.4), inset 0 0 12px rgba(255, 255, 255, 0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: inline-block;
+            padding: 60px 40px;
+            width: 85%; max-width: 400px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.2);
+            animation: appear 1.5s ease-out;
         }
 
-        .action-btn:hover {
-            transform: scale(1.04);
-            box-shadow: 0 0 45px rgba(138, 43, 226, 0.7);
+        @keyframes appear {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        /* شاشة المفاجأة المخفية النظيفة */
-        #surpriseZone {
-            display: none;
-            opacity: 0;
-            width: 100%;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.8s ease-in-out;
-        }
+        /* التاج الذهبي المتحرك */
+        .crown { font-size: 5rem; animation: float 3s infinite ease-in-out; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        .premium-title {
-            font-size: 2.4rem;
-            font-weight: 900;
-            background: linear-gradient(to left, #00bfff, #ffffff, #8a2be2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            text-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
-        }
+        h1 { color: #ffd700; font-size: 2.5rem; text-shadow: 0 0 20px #ffd700; }
+        p { color: #fff; font-size: 1.2rem; margin: 20px 0; line-height: 1.6; }
 
-        .premium-box {
-            font-size: 1.3rem;
-            color: #f5f8ff;
-            line-height: 1.9;
-            background: rgba(0, 191, 255, 0.04);
-            border: 1px solid rgba(0, 191, 255, 0.25);
-            padding: 30px 20px;
-            border-radius: 25px;
-            box-shadow: inset 0 0 20px rgba(0, 191, 255, 0.08);
-            width: 100%;
+        .btn {
+            background: linear-gradient(45deg, #ffd700, #ff8c00);
+            border: none; padding: 15px 40px;
+            border-radius: 30px; font-weight: 900;
+            cursor: pointer; transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
         }
+        .btn:hover { transform: scale(1.1); box-shadow: 0 0 30px #ffd700; }
     </style>
 </head>
 <body>
-
-    <!-- الخلفية الفضائية -->
-    <div class="galaxy-bg"></div>
-
-    <!-- مطر الإيموجيات المطور -->
-    <div class="cosmic-rain" id="cosmicBox"></div>
-
-    <!-- البطاقة المركزية الفاخرة -->
-    <div class="master-card" id="mainCard">
-        
-        <!-- الواجهة الترحيبية -->
-        <div id="welcomeZone" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-            <!-- القلب النيوني المدمج المستحيل يفشل -->
-            <div class="neon-heart-core">
-                <svg width="75" height="75" viewBox="0 0 24 24" fill="none" style="filter: drop-shadow(0 0 15px #00bfff);">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.5 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#neonGrad)" />
-                    <defs>
-                        <linearGradient id="neonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#00bfff" />
-                            <stop offset="100%" stop-color="#8a2be2" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-            </div>
-
-            <!-- هدرة ملكية final touch -->
-            <h1>نورتِ المكان يا ريري ✨💙👑</h1>
-            <div class="main-p" id="typingEffect"></div>
-            <button class="action-btn" onclick="revealCosmicSurprise()">دخول الملاذ السري 💎</button>
-        </div>
-
-        <!-- واجهة المفاجأة والسر الملكي -->
-        <div id="surpriseZone">
-            <div class="neon-heart-core" style="width: 100px; height: 100px; margin-bottom: 15px;">
-                <span style="font-size: 3rem; filter: drop-shadow(0 0 15px rgba(0,191,255,0.7));">🐈</span>
-            </div>
-            <div class="premium-title">الملكية ريري 🦋</div>
-            <div class="premium-box">
-                الكون يبتسم عندما تبتسمين.. 💎<br>
-                أهلاً بكِ في عالم Chems الفخم والمظلم، نورتِ الموقع بوجودكِ النادر والراقي يا بنت تونس الخضراء! 🇹🇳💙🐈👑✨
-            </div>
-        </div>
-
+    <div class="gold-dust"></div>
+    <div class="card">
+        <div class="crown">👑</div>
+        <h1>مملكة ريري</h1>
+        <p>في هذا المكان، الذهب ليس معدناً.. بل هو روح المكان. هل أنتِ جاهزة لفتح الباب الملكي؟ ✨</p>
+        <button class="btn" onclick="alert('أهلاً بكِ في عالم ريري الذهبي!')">دخول العرش</button>
     </div>
-
-    <script>
-        // دمج أفخم إيموجيات الآيفون
-        const luxuryEmojis = ['🐈', '🦋', '💎', '💙', '✨', '💎', '💙'];
-        const cosmicBox = document.getElementById('cosmicBox');
-
-        // محرك توليد الجسيمات المتساقطة والانفجارية
-        function spawnParticle(isBurst = false) {
-            const p = document.createElement('div');
-            p.classList.add('premium-particle');
-            p.textContent = luxuryEmojis[Math.floor(Math.random() * luxuryEmojis.length)];
-
-            if (!isBurst) {
-                p.style.left = Math.random() * 95 + '%';
-                p.style.top = '-50px';
-                const duration = Math.random() * 4 + 4;
-                p.style.animation = `particleFall ${duration}s linear infinite`;
-                p.style.animationDelay = Math.random() * 5 + 's';
-            } else {
-                p.style.left = '50%';
-                p.style.top = '45%';
-                p.style.transform = 'translate(-50%, -50%)';
-                p.style.animation = `particleBurstAnimation 2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards`;
-            }
-
-            cosmicBox.appendChild(p);
-            if (isBurst) setTimeout(() => p.remove(), 2000);
-        }
-
-        // تشغيل المطر الكوني الأساسي
-        for (let i = 0; i < 35; i++) { spawnParticle(); }
-
-        // إدراج أنيميشن السقوط والانفجار ديناميكياً لتأمين الأداء عالي الدقة
-        const sheet = document.styleSheets[0];
-        sheet.insertRule(`
-            @keyframes particleFall {
-                0% { top: -50px; transform: translateX(0) rotate(0deg); opacity: 0; }
-                15% { opacity: 1; }
-                85% { opacity: 1; }
-                100% { top: 105vh; transform: translateX(25px) rotate(360deg); opacity: 0; }
-            }
-        `, sheet.cssRules.length);
-
-        sheet.insertRule(`
-            @keyframes particleBurstAnimation {
-                0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-                20% { opacity: 1; }
-                100% { transform: translate(calc(-50% + ${Math.random() * 360 - 180}px), calc(-50% + ${Math.random() * 360 - 180}px)) scale(1.6) rotate(${Math.random() * 720}deg); opacity: 0; }
-            }
-        `, sheet.cssRules.length);
-
-        // تأثير كتابة الآلة السحرية الموزون في المنتصف
-        const textPhrase = "الأجواء غامضة و VIP.. هناك سر ملكي مخبأ هنا في زوايا هذا المكان مخصّص لسموكِ.. هل أنتِ مستعدة لرؤيته؟ ✨";
-        let characterIndex = 0;
-        function startTyping() {
-            if (characterIndex < textPhrase.length) {
-                document.getElementById("typingEffect").innerHTML += textPhrase.charAt(characterIndex);
-                characterIndex++;
-                setTimeout(startTyping, 45);
-            }
-        }
-        window.onload = startTyping;
-
-        // دالة الانفجار والتحول للواجهة الملكية
-        function revealCosmicSurprise() {
-            // انفجار جزيئي كثيف من الألماس والقلوب
-            for (let i = 0; i < 35; i++) { spawnParticle(true); }
-
-            const welcomeZone = document.getElementById('welcomeZone');
-            const surpriseZone = document.getElementById('surpriseZone');
-
-            welcomeZone.style.transition = 'all 0.4s ease';
-            welcomeZone.style.opacity = '0';
-
-            setTimeout(() => {
-                welcomeZone.style.display = 'none';
-                surpriseZone.style.display = 'flex'; // الحفاظ على محاذاة الوسط الفليكس ديريكت
-                setTimeout(() => {
-                    surpriseZone.style.opacity = '1';
-                }, 50);
-            }, 400);
-        }
-    </script>
 </body>
 </html>
