@@ -24,7 +24,7 @@
             perspective: 1000px;
         }
 
-        /* خلفية ضبابية ساحرة ثلاثية الأبعاد */
+        /* خلفية ضبابية ساحرة ثلاثية الأبعاد ثابتة ومتوهجة */
         body::before {
             content: '';
             position: absolute;
@@ -59,7 +59,7 @@
             filter: drop-shadow(0 0 8px rgba(255, 20, 147, 0.8));
         }
 
-        /* بطاقة الترحيب الفخمة */
+        /* بطاقة الترحيب الفخمة والثابتة */
         .luxury-card {
             background: linear-gradient(135deg, rgba(20, 10, 35, 0.85) 0%, rgba(10, 5, 20, 0.95) 100%);
             border: 2px solid #ff1493;
@@ -139,109 +139,9 @@
             letter-spacing: 1px;
         }
 
-        /* شاشة المفاجأة السعيدة */
+        /* شاشة المفاجأة السعيدة الثابتة */
         #surpriseScreen {
             display: none;
             text-align: center;
-            animation: fadeIn 1s ease-in-out;
+            animation: fadeIn 0.8s ease-in-out;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .gift-title {
-            font-size: 2.2rem;
-            color: #fff;
-            text-shadow: 0 0 20px #ff1493;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .gift-text {
-            font-size: 1.3rem;
-            color: #ffe4e1;
-            line-height: 1.8;
-            background: rgba(255, 20, 147, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px dashed #ff1493;
-            display: inline-block;
-            max-width: 90%;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="magic-container" id="magicBox"></div>
-
-    <div class="luxury-card" id="mainCard">
-        <div id="cardContent">
-            <div class="avatar-area">👑</div>
-            <h1>مرحباً بكِ يا <span>ريري</span></h1>
-            <p>المكان غامض، الأجواء VIP، وهناك سر مخبأ هنا من أجلكِ فقط.. هل أنتِ مستعدة لاكتشافه؟ ✨</p>
-            <button class="magic-btn" onclick="revealSecret()">اضغطي لرؤية المفاجأة 💖</button>
-        </div>
-
-        <div id="surpriseScreen">
-            <div class="avatar-area">🌹✨</div>
-            <div class="gift-title">أجمل تونسية!</div>
-            <div class="gift-text">
-                الكون يبتسم عندما تبتسمين.. <br>
-                أهلاً بكِ في عالم Chems الفخم، نورتِ الموقع بوجودكِ الراقي يا ريري! ✨🇹🇳❤️
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // توليد حركة تساقط القلوب والنجوم الفخمة
-        const container = document.getElementById('magicBox');
-        const particles = ['💖', '✨', '⭐', '🌸', '💕', '✨'];
-
-        for (let i = 0; i < 35; i++) {
-            const p = document.createElement('div');
-            p.classList.add('heart-particle');
-            p.textContent = particles[Math.floor(Math.random() * particles.length)];
-            p.style.left = Math.random() * 100 + '%';
-            p.style.top = Math.random() * -50 + 'px';
-
-            const duration = Math.random() * 4 + 4;
-            const delay = Math.random() * 5;
-            p.style.animation = `fallDown ${duration}s linear infinite`;
-            p.style.animationDelay = `${delay}s`;
-
-            container.appendChild(p);
-        }
-
-        // إدراج أنيميشن السقوط السلس
-        const sheet = document.styleSheets[0];
-        sheet.insertRule(`
-            @keyframes fallDown {
-                0% { top: -50px; transform: translateX(0) rotate(0deg); opacity: 0; }
-                15% { opacity: 1; }
-                90% { opacity: 1; }
-                100% { top: 100vh; transform: translateX(30px) rotate(360deg); opacity: 0; }
-            }
-        `, sheet.cssRules.length);
-
-        // كود إظهار المفاجأة الرومانسية الفخمة
-        function revealSecret() {
-            document.getElementById('cardContent').style.display = 'none';
-            document.getElementById('surpriseScreen').style.display = 'block';
-            
-            // زيادة كثافة القلوب فجأة كنوع من الاحتفال
-            for (let i = 0; i < 20; i++) {
-                const burst = document.createElement('div');
-                burst.classList.add('heart-particle');
-                burst.textContent = '💖';
-                burst.style.left = Math.random() * 100 + '%';
-                burst.style.top = '20%';
-                burst.style.animation = 'fallDown 3s linear infinite';
-                container.appendChild(burst);
-            }
-        }
-    </script>
-
-</body>
-</html>
