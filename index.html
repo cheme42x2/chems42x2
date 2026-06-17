@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>منزل Chems الرقمي - خاص بـ ريري</title>
     <style>
+        /* جلب خط إيموجيات الآيفون لتبان عند الجميع بنفس الستايل */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
+
         /* إقفال الشاشة تماماً لمنع أي حركة جانبية */
         html, body {
             margin: 0;
@@ -12,13 +15,13 @@
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            background: #040814; /* أسود مائل للأزرق الداكن المتناسق مع الصورة */
+            background: #040814;
             color: #fff;
         }
 
         * {
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Apple Color Emoji', 'Noto Color Emoji';
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -30,7 +33,7 @@
             perspective: 1000px;
         }
 
-        /* خلفية ضبابية ساحرة باللون الأزرق الداكن والبنفسجي الليلي */
+        /* خلفية ضبابية ساحرة باللون الأزرق الداكن */
         body::before {
             content: '';
             position: absolute;
@@ -49,7 +52,7 @@
             100% { transform: rotate(360deg) scale(1); }
         }
 
-        /* حاوية القلوب والنجوم الزرقاء المتساقطة */
+        /* حاوية الإيموجيات المتساقطة */
         .magic-container {
             position: absolute;
             top: 0;
@@ -62,15 +65,16 @@
 
         .heart-particle {
             position: absolute;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             will-change: transform, top;
-            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.8));
+            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.6));
+            font-family: 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
         }
 
         /* بطاقة الترحيب الزرقاء الفخمة والثابتة */
         .luxury-card {
             background: linear-gradient(135deg, rgba(10, 20, 45, 0.85) 0%, rgba(5, 10, 25, 0.95) 100%);
-            border: 2px solid #00bfff; /* نيون أزرق سماوي متناسق */
+            border: 2px solid #00bfff;
             box-shadow: 0 0 40px rgba(0, 191, 255, 0.3), inset 0 0 20px rgba(0, 191, 255, 0.15);
             border-radius: 25px;
             padding: 40px 25px;
@@ -83,27 +87,36 @@
             transition: all 0.5s ease;
         }
 
-        .luxury-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 50px rgba(0, 191, 255, 0.5);
-        }
-
-        /* إطار الصورة الشخصية المتناسق */
+        /* إصلاح دائرة الصورة لتظهر كخلفية احتياطية حتى لو لم يُرفع الملف */
         .avatar-container {
-            width: 120px;
-            height: 120px;
+            width: 125px;
+            height: 125px;
             margin: 0 auto 20px auto;
             border-radius: 50%;
             border: 3px solid #00bfff;
-            box-shadow: 0 0 20px rgba(0, 191, 255, 0.6);
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
             overflow: hidden;
+            position: relative;
+            background: #0d1b3e url('1000002315_2.jpg') center center/cover no-repeat;
             animation: float 3s infinite ease-in-out;
+        }
+
+        /* في حال لم تظهر الصورة، يظهر هذا الرمز الفخم كاحتياط */
+        .avatar-container::before {
+            content: '🐈';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            z-index: -1;
         }
 
         .avatar-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
         @keyframes float {
@@ -186,29 +199,29 @@
 </head>
 <body>
 
-    <!-- القلوب والنجوم الماتشي المتساقطة -->
+    <!-- القلوب، الألماس، والقطط المتساقطة بستايل آيفون -->
     <div class="magic-container" id="magicBox"></div>
 
     <!-- الواجهة الرئيسية الفخمة -->
     <div class="luxury-card" id="mainCard">
         <div id="cardContent">
-            <!-- هنا يتم عرض صورتها الماتشي المتناسقة -->
             <div class="avatar-container">
-                <img src="1000002315_2.jpg" alt="ريري التونسية" class="avatar-img">
+                <!-- إدراج الصورة مع معالجة الخطأ لمنع الاختفاء -->
+                <img src="1000002315_2.jpg" alt="ريري" class="avatar-img" onerror="this.style.opacity='0';">
             </div>
-            <h1>مرحباً بكِ يا <span>ريري</span></h1>
+            <h1>مرحباً بكِ يا <span>ريري 🦋</span></h1>
             <p>المكان غامض، الأجواء VIP، وهناك سر مخبأ هنا من أجلكِ فقط.. هل أنتِ مستعدة لاكتشافه؟ ✨</p>
             <button class="magic-btn" onclick="revealSecret()">اضغطي لرؤية المفاجأة 💙</button>
         </div>
 
-        <!-- الشاشة التي تظهر بعد الضغط تطلع ثابتة ومتناسقة -->
+        <!-- الشاشة التي تظهر بعد الضغط -->
         <div id="surpriseScreen">
-            <div class="avatar-container" style="animation-delay: 0.5s;">
-                <img src="1000002315_2.jpg" alt="ريري التونسية" class="avatar-img">
+            <div class="avatar-container">
+                <img src="1000002315_2.jpg" alt="ريري" class="avatar-img" onerror="this.style.opacity='0';">
             </div>
-            <div class="gift-title">أجمل تونسية!</div>
+            <div class="gift-title">أجمل تونسية 🐈💙</div>
             <div class="gift-text">
-                الكون يبتسم عندما تبتسمين.. <br>
+                الكون يبتسم عندما تبتسمين.. 💎<br>
                 أهلاً بكِ في عالم Chems الفخم، نورتِ الموقع بوجودكِ الراقي يا ريري! ✨🇹🇳💙
             </div>
         </div>
@@ -216,8 +229,8 @@
 
     <script>
         const container = document.getElementById('magicBox');
-        // قلوب ونجوم زرقاء وبيضاء لتتناسب مع ألوان الصورة تماماً
-        const particles = ['💙', '✨', '⭐', '💎', '🤍', '✨'];
+        // دمج الإيموجيات المفضلة مع الألماس والقلوب الزرقاء الفخمة
+        const particles = ['🐈', '🦋', '💎', '💙', '✨', '💎', '💙'];
 
         for (let i = 0; i < 35; i++) {
             const p = document.createElement('div');
@@ -248,11 +261,11 @@
             document.getElementById('cardContent').style.display = 'none';
             document.getElementById('surpriseScreen').style.display = 'block';
             
-            // احتفالية قلوب زرقاء فخمة عند الضغط
+            // انفجار إيموجيات احتفالي عند الضغط
             for (let i = 0; i < 20; i++) {
                 const burst = document.createElement('div');
                 burst.classList.add('heart-particle');
-                burst.textContent = '💙';
+                burst.textContent = '💎';
                 burst.style.left = Math.random() * 95 + '%';
                 burst.style.top = '25%';
                 burst.style.animation = 'fallDown 3s linear infinite';
@@ -263,4 +276,3 @@
 
 </body>
 </html>
-
