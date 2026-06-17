@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منزل Chems الأسطوري 4K</title>
+    <title>منزل Chems الرقمي - خاص بـ ريري</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace, 'Segoe UI';
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: #000000;
-            color: #ff0000;
+            background: #0a0512;
+            color: #fff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -24,25 +24,25 @@
             perspective: 1000px;
         }
 
-        /* أنيميشن الخلفية الضبابية الفخمة 4K */
+        /* خلفية ضبابية ساحرة ثلاثية الأبعاد */
         body::before {
             content: '';
             position: absolute;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(150, 0, 0, 0.2) 0%, rgba(20, 0, 0, 0.9) 50%, #000 100%);
+            background: radial-gradient(circle, rgba(255, 20, 147, 0.15) 0%, rgba(75, 0, 130, 0.4) 50%, #05020a 100%);
             z-index: 0;
-            animation: bgPulse 10s infinite linear;
+            animation: bgRotate 15s infinite linear;
         }
 
-        @keyframes bgPulse {
+        @keyframes bgRotate {
             0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.2); }
+            50% { transform: rotate(180deg) scale(1.1); }
             100% { transform: rotate(360deg) scale(1); }
         }
 
-        /* حاوية الدماء وأوراق الكازينو المتساقطة */
-        .canvas-container {
+        /* حاوية القلوب والنجوم المتساقطة */
+        .magic-container {
             position: absolute;
             top: 0;
             left: 0;
@@ -52,46 +52,39 @@
             pointer-events: none;
         }
 
-        .falling-element {
+        .heart-particle {
             position: absolute;
             font-size: 1.5rem;
-            color: #8b0000;
-            text-shadow: 0 0 8px #ff0000;
             will-change: transform, top;
+            filter: drop-shadow(0 0 8px rgba(255, 20, 147, 0.8));
         }
 
-        /* بطاقة كازينو الرعب VIP */
-        .casino-horror-card {
-            background: linear-gradient(135deg, rgba(15, 0, 0, 0.95) 0%, rgba(5, 0, 0, 0.98) 100%);
-            border: 2px solid #ff0000;
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5), inset 0 0 20px rgba(139, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 50px 35px;
+        /* بطاقة الترحيب الفخمة */
+        .luxury-card {
+            background: linear-gradient(135deg, rgba(20, 10, 35, 0.85) 0%, rgba(10, 5, 20, 0.95) 100%);
+            border: 2px solid #ff1493;
+            box-shadow: 0 0 40px rgba(255, 20, 147, 0.4), inset 0 0 20px rgba(255, 20, 147, 0.2);
+            border-radius: 20px;
+            padding: 45px 30px;
             text-align: center;
             max-width: 440px;
-            width: 92%;
+            width: 90%;
             z-index: 2;
+            backdrop-filter: blur(20px);
             transform-style: preserve-3d;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            backdrop-filter: blur(15px);
+            transition: all 0.5s ease;
         }
 
-        .casino-horror-card:hover {
-            transform: rotateX(5deg) rotateY(-5deg) translateY(-5px);
-            box-shadow: 0 0 70px rgba(255, 0, 0, 0.8);
-            border-color: #ff3333;
+        .luxury-card:hover {
+            transform: translateY(-5px) rotateY(2deg);
+            box-shadow: 0 0 60px rgba(255, 20, 147, 0.7);
         }
 
-        .main-icon {
+        .avatar-area {
             font-size: 4.5rem;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             display: inline-block;
-            animation: neonGlow 2s infinite alternate, float 3s infinite ease-in-out;
-        }
-
-        @keyframes neonGlow {
-            0% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; }
-            100% { text-shadow: 0 0 20px #ff0000, 0 0 40px #ff3333, 0 0 60px #ff0000; }
+            animation: float 3s infinite ease-in-out, glow 2s infinite alternate;
         }
 
         @keyframes float {
@@ -99,226 +92,154 @@
             50% { transform: translateY(-10px); }
         }
 
+        @keyframes glow {
+            0% { filter: drop-shadow(0 0 10px #ff1493); }
+            100% { filter: drop-shadow(0 0 25px #ff69b4); }
+        }
+
         h1 {
             font-size: 2rem;
             color: #ffffff;
-            text-shadow: 0 0 15px #ff0000;
-            margin-bottom: 20px;
-            font-weight: 900;
-            letter-spacing: 2px;
-        }
-
-        h1 span {
-            color: #ff0000;
-            animation: flicker 3s infinite;
-        }
-
-        @keyframes flicker {
-            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-            20%, 24%, 55% { opacity: 0.2; }
-        }
-
-        p {
-            color: #d1d1d1;
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            line-height: 1.7;
+            text-shadow: 0 0 15px rgba(255, 20, 147, 0.6);
+            margin-bottom: 15px;
             font-weight: bold;
         }
 
-        /* أزرار الـ VIP */
-        .btn-group {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
+        h1 span {
+            color: #ff1493;
         }
 
-        .btn {
-            padding: 15px 35px;
-            font-size: 1.1rem;
-            font-weight: 900;
+        p {
+            color: #e0d5ea;
+            font-size: 1.15rem;
+            margin-bottom: 35px;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        /* زر المفاجأة الأسطوري */
+        .magic-btn {
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            width: 48%;
-            background: #000;
-            border: 2px solid #8b0000;
-            color: #ff0000;
-            border-radius: 4px;
-            text-transform: uppercase;
+            box-shadow: 0 0 25px rgba(255, 20, 147, 0.5);
+            transition: all 0.3s ease;
+            width: 80%;
+            display: inline-block;
+        }
+
+        .magic-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px #ff1493;
             letter-spacing: 1px;
         }
 
-        .btn-danger {
-            background: linear-gradient(135deg, #bd0000 0%, #590000 100%);
-            color: #fff;
-            border: none;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
-        }
-
-        .btn-danger:hover {
-            background: linear-gradient(135deg, #ff0000 0%, #990000 100%);
-            box-shadow: 0 0 35px #ff0000;
-            transform: scale(1.05);
-        }
-
-        .btn-dark:hover {
-            background: #ff0000;
-            color: #000;
-            box-shadow: 0 0 25px #ff0000;
-            border-color: #ff0000;
-        }
-
-        /* شاشة جحيم الهكرز المخفية 4K */
-        #cyberHellScreen {
+        /* شاشة المفاجأة السعيدة */
+        #surpriseScreen {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #000;
-            z-index: 9999;
-            padding: 30px;
-            overflow: hidden;
-            direction: ltr;
-            text-align: left;
-            font-size: 1rem;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
         }
 
-        .matrix-line {
-            color: #00ff00;
-            line-height: 1.5;
-            white-space: nowrap;
-            margin-bottom: 4px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        .matrix-fatal {
-            color: #ff0000;
-            text-shadow: 0 0 12px #ff0000;
-            font-weight: 900;
-            animation: glitchText 0.2s infinite;
+        .gift-title {
+            font-size: 2.2rem;
+            color: #fff;
+            text-shadow: 0 0 20px #ff1493;
+            margin-bottom: 20px;
+            font-weight: bold;
         }
 
-        .screen-shake {
-            animation: shake 0.15s infinite;
-        }
-
-        @keyframes shake {
-            0% { transform: translate(2px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(0px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(2px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(2px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        .gift-text {
+            font-size: 1.3rem;
+            color: #ffe4e1;
+            line-height: 1.8;
+            background: rgba(255, 20, 147, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px dashed #ff1493;
+            display: inline-block;
+            max-width: 90%;
         }
     </style>
 </head>
 <body>
 
-    <!-- حاوية التأثيرات المتساقطة الخيالية -->
-    <div class="canvas-container" id="particles"></div>
+    <div class="magic-container" id="magicBox"></div>
 
-    <!-- الواجهة الرئيسية الفخمة -->
-    <div class="casino-horror-card" id="mainCard">
-        <div class="main-icon">🎰</div>
-        <h1>كازينو <span>Chems</span> الملعون</h1>
-        <p>هل أنت موافق على الدخول؟ لأنك ستندم لاحقاً وبشدة...</p>
-        
-        <div class="btn-group">
-            <button class="btn btn-danger" onclick="activateCyberHell()">نعم، أدخل</button>
-            <button class="btn btn-dark" onclick="alert('الأرواح أغلقت مخارج الطوارئ.. لا يوجد هروب! ⚰️🃏')">لا، هروب</button>
+    <div class="luxury-card" id="mainCard">
+        <div id="cardContent">
+            <div class="avatar-area">👑</div>
+            <h1>مرحباً بكِ يا <span>ريري</span></h1>
+            <p>المكان غامض، الأجواء VIP، وهناك سر مخبأ هنا من أجلكِ فقط.. هل أنتِ مستعدة لاكتشافه؟ ✨</p>
+            <button class="magic-btn" onclick="revealSecret()">اضغطي لرؤية المفاجأة 💖</button>
+        </div>
+
+        <div id="surpriseScreen">
+            <div class="avatar-area">🌹✨</div>
+            <div class="gift-title">أجمل تونسية!</div>
+            <div class="gift-text">
+                الكون يبتسم عندما تبتسمين.. <br>
+                أهلاً بكِ في عالم Chems الفخم، نورتِ الموقع بوجودكِ الراقي يا ريري! ✨🇹🇳❤️
+            </div>
         </div>
     </div>
 
-    <!-- شاشة الهكرز الفتاكة -->
-    <div id="cyberHellScreen">
-        <div id="terminalOutput"></div>
-    </div>
-
     <script>
-        // توليد حركة خيالية لقطرات الدم وأوراق الكازينو (60fps)
-        const particlesContainer = document.getElementById('particles');
-        const elements = ['🩸', '♠', '♦', '♣', '♥', '💀', '🃏', '🩸'];
-        
-        for (let i = 0; i < 40; i++) {
-            const el = document.createElement('div');
-            el.classList.add('falling-element');
-            el.textContent = elements[Math.floor(Math.random() * elements.length)];
-            el.style.left = Math.random() * 100 + '%';
-            el.style.top = Math.random() * -100 + 'px';
-            
-            // سرعة ودوران عشوائي خيالي
-            const duration = Math.random() * 4 + 3;
+        // توليد حركة تساقط القلوب والنجوم الفخمة
+        const container = document.getElementById('magicBox');
+        const particles = ['💖', '✨', '⭐', '🌸', '💕', '✨'];
+
+        for (let i = 0; i < 35; i++) {
+            const p = document.createElement('div');
+            p.classList.add('heart-particle');
+            p.textContent = particles[Math.floor(Math.random() * particles.length)];
+            p.style.left = Math.random() * 100 + '%';
+            p.style.top = Math.random() * -50 + 'px';
+
+            const duration = Math.random() * 4 + 4;
             const delay = Math.random() * 5;
-            el.style.animation = `fall ${duration}s linear infinite`;
-            el.style.animationDelay = `${delay}s`;
-            
-            particlesContainer.appendChild(el);
+            p.style.animation = `fallDown ${duration}s linear infinite`;
+            p.style.animationDelay = `${delay}s`;
+
+            container.appendChild(p);
         }
 
-        // إضافة أنيميشن السقوط ديناميكياً
-        const styleSheet = document.styleSheets[0];
-        styleSheet.insertRule(`
-            @keyframes fall {
+        // إدراج أنيميشن السقوط السلس
+        const sheet = document.styleSheets[0];
+        sheet.insertRule(`
+            @keyframes fallDown {
                 0% { top: -50px; transform: translateX(0) rotate(0deg); opacity: 0; }
-                10% { opacity: 0.8; }
-                90% { opacity: 0.8; }
-                100% { top: 100vh; transform: translateX(50px) rotate(360deg); opacity: 0; }
+                15% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { top: 100vh; transform: translateX(30px) rotate(360deg); opacity: 0; }
             }
-        `, styleSheet.cssRules.length);
+        `, sheet.cssRules.length);
 
-        // تفعيل جحيم الهكرز المطور
-        function activateCyberHell() {
-            document.body.classList.add('screen-shake');
-            document.getElementById('mainCard').style.display = 'none';
-            const hellScreen = document.getElementById('cyberHellScreen');
-            hellScreen.style.display = 'block';
-
-            const hackLogs = [
-                "============== CHEMS CYBER HELL SYSTEM =============",
-                "[-] INITIALIZING INTRUSION PROTOCOL ON TARGET...",
-                "[!] BYPASSING FIREWALL... SUCCESS (100%)",
-                "[-] EXTRACTING IP ADDRESS... DESTINATION FOUND.",
-                "[💀] TOTAL DEAD SOULS DETECTED IN SERVER: 44,219",
-                "[🎰] CASINO ROOM STATUS: ALL IN! LIFE IS THE BET.",
-                "[-] CORRUPTING OPERATING SYSTEM FILES...",
-                "[🩸] WARNING: BLOOD LEVEL IN CPU OVERFLOWING!",
-                "[@] INJECTING CHEMS_TROJAN_V4.EXE...",
-                "[❌] STAGE 1: HARD DRIVE WIPED.",
-                "[❌] STAGE 2: PERSONAL MEMORIES CORRUPTED.",
-                "[❌] STAGE 3: SOUL LOCKED INSIDE THE CASINO JOKER CARD.",
-                "🧟‍♂️ LOOK OUTSIDE YOUR WINDOW... THEY KNOW WHERE YOU LIVE.",
-                "[-] DISCONNECTING... GOODBYE FOREVER."
-            ];
-
-            const terminal = document.getElementById('terminalOutput');
-            let logIndex = 0;
-
-            const terminalInterval = setInterval(() => {
-                if (logIndex < hackLogs.length) {
-                    const line = document.createElement('div');
-                    line.classList.add('matrix-line');
-                    
-                    // تمييز أسطر الموت والرعب باللون الأحمر المتوهج
-                    if (hackLogs[logIndex].includes('💀') || hackLogs[logIndex].includes('🩸') || hackLogs[logIndex].includes('❌') || hackLogs[logIndex].includes('🎰')) {
-                        line.classList.add('matrix-fatal');
-                    }
-                    
-                    line.textContent = hackLogs[logIndex];
-                    terminal.appendChild(line);
-                    logIndex++;
-                } else {
-                    clearInterval(terminalInterval);
-                    setTimeout(() => {
-                        alert('قُضي الأمر.. كازينو شمس امتص روحك وجهازك صار ملكاً للأرواح! 🩸🎰💀🖤');
-                    }, 600);
-                }
-            }, 300);
+        // كود إظهار المفاجأة الرومانسية الفخمة
+        function revealSecret() {
+            document.getElementById('cardContent').style.display = 'none';
+            document.getElementById('surpriseScreen').style.display = 'block';
+            
+            // زيادة كثافة القلوب فجأة كنوع من الاحتفال
+            for (let i = 0; i < 20; i++) {
+                const burst = document.createElement('div');
+                burst.classList.add('heart-particle');
+                burst.textContent = '💖';
+                burst.style.left = Math.random() * 100 + '%';
+                burst.style.top = '20%';
+                burst.style.animation = 'fallDown 3s linear infinite';
+                container.appendChild(burst);
+            }
         }
     </script>
 
