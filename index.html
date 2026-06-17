@@ -2,69 +2,88 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sultana Sanctuary</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;700;900&display=swap');
         
-        body {
+        body, html {
             margin: 0; padding: 0;
             background: #050505;
-            height: 100vh;
+            height: 100%;
             display: flex;
             justify-content: center; align-items: center;
             font-family: 'Cairo', sans-serif;
             overflow: hidden;
         }
 
-        /* تأثير الغبار الذهبي الفخم */
-        .gold-dust {
-            position: absolute; width: 100%; height: 100%;
-            background-image: radial-gradient(circle, #ffd700 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.1;
-        }
-
         .card {
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(20px);
+            background: rgba(20, 20, 20, 0.9);
+            backdrop-filter: blur(15px);
             border: 2px solid #ffd700;
-            border-radius: 50px;
-            padding: 60px 40px;
-            width: 85%; max-width: 400px;
+            border-radius: 40px;
+            padding: 50px 30px;
+            width: 90%; 
+            max-width: 450px; /* تحكمنا في العرض باش يجي "زومي" */
             text-align: center;
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.2);
-            animation: appear 1.5s ease-out;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+            transition: 0.5s;
         }
 
-        @keyframes appear {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        .crown { font-size: 6rem; margin-bottom: 10px; animation: float 3s infinite ease-in-out; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* التاج الذهبي المتحرك */
-        .crown { font-size: 5rem; animation: float 3s infinite ease-in-out; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-
-        h1 { color: #ffd700; font-size: 2.5rem; text-shadow: 0 0 20px #ffd700; }
-        p { color: #fff; font-size: 1.2rem; margin: 20px 0; line-height: 1.6; }
+        h1 { color: #ffd700; font-size: 2.8rem; margin: 0; text-shadow: 0 0 20px #ffd700; }
+        p { color: #fff; font-size: 1.4rem; margin: 20px 0; }
 
         .btn {
             background: linear-gradient(45deg, #ffd700, #ff8c00);
-            border: none; padding: 15px 40px;
-            border-radius: 30px; font-weight: 900;
-            cursor: pointer; transition: 0.3s;
-            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+            border: none; padding: 18px 50px;
+            border-radius: 50px; font-weight: 900; font-size: 1.2rem;
+            cursor: pointer; transition: 0.3s; color: black;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
         }
-        .btn:hover { transform: scale(1.1); box-shadow: 0 0 30px #ffd700; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 30px #ffd700; }
+
+        /* شاشة الدخول السرية */
+        #secretZone {
+            display: none;
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            background: #000;
+            justify-content: center; align-items: center;
+            flex-direction: column;
+            color: #ffd700;
+            opacity: 0;
+            transition: opacity 1s;
+        }
     </style>
 </head>
 <body>
-    <div class="gold-dust"></div>
-    <div class="card">
+
+    <div class="card" id="mainCard">
         <div class="crown">👑</div>
         <h1>مملكة ريري</h1>
-        <p>في هذا المكان، الذهب ليس معدناً.. بل هو روح المكان. هل أنتِ جاهزة لفتح الباب الملكي؟ ✨</p>
-        <button class="btn" onclick="alert('أهلاً بكِ في عالم ريري الذهبي!')">دخول العرش</button>
+        <p>مرحباً بكِ في الملاذ الذهبي. هل أنتِ جاهزة لفتح الباب الملكي؟ ✨</p>
+        <button class="btn" onclick="enterKingdom()">دخول العرش</button>
     </div>
+
+    <div id="secretZone">
+        <h1 style="font-size: 3rem;">أهلاً بكِ في عرشكِ يا ريري 👑</h1>
+        <p style="color:white;">لقد تم فتح الباب.. الملاذ الآن لكِ وحدكِ.</p>
+    </div>
+
+    <script>
+        function enterKingdom() {
+            const card = document.getElementById('mainCard');
+            const zone = document.getElementById('secretZone');
+            
+            card.style.opacity = '0';
+            setTimeout(() => {
+                card.style.display = 'none';
+                zone.style.display = 'flex';
+                setTimeout(() => { zone.style.opacity = '1'; }, 50);
+            }, 500);
+        }
+    </script>
 </body>
 </html>
