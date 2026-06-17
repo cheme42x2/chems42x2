@@ -23,18 +23,7 @@
             position: relative;
         }
 
-        /* أنيميشن الضباب والأجواء المظلمة */
-        body::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(139, 0, 0, 0.15) 0%, transparent 70%);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* كود تساقط الدماء البرمجي */
+        /* دماء تسيل */
         .blood-container {
             position: absolute;
             top: 0;
@@ -43,12 +32,12 @@
             height: 100%;
             z-index: 1;
             pointer-events: none;
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
         .blood-drop {
             position: absolute;
-            background: linear-gradient(to bottom, #8b0000, #4a0000);
+            background: linear-gradient(to bottom, #8b0000, #300000);
             width: 3px;
             border-radius: 0 0 5px 5px;
             animation: drip linear infinite;
@@ -56,15 +45,15 @@
 
         @keyframes drip {
             0% { top: -10%; height: 0px; }
-            50% { height: 50px; }
+            50% { height: 60px; }
             100% { top: 110%; height: 10px; }
         }
 
-        /* حاوية الرعب الرئيسية */
+        /* الصندوق الرئيسي */
         .horror-box {
-            background: rgba(10, 0, 0, 0.95);
-            border: 1px solid #4a0000;
-            box-shadow: 0 0 40px rgba(139, 0, 0, 0.5);
+            background: rgba(8, 0, 0, 0.95);
+            border: 1px solid #5a0000;
+            box-shadow: 0 0 40px rgba(139, 0, 0, 0.6);
             border-radius: 5px;
             padding: 50px 30px;
             text-align: center;
@@ -72,32 +61,24 @@
             width: 90%;
             z-index: 2;
             border-left: 4px solid #8b0000;
+            transition: all 0.5s ease;
         }
 
         .horror-icon {
-            font-size: 3rem;
-            color: #8b0000;
+            font-size: 3.5rem;
             text-shadow: 0 0 15px #ff0000;
             margin-bottom: 20px;
-            animation: flicker 2s infinite alternate;
-        }
-
-        @keyframes flicker {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
-            20%, 24%, 55% { opacity: 0.3; }
         }
 
         h1 {
             font-size: 1.6rem;
-            font-weight: bold;
-            margin-bottom: 15px;
             color: #8b0000;
-            text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+            margin-bottom: 15px;
             letter-spacing: 2px;
         }
 
         p {
-            color: #999;
+            color: #bbb;
             font-size: 1.1rem;
             margin-bottom: 35px;
             line-height: 1.6;
@@ -118,7 +99,7 @@
             transition: all 0.2s ease;
             width: 45%;
             background: #000;
-            border: 1px solid #4a0000;
+            border: 1px solid #5a0000;
             color: #8b0000;
         }
 
@@ -126,18 +107,40 @@
             color: #fff;
             background: #8b0000;
             box-shadow: 0 0 15px #ff0000;
-            border-color: #ff0000;
         }
 
-        /* تأثير اهتزاز الشاشة عند الموت */
-        .shake {
-            animation: shakeEffect 0.3s ease-in-out;
+        /* شاشة الهكر المرعبة المخفية */
+        #hackerScreen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 999;
+            color: #00ff00;
+            padding: 20px;
+            font-size: 0.95rem;
+            overflow: hidden;
+            direction: ltr;
+            text-align: left;
         }
 
-        @keyframes shakeEffect {
-            0%, 100% { transform: translate(0, 0); }
-            20%, 60% { transform: translate(-5px, 5px); }
-            40%, 80% { transform: translate(5px, -5px); }
+        .glitch-red {
+            color: #ff0000;
+            text-shadow: 0 0 10px #ff0000;
+            font-weight: bold;
+        }
+
+        /* أنيميشن الرعب والاهتزاز */
+        .scary-flash {
+            animation: flash 0.1s infinite alternate;
+        }
+
+        @keyframes flash {
+            0% { background: #000; }
+            100% { background: #200000; }
         }
     </style>
 </head>
@@ -151,13 +154,17 @@
         <p>هل أنت موافق على الدخول؟ لأنك ستندم لاحقاً...</p>
         
         <div class="btn-group">
-            <button class="btn" onclick="triggerHorror('yes')">نعم، أدخل</button>
-            <button class="btn" onclick="triggerHorror('no')">لا، هروب</button>
+            <button class="btn" onclick="startHackerAttack()">نعم، أدخل</button>
+            <button class="btn" onclick="alert('حاولت الهروب؟ الأرواح لا تترك أحداً يغادر! ⚰️')">لا، هروب</button>
         </div>
     </div>
 
+    <div id="hackerScreen">
+        <div id="matrixCode"></div>
+    </div>
+
     <script>
-        // توليد قطرات الدم عشوائياً
+        // قطرات الدم
         const bloodContainer = document.getElementById('blood');
         for (let i = 0; i < 15; i++) {
             const drop = document.createElement('div');
@@ -168,18 +175,4 @@
             bloodContainer.appendChild(drop);
         }
 
-        function triggerHorror(choice) {
-            const box = document.getElementById('mainBox');
-            box.classList.add('shake');
-            setTimeout(() => box.classList.remove('shake'), 300);
-
-            if(choice === 'yes') {
-                alert('لقد خطوت خطوتك الأخيرة.. الأرواح الميتة في منزل شمس تنتظرك الآن بالداخل! 🩸🧟‍♂️');
-            } else {
-                alert('ظننت أنك تستطيع الهروب؟ لقد أُغلق الباب خلفك والموت يلاحقك! ⚰️👻');
-            }
-        }
-    </script>
-
-</body>
-</html>
+        // تفجير شاشة الهكر والرعب كي
