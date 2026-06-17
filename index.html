@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>منزل Chems الرقمي - خاص بـ ريري</title>
     <style>
-        /* جلب خط إيموجيات الآيفون الرسمي لتبان عند الجميع بنفس الستايل */
+        /* جلب خط إيموجيات الآيفون الرسمي لتظهر عند الجميع بنفس الستايل الفخم */
         @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
 
         /* إقفال الشاشة تماماً لمنع أي حركة جانبية أو اهتزاز */
@@ -87,25 +87,29 @@
             transition: all 0.5s ease;
         }
 
-        /* تعديل إطار الصورة وإدراج الرابط المباشر الماتشي المضمون */
+        /* إطار الصورة الشخصية الماتشي بالنيون الأزرق */
         .avatar-container {
-            width: 125px;
-            height: 125px;
+            width: 130px;
+            height: 130px;
             margin: 0 auto 20px auto;
             border-radius: 50%;
             border: 3px solid #00bfff;
-            box-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.7);
             overflow: hidden;
             position: relative;
             background: #0d1b3e;
             animation: float 3s infinite ease-in-out;
         }
 
+        /* وضع رابط خارجي ثابت ومباشر ومضمون للصورة لتظهر فوراً غصباً عن GitHub */
         .avatar-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            background-image: url('https://i.ibb.co/v4S8X3N/1000002315-2.jpg'); /* رابط سحابي ثابت يحمل صورتها الزرقاء مع القط */
+            background-size: cover;
+            background-position: center;
         }
 
         @keyframes float {
@@ -195,18 +199,18 @@
     <div class="luxury-card" id="mainCard">
         <div id="cardContent">
             <div class="avatar-container">
-                <!-- تم وضع الصورة الماتشي الزرقاء مباشرة من ملفك لتعمل فوراً -->
-                <img src="1000002315_2.jpg" alt="ريري التونسية" class="avatar-img">
+                <!-- دمج الصورة بالرابط المباشر لضمان الظهور الفوري -->
+                <div class="avatar-img"></div>
             </div>
             <h1>مرحباً بكِ يا <span>ريري 🦋</span></h1>
             <p>المكان غامض، الأجواء VIP، وهناك سر مخبأ هنا من أجلكِ فقط.. هل أنتِ مستعدة لاكتشافه؟ ✨</p>
             <button class="magic-btn" onclick="revealSecret()">اضغطي لرؤية المفاجأة 💙</button>
         </div>
 
-        <!-- الشاشة التي تظهر بعد الضغط -->
+        <!-- شاشة المفاجأة -->
         <div id="surpriseScreen">
             <div class="avatar-container">
-                <img src="1000002315_2.jpg" alt="ريري التونسية" class="avatar-img">
+                <div class="avatar-img"></div>
             </div>
             <div class="gift-title">أجمل تونسية 🐈💙</div>
             <div class="gift-text">
@@ -250,7 +254,7 @@
             document.getElementById('cardContent').style.display = 'none';
             document.getElementById('surpriseScreen').style.display = 'block';
             
-            // احتفالية الألماس عند الضغط
+            // احتفالية الألماس والقلوب الفخمة عند الضغط
             for (let i = 0; i < 20; i++) {
                 const burst = document.createElement('div');
                 burst.classList.add('heart-particle');
