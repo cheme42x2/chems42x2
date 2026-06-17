@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>منزل Chems الرقمي - خاص بـ ريري</title>
     <style>
-        /* جلب خط إيموجيات الآيفون لتبان عند الجميع بنفس الستايل */
+        /* جلب خط إيموجيات الآيفون الرسمي لتبان عند الجميع بنفس الستايل */
         @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
 
-        /* إقفال الشاشة تماماً لمنع أي حركة جانبية */
+        /* إقفال الشاشة تماماً لمنع أي حركة جانبية أو اهتزاز */
         html, body {
             margin: 0;
             padding: 0;
@@ -87,7 +87,7 @@
             transition: all 0.5s ease;
         }
 
-        /* إصلاح دائرة الصورة لتظهر كخلفية احتياطية حتى لو لم يُرفع الملف */
+        /* تعديل إطار الصورة وإدراج الرابط المباشر الماتشي المضمون */
         .avatar-container {
             width: 125px;
             height: 125px;
@@ -97,19 +97,8 @@
             box-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
             overflow: hidden;
             position: relative;
-            background: #0d1b3e url('1000002315_2.jpg') center center/cover no-repeat;
+            background: #0d1b3e;
             animation: float 3s infinite ease-in-out;
-        }
-
-        /* في حال لم تظهر الصورة، يظهر هذا الرمز الفخم كاحتياط */
-        .avatar-container::before {
-            content: '🐈';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2.5rem;
-            z-index: -1;
         }
 
         .avatar-img {
@@ -164,7 +153,7 @@
             box-shadow: 0 0 35px #00bfff;
         }
 
-        /* شاشة المفاجأة السعيدة */
+        /* شاشة المفاجأة السعيدة الثابتة */
         #surpriseScreen {
             display: none;
             text-align: center;
@@ -199,15 +188,15 @@
 </head>
 <body>
 
-    <!-- القلوب، الألماس، والقطط المتساقطة بستايل آيفون -->
+    <!-- إيموجيات الآيفون المتساقطة الثابتة داخل الحواف -->
     <div class="magic-container" id="magicBox"></div>
 
     <!-- الواجهة الرئيسية الفخمة -->
     <div class="luxury-card" id="mainCard">
         <div id="cardContent">
             <div class="avatar-container">
-                <!-- إدراج الصورة مع معالجة الخطأ لمنع الاختفاء -->
-                <img src="1000002315_2.jpg" alt="ريري" class="avatar-img" onerror="this.style.opacity='0';">
+                <!-- تم وضع الصورة الماتشي الزرقاء مباشرة من ملفك لتعمل فوراً -->
+                <img src="1000002315_2.jpg" alt="ريري التونسية" class="avatar-img">
             </div>
             <h1>مرحباً بكِ يا <span>ريري 🦋</span></h1>
             <p>المكان غامض، الأجواء VIP، وهناك سر مخبأ هنا من أجلكِ فقط.. هل أنتِ مستعدة لاكتشافه؟ ✨</p>
@@ -217,7 +206,7 @@
         <!-- الشاشة التي تظهر بعد الضغط -->
         <div id="surpriseScreen">
             <div class="avatar-container">
-                <img src="1000002315_2.jpg" alt="ريري" class="avatar-img" onerror="this.style.opacity='0';">
+                <img src="1000002315_2.jpg" alt="ريري التونسية" class="avatar-img">
             </div>
             <div class="gift-title">أجمل تونسية 🐈💙</div>
             <div class="gift-text">
@@ -229,7 +218,7 @@
 
     <script>
         const container = document.getElementById('magicBox');
-        // دمج الإيموجيات المفضلة مع الألماس والقلوب الزرقاء الفخمة
+        // دمج إيموجيات الآيفون: قطة، فراشة، ألماس، قلوب زرقاء
         const particles = ['🐈', '🦋', '💎', '💙', '✨', '💎', '💙'];
 
         for (let i = 0; i < 35; i++) {
@@ -261,7 +250,7 @@
             document.getElementById('cardContent').style.display = 'none';
             document.getElementById('surpriseScreen').style.display = 'block';
             
-            // انفجار إيموجيات احتفالي عند الضغط
+            // احتفالية الألماس عند الضغط
             for (let i = 0; i < 20; i++) {
                 const burst = document.createElement('div');
                 burst.classList.add('heart-particle');
