@@ -3,86 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sultana Sanctuary</title>
+    <title>The Golden Sanctuary - RIRI</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;700;900&display=swap');
-        
-        body, html {
-            margin: 0; padding: 0;
-            background: #050505;
-            height: 100%;
-            display: flex;
-            justify-content: center; align-items: center;
-            font-family: 'Cairo', sans-serif;
-            overflow: hidden;
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Noto+Color+Emoji&display=swap');
+
+        html, body {
+            margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden;
+            background: #0a0a05; /* خلفية سوداء داكنة جداً لتعزيز لمعان الذهب */
+            color: #ffffff;
+            font-family: 'Cairo', sans-serif, 'Apple Color Emoji', 'Noto Color Emoji';
         }
 
-        .card {
-            background: rgba(20, 20, 20, 0.9);
-            backdrop-filter: blur(15px);
-            border: 2px solid #ffd700;
-            border-radius: 40px;
-            padding: 50px 30px;
-            width: 90%; 
-            max-width: 450px; /* تحكمنا في العرض باش يجي "زومي" */
-            text-align: center;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
-            transition: 0.5s;
+        body { display: flex; justify-content: center; align-items: center; position: relative; }
+
+        .galaxy-bg {
+            position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 50% 50%, #1a1500 0%, #050500 100%);
+            z-index: 0;
         }
 
-        .crown { font-size: 6rem; margin-bottom: 10px; animation: float 3s infinite ease-in-out; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .cosmic-rain { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .premium-particle { position: absolute; font-size: 1.7rem; filter: drop-shadow(0 0 10px #ffd700); opacity: 0; }
 
-        h1 { color: #ffd700; font-size: 2.8rem; margin: 0; text-shadow: 0 0 20px #ffd700; }
-        p { color: #fff; font-size: 1.4rem; margin: 20px 0; }
-
-        .btn {
-            background: linear-gradient(45deg, #ffd700, #ff8c00);
-            border: none; padding: 18px 50px;
-            border-radius: 50px; font-weight: 900; font-size: 1.2rem;
-            cursor: pointer; transition: 0.3s; color: black;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        .master-card {
+            background: rgba(20, 15, 0, 0.85);
+            border: 1px solid #ffd700;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 215, 0, 0.2);
+            border-radius: 35px; padding: 50px 30px; max-width: 390px; width: 88%; z-index: 2;
+            backdrop-filter: blur(15px); text-align: center;
         }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 0 30px #ffd700; }
 
-        /* شاشة الدخول السرية */
-        #secretZone {
-            display: none;
-            position: fixed; top:0; left:0; width:100%; height:100%;
-            background: #000;
-            justify-content: center; align-items: center;
-            flex-direction: column;
-            color: #ffd700;
-            opacity: 0;
-            transition: opacity 1s;
+        .neon-heart-core { width: 130px; height: 130px; margin-bottom: 25px; position: relative; display: flex; justify-content: center; align-items: center; }
+        .neon-heart-core::before { content: ''; position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 2px dashed #ffd700; animation: spinRing 12s infinite linear; }
+        @keyframes spinRing { 100% { transform: rotate(360deg); } }
+
+        h1 { font-size: 2.2rem; font-weight: 900; background: linear-gradient(to bottom, #ffd700, #ffcc33); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+        .main-p { color: #ffe599; font-size: 1.1rem; line-height: 1.8; margin: 0 0 35px 0; }
+
+        .action-btn {
+            background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
+            color: #000; border: none; padding: 16px 0; width: 90%; font-size: 1.2rem; font-weight: 900;
+            border-radius: 50px; cursor: pointer; box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
         }
+
+        #surpriseZone { display: none; opacity: 0; width: 100%; flex-direction: column; align-items: center; transition: opacity 0.8s; }
+        .premium-title { font-size: 2.4rem; font-weight: 900; background: linear-gradient(to right, #ffd700, #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+        .premium-box { color: #fff; line-height: 1.9; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700; padding: 20px; border-radius: 25px; }
     </style>
 </head>
 <body>
-
-    <div class="card" id="mainCard">
-        <div class="crown">👑</div>
-        <h1>مملكة ريري</h1>
-        <p>مرحباً بكِ في الملاذ الذهبي. هل أنتِ جاهزة لفتح الباب الملكي؟ ✨</p>
-        <button class="btn" onclick="enterKingdom()">دخول العرش</button>
+    <div class="galaxy-bg"></div>
+    <div class="cosmic-rain" id="cosmicBox"></div>
+    <div class="master-card" id="mainCard">
+        <div id="welcomeZone" style="display: flex; flex-direction: column; align-items: center;">
+            <div class="neon-heart-core">
+                <svg width="75" height="75" viewBox="0 0 24 24" fill="#ffd700" style="filter: drop-shadow(0 0 15px #ffd700);">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.5 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+            </div>
+            <h1>نورتِ المكان يا ريري ✨👑</h1>
+            <div class="main-p" id="typingEffect"></div>
+            <button class="action-btn" onclick="revealCosmicSurprise()">دخول الملاذ الذهبي 💎</button>
+        </div>
+        <div id="surpriseZone">
+            <div class="premium-title">الملكية ريري 🦋</div>
+            <div class="premium-box">
+                أهلاً بكِ في عالم Chems الذهبي.. 🌟<br>نورتِ الموقع بطلّتكِ البهية، يا بنت تونس الراقية! 🇹🇳💙🐈👑
+            </div>
+        </div>
     </div>
-
-    <div id="secretZone">
-        <h1 style="font-size: 3rem;">أهلاً بكِ في عرشكِ يا ريري 👑</h1>
-        <p style="color:white;">لقد تم فتح الباب.. الملاذ الآن لكِ وحدكِ.</p>
-    </div>
-
     <script>
-        function enterKingdom() {
-            const card = document.getElementById('mainCard');
-            const zone = document.getElementById('secretZone');
-            
-            card.style.opacity = '0';
+        // التعديلات البرمجية لضمان عمل نفس الحركة الذهبية
+        const textPhrase = "هنا كل شيء يلمع كأنه ذهب.. هناك سر ملكي مخبأ مخصص لسموكِ.. هل أنتِ مستعدة؟ ✨";
+        let characterIndex = 0;
+        function startTyping() {
+            if (characterIndex < textPhrase.length) {
+                document.getElementById("typingEffect").innerHTML += textPhrase.charAt(characterIndex);
+                characterIndex++;
+                setTimeout(startTyping, 45);
+            }
+        }
+        window.onload = startTyping;
+        function revealCosmicSurprise() {
+            document.getElementById('welcomeZone').style.opacity = '0';
             setTimeout(() => {
-                card.style.display = 'none';
-                zone.style.display = 'flex';
-                setTimeout(() => { zone.style.opacity = '1'; }, 50);
-            }, 500);
+                document.getElementById('welcomeZone').style.display = 'none';
+                document.getElementById('surpriseZone').style.display = 'flex';
+                setTimeout(() => { document.getElementById('surpriseZone').style.opacity = '1'; }, 50);
+            }, 400);
         }
     </script>
 </body>
