@@ -2,18 +2,17 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <!-- هاد السطر يمنع التكبير والتحرك في التليفون -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>منزل Chems الرقمي - خاص بـ ريري</title>
     <style>
-        /* إقفال الشاشة تماماً لمنع أي اهتزاز أو حركة جانبية */
+        /* إقفال الشاشة تماماً لمنع أي حركة جانبية */
         html, body {
             margin: 0;
             padding: 0;
             width: 100vw;
             height: 100vh;
-            overflow: hidden; /* السر كامل هنا */
-            background: #0a0512;
+            overflow: hidden;
+            background: #040814; /* أسود مائل للأزرق الداكن المتناسق مع الصورة */
             color: #fff;
         }
 
@@ -31,7 +30,7 @@
             perspective: 1000px;
         }
 
-        /* خلفية ضبابية ساحرة ثلاثية الأبعاد ثابتة ومتوهجة */
+        /* خلفية ضبابية ساحرة باللون الأزرق الداكن والبنفسجي الليلي */
         body::before {
             content: '';
             position: absolute;
@@ -39,18 +38,18 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 20, 147, 0.15) 0%, rgba(75, 0, 130, 0.4) 50%, #05020a 100%);
+            background: radial-gradient(circle, rgba(0, 191, 255, 0.15) 0%, rgba(20, 30, 65, 0.5) 50%, #02050c 100%);
             z-index: 0;
-            animation: bgRotate 15s infinite linear;
+            animation: bgRotate 20s infinite linear;
         }
 
         @keyframes bgRotate {
             0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1.05); }
             100% { transform: rotate(360deg) scale(1); }
         }
 
-        /* حاوية القلوب والنجوم المتساقطة */
+        /* حاوية القلوب والنجوم الزرقاء المتساقطة */
         .magic-container {
             position: absolute;
             top: 0;
@@ -65,18 +64,18 @@
             position: absolute;
             font-size: 1.5rem;
             will-change: transform, top;
-            filter: drop-shadow(0 0 8px rgba(255, 20, 147, 0.8));
+            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.8));
         }
 
-        /* بطاقة الترحيب الفخمة والثابتة */
+        /* بطاقة الترحيب الزرقاء الفخمة والثابتة */
         .luxury-card {
-            background: linear-gradient(135deg, rgba(20, 10, 35, 0.85) 0%, rgba(10, 5, 20, 0.95) 100%);
-            border: 2px solid #ff1493;
-            box-shadow: 0 0 40px rgba(255, 20, 147, 0.4), inset 0 0 20px rgba(255, 20, 147, 0.2);
-            border-radius: 20px;
-            padding: 45px 30px;
+            background: linear-gradient(135deg, rgba(10, 20, 45, 0.85) 0%, rgba(5, 10, 25, 0.95) 100%);
+            border: 2px solid #00bfff; /* نيون أزرق سماوي متناسق */
+            box-shadow: 0 0 40px rgba(0, 191, 255, 0.3), inset 0 0 20px rgba(0, 191, 255, 0.15);
+            border-radius: 25px;
+            padding: 40px 25px;
             text-align: center;
-            max-width: 440px;
+            max-width: 420px;
             width: 90%;
             z-index: 2;
             backdrop-filter: blur(20px);
@@ -85,70 +84,74 @@
         }
 
         .luxury-card:hover {
-            transform: translateY(-5px) rotateY(2deg);
-            box-shadow: 0 0 60px rgba(255, 20, 147, 0.7);
+            transform: translateY(-5px);
+            box-shadow: 0 0 50px rgba(0, 191, 255, 0.5);
         }
 
-        .avatar-area {
-            font-size: 4.5rem;
-            margin-bottom: 20px;
-            display: inline-block;
-            animation: float 3s infinite ease-in-out, glow 2s infinite alternate;
+        /* إطار الصورة الشخصية المتناسق */
+        .avatar-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px auto;
+            border-radius: 50%;
+            border: 3px solid #00bfff;
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.6);
+            overflow: hidden;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes glow {
-            0% { filter: drop-shadow(0 0 10px #ff1493); }
-            100% { filter: drop-shadow(0 0 25px #ff69b4); }
+            50% { transform: translateY(-8px); }
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 20, 147, 0.6);
+            text-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
             margin-bottom: 15px;
             font-weight: bold;
         }
 
         h1 span {
-            color: #ff1493;
+            color: #00bfff;
         }
 
         p {
-            color: #e0d5ea;
-            font-size: 1.15rem;
-            margin-bottom: 35px;
-            line-height: 1.8;
-            font-weight: 500;
+            color: #d1dcfa;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.7;
         }
 
-        /* زر المفاجأة الأسطوري */
+        /* زر المفاجأة الأزرق الملكي */
         .magic-btn {
-            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            background: linear-gradient(135deg, #00bfff 0%, #1e90ff 100%);
             color: white;
             border: none;
-            padding: 15px 40px;
-            font-size: 1.2rem;
+            padding: 14px 35px;
+            font-size: 1.15rem;
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 0 25px rgba(255, 20, 147, 0.5);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
             transition: all 0.3s ease;
-            width: 80%;
+            width: 85%;
             display: inline-block;
         }
 
         .magic-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px #ff1493;
-            letter-spacing: 1px;
+            transform: scale(1.03);
+            box-shadow: 0 0 35px #00bfff;
         }
 
-        /* شاشة المفاجأة السعيدة الثابتة */
+        /* شاشة المفاجأة السعيدة */
         #surpriseScreen {
             display: none;
             text-align: center;
@@ -161,60 +164,65 @@
         }
 
         .gift-title {
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: #fff;
-            text-shadow: 0 0 20px #ff1493;
+            text-shadow: 0 0 20px #00bfff;
             margin-bottom: 20px;
             font-weight: bold;
         }
 
         .gift-text {
-            font-size: 1.3rem;
-            color: #ffe4e1;
+            font-size: 1.2rem;
+            color: #e6eeff;
             line-height: 1.8;
-            background: rgba(255, 20, 147, 0.1);
+            background: rgba(0, 191, 255, 0.08);
             padding: 20px;
             border-radius: 15px;
-            border: 1px dashed #ff1493;
+            border: 1px dashed #00bfff;
             display: inline-block;
-            max-width: 90%;
+            max-width: 95%;
         }
     </style>
 </head>
 <body>
 
-    <!-- القلوب والنجوم المتساقطة -->
+    <!-- القلوب والنجوم الماتشي المتساقطة -->
     <div class="magic-container" id="magicBox"></div>
 
     <!-- الواجهة الرئيسية الفخمة -->
     <div class="luxury-card" id="mainCard">
         <div id="cardContent">
-            <div class="avatar-area">👑</div>
+            <!-- هنا يتم عرض صورتها الماتشي المتناسقة -->
+            <div class="avatar-container">
+                <img src="1000002315_2.jpg" alt="ريري التونسية" class="avatar-img">
+            </div>
             <h1>مرحباً بكِ يا <span>ريري</span></h1>
             <p>المكان غامض، الأجواء VIP، وهناك سر مخبأ هنا من أجلكِ فقط.. هل أنتِ مستعدة لاكتشافه؟ ✨</p>
-            <button class="magic-btn" onclick="revealSecret()">اضغطي لرؤية المفاجأة 💖</button>
+            <button class="magic-btn" onclick="revealSecret()">اضغطي لرؤية المفاجأة 💙</button>
         </div>
 
-        <!-- الشاشة التي تظهر بعد الضغط -->
+        <!-- الشاشة التي تظهر بعد الضغط تطلع ثابتة ومتناسقة -->
         <div id="surpriseScreen">
-            <div class="avatar-area">🌹✨</div>
+            <div class="avatar-container" style="animation-delay: 0.5s;">
+                <img src="1000002315_2.jpg" alt="ريري التونسية" class="avatar-img">
+            </div>
             <div class="gift-title">أجمل تونسية!</div>
             <div class="gift-text">
                 الكون يبتسم عندما تبتسمين.. <br>
-                أهلاً بكِ في عالم Chems الفخم، نورتِ الموقع بوجودكِ الراقي يا ريري! ✨🇹🇳❤️
+                أهلاً بكِ في عالم Chems الفخم، نورتِ الموقع بوجودكِ الراقي يا ريري! ✨🇹🇳💙
             </div>
         </div>
     </div>
 
     <script>
         const container = document.getElementById('magicBox');
-        const particles = ['💖', '✨', '⭐', '🌸', '💕', '✨'];
+        // قلوب ونجوم زرقاء وبيضاء لتتناسب مع ألوان الصورة تماماً
+        const particles = ['💙', '✨', '⭐', '💎', '🤍', '✨'];
 
         for (let i = 0; i < 35; i++) {
             const p = document.createElement('div');
             p.classList.add('heart-particle');
             p.textContent = particles[Math.floor(Math.random() * particles.length)];
-            // التوزيع العشوائي داخل الشاشة فقط
             p.style.left = Math.random() * 95 + '%'; 
             p.style.top = Math.random() * -50 + 'px';
 
@@ -240,12 +248,13 @@
             document.getElementById('cardContent').style.display = 'none';
             document.getElementById('surpriseScreen').style.display = 'block';
             
+            // احتفالية قلوب زرقاء فخمة عند الضغط
             for (let i = 0; i < 20; i++) {
                 const burst = document.createElement('div');
                 burst.classList.add('heart-particle');
-                burst.textContent = '💖';
+                burst.textContent = '💙';
                 burst.style.left = Math.random() * 95 + '%';
-                burst.style.top = '20%';
+                burst.style.top = '25%';
                 burst.style.animation = 'fallDown 3s linear infinite';
                 container.appendChild(burst);
             }
@@ -254,3 +263,4 @@
 
 </body>
 </html>
+
