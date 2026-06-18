@@ -3,198 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى أميرتي الغالية ❤️</title>
+    <title>إلى أميرتي ريري ❤️</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+
+        :root {
+            --primary-glow: #ff0055;
+            --secondary-glow: #00f0ff;
+            --bg-gradient: linear-gradient(135deg, #0f051d 0%, #290b3a 50%, #05010c 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #ffe5ec, #ffb3c6);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background: var(--bg-gradient);
             min-height: 100vh;
-            color: #4a0e17;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow-x: hidden;
-            position: relative;
+            perspective: 1000px;
         }
 
-        /* قلوب متساقطة في الخلفية */
-        .heart {
+        /* جزيئات النيون المتساقطة في الخلفية (مؤثر قوي) */
+        .particle {
             position: absolute;
-            color: #ff4d6d;
-            font-size: 20px;
-            animation: fall linear infinite;
-            top: -20px;
-            z-index: 0;
+            pointer-events: none;
+            background: rgba(255, 0, 85, 0.6);
+            border-radius: 50%;
+            animation: floatUp linear infinite;
         }
 
-        @keyframes fall {
-            to {
-                transform: translateY(105vh) rotate(360deg);
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-10vh) scale(1.5) rotate(360deg);
+                opacity: 0;
             }
         }
 
-        .container {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 3px rgba(0, 0, 0, 0.05), 0 4px 15px rgba(255, 77, 109, 0.2);
-            text-align: center;
-            max-width: 500px;
+        /* الحاوية الزجاجية بتقنية Glassmorphism ثلاثية الأبعاد */
+        .main-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            padding: 40px 30px;
+            border-radius: 30px;
             width: 90%;
-            margin: 40px auto;
-            z-index: 1;
-            border: 2px solid #ff758f;
+            max-width: 550px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 
+                        0 0 40px rgba(255, 0, 85, 0.15),
+                        inset 0 0 20px rgba(255, 255, 255, 0.05);
+            transform: style preserve-3d;
+            animation: cardEntrance 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            z-index: 2;
         }
 
-        h1 {
-            color: #c9184a;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(50px) rotateX(-10deg); }
+            to { opacity: 1; transform: translateY(0) rotateX(0); }
         }
 
-        p.intro {
+        /* اسم ريري بتأثير النيون المشع (Neon Cyber-Romance) */
+        .neon-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 10px #fff, 
+                         0 0 20px var(--primary-glow), 
+                         0 0 40px var(--primary-glow), 
+                         0 0 80px var(--primary-glow);
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from { text-shadow: 0 0 10px #fff, 0 0 20px var(--primary-glow), 0 0 40px var(--primary-glow); }
+            to { text-shadow: 0 0 15px #fff, 0 0 30px var(--primary-glow), 0 0 60px var(--primary-glow), 0 0 90px var(--secondary-glow); }
+        }
+
+        .subtitle {
+            color: #e0b0ff;
             font-size: 1.1rem;
-            color: #5c1321;
-        }
-
-        /* العداد */
-        .counter-box {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin: 30px 0;
-        }
-
-        .time-segment {
-            background: #ff4d6d;
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-
-        .time-segment span {
-            display: block;
-            font-size: 1.5rem;
-        }
-
-        .time-segment label {
-            font-size: 0.8rem;
+            margin-bottom: 30px;
             opacity: 0.9;
         }
 
-        /* الزر والميساج */
-        .btn {
-            background-color: #c9184a;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Cairo', sans-serif;
-            box-shadow: 0 4px 10px rgba(201, 24, 74, 0.3);
+        /* عداد الوقت الخارق */
+        .timer-headline {
+            color: #00f0ff;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .btn:hover {
-            background-color: #ff124f;
+        .cyber-counter {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .counter-slot {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 0, 85, 0.3);
+            border-radius: 15px;
+            padding: 15px 5px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .counter-slot:hover {
+            border-color: var(--secondary-glow);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .counter-slot span {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .counter-slot label {
+            display: block;
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        /* زر المفاجأة المتوهج */
+        .glow-btn {
+            background: linear-gradient(90deg, #ff0055, #9900ff);
+            color: #fff;
+            border: none;
+            padding: 16px 35px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-btn:hover {
+            box-shadow: 0 0 35px rgba(255, 0, 85, 0.8), 0 0 15px rgba(153, 0, 255, 0.5);
             transform: scale(1.05);
         }
 
-        .secret-message {
+        /* رسالة الصدمة العاطفية */
+        .box-message {
             display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background: #fff0f3;
-            border-right: 5px solid #ff4d6d;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            animation: fadeIn 1s ease forwards;
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--secondary-glow);
+            border-right: 4px solid var(--primary-glow);
+            padding: 20px;
+            border-radius: 15px;
+            color: #fff;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: right;
+            box-shadow: inset 0 0 15px rgba(255,255,255,0.05);
+            animation: slideOpen 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideOpen {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .heart-icon {
+            color: var(--primary-glow);
+            display: inline-block;
+            animation: beat 0.6s infinite alternate;
+        }
+
+        @keyframes beat {
+            to { transform: scale(1.2); }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>إلى من ملكت قلبي ❤️</h1>
-        <p class="intro">كل ثانية جازت وأنا معاكِ هي أجمل وقت في حياتي. ربي يخليكِ ليا.</p>
+    <div class="main-card">
+        <div class="neon-title">ريري <span class="heart-icon">❤️</span></div>
+        <div class="subtitle">الملكة التي غيرت عالمي بالكامل</div>
         
-        <h3 style="color: #ff4d6d; margin-top: 20px;">شحال عنا ملي تلاقينا:</h3>
-        <div class="counter-box">
-            <div class="time-segment"><span id="days">00</span><label>يوم</label></div>
-            <div class="time-segment"><span id="hours">00</span><label>ساعة</label></div>
-            <div class="time-segment"><span id="minutes">00</span><label>دقيقة</label></div>
-            <div class="time-segment"><span id="seconds">00</span><label>ثانية</label></div>
+        <div class="timer-headline">⏳ الوقت الذي أضاءت فيه حياتي:</div>
+        
+        <!-- العداد الفاخر عالي الدقة -->
+        <div class="cyber-counter">
+            <div class="counter-slot"><span id="days">00</span><label>يوم</label></div>
+            <div class="counter-slot"><span id="hours">00</span><label>ساعة</label></div>
+            <div class="counter-slot"><span id="minutes">00</span><label>دقيقة</label></div>
+            <div class="counter-slot"><span id="seconds">00</span><label>ثانية</label></div>
         </div>
 
-        <button class="btn" onclick="toggleMessage()">اضغطي هنا لرؤية رسالتي ليكِ 💌</button>
+        <button class="glow-btn" onclick="revealDestiny()">إضغطي هنا يا ريري 🌌</button>
         
-        <div id="message" class="secret-message">
-            يا غالية، حبيت نفرحك بهاد العفسة البسيطة أونلاين باش نقولك بلي علابالي بكل التفاصيل اللي بيناتنا، وبلي كل يوم يزيد حبي ليكِ كتر وكتر. ربي يدومنا لبعضنا وميحرمنيش من ضحكتك. 💕
+        <!-- رسالة الصدمة المفاجئة -->
+        <div id="secretBox" class="box-message">
+            يا ريري الغالية.. <br>
+            المواقع هادو يخدموهم للناس العاديين، بصح أنتِ جيتِ عابرة للقارات ودخلتِ لقلبي بلا إذن. حبيت نخدم كود سبيسيال مشع كيفك، باش نحفر هاد الثواني والدقائق اللي عشتهم معاكِ. كل ثانية جازت وأنا نعرفك فيها تسوى الدنيا وما فيها. نحبك ومستحيل نسيّد وحدة غيرك في قلبي. ربي يخليكِ ليا يا كلشي في حياتي! 👑✨
         </div>
     </div>
 
     <script>
-        // 1. تاريخ بداية علاقتكم (بدل هاد التاريخ بالتاريخ تاعكم: السنة، الشهر ناقص 1، اليوم)
-        // مثلاً: 14 أكتوبر 2024 نكتبوها: (2024, 9, 14) لأن الأشهر تبدأ من 0 في البرمجة
-        const anniversaryDate = new Date(2025, 4, 10); 
+        // ضبط تاريخ البداية (هنا مضبوط تلقائياً على 4 أيام قبل تاريخ اليوم الحالي في 2026)
+        // تقدر تغير التاريخ بدقة هنا: (السنة, الشهر ناقص 1, اليوم, الساعة, الدقائق)
+        const startDate = new Date(2026, 5, 14, 12, 0, 0); 
 
-        function updateCounter() {
+        function runHighPrecisionTimer() {
             const now = new Date();
-            const difference = now - anniversaryDate;
+            const diff = now - startDate;
 
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-            document.getElementById('days').innerText = days;
-            document.getElementById('hours').innerText = hours;
-            document.getElementById('minutes').innerText = minutes;
-            document.getElementById('seconds').innerText = seconds;
+            document.getElementById('days').innerText = String(d).padStart(2, '0');
+            document.getElementById('hours').innerText = String(h).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(s).padStart(2, '0');
         }
 
-        setInterval(updateCounter, 1000);
-        updateCounter();
+        setInterval(runHighPrecisionTimer, 1000);
+        runHighPrecisionTimer();
 
-        // إظهار الرسالة السرية
-        function toggleMessage() {
-            const msg = document.getElementById('message');
-            if (msg.style.display === 'block') {
-                msg.style.display = 'none';
-            } else {
-                msg.style.display = 'block';
+        // إظهار الرسالة
+        function revealDestiny() {
+            const box = document.getElementById('secretBox');
+            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+            box.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // صناعة خلفية الجزيئات النيونية المتحركة المتفوقة
+        function launchParticles() {
+            const count = 40; // عدد الجزيئات
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const p = document.createElement('div');
+                    p.classList.add('particle');
+                    
+                    // خصائص عشوائية لخلق عمق بصري (4K Feel)
+                    const size = Math.random() * 8 + 4;
+                    p.style.width = size + 'px';
+                    p.style.height = size + 'px';
+                    p.style.left = Math.random() * 100 + 'vw';
+                    p.style.animationDuration = Math.random() * 4 + 4 + 's';
+                    
+                    // تنويع الألوان بين النيون الوردي والأزرق السيبراني
+                    if (Math.random() > 0.5) {
+                        p.style.background = 'rgba(0, 240, 255, 0.6)';
+                        p.style.boxShadow = '0 0 10px #00f0ff';
+                    } else {
+                        p.style.boxShadow = '0 0 10px #ff0055';
+                    }
+                    
+                    document.body.appendChild(p);
+                }, i * 150);
             }
         }
-
-        // صناعة القلوب المتساقطة
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerText = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            heart.style.opacity = Math.random();
-            document.body.appendChild(heart);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
-        }
-
-        setInterval(createHeart, 300);
+        window.onload = launchParticles;
     </script>
 </body>
 </html>
