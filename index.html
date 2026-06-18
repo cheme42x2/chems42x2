@@ -2,96 +2,199 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Golden Sanctuary - RIRI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى أميرتي الغالية ❤️</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Noto+Color+Emoji&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
-        html, body {
-            margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden;
-            background: #0a0a05; /* خلفية سوداء داكنة جداً لتعزيز لمعان الذهب */
-            color: #ffffff;
-            font-family: 'Cairo', sans-serif, 'Apple Color Emoji', 'Noto Color Emoji';
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #ffe5ec, #ffb3c6);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #4a0e17;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        body { display: flex; justify-content: center; align-items: center; position: relative; }
-
-        .galaxy-bg {
-            position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle at 50% 50%, #1a1500 0%, #050500 100%);
+        /* قلوب متساقطة في الخلفية */
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: fall linear infinite;
+            top: -20px;
             z-index: 0;
         }
 
-        .cosmic-rain { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-        .premium-particle { position: absolute; font-size: 1.7rem; filter: drop-shadow(0 0 10px #ffd700); opacity: 0; }
-
-        .master-card {
-            background: rgba(20, 15, 0, 0.85);
-            border: 1px solid #ffd700;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 215, 0, 0.2);
-            border-radius: 35px; padding: 50px 30px; max-width: 390px; width: 88%; z-index: 2;
-            backdrop-filter: blur(15px); text-align: center;
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) rotate(360deg);
+            }
         }
 
-        .neon-heart-core { width: 130px; height: 130px; margin-bottom: 25px; position: relative; display: flex; justify-content: center; align-items: center; }
-        .neon-heart-core::before { content: ''; position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 2px dashed #ffd700; animation: spinRing 12s infinite linear; }
-        @keyframes spinRing { 100% { transform: rotate(360deg); } }
-
-        h1 { font-size: 2.2rem; font-weight: 900; background: linear-gradient(to bottom, #ffd700, #ffcc33); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
-        .main-p { color: #ffe599; font-size: 1.1rem; line-height: 1.8; margin: 0 0 35px 0; }
-
-        .action-btn {
-            background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
-            color: #000; border: none; padding: 16px 0; width: 90%; font-size: 1.2rem; font-weight: 900;
-            border-radius: 50px; cursor: pointer; box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 3px rgba(0, 0, 0, 0.05), 0 4px 15px rgba(255, 77, 109, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            margin: 40px auto;
+            z-index: 1;
+            border: 2px solid #ff758f;
         }
 
-        #surpriseZone { display: none; opacity: 0; width: 100%; flex-direction: column; align-items: center; transition: opacity 0.8s; }
-        .premium-title { font-size: 2.4rem; font-weight: 900; background: linear-gradient(to right, #ffd700, #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
-        .premium-box { color: #fff; line-height: 1.9; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700; padding: 20px; border-radius: 25px; }
+        h1 {
+            color: #c9184a;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        p.intro {
+            font-size: 1.1rem;
+            color: #5c1321;
+        }
+
+        /* العداد */
+        .counter-box {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .time-segment {
+            background: #ff4d6d;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .time-segment span {
+            display: block;
+            font-size: 1.5rem;
+        }
+
+        .time-segment label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        /* الزر والميساج */
+        .btn {
+            background-color: #c9184a;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Cairo', sans-serif;
+            box-shadow: 0 4px 10px rgba(201, 24, 74, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #ff124f;
+            transform: scale(1.05);
+        }
+
+        .secret-message {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff0f3;
+            border-right: 5px solid #ff4d6d;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-    <div class="galaxy-bg"></div>
-    <div class="cosmic-rain" id="cosmicBox"></div>
-    <div class="master-card" id="mainCard">
-        <div id="welcomeZone" style="display: flex; flex-direction: column; align-items: center;">
-            <div class="neon-heart-core">
-                <svg width="75" height="75" viewBox="0 0 24 24" fill="#ffd700" style="filter: drop-shadow(0 0 15px #ffd700);">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.5 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                </svg>
-            </div>
-            <h1>نورتِ المكان يا ريري ✨👑</h1>
-            <div class="main-p" id="typingEffect"></div>
-            <button class="action-btn" onclick="revealCosmicSurprise()">دخول الملاذ الذهبي 💎</button>
+
+    <div class="container">
+        <h1>إلى من ملكت قلبي ❤️</h1>
+        <p class="intro">كل ثانية جازت وأنا معاكِ هي أجمل وقت في حياتي. ربي يخليكِ ليا.</p>
+        
+        <h3 style="color: #ff4d6d; margin-top: 20px;">شحال عنا ملي تلاقينا:</h3>
+        <div class="counter-box">
+            <div class="time-segment"><span id="days">00</span><label>يوم</label></div>
+            <div class="time-segment"><span id="hours">00</span><label>ساعة</label></div>
+            <div class="time-segment"><span id="minutes">00</span><label>دقيقة</label></div>
+            <div class="time-segment"><span id="seconds">00</span><label>ثانية</label></div>
         </div>
-        <div id="surpriseZone">
-            <div class="premium-title">الملكية ريري 🦋</div>
-            <div class="premium-box">
-                أهلاً بكِ في عالم Chems الذهبي.. 🌟<br>نورتِ الموقع بطلّتكِ البهية، يا بنت تونس الراقية! 🇹🇳💙🐈👑
-            </div>
+
+        <button class="btn" onclick="toggleMessage()">اضغطي هنا لرؤية رسالتي ليكِ 💌</button>
+        
+        <div id="message" class="secret-message">
+            يا غالية، حبيت نفرحك بهاد العفسة البسيطة أونلاين باش نقولك بلي علابالي بكل التفاصيل اللي بيناتنا، وبلي كل يوم يزيد حبي ليكِ كتر وكتر. ربي يدومنا لبعضنا وميحرمنيش من ضحكتك. 💕
         </div>
     </div>
+
     <script>
-        // التعديلات البرمجية لضمان عمل نفس الحركة الذهبية
-        const textPhrase = "هنا كل شيء يلمع كأنه ذهب.. هناك سر ملكي مخبأ مخصص لسموكِ.. هل أنتِ مستعدة؟ ✨";
-        let characterIndex = 0;
-        function startTyping() {
-            if (characterIndex < textPhrase.length) {
-                document.getElementById("typingEffect").innerHTML += textPhrase.charAt(characterIndex);
-                characterIndex++;
-                setTimeout(startTyping, 45);
+        // 1. تاريخ بداية علاقتكم (بدل هاد التاريخ بالتاريخ تاعكم: السنة، الشهر ناقص 1، اليوم)
+        // مثلاً: 14 أكتوبر 2024 نكتبوها: (2024, 9, 14) لأن الأشهر تبدأ من 0 في البرمجة
+        const anniversaryDate = new Date(2025, 4, 10); 
+
+        function updateCounter() {
+            const now = new Date();
+            const difference = now - anniversaryDate;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+        }
+
+        setInterval(updateCounter, 1000);
+        updateCounter();
+
+        // إظهار الرسالة السرية
+        function toggleMessage() {
+            const msg = document.getElementById('message');
+            if (msg.style.display === 'block') {
+                msg.style.display = 'none';
+            } else {
+                msg.style.display = 'block';
             }
         }
-        window.onload = startTyping;
-        function revealCosmicSurprise() {
-            document.getElementById('welcomeZone').style.opacity = '0';
+
+        // صناعة القلوب المتساقطة
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerText = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+
             setTimeout(() => {
-                document.getElementById('welcomeZone').style.display = 'none';
-                document.getElementById('surpriseZone').style.display = 'flex';
-                setTimeout(() => { document.getElementById('surpriseZone').style.opacity = '1'; }, 50);
-            }, 400);
+                heart.remove();
+            }, 5000);
         }
+
+        setInterval(createHeart, 300);
     </script>
 </body>
 </html>
