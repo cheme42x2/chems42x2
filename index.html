@@ -3,218 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى أميرتي ريري ❤️</title>
+    <title>إلى ملكتي ريري ❤️</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
 
         :root {
-            --primary-glow: #ff0055;
-            --secondary-glow: #00f0ff;
-            --bg-gradient: linear-gradient(135deg, #0f051d 0%, #290b3a 50%, #05010c 100%);
+            --neon-pink: #ff0055;
+            --neon-blue: #00f0ff;
+            --purple-dark: #0a0212;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Cairo', sans-serif;
-            background: var(--bg-gradient);
+            background: radial-gradient(circle at center, #1a082e 0%, var(--purple-dark) 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
+            overflow: hidden;
             perspective: 1000px;
         }
 
-        /* جزيئات النيون المتساقطة في الخلفية (مؤثر قوي) */
-        .particle {
-            position: absolute;
-            pointer-events: none;
-            background: rgba(255, 0, 85, 0.6);
-            border-radius: 50%;
-            animation: floatUp linear infinite;
+        /* شاشة الدخول الاحترافية */
+        #intro-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--purple-dark);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease, visibility 1s;
         }
 
-        @keyframes floatUp {
-            0% {
-                transform: translateY(105vh) scale(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% {
-                transform: translateY(-10vh) scale(1.5) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* الحاوية الزجاجية بتقنية Glassmorphism ثلاثية الأبعاد */
-        .main-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            padding: 40px 30px;
-            border-radius: 30px;
-            width: 90%;
-            max-width: 550px;
-            text-align: center;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 
-                        0 0 40px rgba(255, 0, 85, 0.15),
-                        inset 0 0 20px rgba(255, 255, 255, 0.05);
-            transform: style preserve-3d;
-            animation: cardEntrance 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            z-index: 2;
-        }
-
-        @keyframes cardEntrance {
-            from { opacity: 0; transform: translateY(50px) rotateX(-10deg); }
-            to { opacity: 1; transform: translateY(0) rotateX(0); }
-        }
-
-        /* اسم ريري بتأثير النيون المشع (Neon Cyber-Romance) */
-        .neon-title {
-            font-size: 3rem;
-            font-weight: 900;
+        .intro-btn {
+            background: transparent;
             color: #fff;
-            text-shadow: 0 0 10px #fff, 
-                         0 0 20px var(--primary-glow), 
-                         0 0 40px var(--primary-glow), 
-                         0 0 80px var(--primary-glow);
+            border: 2px solid var(--neon-pink);
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 900;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--neon-pink);
+            transition: 0.4s;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            to { box-shadow: 0 0 40px var(--neon-pink), 0 0 20px var(--neon-blue); transform: scale(1.05); }
+        }
+
+        /* جزيئات السحر الخلفية */
+        canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* حاوية العرض ثلاثية الأبعاد */
+        .main-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            padding: 40px;
+            border-radius: 35px;
+            width: 90%; max-width: 550px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.7), inset 0 0 30px rgba(255,255,255,0.05);
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease;
+            z-index: 2;
+            opacity: 0;
+            transform: scale(0.8) translateY(30px);
+        }
+
+        .main-card.show {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .neon-title {
+            font-size: 3.5rem; font-weight: 900; color: #fff;
+            text-shadow: 0 0 20px var(--neon-pink), 0 0 40px var(--neon-pink);
             margin-bottom: 5px;
-            letter-spacing: 1px;
-            animation: pulseGlow 2s infinite alternate;
         }
 
-        @keyframes pulseGlow {
-            from { text-shadow: 0 0 10px #fff, 0 0 20px var(--primary-glow), 0 0 40px var(--primary-glow); }
-            to { text-shadow: 0 0 15px #fff, 0 0 30px var(--primary-glow), 0 0 60px var(--primary-glow), 0 0 90px var(--secondary-glow); }
-        }
+        .subtitle { color: #d0b0ff; font-size: 1.1rem; margin-bottom: 30px; opacity: 0.8; }
 
-        .subtitle {
-            color: #e0b0ff;
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        /* عداد الوقت الخارق */
-        .timer-headline {
-            color: #00f0ff;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
+        /* العداد الرقمي عالي الفخامة */
         .cyber-counter {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 35px;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 35px;
         }
 
         .counter-slot {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 0, 85, 0.3);
-            border-radius: 15px;
-            padding: 15px 5px;
-            position: relative;
-            overflow: hidden;
-            transition: 0.3s;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 0, 85, 0.2);
+            border-radius: 20px; padding: 15px 5px;
+            box-shadow: inset 0 0 15px rgba(255, 0, 85, 0.05);
         }
 
-        .counter-slot:hover {
-            border-color: var(--secondary-glow);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
-            transform: translateY(-5px);
-        }
+        .counter-slot span { display: block; font-size: 2.2rem; font-weight: 900; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .counter-slot label { display: block; font-size: 0.85rem; color: #8a7fa4; margin-top: 5px; }
 
-        .counter-slot span {
-            display: block;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #fff;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .counter-slot label {
-            display: block;
-            font-size: 0.85rem;
-            color: #aaa;
-            margin-top: 5px;
-        }
-
-        /* زر المفاجأة المتوهج */
+        /* زر التفجير الفني */
         .glow-btn {
-            background: linear-gradient(90deg, #ff0055, #9900ff);
-            color: #fff;
-            border: none;
-            padding: 16px 35px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            outline: none;
+            background: linear-gradient(45deg, var(--neon-pink), #9900ff);
+            color: #fff; border: none; padding: 18px 40px;
+            font-family: 'Cairo', sans-serif; font-size: 1.25rem; font-weight: bold;
+            border-radius: 50px; cursor: pointer;
             box-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s;
         }
 
-        .glow-btn:hover {
-            box-shadow: 0 0 35px rgba(255, 0, 85, 0.8), 0 0 15px rgba(153, 0, 255, 0.5);
-            transform: scale(1.05);
-        }
+        .glow-btn:hover { box-shadow: 0 0 40px var(--neon-pink); transform: scale(1.05); }
 
-        /* رسالة الصدمة العاطفية */
+        /* صندوق الرسالة الذكية المتكتبة */
         .box-message {
-            display: none;
-            margin-top: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border-left: 4px solid var(--secondary-glow);
-            border-right: 4px solid var(--primary-glow);
-            padding: 20px;
-            border-radius: 15px;
-            color: #fff;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            text-align: right;
-            box-shadow: inset 0 0 15px rgba(255,255,255,0.05);
-            animation: slideOpen 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            display: none; margin-top: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 25px; border-radius: 20px;
+            color: #fff; font-size: 1.25rem; line-height: 1.8; text-align: right;
+            min-height: 100px;
         }
 
-        @keyframes slideOpen {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .heart-icon {
-            color: var(--primary-glow);
-            display: inline-block;
-            animation: beat 0.6s infinite alternate;
-        }
-
-        @keyframes beat {
-            to { transform: scale(1.2); }
+        /* زر الصوت الاحترافي */
+        #music-control {
+            position: absolute; top: 20px; right: 20px;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: #fff; padding: 10px; border-radius: 50%; cursor: pointer; z-index: 10;
         }
     </style>
 </head>
 <body>
 
-    <div class="main-card">
-        <div class="neon-title">ريري <span class="heart-icon">❤️</span></div>
-        <div class="subtitle">الملكة التي غيرت عالمي بالكامل</div>
+    <!-- شاشة الدخول الغامضة -->
+    <div id="intro-overlay">
+        <button class="intro-btn" onclick="startExperience()">اضغطي لفتح عالمكِ الخاص يا ريري ✨</button>
+    </div>
+
+    <!-- موسيقى الخلفية (تقدر تبدل الرابط برابط أغنيتكم المفضلة المستضافة أونلاين) -->
+    <audio id="bg-music" loop src="https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav"></audio>
+    <button id="music-control" onclick="toggleMusic()" style="display:none;">🎵</button>
+
+    <canvas id="magicCanvas"></canvas>
+
+    <div class="main-card" id="mainCard">
+        <div class="neon-title">ريري ❤️</div>
+        <div class="subtitle">الملكة التي تتربع على عرش قلبي</div>
         
-        <div class="timer-headline">⏳ الوقت الذي أضاءت فيه حياتي:</div>
+        <div style="color: var(--neon-blue); font-weight: bold; margin-bottom: 15px; font-size: 1.1rem;">⌛️ الوقت الذي أضاءت فيه حياتي:</div>
         
-        <!-- العداد الفاخر عالي الدقة -->
         <div class="cyber-counter">
             <div class="counter-slot"><span id="days">00</span><label>يوم</label></div>
             <div class="counter-slot"><span id="hours">00</span><label>ساعة</label></div>
@@ -222,73 +169,115 @@
             <div class="counter-slot"><span id="seconds">00</span><label>ثانية</label></div>
         </div>
 
-        <button class="glow-btn" onclick="revealDestiny()">إضغطي هنا يا ريري 🌌</button>
+        <button class="glow-btn" onclick="typeSecretMessage()">إقتربي واضغطي هنا 🌌</button>
         
-        <!-- رسالة الصدمة المفاجئة -->
-        <div id="secretBox" class="box-message">
-            يا ريري الغالية.. <br>
-            المواقع هادو يخدموهم للناس العاديين، بصح أنتِ جيتِ عابرة للقارات ودخلتِ لقلبي بلا إذن. حبيت نخدم كود سبيسيال مشع كيفك، باش نحفر هاد الثواني والدقائق اللي عشتهم معاكِ. كل ثانية جازت وأنا نعرفك فيها تسوى الدنيا وما فيها. نحبك ومستحيل نسيّد وحدة غيرك في قلبي. ربي يخليكِ ليا يا كلشي في حياتي! 👑✨
-        </div>
+        <div id="secretBox" class="box-message"></div>
     </div>
 
     <script>
-        // ضبط تاريخ البداية (هنا مضبوط تلقائياً على 4 أيام قبل تاريخ اليوم الحالي في 2026)
-        // تقدر تغير التاريخ بدقة هنا: (السنة, الشهر ناقص 1, اليوم, الساعة, الدقائق)
+        // ضبط تاريخ البداية (مضبوط تلقائياً على 4 أيام قبل اليوم الحالي)
         const startDate = new Date(2026, 5, 14, 12, 0, 0); 
 
-        function runHighPrecisionTimer() {
-            const now = new Date();
-            const diff = now - startDate;
+        function updateCounter() {
+            const diff = new Date() - startDate;
+            document.getElementById('days').innerText = String(Math.floor(diff / 86400000)).padStart(2,'0');
+            document.getElementById('hours').innerText = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+            document.getElementById('minutes').innerText = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+            document.getElementById('seconds').innerText = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+        }
+        setInterval(updateCounter, 1000); updateCounter();
 
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById('days').innerText = String(d).padStart(2, '0');
-            document.getElementById('hours').innerText = String(h).padStart(2, '0');
-            document.getElementById('minutes').innerText = String(m).padStart(2, '0');
-            document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+        // بدء التجربة السينمائية
+        function startExperience() {
+            document.getElementById('intro-overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('intro-overlay').style.display = 'none';
+                document.getElementById('mainCard').classList.add('show');
+                document.getElementById('music-control').style.display = 'block';
+                try { document.getElementById('bg-music').play(); } catch(e){}
+            }, 1000);
         }
 
-        setInterval(runHighPrecisionTimer, 1000);
-        runHighPrecisionTimer();
+        function toggleMusic() {
+            const audio = document.getElementById('bg-music');
+            if(audio.paused) audio.play(); else audio.pause();
+        }
 
-        // إظهار الرسالة
-        function revealDestiny() {
+        // تأثير الكتابة السحري (Typewriter)
+        const textToType = "يا ريري الغالية.. المواقع هادو يخدموهم للناس العاديين، بصح أنتِ جيتِ عابرة للقارات ودخلتِ لقلبي بلا إذن. حبيت نخدم كود سبيسيال مشع كيفك، باش نحفر هاد الثواني والدقائق اللي عشتهم معاكِ. كل ثانية جازت وأنا نعرفك فيها تسوى الدنيا وما فيها. نحبك ومستحيل نسيّد وحدة غيرك في قلبي. ربي يخليكِ ليا يا كلشي في حياتي! 👑✨";
+        let isTyping = false;
+
+        function typeSecretMessage() {
             const box = document.getElementById('secretBox');
-            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
-            box.scrollIntoView({ behavior: 'smooth' });
+            if (box.style.display === 'block') return;
+            box.style.display = 'block';
+            if (isTyping) return;
+            isTyping = true;
+            let i = 0;
+            box.innerHTML = "";
+            function type() {
+                if (i < textToType.length) {
+                    box.innerHTML += textToType.charAt(i); i++;
+                    setTimeout(type, 40); // سرعة الكتابة بالملي ثانية
+                }
+            }
+            type();
         }
 
-        // صناعة خلفية الجزيئات النيونية المتحركة المتفوقة
-        function launchParticles() {
-            const count = 40; // عدد الجزيئات
-            for (let i = 0; i < count; i++) {
-                setTimeout(() => {
-                    const p = document.createElement('div');
-                    p.classList.add('particle');
-                    
-                    // خصائص عشوائية لخلق عمق بصري (4K Feel)
-                    const size = Math.random() * 8 + 4;
-                    p.style.width = size + 'px';
-                    p.style.height = size + 'px';
-                    p.style.left = Math.random() * 100 + 'vw';
-                    p.style.animationDuration = Math.random() * 4 + 4 + 's';
-                    
-                    // تنويع الألوان بين النيون الوردي والأزرق السيبراني
-                    if (Math.random() > 0.5) {
-                        p.style.background = 'rgba(0, 240, 255, 0.6)';
-                        p.style.boxShadow = '0 0 10px #00f0ff';
-                    } else {
-                        p.style.boxShadow = '0 0 10px #ff0055';
-                    }
-                    
-                    document.body.appendChild(p);
-                }, i * 150);
+        /* نظام الجزيئات التفاعلي المتطور (Canvas Particles) */
+        const canvas = document.getElementById('magicCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null };
+
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
+
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; spawnTrail(); });
+        window.addEventListener('touchmove', (e) => { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; spawnTrail(); });
+
+        class Particle {
+            constructor(x, y, isTrail = false) {
+                this.x = x; this.y = y;
+                this.size = Math.random() * (isTrail ? 6 : 3) + 1;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = isTrail ? Math.random() * -2 - 0.5 : Math.random() * -1 - 0.2;
+                this.color = Math.random() > 0.5 ? '#ff0055' : '#00f0ff';
+                this.alpha = 1;
+            }
+            update() { this.x += this.speedX; this.y += this.speedY; if(this.alpha > 0.01) this.alpha -= 0.01; }
+            draw() {
+                ctx.save(); ctx.globalAlpha = this.alpha; ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color; ctx.shadowBlur = 10; ctx.shadowColor = this.color;
+                ctx.fill(); ctx.restore();
             }
         }
-        window.onload = launchParticles;
+
+        function spawnTrail() { if(particles.length < 150) particles.push(new Particle(mouse.x, mouse.y, true)); }
+
+        function initAmbientParticles() {
+            for(let i=0; i<30; i++) particles.push(new Particle(Math.random()*canvas.width, Math.random()*canvas.height + canvas.height));
+        }
+        setInterval(initAmbientParticles, 1000);
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update(); particles[i].draw();
+                if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // تأثير الـ 3D الحركي للكارت
+        const card = document.getElementById('mainCard');
+        window.addEventListener('mousemove', (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            if(card.classList.contains('show')) card.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg)`;
+        });
     </script>
 </body>
 </html>
