@@ -6,126 +6,52 @@
     <title>VIP UNBAN - ULTIMATE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+        :root { --gold: #FFD700; --bg: #050505; }
+        
+        body { margin: 0; background: var(--bg); color: #fff; font-family: 'Tajawal', sans-serif; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
 
-        :root {
-            --gold: #FFD700;
-            --gold-glow: rgba(255, 215, 0, 0.4);
-            --bg-dark: #050505;
-        }
+        #particles-js { position: absolute; width: 100%; height: 100%; z-index: 1; }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg-dark);
-            color: #fff;
-            font-family: 'Tajawal', sans-serif;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+        .card { position: relative; z-index: 2; width: 90%; max-width: 380px; background: rgba(0,0,0,0.7); border: 2px solid var(--gold); padding: 30px; border-radius: 25px; text-align: center; box-shadow: 0 0 30px rgba(255,215,0,0.2); }
 
-        /* خلفية الأكواد الذهبية المتحركة */
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
+        h1 { color: var(--gold); font-size: 2.5rem; margin-bottom: 10px; text-shadow: 0 0 15px var(--gold); }
 
-        .main-card {
-            position: relative;
-            z-index: 2;
-            width: 90%;
-            max-width: 400px;
-            background: rgba(10, 10, 10, 0.85);
-            border: 2px solid var(--gold);
-            padding: 40px 25px;
-            border-radius: 30px;
-            text-align: center;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 50px var(--gold-glow), inset 0 0 20px rgba(255,255,255,0.1);
-            animation: breathe 4s ease-in-out infinite;
-        }
+        .btn { display: block; width: 100%; padding: 18px; margin: 15px 0; background: #111; border: 1px solid var(--gold); color: #fff; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: var(--gold); color: #000; box-shadow: 0 0 20px var(--gold); }
 
-        @keyframes breathe {
-            0%, 100% { box-shadow: 0 0 50px var(--gold-glow); transform: scale(1); }
-            50% { box-shadow: 0 0 70px var(--gold-glow); transform: scale(1.02); }
-        }
+        /* الـ Modal المخصص (بديل الـ alert) */
+        #custom-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 99; justify-content: center; align-items: center; }
+        .modal-content { background: #1a1a1a; padding: 30px; border-radius: 20px; border: 1px solid var(--gold); text-align: center; width: 80%; }
 
-        h1 {
-            color: var(--gold);
-            font-size: 3rem;
-            margin: 0;
-            text-transform: uppercase;
-            text-shadow: 0 0 20px var(--gold);
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            color: #ccc;
-            margin-bottom: 40px;
-        }
-
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 20px;
-            margin: 15px 0;
-            background: linear-gradient(45deg, #111, #222);
-            border: 1px solid var(--gold);
-            color: #fff;
-            border-radius: 15px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.4s;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: var(--gold);
-            color: #000;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px var(--gold);
-        }
-
-        .footer-text {
-            position: fixed;
-            bottom: 20px;
-            font-size: 0.7rem;
-            color: var(--gold);
-            z-index: 2;
-        }
+        .footer { position: absolute; bottom: 10px; font-size: 0.7rem; color: var(--gold); }
     </style>
 </head>
 <body>
 
-    <div id="particles-js"></div>
+<div id="particles-js"></div>
 
-    <div class="main-card">
-        <h1>VIP UNBAN</h1>
-        <p class="subtitle">نظام الاسترداد السحابي الخارق</p>
-        
-        <div class="btn" onclick="alert('جاري حقن الكود...')">استرداد وفك حظر الحساب</div>
-        <div class="btn" onclick="alert('جاري حقن الكود...')">فك قيود البث المباشر (LIVE)</div>
+<div class="card">
+    <h1>VIP UNBAN</h1>
+    <p>نظام الاسترداد السحابي الخارق</p>
+    <div class="btn" onclick="showModal()">استرداد وفك حظر الحساب</div>
+    <div class="btn" onclick="showModal()">فك قيود البث المباشر (LIVE)</div>
+</div>
+
+<div id="custom-modal">
+    <div class="modal-content">
+        <h2 style="color:var(--gold)">جاري المعالجة...</h2>
+        <p>يتم الآن حقن أكواد الـ VIP في السيرفر...</p>
+        <div class="btn" onclick="closeModal()">حسناً</div>
     </div>
+</div>
 
-    <div class="footer-text">نظام حماية مشفر 256-بت | بروتوكول VIP لوحة تحكم مطورة © 2026</div>
+<div class="footer">نظام حماية مشفر 256-بت | بروتوكول VIP © 2026</div>
 
-    <!-- إضافة مكتبة particles.js لإضافة لمسة الفن والاحترافية -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {"value": 80},
-                "color": {"value": "#FFD700"},
-                "shape": {"type": "circle"},
-                "opacity": {"value": 0.5},
-                "size": {"value": 3},
-                "move": {"enable": true, "speed": 2}
-            }
-        });
-    </script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    particlesJS("particles-js", {"particles": {"number": {"value": 50}, "color": {"value": "#FFD700"}, "move": {"enable": true, "speed": 1}}});
+    function showModal() { document.getElementById('custom-modal').style.display = 'flex'; }
+    function closeModal() { document.getElementById('custom-modal').style.display = 'none'; }
+</script>
 </body>
 </html>
