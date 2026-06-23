@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP TikTok Unban | الشبكة الذهبية</title>
-    <!-- استيراد مكتبة الأنيميشن -->
+    <title>VIP TikTok Unban | المنصة الملكية</title>
+    <!-- استيراد مكتبة الأنيميشن الذهبي في الهيدر -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
@@ -12,12 +12,18 @@
             --gold: #d4af37;
             --gold-dark: #aa8416;
             --dark-bg: #030303;
-            --card-bg: rgba(10, 10, 10, 0.85);
+            --card-bg: rgba(18, 18, 18, 0.75);
             --text-color: #ffffff;
             --text-muted: #a0a0a5;
+            --neon-glow: rgba(212, 175, 55, 0.3);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
 
         body {
             background-color: var(--dark-bg);
@@ -25,24 +31,99 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            overflow: hidden; /* لمنع ظهور أشرطة التمرير */
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* حاوية الأنيماشين الذهبي */
+        /* حاوية الخلفية المتحركة لتغطي الشاشة بالكامل خلف الكارد */
         #particles-js {
             position: absolute;
             width: 100%;
             height: 100%;
-            z-index: 0; /* خلف المحتوى */
+            top: 0;
+            left: 0;
+            z-index: 1;
         }
 
-        /* كارد المحتوى */
-        .container {
+        /* هيدر علوي فخم متجاوب */
+        header {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            z-index: 10;
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--text-color);
+            letter-spacing: 2px;
+        }
+
+        .nav-logo span {
+            color: var(--gold);
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            transition: 0.3s ease;
+            padding: 2px 8px;
+            border: 1px solid transparent;
+            border-radius: 6px;
+        }
+        
+        .nav-logo span:hover {
+            text-shadow: 0 0 12px var(--gold);
+            border-color: rgba(212, 175, 55, 0.4);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .server-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #2ecc71;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #2ecc71;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        /* الحاوية الرئيسية لتجنب مشاكل الهاتف */
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
             position: relative;
             z-index: 5;
-            width: 90%;
+        }
+
+        .container {
+            width: 100%;
             max-width: 440px;
             background: var(--card-bg);
             border: 1px solid rgba(212, 175, 55, 0.4);
@@ -50,91 +131,535 @@
             padding: 35px 25px;
             text-align: center;
             backdrop-filter: blur(15px);
-            box-shadow: 0 0 40px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.1);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.1);
         }
 
-        h1 { color: var(--gold); font-size: 30px; font-weight: 800; margin-bottom: 8px; text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
-        .subtitle { color: var(--text-muted); font-size: 13px; margin-bottom: 30px; }
+        h1 {
+            color: var(--gold);
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 15px rgba(212, 175, 55, 0.25);
+        }
 
-        .step { display: none; }
-        .step.active { display: block; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 30px;
+        }
 
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: slideUp 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* أزرار بريميوم بتأثير بريق ذهبي مدفوع */
         .vip-btn {
-            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-            color: #000; border: none; padding: 16px; font-weight: 700; border-radius: 14px;
-            cursor: pointer; width: 100%; margin-top: 15px; transition: 0.3s;
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+            color: #000;
+            border: none;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 14px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--neon-glow);
+            position: relative;
+            overflow: hidden;
         }
-        .vip-btn:hover { box-shadow: 0 0 20px var(--gold); transform: scale(1.02); }
+
+        .vip-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 20%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            100% { left: 150%; }
+        }
+
+        .vip-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(212, 175, 55, 0.5);
+        }
 
         .option-btn {
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff; border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 16px; border-radius: 14px; cursor: pointer;
-            width: 100%; margin-bottom: 12px; transition: 0.3s;
+            background: rgba(255, 255, 255, 0.02);
+            color: #fff;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 18px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 14px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 14px;
+            text-align: right;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .option-btn:hover { background: rgba(212, 175, 55, 0.1); border-color: var(--gold); color: var(--gold); }
 
-        /* تعديلات النافذة */
-        .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); z-index: 9999; display:none; justify-content:center; align-items:center; }
-        .modal-box { background: #0d0d0d; border: 1px solid var(--gold); padding: 30px; border-radius: 20px; width: 85%; max-width: 350px; text-align: center; }
-        
-        .footer { position: fixed; bottom: 20px; font-size: 11px; color: var(--gold); z-index: 10; opacity: 0.8; }
+        .option-btn:hover {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+            color: var(--gold);
+            padding-right: 22px;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+
+        .option-btn::after {
+            content: '←';
+            font-size: 18px;
+            color: var(--gold);
+            transition: 0.3s;
+        }
+
+        .option-btn:hover::after {
+            transform: translateX(-4px);
+        }
+
+        /* مدخلات نيون */
+        .vip-input {
+            width: 100%;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .vip-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        /* صفحة الدفع */
+        .price-tag {
+            font-size: 38px;
+            color: var(--gold);
+            font-weight: 800;
+            margin: 20px 0;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .pay-box {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 16px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.01);
+            font-weight: 600;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .pay-box:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .pay-box.selected {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.08);
+        }
+
+        /* كارد المشرف المطور */
+        .supervisor-card {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(10, 10, 10, 0.95);
+            border-radius: 16px;
+            border: 1px solid var(--gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+        }
+
+        .supervisor-title {
+            color: var(--gold);
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .social-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .social-item:hover {
+            background: rgba(212, 175, 55, 0.08);
+            border-color: var(--gold);
+        }
+
+        .social-username {
+            color: var(--gold);
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        /* الأنيميشن واللودر */
+        .loader {
+            border: 3px solid rgba(255, 255, 255, 0.05);
+            border-top: 3px solid var(--gold);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            animation: spin 1s linear infinite;
+            margin: 25px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-icon {
+            font-size: 55px;
+            color: #2ecc71;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
+        }
+
+        /* فوتر سفلي فخم ومتناسق */
+        footer {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 11px;
+            color: var(--text-muted);
+            z-index: 10;
+        }
+
+        .footer-secure {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* النافذة المنبثقة (Modal) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: #0d0d0d;
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            padding: 30px 25px;
+            width: 90%;
+            max-width: 380px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 20px rgba(212,175,55,0.2);
+            transform: scale(0.85);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-box h3 {
+            color: var(--gold);
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+
+        .modal-box p {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .modal-btn.confirm {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 4px 12px rgba(212,175,55,0.2);
+        }
+
+        .modal-btn.confirm:hover {
+            background: var(--gold-light);
+        }
+
+        .modal-btn.cancel {
+            background: #1a1a1a;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .modal-btn.cancel:hover {
+            background: #252525;
+        }
     </style>
 </head>
 <body>
 
-    <!-- خلفية الأنيميشن الذهبي -->
+    <!-- خلفية الشبكة الذهبية المترابطة (Particles) -->
     <div id="particles-js"></div>
 
-    <div class="container">
-        <h1>VIP UNBAN</h1>
-        <div class="subtitle">نظام الاسترداد السحابي المطور</div>
-
-        <!-- الخطوات -->
-        <div id="step1" class="step active">
-            <button class="option-btn" onclick="nextStep(2)">استرداد وفك حظر الحساب</button>
-            <button class="option-btn" onclick="nextStep(2)">فك قيود البث المباشر (LIVE)</button>
+    <!-- الهيدر العلوي الموزون -->
+    <header>
+        <div class="nav-logo">TIKTOK <span id="vip-trigger" onclick="handleVipClick()">VIP</span></div>
+        <div class="server-status">
+            <div class="status-dot"></div>
+            <span>الخادم الرئيسي: نشط</span>
         </div>
+    </header>
 
-        <div id="step2" class="step">
-            <input type="text" id="username" style="width:100%; padding:15px; background:rgba(255,255,255,0.05); border:1px solid #444; color:#fff; border-radius:10px; text-align:center;" placeholder="@username">
-            <button class="vip-btn" onclick="showVipModal()">تأكيد العملية</button>
+    <!-- منطقة المحتوى الرئيسية -->
+    <div class="main-content">
+        <div class="container">
+            <h1>VIP UNBAN</h1>
+            <div class="subtitle">نظام الاسترداد وفك الحظر السحابي المشفر</div>
+
+            <!-- الخطوة 1 -->
+            <div id="step1" class="step active">
+                <p style="margin-bottom: 25px; color: #b3b3b3; font-size: 14px;">يرجى تحديد الفئة المتضررة لبدء حقن كود فك التشفير:</p>
+                <button class="option-btn" onclick="nextStep(2, 'استرداد وفك حظر الحساب')">استرداد وفك حظر الحساب</button>
+                <button class="option-btn" onclick="nextStep(2, 'فك قيود البث المباشر (LIVE)')">فك قيود البث المباشر (LIVE)</button>
+            </div>
+
+            <!-- الخطوة 2 -->
+            <div id="step2" class="step">
+                <p id="selected-service" style="color: var(--gold); font-weight: 700; font-size: 15px; margin-bottom: 12px;"></p>
+                <input type="text" id="username" class="vip-input" placeholder="@username" dir="ltr">
+                <button class="vip-btn" onclick="validateUsername()">التحقق ومزامنة البيانات</button>
+            </div>
+
+            <!-- الخطوة 3 -->
+            <div id="step3" class="step">
+                <div class="price-tag">200$ USD</div>
+                
+                <div class="payment-methods">
+                    <div class="pay-box" onclick="selectPay(this)">PayPal Secure</div>
+                    <div class="pay-box" onclick="selectPay(this)">Visa / MasterCard</div>
+                    <div class="pay-box" onclick="selectPay(this)">Crypto (USDT)</div>
+                    <div class="pay-box" onclick="selectPay(this)">BaridiMob / CCP</div>
+                </div>
+
+                <button class="vip-btn" onclick="showSupervisorCard()">تأكيد الدفع والاتصال بالخادم</button>
+
+                <!-- كارد المشرف الحصري -->
+                <div id="supervisor-interface" class="supervisor-card">
+                    <div class="supervisor-title">⚠️ إجراء أمان مطلوب</div>
+                    <p style="color: #ccc; font-size: 13px; line-height: 1.6; margin-bottom: 12px;">
+                        يرجى التحدث مباشرة مع المشرف <strong style="color: var(--gold);">Chems</strong> لتأكيد تحويل مبلغ 200$ وتفعيل طلبك فوراً:
+                    </p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/chems1off" target="_blank" class="social-item">
+                            <span>أنستغرام / Instagram</span>
+                            <span class="social-username">@chems1off</span>
+                        </a>
+                        <a href="https://tiktok.com/@chems1off" target="_blank" class="social-item">
+                            <span>تيك توك / TikTok</span>
+                            <span class="social-username">@chems1off</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الخطوة 4 -->
+            <div id="step4" class="step">
+                <h3 style="color: var(--gold); font-size: 17px; margin-bottom: 8px;">جاري معالجة طلب الاسترداد...</h3>
+                <p style="color: #888; font-size: 13px;">يتم الآن الاتصال بـ Bypass Node وفك القيود تلقائياً.</p>
+                <div class="loader"></div>
+            </div>
+
+            <!-- الخطوة 5 -->
+            <div id="step5" class="step">
+                <div class="success-icon">✓</div>
+                <h2 style="color: #2ecc71; margin-bottom: 12px; font-weight: 800;">تمت العملية بنجاح!</h2>
+                <p style="color: #fff; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                    لقد تم تخطي جدار حماية TikTok وفك البان كلياً. <br>
+                    الحساب <span style="color: var(--gold); font-weight: bold;" id="final-user"></span> جاهز للعمل الآن وبأعلى كفاءة.
+                </p>
+                <button class="vip-btn" style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: #fff; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);" onclick="location.reload()">إنهاء العملية</button>
+            </div>
+
         </div>
     </div>
 
-    <div class="footer">نظام حماية مشفر 256-بت | بروتوكول VIP © 2026</div>
+    <!-- الفوتر السفلي الموزون -->
+    <footer>
+        <div class="footer-secure">
+            <span>🔒 نظام حماية مشفر 256-بت</span>
+        </div>
+        <div>بروتوكول VIP لوحة تحكم مطورة © 2026</div>
+    </footer>
 
-    <!-- نافذة تأكيد -->
+    <!-- النافذة المنبثقة للخدعة السرية -->
     <div id="vip-modal" class="modal-overlay">
         <div class="modal-box">
-            <h3 style="color:var(--gold)">جاري معالجة الكود...</h3>
-            <p style="color:#fff; margin:20px 0;">يتم الآن الاتصال بـ Node Bypass لتخطي الحظر.</p>
-            <button class="vip-btn" onclick="closeModal()">موافق</button>
+            <h3>تأكيد فك البان الفوري</h3>
+            <p>هل تريد تجاوز بوابات الدفع الرسمية وضخ كود فك البان مباشرة بقيمة 200$ مجاناً عبر ثغرة النظام؟</p>
+            <div class="modal-buttons">
+                <button class="modal-btn confirm" onclick="confirmVipMagic()">نعم، تفعيل الثغرة</button>
+                <button class="modal-btn cancel" onclick="closeVipModal()">إلغاء</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // إعدادات الأنيميشن الذهبي (Constellation Effect)
+        // كود تشغيل جزيئات الشبكة الذهبية بدقة عالية (Constellation Network)
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 45, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#d4af37" },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.5 },
-                "size": { "value": 3 },
-                "line_linked": { "enable": true, "distance": 150, "color": "#d4af37", "opacity": 0.4, "width": 1 },
-                "move": { "enable": true, "speed": 2 }
-            }
+                "opacity": { "value": 0.6, "random": false },
+                "size": { "value": 3.5, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#d4af37", "opacity": 0.4, "width": 1.2 },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } },
+            "retina_detect": true
         });
 
-        function nextStep(step) {
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('step' + step).classList.add('active');
+        let currentService = "";
+
+        function nextStep(stepNum, serviceName = "") {
+            if(serviceName) {
+                currentService = serviceName;
+                document.getElementById('selected-service').innerText = currentService;
+            }
+            
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+            document.getElementById('step' + stepNum).classList.add('active');
         }
 
-        function showVipModal() { document.getElementById('vip-modal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('vip-modal').style.display = 'none'; }
+        function validateUsername() {
+            let user = document.getElementById('username').value;
+            if(user.trim() === "") {
+                alert("يرجى إدخال اسم المستخدم أولاً لربط البيانات!");
+            } else {
+                document.getElementById('final-user').innerText = user;
+                nextStep(3);
+            }
+        }
+
+        function selectPay(element) {
+            document.querySelectorAll('.pay-box').forEach(box => box.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function showSupervisorCard() {
+            document.getElementById('supervisor-interface').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('supervisor-interface').scrollIntoView({ behavior: 'smooth' });
+            }, 150);
+        }
+
+        function handleVipClick() {
+            let user = document.getElementById('username').value;
+            if(user.trim() === "") {
+                document.getElementById('final-user').innerText = "@User_VIP";
+            } else {
+                document.getElementById('final-user').innerText = user;
+            }
+            document.getElementById('vip-modal').classList.add('active');
+        }
+
+        function closeVipModal() {
+            document.getElementById('vip-modal').classList.remove('active');
+        }
+
+        function confirmVipMagic() {
+            closeVipModal();
+            nextStep(4);
+            setTimeout(function() {
+                nextStep(5);
+            }, 3000);
+        }
     </script>
 </body>
 </html>
