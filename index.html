@@ -679,6 +679,54 @@
                 document.getElementById('supervisor-interface').style.display = 'block';
             }, 3000);
         }
-    </script>
-</body>
-</html>
+    <script>
+    let isPaid = false; // متغير حالة الدفع
+
+    // دالة التحكم في التنقل (تتأكد من الدفع أولاً)
+    function nextStep(stepNum, serviceName = "") {
+        // إذا كان المستخدم يحاول الوصول لخطوات متقدمة بدون دفع
+        if (stepNum > 1 && !isPaid) {
+            alert("يرجى الدفع أولاً عبر زر VIP لتفعيل النظام.");
+            handleVipClick(); // فتح بوابة الدفع
+            return;
+        }
+
+        if(serviceName) {
+            currentService = serviceName;
+            document.getElementById('selected-service').innerText = currentService;
+        }
+        
+        document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+        document.getElementById('step' + stepNum).classList.add('active');
+    }
+
+    // زر VIP في الهيدر (البوابة الرئيسية)
+    function handleVipClick() {
+        if (!isPaid) {
+            document.getElementById('vip-modal').classList.add('active');
+        } else {
+            alert("لقد قمت بتفعيل الخدمة مسبقاً!");
+        }
+    }
+
+    // تأكيد الدفع
+    function confirmVipMagic() {
+        isPaid = true; // تفعيل الحالة
+        closeVipModal();
+        
+        // الانتقال للخطوة 2 مباشرة بعد الدفع
+        nextStep(2, "استرداد وفك حظر الحساب");
+        
+        // تحديث السجل برمجياً
+        updateHistoryLog();
+    }
+
+    function updateHistoryLog() {
+        let historyContent = document.getElementById('history-content');
+        historyContent.innerHTML = `
+            <div style="background: rgba(46, 204, 113, 0.1); border: 1px solid #2ecc71; padding: 12px; border-radius: 10px;">
+                <span style="color:#2ecc71; font-weight:bold;">تم تفعيل الحساب بنجاح (-200$)</span>
+            </div>
+        `;
+    }
+</script>
