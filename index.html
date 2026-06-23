@@ -1,374 +1,341 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTok VIP Growth Network</title>
+    <title>VIP TikTok Unban | فك البان الاحترافي</title>
     <style>
         :root {
-            --bg-dark: #09090b;
-            --card-bg: #141417;
-            --tiktok-pink: #FE2C55;
-            --tiktok-cyan: #25F4EE;
-            --paypal-blue: #00457C;
-            --text-main: #FFFFFF;
-            --text-muted: #A1A1AA;
-            --border-color: #27272A;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            --gold: #d4af37;
+            --dark-bg: #0a0a0a;
+            --card-bg: #141414;
+            --text-color: #ffffff;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            overflow-x: hidden;
         }
 
-        .panel-container {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            width: 100%;
-            max-width: 460px;
+        /* توهج خلفي فخم */
+        .bg-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(0,0,0,0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 450px;
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-            position: relative;
-        }
-
-        .header {
             text-align: center;
-            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.05);
+            position: relative;
+            z-index: 1;
         }
 
-        .header h1 {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .header h1 span {
-            color: var(--tiktok-pink);
-        }
-
-        .step-title {
-            font-size: 14px;
-            color: var(--text-muted);
+        h1 {
+            color: var(--gold);
+            font-size: 28px;
+            margin-bottom: 5px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            font-weight: 600;
-            display: block;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
         }
 
-        /* واجهة اختيار الدفع */
-        .gateway-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 25px;
+        .subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 30px;
         }
 
-        .gateway-item {
-            background-color: #1c1c21;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        .gateway-item:hover {
-            border-color: #444;
-            transform: translateY(-1px);
-        }
-
-        .gateway-item.selected {
-            border-color: var(--tiktok-cyan);
-            background: linear-gradient(90deg, #1c1c21, #122529);
-        }
-
-        .gateway-name {
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .gateway-icon {
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-        }
-
-        /* رصيد بايبال المزيف */
-        .paypal-balance-card {
+        .step {
             display: none;
-            background: linear-gradient(135deg, #001c3d, #00457c);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 25px;
-            text-align: left;
-            border: 1px solid #005ea6;
-            animation: fadeIn 0.4s ease;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .balance-label {
-            font-size: 12px;
-            color: #8ab4f8;
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .balance-amount {
-            font-size: 28px;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .balance-status {
-            font-size: 11px;
-            color: #34a853;
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .btn-action {
-            width: 100%;
-            background: linear-gradient(90deg, var(--tiktok-pink), #e01a43);
-            color: white;
+        /* الأزرار الـ VIP */
+        .vip-btn {
+            background: linear-gradient(45deg, #b38f1d, #d4af37);
+            color: #000;
             border: none;
-            padding: 16px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 700;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-action:hover {
-            opacity: 0.95;
-            box-shadow: 0 5px 20px rgba(254, 44, 85, 0.4);
-        }
-
-        /* شاشات الانتظار والنجاح */
-        .overlay-screen {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 10;
-            padding: 30px;
-            text-align: center;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
         }
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255,255,255,0.05);
-            border-radius: 50%;
-            border-top-color: var(--tiktok-pink);
-            border-right-color: var(--tiktok-cyan);
-            animation: spin 0.8s linear infinite;
-            margin-bottom: 22px;
+        .vip-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            background: linear-gradient(45deg, #d4af37, #f3e5ab);
         }
 
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .success-icon {
-            width: 70px;
-            height: 70px;
-            background-color: rgba(37, 244, 238, 0.1);
-            border-radius: 50%;
+        .option-btn {
+            background: #1a1a1a;
+            color: #fff;
+            border: 1px solid #333;
+            padding: 18px;
+            font-size: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 15px;
+            text-align: right;
+            transition: all 0.3s;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            color: var(--tiktok-cyan);
-            font-size: 35px;
+        }
+
+        .option-btn:hover {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+            color: var(--gold);
+        }
+
+        .option-btn::after {
+            content: '←';
+            font-size: 18px;
+            color: var(--gold);
+        }
+
+        /* المدخلات input */
+        .vip-input {
+            width: 100%;
+            padding: 14px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .vip-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        /* طرق الدفع */
+        .price-tag {
+            font-size: 32px;
+            color: var(--gold);
+            font-weight: bold;
+            margin: 20px 0;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
             margin-bottom: 20px;
         }
 
-        .receipt-box {
-            background-color: #1c1c21;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            width: 100%;
+        .pay-box {
+            border: 1px solid #333;
             padding: 15px;
-            margin: 20px 0;
-            text-align: left;
-            font-size: 13px;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #1a1a1a;
+            font-weight: bold;
+            transition: 0.3s;
         }
 
-        .receipt-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
+        .pay-box:hover {
+            border-color: #fff;
+            background: #222;
         }
-        .receipt-row:last-child { margin-bottom: 0; }
+
+        .pay-box.selected {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* النقطة المخفية */
+        .secret-trigger {
+            width: 6px;
+            height: 6px;
+            background-color: transparent; /* مخفية تماماً */
+            margin: 25px auto 5px auto;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .secret-trigger:hover {
+            background-color: rgba(212, 175, 55, 0.2); /* تظهر خفيفة جداً عند حك الفأرة فوقها للمطور */
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: #444;
+        }
+
+        /* شاشة الانتظار والنجاح */
+        .loader {
+            border: 3px solid #1a1a1a;
+            border-top: 3px solid var(--gold);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-icon {
+            font-size: 50px;
+            color: #2ecc71;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(46, 204, 113, 0.4);
+        }
     </style>
 </head>
 <body>
 
-    <div class="panel-container">
-        <!-- الواجهة الرئيسية لخطوات الدفع -->
-        <div id="payment-panel">
-            <div class="header">
-                <h1>TikTok <span>VIP</span> Funding</h1>
-            </div>
+    <div class="bg-glow"></div>
 
-            <span class="step-title">Select Secure Gateway</span>
-            <div class="gateway-list">
-                <!-- خيار بايبال -->
-                <div class="gateway-item" onclick="selectMethod(this, 'paypal')">
-                    <span class="gateway-name">PayPal Premium Link</span>
-                    <span class="gateway-icon" style="color: #0070ba;">PAYPAL</span>
-                </div>
-                <!-- خيار فيزا -->
-                <div class="gateway-item" onclick="selectMethod(this, 'visa')">
-                    <span class="gateway-name">Visa / Mastercard</span>
-                    <span class="gateway-icon">CREDIT</span>
-                </div>
-                <!-- خيار ريدوت باي -->
-                <div class="gateway-item" onclick="selectMethod(this, 'redotpay')">
-                    <span class="gateway-name">RedotPay Wallet</span>
-                    <span class="gateway-icon" style="color: #ff5500;">REDOTPAY</span>
-                </div>
-            </div>
+    <div class="container">
+        <h1>VIP UNBAN</h1>
+        <div class="subtitle">النظام الاحترافي لفك قيود الحسابات</div>
 
-            <!-- كارت رصيد بايبال المخفي الذي يظهر عند الضغط على بايبال -->
-            <div id="paypal-balance" class="paypal-balance-card">
-                <div class="balance-label">Verified Account Balance</div>
-                <div class="balance-amount">$361,829.00</div>
-                <div class="balance-status">● Synchronized & Ready for Auto-Debit</div>
-            </div>
-
-            <button class="btn-action" onclick="executePayment()">Initialize Transfer</button>
+        <div id="step1" class="step active">
+            <p style="margin-bottom: 25px; color: #aaa;">يرجى تحديد نوع الحظر المفروض على حسابك:</p>
+            <button class="option-btn" onclick="nextStep(2, 'فك بان الحساب بالكامل')">فك بان الحساب نشط</button>
+            <button class="option-btn" onclick="nextStep(2, 'فك حظر البث المباشر (LIVE)')">فك بان لايف الحساب</button>
         </div>
 
-        <!-- واجهة يرجى الانتظار -->
-        <div id="waiting-screen" class="overlay-screen">
-            <div class="spinner"></div>
-            <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">Please Wait...</div>
-            <div style="color: var(--text-muted); font-size: 13px;">Authorizing secure merchant protocol...</div>
+        <div id="step2" class="step">
+            <p id="selected-service" style="color: var(--gold); font-weight: bold;"></p>
+            <p style="color: #aaa; font-size: 14px;">أدخل اسم المستخدم (Username) الخاص بالتيك توك:</p>
+            <input type="text" id="username" class="vip-input" placeholder="@username" dir="ltr">
+            <button class="vip-btn" onclick="validateUsername()">متابعة للنظام</button>
         </div>
 
-        <!-- واجهة تم الشحن بنجاح -->
-        <div id="success-screen" class="overlay-screen">
-            <div class="success-icon">✓</div>
-            <div style="font-size: 18px; font-weight: 600; color: var(--tiktok-cyan); margin-bottom: 8px;">Order Dispatched Successfully!</div>
-            <p style="color: var(--text-muted); font-size: 13px;">The premium algorithm has successfully initiated the delivery sequence to your account.</p>
+        <div id="step3" class="step">
+            <div class="price-tag">200$ USD</div>
+            <p style="color: #aaa; font-size: 14px; margin-bottom: 15px;">اختر طريقة الدفع لتأثير العملية فوراً:</p>
             
-            <div class="receipt-box">
-                <div class="receipt-row">
-                    <span style="color: var(--text-muted);">Selected Method:</span>
-                    <span id="receipt-method" style="font-weight: 600;">PayPal</span>
-                </div>
-                <div class="receipt-row">
-                    <span style="color: var(--text-muted);">Transaction Status:</span>
-                    <span style="color: #34a853; font-weight: 600;">COMPLETED</span>
-                </div>
-                <div class="receipt-row">
-                    <span style="color: var(--text-muted);">Remaining Balance:</span>
-                    <span id="receipt-rem" style="font-weight: 600; color: var(--tiktok-pink);">$361,829.00</span>
-                </div>
+            <div class="payment-methods">
+                <div class="pay-box" onclick="selectPay(this)">PayPal</div>
+                <div class="pay-box" onclick="selectPay(this)">Visa / MasterCard</div>
+                <div class="pay-box" onclick="selectPay(this)">Crypto (BTC/USDT)</div>
+                <div class="pay-box" onclick="selectPay(this)">BaridiMob</div>
             </div>
 
-            <button class="btn-action" style="background: #27272a;" onclick="resetAll()">Finish</button>
+            <button class="vip-btn" onclick="showSupervisorMsg()">تأكيد الدفع والاتصال</button>
+
+            <div id="supervisor-msg" style="display: none; margin-top: 20px; padding: 15px; background: rgba(212,175,55,0.05); border-radius: 10px; border: 1px dashed var(--gold);">
+                <p style="color: #fff; font-size: 14px; margin: 0;">يرجى التحدث مع المشرف <strong style="color: var(--gold);">Chems</strong> لدفع هذا المبلغ وإتمام العملية.</p>
+            </div>
+
+            <div class="secret-trigger" onclick="triggerMagic()"></div>
+            <div class="footer-text">نظام حماية VIP مشفر © 2026</div>
         </div>
+
+        <div id="step4" class="step">
+            <h3>جاري الاتصال بخوادم TikTok...</h3>
+            <p style="color: #888; font-size: 13px;">يرجى عدم إغلاق الصفحة، يتم تجاوز جدار الحماية الآن.</p>
+            <div class="loader"></div>
+        </div>
+
+        <div id="step5" class="step">
+            <div class="success-icon">✓</div>
+            <h2 style="color: #2ecc71; margin-bottom: 10px;">تم بنجاح!</h2>
+            <p style="color: #fff; font-size: 16px; line-height: 1.6;">
+                تم فك البان عن الحساب بنجاح وعاد للعمل 100%. <br>
+                <span style="color: var(--gold);" id="final-user"></span> جاهز الآن للعمل.
+            </p>
+            <button class="vip-btn" style="background: #2ecc71; color: #fff; box-shadow: none;" onclick="location.reload()">إنهاء العملية</button>
+        </div>
+
     </div>
 
     <script>
-        let currentMethod = '';
+        let currentService = "";
 
-        function selectMethod(element, method) {
-            // إزالة التحديد من الجميع
-            document.querySelectorAll('.gateway-item').forEach(item => {
-                item.classList.remove('selected');
-            });
+        function nextStep(stepNum, serviceName = "") {
+            if(serviceName) {
+                currentService = serviceName;
+                document.getElementById('selected-service').innerText = currentService;
+            }
             
-            // تحديد الخيار الحالي
-            element.classList.add('selected');
-            currentMethod = method;
+            // إخفاء كل الخطوات
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+            // إظهار الخطوة المطلوبة
+            document.getElementById('step' + stepNum).classList.add('active');
+        }
 
-            // إظهار كارت الرصيد إذا اختار بايبال فقط، وإخفائه إذا اختار وسيلة أخرى
-            const paypalCard = document.getElementById('paypal-balance');
-            if (method === 'paypal') {
-                paypalCard.style.display = 'block';
+        function validateUsername() {
+            let user = document.getElementById('username').value;
+            if(user.trim() === "") {
+                alert("يرجى إدخال اسم المستخدم أولاً!");
             } else {
-                paypalCard.style.display = 'none';
+                document.getElementById('final-user').innerText = user;
+                nextStep(3);
             }
         }
 
-        function executePayment() {
-            if (!currentMethod) {
-                alert('Please select a payment gateway first.');
-                return;
-            }
-
-            // إظهار واجهة الانتظار
-            document.getElementById('waiting-screen').style.display = 'flex';
-
-            // انتهاء الـ 5 ثواني
-            setTimeout(() => {
-                document.getElementById('waiting-screen').style.display = 'none';
-
-                // تخصيص الفاتورة بناءً على خياره
-                let methodNameText = 'Credit Card';
-                let remainingText = 'N/A';
-                if (currentMethod === 'paypal') {
-                    methodNameText = 'PayPal Business';
-                    remainingText = '$361,829.00'; // رصيدك الضخم
-                } else if (currentMethod === 'redotpay') {
-                    methodNameText = 'RedotPay Wallet';
-                }
-
-                document.getElementById('receipt-method').innerText = methodNameText;
-                document.getElementById('receipt-rem').innerText = remainingText;
-
-                // إظهار واجهة النجاح
-                document.getElementById('success-screen').style.display = 'flex';
-            }, 5000); // 5 ثوانٍ كاملة
+        function selectPay(element) {
+            document.querySelectorAll('.pay-box').forEach(box => box.classList.remove('selected'));
+            element.classList.add('selected');
         }
 
-        function resetAll() {
-            document.getElementById('success-screen').style.display = 'none';
-            document.getElementById('paypal-balance').style.display = 'none';
-            document.querySelectorAll('.gateway-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-            currentMethod = '';
+        function showSupervisorMsg() {
+            document.getElementById('supervisor-msg').style.display = 'block';
+        }
+
+        // الخدعة السحرية عند الضغط على النقطة المخفية
+        function triggerMagic() {
+            nextStep(4); // الذهاب لصفحة الانتظار (التحميل)
+            
+            // بعد 3 ثواني تظهر رسالة النجاح تلقائياً
+            setTimeout(function() {
+                nextStep(5);
+            }, 3000);
         }
     </script>
 </body>
 </html>
-
-
