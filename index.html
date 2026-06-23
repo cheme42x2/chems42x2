@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP TikTok Unban | المنصة الملكية لفك القيود</title>
+    <title>VIP TikTok Unban | المنصة الملكية</title>
     <style>
         :root {
-            --gold-light: #f3e5ab;
+            --gold-light: #fff3cc;
             --gold: #d4af37;
             --gold-dark: #aa8416;
-            --dark-bg: #050505;
-            --card-bg: rgba(15, 15, 15, 0.85);
+            --dark-bg: #030303;
+            --card-bg: rgba(18, 18, 18, 0.75);
             --text-color: #ffffff;
-            --text-muted: #8e8e93;
+            --text-muted: #a0a0a5;
+            --neon-glow: rgba(212, 175, 55, 0.3);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
             background-color: var(--dark-bg);
             color: var(--text-color);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -34,15 +35,15 @@
             position: relative;
         }
 
-        /* توهج وخلفية ديناميكية لملء الفراغات */
+        /* توهج خلفي ديناميكي فخم جداً مالي الشاشة */
         body::before {
             content: '';
             position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
-            top: 20%;
-            left: 10%;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+            top: 15%;
+            left: -50px;
             z-index: 0;
             pointer-events: none;
         }
@@ -50,33 +51,32 @@
         body::after {
             content: '';
             position: absolute;
-            width: 600px;
-            height: 600px;
+            width: 400px;
+            height: 400px;
             background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
-            bottom: 10%;
-            right: 5%;
+            bottom: 15%;
+            right: -50px;
             z-index: 0;
             pointer-events: none;
         }
 
-        /* هيدر علوي فخم لملء الفراغ */
+        /* هيدر علوي فخم متجاوب */
         header {
             width: 100%;
-            padding: 25px 40px;
+            max-width: 1200px;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.8), transparent);
-            position: relative;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
             z-index: 10;
         }
 
         .nav-logo {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 900;
             color: var(--text-color);
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
 
         .nav-logo span {
@@ -84,12 +84,16 @@
             cursor: pointer;
             position: relative;
             display: inline-block;
-            transition: 0.3s;
+            transition: 0.3s ease;
+            padding: 2px 8px;
+            border: 1px solid transparent;
+            border-radius: 6px;
         }
         
         .nav-logo span:hover {
-            text-shadow: 0 0 15px var(--gold);
-            transform: scale(1.05);
+            text-shadow: 0 0 12px var(--gold);
+            border-color: rgba(212, 175, 55, 0.4);
+            background: rgba(212, 175, 55, 0.05);
         }
 
         .server-status {
@@ -114,39 +118,39 @@
         }
 
         @keyframes pulse {
-            0 { opacity: 0.4; }
+            0% { opacity: 0.4; }
             50% { opacity: 1; }
             100% { opacity: 0.4; }
         }
 
-        /* الحاوية الرئيسية وسط الشاشة */
+        /* الحاوية الرئيسية لتجنب مشاكل الهاتف */
         .main-content {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
-            padding: 40px 20px;
+            padding: 20px;
             position: relative;
             z-index: 5;
         }
 
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 440px;
             background: var(--card-bg);
             border: 1px solid rgba(212, 175, 55, 0.25);
             border-radius: 24px;
-            padding: 40px 35px;
+            padding: 35px 25px;
             text-align: center;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.05);
         }
 
         h1 {
             color: var(--gold);
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 800;
             margin-bottom: 8px;
             letter-spacing: 1px;
@@ -155,8 +159,8 @@
 
         .subtitle {
             color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 35px;
+            font-size: 13px;
+            margin-bottom: 30px;
         }
 
         .step {
@@ -165,48 +169,66 @@
 
         .step.active {
             display: block;
-            animation: slideUp 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation: slideUp 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* الأزرار الاحترافية */
+        /* أزرار بريميوم بتأثير بريق ذهبي مدفوع */
         .vip-btn {
             background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
             color: #000;
             border: none;
-            padding: 16px 32px;
+            padding: 16px 24px;
             font-size: 16px;
             font-weight: 700;
             border-radius: 14px;
             cursor: pointer;
             width: 100%;
-            margin-top: 20px;
-            transition: all 0.3s;
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--neon-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vip-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 20%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            100% { left: 150%; }
         }
 
         .vip-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 6px 22px rgba(212, 175, 55, 0.5);
         }
 
         .option-btn {
             background: rgba(255, 255, 255, 0.02);
             color: #fff;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 20px;
-            font-size: 16px;
+            padding: 18px;
+            font-size: 15px;
             font-weight: 600;
             border-radius: 14px;
             cursor: pointer;
             width: 100%;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             text-align: right;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -214,9 +236,10 @@
 
         .option-btn:hover {
             border-color: var(--gold);
-            background: rgba(212, 175, 55, 0.04);
+            background: rgba(212, 175, 55, 0.05);
             color: var(--gold);
-            padding-right: 25px;
+            padding-right: 22px;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
         }
 
         .option-btn::after {
@@ -227,14 +250,14 @@
         }
 
         .option-btn:hover::after {
-            transform: translateX(-5px);
+            transform: translateX(-4px);
         }
 
-        /* المدخلات */
+        /* مدخلات نيون */
         .vip-input {
             width: 100%;
             padding: 16px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             color: #fff;
@@ -246,38 +269,38 @@
 
         .vip-input:focus {
             border-color: var(--gold);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
 
-        /* صفحة الدفع الفخمة */
+        /* صفحة الدفع */
         .price-tag {
-            font-size: 36px;
+            font-size: 38px;
             color: var(--gold);
             font-weight: 800;
-            margin: 25px 0;
+            margin: 20px 0;
             text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
 
         .payment-methods {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 25px;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
         .pay-box {
             border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 18px;
+            padding: 16px 10px;
             border-radius: 12px;
             cursor: pointer;
             background: rgba(255, 255, 255, 0.01);
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             transition: 0.3s;
         }
 
         .pay-box:hover {
-            border-color: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.25);
             background: rgba(255, 255, 255, 0.03);
         }
 
@@ -285,37 +308,31 @@
             border-color: var(--gold);
             color: var(--gold);
             background: rgba(212, 175, 55, 0.08);
-            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.05);
         }
 
-        /* واجهة المشرف المخصصة الإحترافية */
+        /* كارد المشرف المطور */
         .supervisor-card {
             display: none;
-            margin-top: 25px;
-            padding: 25px;
-            background: linear-gradient(135deg, rgba(20, 20, 20, 0.9), rgba(10, 10, 10, 0.9));
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(10, 10, 10, 0.95);
             border-radius: 16px;
             border: 1px solid var(--gold);
-            animation: fadeIn 0.4s ease-in-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
         }
 
         .supervisor-title {
             color: var(--gold);
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .social-links {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-top: 15px;
+            margin-top: 12px;
         }
 
         .social-item {
@@ -324,36 +341,35 @@
             align-items: center;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 12px 20px;
+            padding: 12px 15px;
             border-radius: 10px;
             text-decoration: none;
             color: #fff;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             transition: 0.3s;
         }
 
         .social-item:hover {
-            background: rgba(212, 175, 55, 0.05);
-            border-color: rgba(212, 175, 55, 0.3);
-            transform: translateX(-3px);
+            background: rgba(212, 175, 55, 0.08);
+            border-color: var(--gold);
         }
 
         .social-username {
             color: var(--gold);
             font-family: monospace;
-            font-size: 15px;
+            font-size: 14px;
         }
 
-        /* لودر التحميل والنجاح */
+        /* الأنيميشن واللودر */
         .loader {
             border: 3px solid rgba(255, 255, 255, 0.05);
             border-top: 3px solid var(--gold);
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             animation: spin 1s linear infinite;
-            margin: 30px auto;
+            margin: 25px auto;
         }
 
         @keyframes spin {
@@ -362,24 +378,23 @@
         }
 
         .success-icon {
-            font-size: 60px;
+            font-size: 55px;
             color: #2ecc71;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
         }
 
-        /* فوتر سفلي فخم لملء الفراغ */
+        /* فوتر سفلي فخم ومتناسق */
         footer {
             width: 100%;
-            padding: 25px 40px;
+            max-width: 1200px;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.2);
-            background: linear-gradient(to top, rgba(5, 5, 5, 1), transparent);
-            position: relative;
+            font-size: 11px;
+            color: var(--text-muted);
             z-index: 10;
         }
 
@@ -387,25 +402,25 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            color: var(--text-muted);
         }
 
-        /* نافذة التأكيد المخصصة (Popup) */
+        /* إصلاح جذري ومثالي للنافذة المنبثقة (Modal) لتغطية الشاشة كاملة وعلاج مشكلة الصورة */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 100;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 9999; /* قيمة قصوى لتغطية كل شيء */
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             pointer-events: none;
-            transition: 0.3s;
+            transition: opacity 0.3s ease;
         }
 
         .modal-overlay.active {
@@ -414,16 +429,16 @@
         }
 
         .modal-box {
-            background: #111;
+            background: #0d0d0d;
             border: 1px solid var(--gold);
             border-radius: 20px;
-            padding: 30px;
+            padding: 30px 25px;
             width: 90%;
-            max-width: 400px;
+            max-width: 380px;
             text-align: center;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
-            transform: scale(0.9);
-            transition: 0.3s;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 20px rgba(212,175,55,0.2);
+            transform: scale(0.85);
+            transition: transform 0.3s ease;
         }
 
         .modal-overlay.active .modal-box {
@@ -432,14 +447,14 @@
 
         .modal-box h3 {
             color: var(--gold);
-            font-size: 20px;
-            margin-bottom: 15px;
+            font-size: 19px;
+            margin-bottom: 12px;
         }
 
         .modal-box p {
             color: #ccc;
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
             margin-bottom: 25px;
         }
 
@@ -450,8 +465,8 @@
 
         .modal-btn {
             flex: 1;
-            padding: 12px;
-            border-radius: 10px;
+            padding: 14px;
+            border-radius: 12px;
             border: none;
             font-weight: bold;
             font-size: 14px;
@@ -462,6 +477,7 @@
         .modal-btn.confirm {
             background: var(--gold);
             color: #000;
+            box-shadow: 0 4px 12px rgba(212,175,55,0.2);
         }
 
         .modal-btn.confirm:hover {
@@ -469,61 +485,65 @@
         }
 
         .modal-btn.cancel {
-            background: #222;
+            background: #1a1a1a;
             color: #fff;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.08);
         }
 
         .modal-btn.cancel:hover {
-            background: #333;
+            background: #252525;
         }
     </style>
 </head>
 <body>
 
+    <!-- الهيدر العلوي الموزون -->
     <header>
         <div class="nav-logo">TIKTOK <span id="vip-trigger" onclick="handleVipClick()">VIP</span></div>
         <div class="server-status">
             <div class="status-dot"></div>
-            <span>الخادم الرئيسي: متصل ونشط</span>
+            <span>الخادم الرئيسي: نشط</span>
         </div>
     </header>
 
+    <!-- منطقة المحتوى مريحة ومقاومة للأخطاء -->
     <div class="main-content">
         <div class="container">
             <h1>VIP UNBAN</h1>
             <div class="subtitle">نظام الاسترداد وفك الحظر السحابي المشفر</div>
 
+            <!-- الخطوة 1 -->
             <div id="step1" class="step active">
-                <p style="margin-bottom: 30px; color: #b3b3b3; font-size: 15px;">يرجى تحديد الفئة المتضررة لبدء حقن كود فك التشفير:</p>
-                <button class="option-btn" onclick="nextStep(2, 'فك حظر الحساب بالكامل')">استرداد وفك حظر الحساب</button>
-                <button class="option-btn" onclick="nextStep(2, 'فك حظر البث المباشر (LIVE)')">فك قيود البث المباشر (LIVE)</button>
+                <p style="margin-bottom: 25px; color: #b3b3b3; font-size: 14px;">يرجى تحديد الفئة المتضررة لبدء حقن كود فك التشفير:</p>
+                <button class="option-btn" onclick="nextStep(2, 'استرداد وفك حظر الحساب')">استرداد وفك حظر الحساب</button>
+                <button class="option-btn" onclick="nextStep(2, 'فك قيود البث المباشر (LIVE)')">فك قيود البث المباشر (LIVE)</button>
             </div>
 
+            <!-- الخطوة 2 -->
             <div id="step2" class="step">
-                <p id="selected-service" style="color: var(--gold); font-weight: 700; font-size: 16px; margin-bottom: 10px;"></p>
-                <p style="color: #aaa; font-size: 14px; margin-bottom: 20px;">أدخل اسم المستخدم (Username) الخاص بالحساب المعني:</p>
+                <p id="selected-service" style="color: var(--gold); font-weight: 700; font-size: 15px; margin-bottom: 12px;"></p>
                 <input type="text" id="username" class="vip-input" placeholder="@username" dir="ltr">
                 <button class="vip-btn" onclick="validateUsername()">التحقق ومزامنة البيانات</button>
             </div>
 
+            <!-- الخطوة 3 -->
             <div id="step3" class="step">
                 <div class="price-tag">200$ USD</div>
-                <p style="color: #aaa; font-size: 14px; margin-bottom: 20px;">يرجى تحديد بوابة الدفع المفضلة لاعتماد المعاملة:</p>
                 
                 <div class="payment-methods">
                     <div class="pay-box" onclick="selectPay(this)">PayPal Secure</div>
                     <div class="pay-box" onclick="selectPay(this)">Visa / MasterCard</div>
-                    <div class="pay-box" onclick="selectPay(this)">Crypto (USDT / BTC)</div>
+                    <div class="pay-box" onclick="selectPay(this)">Crypto (USDT)</div>
                     <div class="pay-box" onclick="selectPay(this)">BaridiMob / CCP</div>
                 </div>
 
                 <button class="vip-btn" onclick="showSupervisorCard()">تأكيد الدفع والاتصال بالخادم</button>
 
+                <!-- كارد المشرف الحصري تظهر بالأسفل بشكل احترافي -->
                 <div id="supervisor-interface" class="supervisor-card">
                     <div class="supervisor-title">⚠️ إجراء أمان مطلوب</div>
-                    <p style="color: #ccc; font-size: 13px; line-height: 1.6; margin-bottom: 15px;">
-                        يرجى التحدث مباشرة مع المشرف <strong style="color: var(--gold);">Chems</strong> لتأكيد تحويل مبلغ 200$ وتفعيل طلبك فوراً عبر الحسابات الرسمية التالية:
+                    <p style="color: #ccc; font-size: 13px; line-height: 1.6; margin-bottom: 12px;">
+                        يرجى التحدث مباشرة مع المشرف <strong style="color: var(--gold);">Chems</strong> لتأكيد تحويل مبلغ 200$ وتفعيل طلبك فوراً:
                     </p>
                     <div class="social-links">
                         <a href="https://instagram.com/chems1off" target="_blank" class="social-item">
@@ -538,25 +558,28 @@
                 </div>
             </div>
 
+            <!-- الخطوة 4 -->
             <div id="step4" class="step">
-                <h3 style="color: var(--gold); font-size: 18px; margin-bottom: 10px;">جاري معالجة طلب الاسترداد...</h3>
-                <p style="color: #888; font-size: 13px;">يتم الآن الاتصال بـ Bypass Node وفك القيود السحابية تلقائياً.</p>
+                <h3 style="color: var(--gold); font-size: 17px; margin-bottom: 8px;">جاري معالجة طلب الاسترداد...</h3>
+                <p style="color: #888; font-size: 13px;">يتم الآن الاتصال بـ Bypass Node وفك القيود تلقائياً.</p>
                 <div class="loader"></div>
             </div>
 
+            <!-- الخطوة 5 -->
             <div id="step5" class="step">
                 <div class="success-icon">✓</div>
                 <h2 style="color: #2ecc71; margin-bottom: 12px; font-weight: 800;">تمت العملية بنجاح!</h2>
-                <p style="color: #fff; font-size: 15px; line-height: 1.7; margin-bottom: 25px;">
-                    لقد تم تخطي جدار حماية TikTok وفك البان كلياً وبشكل دائم. <br>
-                    الحساب <span style="color: var(--gold); font-weight: bold;" id="final-user"></span> قيد العمل الآن.
+                <p style="color: #fff; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                    لقد تم تخطي جدار حماية TikTok وفك البان كلياً. <br>
+                    الحساب <span style="color: var(--gold); font-weight: bold;" id="final-user"></span> جاهز للعمل الآن وبأعلى كفاءة.
                 </p>
-                <button class="vip-btn" style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: #fff; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);" onclick="location.reload()">العودة للرئيسية</button>
+                <button class="vip-btn" style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: #fff; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);" onclick="location.reload()">إنهاء العملية</button>
             </div>
 
         </div>
     </div>
 
+    <!-- الفوتر السفلي الموزون -->
     <footer>
         <div class="footer-secure">
             <span>🔒 نظام حماية مشفر 256-بت</span>
@@ -564,12 +587,13 @@
         <div>بروتوكول VIP لوحة تحكم مطورة © 2026</div>
     </footer>
 
+    <!-- النافذة المنبثقة للخدعة السرية - تم إصلاح التغطية الكاملة والأبعاد بنجاح -->
     <div id="vip-modal" class="modal-overlay">
         <div class="modal-box">
             <h3>تأكيد فك البان الفوري</h3>
             <p>هل تريد تجاوز بوابات الدفع الرسمية وضخ كود فك البان مباشرة بقيمة 200$ مجاناً عبر ثغرة النظام؟</p>
             <div class="modal-buttons">
-                <button class="modal-btn confirm" onclick="confirmVipMagic()">نعم، تفعيل</button>
+                <button class="modal-btn confirm" onclick="confirmVipMagic()">نعم، تفعيل الثغرة</button>
                 <button class="modal-btn cancel" onclick="closeVipModal()">إلغاء</button>
             </div>
         </div>
@@ -607,10 +631,10 @@
             document.getElementById('supervisor-interface').style.display = 'block';
             setTimeout(() => {
                 document.getElementById('supervisor-interface').scrollIntoView({ behavior: 'smooth' });
-            }, 100);
+            }, 150);
         }
 
-        /* إدارة الخدعة الجديدة من كلمة VIP */
+        /* تشغيل نافذة الخدعة بكفاءة */
         function handleVipClick() {
             let user = document.getElementById('username').value;
             if(user.trim() === "") {
