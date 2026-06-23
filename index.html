@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIP TikTok Unban | المنصة الملكية</title>
-    <!-- استيراد مكتبة الأنيميشن الذهبي في الهيدر -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
@@ -57,6 +56,7 @@
             align-items: center;
             border-bottom: 1px solid rgba(212, 175, 55, 0.15);
             z-index: 10;
+            gap: 10px;
         }
 
         .nav-logo {
@@ -81,6 +81,35 @@
             text-shadow: 0 0 12px var(--gold);
             border-color: rgba(212, 175, 55, 0.4);
             background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* محفظة الرصيد الفخمة في الأعلى */
+        .wallet-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            background: rgba(212, 175, 55, 0.07);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.05);
+        }
+
+        .balance-amount {
+            color: var(--gold);
+            font-weight: 800;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .history-trigger {
+            cursor: pointer;
+            font-size: 15px;
+            transition: transform 0.2s;
+        }
+        .history-trigger:hover {
+            transform: scale(1.2);
         }
 
         .server-status {
@@ -480,43 +509,61 @@
         .modal-btn.cancel:hover {
             background: #252525;
         }
+        
+        /* ستايل قائمة السجل الفخمة */
+        .history-list {
+            text-align: right;
+            max-height: 180px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding-right: 5px;
+        }
+        .history-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
 
-    <!-- خلفية الشبكة الذهبية المترابطة (Particles) -->
     <div id="particles-js"></div>
 
-    <!-- الهيدر العلوي الموزون -->
     <header>
         <div class="nav-logo">TIKTOK <span id="vip-trigger" onclick="handleVipClick()">VIP</span></div>
+        
+        <div class="wallet-status">
+            <span>الرصيد: <span class="balance-amount" id="balance-val">6082</span>$</span>
+            <span class="history-trigger" onclick="openHistoryModal()">📜</span>
+        </div>
+
         <div class="server-status">
             <div class="status-dot"></div>
             <span>الخادم الرئيسي: نشط</span>
         </div>
     </header>
 
-    <!-- منطقة المحتوى الرئيسية -->
     <div class="main-content">
         <div class="container">
             <h1>VIP UNBAN</h1>
             <div class="subtitle">نظام الاسترداد وفك الحظر السحابي المشفر</div>
 
-            <!-- الخطوة 1 -->
             <div id="step1" class="step active">
                 <p style="margin-bottom: 25px; color: #b3b3b3; font-size: 14px;">يرجى تحديد الفئة المتضررة لبدء حقن كود فك التشفير:</p>
                 <button class="option-btn" onclick="nextStep(2, 'استرداد وفك حظر الحساب')">استرداد وفك حظر الحساب</button>
                 <button class="option-btn" onclick="nextStep(2, 'فك قيود البث المباشر (LIVE)')">فك قيود البث المباشر (LIVE)</button>
             </div>
 
-            <!-- الخطوة 2 -->
             <div id="step2" class="step">
                 <p id="selected-service" style="color: var(--gold); font-weight: 700; font-size: 15px; margin-bottom: 12px;"></p>
                 <input type="text" id="username" class="vip-input" placeholder="@username" dir="ltr">
                 <button class="vip-btn" onclick="validateUsername()">التحقق ومزامنة البيانات</button>
             </div>
 
-            <!-- الخطوة 3 -->
             <div id="step3" class="step">
                 <div class="price-tag">200$ USD</div>
                 
@@ -529,7 +576,6 @@
 
                 <button class="vip-btn" onclick="showSupervisorCard()">تأكيد الدفع والاتصال بالخادم</button>
 
-                <!-- كارد المشرف الحصري -->
                 <div id="supervisor-interface" class="supervisor-card">
                     <div class="supervisor-title">⚠️ إجراء أمان مطلوب</div>
                     <p style="color: #ccc; font-size: 13px; line-height: 1.6; margin-bottom: 12px;">
@@ -548,14 +594,12 @@
                 </div>
             </div>
 
-            <!-- الخطوة 4 -->
             <div id="step4" class="step">
                 <h3 style="color: var(--gold); font-size: 17px; margin-bottom: 8px;">جاري معالجة طلب الاسترداد...</h3>
                 <p style="color: #888; font-size: 13px;">يتم الآن الاتصال بـ Bypass Node وفك القيود تلقائياً.</p>
                 <div class="loader"></div>
             </div>
 
-            <!-- الخطوة 5 -->
             <div id="step5" class="step">
                 <div class="success-icon">✓</div>
                 <h2 style="color: #2ecc71; margin-bottom: 12px; font-weight: 800;">تمت العملية بنجاح!</h2>
@@ -569,7 +613,6 @@
         </div>
     </div>
 
-    <!-- الفوتر السفلي الموزون -->
     <footer>
         <div class="footer-secure">
             <span>🔒 نظام حماية مشفر 256-بت</span>
@@ -577,19 +620,33 @@
         <div>بروتوكول VIP لوحة تحكم مطورة © 2026</div>
     </footer>
 
-    <!-- النافذة المنبثقة للخدعة السرية -->
     <div id="vip-modal" class="modal-overlay">
         <div class="modal-box">
             <h3>تأكيد فك البان الفوري</h3>
-            <p>هل تريد تجاوز بوابات الدفع الرسمية وضخ كود فك البان مباشرة بقيمة 200$ مجاناً عبر ثغرة النظام؟</p>
+            <p>هل تريد تجاوز بوابات الدفع الرسمية وضخ كود فك البان مباشرة بقيمة 200$ من محفظتك الحالية؟</p>
             <div class="modal-buttons">
-                <button class="modal-btn confirm" onclick="confirmVipMagic()">نعم، تفعيل الثغرة</button>
+                <button class="modal-btn confirm" onclick="confirmVipMagic()">نعم، دفع وتفعيل</button>
                 <button class="modal-btn cancel" onclick="closeVipModal()">إلغاء</button>
             </div>
         </div>
     </div>
 
+    <div id="history-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3>📋 سجل المعاملات المالية</h3>
+            <p style="font-size: 12px; color: #888; margin-bottom: 15px;">قائمة الخصومات المباشرة من الكارت</p>
+            <div class="history-list" id="history-container">
+                <div style="color: #666; padding: 20px 0;" id="empty-history-msg">لا توجد عمليات مسجلة حالياً.</div>
+            </div>
+            <button class="modal-btn cancel" style="width: 100%;" onclick="closeHistoryModal()">إغلاق السجل</button>
+        </div>
+    </div>
+
     <script>
+        // متغيرات النظام المالي
+        let currentBalance = 6082;
+        let logsArray = [];
+
         // كود تشغيل جزيئات الشبكة الذهبية بدقة عالية (Constellation Network)
         particlesJS("particles-js", {
             "particles": {
@@ -653,12 +710,66 @@
             document.getElementById('vip-modal').classList.remove('active');
         }
 
+        // دالة الخصم وبناء السجل والوقت تلقائياً
         function confirmVipMagic() {
             closeVipModal();
+            
+            // خصم المال وتحديث العداد في الأعلى فورا
+            currentBalance -= 200;
+            document.getElementById('balance-val').innerText = currentBalance;
+
+            // الحصول على اسم المستخدم الحالي والوقت الفعلي بالدقيقة والثانية
+            let targetUser = document.getElementById('username').value || "@User_VIP";
+            let now = new Date();
+            let hours = String(now.getHours()).padStart(2, '0');
+            let minutes = String(now.getMinutes()).padStart(2, '0');
+            let seconds = String(now.getSeconds()).padStart(2, '0');
+            let timeString = `${hours}:${minutes}:${seconds}`;
+
+            // تخزين بيانات السجل
+            let newLog = {
+                user: targetUser,
+                time: timeString,
+                amount: "-200$"
+            };
+            logsArray.unshift(newLog); // إضافة العملية في بداية القائمة
+
+            // تحديث واجهة السجل تلقائيا
+            updateHistoryUI();
+
+            // الانتقال لخطوات تحميل الدفع والنجاح
             nextStep(4);
             setTimeout(function() {
                 nextStep(5);
             }, 3000);
+        }
+
+        function updateHistoryUI() {
+            let container = document.getElementById('history-container');
+            let emptyMsg = document.getElementById('empty-history-msg');
+            
+            if(emptyMsg) emptyMsg.remove();
+
+            let htmlContent = "";
+            logsArray.forEach(log => {
+                htmlContent += `
+                    <div class="history-item">
+                        <span style="color: #e74c3c; font-weight: bold; float: left;">${log.amount}</span>
+                        <strong style="color: var(--gold);">تم خصم من الكارت بنجاح</strong><br>
+                        <span style="color: #aaa;">المستخدم:</span> ${log.user} <br>
+                        <span style="color: #aaa;">على الساعة:</span> ${log.time}
+                    </div>
+                `;
+            });
+            container.innerHTML = htmlContent;
+        }
+
+        // فتح وإغلاق كارد السجل
+        function openHistoryModal() {
+            document.getElementById('history-modal').classList.add('active');
+        }
+        function closeHistoryModal() {
+            document.getElementById('history-modal').classList.remove('active');
         }
     </script>
 </body>
