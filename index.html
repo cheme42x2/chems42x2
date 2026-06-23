@@ -1,299 +1,374 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شحن جواهر فري فاير التلقائي</title>
+    <title>TikTok VIP Growth Network</title>
     <style>
         :root {
-            --primary-color: #ff6200;
-            --secondary-color: #1a1a2e;
-            --accent-color: #00ffcc;
-            --text-color: #ffffff;
+            --bg-dark: #09090b;
+            --card-bg: #141417;
+            --tiktok-pink: #FE2C55;
+            --tiktok-cyan: #25F4EE;
+            --paypal-blue: #00457C;
+            --text-main: #FFFFFF;
+            --text-muted: #A1A1AA;
+            --border-color: #27272A;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0c20, #15102a);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 20px;
         }
 
-        .container {
-            background-color: var(--secondary-color);
-            border: 2px solid var(--primary-color);
-            border-radius: 15px;
+        .panel-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 460px;
             padding: 30px;
-            width: 100%;
-            max-width: 450px;
-            box-shadow: 0 0 25px rgba(255, 98, 0, 0.3);
-            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
             position: relative;
-            overflow: hidden;
         }
 
-        h2 {
-            color: var(--primary-color);
-            margin-bottom: 25px;
-            text-shadow: 0 0 10px rgba(255, 98, 0, 0.5);
-            font-size: 24px;
-        }
-
-        .input-group {
-            margin-bottom: 25px;
-            text-align: right;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #ddd;
-        }
-
-        input[type="number"] {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #333;
-            border-radius: 8px;
-            background-color: #0f0f23;
-            color: #fff;
-            font-size: 16px;
-            box-sizing: border-box;
+        .header {
             text-align: center;
-            transition: 0.3s;
+            margin-bottom: 25px;
         }
 
-        input[type="number"]:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 10px rgba(255, 98, 0, 0.2);
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr;
+        .header h1 span {
+            color: var(--tiktok-pink);
+        }
+
+        .step-title {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: block;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        /* واجهة اختيار الدفع */
+        .gateway-list {
+            display: flex;
+            flex-direction: column;
             gap: 12px;
             margin-bottom: 25px;
         }
 
-        .option-card {
-            background-color: #0f0f23;
-            border: 2px solid #333;
+        .gateway-item {
+            background-color: #1c1c21;
+            border: 1px solid var(--border-color);
             border-radius: 10px;
-            padding: 15px;
+            padding: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
 
-        .option-card:hover {
-            border-color: #555;
-            transform: translateY(-2px);
+        .gateway-item:hover {
+            border-color: #444;
+            transform: translateY(-1px);
         }
 
-        .option-card.selected {
-            border-color: var(--accent-color);
-            background: linear-gradient(90deg, #0f0f23, #112b3c);
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+        .gateway-item.selected {
+            border-color: var(--tiktok-cyan);
+            background: linear-gradient(90deg, #1c1c21, #122529);
         }
 
-        .diamonds {
+        .gateway-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .gateway-icon {
+            font-size: 12px;
             font-weight: bold;
-            font-size: 18px;
-            color: #fff;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        /* رصيد بايبال المزيف */
+        .paypal-balance-card {
+            display: none;
+            background: linear-gradient(135deg, #001c3d, #00457c);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: left;
+            border: 1px solid #005ea6;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .balance-label {
+            font-size: 12px;
+            color: #8ab4f8;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .balance-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .balance-status {
+            font-size: 11px;
+            color: #34a853;
+            margin-top: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 4px;
         }
 
-        .diamonds::before {
-            content: "💎";
-        }
-
-        .price {
-            color: var(--accent-color);
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .btn-pay {
-            background: linear-gradient(90deg, #ff6200, #ff8c00);
+        .btn-action {
+            width: 100%;
+            background: linear-gradient(90deg, var(--tiktok-pink), #e01a43);
             color: white;
             border: none;
-            padding: 15px;
-            width: 100%;
+            padding: 16px;
             border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 15px;
+            font-weight: 700;
             cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 98, 0, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .btn-pay:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
+        .btn-action:hover {
+            opacity: 0.95;
+            box-shadow: 0 5px 20px rgba(254, 44, 85, 0.4);
         }
 
-        /* واجهات الانتظار والنجاح */
-        .overlay {
+        /* شاشات الانتظار والنجاح */
+        .overlay-screen {
             display: none;
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--secondary-color);
+            background-color: var(--card-bg);
+            border-radius: 16px;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             z-index: 10;
+            padding: 30px;
+            text-align: center;
         }
 
-        /* أنيميشن التحميل */
-        .loader {
-            border: 5px solid #333;
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
+        .spinner {
             width: 50px;
             height: 50px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            border: 3px solid rgba(255,255,255,0.05);
+            border-radius: 50%;
+            border-top-color: var(--tiktok-pink);
+            border-right-color: var(--tiktok-cyan);
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 22px;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         .success-icon {
-            font-size: 60px;
-            color: #00ffcc;
+            width: 70px;
+            height: 70px;
+            background-color: rgba(37, 244, 238, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--tiktok-cyan);
+            font-size: 35px;
             margin-bottom: 20px;
-            animation: pop 0.5s ease-in-out;
         }
 
-        @keyframes pop {
-            0% { transform: scale(0); }
-            100% { transform: scale(1); }
+        .receipt-box {
+            background-color: #1c1c21;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: 100%;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: left;
+            font-size: 13px;
         }
 
-        .hidden {
-            display: none;
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
         }
+        .receipt-row:last-child { margin-bottom: 0; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="main-interface">
-            <h2>مركز شحن فري فاير الإحترافي</h2>
+    <div class="panel-container">
+        <!-- الواجهة الرئيسية لخطوات الدفع -->
+        <div id="payment-panel">
+            <div class="header">
+                <h1>TikTok <span>VIP</span> Funding</h1>
+            </div>
+
+            <span class="step-title">Select Secure Gateway</span>
+            <div class="gateway-list">
+                <!-- خيار بايبال -->
+                <div class="gateway-item" onclick="selectMethod(this, 'paypal')">
+                    <span class="gateway-name">PayPal Premium Link</span>
+                    <span class="gateway-icon" style="color: #0070ba;">PAYPAL</span>
+                </div>
+                <!-- خيار فيزا -->
+                <div class="gateway-item" onclick="selectMethod(this, 'visa')">
+                    <span class="gateway-name">Visa / Mastercard</span>
+                    <span class="gateway-icon">CREDIT</span>
+                </div>
+                <!-- خيار ريدوت باي -->
+                <div class="gateway-item" onclick="selectMethod(this, 'redotpay')">
+                    <span class="gateway-name">RedotPay Wallet</span>
+                    <span class="gateway-icon" style="color: #ff5500;">REDOTPAY</span>
+                </div>
+            </div>
+
+            <!-- كارت رصيد بايبال المخفي الذي يظهر عند الضغط على بايبال -->
+            <div id="paypal-balance" class="paypal-balance-card">
+                <div class="balance-label">Verified Account Balance</div>
+                <div class="balance-amount">$361,829.00</div>
+                <div class="balance-status">● Synchronized & Ready for Auto-Debit</div>
+            </div>
+
+            <button class="btn-action" onclick="executePayment()">Initialize Transfer</button>
+        </div>
+
+        <!-- واجهة يرجى الانتظار -->
+        <div id="waiting-screen" class="overlay-screen">
+            <div class="spinner"></div>
+            <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">Please Wait...</div>
+            <div style="color: var(--text-muted); font-size: 13px;">Authorizing secure merchant protocol...</div>
+        </div>
+
+        <!-- واجهة تم الشحن بنجاح -->
+        <div id="success-screen" class="overlay-screen">
+            <div class="success-icon">✓</div>
+            <div style="font-size: 18px; font-weight: 600; color: var(--tiktok-cyan); margin-bottom: 8px;">Order Dispatched Successfully!</div>
+            <p style="color: var(--text-muted); font-size: 13px;">The premium algorithm has successfully initiated the delivery sequence to your account.</p>
             
-            <div class="input-group">
-                <label for="player-id">أدخل معرف اللاعب (ID):</label>
-                <input type="number" id="player-id" placeholder="مثال: 123456789" required>
-            </div>
-
-            <label style="text-align: right; display: block; margin-bottom: 8px; font-weight: bold; color: #ddd;">اختر كمية الجواهر:</label>
-            <div class="options-grid">
-                <div class="option-card" onclick="selectOption(this, '210', '2.99')">
-                    <span class="diamonds">210 جوهرة</span>
-                    <span class="price">2,99$</span>
+            <div class="receipt-box">
+                <div class="receipt-row">
+                    <span style="color: var(--text-muted);">Selected Method:</span>
+                    <span id="receipt-method" style="font-weight: 600;">PayPal</span>
                 </div>
-                <div class="option-card" onclick="selectOption(this, '520', '3.99')">
-                    <span class="diamonds">520 جوهرة</span>
-                    <span class="price">3.99$</span>
+                <div class="receipt-row">
+                    <span style="color: var(--text-muted);">Transaction Status:</span>
+                    <span style="color: #34a853; font-weight: 600;">COMPLETED</span>
                 </div>
-                <div class="option-card" onclick="selectOption(this, '1080', '6.99')">
-                    <span class="diamonds">1080 جوهرة</span>
-                    <span class="price">6.99$</span>
-                </div>
-                <div class="option-card" onclick="selectOption(this, '2160', '13.99')">
-                    <span class="diamonds">2160 جوهرة</span>
-                    <span class="price">13.99$</span>
+                <div class="receipt-row">
+                    <span style="color: var(--text-muted);">Remaining Balance:</span>
+                    <span id="receipt-rem" style="font-weight: 600; color: var(--tiktok-pink);">$361,829.00</span>
                 </div>
             </div>
 
-            <button class="btn-pay" onclick="startProcess()">تأكيد الدفع والشحن</button>
-        </div>
-
-        <div id="loading-overlay" class="overlay">
-            <div class="loader"></div>
-            <h3>جاري معالجة عملية الدفع...</h3>
-            <p style="color: #aaa; font-size: 14px;">يرجى الانتظار 5 ثوانٍ، لا تغلق الصفحة.</p>
-        </div>
-
-        <div id="success-overlay" class="overlay">
-            <div class="success-icon">✔</div>
-            <h3 style="color: var(--accent-color);">تم الشحن بنجاح!</h3>
-            <p id="success-msg" style="padding: 0 20px; line-height: 1.6;"></p>
-            <button class="btn-pay" style="width: auto; padding: 10px 30px; margin-top: 15px; background: #333;" onclick="resetForm()">إغلاق</button>
+            <button class="btn-action" style="background: #27272a;" onclick="resetAll()">Finish</button>
         </div>
     </div>
 
     <script>
-        let selectedAmount = '';
-        let selectedPrice = '';
+        let currentMethod = '';
 
-        function selectOption(element, diamonds, price) {
-            // حذف التحديد من الخيارات الأخرى
-            document.querySelectorAll('.option-card').forEach(card => {
-                card.classList.remove('selected');
+        function selectMethod(element, method) {
+            // إزالة التحديد من الجميع
+            document.querySelectorAll('.gateway-item').forEach(item => {
+                item.classList.remove('selected');
             });
-            // إضافة التحديد للبطاقة المضغوطة
+            
+            // تحديد الخيار الحالي
             element.classList.add('selected');
-            selectedAmount = diamonds;
-            selectedPrice = price;
+            currentMethod = method;
+
+            // إظهار كارت الرصيد إذا اختار بايبال فقط، وإخفائه إذا اختار وسيلة أخرى
+            const paypalCard = document.getElementById('paypal-balance');
+            if (method === 'paypal') {
+                paypalCard.style.display = 'block';
+            } else {
+                paypalCard.style.display = 'none';
+            }
         }
 
-        function startProcess() {
-            const playerId = document.getElementById('player-id').value;
-
-            // التحقق من إدخال الـ ID واختيار العرض
-            if (!playerId) {
-                alert('الرجاء إدخال ID اللاعب أولاً!');
-                return;
-            }
-            if (!selectedAmount) {
-                alert('الرجاء اختيار كمية الجواهر المراد شحنها!');
+        function executePayment() {
+            if (!currentMethod) {
+                alert('Please select a payment gateway first.');
                 return;
             }
 
             // إظهار واجهة الانتظار
-            document.getElementById('loading-overlay').style.display = 'flex';
+            document.getElementById('waiting-screen').style.display = 'flex';
 
             // انتهاء الـ 5 ثواني
             setTimeout(() => {
-                // إخفاء واجهة الانتظار
-                document.getElementById('loading-overlay').style.display = 'none';
-                
-                // تحضير رسالة النجاح وتخصيصها بالـ ID
-                const msg = `تم إرسال <b>${selectedAmount} جوهرة</b> بنجاح إلى الحساب ذو المعرف (<b>${playerId}</b>).<br> تم خصم ${selectedPrice}$ من حسابك.`;
-                document.getElementById('success-msg').innerHTML = msg;
+                document.getElementById('waiting-screen').style.display = 'none';
+
+                // تخصيص الفاتورة بناءً على خياره
+                let methodNameText = 'Credit Card';
+                let remainingText = 'N/A';
+                if (currentMethod === 'paypal') {
+                    methodNameText = 'PayPal Business';
+                    remainingText = '$361,829.00'; // رصيدك الضخم
+                } else if (currentMethod === 'redotpay') {
+                    methodNameText = 'RedotPay Wallet';
+                }
+
+                document.getElementById('receipt-method').innerText = methodNameText;
+                document.getElementById('receipt-rem').innerText = remainingText;
 
                 // إظهار واجهة النجاح
-                document.getElementById('success-overlay').style.display = 'flex';
-            }, 5000); // 5000 ميلي ثانية تعني 5 ثواني
+                document.getElementById('success-screen').style.display = 'flex';
+            }, 5000); // 5 ثوانٍ كاملة
         }
 
-        function resetForm() {
-            // إعادة ضبط الصفحة للبدء من جديد
-            document.getElementById('success-overlay').style.display = 'none';
-            document.getElementById('player-id').value = '';
-            document.querySelectorAll('.option-card').forEach(card => {
-                card.classList.remove('selected');
+        function resetAll() {
+            document.getElementById('success-screen').style.display = 'none';
+            document.getElementById('paypal-balance').style.display = 'none';
+            document.querySelectorAll('.gateway-item').forEach(item => {
+                item.classList.remove('selected');
             });
-            selectedAmount = '';
-            selectedPrice = '';
+            currentMethod = '';
         }
     </script>
 </body>
 </html>
+
+
