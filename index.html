@@ -3,55 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP UNBAN - ULTIMATE</title>
+    <title>VIP TikTok Unban | الشبكة الذهبية</title>
+    <!-- استيراد مكتبة الأنيميشن -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
-        :root { --gold: #FFD700; --bg: #050505; }
+        :root {
+            --gold-light: #fff3cc;
+            --gold: #d4af37;
+            --gold-dark: #aa8416;
+            --dark-bg: #030303;
+            --card-bg: rgba(10, 10, 10, 0.85);
+            --text-color: #ffffff;
+            --text-muted: #a0a0a5;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* لمنع ظهور أشرطة التمرير */
+        }
+
+        /* حاوية الأنيماشين الذهبي */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* خلف المحتوى */
+        }
+
+        /* كارد المحتوى */
+        .container {
+            position: relative;
+            z-index: 5;
+            width: 90%;
+            max-width: 440px;
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 24px;
+            padding: 35px 25px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 40px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        h1 { color: var(--gold); font-size: 30px; font-weight: 800; margin-bottom: 8px; text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+        .subtitle { color: var(--text-muted); font-size: 13px; margin-bottom: 30px; }
+
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .vip-btn {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            color: #000; border: none; padding: 16px; font-weight: 700; border-radius: 14px;
+            cursor: pointer; width: 100%; margin-top: 15px; transition: 0.3s;
+        }
+        .vip-btn:hover { box-shadow: 0 0 20px var(--gold); transform: scale(1.02); }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff; border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 16px; border-radius: 14px; cursor: pointer;
+            width: 100%; margin-bottom: 12px; transition: 0.3s;
+        }
+        .option-btn:hover { background: rgba(212, 175, 55, 0.1); border-color: var(--gold); color: var(--gold); }
+
+        /* تعديلات النافذة */
+        .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); z-index: 9999; display:none; justify-content:center; align-items:center; }
+        .modal-box { background: #0d0d0d; border: 1px solid var(--gold); padding: 30px; border-radius: 20px; width: 85%; max-width: 350px; text-align: center; }
         
-        body { margin: 0; background: var(--bg); color: #fff; font-family: 'Tajawal', sans-serif; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-
-        #particles-js { position: absolute; width: 100%; height: 100%; z-index: 1; }
-
-        .card { position: relative; z-index: 2; width: 90%; max-width: 380px; background: rgba(0,0,0,0.7); border: 2px solid var(--gold); padding: 30px; border-radius: 25px; text-align: center; box-shadow: 0 0 30px rgba(255,215,0,0.2); }
-
-        h1 { color: var(--gold); font-size: 2.5rem; margin-bottom: 10px; text-shadow: 0 0 15px var(--gold); }
-
-        .btn { display: block; width: 100%; padding: 18px; margin: 15px 0; background: #111; border: 1px solid var(--gold); color: #fff; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn:hover { background: var(--gold); color: #000; box-shadow: 0 0 20px var(--gold); }
-
-        /* الـ Modal المخصص (بديل الـ alert) */
-        #custom-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 99; justify-content: center; align-items: center; }
-        .modal-content { background: #1a1a1a; padding: 30px; border-radius: 20px; border: 1px solid var(--gold); text-align: center; width: 80%; }
-
-        .footer { position: absolute; bottom: 10px; font-size: 0.7rem; color: var(--gold); }
+        .footer { position: fixed; bottom: 20px; font-size: 11px; color: var(--gold); z-index: 10; opacity: 0.8; }
     </style>
 </head>
 <body>
 
-<div id="particles-js"></div>
+    <!-- خلفية الأنيميشن الذهبي -->
+    <div id="particles-js"></div>
 
-<div class="card">
-    <h1>VIP UNBAN</h1>
-    <p>نظام الاسترداد السحابي الخارق</p>
-    <div class="btn" onclick="showModal()">استرداد وفك حظر الحساب</div>
-    <div class="btn" onclick="showModal()">فك قيود البث المباشر (LIVE)</div>
-</div>
+    <div class="container">
+        <h1>VIP UNBAN</h1>
+        <div class="subtitle">نظام الاسترداد السحابي المطور</div>
 
-<div id="custom-modal">
-    <div class="modal-content">
-        <h2 style="color:var(--gold)">جاري المعالجة...</h2>
-        <p>يتم الآن حقن أكواد الـ VIP في السيرفر...</p>
-        <div class="btn" onclick="closeModal()">حسناً</div>
+        <!-- الخطوات -->
+        <div id="step1" class="step active">
+            <button class="option-btn" onclick="nextStep(2)">استرداد وفك حظر الحساب</button>
+            <button class="option-btn" onclick="nextStep(2)">فك قيود البث المباشر (LIVE)</button>
+        </div>
+
+        <div id="step2" class="step">
+            <input type="text" id="username" style="width:100%; padding:15px; background:rgba(255,255,255,0.05); border:1px solid #444; color:#fff; border-radius:10px; text-align:center;" placeholder="@username">
+            <button class="vip-btn" onclick="showVipModal()">تأكيد العملية</button>
+        </div>
     </div>
-</div>
 
-<div class="footer">نظام حماية مشفر 256-بت | بروتوكول VIP © 2026</div>
+    <div class="footer">نظام حماية مشفر 256-بت | بروتوكول VIP © 2026</div>
 
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script>
-    particlesJS("particles-js", {"particles": {"number": {"value": 50}, "color": {"value": "#FFD700"}, "move": {"enable": true, "speed": 1}}});
-    function showModal() { document.getElementById('custom-modal').style.display = 'flex'; }
-    function closeModal() { document.getElementById('custom-modal').style.display = 'none'; }
-</script>
+    <!-- نافذة تأكيد -->
+    <div id="vip-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 style="color:var(--gold)">جاري معالجة الكود...</h3>
+            <p style="color:#fff; margin:20px 0;">يتم الآن الاتصال بـ Node Bypass لتخطي الحظر.</p>
+            <button class="vip-btn" onclick="closeModal()">موافق</button>
+        </div>
+    </div>
+
+    <script>
+        // إعدادات الأنيميشن الذهبي (Constellation Effect)
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#d4af37" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5 },
+                "size": { "value": 3 },
+                "line_linked": { "enable": true, "distance": 150, "color": "#d4af37", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 2 }
+            }
+        });
+
+        function nextStep(step) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+        }
+
+        function showVipModal() { document.getElementById('vip-modal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('vip-modal').style.display = 'none'; }
+    </script>
 </body>
 </html>
