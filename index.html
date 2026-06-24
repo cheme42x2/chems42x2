@@ -3,36 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KortesX - Free Fire Files & Skins</title>
+    <title>KortesX - Premium Free Fire Files & Skins</title>
     <style>
-        /* Global Styles */
+        /* Global Reset & Core Styles */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Orbitron', 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
-            background-color: #0a0a0a;
+            background-color: #050505;
             color: #ffffff;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Dark & Red Network Background */
-        .network-bg {
+        /* Ultimate Cyberpunk / Gaming Background */
+        .cyber-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at bottom, #2a0808 0%, #0a0a0a 80%);
-            opacity: 0.8;
+            background: radial-gradient(circle at center, #1c0505 0%, #050505 100%);
         }
 
-        /* SVG Network Nodes Overlay */
         .network-svg {
             position: absolute;
             top: 0;
@@ -40,363 +38,413 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            opacity: 0.6;
         }
 
-        /* Container */
+        /* Container & Structure */
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 20px;
             text-align: center;
         }
 
-        /* Header / Logo */
+        /* Artistic Header Component */
         header {
-            margin-bottom: 50px;
-            animation: fadeInDown 1s ease-out;
+            margin-bottom: 60px;
+            position: relative;
+            animation: glitchFade 1.2s ease-out;
         }
 
         header h1 {
-            font-size: 3.5rem;
+            font-size: 4.5rem;
             font-weight: 900;
-            letter-spacing: 3px;
-            color: #ff3333;
-            text-shadow: 0 0 20px rgba(255, 51, 51, 0.6), 0 0 40px rgba(255, 51, 51, 0.3);
+            letter-spacing: 5px;
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff1a1a, 0 0 30px #ff1a1a, 0 0 50px #ff1a1a;
             text-transform: uppercase;
+            display: inline-block;
         }
 
         header p {
-            color: #b0b0b0;
-            font-size: 1.1rem;
-            margin-top: 10px;
-            letter-spacing: 1px;
-        }
-
-        /* Purchase List Card */
-        .purchase-box {
-            background: rgba(15, 15, 15, 0.85);
-            border: 2px solid #ff3333;
-            box-shadow: 0 0 25px rgba(255, 51, 51, 0.2);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(10px);
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            color: #ff3333;
+            color: #ff4d4d;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            letter-spacing: 3px;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            border-bottom: 1px dashed rgba(255, 51, 51, 0.4);
-            padding-bottom: 15px;
         }
 
-        /* Pack Items */
-        .pack-item {
+        /* Showcase Card Box */
+        .showcase-box {
+            background: linear-gradient(135deg, rgba(20, 5, 5, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
+            border: 2px solid #ff1a1a;
+            box-shadow: 0 0 30px rgba(255, 26, 26, 0.25), inset 0 0 15px rgba(255, 26, 26, 0.1);
+            border-radius: 16px;
+            padding: 40px 30px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(12px);
+            animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .box-title {
+            font-size: 2rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 35px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .box-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff1a1a, transparent);
+        }
+
+        /* Ultra Premium Pack Items */
+        .pack-card {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 25px 0;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 26, 26, 0.15);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
             text-align: left;
-            transition: transform 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .pack-item:last-child {
-            border-bottom: none;
+        .pack-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            border-color: #ff1a1a;
+            background: rgba(255, 26, 26, 0.05);
+            box-shadow: 0 10px 25px rgba(255, 26, 26, 0.2);
         }
 
-        .pack-item:hover {
-            transform: translateX(5px);
+        .pack-card:last-child {
+            margin-bottom: 0;
         }
 
-        .pack-details {
+        .pack-meta {
+            display: flex;
+            align-items: flex-start;
             flex: 1;
         }
 
-        .pack-num {
-            color: #ff3333;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-right: 15px;
+        .pack-index {
+            color: #ff1a1a;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-right: 20px;
             font-family: monospace;
+            text-shadow: 0 0 8px rgba(255, 26, 26, 0.6);
         }
 
-        .pack-title-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .pack-name {
-            font-size: 1.4rem;
+        .pack-content h3 {
+            font-size: 1.5rem;
             font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
+            margin-bottom: 8px;
+            color: #ffffff;
         }
 
-        .pack-features {
+        .features-list {
             list-style: none;
-            color: #a0a0a0;
+            color: #cccccc;
             font-size: 0.95rem;
-            padding-left: 35px;
             line-height: 1.6;
         }
 
-        .pack-features li::before {
-            content: "• ";
-            color: #ff3333;
-            padding-right: 5px;
+        .features-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 4px;
         }
 
-        /* Pricing Style */
-        .pack-price-box {
+        .features-list li::before {
+            content: "⚡";
+            position: absolute;
+            left: 0;
+            color: #ff1a1a;
+        }
+
+        /* Device Badges */
+        .badge-container {
+            margin-top: 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .device-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, #ff1a1a 0%, #990000 100%);
+            padding: 3px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(255, 26, 26, 0.3);
+        }
+
+        /* Pricing Area */
+        .price-wrapper {
             text-align: right;
-            min-width: 140px;
+            min-width: 150px;
         }
 
-        .old-price {
+        .was-price {
             display: block;
-            color: #777;
+            color: #666;
             text-decoration: line-through;
             font-size: 1.1rem;
             margin-bottom: 2px;
             font-weight: 500;
         }
 
-        .current-price {
+        .now-price {
             display: block;
-            color: #ff3333;
-            font-size: 1.8rem;
-            font-weight: 800;
-            text-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
-        }
-
-        /* Badges for Platform compatibility */
-        .platform-icons {
-            margin-top: 8px;
-            padding-left: 35px;
-            display: flex;
-            gap: 10px;
-            opacity: 0.8;
-        }
-
-        .platform-badge {
-            font-size: 11px;
-            color: #a0a0a0;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
+            color: #ff1a1a;
+            font-size: 2rem;
+            font-weight: 900;
+            text-shadow: 0 0 15px rgba(255, 26, 26, 0.6);
         }
 
         /* Contact Section */
-        .contact-section {
-            background: rgba(20, 10, 10, 0.9);
-            border: 1px solid rgba(255, 51, 51, 0.3);
-            border-radius: 12px;
-            padding: 30px;
-            margin-top: 20px;
-            animation: fadeInUp 1.2s ease-out;
+        .cta-section {
+            background: linear-gradient(180deg, rgba(15, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.98) 100%);
+            border: 1px solid rgba(255, 26, 26, 0.4);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        .contact-title {
-            font-size: 1.4rem;
+        .cta-title {
+            font-size: 1.6rem;
             color: #ffffff;
-            margin-bottom: 20px;
-            font-weight: 600;
-            letter-spacing: 1px;
+            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: pulseGlow 2s infinite alternate;
         }
 
-        .social-buttons {
+        .social-grid {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            max-width: 400px;
+            max-width: 450px;
             margin: 0 auto;
         }
 
-        .social-btn {
+        .action-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 14px 20px;
+            padding: 16px 25px;
             border-radius: 8px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
+            font-weight: 800;
+            font-size: 1.15rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
 
-        .btn-tiktok {
+        .tiktok-style {
             background: #000000;
             color: #ffffff;
-            border: 2px solid #ff0050;
+            border: 2px solid #00f2fe;
+            position: relative;
         }
 
-        .btn-tiktok:hover {
+        .tiktok-style:hover {
             background: #ff0050;
-            box-shadow: 0 0 20px rgba(255, 0, 80, 0.6);
+            border-color: #ff0050;
+            box-shadow: 0 0 25px rgba(255, 0, 80, 0.7);
             transform: translateY(-3px);
         }
 
-        .btn-instagram {
+        .insta-style {
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
             color: #ffffff;
             border: none;
         }
 
-        .btn-instagram:hover {
-            box-shadow: 0 0 20px rgba(220, 39, 67, 0.6);
+        .insta-style:hover {
+            box-shadow: 0 0 25px rgba(220, 39, 67, 0.7);
             transform: translateY(-3px);
         }
 
         footer {
-            margin-top: 50px;
-            color: #555;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+            margin-top: 60px;
+            color: #444;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            font-weight: 500;
         }
 
-        /* Animations */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
+        /* Animations Framework */
+        @keyframes glitchFade {
+            from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            header h1 { font-size: 2.6rem; }
-            .pack-item {
+        @keyframes pulseGlow {
+            from { text-shadow: 0 0 5px rgba(255,26,26,0.4); }
+            to { text-shadow: 0 0 20px rgba(255,26,26,1); color: #ff4d4d; }
+        }
+
+        /* Responsive Mechanics */
+        @media (max-width: 650px) {
+            header h1 { font-size: 3rem; }
+            .pack-card {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 15px;
+                gap: 20px;
             }
-            .pack-price-box {
+            .price-wrapper {
                 text-align: left;
-                padding-left: 35px;
+                padding-left: 38px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="network-bg">
+    <!-- Cyber / Network Ambient Layer -->
+    <div class="cyber-bg">
         <svg class="network-svg" xmlns="http://www.w3.org/2000/svg">
-            <line x1="10%" y1="20%" x2="25%" y2="15%" stroke="rgba(255,51,51,0.2)" stroke-width="1.5"/>
-            <line x1="25%" y1="15%" x2="35%" y2="35%" stroke="rgba(255,51,51,0.2)" stroke-width="1.5"/>
-            <line x1="10%" y1="20%" x2="35%" y2="35%" stroke="rgba(255,51,51,0.1)" stroke-width="1"/>
-            <line x1="35%" y1="35%" x2="20%" y2="60%" stroke="rgba(255,51,51,0.2)" stroke-width="1.5"/>
-            <line x1="20%" y1="60%" x2="45%" y2="70%" stroke="rgba(255,51,51,0.1)" stroke-width="1.5"/>
-            <line x1="80%" y1="15%" x2="65%" y2="40%" stroke="rgba(255,51,51,0.2)" stroke-width="1.5"/>
-            <line x1="65%" y1="40%" x2="85%" y2="55%" stroke="rgba(255,51,51,0.2)" stroke-width="1.5"/>
-            
-            <circle cx="10%" cy="20%" r="4" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
-            <circle cx="25%" cy="15%" r="5" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
-            <circle cx="35%" cy="35%" r="4" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
-            <circle cx="20%" cy="60%" r="5" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
-            <circle cx="45%" cy="70%" r="4" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
-            <circle cx="80%" cy="15%" r="5" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
-            <circle cx="65%" cy="40%" r="4" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
-            <circle cx="85%" cy="55%" r="5" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
+            <line x1="5%" y1="15%" x2="20%" y2="25%" stroke="rgba(255,26,26,0.25)" stroke-width="2"/>
+            <line x1="20%" y1="25%" x2="30%" y2="10%" stroke="rgba(255,26,26,0.2)" stroke-width="1.5"/>
+            <line x1="30%" y1="10%" x2="45%" y2="30%" stroke="rgba(255,26,26,0.15)" stroke-width="1.5"/>
+            <line x1="20%" y1="25%" x2="15%" y2="55%" stroke="rgba(255,26,26,0.2)" stroke-width="1.5"/>
+            <line x1="15%" y1="55%" x2="40%" y2="65%" stroke="rgba(255,26,26,0.25)" stroke-width="2"/>
+            <line x1="85%" y1="20%" x2="70%" y2="45%" stroke="rgba(255,26,26,0.2)" stroke-width="2"/>
+            <line x1="70%" y1="45%" x2="90%" y2="60%" stroke="rgba(255,26,26,0.25)" stroke-width="1.5"/>
+
+            <circle cx="5%" cy="15%" r="5" fill="#ff1a1a" style="filter: drop-shadow(0 0 8px #ff1a1a);"/>
+            <circle cx="20%" cy="25%" r="6" fill="#ff1a1a" style="filter: drop-shadow(0 0 8px #ff1a1a);"/>
+            <circle cx="30%" cy="10%" r="4" fill="#ff1a1a" style="filter: drop-shadow(0 0 6px #ff1a1a);"/>
+            <circle cx="45%" cy="30%" r="5" fill="#ff1a1a" style="filter: drop-shadow(0 0 6px #ff1a1a);"/>
+            <circle cx="15%" cy="55%" r="6" fill="#ff1a1a" style="filter: drop-shadow(0 0 8px #ff1a1a);"/>
+            <circle cx="40%" cy="65%" r="5" fill="#ff1a1a" style="filter: drop-shadow(0 0 6px #ff1a1a);"/>
+            <circle cx="85%" cy="20%" r="6" fill="#ff1a1a" style="filter: drop-shadow(0 0 8px #ff1a1a);"/>
+            <circle cx="70%" cy="45%" r="5" fill="#ff1a1a" style="filter: drop-shadow(0 0 6px #ff1a1a);"/>
+            <circle cx="90%" cy="60%" r="6" fill="#ff1a1a" style="filter: drop-shadow(0 0 8px #ff1a1a);"/>
         </svg>
     </div>
 
     <div class="container">
         
+        <!-- Header Section -->
         <header>
             <h1>KortesX</h1>
-            <p>PREMIUM FREE FIRE FILES & SKINS</p>
+            <p>Premium Free Fire Files & Skins</p>
         </header>
 
-        <div class="purchase-box">
-            <div class="section-title">Purchase List</div>
+        <!-- Main Content Showcase -->
+        <div class="showcase-box">
+            <div class="box-title">Available Packs</div>
 
-            <div class="pack-item">
-                <div class="pack-details">
-                    <div class="pack-title-row">
-                        <span class="pack-num">01</span>
-                        <span class="pack-name">Pack 1</span>
+            <!-- Pack 01 -->
+            <div class="pack-card">
+                <div class="pack-meta">
+                    <span class="pack-index">01</span>
+                    <div class="pack-content">
+                        <h3>Pack One</h3>
+                        <ul class="features-list">
+                            <li>Regular Premium Content</li>
+                            <li>Standard Safe Access</li>
+                        </ul>
                     </div>
-                    <ul class="pack-features">
-                        <li>Regular Content</li>
-                        <li>Standard Access</li>
-                    </ul>
                 </div>
-                <div class="pack-price-box">
-                    <span class="old-price">$18 USD</span>
-                    <span class="current-price">$10 USD</span>
+                <div class="price-wrapper">
+                    <span class="was-price">$18 USD</span>
+                    <span class="now-price">$10 USD</span>
                 </div>
             </div>
 
-            <div class="pack-item">
-                <div class="pack-details">
-                    <div class="pack-title-row">
-                        <span class="pack-num">02</span>
-                        <span class="pack-name">Pack 2</span>
-                    </div>
-                    <ul class="pack-features">
-                        <li>Android & iOS Compatible</li>
-                        <li>Season 2 Texture</li>
-                    </ul>
-                    <div class="platform-icons">
-                        <span class="platform-badge">Android</span>
-                        <span class="platform-badge">iOS</span>
+            <!-- Pack 02 -->
+            <div class="pack-card">
+                <div class="pack-meta">
+                    <span class="pack-index">02</span>
+                    <div class="pack-content">
+                        <h3>Pack Two</h3>
+                        <ul class="features-list">
+                            <li>Season 2 Exclusive Textures</li>
+                            <li>High Stability Codes</li>
+                        </ul>
+                        <div class="badge-container">
+                            <span class="device-badge">Android</span>
+                            <span class="device-badge">iOS</span>
+                        </div>
                     </div>
                 </div>
-                <div class="pack-price-box">
-                    <span class="old-price">$25 USD</span>
-                    <span class="current-price">$15 USD</span>
+                <div class="price-wrapper">
+                    <span class="was-price">$25 USD</span>
+                    <span class="now-price">$15 USD</span>
                 </div>
             </div>
 
-            <div class="pack-item">
-                <div class="pack-details">
-                    <div class="pack-title-row">
-                        <span class="pack-num">03</span>
-                        <span class="pack-name">Pack 3</span>
-                    </div>
-                    <ul class="pack-features">
-                        <li>+3 Gloo Wall Skins</li>
-                        <li>Season 2 Texture</li>
-                    </ul>
-                    <div class="platform-icons">
-                        <span class="platform-badge">Android</span>
-                        <span class="platform-badge">iOS</span>
+            <!-- Pack 03 -->
+            <div class="pack-card">
+                <div class="pack-meta">
+                    <span class="pack-index">03</span>
+                    <div class="pack-content">
+                        <h3>Pack Three</h3>
+                        <ul class="features-list">
+                            <li>+3 Premium Gloo Wall Skins</li>
+                            <li>Season 2 Full Textures</li>
+                            <li>VIP Lifetime Support</li>
+                        </ul>
+                        <div class="badge-container">
+                            <span class="device-badge">Android</span>
+                            <span class="device-badge">iOS</span>
+                        </div>
                     </div>
                 </div>
-                <div class="pack-price-box">
-                    <span class="old-price">$35 USD</span>
-                    <span class="current-price">$25 USD</span>
+                <div class="price-wrapper">
+                    <span class="was-price">$35 USD</span>
+                    <span class="now-price">$25 USD</span>
                 </div>
             </div>
 
         </div>
 
-        <div class="contact-section">
-            <div class="contact-title">CLICK HERE TO CONTACT ME</div>
-            <div class="social-buttons">
-                <a href="https://www.tiktok.com/@kortesxfreestyle" target="_blank" class="social-btn btn-tiktok">
+        <!-- Contact Section -->
+        <div class="cta-section">
+            <div class="cta-title">Click Below To Contact Me</div>
+            <div class="social-grid">
+                <!-- TikTok Button -->
+                <a href="https://www.tiktok.com/@kortesxfreestyle" target="_blank" class="action-btn tiktok-style">
                     TikTok: kortesxfreestyle
                 </a>
-                <a href="https://www.instagram.com/ff.kortesx" target="_blank" class="social-btn btn-instagram">
+                <!-- Instagram Button -->
+                <a href="https://www.instagram.com/ff.kortesx" target="_blank" class="action-btn insta-style">
                     Instagram: ff.kortesx
                 </a>
             </div>
         </div>
 
         <footer>
-            THANK YOU FOR SUPPORTING • KORTESX © 2026
+            POWERED BY KORTESX © 2026 • ALL RIGHTS RESERVED
         </footer>
 
     </div>
