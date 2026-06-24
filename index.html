@@ -1,453 +1,274 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KortesX - Premium Free Fire Files & Skins</title>
+    <title>إحترس 70 مسكن تفترس</title>
     <style>
-        /* Global Reset & Core Styles */
-        * {
-            box-sizing: border-box;
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@1,700&display=swap');
+
+        body, html {
             margin: 0;
             padding: 0;
-            font-family: 'Orbitron', 'Segoe UI', Roboto, sans-serif;
-        }
-
-        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
             background-color: #050505;
-            color: #ffffff;
-            overflow-x: hidden;
-            position: relative;
+            font-family: 'Amiri', serif;
+            color: #ff0033;
+            user-select: none;
         }
 
-        /* Ultimate Cyberpunk / Gaming Background */
-        .cyber-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, #1c0505 0%, #050505 100%);
-        }
-
-        .network-svg {
+        /* شبكة الكانفاس الخضراء */
+        canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: 1;
+        }
+
+        /* تأثير الدماء الخلفية */
+        .blood-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(139,0,0,0.15) 0%, rgba(0,0,0,0.9) 80%);
+            z-index: 2;
             pointer-events: none;
-            opacity: 0.6;
         }
 
-        /* Container & Structure */
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        /* Artistic Header Component */
-        header {
-            margin-bottom: 60px;
+        /* الحاوية الرئيسية للرعب */
+        .horror-container {
             position: relative;
-            animation: glitchFade 1.2s ease-out;
-        }
-
-        header h1 {
-            font-size: 4.5rem;
-            font-weight: 900;
-            letter-spacing: 5px;
-            color: #ffffff;
-            text-shadow: 0 0 10px #ff1a1a, 0 0 30px #ff1a1a, 0 0 50px #ff1a1a;
-            text-transform: uppercase;
-            display: inline-block;
-        }
-
-        header p {
-            color: #ff4d4d;
-            font-size: 1.2rem;
-            margin-top: 15px;
-            letter-spacing: 3px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        /* Showcase Card Box */
-        .showcase-box {
-            background: linear-gradient(135deg, rgba(20, 5, 5, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
-            border: 2px solid #ff1a1a;
-            box-shadow: 0 0 30px rgba(255, 26, 26, 0.25), inset 0 0 15px rgba(255, 26, 26, 0.1);
-            border-radius: 16px;
-            padding: 40px 30px;
-            margin-bottom: 50px;
-            backdrop-filter: blur(12px);
-            animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .box-title {
-            font-size: 2rem;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 35px;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-
-        .box-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #ff1a1a, transparent);
-        }
-
-        /* Ultra Premium Pack Items */
-        .pack-card {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 26, 26, 0.15);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            text-align: left;
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .pack-card:hover {
-            transform: translateY(-5px) scale(1.01);
-            border-color: #ff1a1a;
-            background: rgba(255, 26, 26, 0.05);
-            box-shadow: 0 10px 25px rgba(255, 26, 26, 0.2);
-        }
-
-        .pack-card:last-child {
-            margin-bottom: 0;
-        }
-
-        .pack-meta {
-            display: flex;
-            align-items: flex-start;
-            flex: 1;
-        }
-
-        .pack-index {
-            color: #ff1a1a;
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-right: 20px;
-            font-family: monospace;
-            text-shadow: 0 0 8px rgba(255, 26, 26, 0.6);
-        }
-
-        .pack-content h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-
-        .features-list {
-            list-style: none;
-            color: #cccccc;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .features-list li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 4px;
-        }
-
-        .features-list li::before {
-            content: "⚡";
-            position: absolute;
-            left: 0;
-            color: #ff1a1a;
-        }
-
-        /* Device Badges */
-        .badge-container {
-            margin-top: 12px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .device-badge {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #ffffff;
-            background: linear-gradient(135deg, #ff1a1a 0%, #990000 100%);
-            padding: 3px 10px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 2px 8px rgba(255, 26, 26, 0.3);
-        }
-
-        /* Pricing Area */
-        .price-wrapper {
-            text-align: right;
-            min-width: 150px;
-        }
-
-        .was-price {
-            display: block;
-            color: #666;
-            text-decoration: line-through;
-            font-size: 1.1rem;
-            margin-bottom: 2px;
-            font-weight: 500;
-        }
-
-        .now-price {
-            display: block;
-            color: #ff1a1a;
-            font-size: 2rem;
-            font-weight: 900;
-            text-shadow: 0 0 15px rgba(255, 26, 26, 0.6);
-        }
-
-        /* Contact Section */
-        .cta-section {
-            background: linear-gradient(180deg, rgba(15, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.98) 100%);
-            border: 1px solid rgba(255, 26, 26, 0.4);
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-            animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .cta-title {
-            font-size: 1.6rem;
-            color: #ffffff;
-            margin-bottom: 25px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            animation: pulseGlow 2s infinite alternate;
-        }
-
-        .social-grid {
+            z-index: 3;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            max-width: 450px;
-            margin: 0 auto;
-        }
-
-        .action-btn {
-            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 1.15rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            height: 100%;
+            text-align: center;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #800000;
         }
 
-        .tiktok-style {
-            background: #000000;
-            color: #ffffff;
-            border: 2px solid #00f2fe;
-            position: relative;
-        }
-
-        .tiktok-style:hover {
-            background: #ff0050;
-            border-color: #ff0050;
-            box-shadow: 0 0 25px rgba(255, 0, 80, 0.7);
-            transform: translateY(-3px);
-        }
-
-        .insta-style {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: #ffffff;
-            border: none;
-        }
-
-        .insta-style:hover {
-            box-shadow: 0 0 25px rgba(220, 39, 67, 0.7);
-            transform: translateY(-3px);
-        }
-
-        footer {
-            margin-top: 60px;
-            color: #444;
-            font-size: 0.9rem;
+        /* العنوان الرئيسي المرعب */
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            color: #ff0033;
+            animation: glitch 1s linear infinite, bloodDrip 3s ease-in-out infinite alternate;
             letter-spacing: 2px;
-            font-weight: 500;
         }
 
-        /* Animations Framework */
-        @keyframes glitchFade {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+        p.warning {
+            font-size: 1.5rem;
+            color: #00ff66;
+            text-shadow: 0 0 8px #00ff33;
+            margin-bottom: 40px;
+            animation: flicker 2s infinite;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* قائمة أفراد العصابة */
+        .gang-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 600px;
         }
 
-        @keyframes pulseGlow {
-            from { text-shadow: 0 0 5px rgba(255,26,26,0.4); }
-            to { text-shadow: 0 0 20px rgba(255,26,26,1); color: #ff4d4d; }
+        .gang-member {
+            font-size: 2.2rem;
+            color: #e6e6e6;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 0, 51, 0.3);
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            animation: float 4s ease-in-out infinite;
         }
 
-        /* Responsive Mechanics */
-        @media (max-width: 650px) {
-            header h1 { font-size: 3rem; }
-            .pack-card {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 20px;
-            }
-            .price-wrapper {
-                text-align: left;
-                padding-left: 38px;
-            }
+        .gang-member:nth-child(odd) {
+            animation-delay: 1s;
+        }
+
+        .gang-member:hover {
+            color: #ff0033;
+            border-color: #ff0033;
+            box-shadow: 0 0 15px #ff0033;
+            transform: scale(1.1) rotate(-2deg);
+            text-shadow: 0 0 10px #ff0000;
+        }
+
+        /* أنيميشن الرعب والغليتش */
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        @keyframes bloodDrip {
+            0% { text-shadow: 0 0 10px #ff0033, 0 5px 5px #8b0000; }
+            100% { text-shadow: 0 0 20px #ff0033, 0 15px 25px #8b0000, 0 20px 40px #5c0000; }
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0.3; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* قطرات دماء وهمية نازلة */
+        .blood-drop {
+            position: absolute;
+            background: #8b0000;
+            width: 3px;
+            opacity: 0.7;
+            border-radius: 0 0 5px 5px;
+            animation: drop 2s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes drop {
+            0% { top: -10%; height: 0px; }
+            50% { height: 50px; }
+            100% { top: 110%; height: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Cyber / Network Ambient Layer -->
-    <div class="cyber-bg">
-        <svg class="network-svg" xmlns="http://www.w3.org/2000/svg">
-            <line x1="5%" y1="15%" x2="20%" y2="25%" stroke="rgba(255,26,26,0.25)" stroke-width="2"/>
-            <line x1="20%" y1="25%" x2="30%" y2="10%" stroke="rgba(255,26,26,0.2)" stroke-width="1.5"/>
-            <line x1="30%" y1="10%" x2="45%" y2="30%" stroke="rgba(255,26,26,0.15)" stroke-width="1.5"/>
-            <line x1="20%" y1="25%" x2="15%" y2="55%" stroke="rgba(255,26,26,0.2)" stroke-width="1.5"/>
-            <line x1="15%" y1="55%" x2="40%" y2="65%" stroke="rgba(255,26,26,0.25)" stroke-width="2"/>
-            <line x1="85%" y1="20%" x2="70%" y2="45%" stroke="rgba(255,26,26,0.2)" stroke-width="2"/>
-            <line x1="70%" y1="45%" x2="90%" y2="60%" stroke="rgba(255,26,26,0.25)" stroke-width="1.5"/>
+    <canvas id="networkCanvas"></canvas>
+    
+    <div class="blood-overlay"></div>
 
-            <circle cx="5%" cy="15%" r="5" fill="#ff1a1a" style="filter: drop-shadow(0 0 8px #ff1a1a);"/>
-            <circle cx="20%" cy="25%" r="6" fill="#ff1a1a" style="filter: drop-shadow(0 0 8px #ff1a1a);"/>
-            <circle cx="30%" cy="10%" r="4" fill="#ff1a1a" style="filter: drop-shadow(0 0 6px #ff1a1a);"/>
-            <circle cx="45%" cy="30%" r="5" fill="#ff1a1a" style="filter: drop-shadow(0 0 6px #ff1a1a);"/>
-            <circle cx="15%" cy="55%" r="6" fill="#ff1a1a" style="filter: drop-shadow(0 0 8px #ff1a1a);"/>
-            <circle cx="40%" cy="65%" r="5" fill="#ff1a1a" style="filter: drop-shadow(0 0 6px #ff1a1a);"/>
-            <circle cx="85%" cy="20%" r="6" fill="#ff1a1a" style="filter: drop-shadow(0 0 8px #ff1a1a);"/>
-            <circle cx="70%" cy="45%" r="5" fill="#ff1a1a" style="filter: drop-shadow(0 0 6px #ff1a1a);"/>
-            <circle cx="90%" cy="60%" r="6" fill="#ff1a1a" style="filter: drop-shadow(0 0 8px #ff1a1a);"/>
-        </svg>
+    <div class="horror-container">
+        <h1>إحترس 70 مسكن تفترس</h1>
+        <p class="warning">⚠️ الدخول إلى منطقة الموت.. أفراد السفاحين في انتظارك ⚠️</p>
+
+        <div class="gang-list">
+            <div class="gang-member">🩸 ورش السفاح</div>
+            <div class="gang-member">🩸 منصف الجزار</div>
+            <div class="gang-member">🩸 مسلم المجهول</div>
+            <div class="gang-member">🩸 اياد الكابوس</div>
+            <div class="gang-member">🩸 الياس غسيل الدم</div>
+            <div class="gang-member">🩸 جاد الصياد</div>
+            <div class="gang-member">🩸 بقبق المرعب</div>
+            <div class="gang-member">🩸 يعقوب لسان الموت</div>
+        </div>
     </div>
 
-    <div class="container">
-        
-        <!-- Header Section -->
-        <header>
-            <h1>KortesX</h1>
-            <p>Premium Free Fire Files & Skins</p>
-        </header>
+    <script>
+        // كود بناء الشبكة الخضراء العجيبة (تتفاعل مع الماوس)
+        const canvas = document.getElementById('networkCanvas');
+        const ctx = canvas.getContext('2d');
 
-        <!-- Main Content Showcase -->
-        <div class="showcase-box">
-            <div class="box-title">Available Packs</div>
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-            <!-- Pack 01 -->
-            <div class="pack-card">
-                <div class="pack-meta">
-                    <span class="pack-index">01</span>
-                    <div class="pack-content">
-                        <h3>Pack One</h3>
-                        <ul class="features-list">
-                            <li>Regular Premium Content</li>
-                            <li>Standard Safe Access</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="price-wrapper">
-                    <span class="was-price">$18 USD</span>
-                    <span class="now-price">$10 USD</span>
-                </div>
-            </div>
+        const particlesArray = [];
+        const count = 75; // عدد النقاط في الشبكة
 
-            <!-- Pack 02 -->
-            <div class="pack-card">
-                <div class="pack-meta">
-                    <span class="pack-index">02</span>
-                    <div class="pack-content">
-                        <h3>Pack Two</h3>
-                        <ul class="features-list">
-                            <li>Season 2 Exclusive Textures</li>
-                            <li>High Stability Codes</li>
-                        </ul>
-                        <div class="badge-container">
-                            <span class="device-badge">Android</span>
-                            <span class="device-badge">iOS</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="price-wrapper">
-                    <span class="was-price">$25 USD</span>
-                    <span class="now-price">$15 USD</span>
-                </div>
-            </div>
+        const mouse = {
+            x: null,
+            y: null,
+            radius: 150
+        }
 
-            <!-- Pack 03 -->
-            <div class="pack-card">
-                <div class="pack-meta">
-                    <span class="pack-index">03</span>
-                    <div class="pack-content">
-                        <h3>Pack Three</h3>
-                        <ul class="features-list">
-                            <li>+3 Premium Gloo Wall Skins</li>
-                            <li>Season 2 Full Textures</li>
-                            <li>VIP Lifetime Support</li>
-                        </ul>
-                        <div class="badge-container">
-                            <span class="device-badge">Android</span>
-                            <span class="device-badge">iOS</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="price-wrapper">
-                    <span class="was-price">$35 USD</span>
-                    <span class="now-price">$25 USD</span>
-                </div>
-            </div>
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
 
-        </div>
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 4 + 2;
+                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.speedY = (Math.random() - 0.5) * 1.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
 
-        <!-- Contact Section -->
-        <div class="cta-section">
-            <div class="cta-title">Click Below To Contact Me</div>
-            <div class="social-grid">
-                <!-- TikTok Button -->
-                <a href="https://www.tiktok.com/@kortesxfreestyle" target="_blank" class="action-btn tiktok-style">
-                    TikTok: kortesxfreestyle
-                </a>
-                <!-- Instagram Button -->
-                <a href="https://www.instagram.com/ff.kortesx" target="_blank" class="action-btn insta-style">
-                    Instagram: ff.kortesx
-                </a>
-            </div>
-        </div>
+                // الارتداد عن الحواف
+                if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = '#00ff66'; // لون النقطة أخضر مشع مثل الصورة
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
 
-        <footer>
-            POWERED BY KORTESX © 2026 • ALL RIGHTS RESERVED
-        </footer>
+        function init() {
+            for (let i = 0; i < count; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
 
-    </div>
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                                 + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    
+                    if (distance < (canvas.width/7) * (canvas.height/7)) {
+                        opacityValue = 1 - (distance/20000);
+                        ctx.strokeStyle = `rgba(0, 255, 102, ${opacityValue})`; // خيوط الشبكة الخضراء
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
 
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            connect();
+            requestAnimationFrame(animate);
+        }
+
+        // صناعة قطرات دماء عشوائية تسقط
+        function createBlood() {
+            const drop = document.createElement('div');
+            drop.classList.add('blood-drop');
+            drop.style.left = Math.random() * 100 + "vw";
+            drop.style.animationDuration = Math.random() * 2 + 2 + "s";
+            document.body.appendChild(drop);
+            setTimeout(() => { drop.remove(); }, 4000);
+        }
+        setInterval(createBlood, 300);
+
+        init();
+        animate();
+
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 </body>
 </html>
