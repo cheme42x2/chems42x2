@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إحترس 70 مسكن تفترس</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@1,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@700&family=Amiri:ital,wght@1,700&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
 
         body, html {
             margin: 0;
@@ -13,13 +17,13 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #050505;
-            font-family: 'Amiri', serif;
+            background-color: #020202;
+            font-family: 'Reem Kufi', sans-serif;
             color: #ff0033;
             user-select: none;
         }
 
-        /* شبكة الكانفاس الخضراء */
+        /* شبكة الكانفاس بدقة 4K */
         canvas {
             position: absolute;
             top: 0;
@@ -27,22 +31,25 @@
             width: 100%;
             height: 100%;
             z-index: 1;
+            pointer-events: none;
         }
 
-        /* تأثير الدماء الخلفية */
-        .blood-overlay {
+        /* تأثير الدماء والخلفية السينمائية */
+        .horror-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(139,0,0,0.15) 0%, rgba(0,0,0,0.9) 80%);
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.95) 90%),
+                radial-gradient(circle at 50% 30%, rgba(139, 0, 0, 0.25) 0%, transparent 70%);
             z-index: 2;
             pointer-events: none;
         }
 
-        /* الحاوية الرئيسية للرعب */
-        .horror-container {
+        /* واجهة الرعب الرئيسية */
+        .main-container {
             position: relative;
             z-index: 3;
             display: flex;
@@ -50,224 +57,246 @@
             align-items: center;
             justify-content: center;
             height: 100%;
+            width: 100%;
+            padding: 20px;
             text-align: center;
-            text-shadow: 0 0 10px #ff0000, 0 0 20px #800000;
+            backdrop-filter: blur(1px);
         }
 
-        /* العنوان الرئيسي المرعب */
+        /* العنوان الخرافي المهتز */
         h1 {
-            font-size: 4rem;
-            margin-bottom: 10px;
+            font-size: 5rem;
+            margin: 0 0 10px 0;
+            font-family: 'Amiri', serif;
             color: #ff0033;
-            animation: glitch 1s linear infinite, bloodDrip 3s ease-in-out infinite alternate;
-            letter-spacing: 2px;
+            text-shadow: 0 0 15px #ff0000, 0 0 30px #8b0000, 0 10px 20px #000;
+            animation: glitch 0.8s infinite alternate, pulse 2s infinite alternate;
+            letter-spacing: 3px;
         }
 
-        p.warning {
-            font-size: 1.5rem;
+        .sub-title {
+            font-size: 1.6rem;
             color: #00ff66;
-            text-shadow: 0 0 8px #00ff33;
-            margin-bottom: 40px;
-            animation: flicker 2s infinite;
+            text-shadow: 0 0 12px rgba(0, 255, 102, 0.8);
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+            animation: flicker 2.5s infinite;
         }
 
-        /* قائمة أفراد العصابة */
-        .gang-list {
+        /* شبكة أفراد العصابة */
+        .gang-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            max-width: 600px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            width: 100%;
+            padding: 10px;
         }
 
-        .gang-member {
-            font-size: 2.2rem;
-            color: #e6e6e6;
-            padding: 10px 20px;
-            border: 1px solid rgba(255, 0, 51, 0.3);
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            cursor: pointer;
+        @media (max-width: 900px) {
+            .gang-grid { grid-template-columns: repeat(2, 1fr); }
+            h1 { font-size: 3rem; }
+        }
+
+        /* كارت الفرد السفاح */
+        .gang-card {
+            background: rgba(5, 5, 5, 0.85);
+            border: 2px solid #00ff66;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2), inset 0 0 15px rgba(255, 0, 51, 0.1);
+            border-radius: 8px;
+            padding: 25px 15px;
+            font-size: 2rem;
+            color: #ffffff;
+            font-family: 'Amiri', serif;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: crosshair;
             position: relative;
-            animation: float 4s ease-in-out infinite;
+            overflow: hidden;
         }
 
-        .gang-member:nth-child(odd) {
-            animation-delay: 1s;
+        .gang-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 0, 34, 0.15), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
         }
 
-        .gang-member:hover {
+        .gang-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        /* تأثير مرعب جدا عند تحريك الماوس فوق الكارت */
+        .gang-card:hover {
             color: #ff0033;
             border-color: #ff0033;
-            box-shadow: 0 0 15px #ff0033;
-            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0 0 25px #ff0033, inset 0 0 20px #8b0000;
+            transform: translateY(-8px) scale(1.05);
             text-shadow: 0 0 10px #ff0000;
         }
 
-        /* أنيميشن الرعب والغليتش */
-        @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 2px) }
-            40% { transform: translate(-2px, -2px) }
-            60% { transform: translate(2px, 2px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
+        /* قطرات ودماء عشوائية */
+        .blood-splat {
+            position: absolute;
+            background: #660000;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+            mix-blend-mode: multiply;
+            animation: fadeBlood 4s forwards;
         }
 
-        @keyframes bloodDrip {
-            0% { text-shadow: 0 0 10px #ff0033, 0 5px 5px #8b0000; }
-            100% { text-shadow: 0 0 20px #ff0033, 0 15px 25px #8b0000, 0 20px 40px #5c0000; }
+        /* تأثيرات الحركة والأنيميشن */
+        @keyframes glitch {
+            0% { transform: skewX(-2deg); }
+            5% { transform: skewX(2deg); }
+            10% { transform: skewX(0deg); }
+            90% { transform: skewX(0deg); }
+            95% { transform: skewX(-3deg); }
+            100% { transform: skewX(3deg); }
+        }
+
+        @keyframes pulse {
+            0% { text-shadow: 0 0 15px #ff0033, 0 0 20px #8b0000; }
+            100% { text-shadow: 0 0 30px #ff0033, 0 0 50px #ff0000, 0 0 10px #00ff66; }
         }
 
         @keyframes flicker {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
-            20%, 24%, 55% { opacity: 0.3; }
+            0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; filter: drop-shadow(0 0 8px #00ff66); }
+            20%, 24%, 55% { opacity: 0.4; filter: none; }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* قطرات دماء وهمية نازلة */
-        .blood-drop {
-            position: absolute;
-            background: #8b0000;
-            width: 3px;
-            opacity: 0.7;
-            border-radius: 0 0 5px 5px;
-            animation: drop 2s linear infinite;
-            z-index: 2;
-        }
-
-        @keyframes drop {
-            0% { top: -10%; height: 0px; }
-            50% { height: 50px; }
-            100% { top: 110%; height: 10px; }
+        @keyframes fadeBlood {
+            0% { transform: scale(0); opacity: 0.9; }
+            50% { transform: scale(1); opacity: 0.8; }
+            100% { opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="networkCanvas"></canvas>
+    <!-- الكانفاس عالي الدقة للشبكة الخضراء -->
+    <canvas id="ultraNetworkCanvas"></canvas>
     
-    <div class="blood-overlay"></div>
+    <!-- طبقة تأثير الدماء الخلفية -->
+    <div class="horror-overlay"></div>
 
-    <div class="horror-container">
+    <!-- المحتوى الخرافي -->
+    <div class="main-container">
         <h1>إحترس 70 مسكن تفترس</h1>
-        <p class="warning">⚠️ الدخول إلى منطقة الموت.. أفراد السفاحين في انتظارك ⚠️</p>
+        <div class="sub-title">☣️ مَجْزَرَةُ العِصَابَةِ السَّوْدَاء.. لاَ مَفَرّ ☣️</div>
 
-        <div class="gang-list">
-            <div class="gang-member">🩸 ورش السفاح</div>
-            <div class="gang-member">🩸 منصف الجزار</div>
-            <div class="gang-member">🩸 مسلم المجهول</div>
-            <div class="gang-member">🩸 اياد الكابوس</div>
-            <div class="gang-member">🩸 الياس غسيل الدم</div>
-            <div class="gang-member">🩸 جاد الصياد</div>
-            <div class="gang-member">🩸 بقبق المرعب</div>
-            <div class="gang-member">🩸 يعقوب لسان الموت</div>
+        <div class="gang-grid">
+            <div class="gang-card">🩸 وَرْش السَفّاح</div>
+            <div class="gang-card">🩸 مُنْصِف الجَزّار</div>
+            <div class="gang-card">🩸 مُسْلِم المَجْهُول</div>
+            <div class="gang-card">🩸 إِيَاد الكَابُوس</div>
+            <div class="gang-card">🩸 إِلْيَاس مَأْتَم الدَّم</div>
+            <div class="gang-card">🩸 جَاد الصَّيَّاد</div>
+            <div class="gang-card">🩸 بَقْبَق المُرْعِب</div>
+            <div class="gang-card">🩸 يَعْقُوب لِسَان المَوْت</div>
         </div>
     </div>
 
     <script>
-        // كود بناء الشبكة الخضراء العجيبة (تتفاعل مع الماوس)
-        const canvas = document.getElementById('networkCanvas');
+        const canvas = document.getElementById('ultraNetworkCanvas');
         const ctx = canvas.getContext('2d');
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const particlesArray = [];
-        const count = 75; // عدد النقاط في الشبكة
-
-        const mouse = {
-            x: null,
-            y: null,
-            radius: 150
+        // ضبط الدقة لتكون متوافقة مع شاشات 4K والأجهزة عالية الكثافة البرمجية
+        function resizeCanvas() {
+            const scale = window.devicePixelRatio || 1;
+            canvas.width = window.innerWidth * scale;
+            canvas.height = window.innerHeight * scale;
+            ctx.scale(scale, scale);
         }
+        resizeCanvas();
 
-        window.addEventListener('mousemove', function(event) {
-            mouse.x = event.x;
-            mouse.y = event.y;
-        });
+        const particles = [];
+        const maxParticles = 90; // عدد مثالي للشبكة الخضراء العجيبة
 
-        class Particle {
+        class NetworkParticle {
             constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 4 + 2;
-                this.speedX = (Math.random() - 0.5) * 1.5;
-                this.speedY = (Math.random() - 0.5) * 1.5;
+                this.x = Math.random() * window.innerWidth;
+                this.y = Math.random() * window.innerHeight;
+                this.radius = Math.random() * 3 + 2;
+                this.speedX = (Math.random() - 0.5) * 1.2;
+                this.speedY = (Math.random() - 0.5) * 1.2;
             }
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
 
-                // الارتداد عن الحواف
-                if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-                if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+                if (this.x > window.innerWidth || this.x < 0) this.speedX = -this.speedX;
+                if (this.y > window.innerHeight || this.y < 0) this.speedY = -this.speedY;
             }
             draw() {
-                ctx.fillStyle = '#00ff66'; // لون النقطة أخضر مشع مثل الصورة
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#00ff66';
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = '#00ff66';
                 ctx.fill();
+                ctx.shadowBlur = 0; // إعادة تعيين حتى لا يبطئ الأداء
             }
         }
 
-        function init() {
-            for (let i = 0; i < count; i++) {
-                particlesArray.push(new Particle());
-            }
+        for (let i = 0; i < maxParticles; i++) {
+            particles.push(new NetworkParticle());
         }
 
-        function connect() {
-            let opacityValue = 1;
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
-                                 + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    
-                    if (distance < (canvas.width/7) * (canvas.height/7)) {
-                        opacityValue = 1 - (distance/20000);
-                        ctx.strokeStyle = `rgba(0, 255, 102, ${opacityValue})`; // خيوط الشبكة الخضراء
-                        ctx.lineWidth = 1;
+        // رسم روابط الشبكة بدقة خرافية
+        function drawLines() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 160) {
+                        const opacity = 1 - (distance / 160);
+                        ctx.strokeStyle = `rgba(0, 255, 102, ${opacity * 0.45})`;
+                        ctx.lineWidth = 1.5;
                         ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
                     }
                 }
             }
         }
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            connect();
-            requestAnimationFrame(animate);
+        function loop() {
+            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            drawLines();
+            requestAnimationFrame(loop);
         }
+        loop();
 
-        // صناعة قطرات دماء عشوائية تسقط
-        function createBlood() {
-            const drop = document.createElement('div');
-            drop.classList.add('blood-drop');
-            drop.style.left = Math.random() * 100 + "vw";
-            drop.style.animationDuration = Math.random() * 2 + 2 + "s";
-            document.body.appendChild(drop);
-            setTimeout(() => { drop.remove(); }, 4000);
+        // تأثير بقع الدماء الفجائية الخرافية بالخلفية
+        function spawnBloodSplat() {
+            const splat = document.createElement('div');
+            splat.classList.add('blood-splat');
+            const size = Math.random() * 120 + 40;
+            splat.style.width = size + 'px';
+            splat.style.height = size + 'px';
+            splat.style.left = Math.random() * 100 + 'vw';
+            splat.style.top = Math.random() * 100 + 'vh';
+            
+            // أشكال عشوائية مشوهة للدماء
+            splat.style.borderRadius = `${Math.random()*40+20}% ${Math.random()*40+20}% ${Math.random()*40+20}% ${Math.random()*40+20}%`;
+            
+            document.body.appendChild(splat);
+            setTimeout(() => splat.remove(), 4000);
         }
-        setInterval(createBlood, 300);
+        setInterval(spawnBloodSplat, 800);
 
-        init();
-        animate();
-
-        window.addEventListener('resize', function() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        window.addEventListener('resize', () => {
+            resizeCanvas();
         });
     </script>
 </body>
