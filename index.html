@@ -1,1 +1,402 @@
-. 
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KortesX - Free Fire Files & Skins</title>
+    <style>
+        /* إعدادات عامة */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* خلفية شبكة تكنولوجية باللون الأسود والأحمر */
+        .network-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at bottom, #2a0808 0%, #0a0a0a 80%);
+            opacity: 0.8;
+        }
+
+        /* رسم خطوط الشبكة المضيئة */
+        .network-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* اسم الواجهة واللوقو */
+        header {
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: #ff3333;
+            text-shadow: 0 0 20px rgba(255, 51, 51, 0.6), 0 0 40px rgba(255, 51, 51, 0.3);
+            text-transform: uppercase;
+        }
+
+        header p {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* بطاقة قائمة الأسعار */
+        .purchase-box {
+            background: rgba(15, 15, 15, 0.85);
+            border: 2px solid #ff3333;
+            box-shadow: 0 0 25px rgba(255, 51, 51, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #ff3333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed rgba(255, 51, 51, 0.4);
+            padding-bottom: 15px;
+        }
+
+        /* عناصر العروض */
+        .pack-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 25px 0;
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .pack-item:last-child {
+            border-bottom: none;
+        }
+
+        .pack-item:hover {
+            transform: translateX(5px);
+        }
+
+        .pack-details {
+            flex: 1;
+        }
+
+        .pack-num {
+            color: #ff3333;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 15px;
+            font-family: monospace;
+        }
+
+        .pack-title-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .pack-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .pack-features {
+            list-style: none;
+            color: #a0a0a0;
+            font-size: 0.95rem;
+            padding-left: 35px;
+            line-height: 1.6;
+        }
+
+        .pack-features li::before {
+            content: "• ";
+            color: #ff3333;
+            padding-right: 5px;
+        }
+
+        /* تفاصيل الأسعار المشطوبة والجديدة */
+        .pack-price-box {
+            text-align: right;
+            min-width: 140px;
+        }
+
+        .old-price {
+            display: block;
+            color: #777;
+            text-decoration: line-through;
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+            font-weight: 500;
+        }
+
+        .current-price {
+            display: block;
+            color: #ff3333;
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
+        }
+
+        .platform-icons {
+            margin-top: 8px;
+            padding-left: 35px;
+            display: flex;
+            gap: 10px;
+            opacity: 0.8;
+        }
+
+        .platform-badge {
+            font-size: 11px;
+            color: #a0a0a0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* قسم التواصل الاجتماعي */
+        .contact-section {
+            background: rgba(20, 10, 10, 0.9);
+            border: 1px solid rgba(255, 51, 51, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 20px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .contact-title {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        .btn-tiktok {
+            background: #000000;
+            color: #ffffff;
+            border: 2px solid #ff0050;
+        }
+
+        .btn-tiktok:hover {
+            background: #ff0050;
+            box-shadow: 0 0 20px rgba(255, 0, 80, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .btn-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-instagram:hover {
+            box-shadow: 0 0 20px rgba(220, 39, 67, 0.6);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            margin-top: 50px;
+            color: #555;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* تأثيرات الدخول الحركية */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* التوافق مع الهواتف */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2.6rem; }
+            .pack-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .pack-price-box {
+                text-align: left;
+                padding-left: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="network-bg">
+        <svg class="network-svg" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10%" y1="20%" x2="25%" y2="15%" stroke="rgba(255,51,51,0.2)" stroke-width="1.5"/>
+            <line x1="25%" y1="15%" x2="35%" y2="35%" stroke="rgba(255,51,51,0.2)" stroke-width="1.5"/>
+            <line x1="10%" y1="20%" x2="35%" y2="35%" stroke="rgba(255,51,51,0.1)" stroke-width="1"/>
+            <line x1="35%" y1="35%" x2="20%" y2="60%" stroke="rgba(255,51,51,0.2)" stroke-width="1.5"/>
+            <line x1="20%" y1="60%" x2="45%" y2="70%" stroke="rgba(255,51,51,0.1)" stroke-width="1.5"/>
+            <line x1="80%" y1="15%" x2="65%" y2="40%" stroke="rgba(255,51,51,0.2)" stroke-width="1.5"/>
+            <line x1="65%" y1="40%" x2="85%" y2="55%" stroke="rgba(255,51,51,0.2)" stroke-width="1.5"/>
+            
+            <circle cx="10%" cy="20%" r="4" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
+            <circle cx="25%" cy="15%" r="5" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
+            <circle cx="35%" cy="35%" r="4" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
+            <circle cx="20%" cy="60%" r="5" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
+            <circle cx="45%" cy="70%" r="4" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
+            <circle cx="80%" cy="15%" r="5" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
+            <circle cx="65%" cy="40%" r="4" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
+            <circle cx="85%" cy="55%" r="5" fill="#ff3333" style="filter: drop-shadow(0 0 6px #ff3333);"/>
+        </svg>
+    </div>
+
+    <div class="container">
+        
+        <header>
+            <h1>KortesX</h1>
+            <p>PREMIUM FREE FIRE FILES & SKINS</p>
+        </header>
+
+        <div class="purchase-box">
+            <div class="section-title">Purchase List</div>
+
+            <div class="pack-item">
+                <div class="pack-details">
+                    <div class="pack-title-row">
+                        <span class="pack-num">01</span>
+                        <span class="pack-name">Pack 1</span>
+                    </div>
+                    <ul class="pack-features">
+                        <li>Regular Content</li>
+                        <li>Standard Access</li>
+                    </ul>
+                </div>
+                <div class="pack-price-box">
+                    <span class="old-price">$18 USD</span>
+                    <span class="current-price">$10 USD</span>
+                </div>
+            </div>
+
+            <div class="pack-item">
+                <div class="pack-details">
+                    <div class="pack-title-row">
+                        <span class="pack-num">02</span>
+                        <span class="pack-name">Pack 2</span>
+                    </div>
+                    <ul class="pack-features">
+                        <li>Android & iOS Compatible</li>
+                        <li>Season 2 Texture</li>
+                    </ul>
+                    <div class="platform-icons">
+                        <span class="platform-badge">Android</span>
+                        <span class="platform-badge">iOS</span>
+                    </div>
+                </div>
+                <div class="pack-price-box">
+                    <span class="old-price">$25 USD</span>
+                    <span class="current-price">$15 USD</span>
+                </div>
+            </div>
+
+            <div class="pack-item">
+                <div class="pack-details">
+                    <div class="pack-title-row">
+                        <span class="pack-num">03</span>
+                        <span class="pack-name">Pack 3</span>
+                    </div>
+                    <ul class="pack-features">
+                        <li>+3 Gloo Wall Skins (ملفات الثلج المقلوب)</li>
+                        <li>Season 2 Texture</li>
+                    </ul>
+                    <div class="platform-icons">
+                        <span class="platform-badge">Android</span>
+                        <span class="platform-badge">iOS</span>
+                    </div>
+                </div>
+                <div class="pack-price-box">
+                    <span class="old-price">$35 USD</span>
+                    <span class="current-price">$25 USD</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="contact-section">
+            <div class="contact-title">اضغط هنا للتواصل معي</div>
+            <div class="social-buttons">
+                <a href="https://www.tiktok.com/@kortesxfreestyle" target="_blank" class="social-btn btn-tiktok">
+                    Tik Tok : kortesxfreestyle
+                </a>
+                <a href="https://www.instagram.com/ff.kortesx" target="_blank" class="social-btn btn-instagram">
+                    Instagram : ff.kortesx
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            THANK YOU FOR SUPPORTING • KORTESX © 2026
+        </footer>
+
+    </div>
+
+</body>
+</html>
