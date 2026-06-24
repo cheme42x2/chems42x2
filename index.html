@@ -23,7 +23,7 @@
             user-select: none;
         }
 
-        /* كانفاس الشبكة الخضراء بدقة عالية */
+        /* كانفاس الشبكة الخضراء بدقة عالية 4K */
         canvas {
             position: fixed;
             top: 0;
@@ -70,7 +70,7 @@
             animation: textPulse 2s infinite alternate, glitch 1s infinite alternate;
         }
 
-        /* زر استدعاء العصابة */
+        /* زر تشغيل العصابة والأوديو */
         .trigger-btn {
             font-family: 'Reem Kufi', sans-serif;
             font-size: 1.8rem;
@@ -96,7 +96,7 @@
 
         /* حاوية أفراد العصابة المخفية */
         .gang-container {
-            display: none; /* مخفية في البداية */
+            display: none;
             grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             max-width: 800px;
@@ -115,7 +115,7 @@
             h1 { font-size: 2.8rem; }
         }
 
-        /* بطاقات السفاحين (نفس ستايل صورتك تماماً) */
+        /* بطاقات السفاحين (نفس ستايل الكروت في صورتك) */
         .gang-card {
             background: #000000;
             border: 2px solid #00ff66;
@@ -130,7 +130,6 @@
             position: relative;
         }
 
-        /* اسم السفاح */
         .gang-name {
             font-size: 2.5rem;
             color: #ffffff;
@@ -138,7 +137,6 @@
             line-height: 1.4;
         }
 
-        /* قطرة الدم النابضة المضيئة */
         .blood-drop-icon {
             font-size: 2.8rem;
             margin-bottom: 15px;
@@ -146,7 +144,6 @@
             animation: pulseBlood 1.5s infinite ease-in-out;
         }
 
-        /* الكارت النشط أو عند التمرير يتحول للأحمر المرعب */
         .gang-card:hover {
             border-color: #ff0033;
             box-shadow: 0 0 30px #ff0033, inset 0 0 20px rgba(139, 0, 0, 0.6);
@@ -158,7 +155,15 @@
             text-shadow: 0 0 10px #ff0000;
         }
 
-        /* أنيميشن الحركات والظهور */
+        /* إخفاء مشغل اليوتيوب تماماً للحفاظ على جودة التصميم */
+        #yt-player {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
         @keyframes textPulse {
             0% { text-shadow: 0 0 15px #ff0033, 0 0 10px #8b0000; }
             100% { text-shadow: 0 0 35px #ff0033, 0 0 40px #ff0000, 0 0 10px #00ff66; }
@@ -175,9 +180,15 @@
             50% { transform: scale(1.15); filter: drop-shadow(0 0 15px #ff0000); }
         }
     </style>
+    <!-- استدعاء مكتبة اليوتيوب الرسمية لتشغيل الصوت -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
 
+    <!-- عنصر مشغل اليوتيوب المخفي -->
+    <div id="yt-player"></div>
+
+    <!-- شبكة الجزيئات الخضراء العجيبة -->
     <canvas id="canvasNetwork"></canvas>
     
     <div class="horror-bg-overlay"></div>
@@ -185,60 +196,46 @@
     <div class="wrapper">
         <h1>إحترس 70 مسكن تفترس</h1>
 
-        <button class="trigger-btn" id="revealBtn" onclick="activateGang()">⚠️ كشف أفراد العصابة ⚠️</button>
+        <!-- الزر المضيء -->
+        <button class="trigger-btn" id="revealBtn" onclick="activateGang()">⚠️ كشف أفراد العصابة وتفعيل الرعب ⚠️</button>
 
         <div class="gang-container" id="gangBox">
-            
-            <div class="gang-card">
-                <div class="blood-drop-icon">🩸</div>
-                <div class="gang-name">وَرْش السَفَّاح</div>
-            </div>
-
-            <div class="gang-card">
-                <div class="blood-drop-icon">🩸</div>
-                <div class="gang-name">مُنْصِف الجَزَّار</div>
-            </div>
-
-            <div class="gang-card">
-                <div class="blood-drop-icon">🩸</div>
-                <div class="gang-name">مُسْلِم المَجْهُول</div>
-            </div>
-
-            <div class="gang-card">
-                <div class="blood-drop-icon">🩸</div>
-                <div class="gang-name">إِيَاد الكَابُوس</div>
-            </div>
-
-            <div class="gang-card">
-                <div class="blood-drop-icon">🩸</div>
-                <div class="gang-name">إِلْيَاس مَأْتَم الدَّم</div>
-            </div>
-
-            <div class="gang-card">
-                <div class="blood-drop-icon">🩸</div>
-                <div class="gang-name">جَاد الصَّيَّاد</div>
-            </div>
-
-            <div class="gang-card">
-                <div class="blood-drop-icon">🩸</div>
-                <div class="gang-name">بَقْبَق المُرْعِب</div>
-            </div>
-
-            <div class="gang-card">
-                <div class="blood-drop-icon">🩸</div>
-                <div class="gang-name">يَعْقُوب لِسَان المَوْت</div>
-            </div>
-
+            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">وَرْش السَفَّاح</div></div>
+            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">مُنْصِف الجَزَّار</div></div>
+            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">مُسْلِم المَجْهُول</div></div>
+            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">إِيَاد الكَابُوس</div></div>
+            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">إِلْيَاس مَأْتَم الدَّم</div></div>
+            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">جَاد الصَّيَّاد</div></div>
+            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">بَقْبَق المُرْعِب</div></div>
+            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">يَعْقُوب لِسَان المَوْت</div></div>
         </div>
     </div>
 
     <script>
-        // دالة إظهار أفراد العصابة بتأثير احترافي متدرج الأصوات والحركات
+        let player;
+        
+        // إعداد مشغل اليوتيوب برابط الأغنية الخاصة بك
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-player', {
+                videoId: 'lgO7HTSxsKk', // معرف الفيديو الخاص بأغنية إسكندرية
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': 'lgO7HTSxsKk'
+                }
+            });
+        }
+
         function activateGang() {
             const gangBox = document.getElementById('gangBox');
             const revealBtn = document.getElementById('revealBtn');
             
-            // إخفاء الزر وسحب حاوية العصابة بسلاسة وجعلها مرئية
+            // تشغيل الأغنية من اليوتيوب فوراً عند الضغط
+            if (player && typeof player.playVideo === 'function') {
+                player.playVideo();
+            }
+
             revealBtn.style.display = 'none';
             gangBox.style.display = 'grid';
             
@@ -248,7 +245,7 @@
             }, 50);
         }
 
-        // بناء كود شبكة الجزيئات الخضراء العجيبة بدقة 4K فائقة الجودة من الصفر
+        // بناء شبكة الجزيئات الخضراء 4K
         const canvas = document.getElementById('canvasNetwork');
         const ctx = canvas.getContext('2d');
 
@@ -275,7 +272,6 @@
             move() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-
                 if (this.x < 0 || this.x > window.innerWidth) this.speedX *= -1;
                 if (this.y < 0 || this.y > window.innerHeight) this.speedY *= -1;
             }
@@ -287,9 +283,7 @@
             }
         }
 
-        for (let i = 0; i < numParticles; i++) {
-            particleList.push(new Particle());
-        }
+        for (let i = 0; i < numParticles; i++) particleList.push(new Particle());
 
         function makeConnections() {
             for (let i = 0; i < particleList.length; i++) {
@@ -310,10 +304,7 @@
 
         function engine() {
             ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-            particleList.forEach(p => {
-                p.move();
-                p.render();
-            });
+            particleList.forEach(p => { p.move(); p.render(); });
             makeConnections();
             requestAnimationFrame(engine);
         }
