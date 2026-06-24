@@ -1,318 +1,174 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إحترس 70 مسكن تفترس</title>
+    <title>متجر الألعاب الافتراضي</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@1,700&family=Reem+Kufi:wght@700&display=swap');
-
-        * {
-            box-sizing: border-box;
+        /* إعدادات الخلفية العامة المستوحاة من ألعاب كرة القدم */
+        body {
             margin: 0;
             padding: 0;
-        }
-
-        body, html {
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
-            background-color: #020202;
-            font-family: 'Amiri', serif;
-            color: #ff0033;
-            user-select: none;
-        }
-
-        /* كانفاس الشبكة الخضراء بدقة عالية 4K */
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* الإضاءة الخلفية المرعبة */
-        .horror-bg-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.2) 0%, rgba(2, 2, 2, 0.95) 90%);
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        /* الحاوية المركزية للواجهة */
-        .wrapper {
-            position: relative;
-            z-index: 3;
-            min-height: 100vh;
+            background: radial-gradient(circle, #001f4d 0%, #000a1a 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            padding: 40px 20px;
+            align-items: center;
+            min-height: 100vh;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        /* محاكاة تأثير الشبكة أو الخطوط الخلفية */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0, 123, 255, 0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 123, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 1;
+        }
+
+        .shop-container {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 1000px;
             text-align: center;
+            padding: 20px;
         }
 
-        /* عنوان الموت */
-        h1 {
-            font-size: 4.5rem;
-            color: #ff0033;
-            text-shadow: 0 0 20px #ff0000, 0 10px 30px rgba(0, 0, 0, 0.9);
-            margin-bottom: 30px;
-            font-family: 'Amiri', serif;
-            letter-spacing: 2px;
-            animation: textPulse 2s infinite alternate, glitch 1s infinite alternate;
+        .header h1 {
+            font-size: 2.5rem;
+            color: #00d2ff;
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+            margin-bottom: 5px;
         }
 
-        /* زر تشغيل العصابة والأوديو */
-        .trigger-btn {
-            font-family: 'Reem Kufi', sans-serif;
-            font-size: 1.8rem;
-            padding: 15px 45px;
-            background: rgba(139, 0, 0, 0.1);
-            border: 2px solid #ff0033;
-            color: #ff0033;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 0, 51, 0.4), inset 0 0 15px rgba(255, 0, 51, 0.2);
-            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        .header p {
+            color: #a0c4ff;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        /* تصميم شبكة البطاقات */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        /* تصميم البطاقة والتأثيرات المدفوعة */
+        .card {
+            background: linear-gradient(135deg, rgba(0, 40, 100, 0.8) 0%, rgba(0, 15, 40, 0.9) 100%);
+            border: 2px solid #0055ff;
+            border-radius: 15px;
+            padding: 30px 20px;
             position: relative;
             overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
         }
 
-        .trigger-btn:hover {
-            background: #ff0033;
-            color: #020202;
-            box-shadow: 0 0 35px #ff0033;
-            transform: scale(1.05);
-            font-weight: bold;
+        /* تأثير التوهج والحركة عند تمرير الماوس */
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #00d2ff;
+            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.4);
         }
 
-        /* حاوية أفراد العصابة المخفية */
-        .gang-container {
-            display: none;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            max-width: 800px;
-            width: 100%;
-            margin-top: 20px;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s ease;
-        }
-
-        @media (max-width: 600px) {
-            .gang-container {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            h1 { font-size: 2.8rem; }
-        }
-
-        /* بطاقات السفاحين (نفس ستايل الكروت في صورتك) */
-        .gang-card {
-            background: #000000;
-            border: 2px solid #00ff66;
-            border-radius: 12px;
-            padding: 35px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
-            transition: all 0.4s ease;
-            position: relative;
-        }
-
-        .gang-name {
-            font-size: 2.5rem;
-            color: #ffffff;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.9);
-            line-height: 1.4;
-        }
-
-        .blood-drop-icon {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 8px #ff0033);
-            animation: pulseBlood 1.5s infinite ease-in-out;
-        }
-
-        .gang-card:hover {
-            border-color: #ff0033;
-            box-shadow: 0 0 30px #ff0033, inset 0 0 20px rgba(139, 0, 0, 0.6);
-            transform: scale(1.05) rotate(1deg);
-        }
-
-        .gang-card:hover .gang-name {
-            color: #ff0033;
-            text-shadow: 0 0 10px #ff0000;
-        }
-
-        /* إخفاء مشغل اليوتيوب تماماً للحفاظ على جودة التصميم */
-        #yt-player {
+        /* تأثير ضوئي متحرك يمر عبر البطاقة */
+        .card::after {
+            content: '';
             position: absolute;
-            width: 1px;
-            height: 1px;
+            top: -50%; left: -60%;
+            width: 30%; height: 200%;
+            background: rgba(255, 255, 255, 0.13);
+            transform: rotate(45deg);
+            transition: all 0.5s;
             opacity: 0;
-            pointer-events: none;
         }
 
-        @keyframes textPulse {
-            0% { text-shadow: 0 0 15px #ff0033, 0 0 10px #8b0000; }
-            100% { text-shadow: 0 0 35px #ff0033, 0 0 40px #ff0000, 0 0 10px #00ff66; }
+        .card:hover::after {
+            left: 130%;
+            opacity: 1;
+            transition: all 0.5s ease-in-out;
         }
 
-        @keyframes glitch {
-            0%, 95%, 100% { transform: skewX(0deg); }
-            96% { transform: skewX(-4deg); }
-            98% { transform: skewX(4deg); }
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
-        @keyframes pulseBlood {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px #ff0033); }
-            50% { transform: scale(1.15); filter: drop-shadow(0 0 15px #ff0000); }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-price {
+            font-size: 1.2rem;
+            color: #00d2ff;
+            margin-bottom: 20px;
+        }
+
+        .btn-buy {
+            background: linear-gradient(90deg, #0055ff, #00d2ff);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 85, 255, 0.3);
+        }
+
+        .btn-buy:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #00d2ff, #0055ff);
         }
     </style>
-    <!-- استدعاء مكتبة اليوتيوب الرسمية لتشغيل الصوت -->
-    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
 
-    <!-- عنصر مشغل اليوتيوب المخفي -->
-    <div id="yt-player"></div>
+    <div class="shop-container">
+        <div class="header">
+            <h1>متجر العناصر الافتراضي</h1>
+            <p>تصفح الحزم البرمجية المتوفرة للتصميم</p>
+        </div>
 
-    <!-- شبكة الجزيئات الخضراء العجيبة -->
-    <canvas id="canvasNetwork"></canvas>
-    
-    <div class="horror-bg-overlay"></div>
+        <div class="cards-grid">
+            <!-- البطاقة الأولى -->
+            <div class="card">
+                <div class="card-icon">🪙</div>
+                <div class="card-title">الحزمة البرونزية</div>
+                <div class="card-price">100 نقطة افتراضية</div>
+                <button class="btn-buy">استعراض الحزمة</button>
+            </div>
 
-    <div class="wrapper">
-        <h1>إحترس 70 مسكن تفترس</h1>
+            <!-- البطاقة الثانية -->
+            <div class="card">
+                <div class="card-icon">🪙🪙</div>
+                <div class="card-title">الحزمة الفضية</div>
+                <div class="card-price">500 نقطة افتراضية</div>
+                <button class="btn-buy">استعراض الحزمة</button>
+            </div>
 
-        <!-- الزر المضيء -->
-        <button class="trigger-btn" id="revealBtn" onclick="activateGang()">⚠️ كشف أفراد العصابة وتفعيل الرعب ⚠️</button>
-
-        <div class="gang-container" id="gangBox">
-            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">وَرْش السَفَّاح</div></div>
-            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">مُنْصِف الجَزَّار</div></div>
-            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">مُسْلِم المَجْهُول</div></div>
-            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">إِيَاد الكَابُوس</div></div>
-            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">إِلْيَاس مَأْتَم الدَّم</div></div>
-            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">جَاد الصَّيَّاد</div></div>
-            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">بَقْبَق المُرْعِب</div></div>
-            <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">يَعْقُوب لِسَان المَوْت</div></div>
-       
- <div class="gang-card"><div class="blood-drop-icon">🩸</div><div class="gang-name">جعفر الصادق</div></div>
+            <!-- البطاقة الثالثة -->
+            <div class="card">
+                <div class="card-icon">💎</div>
+                <div class="card-title">الحزمة الذهبية</div>
+                <div class="card-price">1000 نقطة افتراضية</div>
+                <button class="btn-buy">استعراض الحزمة</button>
+            </div>
         </div>
     </div>
-      
-    </div>
 
-    <script>
-        let player;
-        
-        // إعداد مشغل اليوتيوب برابط الأغنية الخاصة بك
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('yt-player', {
-                videoId: 'lgO7HTSxsKk', // معرف الفيديو الخاص بأغنية إسكندرية
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': 'lgO7HTSxsKk'
-                }
-            });
-        }
-
-        function activateGang() {
-            const gangBox = document.getElementById('gangBox');
-            const revealBtn = document.getElementById('revealBtn');
-            
-            // تشغيل الأغنية من اليوتيوب فوراً عند الضغط
-            if (player && typeof player.playVideo === 'function') {
-                player.playVideo();
-            }
-
-            revealBtn.style.display = 'none';
-            gangBox.style.display = 'grid';
-            
-            setTimeout(() => {
-                gangBox.style.opacity = '1';
-                gangBox.style.transform = 'translateY(0)';
-            }, 50);
-        }
-
-        // بناء شبكة الجزيئات الخضراء 4K
-        const canvas = document.getElementById('canvasNetwork');
-        const ctx = canvas.getContext('2d');
-
-        function resize() {
-            const dpr = window.devicePixelRatio || 1;
-            canvas.width = window.innerWidth * dpr;
-            canvas.height = window.innerHeight * dpr;
-            ctx.scale(dpr, dpr);
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        const particleList = [];
-        const numParticles = 80;
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * window.innerWidth;
-                this.y = Math.random() * window.innerHeight;
-                this.r = Math.random() * 2 + 2;
-                this.speedX = (Math.random() - 0.5) * 1.4;
-                this.speedY = (Math.random() - 0.5) * 1.4;
-            }
-            move() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > window.innerWidth) this.speedX *= -1;
-                if (this.y < 0 || this.y > window.innerHeight) this.speedY *= -1;
-            }
-            render() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-                ctx.fillStyle = '#00ff66';
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < numParticles; i++) particleList.push(new Particle());
-
-        function makeConnections() {
-            for (let i = 0; i < particleList.length; i++) {
-                for (let j = i + 1; j < particleList.length; j++) {
-                    const distance = Math.hypot(particleList[i].x - particleList[j].x, particleList[i].y - particleList[j].y);
-                    if (distance < 150) {
-                        const alpha = 1 - (distance / 150);
-                        ctx.strokeStyle = `rgba(0, 255, 102, ${alpha * 0.4})`;
-                        ctx.lineWidth = 1.2;
-                        ctx.beginPath();
-                        ctx.moveTo(particleList[i].x, particleList[i].y);
-                        ctx.lineTo(particleList[j].x, particleList[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function engine() {
-            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-            particleList.forEach(p => { p.move(); p.render(); });
-            makeConnections();
-            requestAnimationFrame(engine);
-        }
-        engine();
-    </script>
 </body>
 </html>
