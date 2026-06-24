@@ -208,7 +208,6 @@
         .cell {
             width: 42px;
             height: 42px;
-            background-color: #c0392b; /* لون بني/قرميدي دائري مثل الخانة المغلقة */
             background: radial-gradient(circle, #87362c, #5c2018);
             border-radius: 50%;
             border: 1px solid #3a1510;
@@ -330,7 +329,7 @@
         <div class="top-info">
             <div class="info-card">
                 <div class="info-label">الشركة</div>
-                <div class="info-value">MELBET</div>
+                <div class="info-value">1XBET</div>
             </div>
             <div class="info-card">
                 <div class="info-label">الحساب</div>
@@ -345,7 +344,6 @@
 
         <!-- شبكة الخانات (5 أعمدة × 7 أسطر) -->
         <div class="grid-container" id="game-grid">
-            <!-- الأسطر مرتبة من الأعلى (مضاعف أكبر) إلى الأسفل -->
             <div class="grid-row" data-row="7"><div class="multiplier">x11.18</div><div class="cells-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div></div>
             <div class="grid-row" data-row="6"><div class="multiplier">x6.71</div><div class="cells-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div></div>
             <div class="grid-row" data-row="5"><div class="multiplier">x4.02</div><div class="cells-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div></div>
@@ -378,7 +376,6 @@
 </div>
 
 <script>
-    // دالة نسخ الكود برومو
     function copyPromo() {
         const promoText = document.getElementById('promo-code').innerText;
         navigator.clipboard.writeText(promoText).then(() => {
@@ -386,7 +383,6 @@
         });
     }
 
-    // دالة تسجيل الدخول
     function login() {
         const idInput = document.getElementById('user-id').value;
         if (idInput.trim() === "") {
@@ -394,11 +390,9 @@
             return;
         }
         
-        // إخفاء واجهة الدخول وإظهار اللعبة
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('main-screen').style.display = 'block';
         
-        // تشفير الـ ID المكتوب ليظهر مثل الصورة (مثلا أول رقمين وآخر رقمين وبينهما نجوم)
         if(idInput.length > 4) {
             document.getElementById('display-id').innerText = idInput.substring(0, 2) + "***" + idInput.substring(idInput.length - 2);
         } else {
@@ -406,30 +400,23 @@
         }
     }
 
-    // دالة توليد التوقعات العشوائية للتفاح
     function generateApples() {
-        // تفريغ الشبكة أولاً
         resetGrid();
-
         const rows = document.querySelectorAll('.grid-row');
         
         rows.forEach(row => {
             const cells = row.querySelectorAll('.cell');
-            // اختيار خانة عشوائية من 0 إلى 4 (لأن هناك 5 خانات في السطر)
             const randomIndex = Math.floor(Math.random() * 5);
             
-            // إضافة كلاس التفاحة للخانة العشوائية بعد تأخير بسيط لإعطاء تأثير حركي جمالي
             setTimeout(() => {
                 cells[randomIndex].classList.add('apple');
             }, 100);
         });
 
-        // إظهار الإشعار السفلي الأخضر
         const toast = document.getElementById('status-toast');
         toast.style.display = 'block';
     }
 
-    // دالة إعادة تهيئة الشبكة
     function resetGrid() {
         const cells = document.querySelectorAll('.cell');
         cells.forEach(cell => {
@@ -438,7 +425,6 @@
         document.getElementById('status-toast').style.display = 'none';
     }
 
-    // دالة تسجيل الخروج للعودة للواجهة الأولى
     function logout() {
         document.getElementById('main-screen').style.display = 'none';
         document.getElementById('login-screen').style.display = 'block';
