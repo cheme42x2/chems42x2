@@ -1,309 +1,283 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔐 نظام التسلل - القسم السري</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎵 مشغل الصوت الفخم</title>
+    <!-- خطوط عصرية -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            background: #050505;
-            font-family: 'Courier New', monospace;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #00ff41;
-            text-shadow: 0 0 8px #00ff4180;
+            background: radial-gradient(circle at center, #0d0d0d, #000000);
+            font-family: 'Orbitron', sans-serif;
+            padding: 20px;
         }
-        .hack-container {
-            background: #0a0e0a;
-            width: 92%;
-            max-width: 880px;
-            padding: 25px 30px 30px;
-            border-radius: 12px;
-            border: 1px solid #00ff4177;
-            box-shadow: 0 0 60px #00ff4133, inset 0 0 30px #00ff4111;
+
+        .container {
+            background: rgba(20, 20, 30, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 60px;
+            padding: 40px 50px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 0 80px rgba(0, 150, 255, 0.2), 0 0 160px rgba(100, 0, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: 0.3s;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f093fb, #f5576c, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 60px rgba(245, 87, 108, 0.3);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        /* منطقة تحميل الملف */
+        .file-zone {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 30px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: 0.3s;
+            cursor: pointer;
             position: relative;
         }
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #00ff4166;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 15px;
-            color: #66ff99;
+
+        .file-zone:hover {
+            border-color: #4facfe88;
+            background: rgba(79, 172, 254, 0.05);
         }
-        .top-bar .status {
-            background: #002200;
-            padding: 4px 14px;
-            border-radius: 30px;
-            border: 1px solid #00ff41;
-            font-size: 13px;
-            animation: pulse 1.5s infinite;
+
+        .file-zone .icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 10px;
         }
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
-        }
-        .data-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 6px;
-            border-bottom: 1px dashed #1a3a1a;
-            font-size: 19px;
-            background: #060b06;
-            margin: 3px 0;
-            border-radius: 4px;
-            transition: 0.2s;
-        }
-        .data-row:hover {
-            background: #0c150c;
-        }
-        .data-row .label {
-            color: #77dd99;
-            letter-spacing: 1px;
-        }
-        .data-row .value {
-            color: #ffffff;
-            font-weight: bold;
-            text-shadow: 0 0 12px #00ff4188;
-        }
-        .terminal-commands {
-            background: #030603;
-            padding: 14px 18px;
-            margin: 18px 0 12px;
-            border-radius: 8px;
-            border-left: 4px solid #00ff41;
-            font-size: 16px;
-            color: #88ffaa;
-            font-family: 'Courier New', monospace;
-            min-height: 70px;
-            direction: ltr;
-        }
-        .terminal-commands span {
-            color: #ffaa44;
-        }
-        .blink-cursor {
-            display: inline-block;
-            width: 10px;
-            height: 20px;
-            background: #00ff41;
-            animation: blink 0.8s infinite;
-            margin-left: 6px;
-            vertical-align: middle;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        .actions {
-            display: flex;
-            gap: 18px;
-            margin-top: 22px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .btn {
-            background: transparent;
-            border: 2px solid #00ff41;
-            color: #00ff41;
-            padding: 14px 36px;
-            border-radius: 8px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.25s;
-            box-shadow: 0 0 20px #00ff4133;
-            font-family: inherit;
-            letter-spacing: 1px;
-        }
-        .btn:hover {
-            background: #00ff41;
-            color: #050505;
-            box-shadow: 0 0 60px #00ff41aa;
-            transform: scale(1.03);
-        }
-        .btn-danger {
-            border-color: #ff2244;
-            color: #ff2244;
-            box-shadow: 0 0 20px #ff224433;
-        }
-        .btn-danger:hover {
-            background: #ff2244;
-            color: #050505;
-            box-shadow: 0 0 60px #ff2244aa;
-        }
-        .footer-log {
-            margin-top: 20px;
+
+        .file-zone p {
+            color: #aaa;
             font-size: 14px;
-            color: #338855;
-            text-align: center;
-            border-top: 1px solid #1a3a1a;
-            padding-top: 14px;
-            direction: ltr;
+            font-family: 'Segoe UI', sans-serif;
         }
-        .fake-loader {
+
+        .file-zone .file-name {
+            color: #4facfe;
+            font-weight: 700;
+            margin-top: 8px;
+            font-size: 16px;
+            word-break: break-all;
+        }
+
+        #fileInput {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
             width: 100%;
-            height: 6px;
-            background: #0a1a0a;
-            margin: 15px 0 8px;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .fake-loader .fill {
             height: 100%;
-            width: 0%;
-            background: #00ff41;
-            box-shadow: 0 0 20px #00ff41;
-            border-radius: 10px;
-            transition: width 0.08s;
+        }
+
+        /* زر التشغيل الضخم */
+        .btn-play {
+            width: 100%;
+            padding: 25px 0;
+            font-size: 32px;
+            font-weight: 700;
+            border: none;
+            border-radius: 80px;
+            background: linear-gradient(145deg, #f5576c, #ff6a88);
+            color: #fff;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            box-shadow: 0 0 60px #f5576c66, inset 0 0 30px #ffffff33;
+            transition: 0.15s ease;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .btn-play::after {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: radial-gradient(circle, #ffffff44, transparent 70%);
+            opacity: 0;
+            transition: 0.4s;
+            transform: scale(1.2);
+        }
+
+        .btn-play:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 100px #f5576c99, inset 0 0 40px #ffffff55;
+        }
+
+        .btn-play:hover::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .btn-play:active {
+            transform: scale(0.96);
+            box-shadow: 0 0 30px #f5576c;
+        }
+
+        .btn-play .sub {
+            display: block;
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            opacity: 0.7;
+            margin-top: 4px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* حالة الصوت */
+        .status {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+            font-size: 14px;
+            font-family: 'Segoe UI', sans-serif;
+            letter-spacing: 1px;
+            min-height: 24px;
+        }
+
+        .status .highlight {
+            color: #4facfe;
+            font-weight: 700;
+        }
+
+        /* تأثيرات 4K / إضاءة متحركة */
+        .glow-ring {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(79, 172, 254, 0.06), transparent 50%);
+            z-index: -1;
+            transition: 0.1s;
+        }
+
+        /* استجابة للجوال */
+        @media (max-width: 500px) {
+            .container { padding: 25px 20px; }
+            .btn-play { font-size: 24px; padding: 20px 0; }
         }
     </style>
 </head>
 <body>
-    <div class="hack-container">
-        <!-- الشريط العلوي -->
-        <div class="top-bar">
-            <span>⚡ ROOT_ACCESS // TARGET: RIRI</span>
-            <span class="status">● SECURE CONNECTION</span>
+
+    <!-- حلقة ضوئية متحركة -->
+    <div class="glow-ring" id="glowRing"></div>
+
+    <div class="container">
+        <h1>🎧 مشغل الصوت</h1>
+
+        <!-- منطقة رفع الملف -->
+        <div class="file-zone" id="fileZone">
+            <span class="icon">📂</span>
+            <p>اضغط هنا لاختيار ملف MP3</p>
+            <div class="file-name" id="fileName">لم يتم اختيار ملف</div>
+            <input type="file" id="fileInput" accept=".mp3,.wav,.ogg" />
         </div>
 
-        <!-- البيانات -->
-        <div class="data-row">
-            <span class="label">👤 الاسم الكامل</span>
-            <span class="value">ريما "ريري" التونسية</span>
-        </div>
-        <div class="data-row">
-            <span class="label">📍 العنوان</span>
-            <span class="value">حي 100 مسكن - تونس العاصمة</span>
-        </div>
-        <div class="data-row">
-            <span class="label">📱 الجهاز</span>
-            <span class="value">Itel A16 (Android 8.1)</span>
-        </div>
-        <div class="data-row">
-            <span class="label">📞 الرقم</span>
-            <span class="value">+216 50 123 456</span>
-        </div>
-        <div class="data-row">
-            <span class="label">🔑 كلمة المرور</span>
-            <span class="value">••••••••• Riri@2026</span>
-        </div>
-        <div class="data-row">
-            <span class="label">🌐 IP & البوابة</span>
-            <span class="value">197.0.1.88 :: 192.168.1.1</span>
-        </div>
+        <!-- زر التشغيل -->
+        <button class="btn-play" id="playBtn">
+            ▶ تشغيل
+            <span class="sub">اضغط بقوة</span>
+        </button>
 
-        <!-- شريط تحميل -->
-        <div class="fake-loader">
-            <div class="fill" id="loaderFill"></div>
-        </div>
-
-        <!-- أوامر Terminal -->
-        <div class="terminal-commands" id="terminalBox">
-            <span>root@kali:~#</span> nmap -sV 197.0.1.88<br>
-            <span>root@kali:~#</span> hydra -l riri -P passlist.txt ssh://197.0.1.88<br>
-            <span id="cmdLine">▶ جاري التسلل إلى الجهاز...</span><span class="blink-cursor"></span>
-        </div>
-
-        <!-- أزرار -->
-        <div class="actions">
-            <button class="btn" onclick="runHack()">🚀 بدء الاختراق</button>
-            <button class="btn btn-danger" onclick="deleteAll()">💣 حذف البيانات</button>
-        </div>
-
-        <!-- سجل الأحداث -->
-        <div class="footer-log" id="logArea">
-            [🔹] النظام جاهز. في انتظار الأمر...
-        </div>
+        <div class="status" id="status">⏳ انتظر اختيار ملف...</div>
     </div>
 
     <script>
-        // شريط التحميل
-        let loadValue = 0;
-        const loader = document.getElementById('loaderFill');
+        // ====== عناصر ======
+        const fileInput = document.getElementById('fileInput');
+        const fileName = document.getElementById('fileName');
+        const playBtn = document.getElementById('playBtn');
+        const status = document.getElementById('status');
+        const glowRing = document.getElementById('glowRing');
 
-        function updateLoader() {
-            if (loadValue < 100) {
-                loadValue += Math.floor(Math.random() * 8) + 2;
-                if (loadValue > 100) loadValue = 100;
-                loader.style.width = loadValue + '%';
-                setTimeout(updateLoader, 300 + Math.random() * 500);
+        let audioElement = null;
+
+        // ====== رفع الملف ======
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // عرض اسم الملف
+            fileName.textContent = '📁 ' + file.name;
+            status.innerHTML = '✅ تم تحميل الملف: <span class="highlight">' + file.name + '</span>';
+
+            // إنشاء كائن صوت
+            const url = URL.createObjectURL(file);
+            if (audioElement) {
+                audioElement.pause();
+                audioElement.src = '';
             }
-        }
-        updateLoader();
+            audioElement = new Audio(url);
+            audioElement.preload = 'auto';
 
-        // دالة "بدء الاختراق"
-        function runHack() {
-            const log = document.getElementById('logArea');
-            const cmd = document.getElementById('cmdLine');
-            
-            log.innerHTML = '[⚠️] جاري تنفيذ الهجوم على الهدف...';
-            cmd.innerHTML = '▶ مهاجمة منفذ 22...';
-            
-            setTimeout(() => {
-                cmd.innerHTML = '▶ استخراج ملفات /etc/passwd...';
-                log.innerHTML = '[🔓] تم العثور على مستخدم: riri';
-            }, 800);
-            
-            setTimeout(() => {
-                cmd.innerHTML = '▶ فك تشفير كلمة المرور...';
-                log.innerHTML = '[🔑] كلمة المرور: Riri@2026 (مشفرة)';
-            }, 1700);
-            
-            setTimeout(() => {
-                cmd.innerHTML = '✅ تم الاختراق بنجاح!';
-                log.innerHTML = '[✅] الوصول الكامل إلى النظام.';
-                alert('🔐 تم اختراق الجهاز بنجاح.');
-            }, 2700);
-        }
-
-        // دالة الحذف
-        function deleteAll() {
-            const rows = document.querySelectorAll('.data-row');
-            const log = document.getElementById('logArea');
-            const cmd = document.getElementById('cmdLine');
-
-            log.innerHTML = '[💀] جاري حذف البيانات نهائياً...';
-            cmd.innerHTML = '▶ rm -rf / --no-preserve-root';
-            
-            rows.forEach((row, index) => {
-                setTimeout(() => {
-                    row.style.transition = 'all 0.25s ease';
-                    row.style.background = '#2a0505';
-                    row.style.color = '#ff2244';
-                    row.style.opacity = '0';
-                    row.style.transform = 'scale(0.9)';
-                    row.style.height = '0';
-                    row.style.padding = '0';
-                    row.style.margin = '0';
-                    row.style.border = 'none';
-                    row.style.overflow = 'hidden';
-                    
-                    if (index === rows.length - 1) {
-                        setTimeout(() => {
-                            log.innerHTML = '[🔥] تم حذف جميع البيانات.';
-                            cmd.innerHTML = '✅ النظام فارغ.';
-                            alert('💀 تم حذف البيانات بالكامل.');
-                        }, 350);
-                    }
-                }, index * 200);
+            // جاهزية الصوت
+            audioElement.addEventListener('canplaythrough', () => {
+                status.innerHTML = '🎵 جاهز للتشغيل: <span class="highlight">' + file.name + '</span>';
             });
 
-            const btns = document.querySelectorAll('.btn');
-            btns.forEach(b => {
-                b.style.opacity = '0.4';
-                b.style.pointerEvents = 'none';
+            audioElement.addEventListener('ended', () => {
+                status.innerHTML = '⏹️ انتهى التشغيل';
+                playBtn.innerHTML = '▶ تشغيل <span class="sub">اضغط بقوة</span>';
             });
-        }
+
+            audioElement.addEventListener('error', () => {
+                status.innerHTML = '❌ خطأ في الملف';
+            });
+        });
+
+        // ====== زر التشغيل ======
+        playBtn.addEventListener('click', function() {
+            if (!audioElement) {
+                status.innerHTML = '⚠️ يرجى اختيار ملف MP3 أولاً';
+                return;
+            }
+
+            if (audioElement.paused) {
+                audioElement.play();
+                playBtn.innerHTML = '⏸ إيقاف <span class="sub">جاري التشغيل</span>';
+                status.innerHTML = '🔊 جاري التشغيل...';
+            } else {
+                audioElement.pause();
+                playBtn.innerHTML = '▶ تشغيل <span class="sub">اضغط بقوة</span>';
+                status.innerHTML = '⏸ متوقف مؤقتاً';
+            }
+        });
+
+        // ====== تأثير الـ Glow (حلقة ضوئية خلف الماوس) ======
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            glowRing.style.setProperty('--x', x + '%');
+            glowRing.style.setProperty('--y', y + '%');
+        });
+
+        // ====== تنبيه للمستخدم ======
+        status.innerHTML = '📂 اختر ملف MP3 من الأعلى';
     </script>
 </body>
 </html>
