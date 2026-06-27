@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🎵 مشغل الصوت الفخم</title>
-    <!-- خطوط عصرية -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>KortesX - Dark Panel</title>
+    <!-- Classic Horror Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet" />
     <style>
+        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -15,269 +16,416 @@
 
         body {
             min-height: 100vh;
+            background: #0a0a0a;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle at center, #0d0d0d, #000000);
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Creepster', cursive;
             padding: 20px;
-        }
-
-        .container {
-            background: rgba(20, 20, 30, 0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 60px;
-            padding: 40px 50px;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 0 80px rgba(0, 150, 255, 0.2), 0 0 160px rgba(100, 0, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: 0.3s;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #f093fb, #f5576c, #4facfe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 60px rgba(245, 87, 108, 0.3);
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-        }
-
-        /* منطقة تحميل الملف */
-        .file-zone {
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px dashed rgba(255, 255, 255, 0.15);
-            border-radius: 30px;
-            padding: 25px;
-            text-align: center;
-            margin-bottom: 30px;
-            transition: 0.3s;
-            cursor: pointer;
             position: relative;
+            overflow-x: hidden;
         }
 
-        .file-zone:hover {
-            border-color: #4facfe88;
-            background: rgba(79, 172, 254, 0.05);
+        /* شبكة الرعب الخلفية */
+        .horror-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(60, 0, 0, 0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(60, 0, 0, 0.2) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+            pointer-events: none;
+            animation: gridPulse 6s infinite alternate;
         }
 
-        .file-zone .icon {
-            font-size: 48px;
-            display: block;
+        @keyframes gridPulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
+        }
+
+        /* كرة دم متحركة */
+        .blood-orb {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #8b0000, #2a0000);
+            border-radius: 50%;
+            top: -80px;
+            right: -80px;
+            filter: blur(70px);
+            opacity: 0.25;
+            z-index: 0;
+            animation: orbFloat 12s infinite alternate ease-in-out;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-40px, 60px) scale(1.3); }
+        }
+
+        /* ===== CARD ===== */
+        .panel {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+            width: 100%;
+            background: rgba(15, 5, 5, 0.85);
+            backdrop-filter: blur(8px);
+            border: 3px solid #8b0000;
+            border-radius: 30px;
+            padding: 40px 35px;
+            box-shadow: 0 0 70px #8b000066, inset 0 0 80px #2a0000;
+            transition: 0.3s;
+        }
+
+        .panel:hover {
+            box-shadow: 0 0 120px #8b0000aa, inset 0 0 100px #3a0000;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #8b000088;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 58px;
+            letter-spacing: 8px;
+            color: #c0392b;
+            text-shadow: 0 0 30px #8b0000, 0 0 60px #4a0000;
+            font-weight: 400;
+            word-break: break-word;
+        }
+
+        .header .sub {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            color: #6a4a4a;
+            letter-spacing: 6px;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        /* ===== INFO BOXES ===== */
+        .info-box {
+            background: rgba(0, 0, 0, 0.6);
+            border-left: 6px solid #8b0000;
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 18px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 60%, #8b000022);
+            pointer-events: none;
+        }
+
+        .info-box .platform {
+            display: flex;
+            align-items: center;
+            gap: 14px;
             margin-bottom: 10px;
         }
 
-        .file-zone p {
-            color: #aaa;
-            font-size: 14px;
+        .info-box .platform img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: #1a1a1a;
+            padding: 4px;
+            border: 1px solid #4a1a1a;
+        }
+
+        .info-box .platform span {
             font-family: 'Segoe UI', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #c0392b;
+            letter-spacing: 2px;
         }
 
-        .file-zone .file-name {
-            color: #4facfe;
-            font-weight: 700;
+        .info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-top: 8px;
-            font-size: 16px;
-            word-break: break-all;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        #fileInput {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            cursor: pointer;
-            width: 100%;
-            height: 100%;
+        .info-row label {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 13px;
+            color: #8a7a7a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            min-width: 80px;
         }
 
-        /* زر التشغيل الضخم */
-        .btn-play {
-            width: 100%;
-            padding: 25px 0;
-            font-size: 32px;
+        .info-row .value {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 15px;
+            background: #1a0a0a;
+            padding: 6px 16px;
+            border-radius: 40px;
+            color: #6a6a6a;
+            border: 1px solid #2a1a1a;
+            flex: 1;
+            min-width: 100px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .info-row .value.reveal {
+            color: #c0392b;
+            border-color: #8b0000;
+            background: #1a0505;
+            text-shadow: 0 0 20px #8b000066;
+        }
+
+        .info-row .btn-reveal {
+            background: transparent;
+            border: 1px solid #4a2a2a;
+            color: #8a6a6a;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 12px;
             font-weight: 700;
-            border: none;
-            border-radius: 80px;
-            background: linear-gradient(145deg, #f5576c, #ff6a88);
-            color: #fff;
             cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .info-row .btn-reveal:hover {
+            background: #8b0000;
+            color: #fff;
+            border-color: #8b0000;
+            box-shadow: 0 0 30px #8b000066;
+        }
+
+        /* ===== DESTRUCTION OPTIONS ===== */
+        .destruction {
+            margin: 30px 0 20px;
+            border-top: 2px solid #4a1a1a;
+            padding-top: 25px;
+        }
+
+        .destruction .title {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            color: #5a3a3a;
             text-transform: uppercase;
             letter-spacing: 4px;
-            box-shadow: 0 0 60px #f5576c66, inset 0 0 30px #ffffff33;
-            transition: 0.15s ease;
-            position: relative;
-            overflow: hidden;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .btn-play::after {
-            content: '';
-            position: absolute;
-            inset: -50%;
-            background: radial-gradient(circle, #ffffff44, transparent 70%);
-            opacity: 0;
-            transition: 0.4s;
-            transform: scale(1.2);
-        }
-
-        .btn-play:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 100px #f5576c99, inset 0 0 40px #ffffff55;
-        }
-
-        .btn-play:hover::after {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .btn-play:active {
-            transform: scale(0.96);
-            box-shadow: 0 0 30px #f5576c;
-        }
-
-        .btn-play .sub {
-            display: block;
-            font-size: 14px;
-            font-weight: 300;
-            letter-spacing: 2px;
-            opacity: 0.7;
-            margin-top: 4px;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        /* حالة الصوت */
-        .status {
             text-align: center;
-            margin-top: 25px;
-            color: #666;
-            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .destruction .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .destruction .grid .opt {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #2a1a1a;
+            border-radius: 14px;
+            padding: 16px 10px;
+            text-align: center;
             font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #7a5a5a;
+            cursor: pointer;
+            transition: 0.3s;
             letter-spacing: 1px;
-            min-height: 24px;
         }
 
-        .status .highlight {
-            color: #4facfe;
-            font-weight: 700;
+        .destruction .grid .opt:hover {
+            background: #1a0505;
+            border-color: #8b0000;
+            color: #c0392b;
+            box-shadow: 0 0 40px #8b000044;
+            transform: scale(1.02);
         }
 
-        /* تأثيرات 4K / إضاءة متحركة */
-        .glow-ring {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(79, 172, 254, 0.06), transparent 50%);
-            z-index: -1;
-            transition: 0.1s;
+        .destruction .grid .opt .icon {
+            display: block;
+            font-size: 28px;
+            margin-bottom: 6px;
         }
 
-        /* استجابة للجوال */
-        @media (max-width: 500px) {
-            .container { padding: 25px 20px; }
-            .btn-play { font-size: 24px; padding: 20px 0; }
+        /* ===== FOOTER SOCIAL ===== */
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #1a0a0a;
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .footer a {
+            font-family: 'Segoe UI', sans-serif;
+            color: #4a3a3a;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer a:hover {
+            color: #8b0000;
+            text-shadow: 0 0 20px #8b000066;
+        }
+
+        .footer a img {
+            width: 22px;
+            height: 22px;
+            filter: grayscale(0.5);
+            transition: 0.3s;
+            border-radius: 4px;
+        }
+
+        .footer a:hover img {
+            filter: grayscale(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 550px) {
+            .panel { padding: 25px 18px; }
+            .header h1 { font-size: 38px; }
+            .destruction .grid { grid-template-columns: 1fr; }
+            .info-row { flex-direction: column; align-items: stretch; }
+            .info-row .value { text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- حلقة ضوئية متحركة -->
-    <div class="glow-ring" id="glowRing"></div>
+    <!-- خلفية الرعب -->
+    <div class="horror-grid"></div>
+    <div class="blood-orb"></div>
 
-    <div class="container">
-        <h1>🎧 مشغل الصوت</h1>
+    <!-- ===== اللوحة ===== -->
+    <div class="panel">
 
-        <!-- منطقة رفع الملف -->
-        <div class="file-zone" id="fileZone">
-            <span class="icon">📂</span>
-            <p>اضغط هنا لاختيار ملف MP3</p>
-            <div class="file-name" id="fileName">لم يتم اختيار ملف</div>
-            <input type="file" id="fileInput" accept=".mp3,.wav,.ogg" />
+        <!-- HEADER -->
+        <div class="header">
+            <h1>KortesX</h1>
+            <div class="sub">⚡ dark presence ⚡</div>
         </div>
 
-        <!-- زر التشغيل -->
-        <button class="btn-play" id="playBtn">
-            ▶ تشغيل
-            <span class="sub">اضغط بقوة</span>
-        </button>
+        <!-- ===== TIKTOK ===== -->
+        <div class="info-box">
+            <div class="platform">
+                <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok" />
+                <span>TIKTOK</span>
+            </div>
+            <div class="info-row">
+                <label>Username</label>
+                <span class="value" id="tiktokUser">••••••••••</span>
+                <button class="btn-reveal" onclick="reveal('tiktokUser', 'kortesx_tiktok')">Show</button>
+            </div>
+            <div class="info-row">
+                <label>Password</label>
+                <span class="value" id="tiktokPass">••••••••••</span>
+                <button class="btn-reveal" onclick="reveal('tiktokPass', 'KortesX@2026')">Show</button>
+            </div>
+        </div>
 
-        <div class="status" id="status">⏳ انتظر اختيار ملف...</div>
+        <!-- ===== INSTAGRAM ===== -->
+        <div class="info-box">
+            <div class="platform">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="Instagram" />
+                <span>INSTAGRAM</span>
+            </div>
+            <div class="info-row">
+                <label>Username</label>
+                <span class="value" id="instaUser">••••••••••</span>
+                <button class="btn-reveal" onclick="reveal('instaUser', 'kortesx_insta')">Show</button>
+            </div>
+            <div class="info-row">
+                <label>Password</label>
+                <span class="value" id="instaPass">••••••••••</span>
+                <button class="btn-reveal" onclick="reveal('instaPass', 'KortesX@2026')">Show</button>
+            </div>
+        </div>
+
+        <!-- ===== DESTRUCTION OPTIONS ===== -->
+        <div class="destruction">
+            <div class="title">☠ select your weapon ☠</div>
+            <div class="grid">
+                <div class="opt" onclick="triggerAction('☠ Device destruction initiated...')">
+                    <span class="icon">💀</span> Destroy Device
+                </div>
+                <div class="opt" onclick="triggerAction('📡 Full data wipe in progress...')">
+                    <span class="icon">🔥</span> Wipe All Data
+                </div>
+                <div class="opt" onclick="triggerAction('👁️ Remote access granted...')">
+                    <span class="icon">🕷️</span> Activate Spy Cam
+                </div>
+                <div class="opt" onclick="triggerAction('⚡ System overload...')">
+                    <span class="icon">⚡</span> Overload Network
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="footer">
+            <a href="#">
+                <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok" />
+                @kortesx_tiktok
+            </a>
+            <a href="#">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="Instagram" />
+                @kortesx_insta
+            </a>
+        </div>
+
     </div>
 
     <script>
-        // ====== عناصر ======
-        const fileInput = document.getElementById('fileInput');
-        const fileName = document.getElementById('fileName');
-        const playBtn = document.getElementById('playBtn');
-        const status = document.getElementById('status');
-        const glowRing = document.getElementById('glowRing');
-
-        let audioElement = null;
-
-        // ====== رفع الملف ======
-        fileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            // عرض اسم الملف
-            fileName.textContent = '📁 ' + file.name;
-            status.innerHTML = '✅ تم تحميل الملف: <span class="highlight">' + file.name + '</span>';
-
-            // إنشاء كائن صوت
-            const url = URL.createObjectURL(file);
-            if (audioElement) {
-                audioElement.pause();
-                audioElement.src = '';
-            }
-            audioElement = new Audio(url);
-            audioElement.preload = 'auto';
-
-            // جاهزية الصوت
-            audioElement.addEventListener('canplaythrough', () => {
-                status.innerHTML = '🎵 جاهز للتشغيل: <span class="highlight">' + file.name + '</span>';
-            });
-
-            audioElement.addEventListener('ended', () => {
-                status.innerHTML = '⏹️ انتهى التشغيل';
-                playBtn.innerHTML = '▶ تشغيل <span class="sub">اضغط بقوة</span>';
-            });
-
-            audioElement.addEventListener('error', () => {
-                status.innerHTML = '❌ خطأ في الملف';
-            });
-        });
-
-        // ====== زر التشغيل ======
-        playBtn.addEventListener('click', function() {
-            if (!audioElement) {
-                status.innerHTML = '⚠️ يرجى اختيار ملف MP3 أولاً';
-                return;
-            }
-
-            if (audioElement.paused) {
-                audioElement.play();
-                playBtn.innerHTML = '⏸ إيقاف <span class="sub">جاري التشغيل</span>';
-                status.innerHTML = '🔊 جاري التشغيل...';
+        // ====== وظيفة إظهار المعلومات ======
+        function reveal(elementId, value) {
+            const el = document.getElementById(elementId);
+            if (el.textContent === '••••••••••') {
+                el.textContent = value;
+                el.classList.add('reveal');
             } else {
-                audioElement.pause();
-                playBtn.innerHTML = '▶ تشغيل <span class="sub">اضغط بقوة</span>';
-                status.innerHTML = '⏸ متوقف مؤقتاً';
+                el.textContent = '••••••••••';
+                el.classList.remove('reveal');
             }
-        });
+        }
 
-        // ====== تأثير الـ Glow (حلقة ضوئية خلف الماوس) ======
+        // ====== وظيفة الخيارات التدميرية ======
+        function triggerAction(message) {
+            alert('⚠️ ' + message + '\n\n(هذا مجرد تأثير تمثيلي، لا ضرر حقيقي)');
+        }
+
+        // ====== تأثير إضافي: تحريك الخلفية مع الماوس ======
         document.addEventListener('mousemove', (e) => {
             const x = (e.clientX / window.innerWidth) * 100;
             const y = (e.clientY / window.innerHeight) * 100;
-            glowRing.style.setProperty('--x', x + '%');
-            glowRing.style.setProperty('--y', y + '%');
+            document.querySelector('.blood-orb').style.transform =
+                `translate(${(x - 50) * 0.05}px, ${(y - 50) * 0.05}px) scale(1.2)`;
         });
-
-        // ====== تنبيه للمستخدم ======
-        status.innerHTML = '📂 اختر ملف MP3 من الأعلى';
     </script>
 </body>
 </html>
