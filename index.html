@@ -206,6 +206,16 @@
             font-weight: 700;
             text-transform: uppercase;
         }
+        .price-tag {
+            background: #00ff4133;
+            color: #00ff41;
+            font-size: 12px;
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            border: 1px solid #00ff4166;
+            margin-left: 8px;
+        }
 
         /* ===== واجهة الهاكر ===== */
         #hackerScreen {
@@ -287,6 +297,10 @@
             color: #ffffff;
             font-weight: bold;
             text-shadow: 0 0 10px #00ff4188;
+        }
+        .data-row .value.hidden-pass {
+            color: #ff2244;
+            letter-spacing: 4px;
         }
         .terminal-box {
             background: #030603;
@@ -409,6 +423,45 @@
         .back-btn:hover {
             color: #fff;
         }
+        .image-placeholder {
+            background: #0a0e0a;
+            border: 2px dashed #00ff4166;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            color: #558855;
+            font-size: 14px;
+            grid-column: 1 / -1;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .image-placeholder:hover {
+            border-color: #00ff41;
+            background: #0f1a0f;
+        }
+        .image-placeholder .icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .price-display {
+            background: #1a2a1a;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 1px solid #00ff4166;
+            text-align: center;
+            grid-column: 1 / -1;
+            font-size: 18px;
+        }
+        .price-display .amount {
+            color: #00ff41;
+            font-weight: 700;
+            font-size: 24px;
+            text-shadow: 0 0 20px #00ff41;
+        }
+        .price-display .label {
+            color: #88dd99;
+        }
     </style>
 </head>
 <body>
@@ -447,7 +500,7 @@
             </div>
 
             <!-- الضحية 1: Lenzox -->
-            <div class="victim-card" onclick="openHacker('Lenzox', '@lenzoxfreestyle', '10.5K', '1,097', '12', 'Itel A16', '+216 50 123 456', 'lenzox@2024')">
+            <div class="victim-card" onclick="openHacker('Lenzox', '@lenzoxfreestyle', '10.5K', '1,097', '12', 'Itel A16', '+216 50 123 456', 'lenzox@2024', 'https://example.com/lenzox.jpg')">
                 <div class="info">
                     <div class="avatar" style="background:linear-gradient(135deg,#00b4db,#0083b0);">L</div>
                     <div class="details">
@@ -460,7 +513,7 @@
             </div>
 
             <!-- الضحية 2: PereiraX -->
-            <div class="victim-card" onclick="openHacker('PereiraX', '@pereiraxfreestyle01', '127.2K', '6,382', '2', 'iPhone 14 Pro', '+216 50 789 012', 'pereira@2025')">
+            <div class="victim-card" onclick="openHacker('PereiraX', '@pereiraxfreestyle01', '127.2K', '6,382', '2', 'iPhone 14 Pro', '+216 50 789 012', 'pereira@2025', 'https://example.com/pereira.jpg')">
                 <div class="info">
                     <div class="avatar" style="background:linear-gradient(135deg,#f7971e,#ffd200);">P</div>
                     <div class="details">
@@ -473,13 +526,26 @@
             </div>
 
             <!-- الضحية 3: JOGO,, 7 -->
-            <div class="victim-card" onclick="openHacker('JOGO,, 7', '@zaimanoa5', '73', '94', '1,251', 'Samsung Galaxy A13', '+216 50 345 678', 'jogo@2023')">
+            <div class="victim-card" onclick="openHacker('JOGO,, 7', '@zaimanoa5', '73', '94', '1,251', 'Samsung Galaxy A13', '+216 50 345 678', 'jogo@2023', 'https://example.com/jogo.jpg')">
                 <div class="info">
                     <div class="avatar" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb);">J</div>
                     <div class="details">
                         <div class="name">JOGO,, 7 <span class="status-badge">active</span></div>
                         <div class="username">@zaimanoa5</div>
                         <div class="stats">❤️ 73 • 👥 94 followers • 📌 1,251 following</div>
+                    </div>
+                </div>
+                <div class="arrow">▶</div>
+            </div>
+
+            <!-- ===== الضحية الجديدة: _jabonia_x5 (RIRI) ===== -->
+            <div class="victim-card" onclick="openHacker('RIRI', '_jabonia_x5', '2.4M', '845K', '312', 'iPhone 15 Pro Max', '+216 98 765 432', '*****', 'https://example.com/riri.jpg')" style="border: 2px solid #ff0050; background: #1a0a0a;">
+                <div class="info">
+                    <div class="avatar" style="background:linear-gradient(135deg,#ff0050,#ff6b00);">R</div>
+                    <div class="details">
+                        <div class="name">RIRI <span class="status-badge" style="background:#ff005044;color:#ff0050;">★ VIP</span> <span class="price-tag">$80</span></div>
+                        <div class="username">_jabonia_x5</div>
+                        <div class="stats">❤️ 2.4M • 👥 845K followers • 📌 312 following</div>
                     </div>
                 </div>
                 <div class="arrow">▶</div>
@@ -519,6 +585,10 @@
                     <span class="value" id="hackUsername">—</span>
                 </div>
                 <div class="data-row">
+                    <span class="label">Instagram</span>
+                    <span class="value" id="hackInstagram">—</span>
+                </div>
+                <div class="data-row">
                     <span class="label">Likes</span>
                     <span class="value" id="hackLikes">—</span>
                 </div>
@@ -540,7 +610,7 @@
                 </div>
                 <div class="data-row">
                     <span class="label">Password</span>
-                    <span class="value" id="hackPassword">—</span>
+                    <span class="value hidden-pass" id="hackPassword">—</span>
                 </div>
                 <div class="data-row">
                     <span class="label">IP Address</span>
@@ -564,6 +634,20 @@
                 <div class="fill" id="loaderFill"></div>
             </div>
 
+            <!-- مكان الصور -->
+            <div class="image-placeholder" onclick="alert('📸 Loading images from target...')">
+                <span class="icon">🖼️</span>
+                <div>📸 Target Photos</div>
+                <div style="font-size: 12px; color: #447744; margin-top: 4px;">Click to view media files</div>
+            </div>
+
+            <!-- سعر البيع -->
+            <div class="price-display">
+                <span class="label">💰 SELLING PRICE:</span>
+                <span class="amount" id="hackPrice">$0</span>
+                <span style="color: #88dd99; margin-left: 8px;">for all data</span>
+            </div>
+
             <!-- Terminal كبير -->
             <div class="terminal-box" id="terminalBox">
                 <span>root@kali:~#</span> exploit -t <span id="hackIP4">197.0.1.88</span> -p 22<br>
@@ -575,6 +659,7 @@
                 <button class="hack-btn" onclick="runExploit()">🚀 Execute Exploit</button>
                 <button class="hack-btn hack-btn-danger" onclick="deleteData()">💣 Wipe Data</button>
                 <button class="hack-btn" onclick="showMatrix()">🌀 Matrix Mode</button>
+                <button class="hack-btn" onclick="alert('💰 Data package ready for sale: $' + document.getElementById('hackPrice').textContent.replace('$', ''))" style="border-color:#ffaa00;color:#ffaa00;">💰 Buy Data</button>
             </div>
 
             <!-- سجل الأحداث -->
@@ -613,20 +698,30 @@
         }
 
         // ===== فتح واجهة الهاكر مع بيانات الضحية =====
-        function openHacker(name, username, likes, followers, following, device, phone, password) {
+        function openHacker(name, username, likes, followers, following, device, phone, password, imageUrl) {
             // تخزين البيانات
-            currentVictim = { name, username, likes, followers, following, device, phone, password };
+            currentVictim = { name, username, likes, followers, following, device, phone, password, imageUrl };
             
             // تحديث العناصر
             document.getElementById('hackTargetName').textContent = name;
             document.getElementById('hackName').textContent = name;
             document.getElementById('hackUsername').textContent = username;
+            document.getElementById('hackInstagram').textContent = username;
             document.getElementById('hackLikes').textContent = likes;
             document.getElementById('hackFollowers').textContent = followers;
             document.getElementById('hackFollowing').textContent = following;
             document.getElementById('hackDevice').textContent = device;
             document.getElementById('hackPhone').textContent = phone;
-            document.getElementById('hackPassword').textContent = '••••••••• ' + password;
+            document.getElementById('hackPassword').textContent = password;
+            
+            // تحديث السعر (إذا كان VIP)
+            let price = '80';
+            if (name === 'RIRI') {
+                price = '80';
+                document.getElementById('hackPrice').textContent = '$80';
+            } else {
+                document.getElementById('hackPrice').textContent = '$0';
+            }
             
             // تحديث IP في أوامر Terminal
             const ip = '197.0.1.' + Math.floor(Math.random() * 200 + 10);
