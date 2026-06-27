@@ -110,7 +110,104 @@
             transform: scale(1.03);
         }
 
-        /* ===== واجهة الهاكر (بعد الضغط) ===== */
+        /* ===== قائمة الضحايا ===== */
+        #victimsScreen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            z-index: 1000;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 30px 20px;
+            overflow-y: auto;
+        }
+        #victimsScreen.active {
+            display: block;
+        }
+        .victims-header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ff0050;
+            margin-bottom: 25px;
+        }
+        .victims-header h1 {
+            color: #ff0050;
+            font-size: 28px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .victims-header p {
+            color: #888;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+        .victim-card {
+            background: #141414;
+            border-radius: 14px;
+            padding: 18px 20px;
+            margin-bottom: 14px;
+            border: 1px solid #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .victim-card:hover {
+            background: #1e1e1e;
+            border-color: #ff005066;
+            transform: scale(1.01);
+        }
+        .victim-card .info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .victim-card .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .victim-card .details .name {
+            font-weight: 700;
+            font-size: 17px;
+            color: #fff;
+        }
+        .victim-card .details .username {
+            color: #888;
+            font-size: 13px;
+        }
+        .victim-card .details .stats {
+            color: #666;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        .victim-card .arrow {
+            color: #ff0050;
+            font-size: 22px;
+        }
+        .victim-card .status-badge {
+            background: #ff005022;
+            color: #ff0050;
+            font-size: 10px;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* ===== واجهة الهاكر ===== */
         #hackerScreen {
             display: none;
             position: fixed;
@@ -119,7 +216,7 @@
             width: 100%;
             height: 100%;
             background: #050505;
-            z-index: 1000;
+            z-index: 1001;
             color: #00ff41;
             font-family: 'Courier New', monospace;
             padding: 20px;
@@ -284,13 +381,6 @@
             direction: ltr;
             text-align: center;
         }
-        .glitch-text {
-            animation: glitch 0.1s infinite alternate;
-        }
-        @keyframes glitch {
-            0% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; }
-            100% { text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; }
-        }
         .matrix-bg {
             position: fixed;
             top: 0;
@@ -306,6 +396,18 @@
             font-family: 'Courier New', monospace;
             line-height: 1.2;
             word-break: break-all;
+        }
+        .back-btn {
+            background: transparent;
+            border: none;
+            color: #00ff41;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px 16px;
+            font-family: inherit;
+        }
+        .back-btn:hover {
+            color: #fff;
         }
     </style>
 </head>
@@ -328,7 +430,7 @@
 
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="closeWarning()">Cancel</button>
-                <button class="btn btn-danger" onclick="proceedToHack()">Proceed Anyway</button>
+                <button class="btn btn-danger" onclick="proceedToVictims()">Proceed Anyway</button>
             </div>
             <p style="font-size: 12px; color: #9aa0a6; margin-top: 14px;">
                 Google Security • Protected by advanced encryption
@@ -336,12 +438,71 @@
         </div>
     </div>
 
-    <!-- ===== واجهة الهاكر (بعد الضغط) ===== -->
+    <!-- ===== قائمة الضحايا ===== -->
+    <div id="victimsScreen">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <div class="victims-header">
+                <h1>🎯 Target List</h1>
+                <p>Select a target to begin exploitation</p>
+            </div>
+
+            <!-- الضحية 1: Lenzox -->
+            <div class="victim-card" onclick="openHacker('Lenzox', '@lenzoxfreestyle', '10.5K', '1,097', '12', 'Itel A16', '+216 50 123 456', 'lenzox@2024')">
+                <div class="info">
+                    <div class="avatar" style="background:linear-gradient(135deg,#00b4db,#0083b0);">L</div>
+                    <div class="details">
+                        <div class="name">Lenzox <span class="status-badge">active</span></div>
+                        <div class="username">@lenzoxfreestyle</div>
+                        <div class="stats">❤️ 10.5K • 👥 1,097 followers • 📌 12 following</div>
+                    </div>
+                </div>
+                <div class="arrow">▶</div>
+            </div>
+
+            <!-- الضحية 2: PereiraX -->
+            <div class="victim-card" onclick="openHacker('PereiraX', '@pereiraxfreestyle01', '127.2K', '6,382', '2', 'iPhone 14 Pro', '+216 50 789 012', 'pereira@2025')">
+                <div class="info">
+                    <div class="avatar" style="background:linear-gradient(135deg,#f7971e,#ffd200);">P</div>
+                    <div class="details">
+                        <div class="name">PereiraX <span class="status-badge">active</span></div>
+                        <div class="username">@pereiraxfreestyle01</div>
+                        <div class="stats">❤️ 127.2K • 👥 6,382 followers • 📌 2 following</div>
+                    </div>
+                </div>
+                <div class="arrow">▶</div>
+            </div>
+
+            <!-- الضحية 3: JOGO,, 7 -->
+            <div class="victim-card" onclick="openHacker('JOGO,, 7', '@zaimanoa5', '73', '94', '1,251', 'Samsung Galaxy A13', '+216 50 345 678', 'jogo@2023')">
+                <div class="info">
+                    <div class="avatar" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb);">J</div>
+                    <div class="details">
+                        <div class="name">JOGO,, 7 <span class="status-badge">active</span></div>
+                        <div class="username">@zaimanoa5</div>
+                        <div class="stats">❤️ 73 • 👥 94 followers • 📌 1,251 following</div>
+                    </div>
+                </div>
+                <div class="arrow">▶</div>
+            </div>
+
+            <!-- زر رجوع -->
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="goBackToWarning()" style="background:transparent; border:1px solid #ff0050; color:#ff0050; padding:10px 30px; border-radius:30px; cursor:pointer; font-size:14px;">
+                    ⬅ Back to Security
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== واجهة الهاكر (بعد اختيار الضحية) ===== -->
     <div id="hackerScreen">
         <div class="matrix-bg" id="matrixBg"></div>
 
         <div class="hack-header">
-            <span>⚡ ROOT_ACCESS // TARGET: RIRI</span>
+            <div>
+                <button class="back-btn" onclick="goBackToVictims()">⬅ BACK</button>
+                <span style="margin-left: 10px;">⚡ ROOT_ACCESS // TARGET: <span id="hackTargetName">UNKNOWN</span></span>
+            </div>
             <span class="status">● SECURE CONNECTION</span>
         </div>
 
@@ -351,27 +512,39 @@
                 <h3>📋 Target Info</h3>
                 <div class="data-row">
                     <span class="label">Full Name</span>
-                    <span class="value">Rima "Riri" Al-Tunisi</span>
+                    <span class="value" id="hackName">—</span>
                 </div>
                 <div class="data-row">
-                    <span class="label">Location</span>
-                    <span class="value">100 Housing, Tunis</span>
+                    <span class="label">Username</span>
+                    <span class="value" id="hackUsername">—</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Likes</span>
+                    <span class="value" id="hackLikes">—</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Followers</span>
+                    <span class="value" id="hackFollowers">—</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Following</span>
+                    <span class="value" id="hackFollowing">—</span>
                 </div>
                 <div class="data-row">
                     <span class="label">Device</span>
-                    <span class="value">Itel A16 (Android 8.1)</span>
+                    <span class="value" id="hackDevice">—</span>
                 </div>
                 <div class="data-row">
                     <span class="label">Phone</span>
-                    <span class="value">+216 50 123 456</span>
+                    <span class="value" id="hackPhone">—</span>
                 </div>
                 <div class="data-row">
                     <span class="label">Password</span>
-                    <span class="value">••••••••• Riri@2026</span>
+                    <span class="value" id="hackPassword">—</span>
                 </div>
                 <div class="data-row">
                     <span class="label">IP Address</span>
-                    <span class="value">197.0.1.88</span>
+                    <span class="value" id="hackIP">197.0.1.88</span>
                 </div>
             </div>
 
@@ -379,8 +552,8 @@
             <div class="data-panel">
                 <h3>💻 Live Commands</h3>
                 <div style="font-size: 13px; color: #88ffaa; font-family: 'Courier New', monospace; min-height: 140px;">
-                    <div><span style="color: #ffaa44;">root@kali:~#</span> nmap -sV 197.0.1.88</div>
-                    <div><span style="color: #ffaa44;">root@kali:~#</span> hydra -l riri -P list.txt ssh://197.0.1.88</div>
+                    <div><span style="color: #ffaa44;">root@kali:~#</span> nmap -sV <span id="hackIP2">197.0.1.88</span></div>
+                    <div><span style="color: #ffaa44;">root@kali:~#</span> hydra -l <span id="hackUser2">target</span> -P list.txt ssh://<span id="hackIP3">197.0.1.88</span></div>
                     <div id="cmdLine" style="margin-top: 4px;">▶ Injecting payload...</div>
                     <span class="blink-cursor"></span>
                 </div>
@@ -393,7 +566,7 @@
 
             <!-- Terminal كبير -->
             <div class="terminal-box" id="terminalBox">
-                <span>root@kali:~#</span> exploit -t 197.0.1.88 -p 22<br>
+                <span>root@kali:~#</span> exploit -t <span id="hackIP4">197.0.1.88</span> -p 22<br>
                 <span id="terminalLog">[+] Connecting to target...</span>
             </div>
 
@@ -412,19 +585,8 @@
     </div>
 
     <script>
-        // ===== إظهار الـ Matrix =====
-        function showMatrix() {
-            const bg = document.getElementById('matrixBg');
-            let chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
-            let text = '';
-            for (let i = 0; i < 2000; i++) {
-                text += chars[Math.floor(Math.random() * chars.length)] + ' ';
-                if (i % 50 === 0) text += '\n';
-            }
-            bg.innerHTML = text;
-            bg.style.opacity = '0.1';
-            setTimeout(() => { bg.style.opacity = '0.05'; }, 5000);
-        }
+        // ===== بيانات الضحايا =====
+        let currentVictim = {};
 
         // ===== إغلاق التحذير =====
         function closeWarning() {
@@ -432,9 +594,50 @@
             alert('Access denied. Session terminated.');
         }
 
-        // ===== الدخول إلى واجهة الهاكر =====
-        function proceedToHack() {
+        // ===== الانتقال إلى قائمة الضحايا =====
+        function proceedToVictims() {
             document.getElementById('warningScreen').style.display = 'none';
+            document.getElementById('victimsScreen').classList.add('active');
+        }
+
+        // ===== الرجوع إلى التحذير =====
+        function goBackToWarning() {
+            document.getElementById('victimsScreen').classList.remove('active');
+            document.getElementById('warningScreen').style.display = 'flex';
+        }
+
+        // ===== الرجوع إلى قائمة الضحايا =====
+        function goBackToVictims() {
+            document.getElementById('hackerScreen').classList.remove('active');
+            document.getElementById('victimsScreen').classList.add('active');
+        }
+
+        // ===== فتح واجهة الهاكر مع بيانات الضحية =====
+        function openHacker(name, username, likes, followers, following, device, phone, password) {
+            // تخزين البيانات
+            currentVictim = { name, username, likes, followers, following, device, phone, password };
+            
+            // تحديث العناصر
+            document.getElementById('hackTargetName').textContent = name;
+            document.getElementById('hackName').textContent = name;
+            document.getElementById('hackUsername').textContent = username;
+            document.getElementById('hackLikes').textContent = likes;
+            document.getElementById('hackFollowers').textContent = followers;
+            document.getElementById('hackFollowing').textContent = following;
+            document.getElementById('hackDevice').textContent = device;
+            document.getElementById('hackPhone').textContent = phone;
+            document.getElementById('hackPassword').textContent = '••••••••• ' + password;
+            
+            // تحديث IP في أوامر Terminal
+            const ip = '197.0.1.' + Math.floor(Math.random() * 200 + 10);
+            document.getElementById('hackIP').textContent = ip;
+            document.getElementById('hackIP2').textContent = ip;
+            document.getElementById('hackIP3').textContent = ip;
+            document.getElementById('hackIP4').textContent = ip;
+            document.getElementById('hackUser2').textContent = username.replace('@', '');
+            
+            // إخفاء قائمة الضحايا وإظهار واجهة الهاكر
+            document.getElementById('victimsScreen').classList.remove('active');
             document.getElementById('hackerScreen').classList.add('active');
             
             // تشغيل شريط التحميل
@@ -459,6 +662,20 @@
             }, 1500);
         }
 
+        // ===== إظهار الـ Matrix =====
+        function showMatrix() {
+            const bg = document.getElementById('matrixBg');
+            let chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
+            let text = '';
+            for (let i = 0; i < 2000; i++) {
+                text += chars[Math.floor(Math.random() * chars.length)] + ' ';
+                if (i % 50 === 0) text += '\n';
+            }
+            bg.innerHTML = text;
+            bg.style.opacity = '0.1';
+            setTimeout(() => { bg.style.opacity = '0.05'; }, 5000);
+        }
+
         // ===== تنفيذ الاختراق =====
         function runExploit() {
             const log = document.getElementById('logArea');
@@ -467,25 +684,25 @@
 
             log.innerHTML = '[🚀] Executing exploit...';
             cmd.innerHTML = '▶ Brute-forcing password...';
-            term.innerHTML = '[+] Hydra started on 197.0.1.88:22';
+            term.innerHTML = '[+] Hydra started on target:22';
 
             setTimeout(() => {
                 cmd.innerHTML = '▶ Extracting /etc/passwd...';
-                log.innerHTML = '[🔓] User found: riri';
-                term.innerHTML += '\n[+] User riri detected. Cracking hash...';
+                log.innerHTML = '[🔓] User found: ' + currentVictim.username.replace('@', '');
+                term.innerHTML += '\n[+] User ' + currentVictim.username.replace('@', '') + ' detected. Cracking hash...';
             }, 1000);
 
             setTimeout(() => {
                 cmd.innerHTML = '▶ Decrypting credentials...';
-                log.innerHTML = '[🔑] Password: Riri@2026 (decrypted)';
-                term.innerHTML += '\n[+] Password recovered: Riri@2026';
+                log.innerHTML = '[🔑] Password: ' + currentVictim.password + ' (decrypted)';
+                term.innerHTML += '\n[+] Password recovered: ' + currentVictim.password;
             }, 2200);
 
             setTimeout(() => {
                 cmd.innerHTML = '✅ Exploit successful!';
                 log.innerHTML = '[✅] Full system access acquired.';
                 term.innerHTML += '\n[✅] Root access granted. System compromised.';
-                alert('🔐 Target compromised successfully!');
+                alert('🔐 ' + currentVictim.name + ' compromised successfully!');
             }, 3500);
         }
 
@@ -499,7 +716,6 @@
             cmd.innerHTML = '▶ rm -rf / --no-preserve-root';
             term.innerHTML += '\n[⚠️] Executing wipe command...';
 
-            // تأثير حذف تدريجي
             const rows = document.querySelectorAll('.data-row');
             rows.forEach((row, index) => {
                 setTimeout(() => {
@@ -524,7 +740,6 @@
                 }, index * 180);
             });
 
-            // تعطيل الأزرار
             const btns = document.querySelectorAll('.hack-btn');
             btns.forEach(b => {
                 b.style.opacity = '0.4';
