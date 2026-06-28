@@ -1,0 +1,21 @@
+{
+  "name": "JADOU",
+  "short_name": "JADOU",
+  "description": "Arabic to American Slang Translator",
+  "start_url": "/chems42x2/",
+  "display": "standalone",
+  "background_color": "#06030a",
+  "theme_color": "#c8001a",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192x192/c8001a/d4a017?text=J",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512x512/c8001a/d4a017?text=J",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
