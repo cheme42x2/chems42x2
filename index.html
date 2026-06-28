@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔐 RIRI • Premium Data</title>
+    <title>🎯 Venta de Cuenta TikTok</title>
     <style>
-        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -21,37 +20,37 @@
             padding: 20px;
             background-image: radial-gradient(ellipse at 50% 0%, #1a0a2e 0%, #0a0a0f 70%);
         }
-        /* ===== GLASS CARD ===== */
-        .glass-card {
-            max-width: 520px;
+        /* ===== TARJETA PRINCIPAL ===== */
+        .card {
+            max-width: 480px;
             width: 100%;
             background: rgba(255,255,255,0.03);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 32px;
-            padding: 32px 28px 30px;
-            box-shadow: 0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 28px;
+            padding: 28px 24px 26px;
+            box-shadow: 0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.03);
             position: relative;
             overflow: hidden;
             transition: 0.5s;
         }
-        .glass-card::before {
+        .card::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(255,0,80,0.05), transparent, rgba(0,255,200,0.05), transparent);
-            animation: rotateGlow 20s linear infinite;
+            background: conic-gradient(from 0deg, transparent, rgba(255,0,80,0.05), transparent, rgba(0,200,255,0.05), transparent);
+            animation: rotateGlow 25s linear infinite;
             pointer-events: none;
         }
         @keyframes rotateGlow {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .glass-card > * {
+        .card > * {
             position: relative;
             z-index: 1;
         }
@@ -61,99 +60,90 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 28px;
-            padding-bottom: 18px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            margin-bottom: 22px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .header .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         .header .brand .icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             background: linear-gradient(135deg, #ff0050, #ff6b00);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             color: #fff;
-            box-shadow: 0 8px 32px rgba(255,0,80,0.3);
+            box-shadow: 0 6px 24px rgba(255,0,80,0.25);
         }
         .header .brand h1 {
             color: #fff;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
         }
         .header .brand h1 span {
             color: #ff0050;
         }
         .header .badge {
-            background: rgba(255,0,80,0.15);
-            border: 1px solid rgba(255,0,80,0.25);
+            background: rgba(255,0,80,0.12);
+            border: 1px solid rgba(255,0,80,0.15);
             color: #ff0050;
-            padding: 4px 16px;
+            padding: 4px 14px;
             border-radius: 30px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
         }
 
-        /* ===== PROFILE FRAME ===== */
-        .profile-frame {
-            background: rgba(255,255,255,0.02);
-            border-radius: 20px;
-            padding: 24px 22px 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            margin-bottom: 22px;
-            transition: 0.4s;
-        }
-        .profile-frame:hover {
-            border-color: rgba(255,0,80,0.15);
-            background: rgba(255,255,255,0.04);
-        }
-        .profile-frame .avatar-row {
+        /* ===== PERFIL ===== */
+        .profile {
             display: flex;
             align-items: center;
-            gap: 18px;
-            margin-bottom: 18px;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding: 18px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.04);
         }
-        .profile-frame .avatar-row .avatar {
-            width: 68px;
-            height: 68px;
+        .profile .avatar {
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
             background: linear-gradient(135deg, #ff0050, #ff6b00);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
             color: #fff;
-            box-shadow: 0 8px 40px rgba(255,0,80,0.25);
-            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 6px 30px rgba(255,0,80,0.2);
+            border: 2px solid rgba(255,255,255,0.06);
             flex-shrink: 0;
         }
-        .profile-frame .avatar-row .info h2 {
+        .profile .info h2 {
             color: #fff;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
-            letter-spacing: -0.3px;
         }
-        .profile-frame .avatar-row .info p {
-            color: rgba(255,255,255,0.4);
+        .profile .info p {
+            color: rgba(255,255,255,0.35);
             font-size: 13px;
             margin-top: 2px;
         }
-        .profile-frame .avatar-row .info .vip {
+        .profile .info .badge-vip {
             display: inline-block;
             background: #ff0050;
             color: #fff;
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 700;
             padding: 2px 10px;
             border-radius: 20px;
@@ -162,17 +152,46 @@
             margin-left: 6px;
         }
 
-        /* ===== DATA ROWS ===== */
+        /* ===== ESTADÍSTICAS ===== */
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin: 16px 0 18px;
+        }
+        .stat-item {
+            background: rgba(255,255,255,0.02);
+            border-radius: 14px;
+            padding: 14px 8px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .stat-item .number {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .stat-item .label {
+            color: rgba(255,255,255,0.25);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        /* ===== DATOS ===== */
         .data-grid {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
+            margin: 12px 0 16px;
         }
         .data-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 14px;
+            padding: 10px 14px;
             background: rgba(255,255,255,0.02);
             border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.03);
@@ -183,22 +202,17 @@
             border-color: rgba(255,255,255,0.06);
         }
         .data-row .label {
-            color: rgba(255,255,255,0.35);
-            font-size: 13px;
+            color: rgba(255,255,255,0.3);
+            font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.6px;
         }
         .data-row .value {
             color: #fff;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             text-align: right;
-        }
-        .data-row .value .hidden {
-            color: #ff2244;
-            letter-spacing: 6px;
-            font-weight: 700;
         }
         .data-row .value .highlight {
             color: #ff0050;
@@ -207,84 +221,52 @@
         .data-row .value .location {
             color: #00ffc8;
         }
-        .data-row .value .device {
-            color: #ffaa44;
+        .data-row .value .hidden {
+            color: #ff2244;
+            letter-spacing: 4px;
         }
 
-        /* ===== PHOTO PLACEHOLDER ===== */
-        .photo-section {
-            margin: 16px 0 18px;
-            padding: 20px;
-            border-radius: 16px;
-            background: rgba(255,255,255,0.02);
-            border: 2px dashed rgba(255,255,255,0.06);
-            text-align: center;
-            transition: 0.4s;
-            cursor: pointer;
-        }
-        .photo-section:hover {
-            border-color: rgba(255,0,80,0.2);
-            background: rgba(255,255,255,0.03);
-        }
-        .photo-section .icon {
-            font-size: 36px;
-            display: block;
-            margin-bottom: 6px;
-            opacity: 0.6;
-        }
-        .photo-section p {
-            color: rgba(255,255,255,0.3);
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-        .photo-section .count {
-            color: rgba(255,255,255,0.15);
-            font-size: 11px;
-            margin-top: 4px;
-        }
-
-        /* ===== PRICE TAG ===== */
-        .price-tag {
-            background: linear-gradient(135deg, rgba(255,0,80,0.12), rgba(255,107,0,0.08));
-            border: 1px solid rgba(255,0,80,0.15);
+        /* ===== PRECIO ===== */
+        .price-box {
+            background: linear-gradient(135deg, rgba(255,0,80,0.08), rgba(255,107,0,0.05));
+            border: 2px solid rgba(255,0,80,0.12);
             border-radius: 16px;
             padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 6px 0 18px;
+            margin: 10px 0 18px;
         }
-        .price-tag .label {
+        .price-box .label {
             color: rgba(255,255,255,0.4);
             font-size: 13px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.8px;
         }
-        .price-tag .amount {
+        .price-box .amount {
             color: #00ff41;
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 800;
-            text-shadow: 0 0 40px rgba(0,255,65,0.15);
+            text-shadow: 0 0 50px rgba(0,255,65,0.1);
         }
-        .price-tag .amount span {
+        .price-box .amount span {
             font-size: 16px;
             font-weight: 400;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.2);
         }
 
-        /* ===== BUTTONS ===== */
+        /* ===== BOTONES ===== */
         .actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
             margin-top: 6px;
         }
         .btn {
-            padding: 14px 20px;
+            padding: 13px 16px;
             border-radius: 14px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             border: none;
             cursor: pointer;
@@ -296,37 +278,37 @@
         .btn-primary {
             background: linear-gradient(135deg, #ff0050, #ff6b00);
             color: #fff;
-            box-shadow: 0 8px 32px rgba(255,0,80,0.25);
+            box-shadow: 0 6px 28px rgba(255,0,80,0.2);
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 48px rgba(255,0,80,0.35);
+            box-shadow: 0 10px 40px rgba(255,0,80,0.3);
         }
         .btn-secondary {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.04);
             color: #fff;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.06);
         }
         .btn-secondary:hover {
-            background: rgba(255,255,255,0.08);
-            transform: translateY(-2px);
-        }
-        .btn-danger {
-            background: rgba(255,34,68,0.12);
-            color: #ff2244;
-            border: 1px solid rgba(255,34,68,0.15);
-        }
-        .btn-danger:hover {
-            background: rgba(255,34,68,0.2);
+            background: rgba(255,255,255,0.07);
             transform: translateY(-2px);
         }
         .btn-success {
-            background: rgba(0,255,65,0.08);
+            background: rgba(0,255,65,0.06);
             color: #00ff41;
-            border: 1px solid rgba(0,255,65,0.12);
+            border: 1px solid rgba(0,255,65,0.08);
         }
         .btn-success:hover {
-            background: rgba(0,255,65,0.14);
+            background: rgba(0,255,65,0.1);
+            transform: translateY(-2px);
+        }
+        .btn-danger {
+            background: rgba(255,34,68,0.08);
+            color: #ff2244;
+            border: 1px solid rgba(255,34,68,0.08);
+        }
+        .btn-danger:hover {
+            background: rgba(255,34,68,0.12);
             transform: translateY(-2px);
         }
         .btn-full {
@@ -335,9 +317,9 @@
 
         /* ===== FOOTER ===== */
         .footer {
-            margin-top: 22px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255,255,255,0.04);
+            margin-top: 20px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255,255,255,0.03);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -346,12 +328,12 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: rgba(255,255,255,0.2);
-            font-size: 12px;
+            color: rgba(255,255,255,0.15);
+            font-size: 11px;
         }
         .footer .status .dot {
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
             background: #00ff41;
             animation: pulseDot 1.8s infinite;
@@ -361,241 +343,190 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
         .footer .version {
-            color: rgba(255,255,255,0.08);
-            font-size: 11px;
+            color: rgba(255,255,255,0.06);
+            font-size: 10px;
             font-weight: 600;
             letter-spacing: 1px;
         }
 
-        /* ===== GLOW LINE ===== */
-        .glow-line {
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ff0050, transparent);
-            margin: 14px 0 10px;
-            opacity: 0.3;
-        }
-
         /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
-            .glass-card {
-                padding: 22px 16px 22px;
-                border-radius: 24px;
+            .card {
+                padding: 20px 14px 18px;
+                border-radius: 22px;
             }
-            .profile-frame .avatar-row .avatar {
-                width: 56px;
-                height: 56px;
+            .profile .avatar {
+                width: 54px;
+                height: 54px;
                 font-size: 22px;
             }
-            .profile-frame .avatar-row .info h2 {
-                font-size: 18px;
+            .profile .info h2 {
+                font-size: 17px;
+            }
+            .stats {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 6px;
+            }
+            .stat-item .number {
+                font-size: 16px;
             }
             .data-row {
-                padding: 10px 12px;
-                font-size: 13px;
+                padding: 8px 10px;
+                font-size: 12px;
             }
-            .price-tag .amount {
-                font-size: 22px;
+            .price-box .amount {
+                font-size: 24px;
             }
             .actions {
                 grid-template-columns: 1fr;
             }
             .header .brand h1 {
-                font-size: 18px;
+                font-size: 17px;
             }
         }
 
-        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar {
-            width: 4px;
+            width: 3px;
         }
         ::-webkit-scrollbar-track {
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(255,0,80,0.3);
+            background: rgba(255,0,80,0.2);
             border-radius: 10px;
+        }
+
+        /* ===== EFECTO GLOW LINE ===== */
+        .glow-line {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ff0050, transparent);
+            margin: 8px 0 12px;
+            opacity: 0.2;
         }
     </style>
 </head>
 <body>
 
-    <div class="glass-card" id="mainCard">
+    <div class="card" id="mainCard">
         <!-- ===== HEADER ===== -->
         <div class="header">
             <div class="brand">
-                <div class="icon">R</div>
-                <h1>RIRI<span>•</span>DB</h1>
+                <div class="icon">T</div>
+                <h1>TK<span>•</span>Market</h1>
             </div>
             <div class="badge">✦ premium</div>
         </div>
 
-        <!-- ===== PROFILE FRAME ===== -->
-        <div class="profile-frame">
-            <div class="avatar-row">
-                <div class="avatar">R</div>
-                <div class="info">
-                    <h2>
-                        RIRI
-                        <span class="vip">★ vip</span>
-                    </h2>
-                    <p>_jabonia_x5 • Tunisia</p>
-                </div>
-            </div>
-
-            <!-- ===== DATA GRID ===== -->
-            <div class="data-grid">
-                <div class="data-row">
-                    <span class="label">Username</span>
-                    <span class="value">_jabonia_x5</span>
-                </div>
-                <div class="data-row">
-                    <span class="label">Password</span>
-                    <span class="value"><span class="hidden">•••••</span></span>
-                </div>
-                <div class="data-row">
-                    <span class="label">Instagram</span>
-                    <span class="value">@_jabonia_x5</span>
-                </div>
-                <div class="data-row">
-                    <span class="label">Phone</span>
-                    <span class="value"><span class="highlight">+216 98 765 432</span></span>
-                </div>
-                <div class="data-row">
-                    <span class="label">Location</span>
-                    <span class="value"><span class="location">🇹🇳 Tunis, Tunisia</span></span>
-                </div>
-                <div class="data-row">
-                    <span class="label">Device</span>
-                    <span class="value"><span class="device">📱 Itel A16</span></span>
-                </div>
+        <!-- ===== PERFIL ===== -->
+        <div class="profile">
+            <div class="avatar">E</div>
+            <div class="info">
+                <h2>
+                    emyyy..
+                    <span class="badge-vip">★ verificado</span>
+                </h2>
+                <p>@emyluvsme_ • España</p>
             </div>
         </div>
 
-        <!-- ===== PHOTO SECTION ===== -->
-        <div class="photo-section" onclick="alert('📸 Loading media from target...\n\n🔹 23 photos\n🔹 4 videos\n🔹 Last update: 2 min ago')">
-            <span class="icon">🖼️</span>
-            <p>📸 Target Media</p>
-            <div class="count">23 photos • 4 videos • 2 min ago</div>
+        <!-- ===== ESTADÍSTICAS ===== -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="number">574</div>
+                <div class="label">Siguiendo</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">610</div>
+                <div class="label">Seguidores</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">4,967</div>
+                <div class="label">Me gusta</div>
+            </div>
         </div>
 
-        <!-- ===== PRICE TAG ===== -->
-        <div class="price-tag">
-            <span class="label">💎 Data Package</span>
-            <span class="amount">$80 <span>USD</span></span>
+        <!-- ===== DATOS ===== -->
+        <div class="data-grid">
+            <div class="data-row">
+                <span class="label">Usuario</span>
+                <span class="value">emyyy..</span>
+            </div>
+            <div class="data-row">
+                <span class="label">Contraseña</span>
+                <span class="value"><span class="hidden">•••••</span></span>
+            </div>
+            <div class="data-row">
+                <span class="label">Email</span>
+                <span class="value">emyluvsme@email.com</span>
+            </div>
+            <div class="data-row">
+                <span class="label">Teléfono</span>
+                <span class="value"><span class="highlight">+34 612 34 56 78</span></span>
+            </div>
+            <div class="data-row">
+                <span class="label">Ubicación</span>
+                <span class="value"><span class="location">🇪🇸 Madrid, España</span></span>
+            </div>
+            <div class="data-row">
+                <span class="label">Dispositivo</span>
+                <span class="value">📱 iPhone 14</span>
+            </div>
         </div>
 
         <!-- ===== GLOW LINE ===== -->
         <div class="glow-line"></div>
 
-        <!-- ===== ACTIONS ===== -->
+        <!-- ===== PRECIO ===== -->
+        <div class="price-box">
+            <span class="label">💰 Precio de venta</span>
+            <span class="amount">$130 <span>USD</span></span>
+        </div>
+
+        <!-- ===== BOTONES ===== -->
         <div class="actions">
-            <button class="btn btn-primary" onclick="executeExploit()">🚀 Execute</button>
-            <button class="btn btn-success" onclick="buyData()">💰 Buy Data</button>
-            <button class="btn btn-secondary" onclick="showMatrix()">🌀 Matrix</button>
-            <button class="btn btn-danger" onclick="wipeData()">💣 Wipe</button>
-            <button class="btn btn-secondary btn-full" onclick="alert('📱 Full profile exported.\n\n🔹 Username: _jabonia_x5\n🔹 IG: @_jabonia_x5\n🔹 Phone: +216 98 765 432\n🔹 Location: Tunis, Tunisia\n🔹 Device: Itel A16\n🔹 Price: $80')">
-                📋 Export Profile
-            </button>
+            <button class="btn btn-primary" onclick="comprar()">🛒 Comprar ahora</button>
+            <button class="btn btn-success" onclick="verificar()">✅ Verificar cuenta</button>
+            <button class="btn btn-secondary" onclick="exportar()">📋 Exportar perfil</button>
+            <button class="btn btn-danger" onclick="eliminar()">🗑️ Eliminar datos</button>
+            <button class="btn btn-secondary btn-full" onclick="info()">ℹ️ Más información</button>
         </div>
 
         <!-- ===== FOOTER ===== -->
         <div class="footer">
             <div class="status">
                 <span class="dot"></span>
-                <span>Secure • Online</span>
+                <span>En línea • Seguro</span>
             </div>
-            <div class="version">v4.2 • 4K</div>
+            <div class="version">v5.0 • 4K</div>
         </div>
     </div>
 
     <script>
-        // ===== التأثيرات =====
+        // ===== EFECTOS =====
 
-        // 1. Execute Exploit
-        function executeExploit() {
-            const card = document.getElementById('mainCard');
+        // Comprar
+        function comprar() {
+            alert('🛒 ¡COMPRA EXITOSA!\n\n🔹 Cuenta: emyyy..\n🔹 Precio: $130 USD\n🔹 Estado: Confirmado\n🔹 Datos enviados a tu correo');
+        }
+
+        // Verificar
+        function verificar() {
+            alert('✅ CUENTA VERIFICADA\n\n🔹 Usuario: emyyy..\n🔹 Seguidores: 610\n🔹 Siguiendo: 574\n🔹 Me gusta: 4,967\n🔹 Estado: Activa y verificada');
+        }
+
+        // Exportar
+        function exportar() {
+            alert('📋 PERFIL EXPORTADO\n\n🔹 Usuario: emyyy..\n🔹 @: emyluvsme_\n🔹 Teléfono: +34 612 34 56 78\n🔹 Ubicación: Madrid, España\n🔹 Precio: $130 USD');
+        }
+
+        // Eliminar
+        function eliminar() {
             const rows = document.querySelectorAll('.data-row');
-            
-            // تأثير اهتزاز
-            card.style.transition = '0.1s';
-            card.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                card.style.transform = 'scale(1)';
-            }, 200);
-
-            // تغيير الألوان مؤقتاً
-            rows.forEach((row, i) => {
-                setTimeout(() => {
-                    row.style.background = 'rgba(255,0,80,0.08)';
-                    row.style.borderColor = 'rgba(255,0,80,0.2)';
-                    setTimeout(() => {
-                        row.style.background = 'rgba(255,255,255,0.02)';
-                        row.style.borderColor = 'rgba(255,255,255,0.03)';
-                    }, 600);
-                }, i * 100);
-            });
-
-            alert('🚀 Exploit executed successfully!\n\n🔹 Target: _jabonia_x5\n🔹 Status: COMPROMISED\n🔹 Data extracted: 100%');
-        }
-
-        // 2. Buy Data
-        function buyData() {
-            alert('💰 PURCHASE COMPLETE!\n\n🔹 Package: RIRI Premium Data\n🔹 Price: $80 USD\n🔹 Status: Payment confirmed\n🔹 Data sent to your email');
-        }
-
-        // 3. Show Matrix
-        function showMatrix() {
-            const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
-            let text = '';
-            for (let i = 0; i < 3000; i++) {
-                text += chars[Math.floor(Math.random() * chars.length)] + ' ';
-                if (i % 60 === 0) text += '\n';
-            }
-            const overlay = document.createElement('div');
-            overlay.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: #000;
-                color: #00ff41;
-                font-family: 'Courier New', monospace;
-                font-size: 14px;
-                line-height: 1.2;
-                padding: 20px;
-                z-index: 9999;
-                opacity: 0;
-                transition: 0.5s;
-                overflow: hidden;
-                pointer-events: none;
-                word-break: break-all;
-                white-space: pre-wrap;
-            `;
-            overlay.textContent = text;
-            document.body.appendChild(overlay);
-            
-            setTimeout(() => {
-                overlay.style.opacity = '0.08';
-            }, 50);
-            
-            setTimeout(() => {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    document.body.removeChild(overlay);
-                }, 600);
-            }, 3500);
-        }
-
-        // 4. Wipe Data
-        function wipeData() {
-            const rows = document.querySelectorAll('.data-row');
-            
             rows.forEach((row, i) => {
                 setTimeout(() => {
                     row.style.transition = 'all 0.25s ease';
-                    row.style.background = 'rgba(255,34,68,0.15)';
+                    row.style.background = 'rgba(255,34,68,0.12)';
                     row.style.borderColor = '#ff2244';
                     row.style.transform = 'scale(0.95)';
                     row.style.opacity = '0';
@@ -604,32 +535,59 @@
                     row.style.margin = '0';
                     row.style.border = 'none';
                     row.style.overflow = 'hidden';
-                    
                     if (i === rows.length - 1) {
                         setTimeout(() => {
-                            alert('💀 All data has been wiped successfully!\n\n🔹 Target: _jabonia_x5\n🔹 Status: EMPTY');
+                            alert('🗑️ Datos eliminados correctamente.');
                         }, 300);
                     }
-                }, i * 150);
+                }, i * 120);
             });
+        }
 
-            // تعطيل الأزرار مؤقتاً
-            const btns = document.querySelectorAll('.btn');
-            btns.forEach(b => {
-                b.style.opacity = '0.4';
-                b.style.pointerEvents = 'none';
-            });
+        // Información
+        function info() {
+            alert('ℹ️ INFORMACIÓN DE LA CUENTA\n\n🔹 Vendedor: TikTok Market\n🔹 Cuenta: @emyluvsme_\n🔹 País: España 🇪🇸\n🔹 Precio: $130 USD\n🔹 Seguidores: 610\n🔹 Siguiendo: 574\n🔹 Me gusta: 4,967\n🔹 Dispositivo: iPhone 14\n🔹 Estado: Verificada');
+        }
+
+        // ===== EFECTO MATRIX =====
+        function matrixEffect() {
+            const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
+            let text = '';
+            for (let i = 0; i < 2000; i++) {
+                text += chars[Math.floor(Math.random() * chars.length)] + ' ';
+                if (i % 50 === 0) text += '\n';
+            }
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                background: #000;
+                color: #00ff41;
+                font-family: 'Courier New', monospace;
+                font-size: 12px;
+                line-height: 1.2;
+                padding: 20px;
+                z-index: 9999;
+                opacity: 0;
+                transition: 0.5s;
+                overflow: hidden;
+                pointer-events: none;
+                white-space: pre-wrap;
+                word-break: break-all;
+            `;
+            overlay.textContent = text;
+            document.body.appendChild(overlay);
+            setTimeout(() => { overlay.style.opacity = '0.06'; }, 50);
             setTimeout(() => {
-                btns.forEach(b => {
-                    b.style.opacity = '1';
-                    b.style.pointerEvents = 'auto';
-                });
+                overlay.style.opacity = '0';
+                setTimeout(() => { document.body.removeChild(overlay); }, 600);
             }, 3000);
         }
 
-        // ===== تأثير الدخول =====
+        // ===== EFECTO ENTRADA =====
         document.addEventListener('DOMContentLoaded', () => {
-            const card = document.querySelector('.glass-card');
+            const card = document.querySelector('.card');
             card.style.opacity = '0';
             card.style.transform = 'translateY(30px) scale(0.96)';
             setTimeout(() => {
