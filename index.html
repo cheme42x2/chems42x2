@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الموقع الرسمي لشحن جواهر Free Fire</title>
+    <title>الموقع الرسمي لشحن كوينز eFootball™ 2026</title>
     <style>
         :root {
-            --primary-color: #ff4655;
-            --secondary-color: #ffb800;
-            --bg-color: #0b0e14;
-            --card-bg: #151a26;
+            --primary-color: #004bff; /* أزرق بيس الشهير */
+            --secondary-color: #e2f105; /* الأصفر الفوسفوري */
+            --bg-color: #050b14;
+            --card-bg: #0f172a;
             --text-color: #ffffff;
-            --input-bg: #1f2636;
+            --input-bg: #1e293b;
+            --accent-color: #ff0055;
         }
 
         body {
@@ -24,35 +25,55 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            background-image: radial-gradient(circle at top right, rgba(0, 75, 255, 0.15), transparent);
         }
 
         .container {
             background-color: var(--card-bg);
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 70, 85, 0.2);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(0, 75, 255, 0.3);
             width: 100%;
             max-width: 480px;
             padding: 30px;
             text-align: center;
             box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         }
 
         .badge {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 5px 15px;
+            background: rgba(0, 75, 255, 0.2);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 6px 16px;
             border-radius: 50px;
             font-size: 12px;
             font-weight: bold;
             display: inline-block;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         h1 {
+            font-size: 24px;
+            margin: 0 0 10px 0;
             color: #fff;
-            font-size: 22px;
-            margin: 0 0 25px 0;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 25px;
         }
 
         .step {
@@ -72,8 +93,9 @@
         label {
             display: block;
             margin-bottom: 8px;
-            color: #9ca3af;
+            color: #94a3b8;
             font-size: 14px;
+            font-weight: 500;
         }
 
         input[type="text"], select {
@@ -81,68 +103,73 @@
             padding: 14px;
             background-color: var(--input-bg);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            border-radius: 10px;
             color: white;
             font-size: 16px;
             box-sizing: border-box;
             outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
         input[type="text"]:focus, select:focus {
             border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 75, 255, 0.3);
         }
 
-        /* عروض الجواهر */
-        .diamond-grid {
+        /* شبكة الكوينز */
+        .coins-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
             margin-bottom: 25px;
         }
 
-        .diamond-option {
+        .coins-option {
             background: var(--input-bg);
             border: 2px solid transparent;
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 14px;
+            padding: 18px 10px;
             cursor: pointer;
             transition: all 0.2s ease;
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
 
-        .diamond-option:hover, .diamond-option.selected {
-            border-color: var(--primary-color);
-            background: rgba(255, 70, 85, 0.05);
+        .coins-option:hover, .coins-option.selected {
+            border-color: var(--secondary-color);
+            background: rgba(226, 241, 5, 0.03);
+            transform: translateY(-2px);
         }
 
-        .diamond-amount {
-            font-size: 18px;
-            font-weight: bold;
-            color: #00e5ff;
+        .coins-amount {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--secondary-color);
             display: block;
             margin-bottom: 5px;
+            text-shadow: 0 0 5px rgba(226, 241, 5, 0.2);
         }
 
         .price {
-            color: var(--secondary-color);
+            color: #fff;
             font-size: 14px;
-            font-weight: bold;
+            font-weight: 600;
+            opacity: 0.9;
         }
 
-        /* أزرار التحكم */
+        /* الأزرار */
         .btn {
-            background: linear-gradient(90deg, var(--primary-color), #e03e4c);
+            background: linear-gradient(90deg, var(--primary-color), #0036b3);
             color: white;
             border: none;
-            padding: 15px;
+            padding: 16px;
             font-size: 16px;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             width: 100%;
-            transition: transform 0.2s, opacity 0.2s;
-            box-shadow: 0 5px 15px rgba(255, 70, 85, 0.3);
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 75, 255, 0.4);
         }
 
         .btn:active {
@@ -150,41 +177,37 @@
         }
 
         .btn-secondary {
-            background: #374151;
+            background: #334155;
             box-shadow: none;
             margin-top: 10px;
         }
 
-        /* واجهة الدفع المدفوع */
-        .payment-methods {
+        /* الدفع */
+        .payment-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-around;
-            margin: 20px 0;
         }
 
-        .method-card {
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            padding: 10px;
-            width: 45%;
-            background: var(--input-bg);
-            font-size: 14px;
+        .pay-method {
             font-weight: bold;
+            font-size: 14px;
+            color: var(--secondary-color);
         }
 
-        /* لودر الانتظار التكنولوجي */
-        .loader-container {
-            padding: 30px 0;
-        }
-
+        /* شاشة الانتظار */
         .loader {
-            border: 4px solid rgba(255,255,255,0.1);
-            border-top: 4px solid var(--primary-color);
+            border: 4px solid rgba(255,255,255,0.05);
+            border-top: 4px solid var(--secondary-color);
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px auto;
+            margin: 30px auto;
         }
 
         @keyframes spin {
@@ -192,168 +215,169 @@
             100% { transform: rotate(360deg); }
         }
 
-        .success-icon {
-            font-size: 70px;
+        .success-circle {
+            width: 70px;
+            height: 70px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid #10b981;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px auto;
             color: #10b981;
-            margin-bottom: 20px;
-            animation: pop 0.5s ease-out;
-        }
-
-        @keyframes pop {
-            0% { transform: scale(0); }
-            100% { transform: scale(1); }
+            font-size: 35px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <span class="badge">بوابة الشحن الآمنة والمباشرة</span>
+        <span class="badge">KONAMI ID Direct Server Connection</span>
 
-        <!-- الخطوة 1: إدخال معلومات الحساب واختيار العرض -->
+        <!-- الخطوة 1: إدخال معلومات الحساب والكوينز -->
         <div id="step1" class="step active">
-            <h1>شحن جواهر فري فاير الفوري</h1>
+            <h1>شحن كوينز eFootball™</h1>
+            <p class="subtitle">اشحن حسابك بالكوينز بشكل رسمي وآمن فوراً</p>
             
             <div class="form-group">
-                <label for="player-id">معرّف اللاعب (ID):</label>
-                <input type="text" id="player-id" placeholder="مثال: 123456789" maxlength="12">
+                <label for="user-account">اسم المستخدم أو KONAMI ID:</label>
+                <input type="text" id="user-account" placeholder="أدخل الـ ID أو إيميل كونامي">
             </div>
 
             <div class="form-group">
-                <label for="device">نوع نظام التشغيل:</label>
-                <select id="device">
-                    <option value="Android">أندرويد (Android)</option>
-                    <option value="iOS">آيفون (iOS)</option>
-                    <option value="PC">محاكي الكمبيوتر</option>
+                <label for="platform">منصة اللعب (Platform):</label>
+                <select id="platform">
+                    <option value="Mobile">Android / iOS (الهاتف)</option>
+                    <option value="PlayStation">PlayStation®4 / PlayStation®5</option>
+                    <option value="Xbox">Xbox One / Series X|S</option>
+                    <option value="PC">Steam (الكمبيوتر)</option>
                 </select>
             </div>
 
-            <label style="text-align: right; display: block; margin-bottom: 8px;">اختر باقة الجواهر:</label>
-            <div class="diamond-grid">
-                <div class="diamond-option" onclick="selectDiamond(this, '100 جوهرة', '200 دج / 1.5$')">
-                    <span class="diamond-amount">💎 100</span>
-                    <span class="price">200 دج</span>
+            <label style="text-align: right; display: block; margin-bottom: 10px;">اختر باقة الكوينز (eFootball Coins):</label>
+            <div class="coins-grid">
+                <div class="coins-option" onclick="selectCoins(this, '500 كوينز', '450 دج')">
+                    <span class="coins-amount">🪙 500</span>
+                    <span class="price">450 دج</span>
                 </div>
-                <div class="diamond-option" onclick="selectDiamond(this, '310 جوهرة', '500 دج / 3.5$')">
-                    <span class="diamond-amount">💎 310</span>
-                    <span class="price">500 دج</span>
-                </div>
-                <div class="diamond-option" onclick="selectDiamond(this, '520 جوهرة', '900 دج / 6.0$')">
-                    <span class="diamond-amount">💎 520</span>
+                <div class="coins-option" onclick="selectCoins(this, '1050 كوينز', '900 دج')">
+                    <span class="coins-amount">🪙 1,050</span>
                     <span class="price">900 دج</span>
                 </div>
-                <div class="diamond-option" onclick="selectDiamond(this, '1060 جوهرة', '1800 دج / 11.0$')">
-                    <span class="diamond-amount">💎 1060</span>
+                <div class="coins-option" onclick="selectCoins(this, '2150 كوينز', '1800 دج')">
+                    <span class="coins-amount">🪙 2,150</span>
                     <span class="price">1800 دج</span>
+                </div>
+                <div class="coins-option" onclick="selectCoins(this, '5700 كوينز', '4000 دج')">
+                    <span class="coins-amount">🪙 5,700</span>
+                    <span class="price">4000 دج</span>
                 </div>
             </div>
 
-            <button class="btn" onclick="goToStep2()">متابعة الدفع</button>
+            <button class="btn" onclick="verifyAndNext()">متابعة عملية الدفع</button>
         </div>
 
-        <!-- الخطوة 2: واجهة الدفع المدفوع الحقيقية -->
+        <!-- الخطوة 2: بوابة الدفع -->
         <div id="step2" class="step">
-            <h1>بوابة الدفع الآمنة</h1>
-            <p id="summary-text" style="color: #9ca3af; font-size: 15px; margin-bottom: 15px;"></p>
+            <h1>تأكيد الدفع المشفر</h1>
+            <p id="summary-info" style="color: #94a3b8; font-size: 15px; margin-bottom: 20px; line-height: 1.6;"></p>
             
-            <div class="payment-methods">
-                <div class="method-card" style="border-color: var(--secondary-color);">
-                    💳 البطاقة النقدية / الذهبية
-                </div>
-                <div class="method-card" style="opacity: 0.5;">
-                    📱 بريدي موب (قريباً)
-                </div>
+            <div class="payment-box">
+                <span class="pay-method">💳 الدفع الإلكتروني (الذهبية / CIB)</span>
             </div>
 
             <div class="form-group">
-                <label>رقم البطاقة:</label>
-                <input type="text" placeholder="xxxx xxxx xxxx xxxx" maxlength="19">
+                <label>رقم البطاقة البنكية:</label>
+                <input type="text" placeholder="0000 0000 0000 0000" maxlength="19">
             </div>
             
             <div style="display: flex; gap: 10px;">
                 <div class="form-group" style="width: 50%;">
-                    <label>تاريخ انتهاء الصلاحية:</label>
+                    <label>تاريخ الانتهاء:</label>
                     <input type="text" placeholder="MM/YY" maxlength="5">
                 </div>
                 <div class="form-group" style="width: 50%;">
-                    <label>الرمز السري (CVC):</label>
-                    <input type="text" placeholder="123" maxlength="3">
+                    <label>الرمز السري CVV:</label>
+                    <input type="text" placeholder="***" maxlength="3">
                 </div>
             </div>
 
-            <p style="font-size: 13px; color: #ff4655; font-weight: bold; margin-bottom: 15px;">هل تريد تأكيد سحب المبلغ وشحن الحساب الآن؟</p>
+            <p style="font-size: 13px; color: var(--accent-color); font-weight: bold; margin-bottom: 20px;">تنبيه: سيتم خصم المبلغ الموضح وإرسال الكوينز تلقائياً.</p>
 
-            <button class="btn" onclick="startPaymentProcess()">نعم، دفع وتشحين الآن</button>
-            <button class="btn btn-secondary" onclick="showStep(1)">إلغاء وتعديل الطلب</button>
+            <button class="btn" onclick="processPayment()">تأكيد الدفع الآمن</button>
+            <button class="btn btn-secondary" onclick="showStep(1)">تعديل الطلب</button>
         </div>
 
-        <!-- الخطوة 3: معالجة الدفع والاتصال بالسيرفر -->
-        <div id="step3" class="step loader-container">
+        <!-- الخطوة 3: الانتظار والمعالجة -->
+        <div id="step3" class="step">
             <div class="loader"></div>
-            <h2>جاري معالجة الدفع...</h2>
-            <p style="color: #9ca3af; font-size: 14px; padding: 0 20px;">يرجى عدم إغلاق الصفحة أو الضغط على زر الرجوع. يتم الآن التحقق من البطاقة وتأكيد تحويل الجواهر إلى الـ ID.</p>
+            <h2>جاري الاتصال بخوادم KONAMI...</h2>
+            <p style="color: #94a3b8; font-size: 14px; padding: 0 15px; line-height: 1.6;">يتم الآن تأكيد عملية الدفع وتشفير البيانات لإرسال الكوينز مباشرة إلى حسابك. يرجى عدم تحديث الصفحة.</p>
         </div>
 
-        <!-- الخطوة 4: تم الدفع والشحن بنجاح -->
+        <!-- الخطوة 4: نجاح العملية -->
         <div id="step4" class="step">
-            <div class="success-icon">✓</div>
-            <h1 style="color: #10b981;">تمت العملية بنجاح!</h1>
-            <p style="font-size: 16px; margin-bottom: 10px;">تم خصم المبلغ بنجاح وإرسال الجواهر.</p>
-            <p id="final-id-text" style="color: var(--secondary-color); font-weight: bold;"></p>
-            <p style="color: #9ca3af; font-size: 13px; margin-top: 15px;">ستصلك رسالة تأكيد SMS على هاتفك المرتبط بالبطاقة خلال دقائق.</p>
-            <button class="btn btn-secondary" onclick="resetAll()">العودة للرئيسية</button>
+            <div class="success-circle">✓</div>
+            <h1 style="color: #10b981;">اكتملت العملية بنجاح!</h1>
+            <p style="font-size: 16px; margin-bottom: 10px;">تمت معالجة الدفع بنجاح وتحويل الكوينز.</p>
+            <p id="success-target" style="color: var(--secondary-color); font-weight: bold; font-size: 15px;"></p>
+            <p style="color: #94a3b8; font-size: 13px; margin-top: 15px;">افتح لعبة eFootball™ الآن لتفقد رصيدك الجديد.</p>
+            <button class="btn btn-secondary" onclick="resetForm()">شحن حساب آخر</button>
         </div>
     </div>
 
     <script>
-        let selectedPackage = "";
-        let selectedPrice = "";
+        let selectedCoinsName = "";
+        let selectedCoinsPrice = "";
 
-        function showStep(stepNum) {
+        function showStep(num) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('step' + stepNum).classList.add('active');
+            document.getElementById('step' + num).classList.add('active');
         }
 
-        function selectDiamond(element, name, price) {
-            document.querySelectorAll('.diamond-option').forEach(opt => opt.classList.remove('selected'));
+        function selectCoins(element, name, price) {
+            document.querySelectorAll('.coins-option').forEach(opt => opt.classList.remove('selected'));
             element.classList.add('selected');
-            selectedPackage = name;
-            selectedPrice = price;
+            selectedCoinsName = name;
+            selectedCoinsPrice = price;
         }
 
-        function goToStep2() {
-            const idInput = document.getElementById('player-id').value;
-            if(!idInput || idInput.trim() === "") {
-                alert("يرجى إدخال معرف اللاعب (ID) أولاً!");
+        function verifyAndNext() {
+            const account = document.getElementById('user-account').value;
+            const platform = document.getElementById('platform').value;
+
+            if(!account || account.trim() === "") {
+                alert("يرجى إدخال معرف اللاعب أو الإيميل الخاص بك أولاً!");
                 return;
             }
-            if(!selectedPackage) {
-                alert("يرجى اختيار باقة الجواهر!");
+            if(!selectedCoinsName) {
+                alert("يرجى اختيار كمية الكوينز المراد شحنها!");
                 return;
             }
 
-            // تحديث نص ملخص الطلب
-            document.getElementById('summary-text').innerHTML = `شحن <b>${selectedPackage}</b> للحساب <b>(${idInput})</b><br>المبلغ الإجمالي: <span style="color:var(--secondary-color); font-weight:bold;">${selectedPrice}</span>`;
+            // تخصيص نص ملخص الطلب
+            document.getElementById('summary-info').innerHTML = `أنت على وشك شحن <b>${selectedCoinsName}</b> <br> للحساب: <b>${account}</b> (${platform}) <br> القيمة الإجمالية للخصم: <span style="color:var(--secondary-color); font-weight:bold;">${selectedCoinsPrice}</span>`;
             showStep(2);
         }
 
-        function startPaymentProcess() {
-            // الانتقال لصفحة "يرجى الانتظار"
-            showStep(3);
+        function processPayment() {
+            showStep(3); // الانتقال للانتظار
 
-            // تمثيل الوقت المستغرق للاتصال بالبنك وسيرفر اللعبة (4 ثواني)
+            // محاكاة الاتصال بالسيرفر والتحقق لمدة 4.5 ثواني باه تبان حقيقية
             setTimeout(() => {
-                const idInput = document.getElementById('player-id').value;
-                document.getElementById('final-id-text').innerText = `الحساب المستهدف: ID ${idInput}`;
+                const account = document.getElementById('user-account').value;
+                document.getElementById('success-target').innerText = `تم إرسال الرصيد لـ: ${account}`;
                 showStep(4);
-            }, 4000);
+            }, 4500);
         }
 
-        function resetAll() {
-            document.getElementById('player-id').value = "";
-            document.querySelectorAll('.diamond-option').forEach(opt => opt.classList.remove('selected'));
-            selectedPackage = "";
-            selectedPrice = "";
+        function resetForm() {
+            document.getElementById('user-account').value = "";
+            document.querySelectorAll('.coins-option').forEach(opt => opt.classList.remove('selected'));
+            selectedCoinsName = "";
+            selectedCoinsPrice = "";
             showStep(1);
         }
     </script>
