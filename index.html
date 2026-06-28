@@ -20,7 +20,6 @@
             padding: 20px;
             background-image: radial-gradient(ellipse at 50% 0%, #1a0a2e 0%, #0a0a0f 70%);
         }
-        /* ===== TARJETA PRINCIPAL ===== */
         .card {
             max-width: 480px;
             width: 100%;
@@ -55,7 +54,6 @@
             z-index: 1;
         }
 
-        /* ===== HEADER ===== */
         .header {
             display: flex;
             justify-content: space-between;
@@ -103,7 +101,6 @@
             letter-spacing: 0.8px;
         }
 
-        /* ===== PERFIL ===== */
         .profile {
             display: flex;
             align-items: center;
@@ -118,14 +115,14 @@
             width: 64px;
             height: 64px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #ff0050, #ff6b00);
+            background: linear-gradient(135deg, #00b4db, #0083b0);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 26px;
             font-weight: 800;
             color: #fff;
-            box-shadow: 0 6px 30px rgba(255,0,80,0.2);
+            box-shadow: 0 6px 30px rgba(0,180,219,0.2);
             border: 2px solid rgba(255,255,255,0.06);
             flex-shrink: 0;
         }
@@ -141,7 +138,7 @@
         }
         .profile .info .badge-vip {
             display: inline-block;
-            background: #ff0050;
+            background: #00b4db;
             color: #fff;
             font-size: 8px;
             font-weight: 700;
@@ -152,7 +149,6 @@
             margin-left: 6px;
         }
 
-        /* ===== ESTADÍSTICAS ===== */
         .stats {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -180,7 +176,6 @@
             margin-top: 2px;
         }
 
-        /* ===== DATOS ===== */
         .data-grid {
             display: flex;
             flex-direction: column;
@@ -215,7 +210,7 @@
             text-align: right;
         }
         .data-row .value .highlight {
-            color: #ff0050;
+            color: #00b4db;
             font-weight: 600;
         }
         .data-row .value .location {
@@ -226,10 +221,9 @@
             letter-spacing: 4px;
         }
 
-        /* ===== PRECIO ===== */
         .price-box {
-            background: linear-gradient(135deg, rgba(255,0,80,0.08), rgba(255,107,0,0.05));
-            border: 2px solid rgba(255,0,80,0.12);
+            background: linear-gradient(135deg, rgba(0,180,219,0.08), rgba(0,131,176,0.05));
+            border: 2px solid rgba(0,180,219,0.12);
             border-radius: 16px;
             padding: 16px 20px;
             display: flex;
@@ -256,7 +250,6 @@
             color: rgba(255,255,255,0.2);
         }
 
-        /* ===== BOTONES ===== */
         .actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -276,13 +269,13 @@
             text-align: center;
         }
         .btn-primary {
-            background: linear-gradient(135deg, #ff0050, #ff6b00);
+            background: linear-gradient(135deg, #00b4db, #0083b0);
             color: #fff;
-            box-shadow: 0 6px 28px rgba(255,0,80,0.2);
+            box-shadow: 0 6px 28px rgba(0,180,219,0.2);
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(255,0,80,0.3);
+            box-shadow: 0 10px 40px rgba(0,180,219,0.3);
         }
         .btn-secondary {
             background: rgba(255,255,255,0.04);
@@ -315,7 +308,6 @@
             grid-column: 1 / -1;
         }
 
-        /* ===== FOOTER ===== */
         .footer {
             margin-top: 20px;
             padding-top: 14px;
@@ -349,7 +341,6 @@
             letter-spacing: 1px;
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
             .card {
                 padding: 20px 14px 18px;
@@ -392,15 +383,14 @@
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(255,0,80,0.2);
+            background: rgba(0,180,219,0.2);
             border-radius: 10px;
         }
 
-        /* ===== EFECTO GLOW LINE ===== */
         .glow-line {
             width: 100%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, #ff0050, transparent);
+            background: linear-gradient(90deg, transparent, #00b4db, transparent);
             margin: 8px 0 12px;
             opacity: 0.2;
         }
@@ -409,7 +399,6 @@
 <body>
 
     <div class="card" id="mainCard">
-        <!-- ===== HEADER ===== -->
         <div class="header">
             <div class="brand">
                 <div class="icon">T</div>
@@ -418,30 +407,30 @@
             <div class="badge">✦ premium</div>
         </div>
 
-        <!-- ===== PERFIL ===== -->
+        <!-- ===== PERFIL ZAMMIE ===== -->
         <div class="profile">
-            <div class="avatar">E</div>
+            <div class="avatar">Z</div>
             <div class="info">
                 <h2>
-                    emyyy..
+                    Zammie
                     <span class="badge-vip">★ verificado</span>
                 </h2>
-                <p>@emyluvsme_ • España</p>
+                <p>@elixir_1435 • España</p>
             </div>
         </div>
 
         <!-- ===== ESTADÍSTICAS ===== -->
         <div class="stats">
             <div class="stat-item">
-                <div class="number">574</div>
+                <div class="number">82</div>
                 <div class="label">Siguiendo</div>
             </div>
             <div class="stat-item">
-                <div class="number">610</div>
+                <div class="number">155</div>
                 <div class="label">Seguidores</div>
             </div>
             <div class="stat-item">
-                <div class="number">4,967</div>
+                <div class="number">0</div>
                 <div class="label">Me gusta</div>
             </div>
         </div>
@@ -450,7 +439,7 @@
         <div class="data-grid">
             <div class="data-row">
                 <span class="label">Usuario</span>
-                <span class="value">emyyy..</span>
+                <span class="value">Zammie</span>
             </div>
             <div class="data-row">
                 <span class="label">Contraseña</span>
@@ -458,23 +447,22 @@
             </div>
             <div class="data-row">
                 <span class="label">Email</span>
-                <span class="value">emyluvsme@email.com</span>
+                <span class="value">zammie@email.com</span>
             </div>
             <div class="data-row">
                 <span class="label">Teléfono</span>
-                <span class="value"><span class="highlight">+34 612 34 56 78</span></span>
+                <span class="value"><span class="highlight">+34 622 11 22 33</span></span>
             </div>
             <div class="data-row">
                 <span class="label">Ubicación</span>
-                <span class="value"><span class="location">🇪🇸 Madrid, España</span></span>
+                <span class="value"><span class="location">🇪🇸 Barcelona, España</span></span>
             </div>
             <div class="data-row">
                 <span class="label">Dispositivo</span>
-                <span class="value">📱 iPhone 14</span>
+                <span class="value">📱 Samsung Galaxy S23</span>
             </div>
         </div>
 
-        <!-- ===== GLOW LINE ===== -->
         <div class="glow-line"></div>
 
         <!-- ===== PRECIO ===== -->
@@ -492,35 +480,28 @@
             <button class="btn btn-secondary btn-full" onclick="info()">ℹ️ Más información</button>
         </div>
 
-        <!-- ===== FOOTER ===== -->
         <div class="footer">
             <div class="status">
                 <span class="dot"></span>
                 <span>En línea • Seguro</span>
             </div>
-            <div class="version">v5.0 • 4K</div>
+            <div class="version">v5.1 • 4K</div>
         </div>
     </div>
 
     <script>
-        // ===== EFECTOS =====
-
-        // Comprar
         function comprar() {
-            alert('🛒 ¡COMPRA EXITOSA!\n\n🔹 Cuenta: emyyy..\n🔹 Precio: $130 USD\n🔹 Estado: Confirmado\n🔹 Datos enviados a tu correo');
+            alert('🛒 ¡COMPRA EXITOSA!\n\n🔹 Cuenta: Zammie\n🔹 Precio: $130 USD\n🔹 Estado: Confirmado\n🔹 Datos enviados a tu correo');
         }
 
-        // Verificar
         function verificar() {
-            alert('✅ CUENTA VERIFICADA\n\n🔹 Usuario: emyyy..\n🔹 Seguidores: 610\n🔹 Siguiendo: 574\n🔹 Me gusta: 4,967\n🔹 Estado: Activa y verificada');
+            alert('✅ CUENTA VERIFICADA\n\n🔹 Usuario: Zammie\n🔹 Seguidores: 155\n🔹 Siguiendo: 82\n🔹 Me gusta: 0\n🔹 Estado: Activa y verificada');
         }
 
-        // Exportar
         function exportar() {
-            alert('📋 PERFIL EXPORTADO\n\n🔹 Usuario: emyyy..\n🔹 @: emyluvsme_\n🔹 Teléfono: +34 612 34 56 78\n🔹 Ubicación: Madrid, España\n🔹 Precio: $130 USD');
+            alert('📋 PERFIL EXPORTADO\n\n🔹 Usuario: Zammie\n🔹 @: elixir_1435\n🔹 Teléfono: +34 622 11 22 33\n🔹 Ubicación: Barcelona, España\n🔹 Precio: $130 USD');
         }
 
-        // Eliminar
         function eliminar() {
             const rows = document.querySelectorAll('.data-row');
             rows.forEach((row, i) => {
@@ -544,48 +525,10 @@
             });
         }
 
-        // Información
         function info() {
-            alert('ℹ️ INFORMACIÓN DE LA CUENTA\n\n🔹 Vendedor: TikTok Market\n🔹 Cuenta: @emyluvsme_\n🔹 País: España 🇪🇸\n🔹 Precio: $130 USD\n🔹 Seguidores: 610\n🔹 Siguiendo: 574\n🔹 Me gusta: 4,967\n🔹 Dispositivo: iPhone 14\n🔹 Estado: Verificada');
+            alert('ℹ️ INFORMACIÓN DE LA CUENTA\n\n🔹 Vendedor: TikTok Market\n🔹 Cuenta: @elixir_1435\n🔹 País: España 🇪🇸\n🔹 Precio: $130 USD\n🔹 Seguidores: 155\n🔹 Siguiendo: 82\n🔹 Me gusta: 0\n🔹 Dispositivo: Samsung Galaxy S23\n🔹 Estado: Verificada');
         }
 
-        // ===== EFECTO MATRIX =====
-        function matrixEffect() {
-            const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
-            let text = '';
-            for (let i = 0; i < 2000; i++) {
-                text += chars[Math.floor(Math.random() * chars.length)] + ' ';
-                if (i % 50 === 0) text += '\n';
-            }
-            const overlay = document.createElement('div');
-            overlay.style.cssText = `
-                position: fixed;
-                top: 0; left: 0;
-                width: 100%; height: 100%;
-                background: #000;
-                color: #00ff41;
-                font-family: 'Courier New', monospace;
-                font-size: 12px;
-                line-height: 1.2;
-                padding: 20px;
-                z-index: 9999;
-                opacity: 0;
-                transition: 0.5s;
-                overflow: hidden;
-                pointer-events: none;
-                white-space: pre-wrap;
-                word-break: break-all;
-            `;
-            overlay.textContent = text;
-            document.body.appendChild(overlay);
-            setTimeout(() => { overlay.style.opacity = '0.06'; }, 50);
-            setTimeout(() => {
-                overlay.style.opacity = '0';
-                setTimeout(() => { document.body.removeChild(overlay); }, 600);
-            }, 3000);
-        }
-
-        // ===== EFECTO ENTRADA =====
         document.addEventListener('DOMContentLoaded', () => {
             const card = document.querySelector('.card');
             card.style.opacity = '0';
