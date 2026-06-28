@@ -931,7 +931,10 @@ function copyResult() {
 
 document.getElementById('inputText').addEventListener('keydown', e => {
   if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') doTranslate();
-});
+<script>
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/chems42x2/sw.js');
+}
 </script>
 </body>
-</html>
+</html>ه
