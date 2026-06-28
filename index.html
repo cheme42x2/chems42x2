@@ -3,206 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة الرسائل - الأجواء الصينية</title>
+    <title>شحن جواهر فري فاير مجاناً</title>
     <style>
-        /* تصميم عام مستوحى من الأجواء الليلية في الصور */
+        :root {
+            --primary-color: #ff4655;
+            --secondary-color: #ffb800;
+            --bg-color: #0f1923;
+            --card-bg: #1f2937;
+            --text-color: #ffffff;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a1a; /* لون ليلي داكن */
-            background-image: 
-                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
-                url('image_2.png'); /* خلفية خفيفة من الصورة لتأثير الأجواء */
-            background-size: cover;
-            background-attachment: fixed;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            color: #fff;
+            min-height: 100vh;
         }
 
-        /* الحاوية الرئيسية بتصميم يشبه المعبد الصيني */
         .container {
-            background-color: rgba(40, 0, 0, 0.9); /* أحمر داكن عميق */
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3); /* ظل ذهبي */
-            width: 90%;
-            max-width: 550px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--primary-color);
+            width: 100%;
+            max-width: 500px;
+            padding: 25px;
             text-align: center;
-            border: 4px solid #d4af37; /* إطار ذهبي */
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* زخارف جانبية تشبه الفوانيس والأعمدة */
-        .container::before, .container::after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 100px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.6;
-        }
-        
-        .container::before {
-            top: 20px;
-            right: 10px;
-            background-image: url('image_1.png'); /* فانوس من الصورة 1 */
-        }
-        
-        .container::after {
-            bottom: 20px;
-            left: 10px;
-            background-image: url('image_1.png'); /* فانوس من الصورة 1 */
-            transform: scaleX(-1); /* عكس الاتجاه */
-        }
-
-        h2 { 
-            color: #d4af37; /* ذهبي */
-            margin-bottom: 25px; 
-            font-size: 28px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            font-family: 'Times New Roman', serif; /* خط كلاسيكي */
-        }
-
-        h2::before, h2::after {
-            content: ' 🏮 '; /* رموز فوانيس */
-        }
-
-        /* تصميم مربعات النص */
-        textarea {
-            width: 100%;
-            height: 120px;
-            padding: 15px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 2px solid #d4af37;
-            border-radius: 10px;
-            resize: none;
             box-sizing: border-box;
-            font-size: 17px;
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            font-size: 24px;
             margin-bottom: 20px;
-            color: #fff;
-            transition: 0.3s;
+            text-shadow: 0 0 10px rgba(255, 184, 0, 0.3);
         }
 
-        textarea:focus {
-            background-color: rgba(255, 255, 255, 0.2);
-            outline: none;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        .step {
+            display: none;
         }
 
-        textarea::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+        .step.active {
+            display: block;
         }
 
-        /* تصميم الأزرار - مستوحى من ألوان المعابد والنار */
-        button {
-            background: linear-gradient(45deg, #b00000, #ff4500); /* أحمر ناري وزخرفي */
-            color: white;
-            border: 2px solid #d4af37;
-            padding: 15px 25px;
-            font-size: 18px;
-            border-radius: 50px; /* أزرار دائرية */
+        /* واجهة اختيار الجواهر */
+        .diamond-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             cursor: pointer;
-            width: 100%;
-            font-weight: bold;
-            transition: 0.4s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
         }
 
-        button:hover { 
-            background: linear-gradient(45deg, #ff4500, #b00000);
-            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.6);
+        .diamond-option:hover {
+            background: rgba(255, 70, 85, 0.1);
+            border-color: var(--primary-color);
             transform: translateY(-2px);
         }
 
-        /* صندوق النتيجة - مستوحى من الورق الصيني التقليدي */
-        .result-box {
-            background-color: #fdf5e6; /* لون ورق معتق */
-            color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            border: 3px solid #b00000;
-            margin-top: 20px;
-            text-align: left;
-            direction: ltr; /* من اليسار لليمين للإنجليزية */
-            min-height: 70px;
-            word-wrap: break-word;
-            font-family: 'Courier New', Courier, monospace; /* خط يشبه الآلة الكاتبة */
-            font-size: 16px;
-            position: relative;
-        }
-        
-        .result-box::before {
-            content: 'ENG: ';
+        .diamond-info {
+            display: flex;
+            align-items: center;
             font-weight: bold;
-            color: #b00000;
+            font-size: 18px;
         }
 
-        /* زر فتح إنستغرام بلون مميز */
-        .ig-button {
-            background: #0095f6; /* لون إنستغرام الأزرق الرسمي */
-            margin-top: 20px;
+        .diamond-icon {
+            color: #00e5ff;
+            margin-left: 10px;
+            font-size: 20px;
+        }
+
+        .price {
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* الأزرار */
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
             border: none;
-        }
-        
-        .ig-button:hover {
-            background: #0077c2;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin: 10px;
+            width: 40%;
         }
 
+        .btn:hover {
+            background-color: #e03e4c;
+        }
+
+        .btn-cancel {
+            background-color: #4b5563;
+        }
+
+        .btn-cancel:hover {
+            background-color: #374151;
+        }
+
+        /* لودر الانتظار */
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--secondary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-icon {
+            font-size: 60px;
+            color: #10b981;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>بوابة الرسائل الشرقية</h2>
-    
-    <textarea id="arabicText" placeholder="اكتب رسالتك بالعربية..."></textarea>
-    
-    <button onclick="translateAndPrepare()">ترجم وانسخ النص 🏮</button>
-    
-    <div class="result-box" id="englishResult">
-        الترجمة الإنجليزية (Google) تظهر هنا...
+    <div class="container">
+        <div id="step1" class="step active">
+            <h1>💎 موقع شحن فري فاير الرسمي 💎</h1>
+            <p style="color: #9ca3af; margin-bottom: 20px;">اختر كمية الجواهر المناسبة لك:</p>
+            
+            <div class="diamond-option" onclick="selectOption('100 جوهرة', '1.00 $')">
+                <div class="diamond-info"><span class="diamond-icon">🔹</span> 100 جوهرة</div>
+                <div class="price">1.00 $</div>
+            </div>
+
+            <div class="diamond-option" onclick="selectOption('310 جوهرة', '3.00 $')">
+                <div class="diamond-info"><span class="diamond-icon">🔹</span> 310 جوهرة</div>
+                <div class="price">3.00 $</div>
+            </div>
+
+            <div class="diamond-option" onclick="selectOption('520 جوهرة', '5.00 $')">
+                <div class="diamond-info"><span class="diamond-icon">🔹</span> 520 جوهرة</div>
+                <div class="price">5.00 $</div>
+            </div>
+
+            <div class="diamond-option" onclick="selectOption('1060 جوهرة', '10.00 $')">
+                <div class="diamond-info"><span class="diamond-icon">🔹</span> 1060 جوهرة</div>
+                <div class="price">10.00 $</div>
+            </div>
+        </div>
+
+        <div id="step2" class="step">
+            <h1>تأكيد عملية الدفع</h1>
+            <p id="order-details" style="font-size: 18px; margin: 20px 0;"></p>
+            <p style="font-weight: bold; color: var(--secondary-color);">هل تريد إتمام عملية الدفع والتشحين الآن؟</p>
+            <div style="margin-top: 25px;">
+                <button class="btn" onclick="confirmPayment(true)">نعم، تأكيد</button>
+                <button class="btn btn-cancel" onclick="confirmPayment(false)">لا، إلغاء</button>
+            </div>
+        </div>
+
+        <div id="step3" class="step">
+            <h1>جاري معالجة الطلب...</h1>
+            <div class="loader"></div>
+            <p style="color: #9ca3af;">يرجى الانتظار، يتم الآن الاتصال بخوادم اللعبة وتأكيد الدفع.</p>
+        </div>
+
+        <div id="step4" class="step">
+            <div class="success-icon">✓</div>
+            <h1>تم الشحن بنجاح!</h1>
+            <p style="font-size: 18px; color: #10b981;">تهانينا، تم إرسال الجواهر إلى حسابك بنجاح.</p>
+            <p style="color: #9ca3af; font-size: 14px; margin-top: 10px;">تفقد حسابك في لعبة Free Fire الآن.</p>
+            <button class="btn" style="width: auto; margin-top: 20px;" onclick="resetProcess()">شحن جديد</button>
+        </div>
     </div>
-    
-    <button onclick="openInstagram()" class="ig-button">افتح رسائل إنستغرام</button>
-</div>
 
-<script>
-async function translateAndPrepare() {
-    const text = document.getElementById('arabicText').value;
-    if(!text) { alert('اكتب حاجة أولاً!'); return; }
-    
-    const resultBox = document.getElementById('englishResult');
-    resultBox.innerText = "جاري الترجمة...";
-    
-    try {
-        // استخدام سيرفر ترجمة غوغل المباشر
-        // ملاحظة: هذه ترجمة غوغل العادية، وليست لغة شارع (Slang).
-        const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=ar&tl=en&dt=t&q=${encodeURIComponent(text)}`);
-        const data = await res.json();
-        const translatedText = data[0][0][0];
-        
-        resultBox.innerText = translatedText;
-        
-        // نسخ النص تلقائياً للـ Clipboard
-        navigator.clipboard.writeText(translatedText);
-        alert('تمت الترجمة ونسخ النص! تقدر درك تلصقها (Paste) في إنستغرام.');
-    } catch (error) {
-        resultBox.innerText = "حدث خطأ في الترجمة، جرب اختصر الجملة.";
-    }
-}
+    <script>
+        let selectedItem = "";
+        let selectedPrice = "";
 
-function openInstagram() {
-    // تفتح إنستغرام مباشرة في صفحة الرسائل
-    window.open('https://www.instagram.com/direct/inbox/', '_blank');
-}
-</script>
+        // الانتقال من خطوة لخطوة
+        function showStep(stepNumber) {
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.getElementById('step' + stepNumber).classList.add('active');
+        }
 
+        // عند اختيار كمية الجواهر
+        function selectOption(item, price) {
+            selectedItem = item;
+            selectedPrice = price;
+            
+            // تحديث نص التأكيد
+            document.getElementById('order-details').innerHTML = `لقد اخترت: <span style="color: #00e5ff;">${selectedItem}</span> بسعر <span style="color: var(--secondary-color);">${selectedPrice}</span>`;
+            
+            // الانتقال لخطوة الدفع
+            showStep(2);
+        }
+
+        // عند الإجابة بنعم أو لا
+        function confirmPayment(isConfirmed) {
+            if (isConfirmed) {
+                // نعم -> يرجى الانتظار
+                showStep(3);
+                
+                // بعد 3 ثوانٍ تظهر واجهة تم الشحن
+                setTimeout(() => {
+                    showStep(4);
+                }, 3500); 
+            } else {
+                // لا -> يرجع لصفحة الاختيار
+                showStep(1);
+            }
+        }
+
+        // إعادة العملية من الأول
+        function resetProcess() {
+            showStep(1);
+        }
+    </script>
 </body>
 </html>
