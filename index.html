@@ -3,584 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ Advanced Slang Translate & Instagram Core Engine ⚡</title>
+    <title>الموقع الرسمي لشحن جواهر Free Fire</title>
     <style>
         :root {
-            --bg-main: #080c14;
-            --bg-surface: #0f172a;
-            --bg-sidebar: #0b0f19;
-            --accent-purple: #6366f1;
-            --accent-pink: #d946ef;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --neon-green: #10b981;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --primary-color: #ff4655;
+            --secondary-color: #ffb800;
+            --bg-color: #0b0e14;
+            --card-bg: #151a26;
+            --text-color: #ffffff;
+            --input-bg: #1f2636;
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* تخطيط اللوحة الجانبية */
-        .sidebar {
-            width: 320px;
-            background-color: var(--bg-sidebar);
-            border-left: 1px solid #1e293b;
-            display: flex;
-            flex-direction: column;
-            z-index: 10;
-        }
-
-        .brand-zone {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
             padding: 20px;
-            font-size: 1.3rem;
-            font-weight: 800;
-            text-align: center;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            border-bottom: 1px solid #1e293b;
-        }
-
-        .add-user-box {
-            padding: 15px;
-            border-bottom: 1px solid #1e293b;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .add-user-box input {
-            background: #1e293b;
-            border: 1px solid #334155;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            outline: none;
-            font-size: 0.9rem;
-        }
-
-        .add-user-box button {
-            background: var(--accent-purple);
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .add-user-box button:hover {
-            background: var(--accent-pink);
-        }
-
-        .user-list {
-            flex: 1;
-            overflow-y: auto;
-            list-style: none;
-        }
-
-        .user-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px;
-            border-bottom: 1px solid #1e293b;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .user-item:hover, .user-item.active {
-            background-color: #1e293b;
-        }
-
-        .user-meta {
-            display: flex;
-            align-items: center;
-        }
-
-        .avatar {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            border-radius: 50%;
-            margin-left: 12px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-weight: bold;
-        }
-
-        .delete-user-btn {
-            background: none;
-            border: none;
-            color: #ef4444;
-            cursor: pointer;
-            font-size: 1.1rem;
-            padding: 5px;
-        }
-
-        /* مساحة العمل المركزية */
-        .main-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background-color: var(--bg-main);
-            position: relative;
-        }
-
-        .top-navbar {
-            height: 70px;
-            background-color: var(--bg-surface);
-            border-bottom: 1px solid #1e293b;
-            display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0 25px;
+            min-height: 100vh;
         }
 
-        .system-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.85rem;
-            color: var(--neon-green);
-        }
-
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--neon-green);
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.8); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(0.8); opacity: 0.5; }
-        }
-
-        /* التيرمنال الذكي ومحلل الكود السفلي */
-        .dashboard-grid {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            gap: 20px;
-            overflow-y: auto;
-        }
-
-        .workspace-row {
-            display: flex;
-            gap: 20px;
-            flex: 1;
-            min-height: 250px;
-        }
-
-        .card {
-            background-color: var(--bg-surface);
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            flex: 1;
-        }
-
-        .card-title {
-            font-size: 0.95rem;
-            font-weight: bold;
-            color: var(--text-muted);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        textarea {
+        .container {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 70, 85, 0.2);
             width: 100%;
-            flex: 1;
-            background-color: #0b0f19;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            padding: 12px;
+            max-width: 480px;
+            padding: 30px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .badge {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             color: white;
-            font-size: 1rem;
-            resize: none;
-            outline: none;
-            transition: border 0.3s;
-        }
-
-        textarea:focus {
-            border-color: var(--accent-purple);
-        }
-
-        .slang-output {
-            background-color: #05070f;
-            border: 1px solid #1e293b;
-            color: #38bdf8;
-            font-family: 'Courier New', Courier, monospace;
-            direction: ltr;
-            text-align: left;
-        }
-
-        /* لوحة التحكم السفلية لـ JS والـ Terminal */
-        .terminal-log {
-            height: 150px;
-            background-color: #020617;
-            border: 1px solid #1e293b;
-            border-radius: 8px;
-            padding: 12px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.8rem;
-            color: #a7f3d0;
-            overflow-y: auto;
-            direction: ltr;
-            text-align: left;
-        }
-
-        .action-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .trigger-btn {
-            background: linear-gradient(90deg, #4f46e5, #7c3aed, #db2777);
-            background-size: 200% auto;
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 1.1rem;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 12px;
             font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 22px;
+            margin: 0 0 25px 0;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        /* المدخلات */
+        .form-group {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--input-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, select:focus {
+            border-color: var(--primary-color);
+        }
+
+        /* عروض الجواهر */
+        .diamond-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .diamond-option {
+            background: var(--input-bg);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 15px;
             cursor: pointer;
-            transition: all 0.4s;
+            transition: all 0.2s ease;
             text-align: center;
         }
 
-        .trigger-btn:hover {
-            background-position: right center;
-            box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+        .diamond-option:hover, .diamond-option.selected {
+            border-color: var(--primary-color);
+            background: rgba(255, 70, 85, 0.05);
         }
 
-        /* إشعارات التوست السريعة */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background-color: #10b981;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
+        .diamond-amount {
+            font-size: 18px;
             font-weight: bold;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transform: translateY(150px);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 999;
+            color: #00e5ff;
+            display: block;
+            margin-bottom: 5px;
         }
 
-        .toast.show { transform: translateY(0); }
+        .price {
+            color: var(--secondary-color);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* أزرار التحكم */
+        .btn {
+            background: linear-gradient(90deg, var(--primary-color), #e03e4c);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, opacity 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 70, 85, 0.3);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: #374151;
+            box-shadow: none;
+            margin-top: 10px;
+        }
+
+        /* واجهة الدفع المدفوع */
+        .payment-methods {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .method-card {
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 10px;
+            width: 45%;
+            background: var(--input-bg);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* لودر الانتظار التكنولوجي */
+        .loader-container {
+            padding: 30px 0;
+        }
+
+        .loader {
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-icon {
+            font-size: 70px;
+            color: #10b981;
+            margin-bottom: 20px;
+            animation: pop 0.5s ease-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
 
-    <!-- القائمة الجانبية المتقدمة لإدارة حسابات الأصدقاء -->
-    <div class="sidebar">
-        <div class="brand-zone">⚙️ INSTA SLANG ENGINE v2.0</div>
-        
-        <div class="add-user-box">
-            <input type="text" id="new-name" placeholder="اسم الصديق (مثال: Tyler)">
-            <input type="text" id="new-insta" placeholder="حسابه (مثال: tyler_xo)">
-            <button onclick="CoreEngine.addNewUser()">إضافة الصديق إلى النظام</button>
+    <div class="container">
+        <span class="badge">بوابة الشحن الآمنة والمباشرة</span>
+
+        <!-- الخطوة 1: إدخال معلومات الحساب واختيار العرض -->
+        <div id="step1" class="step active">
+            <h1>شحن جواهر فري فاير الفوري</h1>
+            
+            <div class="form-group">
+                <label for="player-id">معرّف اللاعب (ID):</label>
+                <input type="text" id="player-id" placeholder="مثال: 123456789" maxlength="12">
+            </div>
+
+            <div class="form-group">
+                <label for="device">نوع نظام التشغيل:</label>
+                <select id="device">
+                    <option value="Android">أندرويد (Android)</option>
+                    <option value="iOS">آيفون (iOS)</option>
+                    <option value="PC">محاكي الكمبيوتر</option>
+                </select>
+            </div>
+
+            <label style="text-align: right; display: block; margin-bottom: 8px;">اختر باقة الجواهر:</label>
+            <div class="diamond-grid">
+                <div class="diamond-option" onclick="selectDiamond(this, '100 جوهرة', '200 دج / 1.5$')">
+                    <span class="diamond-amount">💎 100</span>
+                    <span class="price">200 دج</span>
+                </div>
+                <div class="diamond-option" onclick="selectDiamond(this, '310 جوهرة', '500 دج / 3.5$')">
+                    <span class="diamond-amount">💎 310</span>
+                    <span class="price">500 دج</span>
+                </div>
+                <div class="diamond-option" onclick="selectDiamond(this, '520 جوهرة', '900 دج / 6.0$')">
+                    <span class="diamond-amount">💎 520</span>
+                    <span class="price">900 دج</span>
+                </div>
+                <div class="diamond-option" onclick="selectDiamond(this, '1060 جوهرة', '1800 دج / 11.0$')">
+                    <span class="diamond-amount">💎 1060</span>
+                    <span class="price">1800 دج</span>
+                </div>
+            </div>
+
+            <button class="btn" onclick="goToStep2()">متابعة الدفع</button>
         </div>
 
-        <ul class="user-list" id="users-container">
-            <!-- سيتم توليد العناصر هنا برمجياً بواسطة الـ JS -->
-        </ul>
+        <!-- الخطوة 2: واجهة الدفع المدفوع الحقيقية -->
+        <div id="step2" class="step">
+            <h1>بوابة الدفع الآمنة</h1>
+            <p id="summary-text" style="color: #9ca3af; font-size: 15px; margin-bottom: 15px;"></p>
+            
+            <div class="payment-methods">
+                <div class="method-card" style="border-color: var(--secondary-color);">
+                    💳 البطاقة النقدية / الذهبية
+                </div>
+                <div class="method-card" style="opacity: 0.5;">
+                    📱 بريدي موب (قريباً)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>رقم البطاقة:</label>
+                <input type="text" placeholder="xxxx xxxx xxxx xxxx" maxlength="19">
+            </div>
+            
+            <div style="display: flex; gap: 10px;">
+                <div class="form-group" style="width: 50%;">
+                    <label>تاريخ انتهاء الصلاحية:</label>
+                    <input type="text" placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="form-group" style="width: 50%;">
+                    <label>الرمز السري (CVC):</label>
+                    <input type="text" placeholder="123" maxlength="3">
+                </div>
+            </div>
+
+            <p style="font-size: 13px; color: #ff4655; font-weight: bold; margin-bottom: 15px;">هل تريد تأكيد سحب المبلغ وشحن الحساب الآن؟</p>
+
+            <button class="btn" onclick="startPaymentProcess()">نعم، دفع وتشحين الآن</button>
+            <button class="btn btn-secondary" onclick="showStep(1)">إلغاء وتعديل الطلب</button>
+        </div>
+
+        <!-- الخطوة 3: معالجة الدفع والاتصال بالسيرفر -->
+        <div id="step3" class="step loader-container">
+            <div class="loader"></div>
+            <h2>جاري معالجة الدفع...</h2>
+            <p style="color: #9ca3af; font-size: 14px; padding: 0 20px;">يرجى عدم إغلاق الصفحة أو الضغط على زر الرجوع. يتم الآن التحقق من البطاقة وتأكيد تحويل الجواهر إلى الـ ID.</p>
+        </div>
+
+        <!-- الخطوة 4: تم الدفع والشحن بنجاح -->
+        <div id="step4" class="step">
+            <div class="success-icon">✓</div>
+            <h1 style="color: #10b981;">تمت العملية بنجاح!</h1>
+            <p style="font-size: 16px; margin-bottom: 10px;">تم خصم المبلغ بنجاح وإرسال الجواهر.</p>
+            <p id="final-id-text" style="color: var(--secondary-color); font-weight: bold;"></p>
+            <p style="color: #9ca3af; font-size: 13px; margin-top: 15px;">ستصلك رسالة تأكيد SMS على هاتفك المرتبط بالبطاقة خلال دقائق.</p>
+            <button class="btn btn-secondary" onclick="resetAll()">العودة للرئيسية</button>
+        </div>
     </div>
 
-    <!-- لوحة التحكم الرئيسية والمحركات -->
-    <div class="main-panel">
-        <div class="top-navbar">
-            <div>المستهدف الحالي: <span id="target-display" style="color: var(--accent-pink); font-weight: bold;">لا أحد</span></div>
-            <div class="system-status">
-                <div class="pulse-dot"></div>
-                <span>محرك الـ JavaScript يعمل بكفاءة العالية (JS Ratio > 40%)</span>
-            </div>
-        </div>
-
-        <div class="dashboard-grid">
-            <div class="workspace-row">
-                <!-- صندوق المدخلات العربي -->
-                <div class="card">
-                    <div class="card-title">
-                        <span>اكتب بالعامية أو الفصحى العربية:</span>
-                        <span style="color: var(--accent-purple)">مستقبل النصوص العربي</span>
-                    </div>
-                    <textarea id="arabic-stream" placeholder="اكتب هنا مثلاً: وش بيك يا خويا موراكش تبان؟ خطيك من الهدرة الزايدة وتعال نقلك عفسة فور..." oninput="CoreEngine.processPipeline()"></textarea>
-                </div>
-
-                <!-- صندوق مخرجات لغة الشوارع الأمريكية -->
-                <div class="card">
-                    <div class="card-title">
-                        <span>معاينة لغة الشوارع الأمريكية (US Street Slang):</span>
-                        <span style="color: #38bdf8" id="slang-badge">Slang Active Mode</span>
-                    </div>
-                    <textarea id="english-slang-stream" class="slang-output" readonly placeholder="Yo homie, dynamic street codes waiting for processing..."></textarea>
-                </div>
-            </div>
-
-            <!-- سطر التيرمنال والمحلل المباشر للأكواد للـ JS -->
-            <div class="action-container">
-                <div class="card" style="flex: none; gap: 5px;">
-                    <div class="card-title" style="font-size: 0.8rem; color:#64748b;">سجل أحداث النظام الداخلي للـ Engine (Live Kernel Log):</div>
-                    <div class="terminal-log" id="kernel-terminal"></div>
-                </div>
-
-                <button class="trigger-btn" onclick="CoreEngine.executeDeployment()">
-                    🚀 معالجة البيانات، نسخ كود الشارع وفتح محادثة Instagram فوراً
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- إشعار التوست التلقائي -->
-    <div class="toast" id="toast-notify">تمت العملية بنجاح!</div>
-
-    <!-- ========================================== -->
-    <!--  محرر محرك الـ JavaScript المعقد جداً (>35%) -->
-    <!-- ========================================== -->
     <script>
-        /**
-         * CoreEngine Object - كود برمجيات معقد لإدارة معالجة اللغات المدمجة والحالة المحلية
-         */
-        const CoreEngine = (() => {
-            // حالة النظام الداخلية المتغيرة (State Management)
-            let state = {
-                users: [
-                    { name: "Jessica", account: "jessica_la" },
-                    { name: "Brad", account: "brad_nyc" },
-                    { name: "Emma", account: "emma_westcoast" }
-                ],
-                activeUser: null,
-                slangDictionary: {
-                    // قاموس تحويل الترجمة الأكاديمية العادية إلى لغة شوارع أمريكية عميقة
-                    "friend": "homie",
-                    "brother": "bro",
-                    "man": "dude",
-                    "what are you doing": "what's poppin",
-                    "how are you": "what's good with u",
-                    "cool": "dope",
-                    "beautiful": "fire",
-                    "money": "bag",
-                    "truth": "no cap",
-                    "lying": "capping",
-                    "left me": "ghosted me",
-                    "show off": "flex",
-                    "relaxed": "chillin",
-                    "scared": "shook",
-                    "amazing": "bussin"
-                }
-            };
+        let selectedPackage = "";
+        let selectedPrice = "";
 
-            // تشغيل تهيئة النظام عند فتح الصفحة لأول مرة
-            const init = () => {
-                logToTerminal("System boot sequence initiated...");
-                if (localStorage.getItem("insta_slang_users")) {
-                    state.users = JSON.parse(localStorage.getItem("insta_slang_users"));
-                    logToTerminal("Custom user database loaded from localStorage.");
-                } else {
-                    saveToStorage();
-                    logToTerminal("Default user structure generated.");
-                }
-                renderUsers();
-                if(state.users.length > 0) {
-                    setActiveUser(state.users[0].account, state.users[0].name);
-                }
-                logToTerminal("Core Language Pipelines mapped successfully. System ready.");
-            };
+        function showStep(stepNum) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + stepNum).classList.add('active');
+        }
 
-            const saveToStorage = () => {
-                localStorage.setItem("insta_slang_users", JSON.stringify(state.users));
-            };
+        function selectDiamond(element, name, price) {
+            document.querySelectorAll('.diamond-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedPackage = name;
+            selectedPrice = price;
+        }
 
-            // دالة طباعة الأحداث في سطر الأوامر السفلي (Live Terminal Log)
-            const logToTerminal = (message) => {
-                const terminal = document.getElementById("kernel-terminal");
-                const time = new Date().toLocaleTimeString();
-                terminal.innerHTML += `[${time}] -> ${message}<br>`;
-                terminal.scrollTop = terminal.scrollHeight;
-            };
+        function goToStep2() {
+            const idInput = document.getElementById('player-id').value;
+            if(!idInput || idInput.trim() === "") {
+                alert("يرجى إدخال معرف اللاعب (ID) أولاً!");
+                return;
+            }
+            if(!selectedPackage) {
+                alert("يرجى اختيار باقة الجواهر!");
+                return;
+            }
 
-            // بناء القائمة البرمجية للأصدقاء وتحديث واجهة المستخدم
-            const renderUsers = () => {
-                const container = document.getElementById("users-container");
-                container.innerHTML = "";
-                
-                state.users.forEach(user => {
-                    const isActive = state.activeUser && state.activeUser.account === user.account ? 'active' : '';
-                    const li = document.createElement("li");
-                    li.className = `user-item ${isActive}`;
-                    li.setAttribute("data-account", user.account);
-                    li.onclick = () => setActiveUser(user.account, user.name);
+            // تحديث نص ملخص الطلب
+            document.getElementById('summary-text').innerHTML = `شحن <b>${selectedPackage}</b> للحساب <b>(${idInput})</b><br>المبلغ الإجمالي: <span style="color:var(--secondary-color); font-weight:bold;">${selectedPrice}</span>`;
+            showStep(2);
+        }
 
-                    li.innerHTML = `
-                        <div class="user-meta">
-                            <div class="avatar">${user.name.charAt(0).toUpperCase()}</div>
-                            <div>
-                                <strong style="display:block;">${user.name}</strong>
-                                <span style="font-size:0.75rem; color:var(--text-muted);">@${user.account}</span>
-                            </div>
-                        </div>
-                        <button class="delete-user-btn" onclick="event.stopPropagation(); CoreEngine.removeUser('${user.account}')">🗑️</button>
-                    `;
-                    container.appendChild(li);
-                });
-            };
+        function startPaymentProcess() {
+            // الانتقال لصفحة "يرجى الانتظار"
+            showStep(3);
 
-            const setActiveUser = (account, name) => {
-                state.activeUser = { account, name };
-                document.getElementById("target-display").innerText = `${name} (@${account})`;
-                logToTerminal(`Target pointer context shifted to: @${account}`);
-                
-                // تحديث كلاسات الأكتيف البصرية
-                document.querySelectorAll(".user-item").forEach(item => {
-                    if(item.getAttribute("data-account") === account) item.classList.add("active");
-                    else item.classList.remove("active");
-                });
-            };
+            // تمثيل الوقت المستغرق للاتصال بالبنك وسيرفر اللعبة (4 ثواني)
+            setTimeout(() => {
+                const idInput = document.getElementById('player-id').value;
+                document.getElementById('final-id-text').innerText = `الحساب المستهدف: ID ${idInput}`;
+                showStep(4);
+            }, 4000);
+        }
 
-            const addNewUser = () => {
-                const nameInp = document.getElementById("new-name");
-                const instaInp = document.getElementById("new-insta");
-                const name = nameInp.value.trim();
-                const insta = instaInp.value.trim().replace("@", "");
-
-                if(!name || !insta) {
-                    alert("يا خوي املأ الخانات أولاً!");
-                    return;
-                }
-
-                state.users.push({ name, account: insta });
-                saveToStorage();
-                renderUsers();
-                setActiveUser(insta, name);
-                logToTerminal(`Injected new target object: ${name} -> @${insta}`);
-                
-                nameInp.value = "";
-                instaInp.value = "";
-                showToast("🔥 تم إضافة الحساب بنجاح!");
-            };
-
-            const removeUser = (account) => {
-                state.users = state.users.filter(u => u.account !== account);
-                saveToStorage();
-                logToTerminal(`Purged target entity with pointer ID: @${account}`);
-                
-                if (state.activeUser && state.activeUser.account === account) {
-                    state.activeUser = state.users.length > 0 ? { account: state.users[0].account, name: state.users[0].name } : null;
-                }
-                renderUsers();
-                if(state.activeUser) setActiveUser(state.activeUser.account, state.activeUser.name);
-                else document.getElementById("target-display").innerText = "لا أحد";
-                
-                showToast("🗑️ تم الحذف بنجاح");
-            };
-
-            // محرك الفلترة والتنقية والمعالجة اللغوية المتقدمة للغة الشارع (Advanced Pipeline)
-            const processPipeline = async () => {
-                const arabicText = document.getElementById("arabic-stream").value;
-                const outputBox = document.getElementById("english-slang-stream");
-
-                if (!arabicText.trim()) {
-                    outputBox.value = "";
-                    return;
-                }
-
-                try {
-                    // الخطوة 1: استدعاء المترجم الأولي لتجهيز الهيكل اللغوي الأساسي
-                    const response = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=ar&tl=en&dt=t&q=${encodeURIComponent(arabicText)}`);
-                    const data = await response.json();
-                    
-                    let standardEnglish = "";
-                    data[0].forEach(part => {
-                        if (part[0]) standardEnglish += part[0];
-                    });
-
-                    // الخطوة 2: المعالجة العميقة وضخ لغة الشارع الأمريكي عبر محرك الاستبدال الذكي (Slang Injector)
-                    let slangEnglish = standardEnglish.toLowerCase();
-                    
-                    // تشغيل مصفوفة التبديل المعقدة اللانهائية بناءً على الكلمات المفتاحية
-                    Object.keys(state.slangDictionary).forEach(key => {
-                        const regex = new RegExp(`\\b${key}\\b`, 'g');
-                        slangEnglish = slangEnglish.replace(regex, state.slangDictionary[key]);
-                    });
-
-                    // إضافة بعض اللمسات العشوائية المميزة لشوارع أمريكا (No Cap, Real Talk) لإعطاء طابع حقيقي
-                    if (slangEnglish.endsWith(".") || slangEnglish.endsWith("!")) {
-                        slangEnglish = slangEnglish.slice(0, -1) + ", no cap!";
-                    } else {
-                        slangEnglish += ", real talk.";
-                    }
-
-                    // تحديث الواجهة بالمخرجات
-                    outputBox.value = slangEnglish;
-                    logToTerminal(`Stream compiled. Raw length: ${arabicText.length} chars -> Slang injected.`);
-                } catch (err) {
-                    logToTerminal("Engine Exception: Failed to interface translation matrix.");
-                }
-            };
-
-            const executeDeployment = () => {
-                const finalCode = document.getElementById("english-slang-stream").value;
-                if (!finalCode.trim() || !state.activeUser) {
-                    alert("تأكد من كتابة نص واختيار صديق من القائمة الجانبية أولاً!");
-                    return;
-                }
-
-                // تنفيذ بروتوكول النسخ التلقائي والربط الخارجي بإنستغرام
-                navigator.clipboard.writeText(finalCode).then(() => {
-                    logToTerminal(`Clipboard sync successful. Payload size: ${finalCode.length} bytes.`);
-                    showToast("📋 تم نسخ كود الشارع الأمريكي! جاري توجيهك لـ Instagram...");
-                    
-                    setTimeout(() => {
-                        window.open(`https://instagram.com/_u/${state.activeUser.account}`, '_blank');
-                    }, 1000);
-                }).catch(err => {
-                    window.open(`https://instagram.com/_u/${state.activeUser.account}`, '_blank');
-                });
-            };
-
-            const showToast = (msg) => {
-                const toast = document.getElementById("toast-notify");
-                toast.innerText = msg;
-                toast.classList.add("show");
-                setTimeout(() => toast.classList.remove("show"), 3000);
-            };
-
-            return {
-                init,
-                addNewUser,
-                removeUser,
-                processPipeline,
-                executeDeployment
-            };
-        })();
-
-        // تشغيل المحرك الرئيسي فور تحميل نافذة المتصفح
-        window.onload = CoreEngine.init;
+        function resetAll() {
+            document.getElementById('player-id').value = "";
+            document.querySelectorAll('.diamond-option').forEach(opt => opt.classList.remove('selected'));
+            selectedPackage = "";
+            selectedPrice = "";
+            showStep(1);
+        }
     </script>
 </body>
 </html>
