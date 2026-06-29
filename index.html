@@ -3,358 +3,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الموقع الرسمي لشحن جواهر Free Fire</title>
+    <title>Instagram Auto-Translate Dashboard</title>
     <style>
-        :root {
-            --primary-color: #ff4655;
-            --secondary-color: #ffb800;
-            --bg-color: #0b0e14;
-            --card-bg: #151a26;
-            --text-color: #ffffff;
-            --input-bg: #1f2636;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* القائمة الجانبية للأصدقاء */
+        .sidebar {
+            width: 30%;
+            background-color: #111827;
+            border-left: 1px solid #1f2937;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
             padding: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-bottom: 1px solid #1f2937;
+            color: #ec4899;
+            text-align: center;
+        }
+
+        .user-list {
+            list-style: none;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .user-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #1f2937;
+            transition: background 0.3s;
+        }
+
+        .user-item:hover, .user-item.active {
+            background-color: #1f2937;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            border-radius: 50%;
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .user-info .username {
+            font-weight: 600;
+            display: block;
+        }
+
+        .user-info .insta-tag {
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+
+        /* منطقة المحادثة والترجمة */
+        .chat-area {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            background-color: #0f172a;
+        }
+
+        .chat-header {
+            padding: 20px;
+            background-color: #111827;
+            border-bottom: 1px solid #1f2937;
+            font-weight: bold;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #6b7280;
+        }
+
+        /* واجهة الإدخال والترجمة الذكية */
+        .input-panel {
+            background-color: #111827;
+            padding: 20px;
+            border-top: 1px solid #1f2937;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .translation-boxes {
+            display: flex;
+            gap: 15px;
+        }
+
+        .box-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .box-wrapper label {
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            padding: 10px;
+            color: white;
+            resize: none;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #3b82f6;
+        }
+
+        .output-text {
+            background-color: #111827;
+            border: 1px solid #374151;
+            color: #10b981;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .send-btn {
+            background: linear-gradient(45deg, #4f46e5, #06b6d4);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            gap: 10px;
         }
 
-        .container {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 70, 85, 0.2);
-            width: 100%;
-            max-width: 480px;
-            padding: 30px;
+        .send-btn:hover {
+            opacity: 0.9;
+        }
+
+        .status-msg {
+            font-size: 0.85rem;
             text-align: center;
-            box-sizing: border-box;
-        }
-
-        .badge {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            color: #fff;
-            font-size: 22px;
-            margin: 0 0 25px 0;
-        }
-
-        .step {
-            display: none;
-        }
-
-        .step.active {
-            display: block;
-        }
-
-        /* المدخلات */
-        .form-group {
-            text-align: right;
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #9ca3af;
-            font-size: 14px;
-        }
-
-        input[type="text"], select {
-            width: 100%;
-            padding: 14px;
-            background-color: var(--input-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
-            font-size: 16px;
-            box-sizing: border-box;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        input[type="text"]:focus, select:focus {
-            border-color: var(--primary-color);
-        }
-
-        /* عروض الجواهر */
-        .diamond-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .diamond-option {
-            background: var(--input-bg);
-            border: 2px solid transparent;
-            border-radius: 12px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-        }
-
-        .diamond-option:hover, .diamond-option.selected {
-            border-color: var(--primary-color);
-            background: rgba(255, 70, 85, 0.05);
-        }
-
-        .diamond-amount {
-            font-size: 18px;
-            font-weight: bold;
-            color: #00e5ff;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .price {
-            color: var(--secondary-color);
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        /* أزرار التحكم */
-        .btn {
-            background: linear-gradient(90deg, var(--primary-color), #e03e4c);
-            color: white;
-            border: none;
-            padding: 15px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            transition: transform 0.2s, opacity 0.2s;
-            box-shadow: 0 5px 15px rgba(255, 70, 85, 0.3);
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .btn-secondary {
-            background: #374151;
-            box-shadow: none;
-            margin-top: 10px;
-        }
-
-        /* واجهة الدفع المدفوع */
-        .payment-methods {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-
-        .method-card {
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            padding: 10px;
-            width: 45%;
-            background: var(--input-bg);
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        /* لودر الانتظار التكنولوجي */
-        .loader-container {
-            padding: 30px 0;
-        }
-
-        .loader {
-            border: 4px solid rgba(255,255,255,0.1);
-            border-top: 4px solid var(--primary-color);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .success-icon {
-            font-size: 70px;
-            color: #10b981;
-            margin-bottom: 20px;
-            animation: pop 0.5s ease-out;
-        }
-
-        @keyframes pop {
-            0% { transform: scale(0); }
-            100% { transform: scale(1); }
+            color: #eab308;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <span class="badge">بوابة الشحن الآمنة والمباشرة</span>
-
-        <!-- الخطوة 1: إدخال معلومات الحساب واختيار العرض -->
-        <div id="step1" class="step active">
-            <h1>شحن جواهر فري فاير الفوري</h1>
-            
-            <div class="form-group">
-                <label for="player-id">معرّف اللاعب (ID):</label>
-                <input type="text" id="player-id" placeholder="مثال: 123456789" maxlength="12">
-            </div>
-
-            <div class="form-group">
-                <label for="device">نوع نظام التشغيل:</label>
-                <select id="device">
-                    <option value="Android">أندرويد (Android)</option>
-                    <option value="iOS">آيفون (iOS)</option>
-                    <option value="PC">محاكي الكمبيوتر</option>
-                </select>
-            </div>
-
-            <label style="text-align: right; display: block; margin-bottom: 8px;">اختر باقة الجواهر:</label>
-            <div class="diamond-grid">
-                <div class="diamond-option" onclick="selectDiamond(this, '100 جوهرة', '200 دج / 1.5$')">
-                    <span class="diamond-amount">💎 100</span>
-                    <span class="price">200 دج</span>
+    <!-- القائمة الجانبية: الأصدقاء -->
+    <div class="sidebar">
+        <div class="sidebar-header">📥 قائمة أصدقاء أمريكا</div>
+        <ul class="user-list">
+            <li class="user-item active" onclick="selectUser('Jessica', 'jessica_usa')">
+                <div class="user-avatar">J</div>
+                <div class="user-info">
+                    <span class="username">Jessica</span>
+                    <span class="insta-tag">@jessica_usa</span>
                 </div>
-                <div class="diamond-option" onclick="selectDiamond(this, '310 جوهرة', '500 دج / 3.5$')">
-                    <span class="diamond-amount">💎 310</span>
-                    <span class="price">500 دج</span>
+            </li>
+            <li class="user-item" onclick="selectUser('Alex', 'alex_nyc')">
+                <div class="user-avatar">A</div>
+                <div class="user-info">
+                    <span class="username">Alex</span>
+                    <span class="insta-tag">@alex_nyc</span>
                 </div>
-                <div class="diamond-option" onclick="selectDiamond(this, '520 جوهرة', '900 دج / 6.0$')">
-                    <span class="diamond-amount">💎 520</span>
-                    <span class="price">900 دج</span>
+            </li>
+            <li class="user-item" onclick="selectUser('Emily', 'emily_smith')">
+                <div class="user-avatar">E</div>
+                <div class="user-info">
+                    <span class="username">Emily</span>
+                    <span class="insta-tag">@emily_smith</span>
                 </div>
-                <div class="diamond-option" onclick="selectDiamond(this, '1060 جوهرة', '1800 دج / 11.0$')">
-                    <span class="diamond-amount">💎 1060</span>
-                    <span class="price">1800 دج</span>
-                </div>
-            </div>
+            </li>
+        </ul>
+    </div>
 
-            <button class="btn" onclick="goToStep2()">متابعة الدفع</button>
+    <!-- منطقة العمل والترجمة -->
+    <div class="chat-area">
+        <div class="chat-header">المحادثة الحالية مع: <span id="current-chat-name" style="color: #ec4899;">Jessica</span></div>
+        
+        <div class="chat-messages">
+            <p>اكتب رسالتك بالعربية في الأسفل، وسيتم ترجمتها فوراً وفتح إنستغرام لإرسالها.</p>
         </div>
 
-        <!-- الخطوة 2: واجهة الدفع المدفوع الحقيقية -->
-        <div id="step2" class="step">
-            <h1>بوابة الدفع الآمنة</h1>
-            <p id="summary-text" style="color: #9ca3af; font-size: 15px; margin-bottom: 15px;"></p>
-            
-            <div class="payment-methods">
-                <div class="method-card" style="border-color: var(--secondary-color);">
-                    💳 البطاقة النقدية / الذهبية
+        <div class="input-panel">
+            <div class="translation-boxes">
+                <!-- صندوق الكتابة بالعربية -->
+                <div class="box-wrapper">
+                    <label>اكتب بالعربية:</label>
+                    <textarea id="arabic-input" placeholder="اكتب هنا مثلاً: أهلاً، كيف حالك اليوم؟" oninput="startTranslation()"></textarea>
                 </div>
-                <div class="method-card" style="opacity: 0.5;">
-                    📱 بريدي موب (قريباً)
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>رقم البطاقة:</label>
-                <input type="text" placeholder="xxxx xxxx xxxx xxxx" maxlength="19">
-            </div>
-            
-            <div style="display: flex; gap: 10px;">
-                <div class="form-group" style="width: 50%;">
-                    <label>تاريخ انتهاء الصلاحية:</label>
-                    <input type="text" placeholder="MM/YY" maxlength="5">
-                </div>
-                <div class="form-group" style="width: 50%;">
-                    <label>الرمز السري (CVC):</label>
-                    <input type="text" placeholder="123" maxlength="3">
+                
+                <!-- صندوق المعاينة بالإنجليزية -->
+                <div class="box-wrapper">
+                    <label>الترجمة الفورية (English):</label>
+                    <textarea id="english-output" class="output-text" readonly placeholder="Translation will appear here..."></textarea>
                 </div>
             </div>
 
-            <p style="font-size: 13px; color: #ff4655; font-weight: bold; margin-bottom: 15px;">هل تريد تأكيد سحب المبلغ وشحن الحساب الآن؟</p>
+            <div id="status" class="status-msg"></div>
 
-            <button class="btn" onclick="startPaymentProcess()">نعم، دفع وتشحين الآن</button>
-            <button class="btn btn-secondary" onclick="showStep(1)">إلغاء وتعديل الطلب</button>
-        </div>
-
-        <!-- الخطوة 3: معالجة الدفع والاتصال بالسيرفر -->
-        <div id="step3" class="step loader-container">
-            <div class="loader"></div>
-            <h2>جاري معالجة الدفع...</h2>
-            <p style="color: #9ca3af; font-size: 14px; padding: 0 20px;">يرجى عدم إغلاق الصفحة أو الضغط على زر الرجوع. يتم الآن التحقق من البطاقة وتأكيد تحويل الجواهر إلى الـ ID.</p>
-        </div>
-
-        <!-- الخطوة 4: تم الدفع والشحن بنجاح -->
-        <div id="step4" class="step">
-            <div class="success-icon">✓</div>
-            <h1 style="color: #10b981;">تمت العملية بنجاح!</h1>
-            <p style="font-size: 16px; margin-bottom: 10px;">تم خصم المبلغ بنجاح وإرسال الجواهر.</p>
-            <p id="final-id-text" style="color: var(--secondary-color); font-weight: bold;"></p>
-            <p style="color: #9ca3af; font-size: 13px; margin-top: 15px;">ستصلك رسالة تأكيد SMS على هاتفك المرتبط بالبطاقة خلال دقائق.</p>
-            <button class="btn btn-secondary" onclick="resetAll()">العودة للرئيسية</button>
+            <!-- زر النسخ والفتح التلقائي في إنستغرام -->
+            <button class="send-btn" onclick="sendToInstagram()">
+                <span>ترجم وافتح إنستغرام لإرسالها 🚀</span>
+            </button>
         </div>
     </div>
 
+    <!-- كود الـ JavaScript للترجمة والربط والتفاعلات -->
     <script>
-        let selectedPackage = "";
-        let selectedPrice = "";
+        let selectedInstagramUser = "jessica_usa";
+        let typingTimer;
+        const doneTypingInterval = 500; // الانتظار لنصف ثانية بعد التوقف عن الكتابة للترجمة لعدم إرهاق السيرفر
 
-        function showStep(stepNum) {
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('step' + stepNum).classList.add('active');
+        // تغيير الشخص المراد مراسلته
+        function selectUser(name, username) {
+            document.getElementById('current-chat-name').innerText = name;
+            selectedInstagramUser = username;
+            
+            // تغيير التأثير البصري في القائمة
+            document.querySelectorAll('.user-item').forEach(item => item.classList.remove('active'));
+            event.currentTarget.classList.add('active');
         }
 
-        function selectDiamond(element, name, price) {
-            document.querySelectorAll('.diamond-option').forEach(opt => opt.classList.remove('selected'));
-            element.classList.add('selected');
-            selectedPackage = name;
-            selectedPrice = price;
+        // بدء مؤقت الترجمة عند الكتابة
+        function startTranslation() {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(translateText, doneTypingInterval);
         }
 
-        function goToStep2() {
-            const idInput = document.getElementById('player-id').value;
-            if(!idInput || idInput.trim() === "") {
-                alert("يرجى إدخال معرف اللاعب (ID) أولاً!");
+        // كود الاتصال بمحرك الترجمة التلقائي المجاني
+        async function translateText() {
+            const arabicText = document.getElementById('arabic-input').value;
+            const outputBox = document.getElementById('english-output');
+            
+            if (!arabicText.trim()) {
+                outputBox.value = "";
                 return;
             }
-            if(!selectedPackage) {
-                alert("يرجى اختيار باقة الجواهر!");
+
+            document.getElementById('status').innerText = "جاري الترجمة الفورية...";
+
+            try {
+                // استخدام سيرفر ترجمة مفتوح وسريع جداً وبدون مفاتيح تعقيد
+                const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=ar&tl=en&dt=t&q=${encodeURIComponent(arabicText)}`);
+                const data = await res.json();
+                
+                // تجميع النص المترجم وضعه في الصندوق الإنجليزي
+                let translatedText = "";
+                data[0].forEach(sentence => {
+                    if(sentence[0]) translatedText += sentence[0];
+                });
+
+                outputBox.value = translatedText;
+                document.getElementById('status').innerText = "✨ تمت الترجمة بنجاح وجاهزة للإرسال!";
+            } catch (error) {
+                document.getElementById('status').innerText = "⚠️ عذراً، حدث خطأ في الاتصال بالترجمة الفورية.";
+                console.error(error);
+            }
+        }
+
+        // كود الفتح التلقائي في إنستغرام والنسخ
+        function sendToInstagram() {
+            const englishText = document.getElementById('english-output').value;
+
+            if (!englishText.trim()) {
+                alert("الرجاء كتابة رسالة أولاً ليتم ترجمتها!");
                 return;
             }
 
-            // تحديث نص ملخص الطلب
-            document.getElementById('summary-text').innerHTML = `شحن <b>${selectedPackage}</b> للحساب <b>(${idInput})</b><br>المبلغ الإجمالي: <span style="color:var(--secondary-color); font-weight:bold;">${selectedPrice}</span>`;
-            showStep(2);
-        }
-
-        function startPaymentProcess() {
-            // الانتقال لصفحة "يرجى الانتظار"
-            showStep(3);
-
-            // تمثيل الوقت المستغرق للاتصال بالبنك وسيرفر اللعبة (4 ثواني)
-            setTimeout(() => {
-                const idInput = document.getElementById('player-id').value;
-                document.getElementById('final-id-text').innerText = `الحساب المستهدف: ID ${idInput}`;
-                showStep(4);
-            }, 4000);
-        }
-
-        function resetAll() {
-            document.getElementById('player-id').value = "";
-            document.querySelectorAll('.diamond-option').forEach(opt => opt.classList.remove('selected'));
-            selectedPackage = "";
-            selectedPrice = "";
-            showStep(1);
+            // 1. نسخ النص الإنجليزي تلقائياً لحافظة الهاتف لتقوم بلصقه فوراً
+            navigator.clipboard.writeText(englishText).then(() => {
+                document.getElementById('status').innerText = "📋 تم نسخ النص الإنجليزي تلقائياً! جاري فتح الحساب...";
+                
+                // 2. فتح رابط محادثة الشخص مباشرة في تطبيق إنستغرام
+                setTimeout(() => {
+                    window.open(`https://instagram.com/_u/${selectedInstagramUser}`, '_blank');
+                }, 800);
+            }).catch(err => {
+                // احتياطياً لو لم يمنح المتصفح إذن النسخ
+                window.open(`https://instagram.com/_u/${selectedInstagramUser}`, '_blank');
+            });
         }
     </script>
 </body>
