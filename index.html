@@ -3,117 +3,463 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقعي الحالي - القاهرة</title>
+    <title>فضاء عائلة ويطون المحترف</title>
+    <!-- إيصال أيقونات FontAwesome للمظهر الاحترافي -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- روابط CDN متوافقة وآمنة تماماً مع خوادم GitHub -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha512-Zcn694qR58c15Snpf77tr55JzvwkdKpdBtGgcCnQ16mJcdUeTkp06LJapW5dfN0K4b7bTwsf7C5Z2q17nKzN3A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha512-BwHfrr4c9kmR7FgbQMi5r4stnEQMdBndunQpeOUhtTwQnXq5xn51HjWzA7LI569ES35qE0CDLgOPq9cclWTEog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <style>
-        body, html {
+        /* ==========================================================================
+           1. كود الـ CSS المتقدم والمدمج
+           ========================================================================== */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+
+        * {
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
         }
 
-        #map {
-            width: 100%;
-            height: 100vh;
-        }
-
-        .location-panel {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 1000;
-            max-width: 300px;
-            border-right: 5px solid #0078ff;
-        }
-
-        .location-panel h3 {
-            margin: 0 0 10px 0;
+        body {
+            background-color: #f4f6f9;
             color: #333;
-            font-size: 18px;
         }
 
-        .location-panel p {
-            margin: 5px 0;
-            color: #666;
-            font-size: 14px;
+        /* الهيدر وشريط التنقل */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .status-badge {
-            display: inline-block;
-            background: #28a745;
+        header .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        header .logo span {
+            color: #00f2fe;
+        }
+
+        header nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        header nav ul li {
+            margin-right: 20px;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: 0.3s ease;
+        }
+
+        header nav ul li a:hover, header nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #00f2fe;
+        }
+
+        /* الواجهة الكبيرة */
+        .hero-section {
+            background: radial-gradient(circle, rgba(30,60,114,1) 0%, rgba(42,82,152,1) 100%);
             color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-top: 5px;
+            text-align: center;
+            padding: 60px 20px;
         }
 
-        .leaflet-popup-content-wrapper {
-            direction: rtl;
-            text-align: right;
+        .hero-content h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        /* الأقسام العامة */
+        .section {
+            padding: 40px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 30px;
+            position: relative;
+            color: #1e3c72;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #00f2fe;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* شبكة أفراد العائلة */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .member-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid transparent;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        /* تمييز حالة البطاقات حسب الثراء */
+        .member-card.status-rich { border-top-color: #2ecc71; }
+        .member-card.status-medium { border-top-color: #3498db; }
+        .member-card.status-poor { border-top-color: #e74c3c; }
+
+        .avatar {
+            font-size: 50px;
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+
+        .member-card h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .member-card .role {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .balance-badge {
+            background-color: #f0f3f8;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            color: #2c3e50;
+        }
+
+        /* بوابة الحساب والسحب */
+        .portal-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        @media(max-width: 768px) {
+            .portal-container { grid-template-columns: 1fr; }
+        }
+
+        .account-status-panel {
+            background: #f8fafd;
+            border-right: 4px solid #1e3c72;
+            padding: 30px;
             border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .account-status-panel h3 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .main-balance-display {
+            font-size: 40px;
+            font-weight: 700;
+            color: #2ecc71;
+            margin: 20px 0;
+        }
+
+        .hint-text {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* الاستمارة */
+        .withdrawal-form-panel h3 {
+            margin-bottom: 20px;
+            color: #1e3c72;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            text-align: right;
+        }
+
+        .form-group input:focus {
+            border-color: #1e3c72;
+            box-shadow: 0 0 5px rgba(30,60,114,0.3);
+        }
+
+        /* الخيارات لبريدي موب */
+        .radio-options {
+            background-color: #fff9e6;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #ffeaa7;
+        }
+
+        .radio-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #d35400;
+        }
+
+        .radio-container input {
+            margin-left: 10px;
+            transform: scale(1.2);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #d35400 0%, #b33921 100%);
+        }
+
+        /* رسائل النظام المالي */
+        .hidden-msg { display: none; }
+        .response-msg {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .response-msg.success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .response-msg.error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1e3c72;
+            color: white;
+            font-size: 14px;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
-    <div class="location-panel">
-        <h3>نظام تحديد المواقع (GPS)</h3>
-        <p><strong>الموقع الحالي:</strong> منطقة 70 مسكن، عين شمس، القاهرة، مصر.</p>
-        <p><strong>حالة الاتصال:</strong> نشط الآن</p>
-        <span class="status-badge">أنت متواجد هنا حالياً</span>
-    </div>
+    <!-- الهيدر / شريط التنقل -->
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-users-gear"></i> عائلة <span>ويطون</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#overview" class="active">الرئيسية</a></li>
+                <li><a href="#members-section">أفراد العائلة</a></li>
+                <li><a href="#finance-portal">البوابة المالية</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div id="map"></div>
-
-    <script>
-        // إحداثيات منطقة الـ 70 مسكن بالقاهرة
-        const lat = 30.1245;
-        const lng = 31.3395;
-
-        // تهيئة الخريطة
-        const map = L.map('map').setView([lat, lng], 16);
-
-        // استخدام رابط خريطة آمن تماماً ومتوافق
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
-
-        // إضافة الدليل
-        const marker = L.marker([lat, lng]).addTo(map);
-
-        // النافذة التلقائية لتوثيق السكن
-        marker.bindPopup(`
-            <div style="font-family: sans-serif; padding: 5px; min-width: 150px;">
-                <h4 style="margin: 0 0 5px 0; color: #0078ff;">موقعي السكني الحالي</h4>
-                <p style="margin: 0; font-size: 13px; color: #555;">
-                    <b>العنوان:</b> مساكن الـ 70، القاهرة.<br>
-                    <span style="color: #28a745; font-weight: bold;">✓ تم التحقق من الموقع عبر الـ GPS</span>
-                </p>
+    <!-- القائمة الرئيسية للمعلومات -->
+    <main>
+        <section id="overview" class="hero-section">
+            <div class="hero-content">
+                <h1>مرحباً بكم في المنصة الرقمية لعائلة ويطون</h1>
+                <p>إدارة الحسابات، الأرصدة، وعمليات السحب الخاصة ببريدي موب و CCP بكل احترافية.</p>
             </div>
-        `).openPopup();
+        </section>
 
-        // دائرة دقة الـ GPS الواقعية
-        L.circle([lat, lng], {
-            color: '#0078ff',
-            fillColor: '#0078ff',
-            fillOpacity: 0.15,
-            radius: 120
-        }).addTo(map);
+        <!-- قسم أفراد العائلة -->
+        <section id="members-section" class="section">
+            <h2 class="section-title">أعضاء العائلة والحسابات الحالية</h2>
+            <div class="members-grid">
+                
+                <!-- الأب شريف -->
+                <div class="member-card status-rich" onclick="switchUser('cherif')">
+                    <div class="avatar"><i class="fa-solid fa-user-tie"></i></div>
+                    <h3>الأب شريف</h3>
+                    <p class="role">رئيس العائلة</p>
+                    <div class="balance-badge">الرصيد: ثروة طائلة 💸</div>
+                </div>
+
+                <!-- الأم وريدة -->
+                <div class="member-card status-medium" onclick="switchUser('wourida')">
+                    <div class="avatar"><i class="fa-solid fa-user-nurse"></i></div>
+                    <h3>الأم وريدة</h3>
+                    <p class="role">نائبة الرئيس</p>
+                    <div class="balance-badge">الرصيد: $82.00</div>
+                </div>
+
+                <!-- الجدة -->
+                <div class="member-card status-poor" onclick="switchUser('grandma')">
+                    <div class="avatar"><i class="fa-solid fa-user-graduate"></i></div>
+                    <h3>الجدة</h3>
+                    <p class="role">بركة المنزل</p>
+                    <div class="balance-badge">الرصيد: $0.00</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- البوابة المالية وسحب الأموال -->
+        <section id="finance-portal" class="section">
+            <h2 class="section-title">بوابة سحب الأموال الإحترافية</h2>
+            
+            <div class="portal-container">
+                <!-- تفاصيل الحساب الحالي المختار -->
+                <div class="account-status-panel">
+                    <h3><i class="fa-solid fa-wallet"></i> الحساب النشط الآن: <span id="current-user-name">الأم وريدة</span></h3>
+                    <div class="main-balance-display">
+                        <span id="current-user-balance">$82.00</span>
+                    </div>
+                    <p class="hint-text">اختر (اضغط على) بطاقة أي فرد فوق لتغيير الحساب المالي الجاري.</p>
+                </div>
+
+                <!-- استمارة السحب عبر CCP وبريدي موب -->
+                <div class="withdrawal-form-panel">
+                    <h3><i class="fa-solid fa-money-bill-transfer"></i> طلب سحب آمن</h3>
+                    <form id="withdraw-form" onsubmit="handleWithdraw(event)">
+                        
+                        <div class="form-group">
+                            <label for="withdraw-amount">المبلغ المراد سحبه ($):</label>
+                            <input type="number" id="withdraw-amount" placeholder="أدخل المبلغ هنا" required min="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ccp-number">رقم الحساب البريدي (CCP):</label>
+                            <input type="text" id="ccp-number" placeholder="مثال: 0012345678 / المفتاح 12" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>طريقة الدفع المفضلة:</label>
+                            <div class="radio-options">
+                                <label class="radio-container">
+                                    <input type="radio" name="payment-method" value="baridimob" checked>
+                                    تطبيق بريدي موب (BaridiMob)
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit">تأكيد عملية السحب <i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                    
+                    <!-- رسالة النجاح أو الخطأ -->
+                    <div id="response-message" class="hidden-msg"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 عائلة ويطون - نظام مالي متكامل متصل بـ بريدي موب و CCP.</p>
+    </footer>
+
+    <!-- ==========================================================================
+       2. كود الـ JavaScript التفاعلي والذكي
+       ========================================================================== */ -->
+    <script>
+        // قاعدة البيانات المؤقتة للنظام
+        const familyData = {
+            wourida: { name: "الأم وريدة", balance: 82, canWithdraw: true, exactBalance: "$82.00" },
+            cherif: { name: "الأب شريف", balance: 9999999, canWithdraw: true, exactBalance: "أموال كثيرة جداً 💰" },
+            grandma: { name: "الجدة", balance: 0, canWithdraw: false, exactBalance: "$0.00" }
+        };
+
+        let activeUser = 'wourida'; // الافتراضي عند الفتح
+
+        // دالة تبديل الحسابات عند الضغط الفوقاني
+        function switchUser(userKey) {
+            activeUser = userKey;
+            document.getElementById('current-user-name').innerText = familyData[userKey].name;
+            document.getElementById('current-user-balance').innerText = familyData[userKey].exactBalance;
+            
+            // تصفية الرسائل السابقة
+            const msgDiv = document.getElementById('response-message');
+            msgDiv.className = 'hidden-msg';
+            msgDiv.innerText = '';
+        }
+
+        // دالة معالجة السحب المالي و التحقق من الشروط
+        function handleWithdraw(event) {
+            event.preventDefault();
+            const amount = parseFloat(document.getElementById('withdraw-amount').value);
+            const ccp = document.getElementById('ccp-number').value;
+            const msgDiv = document.getElementById('response-message');
+
+            // 1. إذا كانت الجدة (رصيدها 0$)
+            if (activeUser === 'grandma') {
+                msgDiv.className = "response-msg error";
+                msgDiv.innerText = `❌ خطأ في النظام: الجدة رصيدها الحالي $0.00، لا يمكن إجراء سحب!`;
+                return;
+            }
+
+            // 2. إذا كانت الأم وريدة والمبلغ المطلوب أكبر من 82$
+            if (activeUser === 'wourida' && amount > familyData.wourida.balance) {
+                msgDiv.className = "response-msg error";
+                msgDiv.innerText = `❌ رصيد الأم وريدة لا يسمح بسحب $${amount}. الحد الأقصى المتوفر هو $${familyData.wourida.balance}.`;
+                return;
+            }
+
+            // 3. حالة النجاح (للأب شريف أو الأم وريدة بمبلغ معقول)
+            msgDiv.className = "response-msg success";
+            msgDiv.innerText = `✅ تم معالجة الطلب بنجاح! تم تحويل $${amount} إلى حساب الـ CCP رقم (${ccp}) عبر تطبيق بريدي موب الخاص بـ ${familyData[activeUser].name}.`;
+            
+            // تحديث فوري لرصيد الأم وريدة في الواجهة إذا قامت بالسحب
+            if (activeUser === 'wourida') {
+                familyData.wourida.balance -= amount;
+                familyData.wourida.exactBalance = "$" + familyData.wourida.balance.toFixed(2);
+                document.getElementById('current-user-balance').innerText = familyData.wourida.exactBalance;
+            }
+        }
     </script>
-
 </body>
 </html>
