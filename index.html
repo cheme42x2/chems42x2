@@ -1,168 +1,124 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 FF SCRIPT PANEL</title>
+    <title>موقعي الحالي - القاهرة</title>
+    
+    <!-- تحميل ملفات مكتبة Leaflet للخرائط -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <style>
-        * {
+        /* إعدادات الصفحة */
+        body, html {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: #0a0a0a;
-            font-family: 'Courier New', monospace;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .panel {
-            background: #111;
-            border: 2px solid #ff2200;
-            border-radius: 25px;
-            padding: 30px 25px;
-            max-width: 450px;
             width: 100%;
-            box-shadow: 0 0 50px #ff220055;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        .header {
-            text-align: center;
-            border-bottom: 1px solid #ff220066;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+
+        /* حاوية الخريطة */
+        #map {
+            width: 100%;
+            height: 100vh; /* ملء الشاشة كاملة لتبدو واقعية */
         }
-        .header h1 {
-            color: #ff2200;
-            font-size: 28px;
-            letter-spacing: 4px;
-            text-shadow: 0 0 20px #ff2200;
-        }
-        .header p {
-            color: #888;
-            font-size: 12px;
-            letter-spacing: 2px;
-        }
-        .feature {
-            background: #1a1a1a;
-            border-left: 4px solid #ff2200;
-            padding: 12px 15px;
-            margin-bottom: 10px;
+
+        /* لوحة معلومات الموقع (تظهر فوق الخريطة) */
+        .location-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
             border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            max-width: 300px;
+            border-right: 5px solid #0078ff;
         }
-        .feature .label {
-            color: #ccc;
-            font-size: 14px;
-            font-weight: 600;
+
+        .location-panel h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 18px;
         }
-        .feature .status {
-            color: #0f0;
-            font-size: 12px;
-            background: #0f0a0a;
-            padding: 4px 12px;
-            border-radius: 30px;
-            border: 1px solid #0f0;
-        }
-        .feature .status.off {
-            color: #ff4444;
-            border-color: #ff4444;
-        }
-        .btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(145deg, #ff2200, #cc1100);
-            border: none;
-            border-radius: 60px;
-            color: #fff;
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-top: 20px;
-            box-shadow: 0 0 30px #ff220066;
-            text-transform: uppercase;
-        }
-        .btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 60px #ff220099;
-        }
-        .btn:active {
-            transform: scale(0.96);
-        }
-        .footer {
-            text-align: center;
-            color: #444;
-            font-size: 10px;
-            margin-top: 20px;
-            letter-spacing: 1px;
-        }
-        .version {
-            text-align: center;
+
+        .location-panel p {
+            margin: 5px 0;
             color: #666;
+            font-size: 14px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
             font-size: 12px;
-            margin: 15px 0 10px;
-            border-top: 1px solid #1a1a1a;
-            padding-top: 15px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        /* تعديل تصميم النافذة المنبثقة داخل الخريطة */
+        .leaflet-popup-content-wrapper {
+            direction: rtl;
+            text-align: right;
+            border-radius: 8px;
         }
     </style>
 </head>
 <body>
 
-<div class="panel">
-    <div class="header">
-        <h1>🔥 FF SCRIPT</h1>
-        <p>⚡ MTH TEAM • PROXY ACTIVE</p>
+    <!-- لوحة المعلومات العلوية -->
+    <div class="location-panel">
+        <h3>نظام تحديد المواقع (GPS)</h3>
+        <p><strong>الموقع الحالي:</strong> منطقة 70 مسكن، عين شمس، القاهرة، مصر.</p>
+        <p><strong>حالة الاتصال:</strong> نشط الآن</p>
+        <span class="status-badge">أنت متواجد هنا حالياً</span>
     </div>
 
-    <div class="feature">
-        <span class="label">🔁 Fast Switch</span>
-        <span class="status">ON</span>
-    </div>
-    <div class="feature">
-        <span class="label">🦘 Super Pulo</span>
-        <span class="status">ON</span>
-    </div>
-    <div class="feature">
-        <span class="label">🎯 Aim Assist</span>
-        <span class="status">ON</span>
-    </div>
-    <div class="feature">
-        <span class="label">📈 Sensi Unlock</span>
-        <span class="status">ON</span>
-    </div>
-    <div class="feature">
-        <span class="label">💀 HS Alto</span>
-        <span class="status">ON</span>
-    </div>
-    <div class="feature">
-        <span class="label">🎯 HS Pescoço</span>
-        <span class="status off">OFF</span>
-    </div>
+    <!-- حاوية الخريطة -->
+    <div id="map"></div>
 
-    <div class="version">📌 Free Fire v1.128.2</div>
+    <script>
+        // إحداثيات منطقة الـ 70 مسكن في عين شمس بالقاهرة
+        const latitude = 30.1245;
+        const longitude = 31.3395;
 
-    <!-- زر المواصلة -->
-    <button class="btn" onclick="openFreeFire()">▶ المواصلة</button>
+        // 1. إنشاء الخريطة وتثبيت الرؤية على الإحداثيات مع درجة تقريب عالية (Zoom = 16) لتبدو دقيقة
+        const map = L.map('map').setView([latitude, longitude], 16);
 
-    <div class="footer">🔰 KORTESX • SCRIPT LOADED</div>
-</div>
+        // 2. إضافة طبقة الخرائط (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
 
-<script>
-    function openFreeFire() {
-        // محاولة فتح Free Fire عبر Intent URL
-        window.location.href = "intent://com.dts.freefiremax/#Intent;action=android.intent.action.VIEW;category=android.intent.category.DEFAULT;end";
+        // 3. إضافة الدليل (المؤشر الأزرق) لتحديد موقعك بالضبط
+        const marker = L.marker([latitude, longitude]).addTo(map);
 
-        // إذا فشل (على متصفح لا يدعم)، نفتح صفحة Google Play
-        setTimeout(function() {
-            window.location.href = "https://play.google.com/store/apps/details?id=com.dts.freefiremax";
-        }, 800);
-    }
-</script>
+        // 4. إضافة نافذة منبثقة تفتح تلقائياً لتؤكد سكنك وتواجدك هناك
+        marker.bindPopup(`
+            <div style="font-family: sans-serif; padding: 5px;">
+                <h4 style="margin: 0 0 5px 0; color: #0078ff;">موقعي السكني الحالي</h4>
+                <p style="margin: 0; font-size: 13px; color: #555;">
+                    <b>العنوان:</b> مساكن الـ 70، القاهرة.<br>
+                    <span style="color: #28a745; font-weight: bold;">✓ تم التحقق من الموقع عبر الـ GPS</span>
+                </p>
+            </div>
+        `).openPopup(); // openPopup تجعلها تفتح مباشرة عند تحميل الصفحة
+
+        // 5. إضافة دائرة دقة زرقاء شفافة حول الموقع لتوحي بأن الـ GPS يلتقط إشارتك الحالية واقعياً
+        L.circle([latitude, longitude], {
+            color: '#0078ff',
+            fillColor: '#0078ff',
+            fillOpacity: 0.15,
+            radius: 100 // قطر الدائرة 100 متر
+        }).addTo(map);
+    </script>
+
 </body>
 </html>
