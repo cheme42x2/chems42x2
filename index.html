@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Infinite Symphony of Us</title>
+    <title>Cosmic Alignment - Mia & Chems</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@200;400;600&family=Playfair+Display:ital,wght@1,400;1,600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Space+Grotesk:wght@300;400;600&display=swap');
 
         * {
             box-sizing: border-box;
@@ -16,115 +16,117 @@
 
         body, html {
             width: 100%;
-            background-color: #030104;
-            font-family: 'Montserrat', sans-serif;
+            height: 100%;
+            background-color: #020205;
+            font-family: 'Space Grotesk', sans-serif;
             color: #ffffff;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        /* Luxury Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #030104;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(#ff2a5f, #791a88);
-            border-radius: 10px;
-        }
-
-        /* Constellation / Neural Network Dynamic Background */
-        #dynamic-net {
+        /* Fullscreen Cinematic Interstellar Canvas */
+        #universe-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
             z-index: 1;
-            pointer-events: none;
         }
 
-        /* 1. Cinematic Gateway (Lock Screen) */
-        #gatekeeper {
+        /* 3D Deep Space Nebula Ambient Overlay */
+        .nebula-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vw;
+            background: radial-gradient(circle, rgba(121, 26, 136, 0.15) 0%, rgba(255, 42, 95, 0.05) 50%, transparent 100%);
+            z-index: 2;
+            pointer-events: none;
+            filter: blur(80px);
+            animation: nebulaPulse 10s infinite ease-in-out;
+        }
+
+        /* Cybernetic Luxury Gateway */
+        #quantum-gate {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle at center, #11020a 0%, #030104 100%);
-            transition: all 1.8s cubic-bezier(0.76, 0, 0.24, 1);
+            background: radial-gradient(circle at center, #07040d 0%, #010103 100%);
+            transition: all 2s cubic-bezier(0.85, 0, 0.15, 1);
         }
 
-        .premium-shield {
-            background: rgba(6, 2, 5, 0.5);
-            border: 1px solid rgba(255, 42, 95, 0.12);
-            padding: 60px 45px;
-            border-radius: 40px;
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
+        .gate-shield {
+            background: rgba(4, 2, 8, 0.4);
+            border: 1px solid rgba(255, 42, 95, 0.15);
+            padding: 55px;
+            border-radius: 32px;
+            backdrop-filter: blur(50px);
+            -webkit-backdrop-filter: blur(50px);
             text-align: center;
             width: 90%;
             max-width: 480px;
-            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.9), 0 0 60px rgba(255, 42, 95, 0.03);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.9), 0 0 80px rgba(121, 26, 136, 0.1);
         }
 
-        .premium-shield h1 {
+        .gate-shield h1 {
             font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            letter-spacing: 5px;
+            font-size: 1.3rem;
+            letter-spacing: 6px;
             color: #ffffff;
             margin-bottom: 35px;
-            font-weight: 400;
+            text-transform: uppercase;
         }
 
-        .cyber-input {
+        .cosmic-input {
             width: 100%;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 42, 95, 0.2);
-            border-radius: 16px;
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 42, 95, 0.25);
+            border-radius: 12px;
             color: #ffffff;
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-align: center;
             outline: none;
-            letter-spacing: 3px;
-            margin-bottom: 30px;
-            font-family: 'Montserrat', sans-serif;
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .cyber-input:focus {
-            border-color: #ff2a5f;
-            box-shadow: 0 0 35px rgba(255, 42, 95, 0.35);
-            background: rgba(10, 2, 6, 0.8);
-        }
-
-        .access-btn {
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(45deg, #ff2a5f, #b81d7a);
-            border: none;
-            border-radius: 16px;
-            color: #ffffff;
-            font-size: 0.95rem;
-            font-weight: 600;
             letter-spacing: 4px;
+            margin-bottom: 25px;
+            transition: all 0.5s ease;
+        }
+
+        .cosmic-input:focus {
+            border-color: #ff2a5f;
+            box-shadow: 0 0 40px rgba(255, 42, 95, 0.4);
+            background: rgba(5, 1, 10, 0.8);
+        }
+
+        .warp-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #ff2a5f 0%, #791a88 100%);
+            border: none;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 5px;
             cursor: pointer;
             text-transform: uppercase;
-            box-shadow: 0 12px 35px rgba(255, 42, 95, 0.25);
+            box-shadow: 0 15px 35px rgba(255, 42, 95, 0.3);
             transition: all 0.4s ease;
         }
 
-        .access-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 18px 50px rgba(255, 42, 95, 0.5);
-            letter-spacing: 6px;
+        .warp-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(255, 42, 95, 0.6);
+            letter-spacing: 7px;
         }
 
-        .fail-toast {
-            color: #ff3333;
+        .toast-error {
+            color: #ff3355;
             font-size: 0.8rem;
             margin-top: 15px;
             display: none;
@@ -132,501 +134,354 @@
             font-weight: 600;
         }
 
-        /* Infinite Story Scroll Layout */
-        #universe-scroller {
+        /* Interactive Dynamic HUD System (Main View) */
+        #cosmic-hud {
             position: relative;
             z-index: 10;
             width: 100%;
+            height: 100%;
             display: none;
             opacity: 0;
-            transition: opacity 2.5s ease;
+            transition: opacity 3s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Floating Navigation Utility */
-        .mouse-scroll {
-            position: fixed;
-            bottom: 40px;
+        /* High-End Floating UI Panels */
+        .hud-panel {
+            position: absolute;
+            background: rgba(3, 1, 6, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-left: 2px solid rgba(255, 42, 95, 0.3);
+            padding: 25px 30px;
+            border-radius: 16px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            animation: paneFloat 6s infinite ease-in-out;
+        }
+
+        /* Top Centered Signature Core */
+        .hud-core {
+            top: 40px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 100;
-            font-size: 0.75rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.3);
-            animation: floatUpDown 2s infinite;
-            pointer-events: none;
-        }
-
-        /* Luxurious Chapters */
-        section {
-            min-height: 100vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 100px 40px;
-            box-sizing: border-box;
-            position: relative;
-        }
-
-        .chapter-box {
-            max-width: 900px;
-            width: 100%;
             text-align: center;
-            opacity: 0;
-            transform: translateY(60px) scale(0.96);
-            transition: all 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: transparent;
+            border: none;
+            box-shadow: none;
         }
 
-        .chapter-box.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        /* CHAPTER 1: The Overture (Big Intro) */
-        .chapter-num {
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            color: #ff2a5f;
-            letter-spacing: 6px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .hero-statement {
-            font-family: 'Cinzel', serif;
-            font-size: 4.5rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            background: linear-gradient(135deg, #ffffff 30%, #ff6b8b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-desc {
-            font-size: 1.1rem;
-            font-weight: 200;
-            color: #b5a4b1;
-            letter-spacing: 3px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* CHAPTER 2: The Quantum Clock */
-        .clock-monitor {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-            margin-top: 50px;
-        }
-
-        .clock-tile {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 42, 95, 0.08);
-            padding: 40px 20px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .clock-tile num {
-            display: block;
+        .core-title {
             font-family: 'Cinzel', serif;
             font-size: 3.5rem;
-            font-weight: 300;
-            color: #ff2a5f;
-            text-shadow: 0 0 20px rgba(255, 42, 95, 0.3);
+            font-weight: 900;
+            letter-spacing: 8px;
+            background: linear-gradient(to right, #ffffff, #ff6b8b, #791a88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(255, 42, 95, 0.2);
         }
 
-        .clock-tile label {
+        .core-status {
             font-size: 0.75rem;
-            letter-spacing: 3px;
-            color: #8c7b88;
+            letter-spacing: 6px;
+            color: #8a8ab0;
             text-transform: uppercase;
             margin-top: 10px;
-            display: block;
         }
 
-        /* CHAPTER 3: The Deep Verse */
-        .poetic-canvas {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 2rem;
-            line-height: 2.2;
-            color: #fceef6;
-            max-width: 800px;
-            margin: 0 auto;
-            text-shadow: 0 0 1px rgba(255,255,255,0.3);
+        /* Left Information Telemetry Panel */
+        .telemetry-left {
+            left: 40px;
+            top: 30%;
+            max-width: 320px;
         }
 
-        /* CHAPTER 4: The Kinetic Core */
-        #kinetic-heart-field {
-            position: relative;
-            width: 100%;
-            height: 450px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* Right Constellation Chronicle Panel */
+        .telemetry-right {
+            right: 40px;
+            top: 30%;
+            max-width: 340px;
+            animation-delay: 2s;
         }
 
-        .floating-heart-text {
-            position: absolute;
-            font-size: 0.75rem;
-            font-weight: 600;
+        .panel-header {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
             color: #ff2a5f;
-            text-shadow: 0 0 8px rgba(255, 42, 95, 0.7);
-            opacity: 0;
-            animation: particleReveal 2.5s forwards ease-out;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 8px;
         }
 
-        .embedded-signature {
-            position: absolute;
+        .data-stream {
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+            font-weight: 300;
+            text-align: justify;
+        }
+
+        /* Chrono Vector (Live Universal Counter) */
+        .chrono-vector {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .vector-box {
+            text-align: center;
+            flex: 1;
+            background: rgba(255, 255, 255, 0.01);
+            padding: 10px 5px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .vector-box val {
+            display: block;
             font-family: 'Cinzel', serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            letter-spacing: 4px;
-            color: #ffffff;
-            text-shadow: 0 0 15px #ff2a5f, 0 0 35px #ff2a5f;
-            z-index: 10;
-        }
-
-        /* CHAPTER 5: The Archives */
-        .vault-display {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .vault-item {
-            background: #090307;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 24px;
-            padding: 20px;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer;
-            text-align: left;
-        }
-
-        .vault-item:hover {
-            transform: translateY(-15px);
-            border-color: #ff2a5f;
-            box-shadow: 0 20px 45px rgba(255, 42, 95, 0.15);
-        }
-
-        .vault-item img {
-            width: 100%;
-            height: 240px;
-            object-fit: cover;
-            border-radius: 16px;
-            filter: grayscale(40%);
-            transition: filter 0.6s ease;
-        }
-
-        .vault-item:hover img {
-            filter: grayscale(0%);
-        }
-
-        .vault-item h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            margin: 20px 0 5px 0;
+            font-size: 1.6rem;
             color: #ffffff;
         }
 
-        .vault-item p {
-            font-size: 0.8rem;
-            color: #ff6b8b;
+        .vector-box tag {
+            font-size: 0.6rem;
             letter-spacing: 1px;
+            color: #64748b;
+            text-transform: uppercase;
         }
 
-        /* Keyframes */
-        @keyframes floatUpDown { 0%, 100% { transform: translateY(0) translateX(-50%); } 50% { transform: translateY(-12px) translateX(-50%); } }
-        @keyframes particleReveal { to { opacity: 0.85; transform: scale(1); } }
+        /* Animations Keyframes */
+        @keyframes nebulaPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; } 50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; } }
+        @keyframes paneFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
-        @media (max-width: 900px) {
-            .clock-monitor { grid-template-columns: repeat(2, 1fr); }
-            .vault-display { grid-template-columns: 1fr; }
-            .hero-statement { font-size: 2.5rem; }
-            .poetic-canvas { font-size: 1.4rem; line-height: 2; }
-            section { padding: 60px 20px; }
+        @media (max-width: 1024px) {
+            body, html { overflow-y: auto; }
+            #cosmic-hud { display: flex; flex-direction: column; height: auto; padding: 140px 20px 40px 20px; gap: 30px; }
+            .hud-panel { position: relative; top: auto; left: auto; right: auto; transform: none !important; width: 100%; max-width: 100%; animation: none; }
+            .core-title { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="dynamic-net"></canvas>
+    <canvas id="universe-canvas"></canvas>
+    <div class="nebula-glow"></div>
 
-    <div id="gatekeeper">
-        <div class="premium-shield" id="shake-frame">
-            <h1>SECURE ACCESS PROTOCOL</h1>
-            <input type="password" id="pass-field" class="cyber-input" placeholder="ENTER ACCESS KEY REVELATION" autocomplete="off" onkeydown="checkKeyEnter(event)">
-            <button class="access-btn" onclick="authenticateGateway()">Unlock Dimension</button>
-            <div id="fail-notifier" class="fail-toast">ACCESS DENIED: SIGNATURE MISMATCH</div>
+    <div id="quantum-gate">
+        <div class="gate-shield" id="error-shake">
+            <h1>ORBITAL SIGN IN</h1>
+            <input type="password" id="cosmic-key" class="cosmic-input" placeholder="ENTER UNIVERSAL PASSWORD" autocomplete="off" onkeydown="catchKey(event)">
+            <button class="warp-btn" onclick="engageWarpDrive()">Initiate Launch</button>
+            <div id="error-toast" class="toast-error">GRAVITATIONAL ACCESS DENIED</div>
         </div>
     </div>
 
-    <div id="universe-scroller">
+    <div id="cosmic-hud">
         
-        <div class="mouse-scroll">Scroll down to discover</div>
+        <div class="hud-panel hud-core">
+            <h1 class="core-title">Mia & Chems</h1>
+            <div class="core-status">System Status: Infinitely Synchronized</div>
+        </div>
 
-        <section>
-            <div class="chapter-box scroll-detect">
-                <div class="chapter-num">Chapter I</div>
-                <h2 class="hero-statement">The Genesis of Two Timelines</h2>
-                <p class="hero-desc">A deep-space configuration made purely to celebrate a bond built to outlast stars.</p>
+        <div class="hud-panel telemetry-left">
+            <div class="panel-header">System Continuums</div>
+            <p class="data-stream" style="margin-bottom: 15px;">Absolute spatial time recorded since the perfect intersection of two independent cosmic orbits.</p>
+            <div class="chrono-vector">
+                <div class="vector-box"><val id="v-days">00</val><tag>Days</tag></div>
+                <div class="vector-box"><val id="v-hours">00</val><tag>Hours</tag></div>
+                <div class="vector-box"><val id="v-mins">00</val><tag>Mins</tag></div>
+                <div class="vector-box"><val id="v-secs">00</val><tag>Secs</tag></div>
             </div>
-        </section>
+        </div>
 
-        <section>
-            <div class="chapter-box scroll-detect">
-                <div class="chapter-num">Chapter II</div>
-                <h2 class="hero-statement" style="font-size: 2.8rem;">The Time Continuum</h2>
-                <p class="hero-desc">Precise measurement of absolute synchronicity accumulated between us.</p>
-                <div class="clock-monitor">
-                    <div class="clock-tile"><num id="c-days">00</num><label>Days</label></div>
-                    <div class="clock-tile"><num id="c-hours">00</num><label>Hours</label></div>
-                    <div class="clock-tile"><num id="c-mins">00</num><label>Minutes</label></div>
-                    <div class="clock-tile"><num id="c-secs">00</num><label>Seconds</label></div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="chapter-box scroll-detect">
-                <div class="chapter-num">Chapter III</div>
-                <h2 class="hero-statement" style="font-size: 2.8rem; margin-bottom: 40px;">The Infinite Manifesto</h2>
-                <p class="poetic-canvas" id="poetic-typist"></p>
-            </div>
-        </section>
-
-        <section>
-            <div class="chapter-box scroll-detect">
-                <div class="chapter-num">Chapter IV</div>
-                <h2 class="hero-statement" style="font-size: 2.8rem;">The Quantum Heart</h2>
-                <p class="hero-desc" style="margin-bottom: 30px;">A matrix composed of hundreds of individual nodes perfectly aligned to protect a singular name.</p>
-                <div id="kinetic-heart-field">
-                    <div class="embedded-signature">Mia</div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="chapter-box scroll-detect">
-                <div class="chapter-num">Chapter V</div>
-                <h2 class="hero-statement" style="font-size: 2.8rem;">The Vaulted Constellations</h2>
-                <p class="hero-desc">Precious historical milestones archived safely within the deep neural system layers.</p>
-                <div class="vault-display">
-                    <div class="vault-item">
-                        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600" alt="Arc 1">
-                        <h3>THE GRAVITATIONAL PULL</h3>
-                        <p>Phase 01: Initial alignment</p>
-                    </div>
-                    <div class="vault-item">
-                        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600" alt="Arc 2">
-                        <h3>ELEVATED ORBITS</h3>
-                        <p>Phase 02: Total lock-in</p>
-                    </div>
-                    <div class="vault-item">
-                        <img src="https://images.unsplash.com/photo-1494774157365-9e04c6722e47?w=600" alt="Arc 3">
-                        <h3>INFINITE EXPANSION</h3>
-                        <p>Phase 03: Beyond horizons</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="hud-panel telemetry-right">
+            <div class="panel-header">Cosmic Directive</div>
+            <p class="data-stream">
+                Across thousands of rotating coordinates, deep stellar clusters, and infinite planetary vectors, our alignment remains completely unbreakable. Built inside the absolute fabric of space, this dimension exists solely to guard an eternal connection. Orbiting forever, outlasting lifetimes, expanding beyond limits.
+            </p>
+        </div>
     </div>
 
     <script>
-        // High-Fidelity Physics Engine for Dynamic Moving Networks
-        const canvas = document.getElementById('dynamic-net');
+        // High-Performance Advanced Particle and Celestial Physics Engine
+        const canvas = document.getElementById('universe-canvas');
         const ctx = canvas.getContext('2d');
-        let nodes = [];
-        const totalNodesCount = 85;
+        
+        let stars = [];
+        let planets = [];
+        const totalStars = 1100; // Over a thousand glowing particles
 
-        function adaptScreenDimensions() {
+        function initializeUniverseBounds() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-        window.addEventListener('resize', adaptScreenDimensions);
-        adaptScreenDimensions();
+        window.addEventListener('resize', initializeUniverseBounds);
+        initializeUniverseBounds();
 
-        class NeuralNode {
+        // 1. Star / Cosmic Grid Object Model
+        class CelestialStar {
             constructor() {
+                this.reset();
+                this.y = Math.random() * canvas.height; // Spread initially
+            }
+            reset() {
                 this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.speedX = (Math.random() - 0.5) * 0.9;
-                this.speedY = (Math.random() - 0.5) * 0.9;
-                this.radius = Math.random() * 2 + 1;
+                this.y = 0;
+                this.velocityZ = Math.random() * 0.4 + 0.1; // Speed drifting downwards
+                this.brightness = Math.random() * 0.6 + 0.4;
+                this.size = Math.random() * 1.5;
             }
-            motion() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            drift() {
+                this.y += this.velocityZ;
+                if (this.y > canvas.height) {
+                    this.reset();
+                }
             }
-            renderNode() {
+            project() {
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 42, 95, 0.4)';
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.brightness})`;
                 ctx.fill();
             }
         }
 
-        for (let i = 0; i < totalNodesCount; i++) {
-            nodes.push(new NeuralNode());
-        }
-
-        function runNetworkAnimation() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < nodes.length; i++) {
-                nodes[i].motion();
-                nodes[i].renderNode();
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const deltaX = nodes[i].x - nodes[j].x;
-                    const deltaY = nodes[i].y - nodes[j].y;
-                    const pointDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-                    
-                    if (pointDistance < 140) {
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.strokeStyle = `rgba(255, 42, 95, ${0.25 * (1 - pointDistance / 140)})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.stroke();
-                    }
-                }
+        // 2. Beautiful 3D Orbiting Planet Object Model
+        class RotatingPlanet {
+            constructor(orbitalRadius, size, velocity, baseColor, glowColor) {
+                this.orbitalRadius = orbitalRadius;
+                this.size = size;
+                this.velocity = velocity;
+                this.baseColor = baseColor;
+                this.glowColor = glowColor;
+                this.angle = Math.random() * Math.PI * 2;
+                this.rotationAngle = 0; // Axis rotation spin
             }
-            requestAnimationFrame(runNetworkAnimation);
+            orbit() {
+                this.angle += this.velocity;
+                this.rotationAngle += 0.01; // Internal spin rate
+            }
+            drawPlanet() {
+                // Determine screen coordinates relative to center
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height * 0.55;
+                
+                // Mapped coordinates (creates an architectural perspective orbit elliptical)
+                const posX = centerX + Math.cos(this.angle) * this.orbitalRadius * 1.4;
+                const posY = centerY + Math.sin(this.angle) * this.orbitalRadius * 0.6;
+
+                // Atmospheric Shadow/Glow Calculation
+                const gradient = ctx.createRadialGradient(posX, posY, 0, posX, posY, this.size);
+                gradient.addColorStop(0, '#ffffff');
+                gradient.addColorStop(0.3, this.baseColor);
+                gradient.addColorStop(1, '#020205');
+
+                // Draw Elliptical Orbit Paths Lines
+                ctx.beginPath();
+                ctx.ellipse(centerX, centerY, this.orbitalRadius * 1.4, this.orbitalRadius * 0.6, 0, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.025)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                // Draw Planet Atmosphere Flare Glow
+                ctx.beginPath();
+                ctx.arc(posX, posY, this.size + 8, 0, Math.PI * 2);
+                ctx.fillStyle = this.glowColor;
+                ctx.fill();
+
+                // Draw Planet Solid Body
+                ctx.beginPath();
+                ctx.arc(posX, posY, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+            }
         }
-        runNetworkAnimation();
 
-        // Security Core Verification
-        function checkKeyEnter(e) {
-            if (e.key === 'Enter') authenticateGateway();
+        // Instantiating Celestial Data Structures
+        for (let i = 0; i < totalStars; i++) {
+            stars.push(new CelestialStar());
         }
 
-        function authenticateGateway() {
-            const secretInput = document.getElementById('pass-field').value;
-            const absoluteKey = "Mia & Chems";
+        // Seeding Luxury Custom Planets (Sizes, orbits, speed configuration)
+        planets.push(new RotatingPlanet(180, 24, 0.003, '#ff2a5f', 'rgba(255, 42, 95, 0.08)'));  // Core Crimson Planet
+        planets.push(new RotatingPlanet(280, 16, 0.002, '#791a88', 'rgba(121, 26, 136, 0.06)')); // Quantum Purple gas giant
+        planets.push(new RotatingPlanet(390, 12, 0.001, '#475569', 'rgba(255, 255, 255, 0.04)')); // Edge Satellite Sphere
 
-            if (secretInput === absoluteKey) {
-                const gate = document.getElementById('gatekeeper');
-                gate.style.opacity = '0';
-                gate.style.transform = 'scale(1.08)';
+        // Continuous Cosmic Engine Loop
+        function executeCosmicLoop() {
+            // Dark Matte Void Refresh with trail preservation
+            ctx.fillStyle = '#020205';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Compute & Draw Stars
+            for (let i = 0; i < stars.length; i++) {
+                stars[i].drift();
+                stars[i].project();
+            }
+
+            // Compute & Draw Planets
+            for (let i = 0; i < planets.length; i++) {
+                planets[i].orbit();
+                planets[i].drawPlanet();
+            }
+
+            requestAnimationFrame(executeCosmicLoop);
+        }
+        executeCosmicLoop();
+
+        // Gatekeeping Authorization Actions
+        function catchKey(e) {
+            if (e.key === 'Enter') engageWarpDrive();
+        }
+
+        function engageWarpDrive() {
+            const keyValue = document.getElementById('cosmic-key').value;
+            const targetUniversalSignature = "Mia & Chems";
+
+            if (keyValue === targetUniversalSignature) {
+                const gatePanel = document.getElementById('quantum-gate');
+                gatePanel.style.opacity = '0';
+                gatePanel.style.transform = 'scale(1.15)';
                 
                 setTimeout(() => {
-                    gate.style.display = 'none';
-                    const scrollContainer = document.getElementById('universe-scroller');
-                    scrollContainer.style.display = 'block';
+                    gatePanel.style.display = 'none';
+                    const mainHud = document.getElementById('cosmic-hud');
+                    mainHud.style.display = 'block';
                     
                     setTimeout(() => {
-                        scrollContainer.style.opacity = '1';
-                        initiateChronology();
-                        deployHeartSwarm();
-                        setupScrollRevelation();
+                        mainHud.style.opacity = '1';
+                        initiateChronologyTelemetry();
                     }, 100);
-                }, 1800);
+                }, 2000);
             } else {
-                document.getElementById('fail-notifier').style.display = 'block';
-                const wrapper = document.getElementById('shake-frame');
-                wrapper.style.transform = 'translateX(12px)';
-                setTimeout(() => wrapper.style.transform = 'translateX(-12px)', 80);
-                setTimeout(() => wrapper.style.transform = 'translateX(6px)', 160);
-                setTimeout(() => wrapper.style.transform = 'translateX(0)', 240);
+                document.getElementById('error-toast').style.display = 'block';
+                const box = document.getElementById('error-shake');
+                box.style.transform = 'translateX(12px)';
+                setTimeout(() => box.style.transform = 'translateX(-12px)', 80);
+                setTimeout(() => box.style.transform = 'translateX(6px)', 160);
+                setTimeout(() => box.style.transform = 'translateX(0)', 240);
             }
         }
 
-        // Chrono Engine Module
-        const historicalGenesis = new Date(2025, 0, 1);
+        // Time Continuum Synchronization Telemetry
+        const universeGenesisPoint = new Date(2025, 0, 1);
 
-        function initiateChronology() {
+        function initiateChronologyTelemetry() {
             setInterval(() => {
-                const deltaNow = new Date() - historicalGenesis;
+                const currentEpochDelta = new Date() - universeGenesisPoint;
 
-                const d = Math.floor(deltaNow / (1000 * 60 * 60 * 24));
-                const h = Math.floor((deltaNow % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((deltaNow % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((deltaNow % (1000 * 60)) / 1000);
+                const days = Math.floor(currentEpochDelta / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((currentEpochDelta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((currentEpochDelta % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((currentEpochDelta % (1000 * 60)) / 1000);
 
-                document.getElementById('c-days').innerText = String(d).padStart(2, '0');
-                document.getElementById('c-hours').innerText = String(h).padStart(2, '0');
-                document.getElementById('c-mins').innerText = String(m).padStart(2, '0');
-                document.getElementById('c-secs').innerText = String(s).padStart(2, '0');
+                document.getElementById('v-days').innerText = String(days).padStart(2, '0');
+                document.getElementById('v-hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('v-mins').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('v-secs').innerText = String(seconds).padStart(2, '0');
             }, 1000);
-        }
-
-        // Kinetic Heart Node Array Map
-        function deployHeartSwarm() {
-            const field = document.getElementById('kinetic-heart-field');
-            const pointsDensity = 460;
-            const isResponsiveMobile = window.innerWidth < 768;
-            const vectorScale = isResponsiveMobile ? 10 : 18;
-
-            const originX = field.clientWidth / 2;
-            const originY = field.clientHeight / 2;
-
-            for (let i = 0; i < pointsDensity; i++) {
-                const angle = Math.random() * 2 * Math.PI;
-                const x = 16 * Math.pow(Math.sin(angle), 3);
-                const y = 13 * Math.cos(angle) - 5 * Math.cos(2*angle) - 2 * Math.cos(3*angle) - Math.cos(4*angle);
-
-                const finalPosX = x * vectorScale + originX;
-                const finalPosY = -y * vectorScale + originY;
-
-                const blurScatterX = (Math.random() - 0.5) * 40;
-                const blurScatterY = (Math.random() - 0.5) * 40;
-
-                const leaf = document.createElement('span');
-                leaf.className = 'floating-heart-text';
-                leaf.innerText = Math.random() > 0.45 ? 'i love you' : 'forever';
-                leaf.style.left = `${finalPosX + blurScatterX}px`;
-                leaf.style.top = `${finalPosY + blurScatterY}px`;
-                leaf.style.animationDelay = `${Math.random() * 2.8}s`;
-                leaf.style.fontSize = `${0.62 + Math.random() * 0.4}rem`;
-
-                if (Math.random() > 0.78) {
-                    leaf.style.color = '#ffffff';
-                    leaf.style.textShadow = '0 0 10px #ff7597';
-                }
-
-                field.appendChild(leaf);
-            }
-        }
-
-        // Monologue Live Streams Typography
-        const textualPoetry = "To the woman who completely realigned the gravity of my existence. Meeting you was like catching a glimpse of absolute clarity in a chaotic cosmos. You became the exclusive blueprint of my happiest thoughts, the steady pulse in my heart, and the only sanctuary worth searching for. I forged this entire interactive universe to declare what standard speech cannot express: that our timelines didn't collide by chance, but were woven by star systems to stay inseparable. My dedication to you expands beyond all dimensional limitations. Always. Eternity is just the beginning.";
-        let textIndex = 0;
-        let runningTypist = false;
-
-        function runLiveTyping() {
-            if (textIndex < textualPoetry.length) {
-                document.getElementById("poetic-typist").innerHTML += textualPoetry.charAt(textIndex);
-                textIndex++;
-                setTimeout(runLiveTyping, 45);
-            }
-        }
-
-        // Dynamic Intersection Observer (Multi-page Progressive Discovery)
-        function setupScrollRevelation() {
-            const visualChapters = document.querySelectorAll('.scroll-detect');
-            const observerSettings = { threshold: 0.18, rootMargin: "0px 0px -40px 0px" };
-
-            const targetObserver = new IntersectionObserver((entries, selfObserver) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        if (entry.target.querySelector('#poetic-typist') && !runningTypist) {
-                            runningTypist = true;
-                            runLiveTyping();
-                        }
-                        selfObserver.unobserve(entry.target);
-                    }
-                });
-            }, observerSettings);
-
-            visualChapters.forEach(chapter => targetObserver.observe(chapter));
         }
     </script>
 </body>
