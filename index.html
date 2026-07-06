@@ -1,392 +1,213 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BaridiMob - E-Virement</title>
-    <!-- أيقونات FontAwesome للمظهر الاحترافي -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>Heart Landing</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
-
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Ubuntu', sans-serif;
         }
 
         body {
-            background-color: #eef2f5;
-            color: #333;
+            background-color: #0d0d0d;
+            color: #ff2a5f;
+            font-family: 'Courier New', Courier, monospace;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        /* واجهة الهاتف أو التطبيق */
-        .baridimob-container {
-            width: 100%;
-            max-width: 450px;
-            background-color: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            height: 100vh;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            user-select: none;
         }
 
-        /* الهيدر الخاص ببريدي موب */
-        .app-header {
-            background: linear-gradient(135deg, #00529b 0%, #003366 100%);
-            color: #ffffff;
-            padding: 25px 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        .app-header .logo-text {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .app-header .logo-text span {
-            color: #ffcc00;
-        }
-
-        .user-profile {
-            margin-top: 10px;
-            font-size: 14px;
-            opacity: 0.9;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-            display: inline-block;
-        }
-
-        /* محتوى التطبيق الداخلي */
-        .app-content {
-            padding: 20px;
-            min-height: 400px;
-        }
-
-        .step-panel {
-            display: none;
-        }
-
-        .step-panel.active {
-            display: block;
-        }
-
-        h3 {
-            font-size: 18px;
-            color: #00529b;
-            margin-bottom: 20px;
-            font-weight: 500;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 8px;
-        }
-
-        /* كرت الحساب البنكي */
-        .account-card {
-            background: linear-gradient(135deg, #2c3e50 0%, #00529b 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-bottom: 15px;
-            position: relative;
-            box-shadow: 0 5px 15px rgba(0,82,155,0.2);
-        }
-
-        .account-card:hover {
-            transform: scale(1.02);
-        }
-
-        .account-card .card-type {
-            font-size: 12px;
-            text-transform: uppercase;
-            opacity: 0.8;
-            letter-spacing: 1px;
-        }
-
-        .account-card .card-name {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 10px 0;
-        }
-
-        .account-card .card-balance {
-            font-size: 24px;
-            font-weight: 700;
-            color: #ffcc00;
-        }
-
-        /* مدخلات الاستمارة */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 500;
-            color: #666;
-            margin-bottom: 6px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccd6dd;
-            border-radius: 8px;
-            font-size: 16px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .form-group input:focus {
-            border-color: #00529b;
-            box-shadow: 0 0 5px rgba(0,82,155,0.2);
-        }
-
-        /* الأزرار */
-        .btn-prime {
-            background-color: #00529b;
-            color: white;
-            border: none;
-            padding: 14px;
-            width: 100%;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-
-        .btn-prime:hover {
-            background-color: #003366;
-        }
-
-        /* كود التحقق OTP */
-        .otp-alert {
-            background-color: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            color: #0d47a1;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-
-        .error-message {
-            color: #d32f2f;
-            font-size: 13px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        /* ==========================================
-           ستايل الوصل الرسمي المماثل للصورة ب الضبط
-           ========================================== */
-        .receipt-box {
-            background-color: #ffffff;
-            font-family: 'Arial', sans-serif;
-            color: #000000;
-            padding: 10px 5px;
-        }
-
-        .receipt-header {
-            text-align: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 15px;
-        }
-
-        .receipt-header .title-algeria {
-            font-size: 16px;
-            font-weight: normal;
-            margin-bottom: 2px;
-        }
-
-        .receipt-header .title-system {
-            font-size: 14px;
-            font-weight: normal;
-        }
-
-        .receipt-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            font-size: 14px;
-        }
-
-        .receipt-label {
-            color: #444;
-            width: 40%;
+        /* Terminal Screen */
+        #terminal {
             text-align: left;
+            width: 90%;
+            max-width: 500px;
+            z-index: 10;
+            transition: opacity 0.8s ease;
         }
 
-        .receipt-value {
-            font-weight: normal;
-            width: 60%;
-            text-align: left;
-            padding-left: 10px;
-        }
-
-        .success-banner {
-            text-align: center;
-            color: #2e7d32;
+        .system-line {
+            color: #ff2a5f;
+            font-size: 1rem;
+            margin-bottom: 8px;
             font-weight: bold;
-            margin-top: 25px;
-            font-size: 15px;
+        }
+
+        .status-line {
+            color: #ffffff;
+            font-size: 0.9.5rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            background: transparent;
+            border: 1px solid #ff2a5f;
+            color: #ffffff;
+            background-color: #ff2a5f;
+            padding: 12px 28px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            box-shadow: 0 0 15px rgba(255, 42, 95, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: #ff2a5f;
+            box-shadow: 0 0 25px rgba(255, 42, 95, 0.8);
+        }
+
+        .hint {
+            color: #555;
+            font-size: 0.75rem;
+            margin-top: 10px;
+        }
+
+        /* Heart Canvas Area */
+        #heart-container {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            animation: heartPulse 1.2s infinite ease-in-out;
+        }
+
+        /* The Name Mia in the Center */
+        #center-name {
+            position: absolute;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff2a5f, 0 0 20px #ff2a5f, 0 0 40px #ff2a5f;
+            z-index: 5;
+            letter-spacing: 2px;
+            font-family: 'Arial', sans-serif;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: nameAppear 2s 1s forwards ease-out;
+        }
+
+        /* Floating 'i love you' particles */
+        .love-text {
+            position: absolute;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #ff2a5f;
+            text-shadow: 0 0 4px rgba(255, 42, 95, 0.6);
+            opacity: 0;
+            transform: scale(0);
+            animation: particleFadeIn 2s forwards ease-out;
+        }
+
+        /* Animations */
+        @keyframes heartPulse {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.12); }
+            60% { transform: scale(1); }
+            80% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes particleFadeIn {
+            to {
+                opacity: 0.85;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes nameAppear {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="baridimob-container">
-        <!-- الهيدر الثابت للتطبيق -->
-        <header class="app-header">
-            <div class="logo-text">Baridi<span>Mob</span></div>
-            <div class="user-profile"><i class="fa-solid fa-user"></i> Wourida Bouirane</div>
-        </header>
-
-        <div class="app-content">
-
-            <!-- الخطوة 1: اختيار الحساب ورؤية الرصيد -->
-            <div id="step-1" class="step-panel active">
-                <h3><i class="fa-solid fa-money-check-dollar"></i> Sélectionner le compte</h3>
-                <div class="account-card" onclick="goToStep(2)">
-                    <div class="card-type">Compte Courant CCP</div>
-                    <div class="card-name">Wourida Bouirane</div>
-                    <div class="card-balance">82.00 USD</div>
-                    <div style="font-size: 11px; margin-top: 10px; opacity: 0.7; text-align: right;">Cliquer pour transférer <i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-            </div>
-
-            <!-- الخطوة 2: إدخال المبلغ وحساب الـ CCP -->
-            <div id="step-2" class="step-panel">
-                <h3><i class="fa-solid fa-paper-plane"></i> Informations du transfert</h3>
-                <form onsubmit="processTransfer(event)">
-                    <div class="form-group">
-                        <label>Montant à transférer (USD) :</label>
-                        <input type="number" id="input-amount" value="500.00" step="0.01" required>
-                        <div id="amount-error" class="error-message">Le montant dépasse le solde disponible (82.00 USD).</div>
-                    </div>
-                    <div class="form-group">
-                        <label>Numéro de compte (RIP / CCP Recipient) :</label>
-                        <input type="text" id="input-ccp" value="00799999004455324763" placeholder="Ex: 00799999..." required>
-                    </div>
-                    <button type="submit" class="btn-prime">Continuer</button>
-                </form>
-            </div>
-
-            <!-- الخطوة 3: تأكيد العملية برمز الـ OTP الهاتف المتغير -->
-            <div id="step-3" class="step-panel">
-                <h3><i class="fa-solid fa-shield-halved"></i> Validation OTP</h3>
-                <div class="otp-alert">
-                    <i class="fa-solid fa-paper-plane"></i> Un code de confirmation a été envoyé au numéro suivant : <br>
-                    <strong>+213775819209</strong>
-                </div>
-                <form onsubmit="verifyOTP(event)">
-                    <div class="form-group">
-                        <label>Entrez le code de sécurité reçu :</label>
-                        <input type="text" id="input-otp" placeholder="Ex: 123456" required>
-                        <div id="otp-error" class="error-message">Code incorrect. Veuillez réessayer.</div>
-                    </div>
-                    <button type="submit" class="btn-prime">Confirmer le virement</button>
-                </form>
-            </div>
-
-            <!-- الخطوة 4: الوصل الرسمي النهائي مطابق تماماً لـ 1000002026.jpg -->
-            <div id="step-4" class="step-panel">
-                <div class="receipt-box">
-                    <div class="receipt-header">
-                        <div class="title-algeria">Algeria Poste</div>
-                        <div class="title-system">Receipt for operation in the system «BaridiMob»</div>
-                    </div>
-
-                    <div class="receipt-row">
-                        <div class="receipt-label">Amount</div>
-                        <div class="receipt-value" id="receipt-amount">500.00</div>
-                    </div>
-                    <div class="receipt-row">
-                        <div class="receipt-label">Operation date:</div>
-                        <div class="receipt-value" id="receipt-date">15.06.2026 18:16:10</div>
-                    </div>
-                    <div class="receipt-row">
-                        <div class="receipt-label">Recipient:</div>
-                        <div class="receipt-value" id="receipt-recipient">00799999004455324763</div>
-                    </div>
-                    <div class="receipt-row">
-                        <div class="receipt-label">Operation type:</div>
-                        <div class="receipt-value">TRANSFER</div>
-                    </div>
-                    <div class="receipt-row">
-                        <div class="receipt-label">External id:</div>
-                        <div class="receipt-value" id="receipt-id">011404304724</div>
-                    </div>
-
-                    <div class="success-banner">
-                        <i class="fa-solid fa-circle-check"></i> Opération effectuée avec succès
-                    </div>
-                </div>
-                <button class="btn-prime" onclick="goToStep(1)" style="background-color: #777; margin-top: 20px;">Retour à l'accueil</button>
-            </div>
-
-        </div>
+    <div id="terminal">
+        <div class="system-line">[system] Initializing heart.PROTOCOL_v2.0...</div>
+        <div class="status-line">> One encrypted package found for you.</div>
+        <button class="btn" onclick="decryptHeart()">Decrypt Message</button>
+        <div class="hint">(or just click anywhere)</div>
     </div>
 
-    <!-- جافا سكربت لإدارة الخطوات وتحديث البيانات -->
+    <div id="heart-container">
+        <div id="center-name">Mia</div>
+    </div>
+
     <script>
-        let finalAmount = "500.00";
-        let finalRecipient = "00799999004455324763";
-
-        function goToStep(stepNumber) {
-            document.querySelectorAll('.step-panel').forEach(panel => {
-                panel.classList.remove('active');
-            });
-            document.getElementById('step-' + stepNumber).classList.add('active');
+        // Allow clicking anywhere on screen to trigger it too
+        window.onclick = function(e) {
+            if(document.getElementById('terminal').style.display !== 'none') {
+                decryptHeart();
+            }
         }
 
-        function processTransfer(event) {
-            event.preventDefault();
-            finalAmount = parseFloat(document.getElementById('input-amount').value).toFixed(2);
-            finalRecipient = document.getElementById('input-ccp').value;
-
-            // محاكاة تنبيه إذا تجاوز المبلغ رصيد وردة (لكن تركناه يمر لتطابق الصورة بـ 500.00)
-            goToStep(3);
-        }
-
-        function verifyOTP(event) {
-            event.preventDefault();
-            const otpValue = document.getElementById('input-otp').value;
+        function decryptHeart() {
+            // Stop propagation so clicking the button doesn't trigger window.onclick twice
+            event.stopPropagation(); 
             
-            // أي كود يحطه المستخدم يعتبر صحيح لتسهيل التجربة
-            if(otpValue.trim() !== "") {
-                // توليد تاريخ اليوم والساعة آلياً أو تثبيت تاريخ الصورة
-                document.getElementById('receipt-amount').innerText = finalAmount;
-                document.getElementById('receipt-recipient').innerText = finalRecipient;
+            const terminal = document.getElementById('terminal');
+            terminal.style.opacity = '0';
+            
+            setTimeout(() => {
+                terminal.style.display = 'none';
                 
-                // تحديث التاريخ الحالي لـ 2026 تلقائياً
-                const now = new Date();
-                const day = String(now.getDate()).padStart(2, '0');
-                const month = String(now.getMonth() + 1).padStart(2, '0');
-                const year = now.getFullYear();
-                const time = now.toTimeString().split(' ')[0];
-                document.getElementById('receipt-date').innerText = `${day}.${month}.${year} ${time}`;
+                const container = document.getElementById('heart-container');
+                container.style.display = 'flex';
+                generateHeartShape(container);
+            }, 800);
+        }
 
-                goToStep(4);
-            } else {
-                document.getElementById('otp-error').style.display = 'block';
+        function generateHeartShape(container) {
+            const totalParticles = 400; // Dense look like the video
+            
+            for (let i = 0; i < totalParticles; i++) {
+                const t = Math.random() * 2 * Math.PI;
+                
+                // Heart Mathematical Coordinates
+                const x = 16 * Math.pow(Math.sin(t), 3);
+                const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
+                
+                // Dynamic scaling to fit screen perfectly
+                const scale = 18; 
+                const posX = x * scale + 350;
+                const posY = -y * scale + 350; 
+
+                // Adding organic scattering/drift effect like the tiktok video
+                const driftX = (Math.random() - 0.5) * 35;
+                const driftY = (Math.random() - 0.5) * 35;
+
+                const span = document.createElement('span');
+                span.className = 'love-text';
+                
+                // Randomly alternate between text variants for visual texture
+                span.innerText = Math.random() > 0.3 ? 'i love you' : 'love you';
+                
+                span.style.left = `${posX + driftX}px`;
+                span.style.top = `${posY + driftY}px`;
+                
+                // Slow progressive rendering animation delay
+                span.style.animationDelay = `${Math.random() * 2.5}s`;
+                
+                // Random subtle text sizes
+                span.style.fontSize = `${0.65 + Math.random() * 0.4}rem`;
+
+                container.appendChild(span);
             }
         }
     </script>
