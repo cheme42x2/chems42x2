@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmic Alignment - Mia & Chems</title>
+    <title>The Secret Geometry of Her - Mia & Chems</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Space+Grotesk:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Montserrat:wght@100;300;400;600&family=Pinyon+Script&display=swap');
 
         * {
             box-sizing: border-box;
@@ -17,14 +17,15 @@
         body, html {
             width: 100%;
             height: 100%;
-            background-color: #020205;
-            font-family: 'Space Grotesk', sans-serif;
+            background-color: #030206;
+            font-family: 'Montserrat', sans-serif;
             color: #ffffff;
             overflow: hidden;
+            perspective: 1200px;
         }
 
-        /* Fullscreen Cinematic Interstellar Canvas */
-        #universe-canvas {
+        /* Continuous Matrix of Floating Celestial & Geometrical Web */
+        #luxury-space-canvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -33,100 +34,85 @@
             z-index: 1;
         }
 
-        /* 3D Deep Space Nebula Ambient Overlay */
-        .nebula-glow {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80vw;
-            height: 80vw;
-            background: radial-gradient(circle, rgba(121, 26, 136, 0.15) 0%, rgba(255, 42, 95, 0.05) 50%, transparent 100%);
-            z-index: 2;
-            pointer-events: none;
-            filter: blur(80px);
-            animation: nebulaPulse 10s infinite ease-in-out;
-        }
-
-        /* Cybernetic Luxury Gateway */
-        #quantum-gate {
+        /* Absolute Premium Gatekeeper Shield */
+        #cyber-gate {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1000;
+            z-index: 2000;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle at center, #07040d 0%, #010103 100%);
-            transition: all 2s cubic-bezier(0.85, 0, 0.15, 1);
+            background: radial-gradient(circle at center, #0e0717 0%, #020104 100%);
+            transition: all 2.2s cubic-bezier(0.86, 0, 0.07, 1);
         }
 
-        .gate-shield {
-            background: rgba(4, 2, 8, 0.4);
-            border: 1px solid rgba(255, 42, 95, 0.15);
-            padding: 55px;
-            border-radius: 32px;
-            backdrop-filter: blur(50px);
-            -webkit-backdrop-filter: blur(50px);
+        .gate-vault {
+            background: rgba(6, 3, 11, 0.45);
+            border: 1px solid rgba(255, 42, 105, 0.15);
+            padding: 60px;
+            border-radius: 40px;
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
             text-align: center;
             width: 90%;
-            max-width: 480px;
-            box-shadow: 0 50px 100px rgba(0,0,0,0.9), 0 0 80px rgba(121, 26, 136, 0.1);
+            max-width: 500px;
+            box-shadow: 0 60px 120px rgba(0,0,0,0.9), 0 0 70px rgba(255, 42, 105, 0.05);
         }
 
-        .gate-shield h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            letter-spacing: 6px;
+        .gate-vault h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.2rem;
+            letter-spacing: 7px;
             color: #ffffff;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
             text-transform: uppercase;
+            font-weight: 700;
         }
 
-        .cosmic-input {
+        .premium-input {
             width: 100%;
-            padding: 18px;
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 42, 95, 0.25);
-            border-radius: 12px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 42, 105, 0.3);
+            border-radius: 14px;
             color: #ffffff;
-            font-size: 1rem;
+            font-size: 1.1rem;
             text-align: center;
             outline: none;
-            letter-spacing: 4px;
-            margin-bottom: 25px;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
             transition: all 0.5s ease;
         }
 
-        .cosmic-input:focus {
-            border-color: #ff2a5f;
-            box-shadow: 0 0 40px rgba(255, 42, 95, 0.4);
-            background: rgba(5, 1, 10, 0.8);
+        .premium-input:focus {
+            border-color: #ff2a69;
+            box-shadow: 0 0 50px rgba(255, 42, 105, 0.45);
         }
 
-        .warp-btn {
+        .vault-btn {
             width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #ff2a5f 0%, #791a88 100%);
+            padding: 20px;
+            background: linear-gradient(135deg, #ff2a69 0%, #4a0e4e 100%);
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             color: #ffffff;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            letter-spacing: 5px;
+            letter-spacing: 6px;
             cursor: pointer;
             text-transform: uppercase;
-            box-shadow: 0 15px 35px rgba(255, 42, 95, 0.3);
+            box-shadow: 0 15px 40px rgba(255, 42, 105, 0.3);
             transition: all 0.4s ease;
         }
 
-        .warp-btn:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(255, 42, 95, 0.6);
-            letter-spacing: 7px;
+        .vault-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 60px rgba(255, 42, 105, 0.6);
+            letter-spacing: 8px;
         }
 
-        .toast-error {
-            color: #ff3355;
+        .error-message {
+            color: #ff3366;
             font-size: 0.8rem;
             margin-top: 15px;
             display: none;
@@ -134,33 +120,40 @@
             font-weight: 600;
         }
 
-        /* Interactive Dynamic HUD System (Main View) */
-        #cosmic-hud {
+        /* Immersive Multidimensional Dashboard Controls */
+        #luxury-hud {
             position: relative;
             z-index: 10;
             width: 100%;
             height: 100%;
             display: none;
             opacity: 0;
-            transition: opacity 3s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: opacity 3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* High-End Floating UI Panels */
-        .hud-panel {
+        /* Floating Architectural Glass Panes */
+        .glass-pane {
             position: absolute;
-            background: rgba(3, 1, 6, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-left: 2px solid rgba(255, 42, 95, 0.3);
-            padding: 25px 30px;
-            border-radius: 16px;
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-            animation: paneFloat 6s infinite ease-in-out;
+            background: rgba(4, 2, 8, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-top: 2px solid rgba(255, 42, 105, 0.4);
+            padding: 35px;
+            border-radius: 24px;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            animation: floatingHUD 7s infinite ease-in-out;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Top Centered Signature Core */
-        .hud-core {
+        .glass-pane:hover {
+            border-top-color: #ffffff;
+            background: rgba(4, 2, 8, 0.5);
+            box-shadow: 0 50px 100px rgba(255, 42, 105, 0.1);
+        }
+
+        /* Master Centered Crown Core */
+        .pane-core {
             top: 40px;
             left: 50%;
             transform: translateX(-50%);
@@ -168,320 +161,439 @@
             background: transparent;
             border: none;
             box-shadow: none;
+            width: auto;
         }
 
-        .core-title {
-            font-family: 'Cinzel', serif;
-            font-size: 3.5rem;
+        .signature-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 3.2rem;
             font-weight: 900;
-            letter-spacing: 8px;
-            background: linear-gradient(to right, #ffffff, #ff6b8b, #791a88);
+            letter-spacing: 12px;
+            background: linear-gradient(to right, #ffffff 20%, #ff2a69 60%, #9d4edf 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px rgba(255, 42, 95, 0.2);
+            text-shadow: 0 0 50px rgba(255, 42, 105, 0.25);
         }
 
-        .core-status {
-            font-size: 0.75rem;
-            letter-spacing: 6px;
-            color: #8a8ab0;
-            text-transform: uppercase;
-            margin-top: 10px;
+        .signature-script {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 2.2rem;
+            color: #ff9ebb;
+            margin-top: -5px;
+            letter-spacing: 1px;
         }
 
-        /* Left Information Telemetry Panel */
-        .telemetry-left {
-            left: 40px;
-            top: 30%;
-            max-width: 320px;
+        /* Panel One: Telemetry of Romance & Body Language */
+        .pane-body-language {
+            left: 50px;
+            top: 22%;
+            width: 380px;
         }
 
-        /* Right Constellation Chronicle Panel */
-        .telemetry-right {
-            right: 40px;
-            top: 30%;
-            max-width: 340px;
+        /* Panel Two: UNO Quantum Probability Matrix */
+        .pane-uno-matrix {
+            right: 50px;
+            top: 22%;
+            width: 400px;
             animation-delay: 2s;
         }
 
-        .panel-header {
-            font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            color: #ff2a5f;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 8px;
+        /* Panel Three: The Live Art Canvas Masterpiece */
+        .pane-sketchbook {
+            bottom: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 950px;
+            animation-delay: 3.5s;
+            display: flex;
+            gap: 40px;
+            align-items: center;
         }
 
-        .data-stream {
+        .pane-header {
+            font-family: 'Cinzel Decorative', serif;
             font-size: 0.85rem;
-            line-height: 1.8;
+            letter-spacing: 4px;
+            color: #ff2a69;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pane-header span {
+            font-size: 0.65rem;
+            color: #64748b;
+        }
+
+        .data-paragraph {
+            font-size: 0.85rem;
+            line-height: 1.9;
             color: #cbd5e1;
             font-weight: 300;
             text-align: justify;
         }
 
-        /* Chrono Vector (Live Universal Counter) */
-        .chrono-vector {
+        /* Body Language Metric Sliders */
+        .metric-row {
+            margin-top: 15px;
+        }
+        .metric-label {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+        .metric-bar-bg {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .metric-bar-fill {
+            height: 100%;
+            background: linear-gradient(to right, #ff2a69, #9d4edf);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Custom UNO Digital Interactive Deck Layout */
+        .uno-deck-display {
             display: flex;
             gap: 15px;
-            margin-top: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .uno-luxury-card {
+            width: 75px;
+            height: 115px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 900;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: #000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+        .uno-luxury-card:hover {
+            transform: translateY(-20px) rotate(5deg) scale(1.1);
+            box-shadow: 0 20px 35px var(--glow);
+            border-color: #ffffff;
+        }
+        .uno-inner-oval {
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            transform: rotate(-25deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .vector-box {
-            text-align: center;
-            flex: 1;
-            background: rgba(255, 255, 255, 0.01);
-            padding: 10px 5px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.02);
+        /* Sketchbook Live Rendering Frame */
+        .sketch-frame-container {
+            width: 260px;
+            height: 160px;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            position: relative;
+            overflow: hidden;
+            background: rgba(0,0,0,0.5);
+            flex-shrink: 0;
+        }
+        #sketch-canvas {
+            width: 100%;
+            height: 100%;
+        }
+        .sketch-info-block {
+            flex-grow: 1;
         }
 
-        .vector-box val {
-            display: block;
-            font-family: 'Cinzel', serif;
-            font-size: 1.6rem;
-            color: #ffffff;
+        /* Dynamic Animations Keyframes */
+        @keyframes floatingHUD {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        .vector-box tag {
-            font-size: 0.6rem;
-            letter-spacing: 1px;
-            color: #64748b;
-            text-transform: uppercase;
-        }
-
-        /* Animations Keyframes */
-        @keyframes nebulaPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; } 50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; } }
-        @keyframes paneFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-
-        @media (max-width: 1024px) {
+        @media (max-width: 1100px) {
             body, html { overflow-y: auto; }
-            #cosmic-hud { display: flex; flex-direction: column; height: auto; padding: 140px 20px 40px 20px; gap: 30px; }
-            .hud-panel { position: relative; top: auto; left: auto; right: auto; transform: none !important; width: 100%; max-width: 100%; animation: none; }
-            .core-title { font-size: 2.2rem; }
+            #luxury-hud { display: flex; flex-direction: column; height: auto; padding: 140px 20px 40px 20px; gap: 30px; }
+            .glass-pane { position: relative; top: auto; left: auto; right: auto; transform: none !important; width: 100% !important; max-width: 100% !important; animation: none !important; }
+            .pane-sketchbook { flex-direction: column; gap: 20px; }
+            .sketch-frame-container { width: 100%; height: 200px; }
+            .signature-title { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="universe-canvas"></canvas>
-    <div class="nebula-glow"></div>
+    <canvas id="luxury-space-canvas"></canvas>
 
-    <div id="quantum-gate">
-        <div class="gate-shield" id="error-shake">
-            <h1>ORBITAL SIGN IN</h1>
-            <input type="password" id="cosmic-key" class="cosmic-input" placeholder="ENTER UNIVERSAL PASSWORD" autocomplete="off" onkeydown="catchKey(event)">
-            <button class="warp-btn" onclick="engageWarpDrive()">Initiate Launch</button>
-            <div id="error-toast" class="toast-error">GRAVITATIONAL ACCESS DENIED</div>
+    <div id="cyber-gate">
+        <div class="gate-vault" id="shake-node">
+            <h1>ORBITAL IDENTITY SYNC</h1>
+            <input type="password" id="gate-key" class="premium-input" placeholder="ENTER SYNC KEYPASSE" autocomplete="off" onkeydown="catchGateKey(event)">
+            <button class="vault-btn" onclick="authorizeSpaceSystem()">Synchronize Neurons</button>
+            <div id="gate-error" class="error-message">ENCRYPTED KEY SIGNATURE INCORRECT</div>
         </div>
     </div>
 
-    <div id="cosmic-hud">
+    <div id="luxury-hud">
         
-        <div class="hud-panel hud-core">
-            <h1 class="core-title">Mia & Chems</h1>
-            <div class="core-status">System Status: Infinitely Synchronized</div>
+        <div class="glass-pane pane-core">
+            <h1 class="signature-title">Mia & Chems</h1>
+            <div class="signature-script">The Secret Geometry of Her</div>
         </div>
 
-        <div class="hud-panel telemetry-left">
-            <div class="panel-header">System Continuums</div>
-            <p class="data-stream" style="margin-bottom: 15px;">Absolute spatial time recorded since the perfect intersection of two independent cosmic orbits.</p>
-            <div class="chrono-vector">
-                <div class="vector-box"><val id="v-days">00</val><tag>Days</tag></div>
-                <div class="vector-box"><val id="v-hours">00</val><tag>Hours</tag></div>
-                <div class="vector-box"><val id="v-mins">00</val><tag>Mins</tag></div>
-                <div class="vector-box"><val id="v-secs">00</val><tag>Secs</tag></div>
+        <div class="glass-pane pane-body-language">
+            <div class="pane-header">Romance Telemetry <span>SYSTEM // LIVE</span></div>
+            <p class="data-paragraph">Decoding the micro-expressions, involuntary somatic responses, and elegant structural configurations that define her aura when she orbits near you.</p>
+            
+            <div class="metric-row">
+                <div class="metric-label"><span>Involuntary Smile Vector</span><span>98.4%</span></div>
+                <div class="metric-bar-bg"><div class="metric-bar-fill" data-width="98.4%"></div></div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-label"><span>Pupil Dilation Frequency</span><span>94.1%</span></div>
+                <div class="metric-bar-bg"><div class="metric-bar-fill" data-width="94.1%"></div></div>
+            </div>
+            <div class="metric-row">
+                <div class="metric-label"><span>Proximity Resonance Index</span><span>99.9%</span></div>
+                <div class="metric-bar-bg"><div class="metric-bar-fill" data-width="99.9%"></div></div>
             </div>
         </div>
 
-        <div class="hud-panel telemetry-right">
-            <div class="panel-header">Cosmic Directive</div>
-            <p class="data-stream">
-                Across thousands of rotating coordinates, deep stellar clusters, and infinite planetary vectors, our alignment remains completely unbreakable. Built inside the absolute fabric of space, this dimension exists solely to guard an eternal connection. Orbiting forever, outlasting lifetimes, expanding beyond limits.
-            </p>
+        <div class="glass-pane pane-uno-matrix">
+            <div class="pane-header">Quantum UNO Calibration <span>DECK // REVELATION</span></div>
+            <p class="data-paragraph">Her absolute favoritism towards tactical playful mechanics. Even within the calculated fields of gaming probability, every card drawn leads back to a singular outcome.</p>
+            
+            <div class="uno-deck-display">
+                <div class="uno-luxury-card" style="--glow: rgba(239, 68, 68, 0.4); color: #ef4444;"><div class="uno-inner-oval" style="background: rgba(239,68,68,0.15)">4</div></div>
+                <div class="uno-luxury-card" style="--glow: rgba(59, 130, 246, 0.4); color: #3b82f6;"><div class="uno-inner-oval" style="background: rgba(59,130,246,0.15)">+2</div></div>
+                <div class="uno-luxury-card" style="--glow: rgba(234, 179, 8, 0.4); color: #eab308;"><div class="uno-inner-oval" style="background: rgba(234,179,8,0.15)">Reverse</div></div>
+                <div class="uno-luxury-card" style="--glow: rgba(168, 85, 247, 0.5); background: linear-gradient(45deg, #ef4444, #3b82f6, #10b981, #eab308); color: #fff;"><div class="uno-inner-oval" style="background: rgba(0,0,0,0.6)">Wild</div></div>
+            </div>
         </div>
+
+        <div class="glass-pane pane-sketchbook">
+            <div class="sketch-frame-container">
+                <canvas id="sketch-canvas"></canvas>
+            </div>
+            <div class="sketch-info-block">
+                <div class="pane-header">The Fine Art Matrix <span>SKETCHBOOK // VECTOR</span></div>
+                <p class="data-paragraph">
+                    Art is the reflection of her intricate neural wiring. To capture her soul, a premium system algorithm continuously streams mathematical vectors on the canvas to the left, replicating her beautiful sketches, strokes, and aesthetic blueprints. A living painting honoring a master designer.
+                </p>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        // High-Performance Advanced Particle and Celestial Physics Engine
-        const canvas = document.getElementById('universe-canvas');
+        // Premium High-Fidelity Physics Engine for Dynamic Orbiting Planets & Star Fields
+        const canvas = document.getElementById('luxury-space-canvas');
         const ctx = canvas.getContext('2d');
-        
-        let stars = [];
-        let planets = [];
-        const totalStars = 1100; // Over a thousand glowing particles
+        let starField = [];
+        let geometricalPlanets = [];
+        const maxStarsCount = 750;
 
-        function initializeUniverseBounds() {
+        function equalizeViewBounds() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-        window.addEventListener('resize', initializeUniverseBounds);
-        initializeUniverseBounds();
+        window.addEventListener('resize', equalizeViewBounds);
+        equalizeViewBounds();
 
-        // 1. Star / Cosmic Grid Object Model
-        class CelestialStar {
+        // 1. Quantum Star Grid Configuration
+        class StarParticle {
             constructor() {
-                this.reset();
-                this.y = Math.random() * canvas.height; // Spread initially
-            }
-            reset() {
                 this.x = Math.random() * canvas.width;
-                this.y = 0;
-                this.velocityZ = Math.random() * 0.4 + 0.1; // Speed drifting downwards
-                this.brightness = Math.random() * 0.6 + 0.4;
-                this.size = Math.random() * 1.5;
+                this.y = Math.random() * canvas.height;
+                this.speedZ = Math.random() * 0.3 + 0.05;
+                this.scale = Math.random() * 1.2;
+                this.alpha = Math.random() * 0.5 + 0.3;
             }
             drift() {
-                this.y += this.velocityZ;
-                if (this.y > canvas.height) {
-                    this.reset();
+                this.y -= this.speedZ;
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
                 }
             }
-            project() {
+            render() {
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.brightness})`;
+                ctx.arc(this.x, this.y, this.scale, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
                 ctx.fill();
             }
         }
 
-        // 2. Beautiful 3D Orbiting Planet Object Model
-        class RotatingPlanet {
-            constructor(orbitalRadius, size, velocity, baseColor, glowColor) {
-                this.orbitalRadius = orbitalRadius;
-                this.size = size;
-                this.velocity = velocity;
-                this.baseColor = baseColor;
-                this.glowColor = glowColor;
+        // 2. 3D Mathematical Rotating Planets with Geometrical Web Links
+        class GeometricPlanet {
+            constructor(orbitRadius, radiusSize, angularSpeed, shadeColor) {
+                this.orbitRadius = orbitRadius;
+                this.radiusSize = radiusSize;
+                this.angularSpeed = angularSpeed;
+                this.shadeColor = shadeColor;
                 this.angle = Math.random() * Math.PI * 2;
-                this.rotationAngle = 0; // Axis rotation spin
             }
-            orbit() {
-                this.angle += this.velocity;
-                this.rotationAngle += 0.01; // Internal spin rate
+            propagate() {
+                this.angle += this.angularSpeed;
             }
-            drawPlanet() {
-                // Determine screen coordinates relative to center
-                const centerX = canvas.width / 2;
-                const centerY = canvas.height * 0.55;
-                
-                // Mapped coordinates (creates an architectural perspective orbit elliptical)
-                const posX = centerX + Math.cos(this.angle) * this.orbitalRadius * 1.4;
-                const posY = centerY + Math.sin(this.angle) * this.orbitalRadius * 0.6;
+            draw() {
+                const midX = canvas.width / 2;
+                const midY = canvas.height * 0.5;
 
-                // Atmospheric Shadow/Glow Calculation
-                const gradient = ctx.createRadialGradient(posX, posY, 0, posX, posY, this.size);
-                gradient.addColorStop(0, '#ffffff');
-                gradient.addColorStop(0.3, this.baseColor);
-                gradient.addColorStop(1, '#020205');
+                // Elliptical Math Projection Vectors
+                const targetX = midX + Math.cos(this.angle) * this.orbitRadius * 1.5;
+                const targetY = midY + Math.sin(this.angle) * this.orbitRadius * 0.65;
 
-                // Draw Elliptical Orbit Paths Lines
+                // Sphere Glowing Architecture
+                const radialGrad = ctx.createRadialGradient(targetX, targetY, 0, targetX, targetY, this.radiusSize);
+                radialGrad.addColorStop(0, '#ffffff');
+                radialGrad.addColorStop(0.4, this.shadeColor);
+                radialGrad.addColorStop(1, '#030206');
+
+                // Draw Planet Body
                 ctx.beginPath();
-                ctx.ellipse(centerX, centerY, this.orbitalRadius * 1.4, this.orbitalRadius * 0.6, 0, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.025)';
+                ctx.arc(targetX, targetY, this.radiusSize, 0, Math.PI * 2);
+                ctx.fillStyle = radialGrad;
+                ctx.fill();
+
+                // Interstellar Web Grid Projection Lines linking planets to historical centers
+                ctx.beginPath();
+                ctx.ellipse(midX, midY, this.orbitRadius * 1.5, this.orbitRadius * 0.65, 0, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(255, 42, 105, 0.035)';
                 ctx.lineWidth = 1;
                 ctx.stroke();
 
-                // Draw Planet Atmosphere Flare Glow
-                ctx.beginPath();
-                ctx.arc(posX, posY, this.size + 8, 0, Math.PI * 2);
-                ctx.fillStyle = this.glowColor;
-                ctx.fill();
-
-                // Draw Planet Solid Body
-                ctx.beginPath();
-                ctx.arc(posX, posY, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = gradient;
-                ctx.fill();
+                return {x: targetX, y: targetY};
             }
         }
 
-        // Instantiating Celestial Data Structures
-        for (let i = 0; i < totalStars; i++) {
-            stars.push(new CelestialStar());
+        // Initialize Structural Elements
+        for (let i = 0; i < maxStarsCount; i++) {
+            starField.push(new StarParticle());
         }
 
-        // Seeding Luxury Custom Planets (Sizes, orbits, speed configuration)
-        planets.push(new RotatingPlanet(180, 24, 0.003, '#ff2a5f', 'rgba(255, 42, 95, 0.08)'));  // Core Crimson Planet
-        planets.push(new RotatingPlanet(280, 16, 0.002, '#791a88', 'rgba(121, 26, 136, 0.06)')); // Quantum Purple gas giant
-        planets.push(new RotatingPlanet(390, 12, 0.001, '#475569', 'rgba(255, 255, 255, 0.04)')); // Edge Satellite Sphere
+        geometricalPlanets.push(new GeometricPlanet(220, 22, 0.002, '#ff2a69'));
+        geometricalPlanets.push(new GeometricPlanet(340, 14, -0.0015, '#9d4edf'));
+        geometricalPlanets.push(new GeometricPlanet(460, 10, 0.0008, '#1e1b4b'));
 
-        // Continuous Cosmic Engine Loop
-        function executeCosmicLoop() {
-            // Dark Matte Void Refresh with trail preservation
-            ctx.fillStyle = '#020205';
+        function primarySystemPipelineLoop() {
+            ctx.fillStyle = '#030206';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Compute & Draw Stars
-            for (let i = 0; i < stars.length; i++) {
-                stars[i].drift();
-                stars[i].project();
+            // Execute Stars Data
+            for (let i = 0; i < starField.length; i++) {
+                starField[i].drift();
+                starField[i].render();
             }
 
-            // Compute & Draw Planets
-            for (let i = 0; i < planets.length; i++) {
-                planets[i].orbit();
-                planets[i].drawPlanet();
+            // Execute Interstellar Spatial Nodes
+            let positions = [];
+            for (let i = 0; i < geometricalPlanets.length; i++) {
+                geometricalPlanets[i].propagate();
+                positions.push(geometricalPlanets[i].draw());
             }
 
-            requestAnimationFrame(executeCosmicLoop);
+            // Draw Kinetic Web Linking Lines Between Planet Vectors (Premium Cyber Network Effect)
+            ctx.beginPath();
+            ctx.moveTo(positions[0].x, positions[0].y);
+            ctx.lineTo(positions[1].x, positions[1].y);
+            ctx.lineTo(positions[2].x, positions[2].y);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+
+            requestAnimationFrame(primarySystemPipelineLoop);
         }
-        executeCosmicLoop();
+        primarySystemPipelineLoop();
 
-        // Gatekeeping Authorization Actions
-        function catchKey(e) {
-            if (e.key === 'Enter') engageWarpDrive();
+        // Security Validation Access Framework
+        function catchGateKey(e) {
+            if (e.key === 'Enter') authorizeSpaceSystem();
         }
 
-        function engageWarpDrive() {
-            const keyValue = document.getElementById('cosmic-key').value;
-            const targetUniversalSignature = "Mia & Chems";
+        function authorizeSpaceSystem() {
+            const entryValue = document.getElementById('gate-key').value;
+            const keyVerificationSignature = "Mia & Chems";
 
-            if (keyValue === targetUniversalSignature) {
-                const gatePanel = document.getElementById('quantum-gate');
-                gatePanel.style.opacity = '0';
-                gatePanel.style.transform = 'scale(1.15)';
+            if (entryValue === keyVerificationSignature) {
+                const shield = document.getElementById('cyber-gate');
+                shield.style.opacity = '0';
+                shield.style.transform = 'translateZ(150px) scale(1.1)';
                 
                 setTimeout(() => {
-                    gatePanel.style.display = 'none';
-                    const mainHud = document.getElementById('cosmic-hud');
-                    mainHud.style.display = 'block';
+                    shield.style.display = 'none';
+                    const hud = document.getElementById('luxury-hud');
+                    hud.style.display = 'block';
                     
                     setTimeout(() => {
-                        mainHud.style.opacity = '1';
-                        initiateChronologyTelemetry();
+                        hud.style.opacity = '1';
+                        // Trigger Progress Bar Metrics Animating
+                        document.querySelectorAll('.metric-bar-fill').forEach(bar => {
+                            bar.style.width = bar.getAttribute('data-width');
+                        });
+                        initiateSketchbookLoop();
                     }, 100);
-                }, 2000);
+                }, 2200);
             } else {
-                document.getElementById('error-toast').style.display = 'block';
-                const box = document.getElementById('error-shake');
-                box.style.transform = 'translateX(12px)';
-                setTimeout(() => box.style.transform = 'translateX(-12px)', 80);
-                setTimeout(() => box.style.transform = 'translateX(6px)', 160);
-                setTimeout(() => box.style.transform = 'translateX(0)', 240);
+                document.getElementById('gate-error').style.display = 'block';
+                const frame = document.getElementById('shake-node');
+                frame.style.transform = 'translateX(15px)';
+                setTimeout(() => frame.style.transform = 'translateX(-15px)', 80);
+                setTimeout(() => frame.style.transform = 'translateX(8px)', 160);
+                setTimeout(() => frame.style.transform = 'translateX(0)', 240);
             }
         }
 
-        // Time Continuum Synchronization Telemetry
-        const universeGenesisPoint = new Date(2025, 0, 1);
+        // Live Premium Sketchbook Rendering Script (Mathematical Art Emulator)
+        const sCanvas = document.getElementById('sketch-canvas');
+        const sCtx = sCanvas.getContext('2d');
+        let drawT = 0;
 
-        function initiateChronologyTelemetry() {
-            setInterval(() => {
-                const currentEpochDelta = new Date() - universeGenesisPoint;
+        function resizeSketchCanvas() {
+            sCanvas.width = sCanvas.parentElement.clientWidth;
+            sCanvas.height = sCanvas.parentElement.clientHeight;
+        }
+        window.addEventListener('resize', resizeSketchCanvas);
+        resizeSketchCanvas();
 
-                const days = Math.floor(currentEpochDelta / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((currentEpochDelta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((currentEpochDelta % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((currentEpochDelta % (1000 * 60)) / 1000);
+        function initiateSketchbookLoop() {
+            resizeSketchCanvas();
+            function drawSystemArt() {
+                sCtx.fillStyle = 'rgba(0, 0, 0, 0.03)'; // Beautiful trail fading effect
+                sCtx.fillRect(0, 0, sCanvas.width, sCanvas.height);
 
-                document.getElementById('v-days').innerText = String(days).padStart(2, '0');
-                document.getElementById('v-hours').innerText = String(hours).padStart(2, '0');
-                document.getElementById('v-mins').innerText = String(minutes).padStart(2, '0');
-                document.getElementById('v-secs').innerText = String(seconds).padStart(2, '0');
-            }, 1000);
+                sCtx.beginPath();
+                // Mathematical Lissajous Vector Curve to simulate elegant fine-art drawing movements
+                const posX = sCanvas.width / 2 + Math.sin(drawT * 1.5) * (sCanvas.width * 0.35);
+                const posY = sCanvas.height / 2 + Math.cos(drawT * 0.9) * (sCanvas.height * 0.35);
+
+                sCtx.arc(posX, posY, 1.5, 0, Math.PI * 2);
+                sCtx.fillStyle = `hsl(${(drawT * 20) % 360}, 85%, 65%)`; // Cyber premium gradient shift
+                sCtx.fill();
+
+                drawT += 0.015;
+                requestAnimationFrame(drawSystemArt);
+            }
+            drawSystemArt();
         }
     </script>
 </body>
