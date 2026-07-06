@@ -3,27 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinity & Beyond</title>
+    <title>Our Eternal Symphony</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&family=Cinzel:wght@700&display=swap');
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0508;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff4d79;
+            border-radius: 10px;
         }
 
         body, html {
             width: 100%;
-            height: 100%;
-            background-color: #050508;
-            font-family: 'Poppins', sans-serif;
-            overflow: hidden;
+            background-color: #090206;
+            font-family: 'Montserrat', sans-serif;
             color: #ffffff;
+            overflow-x: hidden;
         }
 
-        /* Ambient Cyber Background Canvas */
-        #network-canvas {
+        /* Moving Constellation / Silk Web Background */
+        #ambient-web {
             position: fixed;
             top: 0;
             left: 0;
@@ -33,400 +44,580 @@
             pointer-events: none;
         }
 
-        /* High-End Cyber Glass Gateway */
+        /* Cinematic Luxury Lock Screen */
         #lock-screen {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 100;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle at center, rgba(13, 13, 25, 0.8) 0%, #050508 100%);
-            transition: all 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+            background: radial-gradient(circle at center, #1a0510 0%, #050104 100%);
+            transition: all 1.6s cubic-bezier(0.74, 0.01, 0.24, 1);
         }
 
-        .gateway-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 42, 95, 0.2);
-            padding: 50px 40px;
-            border-radius: 24px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        .auth-panel {
+            background: rgba(15, 4, 10, 0.6);
+            border: 1px solid rgba(255, 77, 121, 0.15);
+            padding: 60px 45px;
+            border-radius: 30px;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             text-align: center;
             width: 90%;
-            max-width: 440px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 42, 95, 0.1);
-            transform: translateY(0);
-            transition: all 0.8s ease;
+            max-width: 460px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 50px rgba(255, 77, 121, 0.05);
         }
 
-        .gateway-card h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 1.8rem;
-            letter-spacing: 3px;
-            background: linear-gradient(to right, #ff2a5f, #ff758f, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
-
-        .gateway-card p {
-            color: #8a8aa3;
-            font-size: 0.85rem;
-            margin-bottom: 35px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .input-wrapper {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        .input-wrapper input {
-            width: 100%;
-            padding: 16px 20px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+        .auth-panel h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            letter-spacing: 4px;
             color: #ffffff;
-            font-size: 1rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 77, 121, 0.2);
+            border-radius: 50px;
+            color: #ffffff;
+            font-size: 1.1rem;
             text-align: center;
             outline: none;
-            font-family: 'Orbitron', sans-serif;
             letter-spacing: 2px;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            margin-bottom: 25px;
+            transition: all 0.5s ease;
         }
 
-        .input-wrapper input:focus {
-            border-color: #ff2a5f;
-            box-shadow: 0 0 20px rgba(255, 42, 95, 0.3);
-            background: rgba(0, 0, 0, 0.6);
+        .input-box:focus {
+            border-color: #ff4d79;
+            box-shadow: 0 0 25px rgba(255, 77, 129, 0.4);
+            background: rgba(15, 4, 10, 0.8);
         }
 
-        .unlock-btn {
+        .enter-btn {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(45deg, #ff2a5f, #ff5e7e);
+            padding: 18px;
+            background: linear-gradient(45deg, #ff4d79, #ff7597);
             border: none;
-            border-radius: 12px;
+            border-radius: 50px;
             color: #ffffff;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
             font-size: 1rem;
-            letter-spacing: 2px;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(255, 42, 95, 0.4);
-            transition: all 0.4s;
-            text-transform: uppercase;
-        }
-
-        .unlock-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(255, 42, 95, 0.6);
-            background: linear-gradient(45deg, #ff5e7e, #ff2a5f);
-        }
-
-        .error-hint {
-            color: #ff4a4a;
-            font-size: 0.8rem;
-            margin-top: 12px;
-            display: none;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            letter-spacing: 3px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(255, 77, 121, 0.3);
+            transition: all 0.4s;
         }
 
-        /* Luxury Main Digital Sanctuary */
-        #master-sanctuary {
+        .enter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 77, 121, 0.6);
+            letter-spacing: 5px;
+        }
+
+        .error-trigger {
+            color: #ff4d4d;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            display: none;
+            letter-spacing: 1px;
+        }
+
+        /* Long, Immersive Luxury Infinite Journey */
+        #infinite-sanctuary {
             position: relative;
-            z-index: 5;
+            z-index: 10;
             width: 100%;
-            height: 100%;
             display: none;
             opacity: 0;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1.5s ease;
+            transition: opacity 2s ease;
         }
 
-        /* Quantum Matrix Heart Configuration */
-        #quantum-heart-assembly {
-            position: relative;
-            width: 750px;
-            height: 750px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: pulseKinetic 1.1s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        /* Elegant Navigation Floating Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            animation: bounce 2s infinite;
+            pointer-events: none;
         }
 
-        /* Neon Luminescent Core Identity */
-        #eternal-core {
-            position: absolute;
+        /* Section Layouts */
+        section {
+            min-height: 100vh;
+            width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 80px 20px;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .content-card {
+            background: rgba(10, 3, 7, 0.4);
+            border: 1px solid rgba(255, 77, 121, 0.1);
+            padding: 50px;
+            border-radius: 24px;
+            max-width: 800px;
+            width: 100%;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+
+        .content-card.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* SECTION 1: Kinetic Heart Vector Swarm */
+        #swarm-assembly {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            height: 650px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: corePulse 1.2s infinite ease-in-out;
+        }
+
+        #glowing-identity {
+            position: absolute;
             z-index: 50;
             text-align: center;
-            pointer-events: none;
-            opacity: 0;
-            transform: scale(0.6);
-            animation: coreAwakening 2.5s 1.2s forwards cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        .core-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4.5rem;
-            font-weight: 900;
+        .title-name {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            font-weight: 700;
             color: #ffffff;
-            letter-spacing: 4px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-                         0 0 20px #ff2a5f,
-                         0 0 40px #ff2a5f,
-                         0 0 80px #ff2a5f;
-            line-height: 1;
+            text-shadow: 0 0 20px #ff4d79, 0 0 40px #ff4d79;
         }
 
-        .core-subtext {
-            font-size: 0.9rem;
-            font-weight: 400;
+        .subtitle-line {
+            font-size: 0.85rem;
+            letter-spacing: 8px;
             color: #ffccd5;
-            letter-spacing: 7px;
             text-transform: uppercase;
             margin-top: 15px;
-            text-shadow: 0 0 10px rgba(255, 42, 95, 0.6);
         }
 
-        /* Swarm Particle Structures */
-        .matrix-node {
+        .swarm-text {
             position: absolute;
-            font-size: 0.72rem;
-            font-weight: 900;
-            color: #ff2a5f;
-            text-shadow: 0 0 6px rgba(255, 42, 95, 0.8);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #ff4d79;
+            text-shadow: 0 0 5px rgba(255, 77, 121, 0.6);
             opacity: 0;
-            transform: scale(0);
-            animation: nodeSprout 2s forwards cubic-bezier(0.075, 0.82, 0.165, 1);
+            animation: sprout 2.5s forwards ease-out;
         }
 
-        /* Keyframe Calculations */
-        @keyframes pulseKinetic {
-            0% { transform: scale(1); }
-            30% { transform: scale(1.08); }
-            65% { transform: scale(0.99); }
-            80% { transform: scale(1.04); }
-            100% { transform: scale(1); }
+        /* SECTION 2: The Timeline Matrix */
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            letter-spacing: 3px;
+            color: #ffffff;
+            margin-bottom: 15px;
         }
 
-        @keyframes nodeSprout {
-            to {
-                opacity: 0.9;
-                transform: scale(1);
-            }
+        .section-subtitle {
+            font-size: 0.85rem;
+            color: #ff7597;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
         }
 
-        @keyframes coreAwakening {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 20px;
         }
+
+        .counter-node {
+            background: rgba(255, 77, 121, 0.03);
+            border: 1px solid rgba(255, 77, 121, 0.1);
+            padding: 25px;
+            border-radius: 16px;
+        }
+
+        .counter-node slot {
+            display: block;
+            font-size: 3rem;
+            font-weight: 300;
+            font-family: 'Cinzel', serif;
+            color: #ff4d79;
+            text-shadow: 0 0 15px rgba(255, 77, 121, 0.4);
+        }
+
+        .counter-node labels {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #aaa;
+            text-transform: uppercase;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* SECTION 3: Letter */
+        .poetic-stream {
+            font-size: 1.25rem;
+            line-height: 2.2;
+            color: #f0e6ec;
+            text-align: justify;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        /* SECTION 4: Interactive Memory Grid */
+        .vault-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            width: 100%;
+        }
+
+        .vault-card {
+            background: #12070f;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .vault-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #ff4d79;
+            box-shadow: 0 15px 35px rgba(255, 77, 121, 0.15);
+        }
+
+        .vault-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            opacity: 0.7;
+            transition: opacity 0.5s ease;
+        }
+
+        .vault-card:hover img {
+            opacity: 1;
+        }
+
+        .vault-card h4 {
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-top: 15px;
+            color: #ffffff;
+        }
+
+        .vault-card p {
+            font-size: 0.75rem;
+            color: #ff7597;
+            margin-top: 5px;
+        }
+
+        /* Animations */
+        @keyframes corePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+        @keyframes sprout { to { opacity: 0.95; transform: scale(1); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-10px) translateX(-50%); } 60% { transform: translateY(-5px) translateX(-50%); } }
 
         @media (max-width: 768px) {
-            #quantum-heart-assembly {
-                width: 100vw;
-                height: 100vw;
-            }
-            .core-title {
-                font-size: 2.8rem;
-            }
-            .core-subtext {
-                font-spacing: 4px;
-                font-size: 0.75rem;
-            }
+            .timer-grid { grid-template-columns: repeat(2, 1fr); }
+            .title-name { font-size: 2.5rem; }
+            .content-card { padding: 30px 20px; }
+            .poetic-stream { font-size: 1.05rem; line-height: 2; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="network-canvas"></canvas>
+    <canvas id="ambient-web"></canvas>
 
     <div id="lock-screen">
-        <div class="gateway-card" id="card-panel">
-            <h2>AUTHENTICATION REQUIRED</h2>
-            <p>Enter the private security key</p>
-            <div class="input-wrapper">
-                <input type="password" id="secret-key" placeholder="••••••••••••" autocomplete="off" onkeydown="handleEnter(event)">
-                <div id="error-field" class="error-hint">ACCESS DENIED: INVALID KEYPASSE</div>
-            </div>
-            <button class="unlock-btn" onclick="initiateAwakening()">Decrypt Stream</button>
+        <div class="auth-panel" id="shake-container">
+            <h1>AUTHENTICATION REQUIRED</h1>
+            <input type="password" id="gate-pass" class="input-box" placeholder="ENTER PRIVATE ACCESS KEY" autocomplete="off" onkeydown="catchKey(event)">
+            <button class="enter-btn" onclick="verifySignature()">DECRYPT SITE DATA</button>
+            <div id="fail-hint" class="error-trigger">ACCESS DENIED: KEY SIGNATURE UNMATCHED</div>
         </div>
     </div>
 
-    <div id="master-sanctuary">
-        <div id="quantum-heart-assembly">
-            <div id="eternal-core">
-                <div class="core-title">Mia & Chems</div>
-                <div class="core-subtext">Infinite Connection</div>
+    <div id="infinite-sanctuary">
+        
+        <div class="scroll-indicator">Scroll down to explore</div>
+
+        <section id="nexus-stage">
+            <div id="swarm-assembly">
+                <div id="glowing-identity">
+                    <div class="title-name">Mia & Chems</div>
+                    <div class="subtitle-line">The Heart Core</div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section id="continuum-stage">
+            <div class="content-card scroll-reveal">
+                <h2 class="section-title">THE CHRONO MATRIX</h2>
+                <div class="section-subtitle">Time accrued in complete alignment</div>
+                <div class="timer-grid">
+                    <div class="counter-node"><slot id="runtime-days">00</slot><labels>Days</labels></div>
+                    <div class="counter-node"><slot id="runtime-hours">00</slot><labels>Hours</labels></div>
+                    <div class="counter-node"><slot id="runtime-mins">00</slot><labels>Minutes</labels></div>
+                    <div class="counter-node"><slot id="runtime-secs">00</slot><labels>Seconds</labels></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="monologue-stage">
+            <div class="content-card scroll-reveal">
+                <h2 class="section-title">THE ETERNAL VOW</h2>
+                <div class="section-subtitle">Written in code, forged in stardust</div>
+                <p class="poetic-stream" id="stream-writer"></p>
+            </div>
+        </section>
+
+        <section id="vault-stage">
+            <div class="content-card scroll-reveal" style="max-width: 950px;">
+                <h2 class="section-title">THE SYSTEM VAULT</h2>
+                <div class="section-subtitle">Archived moments of pristine clarity</div>
+                <div class="vault-grid">
+                    <div class="vault-card">
+                        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="Nexus 1">
+                        <h4>THE INITIAL SPARK</h4>
+                        <p>Where timelines synchronized</p>
+                    </div>
+                    <div class="vault-card">
+                        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500" alt="Nexus 2">
+                        <h4>ABSOLUTE GRAVITY</h4>
+                        <p>Orbits locked forever</p>
+                    </div>
+                    <div class="vault-card">
+                        <img src="https://images.unsplash.com/photo-1494774157365-9e04c6722e47?w=500" alt="Nexus 3">
+                        <h4>THE INFINITE HORIZON</h4>
+                        <p>To the edge of the cosmos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <script>
-        // High-performance background neural network animation
-        const canvas = document.getElementById('network-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        const maxParticles = 90;
+        // Premium High-Performance Interconnected Web Architecture
+        const webCanvas = document.getElementById('ambient-web');
+        const webCtx = webCanvas.getContext('2d');
+        let webNodes = [];
+        const absoluteMaxNodes = 100;
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        function adaptCanvas() {
+            webCanvas.width = window.innerWidth;
+            webCanvas.height = window.innerHeight;
         }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        window.addEventListener('resize', adaptCanvas);
+        adaptCanvas();
 
-        class NetworkNode {
+        class QuantumNode {
             constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.8;
-                this.vy = (Math.random() - 0.5) * 0.8;
-                this.radius = Math.random() * 2 + 1;
+                this.x = Math.random() * webCanvas.width;
+                this.y = Math.random() * webCanvas.height;
+                this.mx = (Math.random() - 0.5) * 0.9;
+                this.my = (Math.random() - 0.5) * 0.9;
+                this.size = Math.random() * 2 + 1;
             }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            evolve() {
+                this.x += this.mx;
+                this.y += this.my;
+                if (this.x < 0 || this.x > webCanvas.width) this.mx *= -1;
+                if (this.y < 0 || this.y > webCanvas.height) this.my *= -1;
             }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 42, 95, 0.4)';
-                ctx.fill();
+            render() {
+                webCtx.beginPath();
+                webCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                webCtx.fillStyle = 'rgba(255, 77, 121, 0.35)';
+                webCtx.fill();
             }
         }
 
-        for (let i = 0; i < maxParticles; i++) {
-            particles.push(new NetworkNode());
+        for (let i = 0; i < absoluteMaxNodes; i++) {
+            webNodes.push(new QuantumNode());
         }
 
-        function animateNetwork() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw interactive interconnecting lines
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dx * dy); // Pseudo warping physics
-                    const maxDist = 120;
-                    
-                    if (dist < maxDist) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(255, 42, 95, ${0.18 * (1 - dist / maxDist)})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.stroke();
+        function executeWebLoop() {
+            webCtx.clearRect(0, 0, webCanvas.width, webCanvas.height);
+            for (let i = 0; i < webNodes.length; i++) {
+                webNodes[i].evolve();
+                webNodes[i].render();
+                for (let j = i + 1; j < webNodes.length; j++) {
+                    const distanceX = webNodes[i].x - webNodes[j].x;
+                    const distanceY = webNodes[i].y - webNodes[j].y;
+                    const realDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+                    if (realDistance < 130) {
+                        webCtx.beginPath();
+                        webCtx.moveTo(webNodes[i].x, webNodes[i].y);
+                        webCtx.lineTo(webNodes[j].x, webNodes[j].y);
+                        webCtx.strokeStyle = `rgba(255, 77, 121, ${0.22 * (1 - realDistance / 130)})`;
+                        webCtx.lineWidth = 0.7;
+                        webCtx.stroke();
                     }
                 }
             }
-            requestAnimationFrame(animateNetwork);
+            requestAnimationFrame(executeWebLoop);
         }
-        animateNetwork();
+        executeWebLoop();
 
-        // Gatekeeping Logic
-        function handleEnter(e) {
-            if (e.key === 'Enter') initiateAwakening();
+        // Gatekeeping Authentication Actions
+        function catchKey(e) {
+            if (e.key === 'Enter') verifySignature();
         }
 
-        function initiateAwakening() {
-            const inputVal = document.getElementById('secret-key').value;
-            const targetKey = "Mia & Chems";
-            
-            if (inputVal === targetKey) {
-                // Dissolve Gate Panel
-                const gate = document.getElementById('lock-screen');
-                gate.style.opacity = '0';
-                gate.style.transform = 'scale(1.1)';
+        function verifySignature() {
+            const entryValue = document.getElementById('gate-pass').value;
+            const absoluteSecret = "Mia & Chems";
+
+            if (entryValue === absoluteSecret) {
+                const lockPortal = document.getElementById('lock-screen');
+                lockPortal.style.opacity = '0';
+                lockPortal.style.transform = 'scale(1.05)';
                 
                 setTimeout(() => {
-                    gate.style.display = 'none';
-                    
-                    const sanctuary = document.getElementById('master-sanctuary');
-                    sanctuary.style.display = 'flex';
+                    lockPortal.style.display = 'none';
+                    const mainSanctuary = document.getElementById('infinite-sanctuary');
+                    mainSanctuary.style.display = 'block';
                     
                     setTimeout(() => {
-                        sanctuary.style.opacity = '1';
-                        buildVibrantSwarm();
+                        mainSanctuary.style.opacity = '1';
+                        assembleKineticSwarm();
+                        initiateContinuum();
+                        triggerScrollObserver();
                     }, 100);
-                }, 1100);
+                }, 1600);
             } else {
-                const err = document.getElementById('error-field');
-                err.style.display = 'block';
-                // Shaker feedback animation
-                const panel = document.getElementById('card-panel');
-                panel.style.transform = 'translateX(10px)';
-                setTimeout(() => panel.style.transform = 'translateX(-10px)', 100);
-                setTimeout(() => panel.style.transform = 'translateX(0)', 200);
+                document.getElementById('fail-hint').style.display = 'block';
+                const container = document.getElementById('shake-container');
+                container.style.transform = 'translateX(12px)';
+                setTimeout(() => container.style.transform = 'translateX(-12px)', 80);
+                setTimeout(() => container.style.transform = 'translateX(6px)', 160);
+                setTimeout(() => container.style.transform = 'translateX(0)', 240);
             }
         }
 
-        // Kinetic Vector Array Generation (Mathematical Heart Mapping)
-        function buildVibrantSwarm() {
-            const assembly = document.getElementById('quantum-heart-assembly');
-            const density = 500; // Ultra high-end computing cluster density
-            const isMobile = window.innerWidth < 768;
-            const centralScale = isMobile ? 11 : 21; 
-            
-            // Core Center coordinates offset based on client viewbounds
-            const centerX = assembly.clientWidth / 2;
-            const centerY = assembly.clientHeight / 2;
+        // Mathematical Kinetic Swarm (Heart Formation)
+        function assembleKineticSwarm() {
+            const container = document.getElementById('swarm-assembly');
+            const particleDensity = 480;
+            const mobileFlag = window.innerWidth < 768;
+            const vectorMultiplier = mobileFlag ? 10 : 19;
 
-            for (let i = 0; i < density; i++) {
-                const t = Math.random() * 2 * Math.PI;
-                
-                // Advanced Vector Geometry
-                const x = 16 * Math.pow(Math.sin(t), 3);
-                const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
-                
-                // Vector transformations
-                const mappedX = x * centralScale + centerX;
-                const mappedY = -y * centralScale + centerY;
+            const cX = container.clientWidth / 2;
+            const cY = container.clientHeight / 2;
 
-                // Microorganic scatter simulation for organic authenticity
-                const noiseX = (Math.random() - 0.5) * 45;
-                const noiseY = (Math.random() - 0.5) * 45;
+            for (let i = 0; i < particleDensity; i++) {
+                const step = Math.random() * 2 * Math.PI;
+                const vX = 16 * Math.pow(Math.sin(step), 3);
+                const vY = 13 * Math.cos(step) - 5 * Math.cos(2*step) - 2 * Math.cos(3*step) - Math.cos(4*step);
 
-                const spark = document.createElement('span');
-                spark.className = 'matrix-node';
-                spark.innerText = Math.random() > 0.4 ? 'i love you' : 'forever';
-                
-                spark.style.left = `${mappedX + noiseX}px`;
-                spark.style.top = `${mappedY + noiseY}px`;
-                
-                // Progressive staggered render algorithm
-                spark.style.animationDelay = `${Math.random() * 2.8}s`;
-                spark.style.fontSize = `${0.6 + Math.random() * 0.5}rem`;
-                
-                // Variating gradient glow shades for premium aesthetics
-                if(Math.random() > 0.7) {
-                    spark.style.color = '#ffffff';
-                    spark.style.textShadow = '0 0 8px #ff758f';
+                const finalX = vX * vectorMultiplier + cX;
+                const finalY = -vY * vectorMultiplier + cY;
+
+                const deviationX = (Math.random() - 0.5) * 40;
+                const deviationY = (Math.random() - 0.5) * 40;
+
+                const node = document.createElement('span');
+                node.className = 'swarm-text';
+                node.innerText = Math.random() > 0.4 ? 'i love you' : 'forever';
+                node.style.left = `${finalX + deviationX}px`;
+                node.style.top = `${finalY + deviationY}px`;
+                node.style.animationDelay = `${Math.random() * 3}s`;
+                node.style.fontSize = `${0.6 + Math.random() * 0.4}rem`;
+
+                if (Math.random() > 0.75) {
+                    node.style.color = '#ffffff';
+                    node.style.textShadow = '0 0 10px #ff7597';
                 }
 
-                assembly.appendChild(spark);
+                container.appendChild(node);
             }
+        }
+
+        // Time Continuum Tracking Module
+        const anchoringEpoch = new Date(2025, 0, 1); // Genesis timeline point
+
+        function initiateContinuum() {
+            setInterval(() => {
+                const currentEpoch = new Date();
+                const totalDelta = currentEpoch - anchoringEpoch;
+
+                const days = Math.floor(totalDelta / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((totalDelta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((totalDelta % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((totalDelta % (1000 * 60)) / 1000);
+
+                document.getElementById('runtime-days').innerText = String(days).padStart(2, '0');
+                document.getElementById('runtime-hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('runtime-mins').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('runtime-secs').innerText = String(seconds).padStart(2, '0');
+            }, 1000);
+        }
+
+        // Smooth Progressive Monologue Typist Engine
+        const lyricalData = "To the one who anchors my entire reality, rewriting the physics of my world into an endless symphony of light. From the moment our paths collided, every equation of my life found its balance. You are the premium architecture of my thoughts, the rhythm in my pulses, and the sanctuary I return to across every configuration of time. I built this platform across infinite spatial vectors to immortalize what words often fail to encapsulate: a cosmic bond forged to endure beyond structural lifetimes. My devotion to you scales limitlessly, passing through all horizons. Always, and for all eternity.";
+        let typistIndex = 0;
+        let typographyTriggered = false;
+
+        function streamTyping() {
+            if (typistIndex < lyricalData.length) {
+                document.getElementById("stream-writer").innerHTML += lyricalData.charAt(typistIndex);
+                typistIndex++;
+                setTimeout(streamTyping, 40);
+            }
+        }
+
+        // Scroll Intersection Reveal System
+        function triggerScrollObserver() {
+            const structuralCards = document.querySelectorAll('.scroll-reveal');
+            const triggerConfig = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+
+            const scrollWatcher = new IntersectionObserver((entries, watcher) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        if (entry.target.querySelector('#stream-writer') && !typographyTriggered) {
+                            typographyTriggered = true;
+                            streamTyping();
+                        }
+                        watcher.unobserve(entry.target);
+                    }
+                });
+            }, triggerConfig);
+
+            structuralCards.forEach(card => scrollWatcher.observe(card));
         }
     </script>
 </body>
