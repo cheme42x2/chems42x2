@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Eternal Symphony</title>
+    <title>The Infinite Symphony of Us</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&family=Cinzel:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@200;400;600&family=Playfair+Display:ital,wght@1,400;1,600&display=swap');
 
         * {
             box-sizing: border-box;
@@ -14,27 +14,28 @@
             scroll-behavior: smooth;
         }
 
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0508;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ff4d79;
-            border-radius: 10px;
-        }
-
         body, html {
             width: 100%;
-            background-color: #090206;
+            background-color: #030104;
             font-family: 'Montserrat', sans-serif;
             color: #ffffff;
             overflow-x: hidden;
         }
 
-        /* Moving Constellation / Silk Web Background */
-        #ambient-web {
+        /* Luxury Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030104;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#ff2a5f, #791a88);
+            border-radius: 10px;
+        }
+
+        /* Constellation / Neural Network Dynamic Background */
+        #dynamic-net {
             position: fixed;
             top: 0;
             left: 0;
@@ -44,385 +45,393 @@
             pointer-events: none;
         }
 
-        /* Cinematic Luxury Lock Screen */
-        #lock-screen {
+        /* 1. Cinematic Gateway (Lock Screen) */
+        #gatekeeper {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle at center, #1a0510 0%, #050104 100%);
-            transition: all 1.6s cubic-bezier(0.74, 0.01, 0.24, 1);
+            background: radial-gradient(circle at center, #11020a 0%, #030104 100%);
+            transition: all 1.8s cubic-bezier(0.76, 0, 0.24, 1);
         }
 
-        .auth-panel {
-            background: rgba(15, 4, 10, 0.6);
-            border: 1px solid rgba(255, 77, 121, 0.15);
+        .premium-shield {
+            background: rgba(6, 2, 5, 0.5);
+            border: 1px solid rgba(255, 42, 95, 0.12);
             padding: 60px 45px;
-            border-radius: 30px;
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            border-radius: 40px;
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
             text-align: center;
             width: 90%;
-            max-width: 460px;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 50px rgba(255, 77, 121, 0.05);
+            max-width: 480px;
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.9), 0 0 60px rgba(255, 42, 95, 0.03);
         }
 
-        .auth-panel h1 {
+        .premium-shield h1 {
             font-family: 'Cinzel', serif;
-            font-size: 1.6rem;
-            letter-spacing: 4px;
+            font-size: 1.4rem;
+            letter-spacing: 5px;
             color: #ffffff;
-            margin-bottom: 30px;
-            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+            margin-bottom: 35px;
+            font-weight: 400;
         }
 
-        .input-box {
+        .cyber-input {
             width: 100%;
-            padding: 18px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 77, 121, 0.2);
-            border-radius: 50px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 42, 95, 0.2);
+            border-radius: 16px;
             color: #ffffff;
             font-size: 1.1rem;
             text-align: center;
             outline: none;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            transition: all 0.5s ease;
-        }
-
-        .input-box:focus {
-            border-color: #ff4d79;
-            box-shadow: 0 0 25px rgba(255, 77, 129, 0.4);
-            background: rgba(15, 4, 10, 0.8);
-        }
-
-        .enter-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(45deg, #ff4d79, #ff7597);
-            border: none;
-            border-radius: 50px;
-            color: #ffffff;
-            font-size: 1rem;
-            font-weight: 600;
             letter-spacing: 3px;
+            margin-bottom: 30px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .cyber-input:focus {
+            border-color: #ff2a5f;
+            box-shadow: 0 0 35px rgba(255, 42, 95, 0.35);
+            background: rgba(10, 2, 6, 0.8);
+        }
+
+        .access-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(45deg, #ff2a5f, #b81d7a);
+            border: none;
+            border-radius: 16px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 4px;
             cursor: pointer;
             text-transform: uppercase;
-            box-shadow: 0 10px 30px rgba(255, 77, 121, 0.3);
-            transition: all 0.4s;
+            box-shadow: 0 12px 35px rgba(255, 42, 95, 0.25);
+            transition: all 0.4s ease;
         }
 
-        .enter-btn:hover {
+        .access-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 77, 121, 0.6);
-            letter-spacing: 5px;
+            box-shadow: 0 18px 50px rgba(255, 42, 95, 0.5);
+            letter-spacing: 6px;
         }
 
-        .error-trigger {
-            color: #ff4d4d;
-            font-size: 0.85rem;
+        .fail-toast {
+            color: #ff3333;
+            font-size: 0.8rem;
             margin-top: 15px;
             display: none;
             letter-spacing: 1px;
+            font-weight: 600;
         }
 
-        /* Long, Immersive Luxury Infinite Journey */
-        #infinite-sanctuary {
+        /* Infinite Story Scroll Layout */
+        #universe-scroller {
             position: relative;
             z-index: 10;
             width: 100%;
             display: none;
             opacity: 0;
-            transition: opacity 2s ease;
+            transition: opacity 2.5s ease;
         }
 
-        /* Elegant Navigation Floating Indicator */
-        .scroll-indicator {
+        /* Floating Navigation Utility */
+        .mouse-scroll {
             position: fixed;
-            bottom: 30px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
-            font-size: 0.8rem;
-            letter-spacing: 4px;
+            font-size: 0.75rem;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.4);
-            animation: bounce 2s infinite;
+            color: rgba(255, 255, 255, 0.3);
+            animation: floatUpDown 2s infinite;
             pointer-events: none;
         }
 
-        /* Section Layouts */
+        /* Luxurious Chapters */
         section {
             min-height: 100vh;
             width: 100%;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 80px 20px;
-            position: relative;
+            padding: 100px 40px;
             box-sizing: border-box;
+            position: relative;
         }
 
-        .content-card {
-            background: rgba(10, 3, 7, 0.4);
-            border: 1px solid rgba(255, 77, 121, 0.1);
-            padding: 50px;
-            border-radius: 24px;
-            max-width: 800px;
+        .chapter-box {
+            max-width: 900px;
             width: 100%;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 1.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+            transform: translateY(60px) scale(0.96);
+            transition: all 1.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .content-card.revealed {
+        .chapter-box.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
 
-        /* SECTION 1: Kinetic Heart Vector Swarm */
-        #swarm-assembly {
+        /* CHAPTER 1: The Overture (Big Intro) */
+        .chapter-num {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: #ff2a5f;
+            letter-spacing: 6px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero-statement {
+            font-family: 'Cinzel', serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffffff 30%, #ff6b8b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            font-weight: 200;
+            color: #b5a4b1;
+            letter-spacing: 3px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* CHAPTER 2: The Quantum Clock */
+        .clock-monitor {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .clock-tile {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 42, 95, 0.08);
+            padding: 40px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .clock-tile num {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: #ff2a5f;
+            text-shadow: 0 0 20px rgba(255, 42, 95, 0.3);
+        }
+
+        .clock-tile label {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #8c7b88;
+            text-transform: uppercase;
+            margin-top: 10px;
+            display: block;
+        }
+
+        /* CHAPTER 3: The Deep Verse */
+        .poetic-canvas {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2rem;
+            line-height: 2.2;
+            color: #fceef6;
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 0 0 1px rgba(255,255,255,0.3);
+        }
+
+        /* CHAPTER 4: The Kinetic Core */
+        #kinetic-heart-field {
             position: relative;
             width: 100%;
-            max-width: 650px;
-            height: 650px;
+            height: 450px;
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: corePulse 1.2s infinite ease-in-out;
         }
 
-        #glowing-identity {
+        .floating-heart-text {
             position: absolute;
-            z-index: 50;
-            text-align: center;
-        }
-
-        .title-name {
-            font-family: 'Cinzel', serif;
-            font-size: 4rem;
-            font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 0 20px #ff4d79, 0 0 40px #ff4d79;
-        }
-
-        .subtitle-line {
-            font-size: 0.85rem;
-            letter-spacing: 8px;
-            color: #ffccd5;
-            text-transform: uppercase;
-            margin-top: 15px;
-        }
-
-        .swarm-text {
-            position: absolute;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            color: #ff4d79;
-            text-shadow: 0 0 5px rgba(255, 77, 121, 0.6);
+            color: #ff2a5f;
+            text-shadow: 0 0 8px rgba(255, 42, 95, 0.7);
             opacity: 0;
-            animation: sprout 2.5s forwards ease-out;
+            animation: particleReveal 2.5s forwards ease-out;
         }
 
-        /* SECTION 2: The Timeline Matrix */
-        .section-title {
+        .embedded-signature {
+            position: absolute;
             font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            letter-spacing: 3px;
-            color: #ffffff;
-            margin-bottom: 15px;
-        }
-
-        .section-subtitle {
-            font-size: 0.85rem;
-            color: #ff7597;
+            font-size: 2.8rem;
+            font-weight: 700;
             letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 40px;
+            color: #ffffff;
+            text-shadow: 0 0 15px #ff2a5f, 0 0 35px #ff2a5f;
+            z-index: 10;
         }
 
-        .timer-grid {
+        /* CHAPTER 5: The Archives */
+        .vault-display {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
         }
 
-        .counter-node {
-            background: rgba(255, 77, 121, 0.03);
-            border: 1px solid rgba(255, 77, 121, 0.1);
-            padding: 25px;
-            border-radius: 16px;
-        }
-
-        .counter-node slot {
-            display: block;
-            font-size: 3rem;
-            font-weight: 300;
-            font-family: 'Cinzel', serif;
-            color: #ff4d79;
-            text-shadow: 0 0 15px rgba(255, 77, 121, 0.4);
-        }
-
-        .counter-node labels {
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            color: #aaa;
-            text-transform: uppercase;
-            margin-top: 5px;
-            display: block;
-        }
-
-        /* SECTION 3: Letter */
-        .poetic-stream {
-            font-size: 1.25rem;
-            line-height: 2.2;
-            color: #f0e6ec;
-            text-align: justify;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        /* SECTION 4: Interactive Memory Grid */
-        .vault-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            width: 100%;
-        }
-
-        .vault-card {
-            background: #12070f;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.5s ease;
+        .vault-item {
+            background: #090307;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
+            padding: 20px;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: pointer;
+            text-align: left;
         }
 
-        .vault-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: #ff4d79;
-            box-shadow: 0 15px 35px rgba(255, 77, 121, 0.15);
+        .vault-item:hover {
+            transform: translateY(-15px);
+            border-color: #ff2a5f;
+            box-shadow: 0 20px 45px rgba(255, 42, 95, 0.15);
         }
 
-        .vault-card img {
+        .vault-item img {
             width: 100%;
-            height: 200px;
+            height: 240px;
             object-fit: cover;
-            border-radius: 12px;
-            opacity: 0.7;
-            transition: opacity 0.5s ease;
+            border-radius: 16px;
+            filter: grayscale(40%);
+            transition: filter 0.6s ease;
         }
 
-        .vault-card:hover img {
-            opacity: 1;
+        .vault-item:hover img {
+            filter: grayscale(0%);
         }
 
-        .vault-card h4 {
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            margin-top: 15px;
+        .vault-item h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin: 20px 0 5px 0;
             color: #ffffff;
         }
 
-        .vault-card p {
-            font-size: 0.75rem;
-            color: #ff7597;
-            margin-top: 5px;
+        .vault-item p {
+            font-size: 0.8rem;
+            color: #ff6b8b;
+            letter-spacing: 1px;
         }
 
-        /* Animations */
-        @keyframes corePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.06); }
-        }
-        @keyframes sprout { to { opacity: 0.95; transform: scale(1); } }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-10px) translateX(-50%); } 60% { transform: translateY(-5px) translateX(-50%); } }
+        /* Keyframes */
+        @keyframes floatUpDown { 0%, 100% { transform: translateY(0) translateX(-50%); } 50% { transform: translateY(-12px) translateX(-50%); } }
+        @keyframes particleReveal { to { opacity: 0.85; transform: scale(1); } }
 
-        @media (max-width: 768px) {
-            .timer-grid { grid-template-columns: repeat(2, 1fr); }
-            .title-name { font-size: 2.5rem; }
-            .content-card { padding: 30px 20px; }
-            .poetic-stream { font-size: 1.05rem; line-height: 2; }
+        @media (max-width: 900px) {
+            .clock-monitor { grid-template-columns: repeat(2, 1fr); }
+            .vault-display { grid-template-columns: 1fr; }
+            .hero-statement { font-size: 2.5rem; }
+            .poetic-canvas { font-size: 1.4rem; line-height: 2; }
+            section { padding: 60px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="ambient-web"></canvas>
+    <canvas id="dynamic-net"></canvas>
 
-    <div id="lock-screen">
-        <div class="auth-panel" id="shake-container">
-            <h1>AUTHENTICATION REQUIRED</h1>
-            <input type="password" id="gate-pass" class="input-box" placeholder="ENTER PRIVATE ACCESS KEY" autocomplete="off" onkeydown="catchKey(event)">
-            <button class="enter-btn" onclick="verifySignature()">DECRYPT SITE DATA</button>
-            <div id="fail-hint" class="error-trigger">ACCESS DENIED: KEY SIGNATURE UNMATCHED</div>
+    <div id="gatekeeper">
+        <div class="premium-shield" id="shake-frame">
+            <h1>SECURE ACCESS PROTOCOL</h1>
+            <input type="password" id="pass-field" class="cyber-input" placeholder="ENTER ACCESS KEY REVELATION" autocomplete="off" onkeydown="checkKeyEnter(event)">
+            <button class="access-btn" onclick="authenticateGateway()">Unlock Dimension</button>
+            <div id="fail-notifier" class="fail-toast">ACCESS DENIED: SIGNATURE MISMATCH</div>
         </div>
     </div>
 
-    <div id="infinite-sanctuary">
+    <div id="universe-scroller">
         
-        <div class="scroll-indicator">Scroll down to explore</div>
+        <div class="mouse-scroll">Scroll down to discover</div>
 
-        <section id="nexus-stage">
-            <div id="swarm-assembly">
-                <div id="glowing-identity">
-                    <div class="title-name">Mia & Chems</div>
-                    <div class="subtitle-line">The Heart Core</div>
+        <section>
+            <div class="chapter-box scroll-detect">
+                <div class="chapter-num">Chapter I</div>
+                <h2 class="hero-statement">The Genesis of Two Timelines</h2>
+                <p class="hero-desc">A deep-space configuration made purely to celebrate a bond built to outlast stars.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="chapter-box scroll-detect">
+                <div class="chapter-num">Chapter II</div>
+                <h2 class="hero-statement" style="font-size: 2.8rem;">The Time Continuum</h2>
+                <p class="hero-desc">Precise measurement of absolute synchronicity accumulated between us.</p>
+                <div class="clock-monitor">
+                    <div class="clock-tile"><num id="c-days">00</num><label>Days</label></div>
+                    <div class="clock-tile"><num id="c-hours">00</num><label>Hours</label></div>
+                    <div class="clock-tile"><num id="c-mins">00</num><label>Minutes</label></div>
+                    <div class="clock-tile"><num id="c-secs">00</num><label>Seconds</label></div>
                 </div>
             </div>
         </section>
 
-        <section id="continuum-stage">
-            <div class="content-card scroll-reveal">
-                <h2 class="section-title">THE CHRONO MATRIX</h2>
-                <div class="section-subtitle">Time accrued in complete alignment</div>
-                <div class="timer-grid">
-                    <div class="counter-node"><slot id="runtime-days">00</slot><labels>Days</labels></div>
-                    <div class="counter-node"><slot id="runtime-hours">00</slot><labels>Hours</labels></div>
-                    <div class="counter-node"><slot id="runtime-mins">00</slot><labels>Minutes</labels></div>
-                    <div class="counter-node"><slot id="runtime-secs">00</slot><labels>Seconds</labels></div>
+        <section>
+            <div class="chapter-box scroll-detect">
+                <div class="chapter-num">Chapter III</div>
+                <h2 class="hero-statement" style="font-size: 2.8rem; margin-bottom: 40px;">The Infinite Manifesto</h2>
+                <p class="poetic-canvas" id="poetic-typist"></p>
+            </div>
+        </section>
+
+        <section>
+            <div class="chapter-box scroll-detect">
+                <div class="chapter-num">Chapter IV</div>
+                <h2 class="hero-statement" style="font-size: 2.8rem;">The Quantum Heart</h2>
+                <p class="hero-desc" style="margin-bottom: 30px;">A matrix composed of hundreds of individual nodes perfectly aligned to protect a singular name.</p>
+                <div id="kinetic-heart-field">
+                    <div class="embedded-signature">Mia</div>
                 </div>
             </div>
         </section>
 
-        <section id="monologue-stage">
-            <div class="content-card scroll-reveal">
-                <h2 class="section-title">THE ETERNAL VOW</h2>
-                <div class="section-subtitle">Written in code, forged in stardust</div>
-                <p class="poetic-stream" id="stream-writer"></p>
-            </div>
-        </section>
-
-        <section id="vault-stage">
-            <div class="content-card scroll-reveal" style="max-width: 950px;">
-                <h2 class="section-title">THE SYSTEM VAULT</h2>
-                <div class="section-subtitle">Archived moments of pristine clarity</div>
-                <div class="vault-grid">
-                    <div class="vault-card">
-                        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="Nexus 1">
-                        <h4>THE INITIAL SPARK</h4>
-                        <p>Where timelines synchronized</p>
+        <section>
+            <div class="chapter-box scroll-detect">
+                <div class="chapter-num">Chapter V</div>
+                <h2 class="hero-statement" style="font-size: 2.8rem;">The Vaulted Constellations</h2>
+                <p class="hero-desc">Precious historical milestones archived safely within the deep neural system layers.</p>
+                <div class="vault-display">
+                    <div class="vault-item">
+                        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600" alt="Arc 1">
+                        <h3>THE GRAVITATIONAL PULL</h3>
+                        <p>Phase 01: Initial alignment</p>
                     </div>
-                    <div class="vault-card">
-                        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500" alt="Nexus 2">
-                        <h4>ABSOLUTE GRAVITY</h4>
-                        <p>Orbits locked forever</p>
+                    <div class="vault-item">
+                        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600" alt="Arc 2">
+                        <h3>ELEVATED ORBITS</h3>
+                        <p>Phase 02: Total lock-in</p>
                     </div>
-                    <div class="vault-card">
-                        <img src="https://images.unsplash.com/photo-1494774157365-9e04c6722e47?w=500" alt="Nexus 3">
-                        <h4>THE INFINITE HORIZON</h4>
-                        <p>To the edge of the cosmos</p>
+                    <div class="vault-item">
+                        <img src="https://images.unsplash.com/photo-1494774157365-9e04c6722e47?w=600" alt="Arc 3">
+                        <h3>INFINITE EXPANSION</h3>
+                        <p>Phase 03: Beyond horizons</p>
                     </div>
                 </div>
             </div>
@@ -430,194 +439,194 @@
     </div>
 
     <script>
-        // Premium High-Performance Interconnected Web Architecture
-        const webCanvas = document.getElementById('ambient-web');
-        const webCtx = webCanvas.getContext('2d');
-        let webNodes = [];
-        const absoluteMaxNodes = 100;
+        // High-Fidelity Physics Engine for Dynamic Moving Networks
+        const canvas = document.getElementById('dynamic-net');
+        const ctx = canvas.getContext('2d');
+        let nodes = [];
+        const totalNodesCount = 85;
 
-        function adaptCanvas() {
-            webCanvas.width = window.innerWidth;
-            webCanvas.height = window.innerHeight;
+        function adaptScreenDimensions() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
-        window.addEventListener('resize', adaptCanvas);
-        adaptCanvas();
+        window.addEventListener('resize', adaptScreenDimensions);
+        adaptScreenDimensions();
 
-        class QuantumNode {
+        class NeuralNode {
             constructor() {
-                this.x = Math.random() * webCanvas.width;
-                this.y = Math.random() * webCanvas.height;
-                this.mx = (Math.random() - 0.5) * 0.9;
-                this.my = (Math.random() - 0.5) * 0.9;
-                this.size = Math.random() * 2 + 1;
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.speedX = (Math.random() - 0.5) * 0.9;
+                this.speedY = (Math.random() - 0.5) * 0.9;
+                this.radius = Math.random() * 2 + 1;
             }
-            evolve() {
-                this.x += this.mx;
-                this.y += this.my;
-                if (this.x < 0 || this.x > webCanvas.width) this.mx *= -1;
-                if (this.y < 0 || this.y > webCanvas.height) this.my *= -1;
+            motion() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
             }
-            render() {
-                webCtx.beginPath();
-                webCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                webCtx.fillStyle = 'rgba(255, 77, 121, 0.35)';
-                webCtx.fill();
+            renderNode() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 42, 95, 0.4)';
+                ctx.fill();
             }
         }
 
-        for (let i = 0; i < absoluteMaxNodes; i++) {
-            webNodes.push(new QuantumNode());
+        for (let i = 0; i < totalNodesCount; i++) {
+            nodes.push(new NeuralNode());
         }
 
-        function executeWebLoop() {
-            webCtx.clearRect(0, 0, webCanvas.width, webCanvas.height);
-            for (let i = 0; i < webNodes.length; i++) {
-                webNodes[i].evolve();
-                webNodes[i].render();
-                for (let j = i + 1; j < webNodes.length; j++) {
-                    const distanceX = webNodes[i].x - webNodes[j].x;
-                    const distanceY = webNodes[i].y - webNodes[j].y;
-                    const realDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-                    if (realDistance < 130) {
-                        webCtx.beginPath();
-                        webCtx.moveTo(webNodes[i].x, webNodes[i].y);
-                        webCtx.lineTo(webNodes[j].x, webNodes[j].y);
-                        webCtx.strokeStyle = `rgba(255, 77, 121, ${0.22 * (1 - realDistance / 130)})`;
-                        webCtx.lineWidth = 0.7;
-                        webCtx.stroke();
+        function runNetworkAnimation() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < nodes.length; i++) {
+                nodes[i].motion();
+                nodes[i].renderNode();
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const deltaX = nodes[i].x - nodes[j].x;
+                    const deltaY = nodes[i].y - nodes[j].y;
+                    const pointDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                    
+                    if (pointDistance < 140) {
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = `rgba(255, 42, 95, ${0.25 * (1 - pointDistance / 140)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
                     }
                 }
             }
-            requestAnimationFrame(executeWebLoop);
+            requestAnimationFrame(runNetworkAnimation);
         }
-        executeWebLoop();
+        runNetworkAnimation();
 
-        // Gatekeeping Authentication Actions
-        function catchKey(e) {
-            if (e.key === 'Enter') verifySignature();
+        // Security Core Verification
+        function checkKeyEnter(e) {
+            if (e.key === 'Enter') authenticateGateway();
         }
 
-        function verifySignature() {
-            const entryValue = document.getElementById('gate-pass').value;
-            const absoluteSecret = "Mia & Chems";
+        function authenticateGateway() {
+            const secretInput = document.getElementById('pass-field').value;
+            const absoluteKey = "Mia & Chems";
 
-            if (entryValue === absoluteSecret) {
-                const lockPortal = document.getElementById('lock-screen');
-                lockPortal.style.opacity = '0';
-                lockPortal.style.transform = 'scale(1.05)';
+            if (secretInput === absoluteKey) {
+                const gate = document.getElementById('gatekeeper');
+                gate.style.opacity = '0';
+                gate.style.transform = 'scale(1.08)';
                 
                 setTimeout(() => {
-                    lockPortal.style.display = 'none';
-                    const mainSanctuary = document.getElementById('infinite-sanctuary');
-                    mainSanctuary.style.display = 'block';
+                    gate.style.display = 'none';
+                    const scrollContainer = document.getElementById('universe-scroller');
+                    scrollContainer.style.display = 'block';
                     
                     setTimeout(() => {
-                        mainSanctuary.style.opacity = '1';
-                        assembleKineticSwarm();
-                        initiateContinuum();
-                        triggerScrollObserver();
+                        scrollContainer.style.opacity = '1';
+                        initiateChronology();
+                        deployHeartSwarm();
+                        setupScrollRevelation();
                     }, 100);
-                }, 1600);
+                }, 1800);
             } else {
-                document.getElementById('fail-hint').style.display = 'block';
-                const container = document.getElementById('shake-container');
-                container.style.transform = 'translateX(12px)';
-                setTimeout(() => container.style.transform = 'translateX(-12px)', 80);
-                setTimeout(() => container.style.transform = 'translateX(6px)', 160);
-                setTimeout(() => container.style.transform = 'translateX(0)', 240);
+                document.getElementById('fail-notifier').style.display = 'block';
+                const wrapper = document.getElementById('shake-frame');
+                wrapper.style.transform = 'translateX(12px)';
+                setTimeout(() => wrapper.style.transform = 'translateX(-12px)', 80);
+                setTimeout(() => wrapper.style.transform = 'translateX(6px)', 160);
+                setTimeout(() => wrapper.style.transform = 'translateX(0)', 240);
             }
         }
 
-        // Mathematical Kinetic Swarm (Heart Formation)
-        function assembleKineticSwarm() {
-            const container = document.getElementById('swarm-assembly');
-            const particleDensity = 480;
-            const mobileFlag = window.innerWidth < 768;
-            const vectorMultiplier = mobileFlag ? 10 : 19;
+        // Chrono Engine Module
+        const historicalGenesis = new Date(2025, 0, 1);
 
-            const cX = container.clientWidth / 2;
-            const cY = container.clientHeight / 2;
-
-            for (let i = 0; i < particleDensity; i++) {
-                const step = Math.random() * 2 * Math.PI;
-                const vX = 16 * Math.pow(Math.sin(step), 3);
-                const vY = 13 * Math.cos(step) - 5 * Math.cos(2*step) - 2 * Math.cos(3*step) - Math.cos(4*step);
-
-                const finalX = vX * vectorMultiplier + cX;
-                const finalY = -vY * vectorMultiplier + cY;
-
-                const deviationX = (Math.random() - 0.5) * 40;
-                const deviationY = (Math.random() - 0.5) * 40;
-
-                const node = document.createElement('span');
-                node.className = 'swarm-text';
-                node.innerText = Math.random() > 0.4 ? 'i love you' : 'forever';
-                node.style.left = `${finalX + deviationX}px`;
-                node.style.top = `${finalY + deviationY}px`;
-                node.style.animationDelay = `${Math.random() * 3}s`;
-                node.style.fontSize = `${0.6 + Math.random() * 0.4}rem`;
-
-                if (Math.random() > 0.75) {
-                    node.style.color = '#ffffff';
-                    node.style.textShadow = '0 0 10px #ff7597';
-                }
-
-                container.appendChild(node);
-            }
-        }
-
-        // Time Continuum Tracking Module
-        const anchoringEpoch = new Date(2025, 0, 1); // Genesis timeline point
-
-        function initiateContinuum() {
+        function initiateChronology() {
             setInterval(() => {
-                const currentEpoch = new Date();
-                const totalDelta = currentEpoch - anchoringEpoch;
+                const deltaNow = new Date() - historicalGenesis;
 
-                const days = Math.floor(totalDelta / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((totalDelta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((totalDelta % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((totalDelta % (1000 * 60)) / 1000);
+                const d = Math.floor(deltaNow / (1000 * 60 * 60 * 24));
+                const h = Math.floor((deltaNow % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((deltaNow % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((deltaNow % (1000 * 60)) / 1000);
 
-                document.getElementById('runtime-days').innerText = String(days).padStart(2, '0');
-                document.getElementById('runtime-hours').innerText = String(hours).padStart(2, '0');
-                document.getElementById('runtime-mins').innerText = String(minutes).padStart(2, '0');
-                document.getElementById('runtime-secs').innerText = String(seconds).padStart(2, '0');
+                document.getElementById('c-days').innerText = String(d).padStart(2, '0');
+                document.getElementById('c-hours').innerText = String(h).padStart(2, '0');
+                document.getElementById('c-mins').innerText = String(m).padStart(2, '0');
+                document.getElementById('c-secs').innerText = String(s).padStart(2, '0');
             }, 1000);
         }
 
-        // Smooth Progressive Monologue Typist Engine
-        const lyricalData = "To the one who anchors my entire reality, rewriting the physics of my world into an endless symphony of light. From the moment our paths collided, every equation of my life found its balance. You are the premium architecture of my thoughts, the rhythm in my pulses, and the sanctuary I return to across every configuration of time. I built this platform across infinite spatial vectors to immortalize what words often fail to encapsulate: a cosmic bond forged to endure beyond structural lifetimes. My devotion to you scales limitlessly, passing through all horizons. Always, and for all eternity.";
-        let typistIndex = 0;
-        let typographyTriggered = false;
+        // Kinetic Heart Node Array Map
+        function deployHeartSwarm() {
+            const field = document.getElementById('kinetic-heart-field');
+            const pointsDensity = 460;
+            const isResponsiveMobile = window.innerWidth < 768;
+            const vectorScale = isResponsiveMobile ? 10 : 18;
 
-        function streamTyping() {
-            if (typistIndex < lyricalData.length) {
-                document.getElementById("stream-writer").innerHTML += lyricalData.charAt(typistIndex);
-                typistIndex++;
-                setTimeout(streamTyping, 40);
+            const originX = field.clientWidth / 2;
+            const originY = field.clientHeight / 2;
+
+            for (let i = 0; i < pointsDensity; i++) {
+                const angle = Math.random() * 2 * Math.PI;
+                const x = 16 * Math.pow(Math.sin(angle), 3);
+                const y = 13 * Math.cos(angle) - 5 * Math.cos(2*angle) - 2 * Math.cos(3*angle) - Math.cos(4*angle);
+
+                const finalPosX = x * vectorScale + originX;
+                const finalPosY = -y * vectorScale + originY;
+
+                const blurScatterX = (Math.random() - 0.5) * 40;
+                const blurScatterY = (Math.random() - 0.5) * 40;
+
+                const leaf = document.createElement('span');
+                leaf.className = 'floating-heart-text';
+                leaf.innerText = Math.random() > 0.45 ? 'i love you' : 'forever';
+                leaf.style.left = `${finalPosX + blurScatterX}px`;
+                leaf.style.top = `${finalPosY + blurScatterY}px`;
+                leaf.style.animationDelay = `${Math.random() * 2.8}s`;
+                leaf.style.fontSize = `${0.62 + Math.random() * 0.4}rem`;
+
+                if (Math.random() > 0.78) {
+                    leaf.style.color = '#ffffff';
+                    leaf.style.textShadow = '0 0 10px #ff7597';
+                }
+
+                field.appendChild(leaf);
             }
         }
 
-        // Scroll Intersection Reveal System
-        function triggerScrollObserver() {
-            const structuralCards = document.querySelectorAll('.scroll-reveal');
-            const triggerConfig = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+        // Monologue Live Streams Typography
+        const textualPoetry = "To the woman who completely realigned the gravity of my existence. Meeting you was like catching a glimpse of absolute clarity in a chaotic cosmos. You became the exclusive blueprint of my happiest thoughts, the steady pulse in my heart, and the only sanctuary worth searching for. I forged this entire interactive universe to declare what standard speech cannot express: that our timelines didn't collide by chance, but were woven by star systems to stay inseparable. My dedication to you expands beyond all dimensional limitations. Always. Eternity is just the beginning.";
+        let textIndex = 0;
+        let runningTypist = false;
 
-            const scrollWatcher = new IntersectionObserver((entries, watcher) => {
+        function runLiveTyping() {
+            if (textIndex < textualPoetry.length) {
+                document.getElementById("poetic-typist").innerHTML += textualPoetry.charAt(textIndex);
+                textIndex++;
+                setTimeout(runLiveTyping, 45);
+            }
+        }
+
+        // Dynamic Intersection Observer (Multi-page Progressive Discovery)
+        function setupScrollRevelation() {
+            const visualChapters = document.querySelectorAll('.scroll-detect');
+            const observerSettings = { threshold: 0.18, rootMargin: "0px 0px -40px 0px" };
+
+            const targetObserver = new IntersectionObserver((entries, selfObserver) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        if (entry.target.querySelector('#stream-writer') && !typographyTriggered) {
-                            typographyTriggered = true;
-                            streamTyping();
+                        entry.target.classList.add('active');
+                        if (entry.target.querySelector('#poetic-typist') && !runningTypist) {
+                            runningTypist = true;
+                            runLiveTyping();
                         }
-                        watcher.unobserve(entry.target);
+                        selfObserver.unobserve(entry.target);
                     }
                 });
-            }, triggerConfig);
+            }, observerSettings);
 
-            structuralCards.forEach(card => scrollWatcher.observe(card));
+            visualChapters.forEach(chapter => targetObserver.observe(chapter));
         }
     </script>
 </body>
