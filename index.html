@@ -3,597 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Secret Geometry of Her - Mia & Chems</title>
+    <title>Quantum UNO & Fine Art - Mia & Chems</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Montserrat:wght@100;300;400;600&family=Pinyon+Script&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Space+Grotesk:wght@300;400;600&family=Pinyon+Script&display=swap');
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body, html {
-            width: 100%;
-            height: 100%;
-            background-color: #030206;
-            font-family: 'Montserrat', sans-serif;
-            color: #ffffff;
-            overflow: hidden;
-            perspective: 1200px;
+            width: 100%; height: 100%; background-color: #030106;
+            font-family: 'Space Grotesk', sans-serif; color: #ffffff; overflow: hidden;
         }
 
-        /* Continuous Matrix of Floating Celestial & Geometrical Web */
-        #luxury-space-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
+        /* Luxury Deep Space Dynamic Background */
+        #star-matrix { position: fixed; top:0; left:0; width:100vw; height:100vh; z-index:1; pointer-events:none; }
+
+        /* Authorization Secure Gateway */
+        #gatekeeper {
+            position: fixed; top:0; left:0; width:100%; height:100%; z-index:2000;
+            display: flex; justify-content: center; align-items: center;
+            background: radial-gradient(circle at center, #0f061a 0%, #020104 100%);
+            transition: all 1.8s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+        .gate-shield {
+            background: rgba(5, 2, 10, 0.5); border: 1px solid rgba(255, 42, 105, 0.15);
+            padding: 50px; border-radius: 30px; backdrop-filter: blur(40px); text-align: center;
+            width: 90%; max-width: 460px; box-shadow: 0 40px 90px rgba(0,0,0,0.9);
+        }
+        .gate-shield h1 { font-family: 'Cinzel Decorative', serif; font-size: 1.1rem; letter-spacing: 5px; margin-bottom: 35px; }
+        .cyber-input {
+            width: 100%; padding: 18px; background: #000; border: 1px solid rgba(255, 42, 105, 0.25);
+            border-radius: 12px; color: #fff; font-size: 1rem; text-align: center; outline: none; letter-spacing: 4px; margin-bottom: 25px;
+        }
+        .cyber-input:focus { border-color: #ff2a69; box-shadow: 0 0 40px rgba(255, 42, 105, 0.4); }
+        .gate-btn {
+            width: 100%; padding: 18px; background: linear-gradient(135deg, #ff2a69, #5b1161);
+            border: none; border-radius: 12px; color: #fff; font-weight: 600; letter-spacing: 5px; cursor: pointer; text-transform: uppercase;
         }
 
-        /* Absolute Premium Gatekeeper Shield */
-        #cyber-gate {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle at center, #0e0717 0%, #020104 100%);
-            transition: all 2.2s cubic-bezier(0.86, 0, 0.07, 1);
-        }
-
-        .gate-vault {
-            background: rgba(6, 3, 11, 0.45);
-            border: 1px solid rgba(255, 42, 105, 0.15);
-            padding: 60px;
-            border-radius: 40px;
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            text-align: center;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 60px 120px rgba(0,0,0,0.9), 0 0 70px rgba(255, 42, 105, 0.05);
-        }
-
-        .gate-vault h1 {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 1.2rem;
-            letter-spacing: 7px;
-            color: #ffffff;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .premium-input {
-            width: 100%;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(255, 42, 105, 0.3);
-            border-radius: 14px;
-            color: #ffffff;
-            font-size: 1.1rem;
-            text-align: center;
-            outline: none;
-            letter-spacing: 5px;
-            margin-bottom: 30px;
-            transition: all 0.5s ease;
-        }
-
-        .premium-input:focus {
-            border-color: #ff2a69;
-            box-shadow: 0 0 50px rgba(255, 42, 105, 0.45);
-        }
-
-        .vault-btn {
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(135deg, #ff2a69 0%, #4a0e4e 100%);
-            border: none;
-            border-radius: 14px;
-            color: #ffffff;
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 6px;
-            cursor: pointer;
-            text-transform: uppercase;
-            box-shadow: 0 15px 40px rgba(255, 42, 105, 0.3);
-            transition: all 0.4s ease;
-        }
-
-        .vault-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 25px 60px rgba(255, 42, 105, 0.6);
-            letter-spacing: 8px;
-        }
-
-        .error-message {
-            color: #ff3366;
-            font-size: 0.8rem;
-            margin-top: 15px;
-            display: none;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        /* Immersive Multidimensional Dashboard Controls */
+        /* Main Luxury HUD Workspace */
         #luxury-hud {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            height: 100%;
-            display: none;
-            opacity: 0;
-            transition: opacity 3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; z-index: 10; width:100%; height:100%; display: none; opacity: 0;
+            transition: opacity 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+            grid-template-columns: 350px 1fr; grid-template-rows: 100px 1fr; height: 100vh;
         }
 
-        /* Floating Architectural Glass Panes */
-        .glass-pane {
-            position: absolute;
-            background: rgba(4, 2, 8, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-top: 2px solid rgba(255, 42, 105, 0.4);
-            padding: 35px;
-            border-radius: 24px;
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
-            animation: floatingHUD 7s infinite ease-in-out;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Top Brand Header Header */
+        .hud-top-bar {
+            grid-column: 1 / span 2; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03); background: rgba(3, 1, 6, 0.4); backdrop-filter: blur(20px);
         }
+        .hud-title { font-family: 'Cinzel Decorative', serif; font-size: 2.2rem; letter-spacing: 8px; background: linear-gradient(to right, #fff, #ff2a69, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hud-subtitle { font-family: 'Pinyon Script', cursive; font-size: 1.6rem; color: #ff9ebb; margin-top: -5px; }
 
-        .glass-pane:hover {
-            border-top-color: #ffffff;
-            background: rgba(4, 2, 8, 0.5);
-            box-shadow: 0 50px 100px rgba(255, 42, 105, 0.1);
+        /* Left Side: Fine Art Canvas Dashboard */
+        .art-side-panel {
+            grid-column: 1; border-right: 1px solid rgba(255, 255, 255, 0.03); padding: 25px;
+            display: flex; flex-direction: column; gap: 20px; background: rgba(4, 2, 8, 0.2);
         }
+        .panel-header { font-family: 'Cinzel Decorative', serif; font-size: 0.8rem; letter-spacing: 3px; color: #ff2a69; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; }
+        .art-canvas-box { width: 100%; height: 180px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; background: #000; }
+        #sketch-canvas { width: 100%; height: 100%; }
+        .panel-text { font-size: 0.8rem; line-height: 1.8; color: #94a3b8; text-align: justify; }
 
-        /* Master Centered Crown Core */
-        .pane-core {
-            top: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            background: transparent;
-            border: none;
-            box-shadow: none;
-            width: auto;
-        }
+        /* Right Side: The Ultimate Real-Time UNO Arena */
+        .game-arena-panel { grid-column: 2; display: flex; flex-direction: column; justify-content: space-between; padding: 30px; position: relative; }
 
-        .signature-title {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 3.2rem;
-            font-weight: 900;
-            letter-spacing: 12px;
-            background: linear-gradient(to right, #ffffff 20%, #ff2a69 60%, #9d4edf 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 50px rgba(255, 42, 105, 0.25);
+        /* Player Zones Layout */
+        .player-zone {
+            width: 100%; min-height: 140px; border-radius: 20px; padding: 20px;
+            background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255,255,255,0.03);
+            display: flex; flex-direction: column; gap: 15px; transition: all 0.5s ease;
         }
+        .zone-active { background: rgba(255, 42, 105, 0.04); border-color: rgba(255, 42, 105, 0.3); box-shadow: 0 0 30px rgba(255, 42, 105, 0.05); }
+        .zone-label { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: #64748b; display: flex; justify-content: space-between; }
+        .zone-label span.status { color: #ff2a69; font-weight: 600; display: none; }
+        .zone-active .zone-label span.status { display: inline; animation: pulseGlow 1.5s infinite alternate; }
 
-        .signature-script {
-            font-family: 'Pinyon Script', cursive;
-            font-size: 2.2rem;
-            color: #ff9ebb;
-            margin-top: -5px;
-            letter-spacing: 1px;
-        }
-
-        /* Panel One: Telemetry of Romance & Body Language */
-        .pane-body-language {
-            left: 50px;
-            top: 22%;
-            width: 380px;
-        }
-
-        /* Panel Two: UNO Quantum Probability Matrix */
-        .pane-uno-matrix {
-            right: 50px;
-            top: 22%;
-            width: 400px;
-            animation-delay: 2s;
-        }
-
-        /* Panel Three: The Live Art Canvas Masterpiece */
-        .pane-sketchbook {
-            bottom: 45px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 950px;
-            animation-delay: 3.5s;
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .pane-header {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 0.85rem;
-            letter-spacing: 4px;
-            color: #ff2a69;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            padding-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .pane-header span {
-            font-size: 0.65rem;
-            color: #64748b;
-        }
-
-        .data-paragraph {
-            font-size: 0.85rem;
-            line-height: 1.9;
-            color: #cbd5e1;
-            font-weight: 300;
-            text-align: justify;
-        }
-
-        /* Body Language Metric Sliders */
-        .metric-row {
-            margin-top: 15px;
-        }
-        .metric-label {
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            color: #94a3b8;
-            text-transform: uppercase;
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
-        }
-        .metric-bar-bg {
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-        .metric-bar-fill {
-            height: 100%;
-            background: linear-gradient(to right, #ff2a69, #9d4edf);
-            border-radius: 2px;
-            width: 0%;
-            transition: width 2.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        /* Custom UNO Digital Interactive Deck Layout */
-        .uno-deck-display {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-        .uno-luxury-card {
-            width: 75px;
-            height: 115px;
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.1);
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Cinzel Decorative', serif;
-            font-weight: 900;
-            font-size: 1.4rem;
-            cursor: pointer;
+        .cards-deck-wrapper { display: flex; gap: 12px; overflow-x: auto; padding: 10px 5px; min-height: 110px; }
+        
+        /* Interactive UNO Luxury Card Design */
+        .uno-card {
+            width: 65px; height: 95px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);
+            display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 1.2rem;
+            cursor: pointer; position: relative; flex-shrink: 0; box-shadow: 0 8px 16px rgba(0,0,0,0.5);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: #000;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
-        .uno-luxury-card:hover {
-            transform: translateY(-20px) rotate(5deg) scale(1.1);
-            box-shadow: 0 20px 35px var(--glow);
-            border-color: #ffffff;
-        }
-        .uno-inner-oval {
-            width: 80%;
-            height: 80%;
-            border-radius: 50%;
-            transform: rotate(-25deg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .uno-card:hover { transform: translateY(-15px) scale(1.08); border-color: #fff; box-shadow: 0 15px 25px rgba(255,255,255,0.1); }
+        .uno-card.card-back { background: radial-gradient(circle, #ff2a69, #791a88) !important; color: transparent !important; border-color: rgba(255,255,255,0.3); }
+        .uno-card.card-back::before { content: 'UNO'; color: #fff; font-size: 0.7rem; letter-spacing: 1px; font-family: 'Cinzel Decorative', serif; transform: rotate(-20px); }
+        .card-inner-oval { width: 80%; height: 80%; border-radius: 50%; transform: rotate(-25deg); display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.12); }
 
-        /* Sketchbook Live Rendering Frame */
-        .sketch-frame-container {
-            width: 260px;
-            height: 160px;
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 14px;
-            position: relative;
-            overflow: hidden;
-            background: rgba(0,0,0,0.5);
-            flex-shrink: 0;
+        /* Central Nexus: Draw Deck & Discard Pile */
+        .central-nexus { display: flex; justify-content: center; align-items: center; gap: 60px; margin: 20px 0; }
+        .pile-box { text-align: center; }
+        .pile-title { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #475569; margin-bottom: 8px; }
+        
+        /* Pre-Game System Gate: Protocol Flow Buttons */
+        .lobby-overlay {
+            position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(3,1,6,0.95);
+            z-index: 100; display: flex; justify-content: center; align-items: center; border-radius: 20px;
+            backdrop-filter: blur(20px); transition: all 1s ease;
         }
-        #sketch-canvas {
-            width: 100%;
-            height: 100%;
+        .lobby-box { text-align: center; max-width: 400px; padding: 40px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: 24px; }
+        .lobby-box p { font-size: 0.9rem; color: #94a3b8; line-height: 1.6; margin-bottom: 25px; }
+        .action-btn {
+            padding: 15px 35px; background: transparent; border: 1px solid #ff2a69; color: #fff;
+            border-radius: 10px; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.4s;
         }
-        .sketch-info-block {
-            flex-grow: 1;
-        }
+        .action-btn:hover { background: #ff2a69; box-shadow: 0 0 30px rgba(255, 42, 105, 0.4); }
 
-        /* Dynamic Animations Keyframes */
-        @keyframes floatingHUD {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @media (max-width: 1100px) {
-            body, html { overflow-y: auto; }
-            #luxury-hud { display: flex; flex-direction: column; height: auto; padding: 140px 20px 40px 20px; gap: 30px; }
-            .glass-pane { position: relative; top: auto; left: auto; right: auto; transform: none !important; width: 100% !important; max-width: 100% !important; animation: none !important; }
-            .pane-sketchbook { flex-direction: column; gap: 20px; }
-            .sketch-frame-container { width: 100%; height: 200px; }
-            .signature-title { font-size: 2.2rem; }
-        }
+        @keyframes pulseGlow { from { opacity: 0.5; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <canvas id="luxury-space-canvas"></canvas>
+    <canvas id="star-matrix"></canvas>
 
-    <div id="cyber-gate">
-        <div class="gate-vault" id="shake-node">
-            <h1>ORBITAL IDENTITY SYNC</h1>
-            <input type="password" id="gate-key" class="premium-input" placeholder="ENTER SYNC KEYPASSE" autocomplete="off" onkeydown="catchGateKey(event)">
-            <button class="vault-btn" onclick="authorizeSpaceSystem()">Synchronize Neurons</button>
-            <div id="gate-error" class="error-message">ENCRYPTED KEY SIGNATURE INCORRECT</div>
+    <div id="gatekeeper">
+        <div class="gate-shield" id="error-shake">
+            <h1>QUANTUM INTERFACE ACCESS</h1>
+            <input type="password" id="pass-key" class="cyber-input" placeholder="ENTER ACCESS KEY">
+            <button class="gate-btn" onclick="verifyGateSignature()">Unlock Terminal</button>
         </div>
     </div>
 
     <div id="luxury-hud">
         
-        <div class="glass-pane pane-core">
-            <h1 class="signature-title">Mia & Chems</h1>
-            <div class="signature-script">The Secret Geometry of Her</div>
+        <div class="hud-top-bar">
+            <h1 class="hud-title">Mia & Chems</h1>
+            <div class="hud-subtitle">The Quantum UNO Arena</div>
         </div>
 
-        <div class="glass-pane pane-body-language">
-            <div class="pane-header">Romance Telemetry <span>SYSTEM // LIVE</span></div>
-            <p class="data-paragraph">Decoding the micro-expressions, involuntary somatic responses, and elegant structural configurations that define her aura when she orbits near you.</p>
+        <div class="art-side-panel">
+            <div class="panel-header">Fine Art Studio</div>
+            <div class="art-canvas-box"><canvas id="sketch-canvas"></canvas></div>
+            <p class="panel-text">Art represents her deep neural alignment. This sketchbook sub-module tracks vector geometry and mathematical strokes in real-time, executing elegant sketches continuously to honor her creative passion.</p>
+        </div>
+
+        <div class="game-arena-panel">
             
-            <div class="metric-row">
-                <div class="metric-label"><span>Involuntary Smile Vector</span><span>98.4%</span></div>
-                <div class="metric-bar-bg"><div class="metric-bar-fill" data-width="98.4%"></div></div>
+            <div class="lobby-overlay" id="lobby-screen">
+                <div class="lobby-box" id="lobby-step-mia">
+                    <p>Welcome to the custom built UNO Arena. Initialize your neural connection to request a live match against Chems.</p>
+                    <button class="action-btn" onclick="triggerMiaReady()">Mia: Ready To Play</button>
+                </div>
+                <div class="lobby-box" id="lobby-step-waiting" style="display: none;">
+                    <p style="color: #ff2a69; font-weight: 600; letter-spacing: 1px;">[WAITING FOR CONNECTIVITY]</p>
+                    <p>Secure uplink pending... Please hand over or notify Chems to authorize and deal the quantum cards deck.</p>
+                    <button class="action-btn" style="border-color: #a855f7;" onclick="triggerChemsAuthorize()">Chems: Authorize & Deal</button>
+                </div>
             </div>
-            <div class="metric-row">
-                <div class="metric-label"><span>Pupil Dilation Frequency</span><span>94.1%</span></div>
-                <div class="metric-bar-bg"><div class="metric-bar-fill" data-width="94.1%"></div></div>
-            </div>
-            <div class="metric-row">
-                <div class="metric-label"><span>Proximity Resonance Index</span><span>99.9%</span></div>
-                <div class="metric-bar-bg"><div class="metric-bar-fill" data-width="99.9%"></div></div>
-            </div>
-        </div>
 
-        <div class="glass-pane pane-uno-matrix">
-            <div class="pane-header">Quantum UNO Calibration <span>DECK // REVELATION</span></div>
-            <p class="data-paragraph">Her absolute favoritism towards tactical playful mechanics. Even within the calculated fields of gaming probability, every card drawn leads back to a singular outcome.</p>
-            
-            <div class="uno-deck-display">
-                <div class="uno-luxury-card" style="--glow: rgba(239, 68, 68, 0.4); color: #ef4444;"><div class="uno-inner-oval" style="background: rgba(239,68,68,0.15)">4</div></div>
-                <div class="uno-luxury-card" style="--glow: rgba(59, 130, 246, 0.4); color: #3b82f6;"><div class="uno-inner-oval" style="background: rgba(59,130,246,0.15)">+2</div></div>
-                <div class="uno-luxury-card" style="--glow: rgba(234, 179, 8, 0.4); color: #eab308;"><div class="uno-inner-oval" style="background: rgba(234,179,8,0.15)">Reverse</div></div>
-                <div class="uno-luxury-card" style="--glow: rgba(168, 85, 247, 0.5); background: linear-gradient(45deg, #ef4444, #3b82f6, #10b981, #eab308); color: #fff;"><div class="uno-inner-oval" style="background: rgba(0,0,0,0.6)">Wild</div></div>
+            <div class="player-zone" id="zone-mia">
+                <div class="zone-label"><span>Mia's Cards Deck (Player 2)</span><span class="status">YOUR TURN // PLAYING</span></div>
+                <div class="cards-deck-wrapper" id="deck-mia"></div>
             </div>
-        </div>
 
-        <div class="glass-pane pane-sketchbook">
-            <div class="sketch-frame-container">
-                <canvas id="sketch-canvas"></canvas>
+            <div class="central-nexus">
+                <div class="pile-box">
+                    <div class="pile-title">Draw Deck</div>
+                    <div class="uno-card card-back" onclick="drawCardFromPile()"></div>
+                </div>
+                <div class="pile-box">
+                    <div class="pile-title">Discard Field</div>
+                    <div id="discard-field-target"></div>
+                </div>
             </div>
-            <div class="sketch-info-block">
-                <div class="pane-header">The Fine Art Matrix <span>SKETCHBOOK // VECTOR</span></div>
-                <p class="data-paragraph">
-                    Art is the reflection of her intricate neural wiring. To capture her soul, a premium system algorithm continuously streams mathematical vectors on the canvas to the left, replicating her beautiful sketches, strokes, and aesthetic blueprints. A living painting honoring a master designer.
-                </p>
-            </div>
-        </div>
 
+            <div class="player-zone" id="zone-chems">
+                <div class="zone-label"><span>Chems's Cards Deck (Player 1)</span><span class="status">YOUR TURN // PLAYING</span></div>
+                <div class="cards-deck-wrapper" id="deck-chems"></div>
+            </div>
+
+        </div>
     </div>
 
     <script>
-        // Premium High-Fidelity Physics Engine for Dynamic Orbiting Planets & Star Fields
-        const canvas = document.getElementById('luxury-space-canvas');
-        const ctx = canvas.getContext('2d');
-        let starField = [];
-        let geometricalPlanets = [];
-        const maxStarsCount = 750;
-
-        function equalizeViewBounds() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        // Background Particle Space Engine
+        const bgCanvas = document.getElementById('star-matrix');
+        const bgCtx = bgCanvas.getContext('2d');
+        let stars = [];
+        function resizeBg() { bgCanvas.width = window.innerWidth; bgCanvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeBg); resizeBg();
+        for(let i=0; i<300; i++) stars.push({x: Math.random()*bgCanvas.width, y: Math.random()*bgCanvas.height, s: Math.random()*1.5, d: Math.random()*0.2});
+        function drawBg() {
+            bgCtx.fillStyle = '#030106'; bgCtx.fillRect(0,0,bgCanvas.width,bgCanvas.height);
+            bgCtx.fillStyle = 'rgba(255,255,255,0.4)';
+            stars.forEach(st => { bgCtx.beginPath(); bgCtx.arc(st.x, st.y, st.s, 0, Math.PI*2); bgCtx.fill(); st.y -= st.d; if(st.y<0) st.y=bgCanvas.height; });
+            requestAnimationFrame(drawBg);
         }
-        window.addEventListener('resize', equalizeViewBounds);
-        equalizeViewBounds();
+        drawBg();
 
-        // 1. Quantum Star Grid Configuration
-        class StarParticle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.speedZ = Math.random() * 0.3 + 0.05;
-                this.scale = Math.random() * 1.2;
-                this.alpha = Math.random() * 0.5 + 0.3;
-            }
-            drift() {
-                this.y -= this.speedZ;
-                if (this.y < 0) {
-                    this.y = canvas.height;
-                    this.x = Math.random() * canvas.width;
-                }
-            }
-            render() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.scale, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
-                ctx.fill();
-            }
-        }
-
-        // 2. 3D Mathematical Rotating Planets with Geometrical Web Links
-        class GeometricPlanet {
-            constructor(orbitRadius, radiusSize, angularSpeed, shadeColor) {
-                this.orbitRadius = orbitRadius;
-                this.radiusSize = radiusSize;
-                this.angularSpeed = angularSpeed;
-                this.shadeColor = shadeColor;
-                this.angle = Math.random() * Math.PI * 2;
-            }
-            propagate() {
-                this.angle += this.angularSpeed;
-            }
-            draw() {
-                const midX = canvas.width / 2;
-                const midY = canvas.height * 0.5;
-
-                // Elliptical Math Projection Vectors
-                const targetX = midX + Math.cos(this.angle) * this.orbitRadius * 1.5;
-                const targetY = midY + Math.sin(this.angle) * this.orbitRadius * 0.65;
-
-                // Sphere Glowing Architecture
-                const radialGrad = ctx.createRadialGradient(targetX, targetY, 0, targetX, targetY, this.radiusSize);
-                radialGrad.addColorStop(0, '#ffffff');
-                radialGrad.addColorStop(0.4, this.shadeColor);
-                radialGrad.addColorStop(1, '#030206');
-
-                // Draw Planet Body
-                ctx.beginPath();
-                ctx.arc(targetX, targetY, this.radiusSize, 0, Math.PI * 2);
-                ctx.fillStyle = radialGrad;
-                ctx.fill();
-
-                // Interstellar Web Grid Projection Lines linking planets to historical centers
-                ctx.beginPath();
-                ctx.ellipse(midX, midY, this.orbitRadius * 1.5, this.orbitRadius * 0.65, 0, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(255, 42, 105, 0.035)';
-                ctx.lineWidth = 1;
-                ctx.stroke();
-
-                return {x: targetX, y: targetY};
-            }
-        }
-
-        // Initialize Structural Elements
-        for (let i = 0; i < maxStarsCount; i++) {
-            starField.push(new StarParticle());
-        }
-
-        geometricalPlanets.push(new GeometricPlanet(220, 22, 0.002, '#ff2a69'));
-        geometricalPlanets.push(new GeometricPlanet(340, 14, -0.0015, '#9d4edf'));
-        geometricalPlanets.push(new GeometricPlanet(460, 10, 0.0008, '#1e1b4b'));
-
-        function primarySystemPipelineLoop() {
-            ctx.fillStyle = '#030206';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Execute Stars Data
-            for (let i = 0; i < starField.length; i++) {
-                starField[i].drift();
-                starField[i].render();
-            }
-
-            // Execute Interstellar Spatial Nodes
-            let positions = [];
-            for (let i = 0; i < geometricalPlanets.length; i++) {
-                geometricalPlanets[i].propagate();
-                positions.push(geometricalPlanets[i].draw());
-            }
-
-            // Draw Kinetic Web Linking Lines Between Planet Vectors (Premium Cyber Network Effect)
-            ctx.beginPath();
-            ctx.moveTo(positions[0].x, positions[0].y);
-            ctx.lineTo(positions[1].x, positions[1].y);
-            ctx.lineTo(positions[2].x, positions[2].y);
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-
-            requestAnimationFrame(primarySystemPipelineLoop);
-        }
-        primarySystemPipelineLoop();
-
-        // Security Validation Access Framework
-        function catchGateKey(e) {
-            if (e.key === 'Enter') authorizeSpaceSystem();
-        }
-
-        function authorizeSpaceSystem() {
-            const entryValue = document.getElementById('gate-key').value;
-            const keyVerificationSignature = "Mia & Chems";
-
-            if (entryValue === keyVerificationSignature) {
-                const shield = document.getElementById('cyber-gate');
-                shield.style.opacity = '0';
-                shield.style.transform = 'translateZ(150px) scale(1.1)';
-                
-                setTimeout(() => {
-                    shield.style.display = 'none';
-                    const hud = document.getElementById('luxury-hud');
-                    hud.style.display = 'block';
-                    
-                    setTimeout(() => {
-                        hud.style.opacity = '1';
-                        // Trigger Progress Bar Metrics Animating
-                        document.querySelectorAll('.metric-bar-fill').forEach(bar => {
-                            bar.style.width = bar.getAttribute('data-width');
-                        });
-                        initiateSketchbookLoop();
-                    }, 100);
-                }, 2200);
+        // Gateway Authentication
+        function verifyGateSignature() {
+            if(document.getElementById('pass-key').value === "Mia & Chems") {
+                const gate = document.getElementById('gatekeeper'); gate.style.opacity = '0';
+                setTimeout(() => { gate.style.display='none'; const hud=document.getElementById('luxury-hud'); hud.style.display='grid'; setTimeout(()=>hud.style.opacity='1',50); initiateArtEngine(); }, 1800);
             } else {
-                document.getElementById('gate-error').style.display = 'block';
-                const frame = document.getElementById('shake-node');
-                frame.style.transform = 'translateX(15px)';
-                setTimeout(() => frame.style.transform = 'translateX(-15px)', 80);
-                setTimeout(() => frame.style.transform = 'translateX(8px)', 160);
-                setTimeout(() => frame.style.transform = 'translateX(0)', 240);
+                const el = document.getElementById('error-shake'); el.style.transform = 'translateX(10px)'; setTimeout(()=>el.style.transform='translateX(-10px)',80); setTimeout(()=>el.style.transform='translateX(0)',160);
             }
         }
 
-        // Live Premium Sketchbook Rendering Script (Mathematical Art Emulator)
-        const sCanvas = document.getElementById('sketch-canvas');
-        const sCtx = sCanvas.getContext('2d');
-        let drawT = 0;
+        // --- CORE HIGH-END CLIENT-SIDE UNO GAME ENGINE ---
+        const CARD_COLORS = ['#ef4444', '#3b82f6', '#10b981', '#eab308']; // Red, Blue, Green, Yellow
+        const CARD_VALUES = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Skip', 'Reverse', '+2'];
+        
+        let fullDrawDeck = [];
+        let discardPile = [];
+        let playerChemsHand = [];
+        let playerMiaHand = [];
+        let activePlayerTurn = 'mia'; // Mia starts after Chems authorizes
 
-        function resizeSketchCanvas() {
-            sCanvas.width = sCanvas.parentElement.clientWidth;
-            sCanvas.height = sCanvas.parentElement.clientHeight;
+        function generateNewUnoDeck() {
+            fullDrawDeck = [];
+            CARD_COLORS.forEach(color => {
+                CARD_VALUES.forEach(val => {
+                    fullDrawDeck.push({ color: color, value: val });
+                    if(val !== '0') fullDrawDeck.push({ color: color, value: val }); // Duplicate traditional rules
+                });
+            });
+            // Shuffle
+            fullDrawDeck.sort(() => Math.random() - 0.5);
         }
-        window.addEventListener('resize', resizeSketchCanvas);
-        resizeSketchCanvas();
 
-        function initiateSketchbookLoop() {
-            resizeSketchCanvas();
-            function drawSystemArt() {
-                sCtx.fillStyle = 'rgba(0, 0, 0, 0.03)'; // Beautiful trail fading effect
-                sCtx.fillRect(0, 0, sCanvas.width, sCanvas.height);
+        function triggerMiaReady() {
+            document.getElementById('lobby-step-mia').style.display = 'none';
+            document.getElementById('lobby-step-waiting').style.display = 'block';
+        }
 
-                sCtx.beginPath();
-                // Mathematical Lissajous Vector Curve to simulate elegant fine-art drawing movements
-                const posX = sCanvas.width / 2 + Math.sin(drawT * 1.5) * (sCanvas.width * 0.35);
-                const posY = sCanvas.height / 2 + Math.cos(drawT * 0.9) * (sCanvas.height * 0.35);
-
-                sCtx.arc(posX, posY, 1.5, 0, Math.PI * 2);
-                sCtx.fillStyle = `hsl(${(drawT * 20) % 360}, 85%, 65%)`; // Cyber premium gradient shift
-                sCtx.fill();
-
-                drawT += 0.015;
-                requestAnimationFrame(drawSystemArt);
+        function triggerChemsAuthorize() {
+            generateNewUnoDeck();
+            // Deal 7 Cards Each
+            for(let i=0; i<7; i++) {
+                playerChemsHand.push(fullDrawDeck.pop());
+                playerMiaHand.push(fullDrawDeck.pop());
             }
-            drawSystemArt();
+            // Set first discard card
+            discardPile.push(fullDrawDeck.pop());
+            
+            // Hide Lobby Screen fully with animation
+            document.getElementById('lobby-screen').style.opacity = '0';
+            setTimeout(() => { document.getElementById('lobby-screen').style.display = 'none'; renderGameArenaLayout(); }, 1000);
+        }
+
+        function renderGameArenaLayout() {
+            // Render Mia Hand (Hidden from Chems view during her turn is handled or showing for simple local)
+            const miaContainer = document.getElementById('deck-mia'); miaContainer.innerHTML = '';
+            playerMiaHand.forEach((card, idx) => {
+                const cElem = document.createElement('div');
+                cElem.className = `uno-card ${activePlayerTurn === 'chems' ? 'card-back' : ''}`;
+                cElem.style.backgroundColor = card.color;
+                cElem.style.borderColor = 'rgba(255,255,255,0.2)';
+                cElem.innerHTML = `<div class="card-inner-oval">${card.value}</div>`;
+                cElem.onclick = () => playSelectedCard('mia', idx);
+                miaContainer.appendChild(cElem);
+            });
+
+            // Render Chems Hand
+            const chemsContainer = document.getElementById('deck-chems'); chemsContainer.innerHTML = '';
+            playerChemsHand.forEach((card, idx) => {
+                const cElem = document.createElement('div');
+                cElem.className = `uno-card ${activePlayerTurn === 'mia' ? 'card-back' : ''}`;
+                cElem.style.backgroundColor = card.color;
+                cElem.style.borderColor = 'rgba(255,255,255,0.2)';
+                cElem.innerHTML = `<div class="card-inner-oval">${card.value}</div>`;
+                cElem.onclick = () => playSelectedCard('chems', idx);
+                chemsContainer.appendChild(cElem);
+            });
+
+            // Render Top Discard Pile Card
+            const topDiscard = discardPile[discardPile.length - 1];
+            const discardTarget = document.getElementById('discard-field-target'); discardTarget.innerHTML = '';
+            const discCard = document.createElement('div');
+            discCard.className = 'uno-card'; discCard.style.backgroundColor = topDiscard.color;
+            discCard.innerHTML = `<div class="card-inner-oval">${topDiscard.value}</div>`;
+            discardTarget.appendChild(discCard);
+
+            // Toggle Visual Activation State Indicators
+            if(activePlayerTurn === 'mia') {
+                document.getElementById('zone-mia').classList.add('zone-active');
+                document.getElementById('zone-chems').classList.remove('zone-active');
+            } else {
+                document.getElementById('zone-chems').classList.add('zone-active');
+                document.getElementById('zone-mia').classList.remove('zone-active');
+            }
+        }
+
+        function playSelectedCard(player, index) {
+            if(player !== activePlayerTurn) return; // Strict Turn Validation Enforcement
+
+            const currentHand = (player === 'chems') ? playerChemsHand : playerMiaHand;
+            const chosenCard = currentHand[index];
+            const topDiscard = discardPile[discardPile.length - 1];
+
+            // UNO Rules Matcher Logic Verification (Color OR Value identity)
+            if(chosenCard.color === topDiscard.color || chosenCard.value === topDiscard.value) {
+                // Remove from Hand & Push to Discard Field
+                currentHand.splice(index, 1);
+                discardPile.push(chosenCard);
+
+                // Win validation state checks
+                if(currentHand.length === 0) {
+                    alert(`Incredible Masterclass Match! ${player.toUpperCase()} wins the universal match!`);
+                    location.reload(); return;
+                }
+
+                // Handle Modifier Cards (+2, Skip, Reverse changes system turns flow)
+                if(chosenCard.value === '+2') {
+                    const targetHand = (player === 'chems') ? playerMiaHand : playerChemsHand;
+                    if(fullDrawDeck.length < 2) generateNewUnoDeck();
+                    targetHand.push(fullDrawDeck.pop()); targetHand.push(fullDrawDeck.pop());
+                    // Keeps turn to same player as penalty to opponent
+                } else if(chosenCard.value === 'Skip' || chosenCard.value === 'Reverse') {
+                    // Turn remains yours due to double skip or reverse mechanics configuration in 2-player mode
+                } else {
+                    // Standard turn progression step
+                    activePlayerTurn = (player === 'chems') ? 'mia' : 'chems';
+                }
+
+                renderGameArenaLayout();
+            } else {
+                // Shake Animation Feedback on rule violations
+                alert("Invalid move! Card must match the current Discard color or numeric value.");
+            }
+        }
+
+        function drawCardFromPile() {
+            if(fullDrawDeck.length === 0) generateNewUnoDeck();
+            const pulledCard = fullDrawDeck.pop();
+            
+            if(activePlayerTurn === 'chems') playerChemsHand.push(pulledCard);
+            else playerMiaHand.push(pulledCard);
+
+            // Auto shift turn to maintain flow after drawing card
+            activePlayerTurn = (activePlayerTurn === 'chems') ? 'mia' : 'chems';
+            renderGameArenaLayout();
+        }
+
+        // Fine Art Canvas Generative Engine Emulator
+        function initiateArtEngine() {
+            const canvas = document.getElementById('sketch-canvas'); const ctx = canvas.getContext('2d');
+            let t = 0;
+            function resize() { canvas.width = canvas.parentElement.clientWidth; canvas.height = canvas.parentElement.clientHeight; }
+            window.addEventListener('resize', resize); resize();
+            function draw() {
+                ctx.fillStyle = 'rgba(0,0,0,0.04)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+                ctx.beginPath();
+                const x = canvas.width/2 + Math.sin(t*1.2)*(canvas.width*0.38);
+                const y = canvas.height/2 + Math.cos(t*0.8)*(canvas.height*0.35);
+                ctx.arc(x, y, 1.2, 0, Math.PI*2); ctx.fillStyle = `hsl(${(t*25)%360}, 90%, 65%)`; ctx.fill();
+                t += 0.02; requestAnimationFrame(draw);
+            }
+            draw();
         }
     </script>
 </body>
