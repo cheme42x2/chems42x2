@@ -3,211 +3,429 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart Landing</title>
+    <title>Infinity & Beyond</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap');
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        body {
-            background-color: #0d0d0d;
-            color: #ff2a5f;
-            font-family: 'Courier New', Courier, monospace;
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #050508;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        /* Ambient Cyber Background Canvas */
+        #network-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* High-End Cyber Glass Gateway */
+        #lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            user-select: none;
+            background: radial-gradient(circle at center, rgba(13, 13, 25, 0.8) 0%, #050508 100%);
+            transition: all 1.2s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        /* Terminal Screen */
-        #terminal {
-            text-align: left;
+        .gateway-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 42, 95, 0.2);
+            padding: 50px 40px;
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            text-align: center;
             width: 90%;
-            max-width: 500px;
-            z-index: 10;
-            transition: opacity 0.8s ease;
+            max-width: 440px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 42, 95, 0.1);
+            transform: translateY(0);
+            transition: all 0.8s ease;
         }
 
-        .system-line {
-            color: #ff2a5f;
-            font-size: 1rem;
-            margin-bottom: 8px;
-            font-weight: bold;
+        .gateway-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            background: linear-gradient(to right, #ff2a5f, #ff758f, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
         }
 
-        .status-line {
-            color: #ffffff;
-            font-size: 0.9.5rem;
-            margin-bottom: 25px;
-            opacity: 0.9;
-        }
-
-        .btn {
-            background: transparent;
-            border: 1px solid #ff2a5f;
-            color: #ffffff;
-            background-color: #ff2a5f;
-            padding: 12px 28px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            cursor: pointer;
+        .gateway-card p {
+            color: #8a8aa3;
+            font-size: 0.85rem;
+            margin-bottom: 35px;
             letter-spacing: 1px;
-            border-radius: 4px;
-            box-shadow: 0 0 15px rgba(255, 42, 95, 0.4);
-            transition: all 0.3s ease;
             text-transform: uppercase;
         }
 
-        .btn:hover {
-            background-color: transparent;
-            color: #ff2a5f;
-            box-shadow: 0 0 25px rgba(255, 42, 95, 0.8);
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 25px;
         }
 
-        .hint {
-            color: #555;
-            font-size: 0.75rem;
-            margin-top: 10px;
+        .input-wrapper input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* Heart Canvas Area */
-        #heart-container {
-            position: absolute;
-            width: 700px;
-            height: 700px;
+        .input-wrapper input:focus {
+            border-color: #ff2a5f;
+            box-shadow: 0 0 20px rgba(255, 42, 95, 0.3);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .unlock-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #ff2a5f, #ff5e7e);
+            border: none;
+            border-radius: 12px;
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 42, 95, 0.4);
+            transition: all 0.4s;
+            text-transform: uppercase;
+        }
+
+        .unlock-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255, 42, 95, 0.6);
+            background: linear-gradient(45deg, #ff5e7e, #ff2a5f);
+        }
+
+        .error-hint {
+            color: #ff4a4a;
+            font-size: 0.8rem;
+            margin-top: 12px;
             display: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Luxury Main Digital Sanctuary */
+        #master-sanctuary {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+            display: none;
+            opacity: 0;
             justify-content: center;
             align-items: center;
-            animation: heartPulse 1.2s infinite ease-in-out;
+            transition: opacity 1.5s ease;
         }
 
-        /* The Name Mia in the Center */
-        #center-name {
+        /* Quantum Matrix Heart Configuration */
+        #quantum-heart-assembly {
+            position: relative;
+            width: 750px;
+            height: 750px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulseKinetic 1.1s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        }
+
+        /* Neon Luminescent Core Identity */
+        #eternal-core {
             position: absolute;
-            font-size: 3.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            text-align: center;
+            pointer-events: none;
+            opacity: 0;
+            transform: scale(0.6);
+            animation: coreAwakening 2.5s 1.2s forwards cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .core-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
             font-weight: 900;
             color: #ffffff;
-            text-shadow: 0 0 10px #ff2a5f, 0 0 20px #ff2a5f, 0 0 40px #ff2a5f;
-            z-index: 5;
-            letter-spacing: 2px;
-            font-family: 'Arial', sans-serif;
-            opacity: 0;
-            transform: scale(0.5);
-            animation: nameAppear 2s 1s forwards ease-out;
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                         0 0 20px #ff2a5f,
+                         0 0 40px #ff2a5f,
+                         0 0 80px #ff2a5f;
+            line-height: 1;
         }
 
-        /* Floating 'i love you' particles */
-        .love-text {
+        .core-subtext {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #ffccd5;
+            letter-spacing: 7px;
+            text-transform: uppercase;
+            margin-top: 15px;
+            text-shadow: 0 0 10px rgba(255, 42, 95, 0.6);
+        }
+
+        /* Swarm Particle Structures */
+        .matrix-node {
             position: absolute;
-            font-size: 0.75rem;
-            font-weight: bold;
+            font-size: 0.72rem;
+            font-weight: 900;
             color: #ff2a5f;
-            text-shadow: 0 0 4px rgba(255, 42, 95, 0.6);
+            text-shadow: 0 0 6px rgba(255, 42, 95, 0.8);
             opacity: 0;
             transform: scale(0);
-            animation: particleFadeIn 2s forwards ease-out;
+            animation: nodeSprout 2s forwards cubic-bezier(0.075, 0.82, 0.165, 1);
         }
 
-        /* Animations */
-        @keyframes heartPulse {
+        /* Keyframe Calculations */
+        @keyframes pulseKinetic {
             0% { transform: scale(1); }
-            30% { transform: scale(1.12); }
-            60% { transform: scale(1); }
-            80% { transform: scale(1.08); }
+            30% { transform: scale(1.08); }
+            65% { transform: scale(0.99); }
+            80% { transform: scale(1.04); }
             100% { transform: scale(1); }
         }
 
-        @keyframes particleFadeIn {
+        @keyframes nodeSprout {
             to {
-                opacity: 0.85;
+                opacity: 0.9;
                 transform: scale(1);
             }
         }
 
-        @keyframes nameAppear {
+        @keyframes coreAwakening {
             to {
                 opacity: 1;
                 transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            #quantum-heart-assembly {
+                width: 100vw;
+                height: 100vw;
+            }
+            .core-title {
+                font-size: 2.8rem;
+            }
+            .core-subtext {
+                font-spacing: 4px;
+                font-size: 0.75rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <div id="terminal">
-        <div class="system-line">[system] Initializing heart.PROTOCOL_v2.0...</div>
-        <div class="status-line">> One encrypted package found for you.</div>
-        <button class="btn" onclick="decryptHeart()">Decrypt Message</button>
-        <div class="hint">(or just click anywhere)</div>
+    <canvas id="network-canvas"></canvas>
+
+    <div id="lock-screen">
+        <div class="gateway-card" id="card-panel">
+            <h2>AUTHENTICATION REQUIRED</h2>
+            <p>Enter the private security key</p>
+            <div class="input-wrapper">
+                <input type="password" id="secret-key" placeholder="••••••••••••" autocomplete="off" onkeydown="handleEnter(event)">
+                <div id="error-field" class="error-hint">ACCESS DENIED: INVALID KEYPASSE</div>
+            </div>
+            <button class="unlock-btn" onclick="initiateAwakening()">Decrypt Stream</button>
+        </div>
     </div>
 
-    <div id="heart-container">
-        <div id="center-name">Mia</div>
+    <div id="master-sanctuary">
+        <div id="quantum-heart-assembly">
+            <div id="eternal-core">
+                <div class="core-title">Mia & Chems</div>
+                <div class="core-subtext">Infinite Connection</div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Allow clicking anywhere on screen to trigger it too
-        window.onclick = function(e) {
-            if(document.getElementById('terminal').style.display !== 'none') {
-                decryptHeart();
+        // High-performance background neural network animation
+        const canvas = document.getElementById('network-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const maxParticles = 90;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class NetworkNode {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.radius = Math.random() * 2 + 1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 42, 95, 0.4)';
+                ctx.fill();
             }
         }
 
-        function decryptHeart() {
-            // Stop propagation so clicking the button doesn't trigger window.onclick twice
-            event.stopPropagation(); 
-            
-            const terminal = document.getElementById('terminal');
-            terminal.style.opacity = '0';
-            
-            setTimeout(() => {
-                terminal.style.display = 'none';
-                
-                const container = document.getElementById('heart-container');
-                container.style.display = 'flex';
-                generateHeartShape(container);
-            }, 800);
+        for (let i = 0; i < maxParticles; i++) {
+            particles.push(new NetworkNode());
         }
 
-        function generateHeartShape(container) {
-            const totalParticles = 400; // Dense look like the video
+        function animateNetwork() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            for (let i = 0; i < totalParticles; i++) {
+            // Draw interactive interconnecting lines
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dx * dy); // Pseudo warping physics
+                    const maxDist = 120;
+                    
+                    if (dist < maxDist) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(255, 42, 95, ${0.18 * (1 - dist / maxDist)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateNetwork);
+        }
+        animateNetwork();
+
+        // Gatekeeping Logic
+        function handleEnter(e) {
+            if (e.key === 'Enter') initiateAwakening();
+        }
+
+        function initiateAwakening() {
+            const inputVal = document.getElementById('secret-key').value;
+            const targetKey = "Mia & Chems";
+            
+            if (inputVal === targetKey) {
+                // Dissolve Gate Panel
+                const gate = document.getElementById('lock-screen');
+                gate.style.opacity = '0';
+                gate.style.transform = 'scale(1.1)';
+                
+                setTimeout(() => {
+                    gate.style.display = 'none';
+                    
+                    const sanctuary = document.getElementById('master-sanctuary');
+                    sanctuary.style.display = 'flex';
+                    
+                    setTimeout(() => {
+                        sanctuary.style.opacity = '1';
+                        buildVibrantSwarm();
+                    }, 100);
+                }, 1100);
+            } else {
+                const err = document.getElementById('error-field');
+                err.style.display = 'block';
+                // Shaker feedback animation
+                const panel = document.getElementById('card-panel');
+                panel.style.transform = 'translateX(10px)';
+                setTimeout(() => panel.style.transform = 'translateX(-10px)', 100);
+                setTimeout(() => panel.style.transform = 'translateX(0)', 200);
+            }
+        }
+
+        // Kinetic Vector Array Generation (Mathematical Heart Mapping)
+        function buildVibrantSwarm() {
+            const assembly = document.getElementById('quantum-heart-assembly');
+            const density = 500; // Ultra high-end computing cluster density
+            const isMobile = window.innerWidth < 768;
+            const centralScale = isMobile ? 11 : 21; 
+            
+            // Core Center coordinates offset based on client viewbounds
+            const centerX = assembly.clientWidth / 2;
+            const centerY = assembly.clientHeight / 2;
+
+            for (let i = 0; i < density; i++) {
                 const t = Math.random() * 2 * Math.PI;
                 
-                // Heart Mathematical Coordinates
+                // Advanced Vector Geometry
                 const x = 16 * Math.pow(Math.sin(t), 3);
                 const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
                 
-                // Dynamic scaling to fit screen perfectly
-                const scale = 18; 
-                const posX = x * scale + 350;
-                const posY = -y * scale + 350; 
+                // Vector transformations
+                const mappedX = x * centralScale + centerX;
+                const mappedY = -y * centralScale + centerY;
 
-                // Adding organic scattering/drift effect like the tiktok video
-                const driftX = (Math.random() - 0.5) * 35;
-                const driftY = (Math.random() - 0.5) * 35;
+                // Microorganic scatter simulation for organic authenticity
+                const noiseX = (Math.random() - 0.5) * 45;
+                const noiseY = (Math.random() - 0.5) * 45;
 
-                const span = document.createElement('span');
-                span.className = 'love-text';
+                const spark = document.createElement('span');
+                spark.className = 'matrix-node';
+                spark.innerText = Math.random() > 0.4 ? 'i love you' : 'forever';
                 
-                // Randomly alternate between text variants for visual texture
-                span.innerText = Math.random() > 0.3 ? 'i love you' : 'love you';
+                spark.style.left = `${mappedX + noiseX}px`;
+                spark.style.top = `${mappedY + noiseY}px`;
                 
-                span.style.left = `${posX + driftX}px`;
-                span.style.top = `${posY + driftY}px`;
+                // Progressive staggered render algorithm
+                spark.style.animationDelay = `${Math.random() * 2.8}s`;
+                spark.style.fontSize = `${0.6 + Math.random() * 0.5}rem`;
                 
-                // Slow progressive rendering animation delay
-                span.style.animationDelay = `${Math.random() * 2.5}s`;
-                
-                // Random subtle text sizes
-                span.style.fontSize = `${0.65 + Math.random() * 0.4}rem`;
+                // Variating gradient glow shades for premium aesthetics
+                if(Math.random() > 0.7) {
+                    spark.style.color = '#ffffff';
+                    spark.style.textShadow = '0 0 8px #ff758f';
+                }
 
-                container.appendChild(span);
+                assembly.appendChild(spark);
             }
         }
     </script>
