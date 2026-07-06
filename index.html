@@ -3,357 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum UNO & Fine Art - Mia & Chems</title>
+    <title>The Architecture of Her - Mia & Chems</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Space+Grotesk:wght@300;400;600&family=Pinyon+Script&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body, html {
-            width: 100%; height: 100%; background-color: #030106;
+            width: 100%; height: 100%; background-color: #020104;
             font-family: 'Space Grotesk', sans-serif; color: #ffffff; overflow: hidden;
         }
 
-        /* Luxury Deep Space Dynamic Background */
-        #star-matrix { position: fixed; top:0; left:0; width:100vw; height:100vh; z-index:1; pointer-events:none; }
+        /* Continuous Cinematic Space & Particle Canvas */
+        #cosmic-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: none; }
 
-        /* Authorization Secure Gateway */
-        #gatekeeper {
-            position: fixed; top:0; left:0; width:100%; height:100%; z-index:2000;
+        /* Premium Password Gateway */
+        #security-gate {
+            position: fixed; top:0; left:0; width:100%; height:100%; z-index:3000;
             display: flex; justify-content: center; align-items: center;
-            background: radial-gradient(circle at center, #0f061a 0%, #020104 100%);
-            transition: all 1.8s cubic-bezier(0.86, 0, 0.07, 1);
+            background: radial-gradient(circle at center, #0c0517 0%, #010002 100%);
+            transition: all 1.5s cubic-bezier(0.86, 0, 0.07, 1);
         }
-        .gate-shield {
-            background: rgba(5, 2, 10, 0.5); border: 1px solid rgba(255, 42, 105, 0.15);
-            padding: 50px; border-radius: 30px; backdrop-filter: blur(40px); text-align: center;
-            width: 90%; max-width: 460px; box-shadow: 0 40px 90px rgba(0,0,0,0.9);
+        .vault-card {
+            background: rgba(4, 2, 8, 0.55); border: 1px solid rgba(255, 42, 105, 0.2);
+            padding: 55px; border-radius: 32px; backdrop-filter: blur(50px); -webkit-backdrop-filter: blur(50px);
+            text-align: center; width: 90%; max-width: 480px; box-shadow: 0 50px 100px rgba(0,0,0,0.9);
         }
-        .gate-shield h1 { font-family: 'Cinzel Decorative', serif; font-size: 1.1rem; letter-spacing: 5px; margin-bottom: 35px; }
-        .cyber-input {
-            width: 100%; padding: 18px; background: #000; border: 1px solid rgba(255, 42, 105, 0.25);
-            border-radius: 12px; color: #fff; font-size: 1rem; text-align: center; outline: none; letter-spacing: 4px; margin-bottom: 25px;
+        .vault-card h1 { font-family: 'Cinzel Decorative', serif; font-size: 1.1rem; letter-spacing: 6px; margin-bottom: 35px; color: #fff; }
+        .vault-input {
+            width: 100%; padding: 20px; background: #000; border: 1px solid rgba(255, 42, 105, 0.3);
+            border-radius: 12px; color: #fff; font-size: 1.1rem; text-align: center; outline: none; letter-spacing: 5px; margin-bottom: 25px;
         }
-        .cyber-input:focus { border-color: #ff2a69; box-shadow: 0 0 40px rgba(255, 42, 105, 0.4); }
-        .gate-btn {
-            width: 100%; padding: 18px; background: linear-gradient(135deg, #ff2a69, #5b1161);
+        .vault-input:focus { border-color: #ff2a69; box-shadow: 0 0 40px rgba(255, 42, 105, 0.45); }
+        .vault-btn {
+            width: 100%; padding: 20px; background: linear-gradient(135deg, #ff2a69, #4c0d52);
             border: none; border-radius: 12px; color: #fff; font-weight: 600; letter-spacing: 5px; cursor: pointer; text-transform: uppercase;
+            box-shadow: 0 15px 35px rgba(255, 42, 105, 0.25); transition: all 0.4s;
+        }
+        .vault-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 50px rgba(255, 42, 105, 0.5); }
+
+        /* Absolute Laptop/Desktop Layout Grid System (Desktop-First) */
+        #desktop-workspace {
+            position: relative; z-index: 10; width: 100%; height: 100vh;
+            display: none; opacity: 0;
+            transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1);
+            grid-template-columns: 400px 1fr 380px;
+            grid-template-rows: 110px 1fr;
+            padding: 0; box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
         }
 
-        /* Main Luxury HUD Workspace */
-        #luxury-hud {
-            position: relative; z-index: 10; width:100%; height:100%; display: none; opacity: 0;
-            transition: opacity 2.5s cubic-bezier(0.16, 1, 0.3, 1);
-            grid-template-columns: 350px 1fr; grid-template-rows: 100px 1fr; height: 100vh;
+        /* Top Center Luxury Cinematic Branding Bar */
+        .brand-header-bar {
+            grid-column: 1 / span 3; grid-row: 1;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            background: rgba(3, 1, 6, 0.5); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+        }
+        .brand-main-title { font-family: 'Cinzel Decorative', serif; font-size: 2.6rem; letter-spacing: 12px; background: linear-gradient(to right, #ffffff 10%, #ff2a69 50%, #9d4edf 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 50px rgba(255, 42, 105, 0.3); }
+        .brand-script-subtitle { font-family: 'Pinyon Script', cursive; font-size: 1.8rem; color: #ff9ebb; margin-top: -5px; }
+
+        /* Left Section: Advanced Fine Art Generative Engine Container */
+        .column-art-studio {
+            grid-column: 1; grid-row: 2; border-right: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 30px; display: flex; flex-direction: column; gap: 25px; background: rgba(4, 2, 8, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        .section-tag { font-family: 'Cinzel Decorative', serif; font-size: 0.8rem; letter-spacing: 4px; color: #ff2a69; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 10px; display: flex; justify-content: space-between; }
+        .canvas-frame { width: 100%; height: 220px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        #art-canvas { width: 100%; height: 100%; }
+        .description-paragraph { font-size: 0.85rem; line-height: 1.9; color: #94a3b8; text-align: justify; font-weight: 300; }
+
+        /* Right Section: Subtle Body Language Telemetry Metrics */
+        .column-telemetry {
+            grid-column: 3; grid-row: 2; border-left: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 30px; display: flex; flex-direction: column; gap: 25px; background: rgba(4, 2, 8, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        .biometric-row { margin-top: 5px; }
+        .biometric-labels { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #94a3b8; display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .progress-track { width: 100%; height: 4px; background: rgba(255,255,255,0.03); border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(to right, #ff2a69, #9d4edf); width: 0%; transition: width 2.5s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* CENTER AREA: THE ULTIMATE LUXURY UNO GAMING ENVIRONMENT */
+        .column-uno-arena {
+            grid-column: 2; grid-row: 2; padding: 40px; display: flex; flex-direction: column;
+            justify-content: space-between; position: relative; background: radial-gradient(circle at center, rgba(15, 7, 26, 0.2) 0%, transparent 80%);
         }
 
-        /* Top Brand Header Header */
-        .hud-top-bar {
-            grid-column: 1 / span 2; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03); background: rgba(3, 1, 6, 0.4); backdrop-filter: blur(20px);
+        /* Smart Interactive Pre-Game Fake Lobby Engine Overlay */
+        .arena-lobby-gate {
+            position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(2, 1, 4, 0.96);
+            z-index: 100; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(25px);
+            transition: all 1.2s cubic-bezier(0.86, 0, 0.07, 1);
         }
-        .hud-title { font-family: 'Cinzel Decorative', serif; font-size: 2.2rem; letter-spacing: 8px; background: linear-gradient(to right, #fff, #ff2a69, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hud-subtitle { font-family: 'Pinyon Script', cursive; font-size: 1.6rem; color: #ff9ebb; margin-top: -5px; }
-
-        /* Left Side: Fine Art Canvas Dashboard */
-        .art-side-panel {
-            grid-column: 1; border-right: 1px solid rgba(255, 255, 255, 0.03); padding: 25px;
-            display: flex; flex-direction: column; gap: 20px; background: rgba(4, 2, 8, 0.2);
-        }
-        .panel-header { font-family: 'Cinzel Decorative', serif; font-size: 0.8rem; letter-spacing: 3px; color: #ff2a69; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; }
-        .art-canvas-box { width: 100%; height: 180px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; background: #000; }
-        #sketch-canvas { width: 100%; height: 100%; }
-        .panel-text { font-size: 0.8rem; line-height: 1.8; color: #94a3b8; text-align: justify; }
-
-        /* Right Side: The Ultimate Real-Time UNO Arena */
-        .game-arena-panel { grid-column: 2; display: flex; flex-direction: column; justify-content: space-between; padding: 30px; position: relative; }
-
-        /* Player Zones Layout */
-        .player-zone {
-            width: 100%; min-height: 140px; border-radius: 20px; padding: 20px;
-            background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255,255,255,0.03);
-            display: flex; flex-direction: column; gap: 15px; transition: all 0.5s ease;
-        }
-        .zone-active { background: rgba(255, 42, 105, 0.04); border-color: rgba(255, 42, 105, 0.3); box-shadow: 0 0 30px rgba(255, 42, 105, 0.05); }
-        .zone-label { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: #64748b; display: flex; justify-content: space-between; }
-        .zone-label span.status { color: #ff2a69; font-weight: 600; display: none; }
-        .zone-active .zone-label span.status { display: inline; animation: pulseGlow 1.5s infinite alternate; }
-
-        .cards-deck-wrapper { display: flex; gap: 12px; overflow-x: auto; padding: 10px 5px; min-height: 110px; }
+        .lobby-center-vault { text-align: center; max-width: 440px; padding: 45px; background: rgba(5,2,10,0.4); border: 1px solid rgba(255,255,255,0.04); border-radius: 28px; box-shadow: 0 40px 80px rgba(0,0,0,0.8); }
+        .lobby-center-vault p { font-size: 0.95rem; color: #94a3b8; line-height: 1.7; margin-bottom: 30px; font-weight: 300; }
         
-        /* Interactive UNO Luxury Card Design */
-        .uno-card {
-            width: 65px; height: 95px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);
-            display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 1.2rem;
-            cursor: pointer; position: relative; flex-shrink: 0; box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .uno-card:hover { transform: translateY(-15px) scale(1.08); border-color: #fff; box-shadow: 0 15px 25px rgba(255,255,255,0.1); }
-        .uno-card.card-back { background: radial-gradient(circle, #ff2a69, #791a88) !important; color: transparent !important; border-color: rgba(255,255,255,0.3); }
-        .uno-card.card-back::before { content: 'UNO'; color: #fff; font-size: 0.7rem; letter-spacing: 1px; font-family: 'Cinzel Decorative', serif; transform: rotate(-20px); }
-        .card-inner-oval { width: 80%; height: 80%; border-radius: 50%; transform: rotate(-25deg); display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.12); }
+        /* The Trick Activation Click Trigger Card Area */
+        .waiting-status-panel { display: none; background: rgba(255, 42, 105, 0.03); border: 1px solid rgba(255, 42, 105, 0.2); padding: 25px; border-radius: 16px; cursor: pointer; animation: borderPulse 1.5s infinite alternate; }
+        .waiting-status-panel h2 { font-size: 0.85rem; letter-spacing: 3px; color: #ff2a69; margin-bottom: 10px; font-family: 'Cinzel Decorative', serif; }
+        .waiting-status-panel p { font-size: 0.8rem; color: #cbd5e1; margin-bottom: 0; }
 
-        /* Central Nexus: Draw Deck & Discard Pile */
-        .central-nexus { display: flex; justify-content: center; align-items: center; gap: 60px; margin: 20px 0; }
-        .pile-box { text-align: center; }
-        .pile-title { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #475569; margin-bottom: 8px; }
+        /* Premium Desktop Arena Deck Fields */
+        .arena-deck-row {
+            width: 100%; min-height: 150px; border-radius: 24px; padding: 25px;
+            background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255,255,255,0.02);
+            display: flex; flex-direction: column; gap: 15px; transition: all 0.6s ease;
+        }
+        .row-active { background: rgba(255, 42, 105, 0.03); border-color: rgba(255, 42, 105, 0.25); box-shadow: 0 0 40px rgba(255, 42, 105, 0.04); }
+        .row-label { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #475569; display: flex; justify-content: space-between; }
+        .row-label span.turn-indicator { color: #ff2a69; font-weight: 600; display: none; }
+        .row-active .row-label span.turn-indicator { display: inline; animation: textFlicker 1.5s infinite alternate; }
+
+        .cards-flex-container { display: flex; gap: 15px; overflow-x: auto; padding: 10px 5px; min-height: 110px; scrollbar-width: none; }
+        .cards-flex-container::-webkit-scrollbar { display: none; }
+
+        /* Ultimate UNO Luxury Card Structure */
+        .luxury-card {
+            width: 70px; height: 105px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12);
+            display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 1.3rem;
+            cursor: pointer; position: relative; flex-shrink: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); background-color: #000;
+        }
+        .luxury-card:hover { transform: translateY(-18px) rotate(3deg) scale(1.06); border-color: #fff; box-shadow: 0 20px 35px rgba(255,255,255,0.08); }
         
-        /* Pre-Game System Gate: Protocol Flow Buttons */
-        .lobby-overlay {
-            position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(3,1,6,0.95);
-            z-index: 100; display: flex; justify-content: center; align-items: center; border-radius: 20px;
-            backdrop-filter: blur(20px); transition: all 1s ease;
-        }
-        .lobby-box { text-align: center; max-width: 400px; padding: 40px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: 24px; }
-        .lobby-box p { font-size: 0.9rem; color: #94a3b8; line-height: 1.6; margin-bottom: 25px; }
-        .action-btn {
-            padding: 15px 35px; background: transparent; border: 1px solid #ff2a69; color: #fff;
-            border-radius: 10px; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.4s;
-        }
-        .action-btn:hover { background: #ff2a69; box-shadow: 0 0 30px rgba(255, 42, 105, 0.4); }
+        /* Central Table Field Discard Core */
+        .arena-central-nexus { display: flex; justify-content: center; align-items: center; gap: 80px; margin: 25px 0; }
+        .nexus-pile { text-align: center; }
+        .nexus-title { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #475569; margin-bottom: 10px; }
 
-        @keyframes pulseGlow { from { opacity: 0.5; } to { opacity: 1; } }
+        /* Animations */
+        @keyframes borderPulse { from { border-color: rgba(255, 42, 105, 0.2); box-shadow: 0 0 10px rgba(255, 42, 105, 0); } to { border-color: rgba(255, 42, 105, 0.6); box-shadow: 0 0 30px rgba(255, 42, 105, 0.15); } }
+        @keyframes textFlicker { from { opacity: 0.4; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <canvas id="star-matrix"></canvas>
+    <canvas id="cosmic-canvas"></canvas>
 
-    <div id="gatekeeper">
-        <div class="gate-shield" id="error-shake">
-            <h1>QUANTUM INTERFACE ACCESS</h1>
-            <input type="password" id="pass-key" class="cyber-input" placeholder="ENTER ACCESS KEY">
-            <button class="gate-btn" onclick="verifyGateSignature()">Unlock Terminal</button>
+    <div id="security-gate">
+        <div class="vault-card" id="shake-container">
+            <h1>ORBITAL CONTROL GATEWAY</h1>
+            <input type="password" id="access-password" class="vault-input" placeholder="ENTER ACCESS PIN">
+            <button class="vault-btn" onclick="authenticateTerminalSession()">Initiate Synchronicity</button>
         </div>
     </div>
 
-    <div id="luxury-hud">
+    <div id="desktop-workspace">
         
-        <div class="hud-top-bar">
-            <h1 class="hud-title">Mia & Chems</h1>
-            <div class="hud-subtitle">The Quantum UNO Arena</div>
+        <div class="brand-header-bar">
+            <h1 class="brand-main-title">Mia & Chems</h1>
+            <div class="brand-script-subtitle">The Geometry of Us</div>
         </div>
 
-        <div class="art-side-panel">
-            <div class="panel-header">Fine Art Studio</div>
-            <div class="art-canvas-box"><canvas id="sketch-canvas"></canvas></div>
-            <p class="panel-text">Art represents her deep neural alignment. This sketchbook sub-module tracks vector geometry and mathematical strokes in real-time, executing elegant sketches continuously to honor her creative passion.</p>
+        <div class="column-art-studio">
+            <div class="section-tag">Fine Art Matrix <span>STUDIO // LIVE</span></div>
+            <div class="canvas-frame"><canvas id="art-canvas"></canvas></div>
+            <p class="description-paragraph">Art is the definitive mirror of her complex architectural imagination. This generative workspace layer dynamically projects vector strokes and mathematical geometric fields in real-time, executing continuous artistic sequences to honor her absolute design mastery.</p>
         </div>
 
-        <div class="game-arena-panel">
+        <div class="column-uno-arena">
             
-            <div class="lobby-overlay" id="lobby-screen">
-                <div class="lobby-box" id="lobby-step-mia">
-                    <p>Welcome to the custom built UNO Arena. Initialize your neural connection to request a live match against Chems.</p>
-                    <button class="action-btn" onclick="triggerMiaReady()">Mia: Ready To Play</button>
+            <div class="arena-lobby-gate" id="lobby-mask-screen">
+                <div class="lobby-center-vault" id="lobby-phase-mia">
+                    <p>Welcome to the premium secure UNO tactical dashboard. Connect your session grid to initialize the matching process against Chems.</p>
+                    <button class="vault-btn" onclick="advanceToWaitingPhase()">Mia: Ready To Play</button>
                 </div>
-                <div class="lobby-box" id="lobby-step-waiting" style="display: none;">
-                    <p style="color: #ff2a69; font-weight: 600; letter-spacing: 1px;">[WAITING FOR CONNECTIVITY]</p>
-                    <p>Secure uplink pending... Please hand over or notify Chems to authorize and deal the quantum cards deck.</p>
-                    <button class="action-btn" style="border-color: #a855f7;" onclick="triggerChemsAuthorize()">Chems: Authorize & Deal</button>
-                </div>
-            </div>
-
-            <div class="player-zone" id="zone-mia">
-                <div class="zone-label"><span>Mia's Cards Deck (Player 2)</span><span class="status">YOUR TURN // PLAYING</span></div>
-                <div class="cards-deck-wrapper" id="deck-mia"></div>
-            </div>
-
-            <div class="central-nexus">
-                <div class="pile-box">
-                    <div class="pile-title">Draw Deck</div>
-                    <div class="uno-card card-back" onclick="drawCardFromPile()"></div>
-                </div>
-                <div class="pile-box">
-                    <div class="pile-title">Discard Field</div>
-                    <div id="discard-field-target"></div>
+                <div class="lobby-center-vault" id="lobby-phase-waiting" style="display: none;">
+                    <div class="waiting-status-panel" onclick="executeSecretBypassTricking()">
+                        <h2>[WAITING UPLINK]</h2>
+                        <p>Secure pipeline pending authorization... Please wait for Chems to establish connection and deal the deck.</p>
+                        <p style="margin-top: 15px; font-size: 0.65rem; color: #64748b; letter-spacing: 1px;">(CLICK AREA TO FORCE AUTHORIZE MATCH)</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="player-zone" id="zone-chems">
-                <div class="zone-label"><span>Chems's Cards Deck (Player 1)</span><span class="status">YOUR TURN // PLAYING</span></div>
-                <div class="cards-deck-wrapper" id="deck-chems"></div>
+            <div class="arena-deck-row" id="row-mia">
+                <div class="row-label"><span>Mia's Deck (Player 2)</span><span class="turn-indicator">ACTIVE TURN</span></div>
+                <div class="cards-flex-container" id="cards-container-mia"></div>
+            </div>
+
+            <div class="arena-central-nexus">
+                <div class="nexus-pile">
+                    <div class="nexus-title">Draw Deck</div>
+                    <div class="luxury-card" style="background: radial-gradient(circle, #ff2a69, #791a88); border-color: rgba(255,255,255,0.4);" onclick="drawCardAction()"></div>
+                </div>
+                <div class="nexus-pile">
+                    <div class="nexus-title">Discard Pile</div>
+                    <div id="discard-target-anchor"></div>
+                </div>
+            </div>
+
+            <div class="arena-deck-row" id="row-chems">
+                <div class="row-label"><span>Chems's Deck (Player 1)</span><span class="turn-indicator">ACTIVE TURN</span></div>
+                <div class="cards-flex-container" id="cards-container-chems"></div>
             </div>
 
         </div>
+
+        <div class="column-telemetry">
+            <div class="section-tag">Aura Telemetry <span>METRICS // SECURE</span></div>
+            <p class="description-paragraph">Tracing involuntary somatic coordinates, proximity wavelengths, and real-time behavioral vectors when she is positioned inside your gravitation.</p>
+            
+            <div class="biometric-row">
+                <div class="biometric-labels"><span>Involuntary Smile Vector</span><span>98.6%</span></div>
+                <div class="progress-track"><div class="progress-fill" id="bar-smile"></div></div>
+            </div>
+            <div class="biometric-row">
+                <div class="biometric-labels"><span>Pupil Dilation Index</span><span>95.2%</span></div>
+                <div class="progress-track"><div class="progress-fill" id="bar-pupil"></div></div>
+            </div>
+            <div class="biometric-row">
+                <div class="biometric-labels"><span>Proximity Resonance Frequency</span><span>99.9%</span></div>
+                <div class="progress-track"><div class="progress-fill" id="bar-resonance"></div></div>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        // Background Particle Space Engine
-        const bgCanvas = document.getElementById('star-matrix');
+        // High-End Physics Engine: Over 500 Stars & Moving Cosmic Orbits
+        const bgCanvas = document.getElementById('cosmic-canvas');
         const bgCtx = bgCanvas.getContext('2d');
-        let stars = [];
-        function resizeBg() { bgCanvas.width = window.innerWidth; bgCanvas.height = window.innerHeight; }
-        window.addEventListener('resize', resizeBg); resizeBg();
-        for(let i=0; i<300; i++) stars.push({x: Math.random()*bgCanvas.width, y: Math.random()*bgCanvas.height, s: Math.random()*1.5, d: Math.random()*0.2});
-        function drawBg() {
-            bgCtx.fillStyle = '#030106'; bgCtx.fillRect(0,0,bgCanvas.width,bgCanvas.height);
-            bgCtx.fillStyle = 'rgba(255,255,255,0.4)';
-            stars.forEach(st => { bgCtx.beginPath(); bgCtx.arc(st.x, st.y, st.s, 0, Math.PI*2); bgCtx.fill(); st.y -= st.d; if(st.y<0) st.y=bgCanvas.height; });
-            requestAnimationFrame(drawBg);
+        let backgroundStars = [];
+        function alignCanvasBounds() { bgCanvas.width = window.innerWidth; bgCanvas.height = window.innerHeight; }
+        window.addEventListener('resize', alignCanvasBounds); alignCanvasBounds();
+        for(let i=0; i<450; i++) backgroundStars.push({x: Math.random()*bgCanvas.width, y: Math.random()*bgCanvas.height, size: Math.random()*1.3, speed: Math.random()*0.15+0.05});
+        function animateCosmicBackground() {
+            bgCtx.fillStyle = '#020104'; bgCtx.fillRect(0,0,bgCanvas.width,bgCanvas.height);
+            bgCtx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+            backgroundStars.forEach(star => { bgCtx.beginPath(); bgCtx.arc(star.x, star.y, star.size, 0, Math.PI*2); bgCtx.fill(); star.y -= star.speed; if(star.y<0) star.y=bgCanvas.height; });
+            requestAnimationFrame(animateCosmicBackground);
         }
-        drawBg();
+        animateCosmicBackground();
 
-        // Gateway Authentication
-        function verifyGateSignature() {
-            if(document.getElementById('pass-key').value === "Mia & Chems") {
-                const gate = document.getElementById('gatekeeper'); gate.style.opacity = '0';
-                setTimeout(() => { gate.style.display='none'; const hud=document.getElementById('luxury-hud'); hud.style.display='grid'; setTimeout(()=>hud.style.opacity='1',50); initiateArtEngine(); }, 1800);
+        // Terminal Access Security Verification Gateway Check
+        function authenticateTerminalSession() {
+            if(document.getElementById('access-password').value === "Mia & Chems") {
+                const gate = document.getElementById('security-gate'); gate.style.opacity = '0';
+                setTimeout(() => { gate.style.display='none'; const ws=document.getElementById('desktop-workspace'); ws.style.display='grid'; setTimeout(()=>ws.style.opacity='1',100); initializeArtStudioCanvas(); }, 1500);
             } else {
-                const el = document.getElementById('error-shake'); el.style.transform = 'translateX(10px)'; setTimeout(()=>el.style.transform='translateX(-10px)',80); setTimeout(()=>el.style.transform='translateX(0)',160);
+                const shk = document.getElementById('shake-container'); shk.style.transform = 'translateX(12px)'; setTimeout(()=>shk.style.transform='translateX(-12px)',70); setTimeout(()=>shk.style.transform='translateX(0)',140);
             }
         }
 
-        // --- CORE HIGH-END CLIENT-SIDE UNO GAME ENGINE ---
-        const CARD_COLORS = ['#ef4444', '#3b82f6', '#10b981', '#eab308']; // Red, Blue, Green, Yellow
-        const CARD_VALUES = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Skip', 'Reverse', '+2'];
-        
-        let fullDrawDeck = [];
-        let discardPile = [];
-        let playerChemsHand = [];
-        let playerMiaHand = [];
-        let activePlayerTurn = 'mia'; // Mia starts after Chems authorizes
+        // --- THE TRICK ADVANCED LOBBY BYPASS LOGIC ENGINE ---
+        function advanceToWaitingPhase() {
+            document.getElementById('lobby-phase-mia').style.display = 'none';
+            document.getElementById('lobby-phase-waiting').style.display = 'block';
+        }
 
-        function generateNewUnoDeck() {
-            fullDrawDeck = [];
-            CARD_COLORS.forEach(color => {
-                CARD_VALUES.forEach(val => {
-                    fullDrawDeck.push({ color: color, value: val });
-                    if(val !== '0') fullDrawDeck.push({ color: color, value: val }); // Duplicate traditional rules
+        function executeSecretBypassTricking() {
+            // Instantly vanishes the fake locking lobby with high-end premium sliding transition animation
+            const lobbyScreen = document.getElementById('lobby-mask-screen');
+            lobbyScreen.style.opacity = '0';
+            lobbyScreen.style.transform = 'scale(0.9)';
+            setTimeout(() => { 
+                lobbyScreen.style.display = 'none'; 
+                // Initialize Deck Generation and Deal Cards Game Screen Fully
+                initializeUnoDeckMatrix();
+                // Trigger Telemetry Bars Animations
+                document.getElementById('bar-smile').style.width = '98.6%';
+                document.getElementById('bar-pupil').style.width = '95.2%';
+                document.getElementById('bar-resonance').style.width = '99.9%';
+            }, 1200);
+        }
+
+        // --- ULTRA-PREMIUM DESKTOP UNO GAME CODE PLATFORM ---
+        const PALETTE_COLORS = ['#ef4444', '#3b82f6', '#10b981', '#eab308']; // Red, Blue, Green, Yellow
+        const TOKEN_VALUES = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Skip', 'Reverse', '+2'];
+        
+        let deckPile = [];
+        let discardPileHistory = [];
+        let handMia = [];
+        let handChems = [];
+        let turnCursor = 'mia'; // Mia plays first
+
+        function initializeUnoDeckMatrix() {
+            deckPile = []; handMia = []; handChems = [];
+            PALETTE_COLORS.forEach(col => {
+                TOKEN_VALUES.forEach(val => {
+                    deckPile.push({ color: col, value: val });
+                    if(val !== '0') deckPile.push({ color: col, value: val }); // Build realistic double deck numbers
                 });
             });
-            // Shuffle
-            fullDrawDeck.sort(() => Math.random() - 0.5);
-        }
+            deckPile.sort(() => Math.random() - 0.5); // Shuffle array matrix
 
-        function triggerMiaReady() {
-            document.getElementById('lobby-step-mia').style.display = 'none';
-            document.getElementById('lobby-step-waiting').style.display = 'block';
-        }
-
-        function triggerChemsAuthorize() {
-            generateNewUnoDeck();
-            // Deal 7 Cards Each
+            // Deal exactly 7 luxury structured cards each
             for(let i=0; i<7; i++) {
-                playerChemsHand.push(fullDrawDeck.pop());
-                playerMiaHand.push(fullDrawDeck.pop());
+                handMia.push(deckPile.pop());
+                handChems.push(deckPile.pop());
             }
-            // Set first discard card
-            discardPile.push(fullDrawDeck.pop());
-            
-            // Hide Lobby Screen fully with animation
-            document.getElementById('lobby-screen').style.opacity = '0';
-            setTimeout(() => { document.getElementById('lobby-screen').style.display = 'none'; renderGameArenaLayout(); }, 1000);
+            discardPileHistory.push(deckPile.pop());
+            updateGameArenaDisplayLayout();
         }
 
-        function renderGameArenaLayout() {
-            // Render Mia Hand (Hidden from Chems view during her turn is handled or showing for simple local)
-            const miaContainer = document.getElementById('deck-mia'); miaContainer.innerHTML = '';
-            playerMiaHand.forEach((card, idx) => {
-                const cElem = document.createElement('div');
-                cElem.className = `uno-card ${activePlayerTurn === 'chems' ? 'card-back' : ''}`;
-                cElem.style.backgroundColor = card.color;
-                cElem.style.borderColor = 'rgba(255,255,255,0.2)';
-                cElem.innerHTML = `<div class="card-inner-oval">${card.value}</div>`;
-                cElem.onclick = () => playSelectedCard('mia', idx);
-                miaContainer.appendChild(cElem);
+        function updateGameArenaDisplayLayout() {
+            // Clear & Generate Mia's Display Deck
+            const containerMia = document.getElementById('cards-container-mia'); containerMia.innerHTML = '';
+            handMia.forEach((card, idx) => {
+                const cDiv = document.createElement('div'); cDiv.className = 'luxury-card';
+                cDiv.style.backgroundColor = card.color;
+                cDiv.innerHTML = card.value;
+                cDiv.onclick = () => playCardTurnAction('mia', idx);
+                containerMia.appendChild(cDiv);
             });
 
-            // Render Chems Hand
-            const chemsContainer = document.getElementById('deck-chems'); chemsContainer.innerHTML = '';
-            playerChemsHand.forEach((card, idx) => {
-                const cElem = document.createElement('div');
-                cElem.className = `uno-card ${activePlayerTurn === 'mia' ? 'card-back' : ''}`;
-                cElem.style.backgroundColor = card.color;
-                cElem.style.borderColor = 'rgba(255,255,255,0.2)';
-                cElem.innerHTML = `<div class="card-inner-oval">${card.value}</div>`;
-                cElem.onclick = () => playSelectedCard('chems', idx);
-                chemsContainer.appendChild(cElem);
+            // Clear & Generate Chems's Display Deck
+            const containerChems = document.getElementById('cards-container-chems'); containerChems.innerHTML = '';
+            handChems.forEach((card, idx) => {
+                const cDiv = document.createElement('div'); cDiv.className = 'luxury-card';
+                cDiv.style.backgroundColor = card.color;
+                cDiv.innerHTML = card.value;
+                cDiv.onclick = () => playCardTurnAction('chems', idx);
+                containerChems.appendChild(cDiv);
             });
 
-            // Render Top Discard Pile Card
-            const topDiscard = discardPile[discardPile.length - 1];
-            const discardTarget = document.getElementById('discard-field-target'); discardTarget.innerHTML = '';
-            const discCard = document.createElement('div');
-            discCard.className = 'uno-card'; discCard.style.backgroundColor = topDiscard.color;
-            discCard.innerHTML = `<div class="card-inner-oval">${topDiscard.value}</div>`;
-            discardTarget.appendChild(discCard);
+            // Update Top Active Target Discard Card Area
+            const activeTopDiscard = discardPileHistory[discardPileHistory.length - 1];
+            const discardTarget = document.getElementById('discard-target-anchor'); discardTarget.innerHTML = '';
+            const dispCard = document.createElement('div'); dispCard.className = 'luxury-card';
+            dispCard.style.backgroundColor = activeTopDiscard.color; dispCard.innerHTML = activeTopDiscard.value;
+            discardTarget.appendChild(dispCard);
 
-            // Toggle Visual Activation State Indicators
-            if(activePlayerTurn === 'mia') {
-                document.getElementById('zone-mia').classList.add('zone-active');
-                document.getElementById('zone-chems').classList.remove('zone-active');
+            // Update Active Border Glass Rows Highlights
+            if(turnCursor === 'mia') {
+                document.getElementById('row-mia').classList.add('row-active');
+                document.getElementById('row-chems').classList.remove('row-active');
             } else {
-                document.getElementById('zone-chems').classList.add('zone-active');
-                document.getElementById('zone-mia').classList.remove('zone-active');
+                document.getElementById('row-chems').classList.add('row-active');
+                document.getElementById('row-mia').classList.remove('row-active');
             }
         }
 
-        function playSelectedCard(player, index) {
-            if(player !== activePlayerTurn) return; // Strict Turn Validation Enforcement
+        function playCardTurnAction(player, index) {
+            if(player !== turnCursor) return; // Enforce Turn Block Mechanism
 
-            const currentHand = (player === 'chems') ? playerChemsHand : playerMiaHand;
-            const chosenCard = currentHand[index];
-            const topDiscard = discardPile[discardPile.length - 1];
+            const activeHand = (player === 'mia') ? handMia : handChems;
+            const chosenToken = activeHand[index];
+            const currentDiscardTop = discardPileHistory[discardPileHistory.length - 1];
 
-            // UNO Rules Matcher Logic Verification (Color OR Value identity)
-            if(chosenCard.color === topDiscard.color || chosenCard.value === topDiscard.value) {
-                // Remove from Hand & Push to Discard Field
-                currentHand.splice(index, 1);
-                discardPile.push(chosenCard);
+            // Validate Universal Matching Rules (Color symmetry OR Value match equality)
+            if(chosenToken.color === currentDiscardTop.color || chosenToken.value === currentDiscardTop.value) {
+                activeHand.splice(index, 1);
+                discardPileHistory.push(chosenToken);
 
-                // Win validation state checks
-                if(currentHand.length === 0) {
-                    alert(`Incredible Masterclass Match! ${player.toUpperCase()} wins the universal match!`);
+                if(activeHand.length === 0) {
+                    alert(`Absolute Victory! ${player.toUpperCase()} conquered the space matrix!`);
                     location.reload(); return;
                 }
 
-                // Handle Modifier Cards (+2, Skip, Reverse changes system turns flow)
-                if(chosenCard.value === '+2') {
-                    const targetHand = (player === 'chems') ? playerMiaHand : playerChemsHand;
-                    if(fullDrawDeck.length < 2) generateNewUnoDeck();
-                    targetHand.push(fullDrawDeck.pop()); targetHand.push(fullDrawDeck.pop());
-                    // Keeps turn to same player as penalty to opponent
-                } else if(chosenCard.value === 'Skip' || chosenCard.value === 'Reverse') {
-                    // Turn remains yours due to double skip or reverse mechanics configuration in 2-player mode
+                // Check Special Card Modifiers Logic
+                if(chosenToken.value === '+2') {
+                    const opponentHand = (player === 'mia') ? handChems : handMia;
+                    opponentHand.push(deckPile.pop()); opponentHand.push(deckPile.pop());
                 } else {
-                    // Standard turn progression step
-                    activePlayerTurn = (player === 'chems') ? 'mia' : 'chems';
+                    turnCursor = (player === 'mia') ? 'chems' : 'mia';
                 }
-
-                renderGameArenaLayout();
+                updateGameArenaDisplayLayout();
             } else {
-                // Shake Animation Feedback on rule violations
-                alert("Invalid move! Card must match the current Discard color or numeric value.");
+                alert("Invalid configuration Move! Token color or value must match the Discard card.");
             }
         }
 
-        function drawCardFromPile() {
-            if(fullDrawDeck.length === 0) generateNewUnoDeck();
-            const pulledCard = fullDrawDeck.pop();
-            
-            if(activePlayerTurn === 'chems') playerChemsHand.push(pulledCard);
-            else playerMiaHand.push(pulledCard);
-
-            // Auto shift turn to maintain flow after drawing card
-            activePlayerTurn = (activePlayerTurn === 'chems') ? 'mia' : 'chems';
-            renderGameArenaLayout();
+        function drawCardAction() {
+            const activeHand = (turnCursor === 'mia') ? handMia : handChems;
+            activeHand.push(deckPile.pop());
+            turnCursor = (turnCursor === 'mia') ? 'chems' : 'mia'; // Toggle turn control
+            updateGameArenaDisplayLayout();
         }
 
-        // Fine Art Canvas Generative Engine Emulator
-        function initiateArtEngine() {
-            const canvas = document.getElementById('sketch-canvas'); const ctx = canvas.getContext('2d');
-            let t = 0;
-            function resize() { canvas.width = canvas.parentElement.clientWidth; canvas.height = canvas.parentElement.clientHeight; }
-            window.addEventListener('resize', resize); resize();
-            function draw() {
-                ctx.fillStyle = 'rgba(0,0,0,0.04)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+        // Left Frame Mathematical Art Sketchbook Generation Loop Script
+        function initializeArtStudioCanvas() {
+            const canvas = document.getElementById('art-canvas'); const ctx = canvas.getContext('2d');
+            let timeVal = 0;
+            function updateSize() { canvas.width = canvas.parentElement.clientWidth; canvas.height = canvas.parentElement.clientHeight; }
+            window.addEventListener('resize', updateSize); updateSize();
+            function drawLoop() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.035)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
-                const x = canvas.width/2 + Math.sin(t*1.2)*(canvas.width*0.38);
-                const y = canvas.height/2 + Math.cos(t*0.8)*(canvas.height*0.35);
-                ctx.arc(x, y, 1.2, 0, Math.PI*2); ctx.fillStyle = `hsl(${(t*25)%360}, 90%, 65%)`; ctx.fill();
-                t += 0.02; requestAnimationFrame(draw);
+                const xPos = canvas.width/2 + Math.sin(timeVal * 1.4) * (canvas.width * 0.35);
+                const yPos = canvas.height/2 + Math.cos(timeVal * 0.9) * (canvas.height * 0.32);
+                ctx.arc(xPos, yPos, 1.5, 0, Math.PI * 2); ctx.fillStyle = `hsl(${(timeVal * 18) % 360}, 90%, 65%)`; ctx.fill();
+                timeVal += 0.02; requestAnimationFrame(drawLoop);
             }
-            draw();
+            drawLoop();
         }
     </script>
 </body>
