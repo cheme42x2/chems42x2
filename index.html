@@ -1,96 +1,259 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JADOU - Aura Language Hub</title>
+    <title>JADOU | Aura Language Hub</title>
     <style>
-        /* ديزاين الـ Aura والـ Dark Mode */
+        /* إعدادات الخلفية والـ Dark Galaxy Effect */
         body {
-            background-color: #0b0c10;
-            color: #c5c6c7;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at center, #1a1b2f 0%, #080811 100%);
+            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow-x: hidden;
+            overflow-hidden: hidden;
+            position: relative;
         }
 
-        /* أنميشن لـ اسم JADOU الـ Neon Gold */
+        /* جزيئات النجوم في الخلفية لإعطاء طاقة للموقع */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image: radial-gradient(#ffffff 1px, transparent 1px), radial-gradient(#ffffff 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            opacity: 0.05;
+            animation: rotateBg 100s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotateBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .main-container {
+            z-index: 1;
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* اسم JADOU بـ تأثير الـ Premium Aura Gold */
         .brand-title {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            text-shadow: 0 0 10px #ffbd59, 0 0 20px #ffbd59, 0 0 40px #ffbd59;
-            animation: pulse 2s infinite alternate;
-            margin-bottom: 10px;
+            font-size: 5rem;
+            font-weight: 900;
+            margin: 0;
+            background: linear-gradient(45deg, #ffe066, #fcc419, #ff922b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(252, 196, 25, 0.3);
+            letter-spacing: 4px;
         }
 
         .subtitle {
-            color: #45f3ff;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
+            color: #a6a7ab;
+            font-size: 1rem;
             margin-bottom: 40px;
-            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
-        /* كارت اختيار اللغات */
-        .lang-container {
-            display: flex;
-            gap: 20px;
+        /* أزرار لغات طيارة ومستقبلية */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
         }
 
-        .lang-btn {
-            background: transparent;
-            border: 2px solid #45f3ff;
-            color: #45f3ff;
-            padding: 15px 35px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 30px;
+        .premium-btn {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 16px;
             cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 0 10px rgba(69, 243, 255, 0.2);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s, border 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        /* تأثير الـ Hover اللي يعطي الـ Aura للزر */
-        .lang-btn:hover {
-            background: #45f3ff;
-            color: #0b0c10;
-            box-shadow: 0 0 25px #45f3ff;
-            transform: translateY(-5px);
+        .premium-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            border: 1px solid #4dadf7;
+            box-shadow: 0 10px 30px rgba(77, 173, 247, 0.2), inset 0 0 15px rgba(77, 173, 247, 0.1);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.9; }
-            100% { transform: scale(1.05); opacity: 1; }
+        .premium-btn span {
+            font-size: 1.6rem;
         }
+
+        /* شاشة المستويات والنصوص (مخفية في البداية) */
+        .hidden-section {
+            display: none;
+        }
+
+        .level-badge {
+            background: #ff922b;
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .text-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin: 20px 0;
+            border-left: 4px solid #ff922b;
+            min-height: 80px;
+        }
+
+        .translation-box {
+            color: #ced4da;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .control-panel {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-change { background-color: #339af0; color: white; }
+        .btn-change:hover { background-color: #228be6; }
+        .btn-translate { background-color: #51cf66; color: white; }
+        .btn-translate:hover { background-color: #40c057; }
+        .btn-back { background-color: #fa5252; color: white; }
+        .btn-back:hover { background-color: #e03131; }
     </style>
 </head>
 <body>
 
-    <!-- اسم البروجي المفرز -->
-    <div class="brand-title">JADOU</div>
-    <div class="subtitle">Aura Language Platform</div>
+    <div class="main-container">
+        <!-- واجهة اختيار اللغات -->
+        <div id="lobby-section">
+            <h1 class="brand-title">JADOU</h1>
+            <div class="subtitle">AURA LANGUAGE HUB</div>
+            
+            <div class="grid-container">
+                <button class="premium-btn" onclick="startApp('fr')">Français <span>🇫🇷</span></button>
+                <button class="premium-btn" onclick="startApp('en')">English <span>🇺🇸</span></button>
+                <button class="premium-btn" onclick="startApp('ru')">Русский <span>🇷🇺</span></button>
+            </div>
+        </div>
 
-    <!-- واجهة اختيار اللغات -->
-    <div class="lang-container">
-        <button class="lang-btn" onclick="selectLanguage('fr')">Français 🇫🇷</button>
-        <button class="lang-btn" onclick="selectLanguage('en')">English 🇺🇸</button>
-        <button class="lang-btn" onclick="selectLanguage('ru')">Русский 🇷🇺</button>
+        <!-- واجهة المستويات والنصوص الذكية -->
+        <div id="app-section" class="hidden-section">
+            <span class="level-badge" id="current-level-display">مستوى A1</span>
+            <h2 id="selected-lang-title">اللغة المستهدفة</h2>
+            
+            <div class="text-box" id="foreign-text">النص سيظهر هنا...</div>
+            <div class="translation-box" id="translation-text">الترجمة ستظهر هنا...</div>
+
+            <div class="control-panel">
+                <button class="action-btn btn-change" onclick="nextText()">تغيير النص 🔄</button>
+                <button class="action-btn btn-translate" onclick="toggleTranslation()">عرض الترجمة 👁️</button>
+            </div>
+            <button class="action-btn btn-back" onclick="goBack()" style="width:100%; margin-top:10px;">رجوع للقائمة ↩️</button>
+        </div>
     </div>
 
     <script>
-        function selectLanguage(lang) {
-            alert('تم اختيار اللغة: ' + lang.toUpperCase() + '! دروك نوجدو لك مستوى A1 المفرز.');
-            // هنا المرة الجاية نربطوها باش تديك ديريكت لصفحة النصوص والمستويات
+        // قاعدة البيانات التجريبية للمستوى A1
+        const database = {
+            fr: [
+                { foreign: "Bonjour mon ami, ça va ?", native: "أهلاً صديقي، لاباس؟" },
+                { foreign: "J'apprends le français avec mes amis.", native: "راني نتعلم الفرونسي مع صحابي." },
+                { foreign: "Le ciel est bleu aujourd'hui.", native: "السماء زرقاء اليوم." }
+            ],
+            en: [
+                { foreign: "Hello bro, how are you doing?", native: "أهلاً خويا، واش راك داير فيها؟" },
+                { foreign: "We are building an amazing website.", native: "رانا نخدمو في موقع طيارة وهبيل." }
+            ],
+            ru: [
+                { foreign: "Привет друг, как дела?", native: "أهلاً صديقي، كيف الأحوال؟" },
+                { foreign: "Я говорю по-русски.", native: "راني نهدر الروسية." }
+            ]
+        };
+
+        let currentLang = '';
+        let currentIndex = 0;
+
+        function startApp(lang) {
+            currentLang = lang;
+            currentIndex = 0;
+            document.getElementById('lobby-section').style.display = 'none';
+            document.getElementById('app-section').style.display = 'block';
+            
+            let langNames = { 'fr': 'الفرنسية 🇫🇷', 'en': 'الإنجليزية 🇺🇸', 'ru': 'الروسية 🇷🇺' };
+            document.getElementById('selected-lang-title').innerText = langNames[lang];
+            
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            let currentList = database[currentLang];
+            document.getElementById('foreign-text').innerText = currentList[currentIndex].foreign;
+            document.getElementById('translation-text').innerText = currentList[currentIndex].native;
+            document.getElementById('translation-text').style.display = 'none'; // إخفاء الترجمة عند تغيير النص
+        }
+
+        function nextText() {
+            let currentList = database[currentLang];
+            currentIndex = (currentIndex + 1) % currentList.length;
+            updateDisplay();
+        }
+
+        function toggleTranslation() {
+            let transBox = document.getElementById('translation-text');
+            if (transBox.style.display === 'none' || transBox.style.display === '') {
+                transBox.style.display = 'block';
+            } else {
+                transBox.style.display = 'none';
+            }
+        }
+
+        function goBack() {
+            document.getElementById('app-section').style.display = 'none';
+            document.getElementById('lobby-section').style.display = 'block';
         }
     </script>
-
 </body>
 </html>
