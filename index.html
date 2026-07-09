@@ -1,232 +1,334 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Las Vegas Chems Casino</title>
+    <title>Las Vegas Premium Live Casino</title>
     <style>
-        /* تصميم عام فخم بستايل نيون كازينو */
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: #0a0a12; color: #fff; overflow-x: hidden; height: 100vh; }
+        /* تصميم سينمائي فخم بلون ذهبي ونيون غامق */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; }
+        body { background: #030206; color: #fff; overflow-x: hidden; height: 100vh; }
         
-        /* شاشة تسجيل الدخول */
+        /* شاشة الدخول السرية */
         #loginScreen {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            height: 100vh; background: radial-gradient(circle, #1a0b2e 0%, #05020a 100%);
+            height: 100vh; background: radial-gradient(circle, #0f051d 0%, #010003 100%);
         }
-        .login-card {
-            background: rgba(20, 10, 35, 0.8); padding: 40px; border-radius: 20px;
-            box-shadow: 0 0 30px #ff007f, inset 0 0 15px rgba(255, 0, 127, 0.3);
-            text-align: center; width: 90%; max-width: 400px; border: 1px solid #ff007f;
+        .login-box {
+            background: rgba(10, 5, 20, 0.95); padding: 45px; border-radius: 15px;
+            box-shadow: 0 0 40px #ffdf00; text-align: center; width: 90%; max-width: 420px;
+            border: 2px solid #ffdf00;
         }
-        .login-card h1 { color: #ffdf00; text-shadow: 0 0 10px #ffdf00; margin-bottom: 25px; font-size: 28px; }
-        .input-group { margin-bottom: 20px; text-align: left; }
-        .input-group input {
-            width: 100%; padding: 12px; background: #110722; border: 1px solid #00ffff;
-            border-radius: 8px; color: #fff; font-size: 16px; outline: none; transition: 0.3s;
-        }
-        .input-group input:focus { box-shadow: 0 0 15px #00ffff; }
-        .login-btn {
-            width: 100%; padding: 12px; background: linear-gradient(45deg, #ff007f, #7928ca);
-            border: none; border-radius: 8px; color: white; font-weight: bold; font-size: 18px;
-            cursor: pointer; box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4); transition: 0.2s;
-        }
-        .login-btn:hover { transform: scale(1.02); box-shadow: 0 0 20px #ff007f; }
-        #errorMsg { color: #ff3333; margin-top: 15px; font-weight: bold; display: none; }
+        .login-box h1 { color: #ffdf00; font-size: 26px; margin-bottom: 30px; letter-spacing: 2px; }
+        .input-field { width: 100%; padding: 15px; background: #000; border: 1px solid #ff007f; border-radius: 5px; color: #fff; font-size: 16px; margin-bottom: 20px; text-align: center; outline: none; }
+        .input-field:focus { box-shadow: 0 0 15px #ff007f; }
+        .btn-enter { width: 100%; padding: 15px; background: linear-gradient(45deg, #ffdf00, #ff007f); border: none; border-radius: 5px; color: #000; font-weight: bold; font-size: 18px; cursor: pointer; transition: 0.3s; }
+        .btn-enter:hover { transform: scale(1.02); box-shadow: 0 0 25px #ffdf00; }
+        #err { color: #ff3333; margin-top: 15px; font-weight: bold; display: none; }
 
-        /* شاشة الكازينو الرئيسية */
+        /* الكازينو الرئيسي */
         #casinoScreen { display: none; height: 100vh; flex-direction: column; }
         
-        /* البار العلوي - الرصيد */
-        .navbar {
-            background: #111122; padding: 15px 20px; display: flex; justify-content: space-between;
-            align-items: center; border-bottom: 3px solid #ffdf00; box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        /* البار العلوي الاحترافي */
+        .top-bar {
+            background: #090611; padding: 15px 25px; display: flex; justify-content: space-between;
+            align-items: center; border-bottom: 2px solid #ffdf00; box-shadow: 0 4px 20px rgba(0,0,0,0.8);
         }
-        .welcome-msg { font-size: 18px; color: #00ffff; text-shadow: 0 0 5px #00ffff; font-weight: bold; }
-        .balance-box {
-            background: linear-gradient(135deg, #151515 0%, #222 100%); padding: 10px 20px;
-            border-radius: 30px; border: 2px solid #ffdf00; box-shadow: 0 0 15px rgba(255, 223, 0, 0.3);
-        }
-        .balance-box span { color: #ffdf00; font-weight: bold; font-size: 20px; }
+        .vip-status { font-size: 18px; color: #ffdf00; font-weight: bold; text-shadow: 0 0 10px rgba(255, 223, 0, 0.5); }
+        .live-balance { background: #000; padding: 10px 25px; border-radius: 5px; border: 1px solid #00ff66; font-size: 20px; font-weight: bold; color: #00ff66; }
 
-        /* منطقة الألعاب */
-        .main-lobby {
-            flex: 1; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; padding: 20px; background: radial-gradient(circle, #1a1a3a 0%, #080811 100%);
-        }
+        /* قائمة التبديل بين صالونات الألعاب */
+        .lobby-tabs { display: flex; background: #0d091a; border-bottom: 1px solid #221435; }
+        .tab-btn { flex: 1; padding: 15px; background: none; border: none; color: #aaa; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s; text-align: center; }
+        .tab-btn.active { color: #ffdf00; background: #140e28; border-bottom: 3px solid #ffdf00; }
 
-        /* لعبة الـ Slot Machine */
-        .slot-machine {
-            background: #221133; border: 5px solid #ffdf00; border-radius: 20px;
-            padding: 30px; box-shadow: 0 0 40px #ffdf00; text-align: center; max-width: 450px; width: 100%;
-        }
-        .slot-title { color: #ff007f; text-shadow: 0 0 10px #ff007f; font-size: 24px; margin-bottom: 20px; }
+        /* ساحة العرض الأساسية */
+        .game-stage { flex: 1; display: none; padding: 20px; flex-direction: column; align-items: center; justify-content: flex-start; overflow-y: auto; }
+        .game-stage.active { display: flex; }
+
+        /* شاشة اللايف روووم (المرأة والعجلة) */
+        .live-dealer-zone { position: relative; width: 100%; max-width: 500px; height: 240px; background: #000; border-radius: 12px; border: 2px solid #ff007f; overflow: hidden; margin-bottom: 20px; box-shadow: 0 0 25px rgba(255, 0, 127, 0.3); }
+        .dealer-image { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+        .dealer-bubble { position: absolute; bottom: 15px; left: 15px; background: rgba(0,0,0,0.8); padding: 8px 15px; border-radius: 20px; border: 1px solid #ffdf00; font-size: 14px; font-weight: bold; color: #ffdf00; }
         
-        .reels-container {
-            display: flex; justify-content: space-around; background: #000;
-            padding: 20px; border-radius: 10px; border: 2px solid #00ffff; margin-bottom: 20px;
-        }
-        .reel {
-            font-size: 50px; width: 80px; height: 80px; background: #111;
-            display: flex; align-items: center; justify-content: center; border-radius: 8px;
-            border: 1px solid #333; transition: transform 0.1s ease-in-out;
-        }
-        
-        .controls { display: flex; flex-direction: column; gap: 15px; }
-        .bet-input {
-            padding: 10px; background: #000; border: 1px solid #ffdf00; border-radius: 5px;
-            color: #ffdf00; font-size: 18px; text-align: center; font-weight: bold;
-        }
-        .spin-btn {
-            padding: 15px; background: linear-gradient(45deg, #00ffcc, #0099ff);
-            border: none; border-radius: 10px; color: #000; font-weight: bold; font-size: 20px;
-            cursor: pointer; box-shadow: 0 5px 15px rgba(0, 255, 204, 0.4); transition: 0.2s;
-        }
-        .spin-btn:hover { transform: translateY(-2px); box-shadow: 0 0 25px #00ffcc; }
-        #gameStatus { font-size: 18px; font-weight: bold; margin-top: 15px; min-height: 25px; }
+        /* كرة الرولات الصغيرة (الـ Animation) */
+        .ball-animation { position: absolute; width: 12px; height: 12px; background: #fff; border-radius: 50%; top: 48%; left: 50%; transform: translate(-50%, -50%); display: none; box-shadow: 0 0 10px #fff; }
+
+        /* عجلة الرولات الدوارة */
+        .wheel-box { position: relative; width: 160px; height: 160px; margin-bottom: 20px; }
+        .roulette-wheel { width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(#000 0deg 18deg, #d41414 18deg 36deg, #000 36deg 54deg, #d41414 54deg 72deg, #000 72deg 90deg, #d41414 90deg 108deg, #000 108deg 126deg, #d41414 126deg 144deg, #000 144deg 162deg, #d41414 162deg 180deg, #00ff66 180deg 198deg, #d41414 198deg 216deg, #000 216deg 234deg, #d41414 234deg 252deg, #000 252deg 270deg, #d41414 270deg 288deg, #000 288deg 306deg, #d41414 306deg 324deg, #000 324deg 342deg, #d41414 342deg 360deg); border: 5px solid #ffdf00; transition: transform 3.5s cubic-bezier(0.1, 0.8, 0.1, 1); }
+        .wheel-pointer { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 18px solid #ffdf00; z-index: 5; }
+
+        /* لوحة المراهنة وتصميم الجداول */
+        .bet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; max-width: 450px; margin-bottom: 15px; }
+        .grid-btn { padding: 15px; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer; text-align: center; border: 2px solid transparent; color: #fff; }
+        .btn-red { background: #d41414; }
+        .btn-black { background: #111; border: 1px solid #333; }
+        .btn-high { background: linear-gradient(45deg, #1f113a, #351c63); }
+        .btn-low { background: linear-gradient(45deg, #351c63, #1f113a); }
+        .grid-btn.selected { border-color: #ffdf00; box-shadow: 0 0 15px #ffdf00; }
+
+        /* منطقة الأرقام الفردية للكازينو الحقيقي */
+        .number-picker { display: flex; gap: 10px; width: 100%; max-width: 450px; margin-bottom: 15px; overflow-x: auto; padding: 10px 0; }
+        .num-block { flex: 0 0 50px; height: 50px; background: #1a1528; border: 1px solid #ffdf00; display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        .num-block.selected { background: #ffdf00; color: #000; box-shadow: 0 0 10px #ffdf00; }
+
+        /* أدوات التحكم الرهان واللعب */
+        .bet-controls { width: 100%; max-width: 450px; display: flex; flex-direction: column; gap: 12px; }
+        .bet-input-style { width: 100%; padding: 14px; background: #000; border: 1px solid #00ff66; border-radius: 6px; color: #00ff66; font-size: 18px; font-weight: bold; text-align: center; outline: none; }
+        .action-btn { width: 100%; padding: 16px; background: linear-gradient(45deg, #ffdf00, #00ff66); border: none; border-radius: 6px; color: #000; font-weight: bold; font-size: 18px; cursor: pointer; transition: 0.2s; text-transform: uppercase; }
+        .action-btn:hover { box-shadow: 0 0 20px #00ff66; }
+        .console-log { text-align: center; font-size: 16px; font-weight: bold; margin-top: 15px; min-height: 24px; letter-spacing: 0.5px; }
+
+        /* كرت البلاك جاك */
+        .blackjack-zone { display: flex; justify-content: space-around; width: 100%; max-width: 450px; background: #071710; border: 2px solid #00ff66; padding: 20px; border-radius: 10px; margin-bottom: 15px; }
+        .card-score { font-size: 14px; color: #aaa; margin-bottom: 5px; }
+        .card-display { font-size: 28px; font-weight: bold; color: #fff; background: #000; padding: 10px; border-radius: 5px; min-width: 80px; text-align: center; border: 1px solid #444; }
     </style>
 </head>
 <body>
 
-    <!-- 1. شاشة تسجيل الدخول المأمنة -->
+    <!-- الشاشة الأولى: التحقق تع الدخول -->
     <div id="loginScreen">
-        <div class="login-card">
-            <h1>👑 VIP LAS VEGAS LOBBY 👑</h1>
-            <div class="input-group">
-                <input type="text" id="username" placeholder="Username (اسم المستخدم)">
-            </div>
-            <div class="input-group">
-                <input type="password" id="password" placeholder="Password (كلمة المرور)">
-            </div>
-            <button class="login-btn" onclick="checkLogin()">دخول الكازينو الملكي</button>
-            <p id="errorMsg">❌ المعلومات خاطئة! عاود ثبت روحك.</p>
+        <div class="login-box">
+            <h1>🎰 CLUB PRIVÉ LAS VEGAS 🎰</h1>
+            <input type="text" id="us" class="input-field" placeholder="CHEMS ID">
+            <input type="password" id="ps" class="input-field" placeholder="SECURITY KEY">
+            <button class="btn-enter" onclick="validate()">ACCESS CASINO FLOOR</button>
+            <p id="err">ACCESS DENIED.</p>
         </div>
     </div>
 
-    <!-- 2. شاشة الكازينو بعد الدخول -->
+    <!-- الشاشة الثانية: صالة المراهنة الحقيقية اللامتناهية -->
     <div id="casinoScreen">
-        <!-- البار العلوية للرصيد -->
-        <div class="navbar">
-            <div class="welcome-msg">اللاعب المحترف: <span id="playerNameDisplay"></span> 🎰</div>
-            <div class="balance-box">الرصيد: <span id="balanceDisplay">1,000,000</span> DA</div>
+        <div class="top-bar">
+            <div class="vip-status">VIP CLIENT: CHEMS</div>
+            <div class="live-balance"><span id="liveWallet">17,450</span> DA</div>
         </div>
 
-        <!-- ساحة اللعب الاحترافية (Slot Machine 3D Style) -->
-        <div class="main-lobby">
-            <div class="slot-machine">
-                <h2 class="slot-title">🎰 LAS VEGAS JACKPOT SLOT 🎰</h2>
-                <div class="reels-container">
-                    <div id="reel1" class="reel">🍒</div>
-                    <div id="reel2" class="reel">👑</div>
-                    <div id="reel3" class="reel">💎</div>
+        <!-- التبديل بين غرف القمار -->
+        <div class="lobby-tabs">
+            <button class="tab-btn active" onclick="switchRoom('liveRoulette')">🔴 LIVE DEALER ROOM</button>
+            <button class="tab-btn" onclick="switchRoom('speedRoulette')">⚡ SPEED ROULETTE</button>
+            <button class="tab-btn" onclick="switchRoom('blackjack')">🃏 VIP BLACKJACK</button>
+        </div>
+
+        <!-- الصالون 1: لايف روووم (المرأة والعجلة الحقيقية) -->
+        <div id="liveRoulette" class="game-stage active">
+            <div class="live-dealer-zone">
+                <!-- صورة المرأة الكروبر الاحترافية وهي تطلق الكعبورة ديريكت -->
+                <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317?auto=format&fit=crop&w=600&q=80" class="dealer-image" alt="Live Dealer">
+                <div class="dealer-bubble" id="dealerSpeech">Dealer: Place your bets, gentlemen...</div>
+                <div class="ball-animation" id="ball"></div>
+            </div>
+            <div class="wheel-box">
+                <div class="wheel-pointer"></div>
+                <div id="wheel1" class="roulette-wheel"></div>
+            </div>
+            <div class="bet-grid">
+                <button class="grid-btn btn-red" id="b_red" onclick="selectBet('red')">RED</button>
+                <button class="grid-btn btn-black" id="b_black" onclick="selectBet('black')">BLACK</button>
+            </div>
+            <div class="bet-controls">
+                <input type="number" id="amt1" class="bet-input-style" value="1000">
+                <button class="action-btn" onclick="playLiveRoulette()">LAUNCH LIVE BALL 🎡</button>
+                <div class="console-log" id="log1"></div>
+            </div>
+        </div>
+
+        <!-- الصالون 2: الرولات السريعة (بالأرقام والريسك) -->
+        <div id="speedRoulette" class="game-stage">
+            <h2 style="color: #ffdf00; margin-bottom: 15px;">SPEED NUMBER ROULETTE</h2>
+            <div class="wheel-box">
+                <div class="wheel-pointer"></div>
+                <div id="wheel2" class="roulette-wheel"></div>
+            </div>
+            <p style="margin-bottom: 10px; color:#aaa;">اختر الرقم المباشر (ربح ضخم 35 ضعف):</p>
+            <div class="number-picker">
+                <!-- جافا سكريبت يعمر الأرقام هنا تلقائياً -->
+                <script>
+                    for(let i=0; i<=20; i++) {
+                        document.write(`<div class="num-block" id="num_${i}" onclick="selectNumber(${i})">${i}</div>`);
+                    }
+                </script>
+            </div>
+            <div class="bet-controls">
+                <input type="number" id="amt2" class="bet-input-style" value="2000">
+                <button class="action-btn" onclick="playSpeedRoulette()">SPIN SPEED WHEEL ⚡</button>
+                <div class="console-log" id="log2"></div>
+            </div>
+        </div>
+
+        <!-- الصالون 3: طاولة البلاك جاك VIP -->
+        <div id="blackjack" class="game-stage">
+            <h2 style="color: #00ff66; margin-bottom: 20px;">VIP BLACKJACK TABLE</h2>
+            <div class="blackjack-zone">
+                <div>
+                    <div class="card-score">DEALER HAND:</div>
+                    <div class="card-display" id="dealerCards">??</div>
                 </div>
-                <div class="controls">
-                    <input type="number" id="betAmount" class="bet-input" value="1000" min="100">
-                    <button class="spin-btn" onclick="playSlots()">إطلاق العجلة (SPIN) 🚀</button>
+                <div>
+                    <div class="card-score">YOUR HAND:</div>
+                    <div class="card-display" id="playerCards">0</div>
                 </div>
-                <div id="gameStatus"></div>
+            </div>
+            <div class="bet-controls">
+                <input type="number" id="amt3" class="bet-input-style" value="1500">
+                <button class="action-btn" style="background: linear-gradient(45deg, #00ff66, #0099ff);" onclick="playBlackjack()">DEAL CARDS 🃏</button>
+                <div class="console-log" id="log3"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // نظام الحساب والبيانات التفاعلي بالـ JavaScript
-        let currentBalance = 1000000; // عطيناك مليون دينار جزائري كبداية تفرح بها
-        const symbols = ['🍒', '🍋', '💎', '👑', '7️⃣', '🍀'];
+        let wallet = 17450; // المبلغ الرسمي لي حددتو ديريكت
+        let currentBetType = null;
+        let currentSelectedNumber = null;
+        let lock = false;
 
-        // دالة التحقق من الحماية والـ Login ديريكت
-        function checkLogin() {
-            const userIn = document.getElementById("username").value;
-            const passIn = document.getElementById("password").value;
-            const error = document.getElementById("errorMsg");
-
-            // الشروط الصارمة لي طلبتهم بالظبط
-            if (userIn === "chems" && passIn === "84city") {
+        function validate() {
+            const u = document.getElementById("us").value;
+            const p = document.getElementById("ps").value;
+            if(u === "chems" && p === "84city") {
                 document.getElementById("loginScreen").style.display = "none";
                 document.getElementById("casinoScreen").style.display = "flex";
-                document.getElementById("playerNameDisplay").innerText = userIn.toUpperCase();
-                updateBalanceDisplay();
+                document.getElementById("liveWallet").innerText = wallet.toLocaleString();
             } else {
-                error.style.display = "block";
-                // تأثير اهتزاز خفيف عند الخطأ
-                error.style.animation = "shake 0.3s ease-in-out";
+                document.getElementById("err").style.display = "block";
             }
         }
 
-        function updateBalanceDisplay() {
-            document.getElementById("balanceDisplay").innerText = currentBalance.toLocaleString();
+        function switchRoom(roomId) {
+            document.querySelectorAll('.game-stage').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(roomId).classList.add('active');
+            event.target.classList.add('active');
         }
 
-        // ذكاء لعبة الـ Slot Machine التفاعلية
-        function playSlots() {
-            const betInput = document.getElementById("betAmount");
-            const bet = parseInt(betInput.value);
-            const status = document.getElementById("gameStatus");
+        function selectBet(type) {
+            currentBetType = type;
+            document.getElementById("b_red").classList.remove("selected");
+            document.getElementById("b_black").classList.remove("selected");
+            document.getElementById(`b_${type}`).classList.add("selected");
+        }
 
-            // التحقق من صحة الرهان
-            if (isNaN(bet) || bet <= 0) {
-                status.style.color = "#ff3333";
-                status.innerText = "❌ حط رهان حقيقي يا خويا!";
-                return;
-            }
-            if (bet > currentBalance) {
-                status.style.color = "#ff3333";
-                status.innerText = "❌ معندكش هاد الدراهم كامل في جيبك!";
-                return;
-            }
+        function selectNumber(num) {
+            currentSelectedNumber = num;
+            document.querySelectorAll('.num-block').forEach(b => b.classList.remove('selected'));
+            document.getElementById(`num_${num}`).classList.add('selected');
+        }
 
-            // خصم الرهان ديريكت من الرصيد
-            currentBalance -= bet;
-            updateBalanceDisplay();
-            status.style.color = "#fff";
-            status.innerText = "⚡ العجلة تدور دروك... تشششش";
+        /* 1. نظام الرولات المباشرة مع الكروبر */
+        function playLiveRoulette() {
+            if(lock) return;
+            if(!currentBetType) { alert("Choose RED or BLACK first!"); return; }
+            
+            const amt = parseInt(document.getElementById("amt1").value);
+            const log = document.getElementById("log1");
+            const speech = document.getElementById("dealerSpeech");
+            const ball = document.getElementById("ball");
 
-            // أنيميشن عشوائية تع الدوران باستعمال الجافاسكريبت والـ Intervals
-            let count = 0;
-            const interval = setInterval(() => {
-                document.getElementById("reel1").innerText = symbols[Math.floor(Math.random() * symbols.length)];
-                document.getElementById("reel2").innerText = symbols[Math.floor(Math.random() * symbols.length)];
-                document.getElementById("reel3").innerText = symbols[Math.floor(Math.random() * symbols.length)];
-                count++;
-                
-                if (count > 10) { // تتوقف بعد 10 لفات سريعة جداً تمتع العين
-                    clearInterval(interval);
-                    determineResult(bet);
+            if(isNaN(amt) || amt <= 0 || amt > wallet) { log.style.color="#ff3333"; log.innerText="INVALID WAITING BALANCE."; return; }
+
+            lock = true;
+            wallet -= amt;
+            document.getElementById("liveWallet").innerText = wallet.toLocaleString();
+            
+            speech.innerText = "Dealer: No more bets! Spinning the ball...";
+            ball.style.display = "block";
+            
+            const wh = document.getElementById("wheel1");
+            const deg = Math.floor(Math.random() * 360) + 2160;
+            wh.style.transform = `rotate(${deg}deg)`;
+
+            setTimeout(() => {
+                ball.style.display = "none";
+                const num = Math.floor(Math.random() * 37);
+                const isRed = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36].includes(num);
+                const winColor = num === 0 ? "green" : (isRed ? "red" : "black");
+
+                if(currentBetType === winColor) {
+                    wallet += (amt * 2);
+                    log.style.color = "#00ff66";
+                    log.innerText = `WIN! Number was ${num} (${winColor.toUpperCase()}). You won ${(amt*2).toLocaleString()} DA!`;
+                    speech.innerText = `Dealer: Winner is ${num} ${winColor.toUpperCase()}! Congratulations!`;
+                } else {
+                    log.style.color = "#ff3333";
+                    log.innerText = `LOSE! Number was ${num} (${winColor.toUpperCase()}). Lost ${amt.toLocaleString()} DA.`;
+                    speech.innerText = `Dealer: Number ${num} ${winColor.toUpperCase()}. Better luck next time.`;
                 }
-            }, 70);
+                document.getElementById("liveWallet").innerText = wallet.toLocaleString();
+                lock = false;
+            }, 3500);
         }
 
-        // حساب المربوح والخسارة الحقيقية على حساب الرموز
-        function determineResult(bet) {
-            const r1 = document.getElementById("reel1").innerText;
-            const r2 = document.getElementById("reel2").innerText;
-            const r3 = document.getElementById("reel3").innerText;
-            const status = document.getElementById("gameStatus");
+        /* 2. نظام الرولات السريعة بالأرقام الصعبة */
+        function playSpeedRoulette() {
+            if(lock) return;
+            if(currentSelectedNumber === null) { alert("Pick a single number!"); return; }
 
-            // إذا خرجولك 3 رموز كيفكيف قاع (رائعة جداً)
-            if (r1 === r2 && r2 === r3) {
-                let multiplier = 5; // تدي 5 أضعاف الرهان
-                if (r1 === '👑' || r1 === '7️⃣') multiplier = 10; // الرموز الملكية تعتيك 10 أضعاف
-                
-                const winAmount = bet * multiplier;
-                currentBalance += winAmount;
-                status.style.color = "#00ffcc";
-                status.innerText = `🎉 هباااال رابح قاوي! ديت ${winAmount.toLocaleString()} DA!`;
-            } 
-            // إذا خرجو زوز رموز برك كيفكيف (ربح صغير)
-            else if (r1 === r2 || r2 === r3 || r1 === r3) {
-                const winAmount = Math.floor(bet * 1.5);
-                currentBalance += winAmount;
-                status.style.color = "#00ffff";
-                status.innerText = `👍 مليحة! خرجوا زوز كيفكيف، رجعت ${winAmount.toLocaleString()} DA`;
-            } 
-            // خسارة
-            else {
-                status.style.color = "#ff3333";
-                status.innerText = `❌ خسرت هاد الجولة! الكازينو ديما يربح، عاود جرب زهرك.`;
-            }
+            const amt = parseInt(document.getElementById("amt2").value);
+            const log = document.getElementById("log2");
+            if(isNaN(amt) || amt <= 0 || amt > wallet) { log.innerText="BALANCE ERROR."; return; }
 
-            updateBalanceDisplay();
+            lock = true;
+            wallet -= amt;
+            document.getElementById("liveWallet").innerText = wallet.toLocaleString();
+
+            const wh = document.getElementById("wheel2");
+            const deg = Math.floor(Math.random() * 360) + 1440;
+            wh.style.transform = `rotate(${deg}deg)`;
+
+            setTimeout(() => {
+                const finalNum = Math.floor(Math.random() * 21); // النطاق السريع
+                if(currentSelectedNumber === finalNum) {
+                    const winAmt = amt * 35; // 35 ضعف الربح الصافي للرقم المباشر
+                    wallet += winAmt;
+                    log.style.color = "#ffdf00";
+                    log.innerText = `🔥 JACKPOT HIT! Number is ${finalNum}! You won ${winAmt.toLocaleString()} DA!`;
+                } else {
+                    log.style.color = "#ff3333";
+                    log.innerText = `LOSE! Speed number was ${finalNum}. Lost ${amt.toLocaleString()} DA.`;
+                }
+                document.getElementById("liveWallet").innerText = wallet.toLocaleString();
+                lock = false;
+            }, 2000);
+        }
+
+        /* 3. صالون ألعاب الورق: البلاك جاك التفاعلي */
+        function playBlackjack() {
+            if(lock) return;
+            const amt = parseInt(document.getElementById("amt3").value);
+            const log = document.getElementById("log3");
+            if(isNaN(amt) || amt <= 0 || amt > wallet) { log.innerText="BALANCE ERROR."; return; }
+
+            lock = true;
+            wallet -= amt;
+            document.getElementById("liveWallet").innerText = wallet.toLocaleString();
+
+            // حساب أوراق تفاعلية عشوائية بذكاء الآلة
+            const playerVal = Math.floor(Math.random() * 12) + 10; // 10 to 21
+            const dealerVal = Math.floor(Math.random() * 11) + 11; // 11 to 21
+
+            document.getElementById("playerCards").innerText = playerVal;
+            document.getElementById("dealerCards").innerText = dealerVal;
+
+            setTimeout(() => {
+                if(playerVal <= 21 && (playerVal > dealerVal || dealerVal > 21)) {
+                    wallet += (amt * 2);
+                    log.style.color = "#00ff66";
+                    log.innerText = `WIN BLACKJACK! You beat the dealer! Won ${(amt*2).toLocaleString()} DA!`;
+                } else if (playerVal === dealerVal) {
+                    wallet += amt; // استرجاع الرهان عند التعادل
+                    log.style.color = "#ffdf00";
+                    log.innerText = `PUSH! Tie hand. Refunded ${amt.toLocaleString()} DA.`;
+                } else {
+                    log.style.color = "#ff3333";
+                    log.innerText = `DEALER WINS! Dealer hand was stronger. Lost ${amt.toLocaleString()} DA.`;
+                }
+                document.getElementById("liveWallet").innerText = wallet.toLocaleString();
+                lock = false;
+            }, 1000);
         }
     </script>
 </body>
