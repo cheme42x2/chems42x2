@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHEMS | Transparent Void</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>CHEMS | Real Slang Void</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg-void: #020203;
-            --blood-red: #550000;
-            --neon-blood: #e60026;
-            --text-raw: #b5b5bd;
+            --blood-red: #4a0000;
+            --neon-blood: #ff002b;
+            --text-light: #ffffff;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans Arabic', sans-serif; }
 
         body {
             background-color: var(--bg-void);
-            color: var(--text-raw);
+            color: #a5a5b0;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -29,7 +28,7 @@
             overflow: hidden;
         }
 
-        /* 1. شبكة العنكبوت اللاسلكية الدامية والريسان (الجماجم) في الخلفية */
+        /* الخلفية الديناميكية: شبكة متحركة والريسان */
         #void-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -37,7 +36,7 @@
             pointer-events: none;
         }
 
-        /* 2. تأثير قطرات الدم والماء العذب من الأسفل */
+        /* قطرات الدم من التحت فوق ماء عذب */
         #water-ripples {
             position: fixed;
             bottom: 0; left: 0; width: 100%; height: 140px;
@@ -48,21 +47,20 @@
             position: absolute;
             border: 1px solid var(--blood-red);
             border-radius: 50%;
-            animation: ripple-effect 3.5s ease-out infinite;
+            animation: ripple-effect 3s ease-out infinite;
             opacity: 0;
             transform: scale(0);
         }
         @keyframes ripple-effect {
-            0% { transform: scale(0); opacity: 0.6; }
-            50% { opacity: 0.2; }
-            100% { transform: scale(4); opacity: 0; border-color: transparent; }
+            0% { transform: scale(0); opacity: 0.7; }
+            100% { transform: scale(3.5); opacity: 0; border-color: transparent; }
         }
 
-        /* 3. سقوط الأوراق الميتة من الاسم */
+        /* سقوط الأوراق الميتة من الاسم */
         .dead-leaf {
             position: absolute;
             width: 8px; height: 8px;
-            background: #2b1d1d;
+            background: #261717;
             border-radius: 0 80% 0 80%;
             opacity: 0.6;
             pointer-events: none;
@@ -70,31 +68,31 @@
             z-index: 3;
         }
         @keyframes leaf-fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
             100% { transform: translateY(85vh) rotate(360deg); opacity: 0; }
         }
 
-        /* واجهة شفافة بالكامل بدون مستطيلات سوداء مغلقة */
+        /* واجهة شفافة بالكامل تظهر الموت والدم من الخلف */
         .container {
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 480px;
-            background: transparent; /* شفافة تماماً لرؤية ما خلفها */
-            padding: 10px;
+            max-width: 460px;
+            background: transparent;
             text-align: center;
+            padding: 10px;
         }
 
-        header { margin-bottom: 30px; position: relative; }
+        header { margin-bottom: 40px; }
         
         .brand-holder { display: inline-block; position: relative; }
         .brand-name {
             font-family: 'Cinzel', serif;
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             font-weight: 900;
-            letter-spacing: 10px;
-            color: #ffffff;
-            text-shadow: 0 0 20px var(--neon-blood);
+            letter-spacing: 12px;
+            color: var(--text-light);
+            text-shadow: 0 0 25px var(--neon-blood);
         }
 
         .status-msg {
@@ -103,46 +101,46 @@
             letter-spacing: 2px;
             margin-top: 5px;
             font-weight: bold;
-            opacity: 0.8;
         }
 
-        /* حقول نصية شفافة تماماً تظهر الخلفية */
+        /* حقول نصية شفافة مخفية المستطيلات تماماً */
         textarea {
             width: 100%;
-            height: 100px;
+            height: 90px;
             background: transparent;
             border: none;
-            border-bottom: 1px solid rgba(230, 0, 38, 0.2);
+            border-bottom: 1px solid rgba(255, 0, 43, 0.15);
             padding: 10px 0;
-            color: #ffffff;
-            font-size: 1.1rem;
+            color: var(--text-light);
+            font-size: 1.2rem;
             resize: none;
             outline: none;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             text-align: center;
             transition: border-color 0.3s;
         }
         textarea:focus { border-bottom-color: var(--neon-blood); }
 
-        /* مخرجات بحروف صغيرة وبدون رموز */
+        /* مخرجات صافية بحروف صغيرة بدون نقاط وفواصل */
         .output-box {
             color: var(--neon-blood);
             font-family: 'Courier New', monospace;
             font-weight: bold;
-            font-size: 1.15rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
         }
 
         .action-row {
             display: flex;
             justify-content: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .copy-btn {
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.4);
-            padding: 6px 16px;
+            padding: 6px 18px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 0.75rem;
@@ -154,7 +152,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
             background: transparent;
             border: 1px solid var(--neon-blood);
             color: #fff;
@@ -166,22 +163,21 @@
             font-size: 0.9rem;
             transition: 0.3s;
         }
-        .tiktok-btn:hover { background: rgba(230, 0, 38, 0.15); box-shadow: 0 0 15px var(--neon-blood); }
+        .tiktok-btn:hover { background: rgba(255, 0, 43, 0.15); box-shadow: 0 0 15px var(--neon-blood); }
 
         .footer-note {
             text-align: center;
             font-size: 0.6rem;
-            color: rgba(255,255,255,0.1);
-            margin-top: 30px;
+            color: rgba(255,255,255,0.08);
+            margin-top: 40px;
             letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
 
-    <!-- الكانفاس الحركي: شبكة عنكبوت متحركة والريسان (الجماجم) -->
+    <!-- السحر البصري الخلفي: ريسان وشبكة لاسلكية دامية -->
     <canvas id="void-canvas"></canvas>
-    <!-- قطرات في الماء العذب من التحت -->
     <div id="water-ripples"></div>
 
     <div class="container">
@@ -192,11 +188,11 @@
             <div class="status-msg">سِيرفرْ مَغْمُومْ تَرْجَمَة حُرَّة</div>
         </header>
 
-        <textarea id="src-text" placeholder="اكتب هنا..."></textarea>
+        <textarea id="src-text" placeholder="اكتب هنا شمس..."></textarea>
         <textarea id="res-text" class="output-box" readonly placeholder="slang output"></textarea>
 
         <div class="action-row">
-            <button class="copy-btn" onclick="copyText()"><i class="fa-regular fa-copy"></i> نسخ</button>
+            <button class="copy-btn" onclick="copyText()">نسخ الترجمة</button>
         </div>
 
         <a href="https://www.tiktok.com" target="_blank" class="tiktok-btn">
@@ -209,26 +205,59 @@
     </div>
 
     <script>
-        // قاموس يعطي ترجمة شوارع نقية (حروف صغيرة، بدون نقاط، وبدون فواصل)
-        const gangstaSlangPool = [
-            "deadass pack your stuff and back out the block is code red",
-            "spin the block on them opps we dont talk to feds out here",
-            "get ya heavy racks up u straight trippin shorty",
-            "posted up in the dark trenches twelve is hot on our neck",
-            "word to my day ones u a sucker and a cop out for real",
-            "stop yappin heavy before we empty the clip on ya block"
-        ];
+        // قاموس حقيقي شامل لتفكيك وترجمة الكلمات حبة حبة إلى لغة عصابات الـ Bronx
+        const slangDictionary = {
+            "شيطان": "demon",
+            "اما": "what a",
+            "روح": "slide out",
+            "نيك": "f*ck",
+            "امك": "yo momma",
+            "خويا": "my slime",
+            "صاحبي": "my homie",
+            "دراهم": "racks",
+            "دراهمك": "your bands",
+            "بوليس": "twelve",
+            "البوليس": "the feds",
+            "حبس": "quit",
+            "تمسخير": "playin",
+            "التمينك": "trippin",
+            "حومة": "block",
+            "الحومة": "the trenches",
+            "انا": "yo boy",
+            "انت": "u",
+            "واش": "what is",
+            "كاين": "poppin",
+            "امشي": "dip",
+            "هرب": "skate out",
+            "مكاش": "no shot",
+            "صح": "deadass",
+            "هدرة": "yappin",
+            "كلش": "everything"
+        };
 
         const srcText = document.getElementById('src-text');
         const resText = document.getElementById('res-text');
 
         srcText.addEventListener('input', () => {
-            let val = srcText.value.trim();
-            if(!val) { resText.value = ''; return; }
+            let inputVal = srcText.value.trim();
+            if(!inputVal) { resText.value = ''; return; }
+
+            // تنظيف النص بالكامل من أي نقاط أو فواصل أوتوماتيكياً
+            let cleanInput = inputVal.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()؟?]/g,"");
+            let words = cleanInput.split(/\s+/);
             
-            let index = val.length % gangstaSlangPool.length;
-            // إخراج الترجمة خام ومباشرة بحروف صغيرة تماماً
-            resText.value = gangstaSlangPool[index].toLowerCase();
+            let translatedWords = words.map(word => {
+                let lowerWord = word.toLowerCase();
+                if (slangDictionary[lowerWord]) {
+                    return slangDictionary[lowerWord];
+                }
+                // إذا الكلمة جديدة، يحولها لـ سياق شوارع مدمج بدلاً من جمل عشوائية
+                return word.replace(/[أإاىي]/g, "e").replace(/[و]/g, "o") + " blocka";
+            });
+
+            // دمج الكلمات صافية تماماً: حروف صغيرة، بدون أي فواصل أو نقاط
+            let finalOutput = translatedWords.join(" ").toLowerCase();
+            resText.value = finalOutput;
         });
 
         function copyText() {
@@ -237,7 +266,7 @@
             document.execCommand('copy');
         }
 
-        // --- محرك الخلفية: شبكة عنكبوت لاسلكية وجماجم متحركة تدل على الموت ---
+        // --- محرك الخلفية: شبكة عنكبوت لاسلكية وجماجم (ريسان) متحركة ---
         const canvas = document.getElementById('void-canvas');
         const ctx = canvas.getContext('2d');
         let points = [];
@@ -252,24 +281,24 @@
         function initElements() {
             points = [];
             skulls = [];
-            // إنشاء نقاط الشبكة العنكبوتية اللاسلكية
-            for(let i=0; i<25; i++) {
+            // نقاط شبكة العنكبوت
+            for(let i=0; i<28; i++) {
                 points.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.4,
-                    vy: (Math.random() - 0.5) * 0.4
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
                 });
             }
-            // إنشاء ريسان (جماجم ميتة) عائمة في الفراغ الخلفي للشبكة
-            for(let i=0; i<4; i++) {
+            // ريسان (جماجم الموت المغمومة)
+            for(let i=0; i<5; i++) {
                 skulls.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    size: Math.random() * 12 + 8,
-                    opacity: Math.random() * 0.15 + 0.05,
-                    vx: (Math.random() - 0.5) * 0.2,
-                    vy: (Math.random() - 0.5) * 0.2
+                    size: Math.random() * 14 + 10,
+                    opacity: Math.random() * 0.18 + 0.05,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3
                 });
             }
         }
@@ -277,23 +306,21 @@
         function drawScene() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // 1. رسم الريسان (الجماجم البدائية بالـ Canvas البصري)
+            // رسم الريسان في العمق الخلفي
             skulls.forEach(s => {
                 s.x += s.vx; s.y += s.vy;
                 if(s.x < 0 || s.x > canvas.width) s.vx *= -1;
                 if(s.y < 0 || s.y > canvas.height) s.vy *= -1;
                 
-                ctx.fillStyle = `rgba(230, 0, 38, ${s.opacity})`;
+                ctx.fillStyle = `rgba(180, 0, 30, ${s.opacity})`;
                 ctx.beginPath();
-                // الرأس الرئيسي
                 ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
                 ctx.fill();
-                // الفك السفلي للجمجمة
-                ctx.fillRect(s.x - s.size/2, s.y + s.size/3, s.size, s.size/1.5);
+                ctx.fillRect(s.x - s.size/2, s.y + s.size/3, s.size, s.size/1.4);
             });
 
-            // 2. رسم خطوط شبكة العنكبوت اللاسلكية (تقطر بالدم بلون خافت جداً)
-            ctx.strokeStyle = 'rgba(85, 0, 0, 0.3)';
+            // رسم خطوط الشبكة اللاسلكية الدامية
+            ctx.strokeStyle = 'rgba(70, 0, 10, 0.35)';
             ctx.lineWidth = 1;
             for(let i=0; i<points.length; i++) {
                 let p = points[i];
@@ -304,7 +331,7 @@
                 for(let j=i+1; j<points.length; j++) {
                     let p2 = points[j];
                     let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-                    if(dist < 160) {
+                    if(dist < 150) {
                         ctx.beginPath();
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);
@@ -318,7 +345,7 @@
         resizeCanvas();
         drawScene();
 
-        // --- أنيميشن: سقوط الأوراق الميتة من الاسم CHEMS مباشرة ---
+        // سقوط الأوراق الميتة من تحت حروف CHEMS مباشرة
         function spawnLeaves() {
             const titleRect = document.getElementById('chems-title').getBoundingClientRect();
             setInterval(() => {
@@ -326,31 +353,30 @@
                 leaf.classList.add('dead-leaf');
                 leaf.style.left = (titleRect.left + Math.random() * titleRect.width) + 'px';
                 leaf.style.top = titleRect.bottom + 'px';
-                leaf.style.animationDuration = (Math.random() * 5 + 4) + 's';
+                leaf.style.animationDuration = (Math.random() * 4 + 4) + 's';
                 leaf.style.transform = `scale(${Math.random() * 0.6 + 0.4})`;
                 document.body.appendChild(leaf);
-                
                 setTimeout(() => leaf.remove(), 7000);
             }, 500);
         }
-        setTimeout(spawnLeaves, 400);
+        setTimeout(spawnLeaves, 300);
 
-        // --- أنيميشن: قطرات الدم فوق الماء العذب (Ripple Effect) ---
+        // تأثير قطرات الماء العذب من الأسفل
         const rippleContainer = document.getElementById('water-ripples');
         setInterval(() => {
             let ripple = document.createElement('div');
             ripple.classList.add('ripple');
             ripple.style.left = Math.random() * 100 + 'vw';
-            ripple.style.bottom = Math.random() * 40 + 'px';
-            let size = Math.random() * 25 + 15;
+            ripple.style.bottom = Math.random() * 30 + 'px';
+            let size = Math.random() * 20 + 15;
             ripple.style.width = size + 'px';
             ripple.style.height = size + 'px';
             ripple.style.marginLeft = -(size/2) + 'px';
             ripple.style.marginBottom = -(size/2) + 'px';
             
             rippleContainer.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 3500);
-        }, 900);
+            setTimeout(() => ripple.remove(), 3000);
+        }, 950);
     </script>
 </body>
 </html>
