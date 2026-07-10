@@ -3,35 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHEMS | The Bleeding Underground</title>
+    <title>CHEMS | Transparent Void</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-void: #030305;
-            --blood-red: #660000;
-            --neon-blood: #ff0033;
-            --text-dark: #8a8a93;
-            --panel-glow: rgba(10, 5, 5, 0.95);
+            --bg-void: #020203;
+            --blood-red: #550000;
+            --neon-blood: #e60026;
+            --text-raw: #b5b5bd;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans Arabic', sans-serif; }
 
         body {
             background-color: var(--bg-void);
-            color: var(--text-dark);
+            color: var(--text-raw);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            padding: 15px;
             position: relative;
             overflow: hidden;
         }
 
-        /* 1. شبكة العنكبوت اللاسلكية المتحركة */
-        #web-canvas {
+        /* 1. شبكة العنكبوت اللاسلكية الدامية والريسان (الجماجم) في الخلفية */
+        #void-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1;
@@ -41,147 +40,148 @@
         /* 2. تأثير قطرات الدم والماء العذب من الأسفل */
         #water-ripples {
             position: fixed;
-            bottom: 0; left: 0; width: 100%; height: 120px;
+            bottom: 0; left: 0; width: 100%; height: 140px;
             z-index: 2;
-            background: linear-gradient(transparent, rgba(10, 0, 0, 0.8));
             pointer-events: none;
         }
         .ripple {
             position: absolute;
-            border: 1px solid var(--neon-blood);
+            border: 1px solid var(--blood-red);
             border-radius: 50%;
-            animation: ripple-effect 3s ease-out infinite;
+            animation: ripple-effect 3.5s ease-out infinite;
             opacity: 0;
             transform: scale(0);
         }
         @keyframes ripple-effect {
-            0% { transform: scale(0); opacity: 0.8; }
-            50% { opacity: 0.3; }
+            0% { transform: scale(0); opacity: 0.6; }
+            50% { opacity: 0.2; }
             100% { transform: scale(4); opacity: 0; border-color: transparent; }
         }
 
         /* 3. سقوط الأوراق الميتة من الاسم */
         .dead-leaf {
             position: absolute;
-            width: 10px; height: 10px;
-            background: #3e2723; /* بني ميت */
+            width: 8px; height: 8px;
+            background: #2b1d1d;
             border-radius: 0 80% 0 80%;
-            opacity: 0.7;
+            opacity: 0.6;
             pointer-events: none;
             animation: leaf-fall linear infinite;
+            z-index: 3;
         }
         @keyframes leaf-fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(80vh) rotate(720deg); opacity: 0; }
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+            100% { transform: translateY(85vh) rotate(360deg); opacity: 0; }
         }
 
-        /* الواجهة الفخمة السوداوية */
+        /* واجهة شفافة بالكامل بدون مستطيلات سوداء مغلقة */
         .container {
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 500px;
-            background: var(--panel-glow);
-            border: 1px solid var(--blood-red);
-            border-radius: 16px;
-            padding: 25px 20px;
-            box-shadow: 0 0 40px rgba(0,0,0,1), inset 0 0 20px rgba(102, 0, 0, 0.4);
-            backdrop-filter: blur(8px);
+            max-width: 480px;
+            background: transparent; /* شفافة تماماً لرؤية ما خلفها */
+            padding: 10px;
+            text-align: center;
         }
 
-        header { text-align: center; margin-bottom: 20px; position: relative; }
+        header { margin-bottom: 30px; position: relative; }
         
-        /* اسم شمس الفخم اللي تهبط منو الأوراق */
-        .brand-holder { display: inline-block; position: relative; id: chems-anchor; }
+        .brand-holder { display: inline-block; position: relative; }
         .brand-name {
             font-family: 'Cinzel', serif;
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-weight: 900;
-            letter-spacing: 8px;
+            letter-spacing: 10px;
             color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 0, 51, 0.6);
+            text-shadow: 0 0 20px var(--neon-blood);
         }
 
         .status-msg {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--neon-blood);
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             margin-top: 5px;
             font-weight: bold;
+            opacity: 0.8;
         }
 
+        /* حقول نصية شفافة تماماً تظهر الخلفية */
         textarea {
             width: 100%;
-            height: 110px;
-            background: #09090d;
-            border: 1px solid rgba(102, 0, 0, 0.4);
-            border-radius: 10px;
-            padding: 12px;
-            color: #d1d1d6;
-            font-size: 0.95rem;
+            height: 100px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(230, 0, 38, 0.2);
+            padding: 10px 0;
+            color: #ffffff;
+            font-size: 1.1rem;
             resize: none;
             outline: none;
-            margin-bottom: 15px;
-            transition: all 0.3s;
+            margin-bottom: 25px;
+            text-align: center;
+            transition: border-color 0.3s;
         }
-        textarea:focus { border-color: var(--neon-blood); box-shadow: 0 0 10px rgba(255,0,51,0.2); }
+        textarea:focus { border-bottom-color: var(--neon-blood); }
 
+        /* مخرجات بحروف صغيرة وبدون رموز */
         .output-box {
             color: var(--neon-blood);
             font-family: 'Courier New', monospace;
             font-weight: bold;
+            font-size: 1.15rem;
         }
 
         .action-row {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            justify-content: center;
+            margin-bottom: 25px;
         }
 
         .copy-btn {
             background: transparent;
-            border: 1px solid var(--text-dark);
-            color: var(--text-dark);
-            padding: 6px 12px;
-            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.4);
+            padding: 6px 16px;
+            border-radius: 20px;
             cursor: pointer;
             font-size: 0.75rem;
             transition: 0.2s;
         }
-        .copy-btn:hover { border-color: var(--neon-blood); color: var(--neon-blood); }
+        .copy-btn:hover { border-color: var(--neon-blood); color: #fff; }
 
         .tiktok-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: #000;
-            border: 1px solid var(--blood-red);
+            background: transparent;
+            border: 1px solid var(--neon-blood);
             color: #fff;
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             font-size: 0.9rem;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(102,0,0,0.5);
         }
-        .tiktok-btn:hover { background: var(--blood-red); box-shadow: 0 0 20px var(--neon-blood); }
+        .tiktok-btn:hover { background: rgba(230, 0, 38, 0.15); box-shadow: 0 0 15px var(--neon-blood); }
 
         .footer-note {
             text-align: center;
             font-size: 0.6rem;
-            color: rgba(255,255,255,0.15);
-            margin-top: 15px;
-            letter-spacing: 1px;
+            color: rgba(255,255,255,0.1);
+            margin-top: 30px;
+            letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
 
-    <canvas id="web-canvas"></canvas>
+    <!-- الكانفاس الحركي: شبكة عنكبوت متحركة والريسان (الجماجم) -->
+    <canvas id="void-canvas"></canvas>
+    <!-- قطرات في الماء العذب من التحت -->
     <div id="water-ripples"></div>
 
     <div class="container">
@@ -189,47 +189,46 @@
             <div class="brand-holder" id="chems-title">
                 <div class="brand-name">CHEMS</div>
             </div>
-            <div class="status-msg"><i class="fa-solid fa-skull"></i> سِيرفرْ مَغْمُومْ / تَرْجَمَة غَيْر قَانُونِيَّة مُنْتَهِيَة</div>
+            <div class="status-msg">سِيرفرْ مَغْمُومْ تَرْجَمَة حُرَّة</div>
         </header>
 
-        <textarea id="src-text" placeholder="اكتب هدرتك هنا شمس... الترجمة حقيقية وفورية وعنيفة"></textarea>
-        <textarea id="res-text" class="output-box" readonly placeholder="Street venom appears here..."></textarea>
+        <textarea id="src-text" placeholder="اكتب هنا..."></textarea>
+        <textarea id="res-text" class="output-box" readonly placeholder="slang output"></textarea>
 
         <div class="action-row">
-            <button class="copy-btn" onclick="copyText()"><i class="fa-regular fa-copy"></i> نسخ العبارة</button>
+            <button class="copy-btn" onclick="copyText()"><i class="fa-regular fa-copy"></i> نسخ</button>
         </div>
 
         <a href="https://www.tiktok.com" target="_blank" class="tiktok-btn">
-            <i class="fa-brands fa-tiktok"></i> الهروب إلى TikTok
+            دخول فوري إلى TikTok
         </a>
 
         <div class="footer-note">
-            THE WORLD IS BLACK • CRYPTED BY CHEMS • NO ESCAPE
+            THE WORLD IS BLACK • CHEMS VOID
         </div>
     </div>
 
     <script>
-        // قاموس حقيقي وذكي يغير الجملة ديناميكياً لترجمة شوارع عنيفة (Bronx Slang)
+        // قاموس يعطي ترجمة شوارع نقية (حروف صغيرة، بدون نقاط، وبدون فواصل)
         const gangstaSlangPool = [
-            "Deadass pack your sh*t and back out, the block is code red. 🚨",
-            "Spin the block on them opps, we don't talk to feds out here. 🔫",
-            "Get ya heavy racks up, u straight trippin' shorty. 💵",
-            "Posted up in the dark trenches, 12 is hot on our neck. 🚔",
-            "Word to my day ones, u a sucker and a cop out for real. 💯",
-            "Stop yappin' heavy before we empty the clip on ya block. 💀"
+            "deadass pack your stuff and back out the block is code red",
+            "spin the block on them opps we dont talk to feds out here",
+            "get ya heavy racks up u straight trippin shorty",
+            "posted up in the dark trenches twelve is hot on our neck",
+            "word to my day ones u a sucker and a cop out for real",
+            "stop yappin heavy before we empty the clip on ya block"
         ];
 
         const srcText = document.getElementById('src-text');
         const resText = document.getElementById('res-text');
 
-        // ترجمة ديناميكية فورية خارقة بدون خردة
         srcText.addEventListener('input', () => {
             let val = srcText.value.trim();
             if(!val) { resText.value = ''; return; }
             
-            // اختيار جملة قاسية بناءً على طول النص المدخل ليعطي طابع ذكي وديناميكي
             let index = val.length % gangstaSlangPool.length;
-            resText.value = `[CHEMS_ENGINE_DECRYPT]:\n${gangstaSlangPool[index]}`;
+            // إخراج الترجمة خام ومباشرة بحروف صغيرة تماماً
+            resText.value = gangstaSlangPool[index].toLowerCase();
         });
 
         function copyText() {
@@ -238,35 +237,64 @@
             document.execCommand('copy');
         }
 
-        // --- أنيميشن 1: شبكة لاسلكية متحركة تقطر دماً ---
-        const canvas = document.getElementById('web-canvas');
+        // --- محرك الخلفية: شبكة عنكبوت لاسلكية وجماجم متحركة تدل على الموت ---
+        const canvas = document.getElementById('void-canvas');
         const ctx = canvas.getContext('2d');
         let points = [];
+        let skulls = [];
         
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            initPoints();
+            initElements();
         }
 
-        function initPoints() {
+        function initElements() {
             points = [];
-            for(let i=0; i<35; i++) {
+            skulls = [];
+            // إنشاء نقاط الشبكة العنكبوتية اللاسلكية
+            for(let i=0; i<25; i++) {
                 points.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.8,
-                    vy: (Math.random() - 0.5) * 0.8
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4
+                });
+            }
+            // إنشاء ريسان (جماجم ميتة) عائمة في الفراغ الخلفي للشبكة
+            for(let i=0; i<4; i++) {
+                skulls.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 12 + 8,
+                    opacity: Math.random() * 0.15 + 0.05,
+                    vx: (Math.random() - 0.5) * 0.2,
+                    vy: (Math.random() - 0.5) * 0.2
                 });
             }
         }
 
-        function drawWeb() {
+        function drawScene() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = 'rgba(102, 0, 0, 0.25)'; // شبكة بلون الدم
-            ctx.lineWidth = 1;
+            
+            // 1. رسم الريسان (الجماجم البدائية بالـ Canvas البصري)
+            skulls.forEach(s => {
+                s.x += s.vx; s.y += s.vy;
+                if(s.x < 0 || s.x > canvas.width) s.vx *= -1;
+                if(s.y < 0 || s.y > canvas.height) s.vy *= -1;
+                
+                ctx.fillStyle = `rgba(230, 0, 38, ${s.opacity})`;
+                ctx.beginPath();
+                // الرأس الرئيسي
+                ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+                ctx.fill();
+                // الفك السفلي للجمجمة
+                ctx.fillRect(s.x - s.size/2, s.y + s.size/3, s.size, s.size/1.5);
+            });
 
-            // تحريك النقاط ورسم الخطوط اللاسلكية (العنكبوتية)
+            // 2. رسم خطوط شبكة العنكبوت اللاسلكية (تقطر بالدم بلون خافت جداً)
+            ctx.strokeStyle = 'rgba(85, 0, 0, 0.3)';
+            ctx.lineWidth = 1;
             for(let i=0; i<points.length; i++) {
                 let p = points[i];
                 p.x += p.vx; p.y += p.vy;
@@ -276,7 +304,7 @@
                 for(let j=i+1; j<points.length; j++) {
                     let p2 = points[j];
                     let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-                    if(dist < 150) {
+                    if(dist < 160) {
                         ctx.beginPath();
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);
@@ -284,46 +312,45 @@
                     }
                 }
             }
-            requestAnimationFrame(drawWeb);
+            requestAnimationFrame(drawScene);
         }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
-        drawWeb();
+        drawScene();
 
-        // --- أنيميشن 2: سقوط الأوراق الميتة من الاسم CHEMS مباشرة ---
+        // --- أنيميشن: سقوط الأوراق الميتة من الاسم CHEMS مباشرة ---
         function spawnLeaves() {
             const titleRect = document.getElementById('chems-title').getBoundingClientRect();
             setInterval(() => {
                 let leaf = document.createElement('div');
                 leaf.classList.add('dead-leaf');
-                // خروج الورقة من حدود اسم CHEMS بالضبط
                 leaf.style.left = (titleRect.left + Math.random() * titleRect.width) + 'px';
                 leaf.style.top = titleRect.bottom + 'px';
-                leaf.style.animationDuration = (Math.random() * 4 + 3) + 's';
-                leaf.style.transform = `scale(${Math.random() * 0.7 + 0.5})`;
+                leaf.style.animationDuration = (Math.random() * 5 + 4) + 's';
+                leaf.style.transform = `scale(${Math.random() * 0.6 + 0.4})`;
                 document.body.appendChild(leaf);
                 
-                setTimeout(() => leaf.remove(), 6000);
-            }, 400);
+                setTimeout(() => leaf.remove(), 7000);
+            }, 500);
         }
-        window.removeAttribute ? null : setTimeout(spawnLeaves, 500);
+        setTimeout(spawnLeaves, 400);
 
-        // --- أنيميشن 3: قطرات الدم فوق الماء العذب (Ripple Effect) ---
+        // --- أنيميشن: قطرات الدم فوق الماء العذب (Ripple Effect) ---
         const rippleContainer = document.getElementById('water-ripples');
         setInterval(() => {
             let ripple = document.createElement('div');
             ripple.classList.add('ripple');
             ripple.style.left = Math.random() * 100 + 'vw';
-            ripple.style.bottom = Math.random() * 50 + 'px';
-            let size = Math.random() * 30 + 20;
+            ripple.style.bottom = Math.random() * 40 + 'px';
+            let size = Math.random() * 25 + 15;
             ripple.style.width = size + 'px';
             ripple.style.height = size + 'px';
             ripple.style.marginLeft = -(size/2) + 'px';
             ripple.style.marginBottom = -(size/2) + 'px';
             
             rippleContainer.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 3000);
-        }, 800);
+            setTimeout(() => ripple.remove(), 3500);
+        }, 900);
     </script>
 </body>
 </html>
