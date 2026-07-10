@@ -1,382 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHEMS | Real Slang Void</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-void: #020203;
-            --blood-red: #4a0000;
-            --neon-blood: #ff002b;
-            --text-light: #ffffff;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans Arabic', sans-serif; }
-
-        body {
-            background-color: var(--bg-void);
-            color: #a5a5b0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* الخلفية الديناميكية: شبكة متحركة والريسان */
-        #void-canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* قطرات الدم من التحت فوق ماء عذب */
-        #water-ripples {
-            position: fixed;
-            bottom: 0; left: 0; width: 100%; height: 140px;
-            z-index: 2;
-            pointer-events: none;
-        }
-        .ripple {
-            position: absolute;
-            border: 1px solid var(--blood-red);
-            border-radius: 50%;
-            animation: ripple-effect 3s ease-out infinite;
-            opacity: 0;
-            transform: scale(0);
-        }
-        @keyframes ripple-effect {
-            0% { transform: scale(0); opacity: 0.7; }
-            100% { transform: scale(3.5); opacity: 0; border-color: transparent; }
-        }
-
-        /* سقوط الأوراق الميتة من الاسم */
-        .dead-leaf {
-            position: absolute;
-            width: 8px; height: 8px;
-            background: #261717;
-            border-radius: 0 80% 0 80%;
-            opacity: 0.6;
-            pointer-events: none;
-            animation: leaf-fall linear infinite;
-            z-index: 3;
-        }
-        @keyframes leaf-fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(85vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* واجهة شفافة بالكامل تظهر الموت والدم من الخلف */
-        .container {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 460px;
-            background: transparent;
-            text-align: center;
-            padding: 10px;
-        }
-
-        header { margin-bottom: 40px; }
-        
-        .brand-holder { display: inline-block; position: relative; }
-        .brand-name {
-            font-family: 'Cinzel', serif;
-            font-size: 3.5rem;
-            font-weight: 900;
-            letter-spacing: 12px;
-            color: var(--text-light);
-            text-shadow: 0 0 25px var(--neon-blood);
-        }
-
-        .status-msg {
-            font-size: 0.75rem;
-            color: var(--neon-blood);
-            letter-spacing: 2px;
-            margin-top: 5px;
-            font-weight: bold;
-        }
-
-        /* حقول نصية شفافة مخفية المستطيلات تماماً */
-        textarea {
-            width: 100%;
-            height: 90px;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(255, 0, 43, 0.15);
-            padding: 10px 0;
-            color: var(--text-light);
-            font-size: 1.2rem;
-            resize: none;
-            outline: none;
-            margin-bottom: 30px;
-            text-align: center;
-            transition: border-color 0.3s;
-        }
-        textarea:focus { border-bottom-color: var(--neon-blood); }
-
-        /* مخرجات صافية بحروف صغيرة بدون نقاط وفواصل */
-        .output-box {
-            color: var(--neon-blood);
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            font-size: 1.2rem;
-            letter-spacing: 0.5px;
-        }
-
-        .action-row {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .copy-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.4);
-            padding: 6px 18px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            transition: 0.2s;
-        }
-        .copy-btn:hover { border-color: var(--neon-blood); color: #fff; }
-
-        .tiktok-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            border: 1px solid var(--neon-blood);
-            color: #fff;
-            width: 100%;
-            padding: 14px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-        .tiktok-btn:hover { background: rgba(255, 0, 43, 0.15); box-shadow: 0 0 15px var(--neon-blood); }
-
-        .footer-note {
-            text-align: center;
-            font-size: 0.6rem;
-            color: rgba(255,255,255,0.08);
-            margin-top: 40px;
-            letter-spacing: 2px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>تجربة HTML</title>
+  <style>
+    :root { --bg: #0f172a; --card: #111827; --accent: #38bdf8; --text: #e5e7eb; }
+    body {
+      margin: 0; min-height: 100vh; display: grid; place-items: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b 50%, #111827);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+    }
+    .card {
+      width: min(720px, calc(100vw - 32px));
+      background: rgba(17, 24, 39, 0.88);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(8px);
+    }
+    h1 { margin: 0 0 12px; font-size: clamp(2rem, 5vw, 3.5rem); }
+    p { margin: 0 0 20px; line-height: 1.9; font-size: 1.05rem; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      appearance: none; border: 0; cursor: pointer;
+      background: var(--accent); color: #082f49;
+      padding: 12px 18px; border-radius: 999px; font-weight: 700;
+      transition: transform .15s ease, box-shadow .15s ease;
+      box-shadow: 0 10px 24px rgba(56, 189, 248, 0.25);
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .pill {
+      border: 1px solid rgba(229, 231, 235, 0.15);
+      padding: 12px 18px; border-radius: 999px; color: #cbd5e1;
+    }
+    .footer { margin-top: 22px; font-size: .92rem; color: #94a3b8; }
+    code { color: #67e8f9; }
+  </style>
 </head>
 <body>
-
-    <!-- السحر البصري الخلفي: ريسان وشبكة لاسلكية دامية -->
-    <canvas id="void-canvas"></canvas>
-    <div id="water-ripples"></div>
-
-    <div class="container">
-        <header>
-            <div class="brand-holder" id="chems-title">
-                <div class="brand-name">CHEMS</div>
-            </div>
-            <div class="status-msg">سِيرفرْ مَغْمُومْ تَرْجَمَة حُرَّة</div>
-        </header>
-
-        <textarea id="src-text" placeholder="اكتب هنا شمس..."></textarea>
-        <textarea id="res-text" class="output-box" readonly placeholder="slang output"></textarea>
-
-        <div class="action-row">
-            <button class="copy-btn" onclick="copyText()">نسخ الترجمة</button>
-        </div>
-
-        <a href="https://www.tiktok.com" target="_blank" class="tiktok-btn">
-            دخول فوري إلى TikTok
-        </a>
-
-        <div class="footer-note">
-            THE WORLD IS BLACK • CHEMS VOID
-        </div>
+  <main class="card">
+    <h1>سلام خويا 👋</h1>
+    <p>هذا مثال <strong>HTML</strong> بسيط فيه تصميم، زر، وتفاعل صغير باش تبان الخدمة مليحة وماشي غير صفحة خاوية.</p>
+    <div class="row">
+      <button class="btn" onclick="document.getElementById('msg').textContent='هاك شفت؟ الكود يخدم ✅'">جرّبني</button>
+      <div class="pill" id="msg">اضغط على الزر باش تبدل الرسالة.</div>
     </div>
-
-    <script>
-        // قاموس حقيقي شامل لتفكيك وترجمة الكلمات حبة حبة إلى لغة عصابات الـ Bronx
-        const slangDictionary = {
-            "شيطان": "demon",
-            "اما": "what a",
-            "روح": "slide out",
-            "نيك": "f*ck",
-            "امك": "yo momma",
-            "خويا": "my slime",
-            "صاحبي": "my homie",
-            "دراهم": "racks",
-            "دراهمك": "your bands",
-            "بوليس": "twelve",
-            "البوليس": "the feds",
-            "حبس": "quit",
-            "تمسخير": "playin",
-            "التمينك": "trippin",
-            "حومة": "block",
-            "الحومة": "the trenches",
-            "انا": "yo boy",
-            "انت": "u",
-            "واش": "what is",
-            "كاين": "poppin",
-            "امشي": "dip",
-            "هرب": "skate out",
-            "مكاش": "no shot",
-            "صح": "deadass",
-            "هدرة": "yappin",
-            "كلش": "everything"
-        };
-
-        const srcText = document.getElementById('src-text');
-        const resText = document.getElementById('res-text');
-
-        srcText.addEventListener('input', () => {
-            let inputVal = srcText.value.trim();
-            if(!inputVal) { resText.value = ''; return; }
-
-            // تنظيف النص بالكامل من أي نقاط أو فواصل أوتوماتيكياً
-            let cleanInput = inputVal.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()؟?]/g,"");
-            let words = cleanInput.split(/\s+/);
-            
-            let translatedWords = words.map(word => {
-                let lowerWord = word.toLowerCase();
-                if (slangDictionary[lowerWord]) {
-                    return slangDictionary[lowerWord];
-                }
-                // إذا الكلمة جديدة، يحولها لـ سياق شوارع مدمج بدلاً من جمل عشوائية
-                return word.replace(/[أإاىي]/g, "e").replace(/[و]/g, "o") + " blocka";
-            });
-
-            // دمج الكلمات صافية تماماً: حروف صغيرة، بدون أي فواصل أو نقاط
-            let finalOutput = translatedWords.join(" ").toLowerCase();
-            resText.value = finalOutput;
-        });
-
-        function copyText() {
-            if(!resText.value) return;
-            resText.select();
-            document.execCommand('copy');
-        }
-
-        // --- محرك الخلفية: شبكة عنكبوت لاسلكية وجماجم (ريسان) متحركة ---
-        const canvas = document.getElementById('void-canvas');
-        const ctx = canvas.getContext('2d');
-        let points = [];
-        let skulls = [];
-        
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initElements();
-        }
-
-        function initElements() {
-            points = [];
-            skulls = [];
-            // نقاط شبكة العنكبوت
-            for(let i=0; i<28; i++) {
-                points.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5
-                });
-            }
-            // ريسان (جماجم الموت المغمومة)
-            for(let i=0; i<5; i++) {
-                skulls.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 14 + 10,
-                    opacity: Math.random() * 0.18 + 0.05,
-                    vx: (Math.random() - 0.5) * 0.3,
-                    vy: (Math.random() - 0.5) * 0.3
-                });
-            }
-        }
-
-        function drawScene() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // رسم الريسان في العمق الخلفي
-            skulls.forEach(s => {
-                s.x += s.vx; s.y += s.vy;
-                if(s.x < 0 || s.x > canvas.width) s.vx *= -1;
-                if(s.y < 0 || s.y > canvas.height) s.vy *= -1;
-                
-                ctx.fillStyle = `rgba(180, 0, 30, ${s.opacity})`;
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.fillRect(s.x - s.size/2, s.y + s.size/3, s.size, s.size/1.4);
-            });
-
-            // رسم خطوط الشبكة اللاسلكية الدامية
-            ctx.strokeStyle = 'rgba(70, 0, 10, 0.35)';
-            ctx.lineWidth = 1;
-            for(let i=0; i<points.length; i++) {
-                let p = points[i];
-                p.x += p.vx; p.y += p.vy;
-                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
-                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-                for(let j=i+1; j<points.length; j++) {
-                    let p2 = points[j];
-                    let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-                    if(dist < 150) {
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(drawScene);
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-        drawScene();
-
-        // سقوط الأوراق الميتة من تحت حروف CHEMS مباشرة
-        function spawnLeaves() {
-            const titleRect = document.getElementById('chems-title').getBoundingClientRect();
-            setInterval(() => {
-                let leaf = document.createElement('div');
-                leaf.classList.add('dead-leaf');
-                leaf.style.left = (titleRect.left + Math.random() * titleRect.width) + 'px';
-                leaf.style.top = titleRect.bottom + 'px';
-                leaf.style.animationDuration = (Math.random() * 4 + 4) + 's';
-                leaf.style.transform = `scale(${Math.random() * 0.6 + 0.4})`;
-                document.body.appendChild(leaf);
-                setTimeout(() => leaf.remove(), 7000);
-            }, 500);
-        }
-        setTimeout(spawnLeaves, 300);
-
-        // تأثير قطرات الماء العذب من الأسفل
-        const rippleContainer = document.getElementById('water-ripples');
-        setInterval(() => {
-            let ripple = document.createElement('div');
-            ripple.classList.add('ripple');
-            ripple.style.left = Math.random() * 100 + 'vw';
-            ripple.style.bottom = Math.random() * 30 + 'px';
-            let size = Math.random() * 20 + 15;
-            ripple.style.width = size + 'px';
-            ripple.style.height = size + 'px';
-            ripple.style.marginLeft = -(size/2) + 'px';
-            ripple.style.marginBottom = -(size/2) + 'px';
-            
-            rippleContainer.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 3000);
-        }, 950);
-    </script>
+    <div class="footer">مكتوب بكود نظيف ومرتب، وتقدر تبدلو كيف تحب.</div>
+  </main>
 </body>
 </html>
