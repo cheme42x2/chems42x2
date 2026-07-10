@@ -1,273 +1,378 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JADU CRAFT 3D - VIP EDITION</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JADOU | Underground Slang Translator</title>
+    <!-- Google Fonts for Luxury Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;900&family=Noto+Sans+Arabic:wght@300;600;900&display=swap" rel="family">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial', sans-serif; -webkit-user-select: none; user-select: none; }
-        body, html { width: 100%; height: 100%; overflow: hidden; background: #000; }
-        
-        /* شاشة اللعبة */
-        #gameCanvas { width: 100%; height: 100%; display: block; }
+        :root {
+            --bg-dark: #0a0b0d;
+            --premium-gold: #d4af37;
+            --premium-red: #8b0000;
+            --text-light: #e6e6e6;
+            --panel-bg: rgba(18, 18, 24, 0.85);
+        }
 
-        /* اللمسة لي تحير صحابك - الواجهة العلوية */
-        .top-ui { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); text-align: center; pointer-events: none; width: 90%; }
-        .game-title { color: #00ffcc; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px #00ffcc; letter-spacing: 1px; }
-        .credits { color: #fff; font-size: 11px; opacity: 0.8; margin-top: 2px; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans Arabic', sans-serif;
+        }
 
-        /* متجر السلعة باطل (Inventory) من فوق */
-        .inventory-bar { position: absolute; top: 55px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; background: rgba(0,0,0,0.6); padding: 6px; border-radius: 8px; border: 2px solid #00ffcc; max-width: 95%; overflow-x: auto; pointer-events: auto; }
-        .slot { width: 45px; height: 45px; border-radius: 4px; border: 2px solid #555; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; background: #222; color: #fff; position: relative; }
-        .slot.active { border-color: #00ffcc; background: #333; box-shadow: 0 0 10px #00ffcc; }
-        .slot-name { position: absolute; bottom: 1px; font-size: 8px; color: #ccc; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
 
-        /* الـ Joystick تع المشي من تحت على اليسار */
-        .joystick-container { position: absolute; bottom: 30px; left: 30px; width: 110px; height: 110px; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; touch-action: none; }
-        .joystick-knob { width: 45px; height: 45px; background: linear-gradient(45deg, #00ffcc, #0077ff); border-radius: 50%; box-shadow: 0 0 10px rgba(0,255,204,0.5); }
+        /* Luxury Autumn Leaves Animation Background */
+        #autumn-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-        /* أزرار البناء والتكسير من تحت على اليمين */
-        .action-buttons { position: absolute; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; }
-        .action-btn { width: 65px; height: 65px; border-radius: 50%; border: none; font-weight: bold; font-size: 14px; color: #000; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        .btn-build { background: #00ffcc; }
-        .btn-destroy { background: #ff3333; color: #fff; }
+        .leaf {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #d35400; /* Autumn orange */
+            opacity: 0.6;
+            border-radius: 0 70% 0 70%;
+            animation: fall linear infinite;
+        }
 
-        /* نقطة التصويب في الوسط تع المينكرافت (+) */
-        .crosshair { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.7); font-size: 24px; font-weight: 300; pointer-events: none; }
+        @keyframes fall {
+            0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Premium Cyber-Underground Interface */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 950px;
+            background: var(--panel-bg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(139, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Chinese Calligraphy Background Accent */
+        .container::before {
+            content: "翻訳";
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 5rem;
+            color: rgba(139, 0, 0, 0.05);
+            pointer-events: none;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .brand-name {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: var(--premium-gold);
+            text-shadow: 0px 0px 15px rgba(212, 175, 55, 0.5);
+            display: inline-block;
+        }
+
+        .status-badge {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ff3333;
+            font-weight: bold;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0.3; }
+        }
+
+        /* Translation Grid */
+        .translator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .translator-grid { grid-template-columns: 1fr; }
+        }
+
+        .box {
+            position: relative;
+            background: rgba(10, 11, 13, 0.9);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .box:focus-within {
+            border-color: var(--premium-gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+
+        .box-label {
+            font-size: 0.8rem;
+            color: var(--premium-gold);
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chinese-sub {
+            font-size: 0.7rem;
+            opacity: 0.5;
+        }
+
+        textarea {
+            width: 100%;
+            height: 180px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            resize: none;
+            line-height: 1.6;
+        }
+
+        .output-text {
+            color: #50fa7b; /* Gangsta neon green for illegal look */
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            position: absolute;
+            bottom: 15px;
+            left: 25px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--premium-gold);
+            color: var(--premium-gold);
+            padding: 6px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-btn:hover {
+            background: var(--premium-gold);
+            color: var(--bg-dark);
+        }
+
+        /* TikTok CTA Button */
+        .tiktok-footer {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .tiktok-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(45deg, #ff0050, #00f2fe);
+            color: #fff;
+            padding: 14px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(255, 0, 80, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .tiktok-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.5);
+        }
+
+        /* Disclaimer Footer */
+        .system-foot {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 1px;
+        }
     </style>
-    <!-- استدعاء مكتبة Three.js الرسمية للجرافيكس الـ 3D -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
-    <div class="top-ui">
-        <div class="game-title">✨ JADU CRAFT 3D ✨</div>
-        <div class="credits">Created by Chems | VIP World</div>
+    <!-- Leaf Drops Effect -->
+    <div id="autumn-container"></div>
+
+    <div class="container">
+        <header>
+            <div class="brand-name">JADOU</div>
+            <div class="status-badge"><i class="fa-solid fa-circle-nodes"></i> شبكة ترجمة موازية غير قانونية عابرة للقارات v3.9</div>
+        </header>
+
+        <div class="translator-grid">
+            <!-- Input (Arabic) -->
+            <div class="box">
+                <div class="box-label">
+                    <span>النص الأصلي (العربية)</span>
+                    <span class="chinese-sub">输入 (العربية)</span>
+                </div>
+                <textarea id="src-text" placeholder="اكتب كلامك هنا خويا... (مثال: واش كاين، خويا، دراهم، بوليس...)"></textarea>
+            </div>
+
+            <!-- Output (Ghetto English) -->
+            <div class="box">
+                <div class="box-label">
+                    <span>ترجمة العصابات والشوارع الأمريكية (Bronx Slang)</span>
+                    <span class="chinese-sub">地下翻译 (Slang)</span>
+                </div>
+                <textarea id="res-text" class="output-text" readonly placeholder="The street talk appears here..."></textarea>
+                <button class="copy-btn" onclick="copyTranslation()">
+                    <i class="fa-regular fa-copy"></i> نسخ كود الشارع
+                </button>
+            </div>
+        </div>
+
+        <!-- TikTok Jump Action -->
+        <div class="tiktok-footer">
+            <a href="https://www.tiktok.com" target="_blank" class="tiktok-btn">
+                <i class="fa-brands fa-tiktok"></i> دخول فوري لمنصة TIKTOK
+            </a>
+        </div>
+
+        <div class="system-foot">
+            CHINESE AUTUMN PARALLEL SERVER • SECURED BY JADOU • TRADUCTION ILLÉGALE
+        </div>
     </div>
-
-    <!-- متجر السلعة (كلش باطل وبدون أموال) -->
-    <div class="inventory-bar" id="inventory">
-        <div class="slot active" onclick="selectBlock('grass', this)">🌱<span class="slot-name">حشيش</span></div>
-        <div class="slot" onclick="selectBlock('stone', this)">🪨<span class="slot-name">حجر</span></div>
-        <div class="slot" onclick="selectBlock('wood', this)">🪵<span class="slot-name">لوح</span></div>
-        <div class="slot" onclick="selectBlock('gold', this)">👑<span class="slot-name">Jادو</span></div>
-        <div class="slot" onclick="selectBlock('fire', this)">🔥<span class="slot-name">نار</span></div>
-    </div>
-
-    <div class="crosshair">+</div>
-
-    <!-- الـ Joystick للمشي -->
-    <div class="joystick-container" id="joyBounds">
-        <div class="joystick-knob" id="joyKnob"></div>
-    </div>
-
-    <!-- أزرار البناء والتدمير تع المينكرافت -->
-    <div class="action-buttons">
-        <button class="action-btn btn-build" onclick="triggerBuild()">BUILD</button>
-        <button class="action-btn btn-destroy" onclick="triggerDestroy()">DELETE</button>
-    </div>
-
-    <canvas id="gameCanvas"></canvas>
 
     <script>
-        // 1. إعداد المشهد، الكاميرا، والإضاءة الـ 3D
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x0b1d3a); // سماء ليلية فخمة
-        scene.fog = new THREE.FogExp2(0x0b1d3a, 0.05);
-
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('gameCanvas'), antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.shadowMap.enabled = true;
-
-        // الإضاءة (الشمس والضوء المحيط)
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-        scene.add(ambientLight);
-        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        dirLight.position.set(20, 40, 20);
-        scene.add(dirLight);
-
-        // 2. مستلزمات البناء والألوان
-        let currentBlockType = 'grass';
-        const blocksArray = [];
-        const animatedFires = []; // لتخزين النيران لي تشعل وتتحرك
-
-        const blockTextures = {
-            grass: new THREE.MeshStandardMaterial({ color: 0x55aa44, roughness: 0.6 }),
-            stone: new THREE.MeshStandardMaterial({ color: 0x888888, roughness: 0.8 }),
-            wood: new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.5 }),
-            gold: new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.8, roughness: 0.2 }),
-            fire: new THREE.MeshBasicMaterial({ color: 0xff5500, wireframe: false }) // لون النار المشع
+        // Real-time Ultra Fast Mapping Dictionary (Gangsta/Bronx Slang)
+        const gangstaDictionary = {
+            "خويا": "my brother -> my brotha / my slime 🐍 / details: word on the street is he's family",
+            "واش كاين": "what's up -> what's good, gang? / what's poppin'?",
+            "صاحبي": "my friend -> my homie / my day one 💯",
+            "دراهم": "money -> them bands / racks / dough 💵",
+            "البوليس": "police -> the feds / 12 / 🛑 12 is hot on the block",
+            "شرطة": "police -> the 12 / opps",
+            "حومة": "hood -> the block / the trenches 🏙️",
+            "هدرة": "talking -> straight yappin' / talkin' heavy",
+            "مليح": "good -> straight fire 🔥 / bussin'",
+            "راني هنا": "I'm here -> I'm posted up on the block 📍",
+            "تخاف": "scared -> you trippin' / u a cop out",
+            "سكت": "shut up -> zip it up / hold that thought for the feds",
+            "تلفون": "phone -> the trap phone 📱",
+            "بزاف": "a lot -> deadass mad / odee",
+            "صح": "really -> deadass? / word to my momma 💯",
+            "شكون": "who -> who dat pullin' up?",
+            "هرب": "run -> dip / skate out 🏃‍♂️",
+            "مكاش": "no way -> zero chance, fam / street denied it"
         };
 
-        // بناء الأرضية الأساسية تع المينكرافت (15x15 مربع)
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
-        for (let x = -7; x <= 7; x++) {
-            for (let z = -7; z <= 7; z++) {
-                const mesh = new THREE.Mesh(geometry, blockTextures.grass);
-                mesh.position.set(x, 0, z);
-                scene.add(mesh);
-                blocksArray.push(mesh);
+        const srcInput = document.getElementById('src-text');
+        const resOutput = document.getElementById('res-text');
+
+        // Lightning-Fast Translator Mechanism
+        srcInput.addEventListener('input', () => {
+            let currentVal = srcInput.value.trim();
+            if(!currentVal) {
+                resOutput.value = '';
+                return;
             }
-        }
 
-        // وضع الكاميرا فوق الأرضية
-        camera.position.set(0, 2, 5);
-        let moveForward = 0, moveLeft = 0;
-
-        // 3. نظام تدوير الكاميرا بالتاتش (Touch Look)
-        let touchStartX = 0, touchStartY = 0;
-        let yaw = 0, pitch = 0;
-
-        window.addEventListener('touchstart', (e) => {
-            if(e.touches[0].clientX > window.innerWidth / 2) { // التدوير في الجهة اليمنى تع الشاشة
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
-            }
-        });
-
-        window.addEventListener('touchmove', (e) => {
-            if(e.touches[0].clientX > window.innerWidth / 2) {
-                const deltaX = e.touches[0].clientX - touchStartX;
-                const deltaY = e.touches[0].clientY - touchStartY;
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
-
-                yaw -= deltaX * 0.005;
-                pitch -= deltaY * 0.005;
-                pitch = Math.max(-Math.PI/2.5, Math.min(Math.PI/2.5, pitch)); // حماية الكاميرا متقلبش
-
-                camera.quaternion.setFromEuler(new THREE.Euler(pitch, yaw, 0, 'YXZ'));
-            }
-        });
-
-        // 4. نظام الـ Joystick للمشي (الجهة اليسرى)
-        const joyBounds = document.getElementById('joyBounds');
-        const joyKnob = document.getElementById('joyKnob');
-        let joyTouchId = null;
-
-        joyBounds.addEventListener('touchstart', (e) => {
-            joyTouchId = e.changedTouches[0].identifier;
-        });
-
-        joyBounds.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            for(let touch of e.touches) {
-                if(touch.identifier === joyTouchId) {
-                    const rect = joyBounds.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    let dx = touch.clientX - centerX;
-                    let dy = touch.clientY - centerY;
-                    const dist = Math.min(Math.sqrt(dx*dx + dy*dy), 35);
-                    
-                    const angle = Math.atan2(dy, dx);
-                    joyKnob.style.transform = `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist}px)`;
-
-                    // تحويل قيم الجويستيك للمشي
-                    moveForward = -Math.sin(angle) * (dist / 35) * 0.08;
-                    moveLeft = -Math.cos(angle) * (dist / 35) * 0.08;
+            // Splitting words and matching the street rules instantly
+            let words = currentVal.split(/\s+/);
+            let translatedArr = words.map(word => {
+                // Clean punctuation for matching
+                let cleanWord = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+                if(gangstaDictionary[cleanWord]) {
+                    return gangstaDictionary[cleanWord];
                 }
-            }
-        });
-
-        joyBounds.addEventListener('touchend', () => {
-            joyKnob.style.transform = 'translate(0px, 0px)';
-            moveForward = 0; moveLeft = 0;
-            joyTouchId = null;
-        });
-
-        // 5. متجر السلعة والتبديل بين البلوكات
-        function selectBlock(type, el) {
-            currentBlockType = type;
-            document.querySelectorAll('.slot').forEach(s => s.classList.remove('active'));
-            el.classList.add('active');
-        }
-
-        // 6. ميكانيزم البناء والتكسير باستخدام الـ Raycaster (التصويب في الوسط)
-        const raycaster = new THREE.Raycaster();
-        const centerPoint = new THREE.Vector2(0, 0); // وسط الشاشة بالظبط (+)
-
-        function triggerBuild() {
-            raycaster.setFromCamera(centerPoint, camera);
-            const intersects = raycaster.intersectObjects(blocksArray);
-
-            if (intersects.length > 0) {
-                const intersect = intersects[0];
-                const position = new THREE.Vector3().copy(intersect.point).add(intersect.face.normal).round();
-
-                // حماية باش ميبنيش فوق نفس البلوكة ديريكت
-                let blockMaterial = blockTextures[currentBlockType];
-                let currentGeo = geometry;
-
-                // إذا اختار النار، نخدمولها جوميتري خاص يشبه لشعلة النار 🔥
-                if(currentBlockType === 'fire') {
-                    currentGeo = new THREE.ConeGeometry(0.4, 1, 4);
-                }
-
-                const newBlock = new THREE.Mesh(currentGeo, blockMaterial);
-                newBlock.position.set(position.x, position.y, position.z);
-                scene.add(newBlock);
-                blocksArray.push(newBlock);
-
-                // إذا كانت نار، نضيفوها لقائمة الأنيميشن باش تشعل وتتحرك عادي
-                if(currentBlockType === 'fire') {
-                    animatedFires.push(newBlock);
-                }
-            }
-        }
-
-        function triggerDestroy() {
-            raycaster.setFromCamera(centerPoint, camera);
-            const intersects = raycaster.intersectObjects(blocksArray);
-
-            if (intersects.length > 0) {
-                const intersect = intersects[0];
-                if(intersect.object.position.y === 0 && blocksArray.length <= 225) return; // حماية الأرضية الأساسية متتكسرش قاع
-
-                scene.remove(intersect.object);
-                const index = blocksArray.indexOf(intersect.object);
-                if (index > -1) blocksArray.splice(index, 1);
-
-                const fireIndex = animatedFires.indexOf(intersect.object);
-                if (fireIndex > -1) animatedFires.splice(fireIndex, 1);
-            }
-        }
-
-        // 7. حلقة التحديث المستمر للعبة (Game Loop)
-        function animate() {
-            requestAnimationFrame(animate);
-
-            // تطبيق الحركة للمشي (الأمام/الخلف/اليمين/اليسار) حسب اتجاه الكاميرا
-            const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
-            const right = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion);
-            forward.y = 0; right.y = 0; forward.normalize(); right.normalize();
-
-            camera.position.addScaledVector(forward, moveForward);
-            camera.position.addScaledVector(right, moveLeft);
-
-            // أنيميشن النار (تتحرك وتكبر وتصغر ديريكت كأنها تشعل عادي)
-            const time = Date.now() * 0.01;
-            animatedFires.forEach(fire => {
-                fire.scale.set(
-                    1 + Math.sin(time * 2) * 0.1,
-                    1 + Math.cos(time * 3) * 0.15,
-                    1 + Math.sin(time * 2) * 0.1
-                );
-                fire.rotation.y += 0.05;
+                // Fallback for missing words to mimic "illegal hacker decoding"
+                return `[${word} -> raw_slang_undetected]`;
             });
 
-            renderer.render(scene, camera);
-        }
-
-        // إعادة ضبط الشاشة في حالة تدوير التيلفون
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            // Fast output delivery
+            resOutput.value = `[BROKER_LOG]: TRANSLATION TERMINATED.\n\n` + translatedArr.join(' ');
         });
 
-        animate();
+        // Copy Feature
+        function copyTranslation() {
+            if(!resOutput.value) return;
+            resOutput.select();
+            document.execCommand('copy');
+            
+            let btn = document.querySelector('.copy-btn');
+            btn.innerHTML = `<i class="fa-solid fa-check"></i> تم النسخ بنجاح`;
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fa-regular fa-copy"></i> نسخ كود الشارع`;
+            }, 2000);
+        }
+
+        // Autumn Leaves Generator (Chinatown Autumn Vibe)
+        function createAutumnVibe() {
+            const container = document.getElementById('autumn-container');
+            const leafCount = 25;
+            
+            // Premium autumn colors
+            const colors = ['#d35400', '#e67e22', '#b71540', '#f39c12'];
+
+            for (let i = 0; i < leafCount; i++) {
+                let leaf = document.createElement('div');
+                leaf.classList.add('leaf');
+                
+                leaf.style.left = Math.random() * 100 + 'vw';
+                leaf.style.animationDuration = (Math.random() * 5 + 5) + 's'; 
+                leaf.style.animationDelay = (Math.random() * 5) + 's';
+                leaf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                leaf.style.transform = `scale(${Math.random() * 0.8 + 0.4})`;
+
+                container.appendChild(leaf);
+            }
+        }
+        
+        // Execute autumn animation on boot
+        createAutumnVibe();
     </script>
 </body>
 </html>
