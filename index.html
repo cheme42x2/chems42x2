@@ -3,336 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>واحة السكينة | الفخامة والهدوء</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <title>ملاذ السكون | الفخامة والنوم</title>
     <style>
-        :root {
-            --bg-color: #0a0f18;
-            --primary-gold: #d4af37;
-            --light-gold: #f3e5ab;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(212, 175, 55, 0.2);
-        }
+        /* Reset and Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body, html { width: 100%; height: 100%; background-color: #11151c; color: #e2e8c0; overflow: hidden; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Tajawal', sans-serif;
-        }
+        /* Background Elements */
+        .bg-lines { position: absolute; top: 0; left: 10%; width: 1px; height: 100%; background: rgba(212, 175, 55, 0.2); z-index: 0; }
+        .bg-lines::after { content: ''; position: absolute; top: 0; left: 80vw; width: 1px; height: 100%; background: rgba(212, 175, 55, 0.2); }
+        .bg-square { position: absolute; top: 20%; right: 15%; width: 300px; height: 300px; background-color: #2c698d; opacity: 0.8; z-index: 0; box-shadow: 0 0 50px rgba(44, 105, 141, 0.2); }
+        .bg-orb { position: absolute; top: 5%; right: 25%; width: 150px; height: 150px; background: radial-gradient(circle, #a2d2d9 0%, transparent 70%); border-radius: 50%; opacity: 0.9; z-index: 0; filter: blur(5px); }
 
-        body {
-            background: linear-gradient(135deg, var(--bg-color), #1a2536);
-            color: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 2rem;
-        }
+        /* App Container */
+        #app { position: relative; z-index: 10; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(40px); background: rgba(17, 21, 28, 0.6); }
 
-        h1 {
-            font-family: 'Amiri', serif;
-            color: var(--primary-gold);
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            text-align: center;
-        }
+        /* Views Configuration */
+        .view { display: none; width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: center; text-align: center; opacity: 0; transition: opacity 1.5s ease-in-out; }
+        .view.active { display: flex; opacity: 1; }
 
-        p.subtitle {
-            color: var(--light-gold);
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            opacity: 0.8;
-            text-align: center;
-        }
+        /* View 1: Luxury Anti-Anxiety */
+        h1 { font-size: 4.5rem; color: #e2e8c0; font-weight: 300; letter-spacing: 2px; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(226, 232, 192, 0.1); }
+        p.subtitle { font-size: 1.3rem; color: #a2d2d9; max-width: 600px; line-height: 1.8; margin-bottom: 50px; font-weight: 300; }
 
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            width: 100%;
-            max-width: 1200px;
-        }
+        .btn-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        
+        .btn-premium { background: transparent; border: 1px solid rgba(212, 175, 55, 0.4); color: #e2e8c0; padding: 15px 45px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; transition: all 0.5s ease; position: relative; overflow: hidden; letter-spacing: 1px; }
+        .btn-premium::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent); transition: all 0.7s ease; }
+        .btn-premium:hover::before { left: 100%; }
+        .btn-premium:hover { background: rgba(212, 175, 55, 0.05); border-color: rgba(212, 175, 55, 0.8); box-shadow: 0 0 40px rgba(212, 175, 55, 0.15); transform: translateY(-3px); }
 
-        /* Glassmorphism Cards */
-        .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+        .btn-sleep { border-color: rgba(44, 105, 141, 0.5); color: #a2d2d9; }
+        .btn-sleep::before { background: linear-gradient(90deg, transparent, rgba(44, 105, 141, 0.2), transparent); }
+        .btn-sleep:hover { background: rgba(44, 105, 141, 0.05); border-color: rgba(44, 105, 141, 0.8); box-shadow: 0 0 40px rgba(44, 105, 141, 0.2); }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px 0 rgba(212, 175, 55, 0.15);
-        }
+        .message-display { margin-top: 40px; font-size: 1.6rem; height: 60px; color: #fff; font-weight: 300; opacity: 0; transition: opacity 0.8s ease; text-shadow: 0 0 15px rgba(255,255,255,0.2); }
 
-        .card h2 {
-            font-family: 'Amiri', serif;
-            color: var(--primary-gold);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
+        /* View 2: The Sleep Trap (Hypnosis) */
+        .hypno-trap { position: relative; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; background: #020406; overflow: hidden; cursor: none; }
+        .hypno-text { position: absolute; z-index: 100; font-size: 1.8rem; color: rgba(226, 232, 192, 0.6); font-weight: 100; letter-spacing: 5px; animation: breatheText 10s infinite ease-in-out; pointer-events: none; text-shadow: 0 0 20px rgba(226, 232, 192, 0.3); }
 
-        /* Breathing Circle */
-        .breathe-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
+        .spiral-container { position: absolute; width: 120vmax; height: 120vmax; display: flex; align-items: center; justify-content: center; animation: spin 90s linear infinite; }
+        
+        .ring { position: absolute; border-radius: 50%; border: 1px solid rgba(44, 105, 141, 0.15); box-shadow: inset 0 0 60px rgba(44, 105, 141, 0.05), 0 0 60px rgba(44, 105, 141, 0.05); }
+        
+        /* Generating hypnotic concentric rings */
+        .r1 { width: 5%; height: 5%; animation: pulseRing 10s infinite alternate ease-in-out; background: rgba(44, 105, 141, 0.1); }
+        .r2 { width: 15%; height: 15%; animation: pulseRing 10s infinite alternate-reverse ease-in-out; border-color: rgba(212, 175, 55, 0.05); }
+        .r3 { width: 25%; height: 25%; animation: pulseRing 10s infinite alternate ease-in-out; }
+        .r4 { width: 35%; height: 35%; animation: pulseRing 10s infinite alternate-reverse ease-in-out; border-color: rgba(212, 175, 55, 0.05); }
+        .r5 { width: 50%; height: 50%; animation: pulseRing 10s infinite alternate ease-in-out; }
+        .r6 { width: 65%; height: 65%; animation: pulseRing 10s infinite alternate-reverse ease-in-out; border-color: rgba(212, 175, 55, 0.05); }
+        .r7 { width: 80%; height: 80%; animation: pulseRing 10s infinite alternate ease-in-out; }
+        .r8 { width: 100%; height: 100%; animation: pulseRing 10s infinite alternate-reverse ease-in-out; border-color: rgba(212, 175, 55, 0.05); }
 
-        .circle {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, rgba(10,15,24,0) 70%);
-            border: 2px solid var(--primary-gold);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-            transition: all 0.1s linear;
-        }
+        .black-hole { position: absolute; width: 2%; height: 2%; background: #000; border-radius: 50%; box-shadow: 0 0 150px 80px #000; z-index: 50; }
 
-        .breathe-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-            z-index: 10;
-            color: var(--light-gold);
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-            transition: opacity 0.5s;
-        }
+        .exit-sleep { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 200; opacity: 0; transition: opacity 2s; cursor: pointer; }
+        .hypno-trap:hover .exit-sleep { opacity: 0.1; }
+        .exit-sleep:hover { opacity: 1; }
 
-        /* Dopamine Button */
-        .btn-dopamine {
-            background: linear-gradient(45deg, #d4af37, #b8860b);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            color: #0a0f18;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-            transition: all 0.3s ease;
-            margin-bottom: 1rem;
-        }
-
-        .btn-dopamine:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
-        }
-
-        .btn-dopamine:active {
-            transform: scale(0.95);
-        }
-
-        .message-box {
-            min-height: 80px;
-            text-align: center;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #fff;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        /* Bubble Game */
-        .bubble-area {
-            width: 100%;
-            height: 200px;
-            position: relative;
-            background: rgba(0,0,0,0.2);
-            border-radius: 15px;
-            overflow: hidden;
-            cursor: crosshair;
-        }
-
-        .bubble {
-            position: absolute;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(212,175,55,0.6));
-            border-radius: 50%;
-            box-shadow: inset 0 0 10px rgba(255,255,255,0.5), 0 0 10px rgba(212,175,55,0.3);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            color: #0a0f18;
-            font-weight: bold;
-            transition: transform 0.1s;
-        }
-
-        .bubble:hover {
-            transform: scale(1.1);
-        }
-
-        .score-board {
-            margin-top: 1rem;
-            font-size: 1.2rem;
-            color: var(--light-gold);
-        }
-
+        /* Animations */
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulseRing { 0% { transform: scale(0.85); opacity: 0.2; } 100% { transform: scale(1.15); opacity: 0.9; } }
+        @keyframes breatheText { 0%, 100% { opacity: 0; transform: scale(0.9); } 50% { opacity: 0.8; transform: scale(1.05); } }
     </style>
 </head>
 <body>
 
-    <h1>واحة السكينة</h1>
-    <p class="subtitle">ملاذك الفخم لتجديد الطاقة، الاسترخاء، ورفع هرمون السعادة</p>
+    <!-- Abstract Background -->
+    <div class="bg-lines"></div>
+    <div class="bg-square"></div>
+    <div class="bg-orb"></div>
 
-    <div class="container">
-        <!-- Section 1: Breathing -->
-        <div class="card">
-            <h2>تنفس بعمق</h2>
-            <p style="margin-bottom: 1rem; text-align: center; font-size: 0.9rem; color: #ccc;">علمياً: التنفس العميق يوقف هرمون التوتر فوراً.</p>
-            <div class="breathe-container">
-                <div class="circle" id="breatheCircle"></div>
-                <div class="breathe-text" id="breatheText">ابدأ</div>
+    <div id="app">
+        <!-- Interface 1: Minimalist Anti-Anxiety & Dopamine -->
+        <div id="view-joy" class="view active">
+            <h1>ملاذ السكون</h1>
+            <p class="subtitle">صُمم هذا الفضاء الفاخر خصيصاً ليأخذك بعيداً عن ضجيج العالم. لا يوجد هنا ما يزعجك، فقط هدوء نقي، طاقة إيجابية، وراحة بال تامة لا تُقدر بثمن.</p>
+
+            <div class="btn-container">
+                <button class="btn-premium" onclick="givePeace()">تفريغ القلق ✦</button>
+                <button class="btn-premium btn-sleep" onclick="goToSleep()">بوابة النوم العميق ☾</button>
             </div>
-            <button class="btn-dopamine" onclick="startBreathing()" style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 1rem;">بدء التمرين</button>
+
+            <div class="message-display" id="msg-box"></div>
         </div>
 
-        <!-- Section 2: Dopamine & Comfort -->
-        <div class="card">
-            <h2>جرعة دوبامين</h2>
-            <p style="margin-bottom: 1rem; text-align: center; font-size: 0.9rem; color: #ccc;">اضغط هنا لتحصل على جرعة من السعادة والراحة النفسية.</p>
-            <button class="btn-dopamine" onclick="generateDopamine()">أريد أن أبتسم</button>
-            <div class="message-box" id="messageBox"></div>
-        </div>
-
-        <!-- Section 3: Stress Relief Game -->
-        <div class="card">
-            <h2>فرقعة القلق</h2>
-            <p style="margin-bottom: 1rem; text-align: center; font-size: 0.9rem; color: #ccc;">اضغط على فقاعات التوتر لتدميرها وتحويلها إلى طاقة إيجابية.</p>
-            <div class="bubble-area" id="bubbleArea" onclick="createBubble(event)"></div>
-            <div class="score-board">مستوى الروقان: <span id="score">0</span>%</div>
+        <!-- Interface 2: The Sleep Hypnosis Trap -->
+        <div id="view-sleep" class="view">
+            <div class="hypno-trap">
+                <div class="spiral-container">
+                    <div class="ring r1"></div>
+                    <div class="ring r2"></div>
+                    <div class="ring r3"></div>
+                    <div class="ring r4"></div>
+                    <div class="ring r5"></div>
+                    <div class="ring r6"></div>
+                    <div class="ring r7"></div>
+                    <div class="ring r8"></div>
+                </div>
+                <div class="black-hole"></div>
+                <!-- Slow, hypnotic text guiding the subconscious -->
+                <div class="hypno-text" id="hypno-words">استسلم للهدوء... عيناك تزداد ثقلاً...</div>
+                
+                <button class="btn-premium btn-sleep exit-sleep" onclick="goBack()">العودة للواقع</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // --- 1. Breathing Exercise Logic ---
-        let breathingInterval;
-        function startBreathing() {
-            clearInterval(breathingInterval);
-            const circle = document.getElementById('breatheCircle');
-            const text = document.getElementById('breatheText');
-            
-            let phase = 0; // 0: Inhale, 1: Hold, 2: Exhale
-            
-            const breathe = () => {
-                if (phase === 0) {
-                    text.innerText = "شهيـــق...";
-                    circle.style.transform = "scale(1.5)";
-                    circle.style.transition = "transform 4s ease-in-out";
-                    setTimeout(() => phase = 1, 4000);
-                } else if (phase === 1) {
-                    text.innerText = "احتفظ به...";
-                    circle.style.transform = "scale(1.5)";
-                    setTimeout(() => phase = 2, 2000);
-                } else if (phase === 2) {
-                    text.innerText = "زفيـــر...";
-                    circle.style.transform = "scale(1)";
-                    circle.style.transition = "transform 4s ease-in-out";
-                    setTimeout(() => phase = 0, 4000);
-                }
-            };
-            
-            breathe();
-            breathingInterval = setInterval(breathe, 10000); // 4s + 2s + 4s = 10s cycle
-        }
+        // -- View Management (Smooth Transitions) --
+        const viewJoy = document.getElementById('view-joy');
+        const viewSleep = document.getElementById('view-sleep');
+        const hypnoWords = document.getElementById('hypno-words');
 
-        // --- 2. Dopamine Messages Logic ---
-        const messages = [
-            "أنت شخص رائع جداً، ومجرد وجودك يصنع فارقاً! ✨",
-            "خذ نفساً.. ما يقلقك الآن سيكون مجرد ذكرى عابرة غداً. 💛",
-            "هل تعلم؟ عقلك الباطن يصدق كل ما تقوله له، قل لنفسك الآن: أنا قوي وسعيد! 🧠",
-            "ابتسم! نعم الآن.. الابتسامة تفرز الإندورفين حتى لو كانت مصطنعة في البداية. 😊",
-            "كل شيء سيكون على ما يرام، ليس لأن الحياة مثالية، بل لأنك تستطيع التعامل معها. 👑",
-            "أنت لست مطالباً بأن تكون مثالياً، أنت مطالب بأن تكون بخير فقط. ☕",
-            "تخيل أسوأ شيء ممكن؟ حسناً.. الآن تخيل أنه لن يحدث وأن القادم أجمل بكثير! 🌟",
-            "مرة واحد قلقان راح لدكتور نفسي، قاله أنا حاسس إني محدش مهتم بيا.. الدكتور قاله: نعم؟ كنت بتقول حاجة؟ 😂 (اضحك الدنيا ما تسواش!)"
+        const sleepMantras = [
+            "استسلم للهدوء... عيناك تزداد ثقلاً...",
+            "تنفس ببطء... دع العالم يتلاشى...",
+            "لا تفكر في شيء... فقط راقب المركز...",
+            "عقلك يهدأ... جسدك يسترخي تماماً...",
+            "أنت تغوص في نوم عميق... عميق جداً..."
         ];
 
-        function generateDopamine() {
-            const msgBox = document.getElementById('messageBox');
-            msgBox.style.opacity = 0;
+        let mantraInterval;
+
+        function goToSleep() {
+            // Fade out the joy view
+            viewJoy.style.opacity = '0';
             
             setTimeout(() => {
-                const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-                msgBox.innerText = randomMsg;
-                msgBox.style.opacity = 1;
-            }, 300);
-        }
+                viewJoy.classList.remove('active');
+                viewSleep.classList.add('active');
+                
+                // Slight delay before fading in the sleep view for a dramatic dark transition
+                setTimeout(() => {
+                    viewSleep.style.opacity = '1';
+                }, 100);
 
-        // --- 3. Pop the Stress Game Logic ---
-        let score = 0;
-        const bubbleArea = document.getElementById('bubbleArea');
-        const scoreSpan = document.getElementById('score');
-        const badThoughts = ["توتر", "قلق", "ضغط", "خوف", "حزن", "تفكير مفرط"];
-
-        function spawnRandomBubble() {
-            const bubble = document.createElement('div');
-            bubble.classList.add('bubble');
-            
-            const size = Math.random() * 30 + 40; // 40px to 70px
-            bubble.style.width = `${size}px`;
-            bubble.style.height = `${size}px`;
-            
-            const x = Math.random() * (bubbleArea.clientWidth - size);
-            const y = Math.random() * (bubbleArea.clientHeight - size);
-            bubble.style.left = `${x}px`;
-            bubble.style.top = `${y}px`;
-            
-            bubble.innerText = badThoughts[Math.floor(Math.random() * badThoughts.length)];
-            
-            bubble.onclick = (e) => {
-                e.stopPropagation();
-                popBubble(bubble);
-            };
-            
-            bubbleArea.appendChild(bubble);
-            
-            // Remove bubble if not clicked after 3 seconds
-            setTimeout(() => {
-                if(bubble.parentElement) {
-                    bubble.remove();
+                // Request fullscreen to enhance the hypnosis trap
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch((e) => console.log("Fullscreen blocked by browser, continuing gracefully."));
                 }
-            }, 3000);
+
+                // Cycle hypnotic text
+                let mIndex = 0;
+                mantraInterval = setInterval(() => {
+                    mIndex = (mIndex + 1) % sleepMantras.length;
+                    // The text animation handles opacity fading naturally
+                    setTimeout(() => {
+                        hypnoWords.innerText = sleepMantras[mIndex];
+                    }, 5000); // Change text at the invisible point of the breathing animation
+                }, 10000);
+
+            }, 1500); // 1.5s transition time matches CSS
         }
 
-        function popBubble(bubble) {
-            // Popping effect
-            bubble.style.transform = "scale(1.5)";
-            bubble.style.opacity = "0";
+        function goBack() {
+            viewSleep.style.opacity = '0';
+            clearInterval(mantraInterval);
             
-            // Increment score (Caps at 100%)
-            score += 5;
-            if(score > 100) score = 100;
-            scoreSpan.innerText = score;
-            
-            setTimeout(() => bubble.remove(), 200);
-        }
-
-        // Auto spawn bubbles slowly
-        setInterval(() => {
-            if(document.querySelectorAll('.bubble').length < 5) {
-                spawnRandomBubble();
+            if (document.exitFullscreen && document.fullscreenElement) {
+                document.exitFullscreen().catch((e) => console.log(e));
             }
-        }, 1500);
 
+            setTimeout(() => {
+                viewSleep.classList.remove('active');
+                viewJoy.classList.add('active');
+                setTimeout(() => viewJoy.style.opacity = '1', 50);
+            }, 1500);
+        }
+
+        // -- Elegant Anti-Anxiety Engine (No annoying popups) --
+        const peaceMessages = [
+            "أنت بأمان هنا. خذ نفساً عميقاً وارخِ كتفيك الآن.",
+            "كل تلك الأفكار المزعجة هي مجرد وهم. الحقيقة هي أنك أقوى منها.",
+            "اسمح لنفسك بالراحة. أنت تستحق هذا الهدوء الفاخر.",
+            "تخيل أن كل قلقك يذوب ويتلاشى في هذا الفراغ الهادئ.",
+            "أنت لست متأخراً في أي شيء، أنت تعيش بتوقيتك الخاص والمثالي.",
+            "بمجرد أن تتوقف عن المقاومة، سيبدأ السلام الداخلي بالتدفق إليك."
+        ];
+
+        let lastIndex = -1;
+        function givePeace() {
+            const msgBox = document.getElementById('msg-box');
+            
+            // Fade out current message
+            msgBox.style.opacity = '0';
+
+            // Wait for fade out, then change text and fade in
+            setTimeout(() => {
+                let newIndex;
+                do {
+                    newIndex = Math.floor(Math.random() * peaceMessages.length);
+                } while (newIndex === lastIndex);
+                lastIndex = newIndex;
+
+                msgBox.innerText = peaceMessages[newIndex];
+                msgBox.style.opacity = '1';
+            }, 800);
+        }
     </script>
 </body>
 </html>
