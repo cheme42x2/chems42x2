@@ -3,265 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وزارة التربية الوطنية - أرضية كشف نتائج شهادة البكالوريا</title>
+    <title>الديوان الوطني للامتحانات والمسابقات - نتائج شهادة البكالوريا 2026</title>
     <style>
         :root {
-            --primary-color: #004d40;
-            --secondary-color: #0288d1;
-            --accent-color: #d32f2f;
-            --text-color: #333;
-            --bg-color: #f4f6f9;
+            --dz-green: #008751;
+            --dz-red: #d21034;
+            --gov-dark: #15283c;
+            --bg-gray: #f8f9fa;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-gray);
+            color: #333;
             margin: 0;
             padding: 0;
         }
 
-        /* شريط الوزارة العلوي */
+        /* شريط العلم الجزائري والوزارة */
+        .top-bar {
+            background: linear-gradient(to left, var(--dz-green) 50%, #ffffff 50%);
+            position: relative;
+            height: 8px;
+            width: 100%;
+        }
+        .top-bar::before {
+            content: "★ ☾";
+            position: absolute;
+            left: 50%;
+            top: -4px;
+            transform: translateX(-50%);
+            color: var(--dz-red);
+            font-size: 14px;
+            z-index: 10;
+        }
+
         .gov-header {
-            background-color: var(--primary-color);
+            background-color: var(--gov-dark);
             color: white;
             text-align: center;
-            padding: 15px 10px;
-            border-bottom: 4px solid #ffd700;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px 10px;
+            border-bottom: 3px solid var(--dz-green);
+            position: relative;
+        }
+
+        .gov-header .flag-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* علم مصمم بالـ CSS لضمان ظهوره بدون إنترنت */
+        .dz-flag {
+            width: 45px;
+            height: 30px;
+            background: linear-gradient(to left, var(--dz-green) 50%, #ffffff 50%);
+            position: relative;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .dz-flag::after {
+            content: "★☾";
+            color: var(--dz-red);
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            position: absolute;
+            line-height: 1;
         }
 
         .gov-header h1 {
             margin: 0;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: bold;
+            letter-spacing: 0.5px;
         }
 
         .gov-header p {
-            margin: 5px 0 0 0;
-            font-size: 0.9rem;
-            opacity: 0.9;
+            margin: 6px 0 0 0;
+            font-size: 0.85rem;
+            color: #b0bec5;
+        }
+
+        .secure-badge {
+            background: rgba(0, 135, 81, 0.2);
+            color: #81c784;
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-top: 8px;
+            border: 1px solid var(--dz-green);
         }
 
         .container {
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 20px;
+            max-width: 550px;
+            margin: 25px auto;
+            padding: 0 15px;
         }
 
-        /* بطاقة إدخال البيانات */
         .card {
             background: white;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--dz-green);
         }
 
         .card h2 {
-            color: var(--primary-color);
+            color: var(--gov-dark);
             text-align: center;
             margin-top: 0;
-            font-size: 1.3rem;
-            border-bottom: 2px solid #f0f0f0;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
             padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            color: #455a64;
         }
 
-        input[type="text"] {
+        input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
+            padding: 11px;
+            border: 1px solid #cfd8dc;
             border-radius: 4px;
             box-sizing: border-box;
-            font-size: 1rem;
+            font-size: 0.95rem;
             text-align: right;
-            transition: border-color 0.3s;
         }
 
-        input[type="text"]:focus {
+        input:focus {
             outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 5px rgba(2, 136, 209, 0.3);
+            border-color: var(--dz-green);
+            box-shadow: 0 0 5px rgba(0, 135, 81, 0.2);
         }
 
         .btn {
             width: 100%;
-            background-color: var(--secondary-color);
+            background-color: var(--dz-green);
             color: white;
             border: none;
-            padding: 14px;
-            font-size: 1.1rem;
+            padding: 13px;
+            font-size: 1rem;
             font-weight: bold;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .btn:hover {
-            background-color: #0277bd;
+            background-color: #006e42;
         }
 
-        /* كشف النقاط (النتيجة) */
+        /* كشف النقاط الرسمي */
         .result-box {
             display: none;
             margin-top: 25px;
             background: #fff;
-            border: 2px solid var(--primary-color);
-            border-radius: 8px;
+            border: 2px solid var(--gov-dark);
+            border-radius: 6px;
             padding: 20px;
-            animation: fadeIn 0.5s ease-out;
+            position: relative;
+            background-image: radial-gradient(rgba(0, 135, 81, 0.03) 15%, transparent 16%);
+            background-size: 16px 16px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .result-box::before {
+            content: "نسخة رسمية مؤمنة";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-size: 2.5rem;
+            color: rgba(0, 0, 0, 0.03);
+            font-weight: bold;
+            pointer-events: none;
+            white-space: nowrap;
         }
 
         .result-header {
             text-align: center;
-            border-bottom: 2px dashed #ccc;
-            padding-bottom: 10px;
+            border-bottom: 2px dashed #b0bec5;
+            padding-bottom: 12px;
             margin-bottom: 15px;
         }
 
         .result-title {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: bold;
-            color: var(--primary-color);
+            color: var(--dz-red);
             margin: 0;
         }
 
-        .result-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 1.05rem;
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
         }
 
-        .result-row .label {
-            font-weight: bold;
-            color: #555;
-        }
-
-        .result-row .value {
-            font-weight: bold;
-        }
-
-        .grade-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            color: white;
+        .result-table td {
+            padding: 10px;
+            border-bottom: 1px solid #eceff1;
             font-size: 0.95rem;
         }
 
-        .success { background-color: #2e7d32; }
-        .fail { background-color: #c62828; }
+        .result-table td.label {
+            font-weight: 600;
+            color: #546e7a;
+            width: 40%;
+        }
 
-        /* تذييل الصفحة */
+        .result-table td.value {
+            font-weight: 700;
+            color: #263238;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .bg-success { background-color: var(--dz-green); }
+        .bg-danger { background-color: var(--dz-red); }
+
         .footer {
             text-align: center;
-            margin-top: 40px;
-            font-size: 0.8rem;
-            color: #777;
+            margin-top: 35px;
+            font-size: 0.75rem;
+            color: #78909c;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 15px;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
 <body>
 
-    <!-- رأس الصفحة الرسمي -->
+    <!-- شريط العلم العلوي -->
+    <div class="top-bar"></div>
+
+    <!-- رأس الصفحة الحكومي -->
     <div class="gov-header">
-        <h1>الجمهورية الجزائرية الديمقراطية الشعبية</h1>
+        <div class="flag-container">
+            <div class="dz-flag"></div>
+            <h1>الجمهورية الجزائرية الديمقراطية الشعبية</h1>
+            <div class="dz-flag"></div>
+        </div>
         <p>وزارة التربية الوطنية | الديوان الوطني للامتحانات والمسابقات</p>
+        <span class="secure-badge">🔒 اتصال آمن وموثق - أمان عالي (SSL)</span>
     </div>
 
     <div class="container">
-        <!-- بطاقة طلب النتيجة -->
+        <!-- بطاقة الحساب -->
         <div class="card">
-            <h2>المركّز الوطني لإعلان نتائج امتحان شهادة البكالوريا</h2>
+            <h2>موقع إعلان نتائج امتحان شهادة البكالوريا لدورة جوان</h2>
             
             <div class="form-group">
-                <label for="fullName">الاسم واللقب الكامل للمترشح(ة):</label>
-                <input type="text" id="fullName" placeholder="أدخل اسمك ولقبك هنا..." required>
+                <label for="fullName">الإسم واللقب الكامل للمترشح:</label>
+                <input type="text" id="fullName" placeholder="مثال: محمد بن علي" required>
             </div>
 
-            <button class="btn" onclick="showResult()">إظهار نتيجة الباك الخاصة بك</button>
+            <div class="form-group">
+                <label for="regNum">رقم التسجيل (7 أو 8 أرقام):</label>
+                <input type="text" id="regNum" placeholder="مثال: 35014829" maxlength="8">
+            </div>
+
+            <button class="btn" onclick="generateOfficialResult()">إظهار نتيجة الباك الخاصة بك</button>
         </div>
 
-        <!-- كشف النتيجة المخفي الافتراضي -->
+        <!-- كشف النقاط الرسمي المخفي -->
         <div id="resultBox" class="result-box">
             <div class="result-header">
-                <p class="result-title">كشف نتائج امتحان شهادة البكالوريا</p>
-                <small style="color: #666;">موقع موثق ومؤمن وصادر عن منصة الوزارة الرقمية</small>
+                <p class="result-title">📢 المطبوعة الرسمية لكشف النتائج</p>
+                <small style="color: #78909c; font-weight: 500;">تاريخ الـسحب: اليوم عبر الأرضية الرقمية</small>
             </div>
 
-            <div class="result-row">
-                <span class="label">اسم ولقب المترشح:</span>
-                <span class="value" id="resName">-</span>
-            </div>
-
-            <div class="result-row">
-                <span class="label">المعدل العام:</span>
-                <span class="value" id="resScore" style="color: var(--secondary-color); font-size: 1.2rem;">-</span>
-            </div>
-
-            <div class="result-row">
-                <span class="label">الملاحظة والتقدير:</span>
-                <span class="value" id="resStatus">-</span>
-            </div>
+            <table class="result-table">
+                <tr>
+                    <td class="label">الإسم واللقب:</td>
+                    <td class="value" id="resName">-</td>
+                </tr>
+                <tr>
+                    <td class="label">رقم التسجيل:</td>
+                    <td class="value" id="resNum">-</td>
+                </tr>
+                <tr>
+                    <td class="label">الشعبة:</td>
+                    <td class="value" id="resBranch">-</td>
+                </tr>
+                <tr>
+                    <td class="label">المعدل العام:</td>
+                    <td class="value" id="resScore" style="font-size: 1.2rem; color: var(--dz-green);">-</td>
+                </tr>
+                <tr>
+                    <td class="label">النتيجة والتقدير:</td>
+                    <td class="value" id="resStatus">-</td>
+                </tr>
+            </table>
         </div>
 
         <div class="footer">
-            &copy; 2026 وزارة التربية الوطنية. جميع الحقوق محفوظة. المنصة الرقمية الرسمية.
+            موقع مؤمن تابع لوزارة التربية الوطنية والديوان الوطني للامتحانات والمسابقات &copy; 2026. <br>
+            أي تزوير في هذه الوثيقة يعرض صاحبها للمتابعة القضائية.
         </div>
     </div>
 
     <script>
-        function showResult() {
-            const nameInput = document.getElementById('fullName').value.trim();
+        // مصفوفات لإعطاء طابع أكثر واقعية للموقع
+        const branches = ["علوم تجريبية", "تقني رياضي", "رياضيات", "تسيير واقتصاد", "آداب وفلسفة", "لغات أجنبية"];
 
-            if (nameInput === "") {
-                alert("من فضلك، أدخل الاسم واللقب أولاً لرؤية النتيجة.");
+        function generateOfficialResult() {
+            const name = document.getElementById('fullName').value.trim();
+            const regNum = document.getElementById('regNum').value.trim();
+
+            if (name === "") {
+                alert("يرجى إدخال الإسم واللقب أولاً.");
                 return;
             }
 
-            // توليد معدل عشوائي بين 7.00 و 18.50 مع رقمين وراء الفاصلة
-            const randomScore = (Math.random() * (18.5 - 7.0) + 7.0).toFixed(2);
-            
-            let statusText = "";
-            let badgeClass = "success";
+            // توليد معدل عشوائي
+            const randomScore = (Math.random() * (18.90 - 8.0) + 8.0).toFixed(2);
+            // اختيار شعبة عشوائية
+            const randomBranch = branches[Math.floor(Math.random() * branches.length)];
+            // إذا لم يكتب رقم التسجيل، نولد واحد عشوائي
+            const finalRegNum = regNum !== "" ? regNum : Math.floor(10000000 + Math.random() * 90000000);
 
-            // تحديد الملاحظة بناءً على المعدل العشوائي اللي خرج
+            let statusHTML = "";
+
             if (randomScore >= 16) {
-                statusText = '<span class="grade-badge success">ناجح(ة) بملاحظة: ممتاز</span>';
+                statusHTML = '<span class="badge bg-success">ناجح(ة) - تقدير: ممتاز</span>';
             } else if (randomScore >= 14) {
-                statusText = '<span class="grade-badge success">ناجح(ة) بملاحظة: جيد جداً</span>';
+                statusHTML = '<span class="badge bg-success">ناجح(ة) - تقدير: جيد جداً</span>';
             } else if (randomScore >= 12) {
-                statusText = '<span class="grade-badge success">ناجح(ة) بملاحظة: قريب من الحسن</span>';
+                statusHTML = '<span class="badge bg-success">ناجح(ة) - تقدير: قريب من الحسن</span>';
             } else if (randomScore >= 10) {
-                statusText = '<span class="grade-badge success">ناجح(ة) بملاحظة: مقبول</span>';
+                statusHTML = '<span class="badge bg-success">ناجح(ة) - تقدير: مقبول</span>';
             } else {
-                statusText = '<span class="grade-badge fail">راسب(ة) - حظ أوفر في الدورة القادمة</span>';
+                statusHTML = '<span class="badge bg-danger">مؤجل (راسب) - حظ أوفر</span>';
             }
 
-            // حقن البيانات داخل كشف النقاط
-            document.getElementById('resName').innerText = nameInput;
+            // تعبئة البيانات في الجدول
+            document.getElementById('resName').innerText = name;
+            document.getElementById('resNum').innerText = finalRegNum;
+            document.getElementById('resBranch').innerText = randomBranch;
             document.getElementById('resScore').innerText = randomScore + " / 20";
-            document.getElementById('resStatus').innerHTML = statusText;
+            document.getElementById('resStatus').innerHTML = statusHTML;
 
-            // إظهار صندوق النتيجة بحركة أنيميشن
+            // إظهار النتيجة والنزول إليها تلقائياً
             const resultBox = document.getElementById('resultBox');
             resultBox.style.display = 'block';
             resultBox.scrollIntoView({ behavior: 'smooth' });
