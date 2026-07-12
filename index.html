@@ -3,44 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHEMSBB - Mines Predictor</title>
+    <title>CHEMSBB - Ultra Predictor</title>
     <style>
         :root {
-            --bg-color: #0b141a;
-            --panel-color: #1a2c38;
-            --card-color: #213743;
-            --card-hover: #2f4553;
-            --green-glow: #00e676;
-            --bomb-red: #ff3d00;
-            --text-main: #ffffff;
-            --text-muted: #b1b6c6;
+            --bg-dark: #070d12;
+            --panel-bg: rgba(17, 28, 36, 0.85);
+            --card-closed: linear-gradient(135deg, #152530, #0f1b24);
+            --neon-green: #00ff87;
+            --neon-cyan: #00f0ff;
+            --bomb-border: #ff3d00;
+            --text-white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text-main);
+            background-color: var(--bg-dark);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-white);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* شبكة متحركة في الخلفية (Moving Grid Background) */
+        .bg-grid-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150%;
+            height: 150%;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            transform: rotateX(60deg) translateY(-20%);
+            animation: gridMove 20s linear infinite;
+            z-index: 1;
+            perspective: 500px;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 80px; }
+        }
+
+        /* الحاوية البورجوازية الفاخرة */
+        .luxury-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 430px;
+            padding: 20px;
         }
 
         .game-container {
-            width: 100%;
-            max-width: 450px;
-            background: linear-gradient(145deg, #13222c, #0d1a22);
-            border-radius: 24px;
-            padding: 25px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: var(--panel-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 32px;
+            padding: 30px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8),
+                        inset 0 1px 2px rgba(255, 255, 255, 0.15);
         }
 
-        /* الهيدر باسم CHEMSBB */
+        /* الهيدر الاحترافي */
         .header {
             display: flex;
             justify-content: space-between;
@@ -48,278 +83,241 @@
             margin-bottom: 25px;
         }
 
-        .logo {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-shadow: 0 0 15px rgba(255,255,255,0.1);
+        .settings-icon {
+            color: #5f7583;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
+        .settings-icon:hover { transform: rotate(40deg); }
 
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
         .logo span {
-            color: var(--green-glow);
-            text-shadow: 0 0 15px rgba(0, 230, 118, 0.4);
+            color: var(--neon-green);
+            text-shadow: 0 0 15px rgba(0, 255, 135, 0.6);
         }
 
         /* شبكة اللعبة ثلاثية الأبعاد */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 25px;
-            perspective: 1000px; /* لتفعيل البعد الثالث */
+            perspective: 1000px;
         }
 
         .grid-item {
             aspect-ratio: 1;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
+            transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* الوجه الأمامي (المغلق) */
         .card-front, .card-back {
             position: absolute;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .card-front {
-            background: linear-gradient(135deg, var(--card-color), #172a35);
-            box-shadow: inset 0 2px 4px rgba(255,255,255,0.05),
-                        0 4px 8px rgba(0,0,0,0.3),
-                        box-shadow 0 2px 0 #111d24;
-            border: 1px solid rgba(255, 255, 255, 0.02);
+            background: var(--card-closed);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 4px 10px rgba(0,0,0,0.4);
         }
 
-        .card-front::before {
-            content: '💎';
-            font-size: 16px;
-            opacity: 0.15;
-            filter: grayscale(1);
-        }
-
-        /* الوجه الخلفي (عند ظهور الماس أو القنبلة) */
         .card-back {
             transform: rotateY(180deg);
-            background: #101f28;
-            border: 2px solid rgba(255, 255, 255, 0.05);
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+            background: #0d171f;
+            border: 2px solid transparent;
         }
 
-        /* تأثيرات الألوان والتوغل ثلاثي الأبعاد للماس والقنابل */
+        /* حالة كشف الماسة الآمنة المتوهجة */
         .grid-item.revealed-diamond {
             transform: rotateY(180deg);
         }
-        
         .grid-item.revealed-diamond .card-back {
-            border-color: var(--green-glow);
-            box-shadow: 0 0 20px rgba(0, 230, 118, 0.25), inset 0 0 15px rgba(0, 230, 118, 0.2);
-            animation: pulseGlow 2s infinite alternate;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 15px rgba(0, 255, 135, 0.3), inset 0 0 10px rgba(0, 255, 135, 0.2);
         }
 
-        .grid-item.revealed-bomb {
-            transform: rotateY(180deg);
+        /* أنيميشن الماس الأزرق الفاخر */
+        .diamond-svg {
+            width: 65%;
+            height: 65%;
+            filter: drop-shadow(0 0 8px var(--neon-cyan));
+            animation: diamondFloat 2.5s ease-in-out infinite alternate;
         }
 
-        .grid-item.revealed-bomb .card-back {
-            border-color: var(--bomb-red);
-            box-shadow: 0 0 20px rgba(255, 61, 0, 0.25), inset 0 0 15px rgba(255, 61, 0, 0.2);
+        @keyframes diamondFloat {
+            0% { transform: translateY(2px) scale(0.95) rotate(-5deg); }
+            100% { transform: translateY(-3px) scale(1.05) rotate(5deg); }
         }
 
-        /* الأيقونات ثلاثية الأبعاد داخل الكروت */
-        .diamond-icon {
-            font-size: 26px;
-            filter: drop-shadow(0 0 8px var(--green-glow));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .bomb-icon {
-            font-size: 26px;
-            filter: drop-shadow(0 0 8px var(--bomb-red));
-        }
-
-        /* حركة الدوران والاهتزاز للماس */
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg) scale(1); }
-            50% { transform: translateY(-4px) rotate(180deg) scale(1.1); }
-            100% { transform: translateY(0) rotate(360deg) scale(1); }
-        }
-
-        @keyframes pulseGlow {
-            0% { border-color: rgba(0, 230, 118, 0.4); }
-            100% { border-color: rgba(0, 230, 118, 1); }
-        }
-
-        /* لوحة التحكم السفلية */
-        .controls-panel {
-            background-color: var(--panel-color);
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 20px;
+        /* لوحة البيانات السفلى */
+        .stats-panel {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+            background: rgba(10, 19, 26, 0.6);
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.03);
         }
 
-        .stat-box {
+        .stat-item {
             text-align: center;
             flex: 1;
         }
-
-        .stat-box.center-box {
-            border-left: 1px solid rgba(255,255,255,0.05);
-            border-right: 1px solid rgba(255,255,255,0.05);
-            padding: 0 10px;
+        .stat-item:not(:last-child) {
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .stat-value {
-            font-weight: 700;
+        .stat-val {
             font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .stat-lbl {
+            font-size: 11px;
+            color: #6a7e8c;
+            margin-top: 5px;
+        }
+
+        /* زر عرض الماسات البورجوازي الكبير */
+        .predict-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #00f0ff 0%, #00ff87 100%);
+            border: none;
+            border-radius: 18px;
+            padding: 18px;
+            color: #030a10;
+            font-size: 20px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 255, 135, 0.35);
+            transition: all 0.3s ease;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 5px;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        /* زر عرض الماسات الكبير والسحري */
-        .predict-btn {
-            width: 100%;
-            background: linear-gradient(180deg, #00e676 0%, #00b0ff 100%);
-            border: none;
-            border-radius: 16px;
-            padding: 18px;
-            color: #000;
-            font-size: 18px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 6px 20px rgba(0, 230, 118, 0.3),
-                        inset 0 2px 0 rgba(255,255,255,0.4);
-            position: relative;
-            overflow: hidden;
+            gap: 10px;
         }
 
         .predict-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 230, 118, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 240, 255, 0.5);
         }
+        .predict-btn:active { transform: translateY(1px); }
 
-        .predict-btn:active {
-            transform: translateY(1px);
-        }
-
-        .predict-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: rotate(45deg);
-            transition: 0.5s;
-            opacity: 0;
-        }
-
-        .predict-btn:hover::after {
-            left: 120%;
-            opacity: 1;
-        }
     </style>
 </head>
 <body>
 
-    <div class="game-container">
-        <!-- الهيدر باسمك المميز -->
-        <div class="header">
-            <div class="logo">CHEMS<span>BB</span></div>
-            <div style="font-size: 20px; opacity: 0.7;">⚙️</div>
-        </div>
+    <!-- الخلفية المتحركة -->
+    <div class="bg-grid-animation"></div>
 
-        <!-- شبكة الـ 25 مربع الموزعة 5×5 -->
-        <div class="grid-container" id="grid">
-            <!-- سيتم توليد المربعات تلقائياً عبر الجافاسكريبت لضمان الترتيب التام -->
-        </div>
+    <div class="luxury-wrapper">
+        <div class="game-container">
+            
+            <!-- الهيدر -->
+            <div class="header">
+                <div class="settings-icon">⚙️</div>
+                <div class="logo">CHEMS<span>BB</span></div>
+            </div>
 
-        <!-- لوحة الإحصائيات والمعلومات الوسطى -->
-        <div class="controls-panel">
-            <div class="stat-box">
-                <div class="stat-value" style="color: var(--green-glow);">💎 24</div>
-                <div class="stat-label">الماسات المتبقية</div>
-            </div>
-            <div class="stat-box center-box">
-                <div class="stat-value">💣 1</div>
-                <div class="stat-label">عدد القنابل</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-value" style="color: #ffb300;">×24.00</div>
-                <div class="stat-label">أعلى ربح متوقع</div>
-            </div>
-        </div>
+            <!-- شبكة الـ 25 مربع -->
+            <div class="grid-container" id="gameGrid"></div>
 
-        <!-- زر تفعيل حركة التوقعات ثلاثية الأبعاد -->
-        <button class="predict-btn" id="predictBtn">عـرض الـمـاسـات 💎</button>
+            <!-- الإحصائيات -->
+            <div class="stats-panel">
+                <div class="stat-item">
+                    <div class="stat-val" style="color: #ffb703;">24.00×</div>
+                    <div class="stat-lbl">أعلى ربح متوقع</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val">1 💣</div>
+                    <div class="stat-lbl">عدد القنابل</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val" style="color: var(--neon-green);">24 💎</div>
+                    <div class="stat-lbl">الماسات المتبقية</div>
+                </div>
+            </div>
+
+            <!-- الزر السحري -->
+            <button class="predict-btn" id="predictAction">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 9l10 13 10-13L12 2zm0 3.55L18.36 10 12 18.1 5.64 10 12 5.55z"/></svg>
+                عرض الماسات
+            </button>
+
+        </div>
     </div>
 
-    <script>
-        const grid = document.getElementById('grid');
-        const predictBtn = document.getElementById('predictBtn');
+    <script {timestamp="2026-07-12"}>
+        const gameGrid = document.getElementById('gameGrid');
+        const predictAction = document.getElementById('predictAction');
         const totalCells = 25;
 
-        // إنشاء المربعات الـ 25 عند تحميل الصفحة
+        // توليد مربعات الشبكة الاحترافية
         for (let i = 0; i < totalCells; i++) {
-            const item = document.createElement('div');
-            item.classList.add('grid-item');
-            
-            item.innerHTML = `
+            const cell = document.createElement('div');
+            cell.classList.add('grid-item');
+            cell.innerHTML = `
                 <div class="card-front"></div>
                 <div class="card-back"></div>
             `;
-            
-            grid.appendChild(item);
+            gameGrid.appendChild(cell);
         }
 
-        // عند الضغط على زر عرض الماسات
-        predictBtn.addEventListener('click', () => {
-            const items = document.querySelectorAll('.grid-item');
+        // تصميم الماسة الأزرق الملكي SVG المتناسق بدقة عالية
+        const diamondSVG = `
+            <svg class="diamond-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5L15 40L50 95L85 40L50 5Z" fill="#7bf0ff" opacity="0.3"/>
+                <path d="M50 5L32 40H68L50 5Z" fill="#beefff"/>
+                <path d="M32 40L15 40L50 95L32 40Z" fill="#00b0ff"/>
+                <path d="M68 40L85 40L50 95L68 40Z" fill="#0081cb"/>
+                <path d="M50 5L15 40H32L50 5Z" fill="#4fc3f7"/>
+                <path d="M50 5L85 40H68L50 5Z" fill="#00e5ff"/>
+                <path d="M32 40L50 95L68 40H32Z" fill="#00d4ff"/>
+            </svg>
+        `;
+
+        predictAction.addEventListener('click', () => {
+            const cells = document.querySelectorAll('.grid-item');
             
-            // إعادة تصفير الشبكة أولاً لإعادة التأثير الحركي من جديد عند كل ضغطة
-            items.forEach(item => {
-                item.classList.remove('revealed-diamond', 'revealed-bomb');
-                item.querySelector('.card-back').innerHTML = '';
+            // إعادة تصفير كامل للشبكة قبل عرض التوقع الجديد
+            cells.forEach(cell => {
+                cell.classList.remove('revealed-diamond');
+                cell.querySelector('.card-back').innerHTML = '';
             });
 
-            // اختيار مكان عشوائي واحد للقنبلة من بين الـ 25 مربع
-            const bombIndex = Math.floor(Math.random() * totalCells);
+            // توليد أرقام عشوائية فريدة لفتح عدد آمن جداً (بين 13 إلى 15 كارت فقط لحمايتك)
+            const safeCount = Math.floor(Math.random() * 3) + 13; // يعطيك إما 13، 14، أو 15 خانة
+            const safeIndices = new Set();
+            
+            while(safeIndices.size < safeCount) {
+                const randomIdx = Math.floor(Math.random() * totalCells);
+                safeIndices.add(randomIdx);
+            }
 
-            // توزيع التوقعات بحركة متتالية ثلاثية الأبعاد (Staggered Animation)
-            items.forEach((item, index) => {
-                setTimeout(() => {
-                    const cardBack = item.querySelector('.card-back');
-                    
-                    if (index === bombIndex) {
-                        // مكان القنبلة المتوقعة
-                        cardBack.innerHTML = '<span class="bomb-icon">💣</span>';
-                        item.classList.add('revealed-bomb');
-                    } else {
-                        // أماكن الماسات المتوقعة التي تدور وتتحرك
-                        cardBack.innerHTML = '<span class="diamond-icon">💎</span>';
-                        item.classList.add('revealed-diamond');
-                    }
-                }, index * 30); // فارق زمني بسيط جداً بين كل مربع ليمنح تأثير مسح بصري رائع
+            // تفعيل حركة الكشف التدريجي ثلاثي الأبعاد والآمن
+            cells.forEach((cell, index) => {
+                if (safeIndices.has(index)) {
+                    setTimeout(() => {
+                        const cardBack = cell.querySelector('.card-back');
+                        cardBack.innerHTML = diamondSVG;
+                        cell.classList.add('revealed-diamond');
+                    }, index * 40); // تأثير التتابع البصري المتناسق
+                }
             });
         });
     </script>
