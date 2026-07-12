@@ -3,144 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chems Bank Dashboard</title>
+    <title>Chems Financial Dashboard</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --bg: #0f172a;
-            --card: #1e293b;
-            --text: #f8fafc;
-            --green: #22c55e;
+            --bg: #0b0e14;
+            --sidebar: #151921;
+            --card: #1c222d;
+            --accent: #3b82f6;
+            --text-main: #ffffff;
+            --text-dim: #94a3b8;
+            --success: #22c55e;
         }
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 20px;
-        }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--bg); color: var(--text-main); margin: 0; display: flex; height: 100vh; }
+        
+        /* Sidebar */
+        nav { width: 240px; background: var(--sidebar); padding: 20px; border-right: 1px solid #2d3748; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent); margin-bottom: 40px; }
+        nav ul { list-style: none; padding: 0; }
+        nav li { padding: 15px 10px; color: var(--text-dim); cursor: pointer; transition: 0.3s; border-radius: 8px; }
+        nav li:hover { background: var(--card); color: white; }
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-        }
+        /* Main Content */
+        main { flex: 1; padding: 40px; overflow-y: auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        
+        /* Dashboard Cards */
+        .balance-card { background: var(--card); padding: 30px; border-radius: 20px; border: 1px solid #334155; max-width: 400px; }
+        .balance-val { font-size: 2.5rem; font-weight: 700; margin: 10px 0; }
+        
+        .actions { margin-top: 20px; display: flex; gap: 10px; }
+        button { padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; }
+        .btn-send { background: var(--accent); color: white; }
+        .btn-pay { background: #0070ba; color: white; }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .balance-card {
-            background: linear-gradient(135deg, #1e293b, #334155);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
-        }
-
-        .balance-amount {
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--green);
-        }
-
-        .actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .btn-withdraw { background: var(--primary); color: white; }
-        .btn-paypal { background: #0070ba; color: white; }
-        button:hover { opacity: 0.8; }
-
-        .history {
-            margin-top: 40px;
-            background: var(--card);
-            padding: 20px;
-            border-radius: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        th { text-align: left; color: #94a3b8; padding-bottom: 10px; }
-        td { padding: 15px 0; border-top: 1px solid #334155; }
-        .status-success { color: var(--green); }
+        /* Table */
+        .history { margin-top: 40px; background: var(--card); padding: 25px; border-radius: 20px; border: 1px solid #334155; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { text-align: left; color: var(--text-dim); padding-bottom: 15px; border-bottom: 1px solid #334155; }
+        td { padding: 15px 0; border-bottom: 1px solid #2d3748; }
+        .pos { color: var(--success); }
+        .neg { color: #f43f5e; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>Welcome back, <strong>Chems</strong></h1>
-        <div style="font-size: 0.9rem; color: #94a3b8;">Account ID: US-99827361</div>
-    </header>
+<nav>
+    <div class="logo">ChemsBank</div>
+    <ul>
+        <li>Dashboard</li>
+        <li>Accounts</li>
+        <li>Transfers</li>
+        <li>Settings</li>
+    </ul>
+</nav>
+
+<main>
+    <div class="header">
+        <h2>Overview</h2>
+        <div>Logged in as <b>Chems</b></div>
+    </div>
 
     <div class="balance-card">
-        <p>Available Balance</p>
-        <div class="balance-amount">$572,819.00</div>
-        
+        <p style="color: var(--text-dim);">Total Balance</p>
+        <div class="balance-val">$572,819.00</div>
+        <p style="font-size: 0.8rem; color: var(--text-dim);">Checking Account •••• 8829</p>
         <div class="actions">
-            <button class="btn-withdraw">Withdraw Funds</button>
-            <button class="btn-paypal">Connect PayPal</button>
+            <button class="btn-send">Withdraw</button>
+            <button class="btn-pay">PayPal Payout</button>
         </div>
     </div>
 
     <div class="history">
-        <h3>Transaction History</h3>
+        <h3>Recent Transactions</h3>
         <table>
             <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Method</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                </tr>
+                <tr><th>Date</th><th>Description</th><th>Status</th><th>Amount</th></tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>July 12, 2026</td>
-                    <td>Withdrawal to US Bank</td>
-                    <td>ACH Transfer</td>
-                    <td>-$5,000.00</td>
-                    <td class="status-success">Completed</td>
-                </tr>
-                <tr>
-                    <td>July 10, 2026</td>
-                    <td>Payment Received</td>
-                    <td>PayPal</td>
-                    <td>+$12,450.00</td>
-                    <td class="status-success">Completed</td>
-                </tr>
-                <tr>
-                    <td>July 05, 2026</td>
-                    <td>Client Deposit</td>
-                    <td>Wire Transfer</td>
-                    <td>+$45,200.00</td>
-                    <td class="status-success">Completed</td>
-                </tr>
+                <tr><td>Jul 12, 2026</td><td>ACH Transfer - External</td><td><span style="color:var(--success)">Completed</span></td><td class="neg">-$5,000.00</td></tr>
+                <tr><td>Jul 10, 2026</td><td>PayPal Deposit</td><td><span style="color:var(--success)">Completed</span></td><td class="pos">+$12,450.00</td></tr>
+                <tr><td>Jul 05, 2026</td><td>Wire Transfer</td><td><span style="color:var(--success)">Completed</span></td><td class="pos">+$45,200.00</td></tr>
             </tbody>
         </table>
     </div>
-</div>
+</main>
 
 </body>
 </html>
