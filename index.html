@@ -3,91 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chems | Secure Banking Terminal</title>
+    <title>Withdrawal Details</title>
     <style>
         :root {
-            --bg: #09090b;
-            --card: #18181b;
-            --accent: #2563eb;
-            --text: #ffffff;
-            --muted: #a1a1aa;
+            --bg-body: #0a0a0a;
+            --card-bg: #121212;
+            --input-bg: #1a1a1a;
+            --border: #333;
+            --primary-blue: #2563eb;
+            --text-main: #ffffff;
+            --text-dim: #9ca3af;
         }
 
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .dashboard { background: var(--card); padding: 40px; border-radius: 20px; width: 400px; text-align: center; border: 1px solid #27272a; }
-        
-        .balance-text { font-size: 0.9rem; color: var(--muted); }
-        .balance-amount { font-size: 3rem; font-weight: 700; margin: 10px 0; }
-        
-        button { width: 100%; padding: 15px; border-radius: 10px; border: none; background: var(--accent); color: white; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        button:hover { filter: brightness(1.2); }
+        body { 
+            margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background: var(--bg-body); display: flex; justify-content: center; align-items: center; height: 100vh; color: var(--text-main);
+        }
 
-        /* Modals */
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 100; }
-        .modal { background: #18181b; padding: 30px; border-radius: 15px; width: 320px; text-align: left; }
-        input { width: 92%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #3f3f46; background: #09090b; color: white; }
+        /* Container */
+        .modal { 
+            background: var(--card-bg); padding: 30px; border-radius: 20px; width: 350px; 
+            border: 1px solid #222; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
 
-        /* Loader */
-        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--accent); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
+        h2 { font-size: 1.5rem; margin-bottom: 25px; font-weight: 600; }
+
+        /* Form Elements */
+        .input-group { margin-bottom: 20px; }
+        input { 
+            width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid var(--border); 
+            border-radius: 10px; color: white; box-sizing: border-box; font-size: 1rem;
+        }
+        input::placeholder { color: var(--text-dim); }
+        
+        button { 
+            width: 100%; padding: 15px; background: var(--primary-blue); color: white; 
+            border: none; border-radius: 10px; font-weight: 600; font-size: 1rem; cursor: pointer;
+        }
+
+        /* Loading & Success States */
+        #loading, #success { display: none; text-align: center; }
+        .spinner { 
+            border: 4px solid #333; border-top: 4px solid var(--primary-blue); border-radius: 50%; 
+            width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 20px auto;
+        }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<div class="dashboard">
-    <p>Welcome back, Chems</p>
-    <div class="balance-text">Available Balance</div>
-    <div class="balance-amount">$18,290.00</div>
-    <button onclick="openModal()">Withdraw Funds</button>
-</div>
-
-<!-- Modal 1: Data Input -->
-<div id="modal-input" class="overlay">
-    <div class="modal">
-        <h3>Withdrawal Details</h3>
-        <input type="text" placeholder="Bank Name" id="bankName">
-        <input type="text" placeholder="Account Number" id="accNum">
-        <input type="number" placeholder="Amount ($)" id="amount">
-        <button onclick="process()">Confirm Withdrawal</button>
+<div class="modal" id="main-card">
+    <h2 id="title">Withdrawal Details</h2>
+    
+    <!-- Form -->
+    <div id="form-content">
+        <div class="input-group">
+            <input type="text" placeholder="Bank Name" id="bank">
+        </div>
+        <div class="input-group">
+            <input type="text" placeholder="Account Number" id="acc">
+        </div>
+        <div class="input-group">
+            <input type="number" placeholder="Amount ($)" id="amount">
+        </div>
+        <button onclick="processWithdrawal()">Confirm Withdrawal</button>
     </div>
-</div>
 
-<!-- Modal 2: Loader -->
-<div id="modal-loader" class="overlay">
-    <div class="modal" style="text-align: center;">
+    <!-- Loading State -->
+    <div id="loading">
         <div class="spinner"></div>
-        <p>Connecting to secure server...</p>
+        <p style="color: var(--text-dim);">Processing transaction...</p>
     </div>
-</div>
 
-<!-- Modal 3: Success -->
-<div id="modal-success" class="overlay">
-    <div class="modal" style="text-align: center;">
-        <h2 style="color: #22c55e;">✔ Success</h2>
-        <p>The transaction has been processed successfully.</p>
-        <button onclick="closeAll()">Close</button>
+    <!-- Success State -->
+    <div id="success">
+        <h2 style="color: #22c55e;">Success!</h2>
+        <p>Your withdrawal of <span id="final-amount"></span> has been requested.</p>
+        <button onclick="location.reload()" style="background: #333;">Close</button>
     </div>
 </div>
 
 <script>
-    function openModal() { document.getElementById('modal-input').style.display = 'flex'; }
-    
-    function process() {
-        // Validation (Simple check)
+    function processWithdrawal() {
+        // التحقق من البيانات
         if(document.getElementById('amount').value === "") { alert("Please enter amount"); return; }
         
-        document.getElementById('modal-input').style.display = 'none';
-        document.getElementById('modal-loader').style.display = 'flex';
-        
-        // Simulate Processing (2 seconds)
-        setTimeout(() => {
-            document.getElementById('modal-loader').style.display = 'none';
-            document.getElementById('modal-success').style.display = 'flex';
-        }, 2000);
-    }
+        // إخفاء الفورم وإظهار الـ Loading
+        document.getElementById('form-content').style.display = 'none';
+        document.getElementById('title').innerText = "Processing...";
+        document.getElementById('loading').style.display = 'block';
 
-    function closeAll() {
-        document.getElementById('modal-success').style.display = 'none';
+        // محاكاة الإرسال
+        setTimeout(() => {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('title').style.display = 'none';
+            document.getElementById('final-amount').innerText = "$" + document.getElementById('amount').value;
+            document.getElementById('success').style.display = 'block';
+        }, 3000); // 3 ثواني وقت المعالجة
     }
 </script>
 
