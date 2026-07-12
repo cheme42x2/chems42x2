@@ -3,108 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERMINAL_CORE | Chems</title>
+    <title>Chems | Secure Banking Terminal</title>
     <style>
         :root {
-            --bg: #050505;
-            --panel: #0d0d0d;
-            --accent: #00ff41; /* Hacker Green */
-            --border: #222;
-            --text: #e0e0e0;
+            --bg: #09090b;
+            --card: #18181b;
+            --accent: #2563eb;
+            --text: #ffffff;
+            --muted: #a1a1aa;
         }
-        body { font-family: 'Courier New', Courier, monospace; background: var(--bg); color: var(--text); margin: 0; display: flex; height: 100vh; overflow: hidden; }
 
-        /* Left Sidebar */
-        aside { width: 240px; background: #000; border-right: 1px solid var(--border); padding: 20px; }
-        .logo { color: var(--accent); font-weight: bold; margin-bottom: 40px; letter-spacing: 2px; }
-        .menu-item { margin-bottom: 20px; font-size: 0.8rem; text-transform: uppercase; color: #666; cursor: pointer; }
-        .menu-item:hover { color: var(--accent); }
-
-        /* Main View */
-        main { flex: 1; padding: 30px; overflow-y: auto; }
-        .header { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 30px; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .dashboard { background: var(--card); padding: 40px; border-radius: 20px; width: 400px; text-align: center; border: 1px solid #27272a; }
         
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .box { border: 1px solid var(--border); padding: 20px; background: var(--panel); }
-        .value { font-size: 2rem; color: var(--accent); margin: 10px 0; }
-
-        /* Table */
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th { text-align: left; border-bottom: 1px solid var(--border); padding: 10px; font-size: 0.7rem; color: #666; }
-        td { padding: 15px 10px; border-bottom: 1px solid #111; font-size: 0.9rem; }
-
-        /* Button & Modal */
-        button { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 10px 20px; cursor: pointer; transition: 0.3s; }
-        button:hover { background: var(--accent); color: #000; }
+        .balance-text { font-size: 0.9rem; color: var(--muted); }
+        .balance-amount { font-size: 3rem; font-weight: 700; margin: 10px 0; }
         
-        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
-        .modal-box { background: var(--panel); border: 1px solid var(--accent); padding: 40px; text-align: center; }
+        button { width: 100%; padding: 15px; border-radius: 10px; border: none; background: var(--accent); color: white; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        button:hover { filter: brightness(1.2); }
+
+        /* Modals */
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 100; }
+        .modal { background: #18181b; padding: 30px; border-radius: 15px; width: 320px; text-align: left; }
+        input { width: 92%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #3f3f46; background: #09090b; color: white; }
+
+        /* Loader */
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--accent); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<aside>
-    <div class="logo">BANKING_CORE</div>
-    <div class="menu-item">Dashboard</div>
-    <div class="menu-item">Ledger Log</div>
-    <div class="menu-item">API Status: ONLINE</div>
-    <div class="menu-item">Encrypted Transfer</div>
-</aside>
+<div class="dashboard">
+    <p>Welcome back, Chems</p>
+    <div class="balance-text">Available Balance</div>
+    <div class="balance-amount">$18,290.00</div>
+    <button onclick="openModal()">Withdraw Funds</button>
+</div>
 
-<main>
-    <div class="header">
-        <div>USER_ID: <b>Chems</b> | SESSION: ACTIVE</div>
-        <div id="clock">00:00:00 UTC</div>
+<!-- Modal 1: Data Input -->
+<div id="modal-input" class="overlay">
+    <div class="modal">
+        <h3>Withdrawal Details</h3>
+        <input type="text" placeholder="Bank Name" id="bankName">
+        <input type="text" placeholder="Account Number" id="accNum">
+        <input type="number" placeholder="Amount ($)" id="amount">
+        <button onclick="process()">Confirm Withdrawal</button>
     </div>
+</div>
 
-    <div class="grid">
-        <div class="box">
-            <div style="font-size: 0.7rem;">AVAILABLE_LIQUIDITY</div>
-            <div class="value" id="balance">$572,819.00</div>
-            <button onclick="showWithdraw()">WITHDRAW_FUNDS</button>
-        </div>
-        <div class="box">
-            <div style="font-size: 0.7rem;">GATEWAY_STATUS</div>
-            <div style="color: var(--accent); margin-top: 10px;">[PAYPAL] : CONNECTED</div>
-            <div style="color: #666; font-size: 0.8rem; margin-top: 10px;">AUTH: OAUTH2-US-EAST</div>
-        </div>
+<!-- Modal 2: Loader -->
+<div id="modal-loader" class="overlay">
+    <div class="modal" style="text-align: center;">
+        <div class="spinner"></div>
+        <p>Connecting to secure server...</p>
     </div>
+</div>
 
-    <div class="box" style="margin-top: 20px;">
-        <div style="font-size: 0.7rem;">TRANSACTION_LEDGER</div>
-        <table id="ledger">
-            <thead><tr><th>TIMESTAMP</th><th>TXN_ID</th><th>METHOD</th><th>AMOUNT</th><th>STATUS</th></tr></thead>
-            <tbody id="tbody">
-                <tr><td>12:45:01</td><td>TXN-99823</td><td>PAYPAL_US</td><td>+$12,450.00</td><td style="color:var(--accent)">SUCCESS</td></tr>
-            </tbody>
-        </table>
-    </div>
-</main>
-
-<div id="modal">
-    <div class="modal-box">
-        <h3>SECURE WITHDRAWAL PROTOCOL</h3>
-        <p>Target: External US Account</p>
-        <button onclick="processWithdrawal()">CONFIRM EXECUTION</button>
-        <button onclick="closeModal()" style="border-color: #666; color: #666;">CANCEL</button>
+<!-- Modal 3: Success -->
+<div id="modal-success" class="overlay">
+    <div class="modal" style="text-align: center;">
+        <h2 style="color: #22c55e;">✔ Success</h2>
+        <p>The transaction has been processed successfully.</p>
+        <button onclick="closeAll()">Close</button>
     </div>
 </div>
 
 <script>
-    setInterval(() => document.getElementById('clock').innerText = new Date().toUTCString(), 1000);
+    function openModal() { document.getElementById('modal-input').style.display = 'flex'; }
     
-    function showWithdraw() { document.getElementById('modal').style.display = 'flex'; }
-    function closeModal() { document.getElementById('modal').style.display = 'none'; }
-    
-    function processWithdrawal() {
-        alert("Establishing encrypted tunnel... Authorized.");
-        let bal = document.getElementById('balance');
-        let current = 572819 - 5000;
-        bal.innerText = "$" + current.toLocaleString() + ".00";
+    function process() {
+        // Validation (Simple check)
+        if(document.getElementById('amount').value === "") { alert("Please enter amount"); return; }
         
-        let row = document.getElementById('tbody').insertRow(0);
-        row.innerHTML = `<td>${new Date().toLocaleTimeString()}</td><td>TXN-${Math.floor(Math.random()*99999)}</td><td>ACH_WIRE</td><td style="color:red">-$5,000.00</td><td style="color:var(--accent)">COMPLETED</td>`;
-        closeModal();
+        document.getElementById('modal-input').style.display = 'none';
+        document.getElementById('modal-loader').style.display = 'flex';
+        
+        // Simulate Processing (2 seconds)
+        setTimeout(() => {
+            document.getElementById('modal-loader').style.display = 'none';
+            document.getElementById('modal-success').style.display = 'flex';
+        }, 2000);
+    }
+
+    function closeAll() {
+        document.getElementById('modal-success').style.display = 'none';
     }
 </script>
 
