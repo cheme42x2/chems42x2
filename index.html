@@ -1,58 +1,146 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>العد التنازلي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chems Bank Dashboard</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f9;
+        :root {
+            --primary: #2563eb;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+            --green: #22c55e;
         }
-        #timer {
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .balance-card {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+        }
+
+        .balance-amount {
             font-size: 3rem;
             font-weight: bold;
-            color: #333;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            color: var(--green);
         }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-withdraw { background: var(--primary); color: white; }
+        .btn-paypal { background: #0070ba; color: white; }
+        button:hover { opacity: 0.8; }
+
+        .history {
+            margin-top: 40px;
+            background: var(--card);
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th { text-align: left; color: #94a3b8; padding-bottom: 10px; }
+        td { padding: 15px 0; border-top: 1px solid #334155; }
+        .status-success { color: var(--green); }
     </style>
 </head>
 <body>
 
-    <div id="timer">جاري التحميل...</div>
+<div class="container">
+    <header>
+        <h1>Welcome back, <strong>Chems</strong></h1>
+        <div style="font-size: 0.9rem; color: #94a3b8;">Account ID: US-99827361</div>
+    </header>
 
-    <script>
-        // ضبط وقت النهاية (الساعة 10:00 صباحاً اليوم)
-        const targetDate = new Date();
-        targetDate.setHours(10, 0, 0, 0);
+    <div class="balance-card">
+        <p>Available Balance</p>
+        <div class="balance-amount">$572,819.00</div>
+        
+        <div class="actions">
+            <button class="btn-withdraw">Withdraw Funds</button>
+            <button class="btn-paypal">Connect PayPal</button>
+        </div>
+    </div>
 
-        function updateTimer() {
-            const now = new Date();
-            const diff = targetDate - now;
+    <div class="history">
+        <h3>Transaction History</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Method</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>July 12, 2026</td>
+                    <td>Withdrawal to US Bank</td>
+                    <td>ACH Transfer</td>
+                    <td>-$5,000.00</td>
+                    <td class="status-success">Completed</td>
+                </tr>
+                <tr>
+                    <td>July 10, 2026</td>
+                    <td>Payment Received</td>
+                    <td>PayPal</td>
+                    <td>+$12,450.00</td>
+                    <td class="status-success">Completed</td>
+                </tr>
+                <tr>
+                    <td>July 05, 2026</td>
+                    <td>Client Deposit</td>
+                    <td>Wire Transfer</td>
+                    <td>+$45,200.00</td>
+                    <td class="status-success">Completed</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-            if (diff <= 0) {
-                document.getElementById('timer').innerHTML = "انتهى الوقت!";
-                clearInterval(interval);
-                return;
-            }
-
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            // عرض الوقت بالتنسيق المناسب
-            document.getElementById('timer').innerHTML = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-
-        // تحديث العد كل ثانية
-        const interval = setInterval(updateTimer, 1000);
-        updateTimer(); // استدعاء الدالة فوراً
-    </script>
 </body>
 </html>
