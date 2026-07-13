@@ -2,65 +2,136 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Apple of Fortune Clone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple of Fortune</title>
     <style>
-        body { background-color: #0b1a0b; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; margin: 0; padding: 20px; }
-        
+        :root {
+            --bg-color: #0c1a0c;
+            --tile-bg: #2d1a0d;
+            --tile-border: #4d3320;
+            --accent-blue: #3484c2;
+            --text-color: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: space-between;
+        }
+
         /* الهيدر */
-        .header { background: #1c3d1c; padding: 10px 20px; border-radius: 20px; font-weight: bold; margin-bottom: 20px; border: 1px solid #3c6e3c; }
-        
+        .header {
+            background: #183318;
+            padding: 10px 30px;
+            border-radius: 25px;
+            margin-top: 15px;
+            font-weight: bold;
+            border: 1px solid #2d5a2d;
+        }
+
         /* الشبكة */
-        .game-board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
-        .cell { width: 50px; height: 50px; background: #3d2b1f; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid #5e4533; }
-        .cell.revealed { background: #2a1f18; }
-        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .tile {
+            width: 55px;
+            height: 55px;
+            background: var(--tile-bg);
+            border: 3px solid var(--tile-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
         /* التحكم */
-        .controls { background: #1a2a1a; padding: 15px; border-radius: 10px; width: 300px; text-align: center; }
-        .bet-button { background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 10px; }
+        .footer-controls {
+            background: #122212;
+            padding: 20px;
+            width: 100%;
+            border-top: 2px solid #1f3a1f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bet-input-box {
+            background: #0f1d0f;
+            padding: 10px;
+            border-radius: 5px;
+            width: 80%;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .btn-bet {
+            background: var(--accent-blue);
+            color: white;
+            padding: 12px 60px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
     <div class="header">الرصيد: 3000 دج</div>
 
-    <div class="game-board" id="board"></div>
+    <div class="grid-container" id="gameGrid"></div>
 
-    <div class="controls">
-        <input type="number" value="50" style="width: 80%; padding: 5px;" placeholder="أدخل مبلغ الرهان">
-        <button class="bet-button" onclick="startGame()">ابدأ الرهان</button>
+    <div class="footer-controls">
+        <div class="bet-input-box">
+            <input type="number" value="50" style="background:transparent; border:none; color:white; width: 60px; text-align:center;">
+            <span>د.ج</span>
+        </div>
+        <button class="btn-bet" onclick="initGame()">الرهان</button>
     </div>
 
     <script>
-        // إعدادات المخاطرة: كل رقم يمثل عدد التفاحات المعضوضة في السطر
-        const trapConfig = [1, 1, 2, 2, 3, 3, 4]; 
-        const boardElement = document.getElementById('board');
+        // المنطق: 7 أسطر، زيادة الفخاخ (التفاح المعضوض)
+        // 0: آمن (🍎), 1: فخ (🍏)
+        const trapPattern = [1, 1, 2, 2, 3, 3, 4]; 
+        
+        function initGame() {
+            const grid = document.getElementById('gameGrid');
+            grid.innerHTML = '';
 
-        function startGame() {
-            boardElement.innerHTML = '';
-            for (let row = 0; row < trapConfig.length; row++) {
-                let traps = trapConfig[row];
-                let rowArray = Array(5).fill('safe'); // 5 خانات
-                
-                // توزيع التفاحات المعضوضة عشوائياً
-                for(let i=0; i<traps; i++) { rowArray[i] = 'trap'; }
-                rowArray.sort(() => Math.random() - 0.5);
+            trapPattern.forEach((numTraps) => {
+                let row = new Array(5).fill('safe');
+                for(let i=0; i<numTraps; i++) row[i] = 'trap';
+                row.sort(() => Math.random() - 0.5); // خلط عشوائي
 
-                rowArray.forEach(type => {
-                    const cell = document.createElement('div');
-                    cell.className = 'cell';
-                    cell.onclick = () => reveal(cell, type);
-                    boardElement.appendChild(cell);
+                row.forEach(type => {
+                    const tile = document.createElement('div');
+                    tile.className = 'tile';
+                    tile.onclick = function() {
+                        this.style.background = '#2a1f18';
+                        this.innerText = (type === 'trap') ? '🍏' : '🍎';
+                        if(type === 'trap') {
+                            setTimeout(() => alert('خسرت!'), 200);
+                        }
+                    };
+                    grid.appendChild(tile);
                 });
-            }
+            });
         }
-
-        function reveal(cell, type) {
-            cell.classList.add('revealed');
-            cell.innerHTML = (type === 'trap') ? '🍏' : '🍎';
-            if(type === 'trap') alert('خسرت! حظاً أوفر.');
-        }
-
-        startGame();
+        initGame();
     </script>
 </body>
 </html>
