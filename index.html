@@ -3,135 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apple of Fortune</title>
+    <title>لعبة التوقيت - تحدي 0.67</title>
     <style>
-        :root {
-            --bg-color: #0c1a0c;
-            --tile-bg: #2d1a0d;
-            --tile-border: #4d3320;
-            --accent-blue: #3484c2;
-            --text-color: #ffffff;
-        }
-
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: Arial, sans-serif;
-            margin: 0;
+            background-color: #1a1a1a; /* لون خلفية داكن مثل الطاولة في الصورة */
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            justify-content: space-between;
-        }
-
-        /* الهيدر */
-        .header {
-            background: #183318;
-            padding: 10px 30px;
-            border-radius: 25px;
-            margin-top: 15px;
-            font-weight: bold;
-            border: 1px solid #2d5a2d;
-        }
-
-        /* الشبكة */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            padding: 20px;
-        }
-
-        .tile {
-            width: 55px;
-            height: 55px;
-            background: var(--tile-bg);
-            border: 3px solid var(--tile-border);
-            border-radius: 50%;
-            display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            font-size: 24px;
+            height: 100vh;
+            margin: 0;
         }
 
-        /* التحكم */
-        .footer-controls {
-            background: #122212;
-            padding: 20px;
-            width: 100%;
-            border-top: 2px solid #1f3a1f;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .bet-input-box {
-            background: #0f1d0f;
-            padding: 10px;
-            border-radius: 5px;
-            width: 80%;
+        .game-container {
             text-align: center;
-            border: 1px solid #333;
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .btn-bet {
-            background: var(--accent-blue);
-            color: white;
-            padding: 12px 60px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
+        h2 {
+            margin-top: 0;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        .target {
+            background-color: white;
+            color: black;
+            padding: 5px 15px;
+            border-radius: 10px;
             font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        /* تصميم الشاشة الرقمية الخضراء */
+        #display {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 4.5rem;
+            font-weight: bold;
+            color: #00ff00; /* لون أخضر فاقع */
+            background: #000;
+            padding: 20px 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 4px solid #444;
+            text-shadow: 0 0 15px #00ff00; /* تأثير الإضاءة */
+            letter-spacing: 2px;
+        }
+
+        /* تصميم الزر الدائري الذي يشبه الزر في الصورة */
+        #mainBtn {
+            font-size: 2rem;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* شكل دائري */
+            border: 5px solid #ddd;
             cursor: pointer;
+            background-color: #f8f8f8;
+            color: #333;
+            font-weight: bold;
+            transition: all 0.1s ease;
+            box-shadow: 0 8px 0 #999, 0 15px 20px rgba(0,0,0,0.4);
+            margin-bottom: 15px;
+        }
+
+        #mainBtn:active {
+            transform: translateY(8px); /* تأثير الضغط لأسفل */
+            box-shadow: 0 0 0 #999, 0 5px 10px rgba(0,0,0,0.4);
+        }
+
+        #resetBtn {
+            font-size: 1.2rem;
+            padding: 10px 25px;
+            border-radius: 8px;
+            border: none;
+            background-color: #555;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+        }
+
+        #resetBtn:hover {
+            background-color: #777;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            min-height: 30px;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">الرصيد: 3000 دج</div>
-
-    <div class="grid-container" id="gameGrid"></div>
-
-    <div class="footer-controls">
-        <div class="bet-input-box">
-            <input type="number" value="50" style="background:transparent; border:none; color:white; width: 60px; text-align:center;">
-            <span>د.ج</span>
-        </div>
-        <button class="btn-bet" onclick="initGame()">الرهان</button>
+    <div class="game-container">
+        <div class="target">الهدف: 0.67 ثانية</div>
+        <div id="display">00:00.00</div>
+        
+        <button id="mainBtn" onclick="toggleTimer()">بدء</button>
+        <br>
+        <button id="resetBtn" onclick="resetTimer()">إعادة التعيين</button>
+        
+        <div id="result"></div>
     </div>
 
     <script>
-        // المنطق: 7 أسطر، زيادة الفخاخ (التفاح المعضوض)
-        // 0: آمن (🍎), 1: فخ (🍏)
-        const trapPattern = [1, 1, 2, 2, 3, 3, 4]; 
+        // إعدادات الصوت (توليد صوت التيك برمجياً)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         
-        function initGame() {
-            const grid = document.getElementById('gameGrid');
-            grid.innerHTML = '';
-
-            trapPattern.forEach((numTraps) => {
-                let row = new Array(5).fill('safe');
-                for(let i=0; i<numTraps; i++) row[i] = 'trap';
-                row.sort(() => Math.random() - 0.5); // خلط عشوائي
-
-                row.forEach(type => {
-                    const tile = document.createElement('div');
-                    tile.className = 'tile';
-                    tile.onclick = function() {
-                        this.style.background = '#2a1f18';
-                        this.innerText = (type === 'trap') ? '🍏' : '🍎';
-                        if(type === 'trap') {
-                            setTimeout(() => alert('خسرت!'), 200);
-                        }
-                    };
-                    grid.appendChild(tile);
-                });
-            });
+        function playTickSound() {
+            // تشغيل الصوت في حال كان المتصفح يعلقه
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+            
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            // إعدادات الصوت ليشبه النقرة/التيك
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(800, audioCtx.currentTime); // تردد عالي
+            oscillator.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.05); // انخفاض سريع جداً
+            
+            gainNode.gain.setValueAtTime(1, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.05);
         }
-        initGame();
+
+        // متغيرات العداد
+        let startTime, updatedTime, difference = 0, tInterval;
+        let running = false;
+        const targetTime = 0.67; // التوقيت الهدف بالثواني
+
+        const display = document.getElementById('display');
+        const mainBtn = document.getElementById('mainBtn');
+        const resultDisplay = document.getElementById('result');
+
+        // دالة التشغيل والإيقاف
+        function toggleTimer() {
+            playTickSound(); // تشغيل صوت التيك عند الضغط
+
+            if (!running) {
+                // حالة البدء
+                startTime = new Date().getTime() - difference;
+                tInterval = setInterval(updateDisplay, 10); // تحديث الشاشة كل 10 أجزاء من الثانية
+                running = true;
+                mainBtn.innerText = "إيقاف";
+                mainBtn.style.backgroundColor = "#ff4444"; // تغيير لون الزر للأحمر
+                mainBtn.style.color = "white";
+                resultDisplay.innerText = "";
+            } else {
+                // حالة الإيقاف
+                clearInterval(tInterval);
+                running = false;
+                mainBtn.innerText = "بدء";
+                mainBtn.style.backgroundColor = "#f8f8f8"; // إرجاع لون الزر للأبيض
+                mainBtn.style.color = "#333";
+                evaluateResult(); // حساب النتيجة
+            }
+        }
+
+        // دالة تحديث الأرقام على الشاشة
+        function updateDisplay() {
+            updatedTime = new Date().getTime();
+            difference = updatedTime - startTime;
+
+            let seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            let milliseconds = Math.floor((difference % 1000) / 10); // أجزاء من المئة
+
+            // إضافة صفر على اليسار إذا كان الرقم أقل من 10
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+            milliseconds = (milliseconds < 10) ? "0" + milliseconds : milliseconds;
+
+            display.innerText = "00:" + seconds + "." + milliseconds;
+        }
+
+        // دالة حساب النتيجة ومقارنتها بالهدف
+        function evaluateResult() {
+            let currentSeconds = difference / 1000;
+            let diffFromTarget = Math.abs(currentSeconds - targetTime).toFixed(2);
+
+            if (diffFromTarget == 0.00) {
+                 resultDisplay.innerText = "🔥 أسطورة! لقد أصبت 0.67 بالضبط! 🔥";
+                 resultDisplay.style.color = "#00ff00";
+            } else {
+                 resultDisplay.innerText = `الفرق بينك وبين الهدف: ${diffFromTarget} ثانية`;
+                 resultDisplay.style.color = "#ffcc00";
+            }
+        }
+
+        // دالة إعادة التعيين (تصفير العداد)
+        function resetTimer() {
+            clearInterval(tInterval);
+            running = false;
+            difference = 0;
+            display.innerText = "00:00.00";
+            mainBtn.innerText = "بدء";
+            mainBtn.style.backgroundColor = "#f8f8f8";
+            mainBtn.style.color = "#333";
+            resultDisplay.innerText = "";
+        }
     </script>
 </body>
 </html>
