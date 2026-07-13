@@ -6,7 +6,7 @@
     <title>لعبة التوقيت - تحدي 0.67</title>
     <style>
         body {
-            background-color: #1a1a1a; /* لون خلفية داكن مثل الطاولة في الصورة */
+            background-color: #1a1a1a;
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
@@ -47,22 +47,22 @@
             font-family: 'Courier New', Courier, monospace;
             font-size: 4.5rem;
             font-weight: bold;
-            color: #00ff00; /* لون أخضر فاقع */
+            color: #00ff00;
             background: #000;
             padding: 20px 30px;
             border-radius: 10px;
             margin: 20px 0;
             border: 4px solid #444;
-            text-shadow: 0 0 15px #00ff00; /* تأثير الإضاءة */
+            text-shadow: 0 0 15px #00ff00;
             letter-spacing: 2px;
         }
 
-        /* تصميم الزر الدائري الذي يشبه الزر في الصورة */
+        /* تصميم الزر الدائري */
         #mainBtn {
             font-size: 2rem;
             width: 150px;
             height: 150px;
-            border-radius: 50%; /* شكل دائري */
+            border-radius: 50%;
             border: 5px solid #ddd;
             cursor: pointer;
             background-color: #f8f8f8;
@@ -74,7 +74,7 @@
         }
 
         #mainBtn:active {
-            transform: translateY(8px); /* تأثير الضغط لأسفل */
+            transform: translateY(8px);
             box-shadow: 0 0 0 #999, 0 5px 10px rgba(0,0,0,0.4);
         }
 
@@ -116,80 +116,75 @@
     </div>
 
     <script>
-        // إعدادات الصوت (توليد صوت التيك برمجياً)
+        // إعدادات الصوت (تم تعديلها ليكون الصوت كبيراً ومسموعاً بوضوح)
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         
         function playTickSound() {
-            // تشغيل الصوت في حال كان المتصفح يعلقه
             if(audioCtx.state === 'suspended') audioCtx.resume();
             
             const oscillator = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
             
-            // إعدادات الصوت ليشبه النقرة/التيك
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(800, audioCtx.currentTime); // تردد عالي
-            oscillator.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.05); // انخفاض سريع جداً
+            // استخدام الموجة المربعة يعطي صوتاً أعلى وأكثر حدة (كأنه زر مسابقات حقيقي)
+            oscillator.type = 'square'; 
             
-            gainNode.gain.setValueAtTime(1, audioCtx.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+            // تردد قوي للضغطة
+            oscillator.frequency.setValueAtTime(400, audioCtx.currentTime); 
+            oscillator.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.1); 
+            
+            // رفع مستوى الصوت (Gain) وتطويل مدة الرنة قليلاً لتبدو أضخم
+            gainNode.gain.setValueAtTime(1.5, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
             
             oscillator.connect(gainNode);
             gainNode.connect(audioCtx.destination);
             
             oscillator.start();
-            oscillator.stop(audioCtx.currentTime + 0.05);
+            oscillator.stop(audioCtx.currentTime + 0.15);
         }
 
-        // متغيرات العداد
         let startTime, updatedTime, difference = 0, tInterval;
         let running = false;
-        const targetTime = 0.67; // التوقيت الهدف بالثواني
+        const targetTime = 0.67; 
 
         const display = document.getElementById('display');
         const mainBtn = document.getElementById('mainBtn');
         const resultDisplay = document.getElementById('result');
 
-        // دالة التشغيل والإيقاف
         function toggleTimer() {
-            playTickSound(); // تشغيل صوت التيك عند الضغط
+            playTickSound(); // تشغيل الصوت القوي
 
             if (!running) {
-                // حالة البدء
                 startTime = new Date().getTime() - difference;
-                tInterval = setInterval(updateDisplay, 10); // تحديث الشاشة كل 10 أجزاء من الثانية
+                tInterval = setInterval(updateDisplay, 10);
                 running = true;
                 mainBtn.innerText = "إيقاف";
-                mainBtn.style.backgroundColor = "#ff4444"; // تغيير لون الزر للأحمر
+                mainBtn.style.backgroundColor = "#ff4444";
                 mainBtn.style.color = "white";
                 resultDisplay.innerText = "";
             } else {
-                // حالة الإيقاف
                 clearInterval(tInterval);
                 running = false;
                 mainBtn.innerText = "بدء";
-                mainBtn.style.backgroundColor = "#f8f8f8"; // إرجاع لون الزر للأبيض
+                mainBtn.style.backgroundColor = "#f8f8f8";
                 mainBtn.style.color = "#333";
-                evaluateResult(); // حساب النتيجة
+                evaluateResult();
             }
         }
 
-        // دالة تحديث الأرقام على الشاشة
         function updateDisplay() {
             updatedTime = new Date().getTime();
             difference = updatedTime - startTime;
 
             let seconds = Math.floor((difference % (1000 * 60)) / 1000);
-            let milliseconds = Math.floor((difference % 1000) / 10); // أجزاء من المئة
+            let milliseconds = Math.floor((difference % 1000) / 10);
 
-            // إضافة صفر على اليسار إذا كان الرقم أقل من 10
             seconds = (seconds < 10) ? "0" + seconds : seconds;
             milliseconds = (milliseconds < 10) ? "0" + milliseconds : milliseconds;
 
             display.innerText = "00:" + seconds + "." + milliseconds;
         }
 
-        // دالة حساب النتيجة ومقارنتها بالهدف
         function evaluateResult() {
             let currentSeconds = difference / 1000;
             let diffFromTarget = Math.abs(currentSeconds - targetTime).toFixed(2);
@@ -203,7 +198,6 @@
             }
         }
 
-        // دالة إعادة التعيين (تصفير العداد)
         function resetTimer() {
             clearInterval(tInterval);
             running = false;
