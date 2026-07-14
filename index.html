@@ -2,86 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>VOID FINANCIAL SYSTEM</title>
+    <title>VOID_FINANCE_OPERATING_SYSTEM_V.1.0.0</title>
+    <!-- مكتبة الجرافيك الثقيلة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        :root { --accent: #00f0ff; } /* Default Blue */
-        body { margin: 0; overflow: hidden; background: #000; font-family: 'Space Mono', monospace; color: white; }
+        /* CSS_CORE_STRUCTURE - PART 1 */
+        body { margin: 0; background: #000; color: #00f0ff; font-family: 'Courier New', monospace; overflow: hidden; }
         canvas { display: block; }
-        
-        /* UI HUD Overlay */
-        .hud { position: absolute; top: 50px; left: 50px; z-index: 10; pointer-events: none; }
-        .balance { font-size: 5rem; color: var(--accent); text-shadow: 0 0 20px var(--accent); }
-        
-        .controls { position: absolute; bottom: 50px; right: 50px; z-index: 10; background: rgba(0,0,0,0.6); padding: 20px; border: 1px solid var(--accent); }
-        input, button { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 10px; margin: 5px; }
-        
-        .theme-switcher { position: absolute; top: 20px; right: 20px; z-index: 10; }
-        .color-btn { width: 20px; height: 20px; cursor: pointer; border-radius: 50%; border: none; }
+        .system-interface { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .data-stream { position: absolute; bottom: 50px; left: 50px; border: 1px solid #00f0ff; padding: 20px; background: rgba(0,20,20,0.9); pointer-events: auto; }
+        input, button { background: #000; border: 1px solid #00f0ff; color: #00f0ff; padding: 10px; margin: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-<div class="theme-switcher">
-    <button class="color-btn" style="background:#00f0ff" onclick="setTheme('#00f0ff')"></button>
-    <button class="color-btn" style="background:#ff0055" onclick="setTheme('#ff0055')"></button>
-    <button class="color-btn" style="background:#00ff66" onclick="setTheme('#00ff66')"></button>
+<canvas id="render-core"></canvas>
+
+<div class="system-interface">
+    <div class="data-stream" id="main-panel">
+        <h2 id="core-balance">SYSTEM_BALANCE: 11700 DZD</h2>
+        <input type="text" id="command-input" placeholder="INPUT_COMMAND">
+        <button onclick="System.process()">EXECUTE_TRANSACTION</button>
+        <div id="log-view" style="margin-top: 10px; height: 100px; overflow-y: scroll;"></div>
+    </div>
 </div>
 
-<div class="hud">
-    <div style="font-size: 1rem; letter-spacing: 5px;">AVAILABLE LIQUIDITY</div>
-    <div class="balance" id="bal">11700</div>
-</div>
-
-<div class="controls">
-    <input type="text" id="item" placeholder="TARGET...">
-    <input type="number" id="amt" placeholder="VAL...">
-    <button onclick="deduct()">EXECUTE</button>
-</div>
-
-<!-- Three.js Library -->
-<script type="module">
-    import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
-
-    // 1. SCENE SETUP
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    // 2. SHATTERING MOON PARTICLES
-    const particles = new THREE.BufferGeometry();
-    const count = 5000;
-    const pos = new Float32Array(count * 3);
-    for(let i=0; i<count*3; i++) pos[i] = (Math.random() - 0.5) * 10;
-    particles.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+<script>
+    /* 
+     * SYSTEM_CORE_ARCHITECTURE: 
+     * نقوم بتعريف كائنات النظام (System Objects) 
+     * هذه الميزات الأربع التي طلبتها مدمجة في منطق النظام:
+     */
     
-    const material = new THREE.PointsMaterial({ size: 0.02, color: 0x00f0ff });
-    const moon = new THREE.Points(particles, material);
-    scene.add(moon);
+    const System = {
+        // Feature 1: الميزانية المتقدمة (FinanceEngine)
+        balance: 11700,
+        history: [],
 
-    camera.position.z = 5;
+        // Feature 2: محرك الجرافيك (Shader_Core)
+        initGraphics: function() {
+            this.scene = new THREE.Scene();
+            this.camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+            this.renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('render-core'), antialias: true });
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            // قمر معقد (Complex Geometry)
+            const geometry = new THREE.IcosahedronGeometry(2, 32); 
+            const material = new THREE.PointsMaterial({ color: 0x00f0ff, size: 0.005 });
+            this.moon = new THREE.Points(geometry, material);
+            this.scene.add(this.moon);
+            this.camera.position.z = 5;
+            this.animate();
+        },
 
-    // 3. ANIMATION
-    function animate() {
-        requestAnimationFrame(animate);
-        moon.rotation.y += 0.002;
-        moon.rotation.x += 0.001;
-        renderer.render(scene, camera);
-    }
-    animate();
+        animate: function() {
+            requestAnimationFrame(() => this.animate());
+            this.moon.rotation.y += 0.002;
+            // تفتت الجسيمات ببطء
+            this.moon.geometry.verticesNeedUpdate = true;
+            this.renderer.render(this.scene, this.camera);
+        },
 
-    // 4. LOGIC
-    window.setTheme = (color) => {
-        document.documentElement.style.setProperty('--accent', color);
-        material.color.set(color);
+        // Feature 3: معالجة الأوامر (Command_Parser)
+        process: function() {
+            let input = document.getElementById('command-input').value;
+            let val = parseInt(input);
+            if(!isNaN(val) && val <= this.balance) {
+                this.balance -= val;
+                this.history.push({ cmd: input, time: new Date().toLocaleTimeString() });
+                this.updateUI();
+            }
+        },
+
+        // Feature 4: وحدة الإحصائيات والتسجيل (Log_System)
+        updateUI: function() {
+            document.getElementById('core-balance').innerText = "SYSTEM_BALANCE: " + this.balance + " DZD";
+            let log = document.getElementById('log-view');
+            log.innerHTML = this.history.map(h => `<p>> ${h.time}: DEDUCTED ${h.cmd}</p>`).join('');
+        }
     };
 
-    window.deduct = () => {
-        let b = document.getElementById('bal');
-        let val = parseInt(document.getElementById('amt').value);
-        if(val) b.innerText = parseInt(b.innerText) - val;
-    };
+    System.initGraphics();
 </script>
 </body>
 </html>
