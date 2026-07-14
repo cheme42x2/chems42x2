@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Financial Tracker</title>
+    <title>Nexus Core System</title>
     <!-- Premium Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Base Reset */
         * {
@@ -18,12 +18,9 @@
             width: 100%;
             height: 100%;
             font-family: 'Montserrat', sans-serif;
-            background-color: #0b0c10;
+            background-color: #030406; /* Deepest black/blue */
             color: #ffffff;
-            overflow: hidden; /* Prevent scrolling on body, handled in card */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            overflow: hidden;
         }
 
         /* Dynamic Background Canvas */
@@ -33,255 +30,274 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 0;
         }
 
-        /* Glassmorphism Main Panel */
-        .glass-panel {
-            background: rgba(17, 25, 40, 0.75);
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.125);
-            border-radius: 24px;
-            width: 90%;
-            max-width: 480px;
-            height: 90vh;
-            max-height: 800px;
-            padding: 40px 30px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        /* Main Fullscreen Interface (No Box) */
+        .core-interface {
             position: relative;
             z-index: 1;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 8%;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        /* User Avatar Section */
+        /* Top Header */
+        .system-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 5vh;
+        }
+
         .user-profile {
             display: flex;
             align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            border-radius: 0; /* Square for a more system/tech look */
             object-fit: cover;
-            border: 2px solid #66fcf1;
-            box-shadow: 0 0 15px rgba(102, 252, 241, 0.3);
-            margin-right: 15px;
+            border-left: 3px solid #00f0ff;
+            padding-left: 10px;
         }
 
         .user-info h2 {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            color: #ffffff;
         }
 
         .user-info p {
-            font-size: 0.85rem;
-            color: #c5c6c7;
-            font-weight: 300;
-        }
-
-        /* Balance Display */
-        .balance-container {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .balance-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #c5c6c7;
-            margin-bottom: 10px;
-        }
-
-        .balance-amount {
+            font-size: 0.75rem;
+            color: #00f0ff;
             font-family: 'Space Mono', monospace;
-            font-size: 3rem;
+            letter-spacing: 1px;
+        }
+
+        /* Center Display - Huge Balance */
+        .data-core {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 4vh;
+        }
+
+        .core-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 15px;
+        }
+
+        .core-amount {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(3.5rem, 10vw, 6rem); /* Responsive huge text */
             font-weight: 700;
-            color: #66fcf1;
-            text-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
+            color: #ffffff;
+            line-height: 1;
+            text-shadow: 0 0 40px rgba(0, 240, 255, 0.4);
+            letter-spacing: -2px;
         }
 
         .currency {
-            font-size: 1.5rem;
-            color: #45a29e;
-        }
-
-        /* Input Fields */
-        .input-group {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 15px 15px 15px 0;
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-bottom-color: #66fcf1;
-        }
-
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        /* Button */
-        button {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #45a29e, #1f2833);
-            color: #fff;
-            border: 1px solid #66fcf1;
-            border-radius: 12px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-transform: uppercase;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: #00f0ff;
+            font-weight: 400;
             letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        /* Input Controls - Minimalist */
+        .control-panel {
+            margin-bottom: 4vh;
+        }
+
+        .input-line {
+            position: relative;
             margin-bottom: 30px;
         }
 
-        button:hover {
-            background: linear-gradient(135deg, #66fcf1, #45a29e);
-            color: #0b0c10;
-            box-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
+        .input-line input {
+            width: 100%;
+            padding: 15px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
         }
 
-        button:active {
+        .input-line input:focus {
+            outline: none;
+            border-bottom: 1px solid #00f0ff;
+            box-shadow: 0 10px 20px -10px rgba(0, 240, 255, 0.3);
+            padding-left: 15px;
+        }
+
+        .input-line input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 200;
+        }
+
+        /* Execution Button */
+        .execute-btn {
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 240, 255, 0.05);
+            color: #00f0ff;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .execute-btn:hover {
+            background: rgba(0, 240, 255, 0.15);
+            border: 1px solid #00f0ff;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            text-shadow: 0 0 10px #00f0ff;
+        }
+
+        .execute-btn:active {
             transform: scale(0.98);
         }
 
-        /* Transaction History */
-        .history-section {
-            flex-grow: 1;
-            overflow: hidden;
+        /* Stream Log (History) */
+        .data-stream {
+            height: 25vh;
             display: flex;
             flex-direction: column;
         }
 
-        .history-title {
-            font-size: 1rem;
+        .stream-title {
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.4);
             margin-bottom: 15px;
-            color: #c5c6c7;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
         }
 
-        .history-list {
+        .stream-list {
             list-style: none;
             overflow-y: auto;
-            padding-right: 10px;
+            padding-right: 15px;
         }
 
-        .history-list::-webkit-scrollbar {
-            width: 4px;
+        /* Custom Scrollbar */
+        .stream-list::-webkit-scrollbar {
+            width: 2px;
+        }
+        .stream-list::-webkit-scrollbar-thumb {
+            background: #00f0ff;
         }
 
-        .history-list::-webkit-scrollbar-thumb {
-            background: rgba(102, 252, 241, 0.3);
-            border-radius: 10px;
-        }
-
-        .transaction-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 12px;
+        .log-entry {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-left: 4px solid #ff4655; /* Red accent for expense */
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            animation: fadeIn 0.5s ease;
         }
 
-        .tx-name {
-            font-weight: 500;
-            font-size: 0.95rem;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .tx-amount {
+        .log-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .log-amount {
             font-family: 'Space Mono', monospace;
-            color: #ff4655;
-            font-weight: 700;
+            color: #ff3366;
+            font-size: 1rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- Dynamic Network Background -->
+    <!-- Dynamic Environment -->
     <canvas id="networkCanvas"></canvas>
 
-    <!-- Main Application UI -->
-    <div class="glass-panel">
+    <!-- Main Fullscreen Interface -->
+    <div class="core-interface">
         
-        <!-- User Profile (No Emojis, Real Avatar Placeholder) -->
-        <div class="user-profile">
-            <!-- Using a real face placeholder from UI Faces/Pravatar -->
-            <img src="https://i.pravatar.cc/150?img=11" alt="Admin Avatar" class="avatar">
-            <div class="user-info">
-                <h2>System Admin</h2>
-                <p>Root Access Authorized</p>
+        <!-- Header / Identity -->
+        <div class="system-header">
+            <div class="user-profile">
+                <!-- Formal Avatar Image -->
+                <img src="https://i.pravatar.cc/150?img=11" alt="Admin" class="avatar">
+                <div class="user-info">
+                    <h2>Sys.Admin</h2>
+                    <p>SECURE_LINK_ACTIVE</p>
+                </div>
             </div>
         </div>
 
-        <!-- Balance -->
-        <div class="balance-container">
-            <div class="balance-label">Current Balance</div>
-            <div class="balance-amount" id="balanceDisplay">11700 <span class="currency">DZD</span></div>
-        </div>
-
-        <!-- Inputs -->
-        <div class="input-group">
-            <input type="text" id="itemName" placeholder="ENTER ITEM DESCRIPTION..." autocomplete="off">
-        </div>
-        <div class="input-group">
-            <input type="number" id="itemPrice" placeholder="ENTER AMOUNT (DZD)..." autocomplete="off">
-        </div>
-
-        <!-- Action Button -->
-        <button onclick="processTransaction()">Execute Deduction</button>
-
-        <!-- History -->
-        <div class="history-section">
-            <div class="history-title">
-                <span>Transaction Log</span>
+        <!-- Central Data Display -->
+        <div class="data-core">
+            <div class="core-label">Available Liquidity</div>
+            <div class="core-amount" id="balanceDisplay">
+                11700<span class="currency">DZD</span>
             </div>
-            <ul class="history-list" id="historyList">
-                <!-- Data will be injected here -->
+        </div>
+
+        <!-- Inputs Section -->
+        <div class="control-panel">
+            <div class="input-line">
+                <input type="text" id="itemName" placeholder="TARGET_DESCRIPTION" autocomplete="off">
+            </div>
+            <div class="input-line">
+                <input type="number" id="itemPrice" placeholder="AMOUNT_VALUE" autocomplete="off">
+            </div>
+            <button class="execute-btn" onclick="processTransaction()">Initiate Protocol</button>
+        </div>
+
+        <!-- History / Logs -->
+        <div class="data-stream">
+            <div class="stream-title">Activity Stream</div>
+            <ul class="stream-list" id="historyList">
+                <!-- Logs output -->
             </ul>
         </div>
+
     </div>
 
-    <!-- Application Logic & Canvas Animation -->
+    <!-- System Logic -->
     <script>
-        /* --- 1. DYNAMIC NETWORK BACKGROUND (CANVAS) --- */
+        // 1. DYNAMIC BACKGROUND SCRIPT (Optimized for Fullscreen Depth)
         const canvas = document.getElementById('networkCanvas');
         const ctx = canvas.getContext('2d');
         
         let particlesArray = [];
-        const numberOfParticles = 80;
+        const numberOfParticles = 100; // Increased density
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -296,9 +312,9 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() * 1 - 0.5) * 0.5; // Slower, deeper movement
+                this.speedY = (Math.random() * 1 - 0.5) * 0.5;
             }
             update() {
                 this.x += this.speedX;
@@ -307,7 +323,7 @@
                 if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
             }
             draw() {
-                ctx.fillStyle = 'rgba(102, 252, 241, 0.5)';
+                ctx.fillStyle = 'rgba(0, 240, 255, 0.4)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -327,15 +343,14 @@
                 particlesArray[i].update();
                 particlesArray[i].draw();
                 
-                // Draw lines between close particles
                 for (let j = i; j < particlesArray.length; j++) {
                     const dx = particlesArray[i].x - particlesArray[j].x;
                     const dy = particlesArray[i].y - particlesArray[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
                     
-                    if (distance < 120) {
+                    if (distance < 150) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(102, 252, 241, ${1 - distance/120})`;
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.15 - distance/1000})`;
                         ctx.lineWidth = 0.5;
                         ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
                         ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
@@ -350,12 +365,11 @@
         animateNetwork();
 
 
-        /* --- 2. FINANCIAL TRACKER LOGIC (WITH LOCAL STORAGE) --- */
+        // 2. CORE LOGIC (Data Persistence)
         const INITIAL_BALANCE = 11700;
         
-        // Load data from LocalStorage or set defaults
-        let currentBalance = localStorage.getItem('nexusBalance');
-        let transactionHistory = JSON.parse(localStorage.getItem('nexusHistory')) || [];
+        let currentBalance = localStorage.getItem('nexusCoreBalance');
+        let transactionHistory = JSON.parse(localStorage.getItem('nexusCoreHistory')) || [];
 
         if (currentBalance === null) {
             currentBalance = INITIAL_BALANCE;
@@ -363,7 +377,6 @@
             currentBalance = parseFloat(currentBalance);
         }
 
-        // Initialize UI
         updateBalanceUI();
         renderHistory();
 
@@ -374,44 +387,36 @@
             const itemName = nameInput.value.trim().toUpperCase();
             const itemPrice = parseFloat(priceInput.value);
 
-            if (!itemName) {
-                alert('SYSTEM ERROR: PLEASE ENTER ITEM DESCRIPTION.');
-                return;
+            if (!itemName || isNaN(itemPrice) || itemPrice <= 0) {
+                return; // Silent fail for cleaner UX, or you can add custom alerts
             }
-            if (isNaN(itemPrice) || itemPrice <= 0) {
-                alert('SYSTEM ERROR: INVALID AMOUNT DETECTED.');
-                return;
-            }
+            
             if (itemPrice > currentBalance) {
-                alert('SYSTEM ERROR: INSUFFICIENT FUNDS.');
+                nameInput.value = 'ERROR: INSUFFICIENT FUNDS';
+                setTimeout(() => nameInput.value = '', 2000);
                 return;
             }
 
-            // Deduct balance
             currentBalance -= itemPrice;
             
-            // Add to history array
             transactionHistory.unshift({
                 name: itemName,
                 amount: itemPrice,
                 id: Date.now()
             });
 
-            // Save to LocalStorage
-            localStorage.setItem('nexusBalance', currentBalance);
-            localStorage.setItem('nexusHistory', JSON.stringify(transactionHistory));
+            localStorage.setItem('nexusCoreBalance', currentBalance);
+            localStorage.setItem('nexusCoreHistory', JSON.stringify(transactionHistory));
 
-            // Update UI
             updateBalanceUI();
             renderHistory();
 
-            // Clear inputs
             nameInput.value = '';
             priceInput.value = '';
         }
 
         function updateBalanceUI() {
-            document.getElementById('balanceDisplay').innerHTML = `${currentBalance} <span class="currency">DZD</span>`;
+            document.getElementById('balanceDisplay').innerHTML = `${currentBalance}<span class="currency">DZD</span>`;
         }
 
         function renderHistory() {
@@ -420,10 +425,10 @@
             
             transactionHistory.forEach(tx => {
                 const li = document.createElement('li');
-                li.className = 'transaction-item';
+                li.className = 'log-entry';
                 li.innerHTML = `
-                    <span class="tx-name">${tx.name}</span>
-                    <span class="tx-amount">- ${tx.amount} DZD</span>
+                    <span class="log-name">${tx.name}</span>
+                    <span class="log-amount">- ${tx.amount}</span>
                 `;
                 list.appendChild(li);
             });
