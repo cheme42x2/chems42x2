@@ -2,437 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Core System</title>
-    <!-- Premium Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>VOID FINANCIAL SYSTEM</title>
     <style>
-        /* Base Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body, html {
-            width: 100%;
-            height: 100%;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #030406; /* Deepest black/blue */
-            color: #ffffff;
-            overflow: hidden;
-        }
-
-        /* Dynamic Background Canvas */
-        #networkCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        /* Main Fullscreen Interface (No Box) */
-        .core-interface {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            padding: 40px 8%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Top Header */
-        .system-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 5vh;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-        }
-
-        .avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 0; /* Square for a more system/tech look */
-            object-fit: cover;
-            border-left: 3px solid #00f0ff;
-            padding-left: 10px;
-        }
-
-        .user-info h2 {
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #ffffff;
-        }
-
-        .user-info p {
-            font-size: 0.75rem;
-            color: #00f0ff;
-            font-family: 'Space Mono', monospace;
-            letter-spacing: 1px;
-        }
-
-        /* Center Display - Huge Balance */
-        .data-core {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin-bottom: 4vh;
-        }
-
-        .core-label {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 15px;
-        }
-
-        .core-amount {
-            font-family: 'Space Mono', monospace;
-            font-size: clamp(3.5rem, 10vw, 6rem); /* Responsive huge text */
-            font-weight: 700;
-            color: #ffffff;
-            line-height: 1;
-            text-shadow: 0 0 40px rgba(0, 240, 255, 0.4);
-            letter-spacing: -2px;
-        }
-
-        .currency {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            color: #00f0ff;
-            font-weight: 400;
-            letter-spacing: 2px;
-            margin-left: 10px;
-        }
-
-        /* Input Controls - Minimalist */
-        .control-panel {
-            margin-bottom: 4vh;
-        }
-
-        .input-line {
-            position: relative;
-            margin-bottom: 30px;
-        }
-
-        .input-line input {
-            width: 100%;
-            padding: 15px 0;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            font-family: 'Space Mono', monospace;
-            font-size: 1.1rem;
-            transition: all 0.4s ease;
-        }
-
-        .input-line input:focus {
-            outline: none;
-            border-bottom: 1px solid #00f0ff;
-            box-shadow: 0 10px 20px -10px rgba(0, 240, 255, 0.3);
-            padding-left: 15px;
-        }
-
-        .input-line input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 200;
-        }
-
-        /* Execution Button */
-        .execute-btn {
-            width: 100%;
-            padding: 20px;
-            background: rgba(0, 240, 255, 0.05);
-            color: #00f0ff;
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            font-family: 'Space Mono', monospace;
-            font-size: 1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .execute-btn:hover {
-            background: rgba(0, 240, 255, 0.15);
-            border: 1px solid #00f0ff;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
-            text-shadow: 0 0 10px #00f0ff;
-        }
-
-        .execute-btn:active {
-            transform: scale(0.98);
-        }
-
-        /* Stream Log (History) */
-        .data-stream {
-            height: 25vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stream-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 10px;
-        }
-
-        .stream-list {
-            list-style: none;
-            overflow-y: auto;
-            padding-right: 15px;
-        }
-
-        /* Custom Scrollbar */
-        .stream-list::-webkit-scrollbar {
-            width: 2px;
-        }
-        .stream-list::-webkit-scrollbar-thumb {
-            background: #00f0ff;
-        }
-
-        .log-entry {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .log-name {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 400;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .log-amount {
-            font-family: 'Space Mono', monospace;
-            color: #ff3366;
-            font-size: 1rem;
-        }
+        :root { --accent: #00f0ff; } /* Default Blue */
+        body { margin: 0; overflow: hidden; background: #000; font-family: 'Space Mono', monospace; color: white; }
+        canvas { display: block; }
+        
+        /* UI HUD Overlay */
+        .hud { position: absolute; top: 50px; left: 50px; z-index: 10; pointer-events: none; }
+        .balance { font-size: 5rem; color: var(--accent); text-shadow: 0 0 20px var(--accent); }
+        
+        .controls { position: absolute; bottom: 50px; right: 50px; z-index: 10; background: rgba(0,0,0,0.6); padding: 20px; border: 1px solid var(--accent); }
+        input, button { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 10px; margin: 5px; }
+        
+        .theme-switcher { position: absolute; top: 20px; right: 20px; z-index: 10; }
+        .color-btn { width: 20px; height: 20px; cursor: pointer; border-radius: 50%; border: none; }
     </style>
 </head>
 <body>
 
-    <!-- Dynamic Environment -->
-    <canvas id="networkCanvas"></canvas>
+<div class="theme-switcher">
+    <button class="color-btn" style="background:#00f0ff" onclick="setTheme('#00f0ff')"></button>
+    <button class="color-btn" style="background:#ff0055" onclick="setTheme('#ff0055')"></button>
+    <button class="color-btn" style="background:#00ff66" onclick="setTheme('#00ff66')"></button>
+</div>
 
-    <!-- Main Fullscreen Interface -->
-    <div class="core-interface">
-        
-        <!-- Header / Identity -->
-        <div class="system-header">
-            <div class="user-profile">
-                <!-- Formal Avatar Image -->
-                <img src="https://i.pravatar.cc/150?img=11" alt="Admin" class="avatar">
-                <div class="user-info">
-                    <h2>Sys.Admin</h2>
-                    <p>SECURE_LINK_ACTIVE</p>
-                </div>
-            </div>
-        </div>
+<div class="hud">
+    <div style="font-size: 1rem; letter-spacing: 5px;">AVAILABLE LIQUIDITY</div>
+    <div class="balance" id="bal">11700</div>
+</div>
 
-        <!-- Central Data Display -->
-        <div class="data-core">
-            <div class="core-label">Available Liquidity</div>
-            <div class="core-amount" id="balanceDisplay">
-                11700<span class="currency">DZD</span>
-            </div>
-        </div>
+<div class="controls">
+    <input type="text" id="item" placeholder="TARGET...">
+    <input type="number" id="amt" placeholder="VAL...">
+    <button onclick="deduct()">EXECUTE</button>
+</div>
 
-        <!-- Inputs Section -->
-        <div class="control-panel">
-            <div class="input-line">
-                <input type="text" id="itemName" placeholder="TARGET_DESCRIPTION" autocomplete="off">
-            </div>
-            <div class="input-line">
-                <input type="number" id="itemPrice" placeholder="AMOUNT_VALUE" autocomplete="off">
-            </div>
-            <button class="execute-btn" onclick="processTransaction()">Initiate Protocol</button>
-        </div>
+<!-- Three.js Library -->
+<script type="module">
+    import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
-        <!-- History / Logs -->
-        <div class="data-stream">
-            <div class="stream-title">Activity Stream</div>
-            <ul class="stream-list" id="historyList">
-                <!-- Logs output -->
-            </ul>
-        </div>
+    // 1. SCENE SETUP
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
 
-    </div>
+    // 2. SHATTERING MOON PARTICLES
+    const particles = new THREE.BufferGeometry();
+    const count = 5000;
+    const pos = new Float32Array(count * 3);
+    for(let i=0; i<count*3; i++) pos[i] = (Math.random() - 0.5) * 10;
+    particles.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    
+    const material = new THREE.PointsMaterial({ size: 0.02, color: 0x00f0ff });
+    const moon = new THREE.Points(particles, material);
+    scene.add(moon);
 
-    <!-- System Logic -->
-    <script>
-        // 1. DYNAMIC BACKGROUND SCRIPT (Optimized for Fullscreen Depth)
-        const canvas = document.getElementById('networkCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        let particlesArray = [];
-        const numberOfParticles = 100; // Increased density
+    camera.position.z = 5;
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    // 3. ANIMATION
+    function animate() {
+        requestAnimationFrame(animate);
+        moon.rotation.y += 0.002;
+        moon.rotation.x += 0.001;
+        renderer.render(scene, camera);
+    }
+    animate();
 
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initParticles();
-        });
+    // 4. LOGIC
+    window.setTheme = (color) => {
+        document.documentElement.style.setProperty('--accent', color);
+        material.color.set(color);
+    };
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 1.5 + 0.5;
-                this.speedX = (Math.random() * 1 - 0.5) * 0.5; // Slower, deeper movement
-                this.speedY = (Math.random() * 1 - 0.5) * 0.5;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(0, 240, 255, 0.4)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particlesArray = [];
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-
-        function animateNetwork() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-                
-                for (let j = i; j < particlesArray.length; j++) {
-                    const dx = particlesArray[i].x - particlesArray[j].x;
-                    const dy = particlesArray[i].y - particlesArray[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < 150) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.15 - distance/1000})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animateNetwork);
-        }
-
-        initParticles();
-        animateNetwork();
-
-
-        // 2. CORE LOGIC (Data Persistence)
-        const INITIAL_BALANCE = 11700;
-        
-        let currentBalance = localStorage.getItem('nexusCoreBalance');
-        let transactionHistory = JSON.parse(localStorage.getItem('nexusCoreHistory')) || [];
-
-        if (currentBalance === null) {
-            currentBalance = INITIAL_BALANCE;
-        } else {
-            currentBalance = parseFloat(currentBalance);
-        }
-
-        updateBalanceUI();
-        renderHistory();
-
-        function processTransaction() {
-            const nameInput = document.getElementById('itemName');
-            const priceInput = document.getElementById('itemPrice');
-            
-            const itemName = nameInput.value.trim().toUpperCase();
-            const itemPrice = parseFloat(priceInput.value);
-
-            if (!itemName || isNaN(itemPrice) || itemPrice <= 0) {
-                return; // Silent fail for cleaner UX, or you can add custom alerts
-            }
-            
-            if (itemPrice > currentBalance) {
-                nameInput.value = 'ERROR: INSUFFICIENT FUNDS';
-                setTimeout(() => nameInput.value = '', 2000);
-                return;
-            }
-
-            currentBalance -= itemPrice;
-            
-            transactionHistory.unshift({
-                name: itemName,
-                amount: itemPrice,
-                id: Date.now()
-            });
-
-            localStorage.setItem('nexusCoreBalance', currentBalance);
-            localStorage.setItem('nexusCoreHistory', JSON.stringify(transactionHistory));
-
-            updateBalanceUI();
-            renderHistory();
-
-            nameInput.value = '';
-            priceInput.value = '';
-        }
-
-        function updateBalanceUI() {
-            document.getElementById('balanceDisplay').innerHTML = `${currentBalance}<span class="currency">DZD</span>`;
-        }
-
-        function renderHistory() {
-            const list = document.getElementById('historyList');
-            list.innerHTML = '';
-            
-            transactionHistory.forEach(tx => {
-                const li = document.createElement('li');
-                li.className = 'log-entry';
-                li.innerHTML = `
-                    <span class="log-name">${tx.name}</span>
-                    <span class="log-amount">- ${tx.amount}</span>
-                `;
-                list.appendChild(li);
-            });
-        }
-    </script>
+    window.deduct = () => {
+        let b = document.getElementById('bal');
+        let val = parseInt(document.getElementById('amt').value);
+        if(val) b.innerText = parseInt(b.innerText) - val;
+    };
+</script>
 </body>
 </html>
