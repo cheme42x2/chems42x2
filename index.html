@@ -1,230 +1,433 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محفظتي الأنيقة</title>
-    <!-- استدعاء خط عربي أنيق من جوجل -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <title>Nexus Financial Tracker</title>
+    <!-- Premium Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* إعدادات التصميم (Classy Design) */
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: #f4f7f6; /* لون خلفية مريح للعين */
-            color: #333;
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0b0c10;
+            color: #ffffff;
+            overflow: hidden; /* Prevent scrolling on body, handled in card */
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
         }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* ظل خفيف وناعم */
+
+        /* Dynamic Background Canvas */
+        #networkCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 400px;
+            height: 100%;
+            z-index: -1;
         }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            font-size: 1.8rem;
+
+        /* Glassmorphism Main Panel */
+        .glass-panel {
+            background: rgba(17, 25, 40, 0.75);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            border-radius: 24px;
+            width: 90%;
+            max-width: 480px;
+            height: 90vh;
+            max-height: 800px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
         }
-        /* تصميم بطاقة الرصيد */
-        .balance-card {
-            background: linear-gradient(135deg, #1abc9c, #16a085); /* تدرج لوني أخضر أنيق */
-            color: white;
-            padding: 25px 20px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(26, 188, 156, 0.3);
+
+        /* User Avatar Section */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .balance-card h2 {
-            margin: 0;
-            font-size: 1.1rem;
-            font-weight: 400;
-            opacity: 0.9;
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #66fcf1;
+            box-shadow: 0 0 15px rgba(102, 252, 241, 0.3);
+            margin-right: 15px;
         }
-        .balance-card .amount {
-            font-size: 2.8rem;
+
+        .user-info h2 {
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-top: 10px;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
-        /* تصميم خانات الإدخال */
-        .input-group {
-            margin-bottom: 18px;
+
+        .user-info p {
+            font-size: 0.85rem;
+            color: #c5c6c7;
+            font-weight: 300;
         }
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
+
+        /* Balance Display */
+        .balance-container {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .balance-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #c5c6c7;
+            margin-bottom: 10px;
+        }
+
+        .balance-amount {
+            font-family: 'Space Mono', monospace;
+            font-size: 3rem;
             font-weight: 700;
-            color: #34495e;
-            font-size: 0.95rem;
+            color: #66fcf1;
+            text-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
         }
+
+        .currency {
+            font-size: 1.5rem;
+            color: #45a29e;
+        }
+
+        /* Input Fields */
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
         .input-group input {
             width: 100%;
-            padding: 14px;
-            border: 2px solid #ecf0f1;
-            border-radius: 10px;
-            box-sizing: border-box;
-            font-family: inherit;
+            padding: 15px 15px 15px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             transition: all 0.3s ease;
         }
+
         .input-group input:focus {
             outline: none;
-            border-color: #1abc9c; /* يتغير اللون عند الكتابة */
-            background-color: #fcfcfc;
+            border-bottom-color: #66fcf1;
         }
-        /* تصميم الزر */
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Button */
         button {
             width: 100%;
-            padding: 15px;
-            background-color: #2c3e50;
-            color: white;
-            border: none;
-            border-radius: 10px;
+            padding: 16px;
+            background: linear-gradient(135deg, #45a29e, #1f2833);
+            color: #fff;
+            border: 1px solid #66fcf1;
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
             font-size: 1.1rem;
             font-weight: 700;
-            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.1s;
+            transition: all 0.3s ease;
             margin-top: 10px;
+            margin-bottom: 30px;
         }
+
         button:hover {
-            background-color: #34495e;
+            background: linear-gradient(135deg, #66fcf1, #45a29e);
+            color: #0b0c10;
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
         }
+
         button:active {
-            transform: scale(0.98); /* تأثير ضغط الزر */
+            transform: scale(0.98);
         }
-        /* تصميم سجل المشتريات */
-        .history {
-            margin-top: 30px;
+
+        /* Transaction History */
+        .history-section {
+            flex-grow: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
-        .history h3 {
-            color: #2c3e50;
-            font-size: 1.1rem;
-            border-bottom: 2px solid #ecf0f1;
-            padding-bottom: 10px;
+
+        .history-title {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 15px;
-        }
-        .expense-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            max-height: 220px;
-            overflow-y: auto;
-        }
-        .expense-item {
+            color: #c5c6c7;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #fff;
+        }
+
+        .history-list {
+            list-style: none;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .history-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .history-list::-webkit-scrollbar-thumb {
+            background: rgba(102, 252, 241, 0.3);
+            border-radius: 10px;
+        }
+
+        .transaction-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
             padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ecf0f1;
-            border-right: 4px solid #e74c3c; /* خط أحمر يعبر عن الخصم */
-            transition: transform 0.2s;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #ff4655; /* Red accent for expense */
         }
-        .expense-item:hover {
-            transform: translateX(-5px); /* حركة خفيفة عند تمرير الماوس */
+
+        .tx-name {
+            font-weight: 500;
+            font-size: 0.95rem;
         }
-        .expense-name {
+
+        .tx-amount {
+            font-family: 'Space Mono', monospace;
+            color: #ff4655;
             font-weight: 700;
-            color: #34495e;
-        }
-        .expense-amount {
-            color: #e74c3c;
-            font-weight: 700;
-        }
-        
-        /* شريط التمرير (Scrollbar) المخصص */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #bdc3c7; 
-            border-radius: 10px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>تتبّع ميزانيتي</h1>
-    
-    <div class="balance-card">
-        <h2>رصيدك الحالي</h2>
-        <div class="amount" id="balanceDisplay">11700 د.ج</div>
-    </div>
+    <!-- Dynamic Network Background -->
+    <canvas id="networkCanvas"></canvas>
 
-    <div class="input-group">
-        <label for="expenseName">ماذا اشتريت؟ (مثال: قش، سناك...)</label>
-        <input type="text" id="expenseName" placeholder="أدخل اسم المشتريات هنا...">
-    </div>
-
-    <div class="input-group">
-        <label for="expenseAmount">كم السعر؟ (د.ج)</label>
-        <input type="number" id="expenseAmount" placeholder="أدخل المبلغ الذي دفعته...">
-    </div>
-
-    <button onclick="addExpense()">خصم من الرصيد 💸</button>
-
-    <div class="history">
-        <h3>سجل المصاريف</h3>
-        <ul class="expense-list" id="expenseList">
-            <!-- ستظهر المشتريات هنا -->
-        </ul>
-    </div>
-</div>
-
-<script>
-    // الرصيد الافتتاحي الذي طلبته
-    let currentBalance = 11700;
-
-    function addExpense() {
-        const nameInput = document.getElementById('expenseName');
-        const amountInput = document.getElementById('expenseAmount');
-        const expenseName = nameInput.value.trim();
-        const expenseAmount = parseFloat(amountInput.value);
-
-        // تنبيهات للتأكد من أن البيانات صحيحة
-        if (expenseName === '') {
-            alert('رجاءً اكتب ماذا اشتريت أولاً!');
-            return;
-        }
-        if (isNaN(expenseAmount) || expenseAmount <= 0) {
-            alert('رجاءً أدخل مبلغاً صحيحاً أكبر من الصفر!');
-            return;
-        }
-        if (expenseAmount > currentBalance) {
-            alert('عذراً! المبلغ الذي أدخلته أكبر من رصيدك المتبقي.');
-            return;
-        }
-
-        // عملية الخصم وتحديث الرصيد على الشاشة
-        currentBalance -= expenseAmount;
-        document.getElementById('balanceDisplay').innerText = currentBalance + ' د.ج';
-
-        // إضافة العنصر الذي اشتريته إلى السجل
-        const expenseList = document.getElementById('expenseList');
-        const li = document.createElement('li');
-        li.className = 'expense-item';
-        li.innerHTML = `<span class="expense-name">${expenseName}</span> <span class="expense-amount">- ${expenseAmount} د.ج</span>`;
+    <!-- Main Application UI -->
+    <div class="glass-panel">
         
-        // إضافته في أعلى القائمة لتراه مباشرة
-        expenseList.insertBefore(li, expenseList.firstChild);
+        <!-- User Profile (No Emojis, Real Avatar Placeholder) -->
+        <div class="user-profile">
+            <!-- Using a real face placeholder from UI Faces/Pravatar -->
+            <img src="https://i.pravatar.cc/150?img=11" alt="Admin Avatar" class="avatar">
+            <div class="user-info">
+                <h2>System Admin</h2>
+                <p>Root Access Authorized</p>
+            </div>
+        </div>
 
-        // تفريغ الخانات لتكون جاهزة للمرة القادمة
-        nameInput.value = '';
-        amountInput.value = '';
-    }
-</script>
+        <!-- Balance -->
+        <div class="balance-container">
+            <div class="balance-label">Current Balance</div>
+            <div class="balance-amount" id="balanceDisplay">11700 <span class="currency">DZD</span></div>
+        </div>
 
+        <!-- Inputs -->
+        <div class="input-group">
+            <input type="text" id="itemName" placeholder="ENTER ITEM DESCRIPTION..." autocomplete="off">
+        </div>
+        <div class="input-group">
+            <input type="number" id="itemPrice" placeholder="ENTER AMOUNT (DZD)..." autocomplete="off">
+        </div>
+
+        <!-- Action Button -->
+        <button onclick="processTransaction()">Execute Deduction</button>
+
+        <!-- History -->
+        <div class="history-section">
+            <div class="history-title">
+                <span>Transaction Log</span>
+            </div>
+            <ul class="history-list" id="historyList">
+                <!-- Data will be injected here -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- Application Logic & Canvas Animation -->
+    <script>
+        /* --- 1. DYNAMIC NETWORK BACKGROUND (CANVAS) --- */
+        const canvas = document.getElementById('networkCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let particlesArray = [];
+        const numberOfParticles = 80;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(102, 252, 241, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateNetwork() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+                
+                // Draw lines between close particles
+                for (let j = i; j < particlesArray.length; j++) {
+                    const dx = particlesArray[i].x - particlesArray[j].x;
+                    const dy = particlesArray[i].y - particlesArray[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(102, 252, 241, ${1 - distance/120})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateNetwork);
+        }
+
+        initParticles();
+        animateNetwork();
+
+
+        /* --- 2. FINANCIAL TRACKER LOGIC (WITH LOCAL STORAGE) --- */
+        const INITIAL_BALANCE = 11700;
+        
+        // Load data from LocalStorage or set defaults
+        let currentBalance = localStorage.getItem('nexusBalance');
+        let transactionHistory = JSON.parse(localStorage.getItem('nexusHistory')) || [];
+
+        if (currentBalance === null) {
+            currentBalance = INITIAL_BALANCE;
+        } else {
+            currentBalance = parseFloat(currentBalance);
+        }
+
+        // Initialize UI
+        updateBalanceUI();
+        renderHistory();
+
+        function processTransaction() {
+            const nameInput = document.getElementById('itemName');
+            const priceInput = document.getElementById('itemPrice');
+            
+            const itemName = nameInput.value.trim().toUpperCase();
+            const itemPrice = parseFloat(priceInput.value);
+
+            if (!itemName) {
+                alert('SYSTEM ERROR: PLEASE ENTER ITEM DESCRIPTION.');
+                return;
+            }
+            if (isNaN(itemPrice) || itemPrice <= 0) {
+                alert('SYSTEM ERROR: INVALID AMOUNT DETECTED.');
+                return;
+            }
+            if (itemPrice > currentBalance) {
+                alert('SYSTEM ERROR: INSUFFICIENT FUNDS.');
+                return;
+            }
+
+            // Deduct balance
+            currentBalance -= itemPrice;
+            
+            // Add to history array
+            transactionHistory.unshift({
+                name: itemName,
+                amount: itemPrice,
+                id: Date.now()
+            });
+
+            // Save to LocalStorage
+            localStorage.setItem('nexusBalance', currentBalance);
+            localStorage.setItem('nexusHistory', JSON.stringify(transactionHistory));
+
+            // Update UI
+            updateBalanceUI();
+            renderHistory();
+
+            // Clear inputs
+            nameInput.value = '';
+            priceInput.value = '';
+        }
+
+        function updateBalanceUI() {
+            document.getElementById('balanceDisplay').innerHTML = `${currentBalance} <span class="currency">DZD</span>`;
+        }
+
+        function renderHistory() {
+            const list = document.getElementById('historyList');
+            list.innerHTML = '';
+            
+            transactionHistory.forEach(tx => {
+                const li = document.createElement('li');
+                li.className = 'transaction-item';
+                li.innerHTML = `
+                    <span class="tx-name">${tx.name}</span>
+                    <span class="tx-amount">- ${tx.amount} DZD</span>
+                `;
+                list.appendChild(li);
+            });
+        }
+    </script>
 </body>
 </html>
