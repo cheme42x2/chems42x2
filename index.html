@@ -1,54 +1,228 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محفظتي الأنيقة</title>
+    <!-- استدعاء خط عربي أنيق من جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #050505; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; height: 100vh; margin: 0; }
-        .app-container { width: 375px; height: 100%; background: #121212; border-left: 1px solid #333; border-right: 1px solid #333; padding: 20px; box-sizing: border-box; overflow-y: auto; transition: all 0.3s ease; }
+        /* إعدادات التصميم (Classy Design) */
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f4f7f6; /* لون خلفية مريح للعين */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* ظل خفيف وناعم */
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        /* تصميم بطاقة الرصيد */
+        .balance-card {
+            background: linear-gradient(135deg, #1abc9c, #16a085); /* تدرج لوني أخضر أنيق */
+            color: white;
+            padding: 25px 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(26, 188, 156, 0.3);
+        }
+        .balance-card h2 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        .balance-card .amount {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+        /* تصميم خانات الإدخال */
+        .input-group {
+            margin-bottom: 18px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #34495e;
+            font-size: 0.95rem;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #1abc9c; /* يتغير اللون عند الكتابة */
+            background-color: #fcfcfc;
+        }
+        /* تصميم الزر */
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #34495e;
+        }
+        button:active {
+            transform: scale(0.98); /* تأثير ضغط الزر */
+        }
+        /* تصميم سجل المشتريات */
+        .history {
+            margin-top: 30px;
+        }
+        .history h3 {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .expense-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 220px;
+            overflow-y: auto;
+        }
+        .expense-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ecf0f1;
+            border-right: 4px solid #e74c3c; /* خط أحمر يعبر عن الخصم */
+            transition: transform 0.2s;
+        }
+        .expense-item:hover {
+            transform: translateX(-5px); /* حركة خفيفة عند تمرير الماوس */
+        }
+        .expense-name {
+            font-weight: 700;
+            color: #34495e;
+        }
+        .expense-amount {
+            color: #e74c3c;
+            font-weight: 700;
+        }
         
-        /* تأثير سلاسة */
-        .balance-card { text-align: center; margin: 40px 0; }
-        .amount { font-size: 2.8em; font-weight: 800; color: #00ff9d; letter-spacing: -1px; }
-        
-        .nav-bar { display: flex; justify-content: space-around; background: #1a1a1a; padding: 15px; border-radius: 50px; margin-bottom: 20px; }
-        .nav-item { cursor: pointer; color: #aaa; transition: 0.3s; }
-        .nav-item:hover { color: #fff; }
-
-        .asset { background: #1c1c1c; padding: 20px; border-radius: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; border: 1px solid #2a2a2a; }
-        
-        button { background: #00ff9d; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; }
+        /* شريط التمرير (Scrollbar) المخصص */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #bdc3c7; 
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
 
-<div class="app-container" id="app">
+<div class="container">
+    <h1>تتبّع ميزانيتي</h1>
+    
     <div class="balance-card">
-        <div style="color: #666;">Total Balance</div>
-        <div class="amount" id="balance">$1,279.00</div>
+        <h2>رصيدك الحالي</h2>
+        <div class="amount" id="balanceDisplay">11700 د.ج</div>
     </div>
 
-    <div class="nav-bar">
-        <div class="nav-item">Tokens</div>
-        <div class="nav-item">NFTs</div>
-        <div class="nav-item">Activity</div>
+    <div class="input-group">
+        <label for="expenseName">ماذا اشتريت؟ (مثال: قش، سناك...)</label>
+        <input type="text" id="expenseName" placeholder="أدخل اسم المشتريات هنا...">
     </div>
 
-    <div id="assets">
-        <div class="asset"><span>Solana</span> <span>$84.20</span></div>
-        <div class="asset"><span>Ethereum</span> <span>$1,194.80</span></div>
+    <div class="input-group">
+        <label for="expenseAmount">كم السعر؟ (د.ج)</label>
+        <input type="number" id="expenseAmount" placeholder="أدخل المبلغ الذي دفعته...">
     </div>
 
-    <button onclick="refreshPage()">تحديث المحفظة</button>
+    <button onclick="addExpense()">خصم من الرصيد 💸</button>
+
+    <div class="history">
+        <h3>سجل المصاريف</h3>
+        <ul class="expense-list" id="expenseList">
+            <!-- ستظهر المشتريات هنا -->
+        </ul>
+    </div>
 </div>
 
 <script>
-    // خاصية التحديث السلس
-    function refreshPage() {
-        const balanceEl = document.getElementById('balance');
-        balanceEl.style.opacity = '0';
-        setTimeout(() => {
-            balanceEl.innerText = "$1,279.00";
-            balanceEl.style.opacity = '1';
-        }, 300);
+    // الرصيد الافتتاحي الذي طلبته
+    let currentBalance = 11700;
+
+    function addExpense() {
+        const nameInput = document.getElementById('expenseName');
+        const amountInput = document.getElementById('expenseAmount');
+        const expenseName = nameInput.value.trim();
+        const expenseAmount = parseFloat(amountInput.value);
+
+        // تنبيهات للتأكد من أن البيانات صحيحة
+        if (expenseName === '') {
+            alert('رجاءً اكتب ماذا اشتريت أولاً!');
+            return;
+        }
+        if (isNaN(expenseAmount) || expenseAmount <= 0) {
+            alert('رجاءً أدخل مبلغاً صحيحاً أكبر من الصفر!');
+            return;
+        }
+        if (expenseAmount > currentBalance) {
+            alert('عذراً! المبلغ الذي أدخلته أكبر من رصيدك المتبقي.');
+            return;
+        }
+
+        // عملية الخصم وتحديث الرصيد على الشاشة
+        currentBalance -= expenseAmount;
+        document.getElementById('balanceDisplay').innerText = currentBalance + ' د.ج';
+
+        // إضافة العنصر الذي اشتريته إلى السجل
+        const expenseList = document.getElementById('expenseList');
+        const li = document.createElement('li');
+        li.className = 'expense-item';
+        li.innerHTML = `<span class="expense-name">${expenseName}</span> <span class="expense-amount">- ${expenseAmount} د.ج</span>`;
+        
+        // إضافته في أعلى القائمة لتراه مباشرة
+        expenseList.insertBefore(li, expenseList.firstChild);
+
+        // تفريغ الخانات لتكون جاهزة للمرة القادمة
+        nameInput.value = '';
+        amountInput.value = '';
     }
 </script>
 
