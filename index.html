@@ -4,68 +4,16 @@
     <meta charset="UTF-8">
     <title>For Sofia</title>
     <style>
-        body { 
-            margin: 0; 
-            background: #000; 
-            height: 100vh; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            overflow: hidden; 
-            font-family: Arial, sans-serif;
-        }
+        body { margin: 0; background: #000; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; font-family: Arial, sans-serif; }
         
-        #login-overlay { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: #000; 
-            display: flex; 
-            flex-direction: column;
-            justify-content: center; 
-            align-items: center; 
-            z-index: 1000; 
-        }
-        
-        input { 
-            padding: 12px; 
-            border-radius: 5px; 
-            border: 1px solid #555; 
-            background: #222; 
-            color: white; 
-            margin-bottom: 10px;
-            width: 200px;
-        }
-        
-        button { 
-            padding: 10px 20px; 
-            background: #ff69b4; 
-            border: none; 
-            color: white; 
-            cursor: pointer; 
-            border-radius: 5px; 
-            font-weight: bold;
-        }
+        #login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; }
+        input { padding: 12px; border-radius: 5px; border: 1px solid #ff69b4; background: #222; color: white; margin-bottom: 10px; width: 250px; text-align: center; }
+        button { padding: 10px 20px; background: #ff69b4; border: none; color: white; cursor: pointer; border-radius: 5px; font-weight: bold; }
 
-        #heart { 
-            color: #ff69b4; 
-            font-size: 16px; 
-            font-weight: bold;
-            transform-style: preserve-3d; 
-            animation: rotate 10s infinite linear; 
-        }
+        #heart-container { position: relative; width: 300px; height: 300px; transform-style: preserve-3d; animation: rotate 12s infinite linear; }
+        @keyframes rotate { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
         
-        @keyframes rotate { 
-            from { transform: rotateY(0deg); } 
-            to { transform: rotateY(360deg); } 
-        }
-        
-        .text { 
-            position: absolute; 
-            white-space: nowrap; 
-        }
+        .text { position: absolute; color: #ff69b4; font-size: 20px; font-weight: bold; white-space: nowrap; text-shadow: 0 0 5px #ff69b4; }
     </style>
 </head>
 <body>
@@ -75,15 +23,19 @@
         <button onclick="checkPassword()">Enter</button>
     </div>
 
-    <div id="heart" style="display:none;">
-        <div class="text" style="transform: rotateY(0deg) translateZ(100px);">I LOVE YOU SOFIA</div>
-        <div class="text" style="transform: rotateY(45deg) translateZ(100px);">I LOVE YOU SOFIA</div>
-        <div class="text" style="transform: rotateY(90deg) translateZ(100px);">I LOVE YOU SOFIA</div>
-        <div class="text" style="transform: rotateY(135deg) translateZ(100px);">I LOVE YOU SOFIA</div>
-        <div class="text" style="transform: rotateY(180deg) translateZ(100px);">I LOVE YOU SOFIA</div>
-        <div class="text" style="transform: rotateY(225deg) translateZ(100px);">I LOVE YOU SOFIA</div>
-        <div class="text" style="transform: rotateY(270deg) translateZ(100px);">I LOVE YOU SOFIA</div>
-        <div class="text" style="transform: rotateY(315deg) translateZ(100px);">I LOVE YOU SOFIA</div>
+    <div id="heart-container" style="display:none;">
+        <script>
+            // توزيع النصوص لتشكيل القلب
+            const container = document.getElementById('heart-container');
+            for (let i = 0; i < 20; i++) {
+                const div = document.createElement('div');
+                div.className = 'text';
+                div.innerText = 'I LOVE YOU SOFIA';
+                // معادلة بسيطة لتشكيل القلب
+                div.style.transform = `rotateY(${i * 18}deg) translateZ(100px) translateY(${Math.abs(i-10)*10}px)`;
+                container.appendChild(div);
+            }
+        </script>
     </div>
 
     <script>
@@ -91,7 +43,7 @@
             const pass = document.getElementById('password').value;
             if (pass === 'sofia/iloveyou') {
                 document.getElementById('login-overlay').style.display = 'none';
-                document.getElementById('heart').style.display = 'block';
+                document.getElementById('heart-container').style.display = 'block';
             } else {
                 alert('Wrong password!');
             }
