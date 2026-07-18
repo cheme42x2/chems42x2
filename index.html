@@ -4,37 +4,94 @@
     <meta charset="UTF-8">
     <title>For Sofia</title>
     <style>
-        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; color: white; font-family: Arial, sans-serif; }
-        #login-container { text-align: center; }
-        #heart-container { display: none; perspective: 1000px; text-align: center; }
-        .heart { font-size: 24px; font-weight: bold; color: #ff69b4; text-shadow: 0 0 10px #ff69b4; animation: rotate 10s infinite linear; }
-        @keyframes rotate { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
-        input { padding: 10px; border-radius: 5px; border: none; }
-        button { padding: 10px 20px; background: #ff69b4; border: none; color: white; cursor: pointer; border-radius: 5px; margin-left: 5px;}
+        body { 
+            margin: 0; 
+            background: #000; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            overflow: hidden; 
+            font-family: Arial, sans-serif;
+        }
+        
+        #login-overlay { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: #000; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            z-index: 1000; 
+        }
+        
+        input { 
+            padding: 12px; 
+            border-radius: 5px; 
+            border: 1px solid #555; 
+            background: #222; 
+            color: white; 
+            margin-bottom: 10px;
+            width: 200px;
+        }
+        
+        button { 
+            padding: 10px 20px; 
+            background: #ff69b4; 
+            border: none; 
+            color: white; 
+            cursor: pointer; 
+            border-radius: 5px; 
+            font-weight: bold;
+        }
+
+        #heart { 
+            color: #ff69b4; 
+            font-size: 16px; 
+            font-weight: bold;
+            transform-style: preserve-3d; 
+            animation: rotate 10s infinite linear; 
+        }
+        
+        @keyframes rotate { 
+            from { transform: rotateY(0deg); } 
+            to { transform: rotateY(360deg); } 
+        }
+        
+        .text { 
+            position: absolute; 
+            white-space: nowrap; 
+        }
     </style>
 </head>
 <body>
 
-    <div id="login-container">
+    <div id="login-overlay">
         <input type="password" id="password" placeholder="Enter Password">
         <button onclick="checkPassword()">Enter</button>
     </div>
 
-    <div id="heart-container">
-        <div class="heart">
-            Sofia<br>
-            ♥ ♥ ♥<br>
-            Sofia Sofia<br>
-            Sofia Sofia Sofia
-        </div>
+    <div id="heart" style="display:none;">
+        <div class="text" style="transform: rotateY(0deg) translateZ(100px);">I LOVE YOU SOFIA</div>
+        <div class="text" style="transform: rotateY(45deg) translateZ(100px);">I LOVE YOU SOFIA</div>
+        <div class="text" style="transform: rotateY(90deg) translateZ(100px);">I LOVE YOU SOFIA</div>
+        <div class="text" style="transform: rotateY(135deg) translateZ(100px);">I LOVE YOU SOFIA</div>
+        <div class="text" style="transform: rotateY(180deg) translateZ(100px);">I LOVE YOU SOFIA</div>
+        <div class="text" style="transform: rotateY(225deg) translateZ(100px);">I LOVE YOU SOFIA</div>
+        <div class="text" style="transform: rotateY(270deg) translateZ(100px);">I LOVE YOU SOFIA</div>
+        <div class="text" style="transform: rotateY(315deg) translateZ(100px);">I LOVE YOU SOFIA</div>
     </div>
 
     <script>
         function checkPassword() {
             const pass = document.getElementById('password').value;
             if (pass === 'sofia/iloveyou') {
-                document.getElementById('login-container').style.display = 'none';
-                document.getElementById('heart-container').style.display = 'block';
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('heart').style.display = 'block';
             } else {
                 alert('Wrong password!');
             }
