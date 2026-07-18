@@ -1,6 +1,44 @@
-function getRandomAmount() {
-    // يولد رقماً عشوائياً بين 10 و 1000
-    return (Math.random() * (1000 - 10) + 10).toFixed(2);
-}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>For Sofia</title>
+    <style>
+        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; color: white; font-family: Arial, sans-serif; }
+        #login-container { text-align: center; }
+        #heart-container { display: none; perspective: 1000px; }
+        .heart { font-size: 20px; font-weight: bold; color: #ff69b4; text-shadow: 0 0 10px #ff69b4; animation: rotate 10s infinite linear; }
+        @keyframes rotate { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+        input { padding: 10px; border-radius: 5px; border: none; }
+        button { padding: 10px 20px; background: #ff69b4; border: none; color: white; cursor: pointer; border-radius: 5px; }
+    </style>
+</head>
+<body>
 
-console.log("المبلغ العشوائي هو: $" + getRandomAmount());
+    <div id="login-container">
+        <input type="password" id="password" placeholder="أدخل كلمة السر">
+        <button onclick="checkPassword()">ادخل</button>
+    </div>
+
+    <div id="heart-container">
+        <div class="heart">
+            Sofia<br>
+            ♥ ♥ ♥<br>
+            Sofia Sofia<br>
+            Sofia Sofia Sofia
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const pass = document.getElementById('password').value;
+            if (pass === 'sofia/iloveyou') {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('heart-container').style.display = 'block';
+            } else {
+                alert('كلمة سر خاطئة!');
+            }
+        }
+    </script>
+</body>
+</html>
