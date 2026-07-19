@@ -1,338 +1,230 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alone Without Sofia</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Tajawal:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+<title>مفكرتي</title>
 <style>
   :root{
-    --void:#0a0510;
-    --deep:#1a0f2e;
-    --plum:#3b1f52;
-    --copper:#c8703a;
-    --amber:#e8a15c;
-    --teal:#1f5f5b;
-    --tealight:#4fb8ab;
-    --ink:#180a24;
+    --paper:#faf6ef;
+    --ink:#2b2620;
+    --line:#e4dcc9;
+    --accent:#6b7a5e;
+    --accent-dark:#4d5a43;
+    --muted:#8a8270;
   }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html,body{
-    width:100%;height:100%;
-    background:var(--void);
-    overflow:hidden;
-    font-family:'Tajawal',sans-serif;
-    color:#ece4de;
-    direction:ltr;
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    min-height:100vh;
+    background:
+      linear-gradient(var(--line) 1px, transparent 1px);
+    background-size: 100% 34px;
+    background-color: var(--paper);
+    font-family: 'Tahoma', 'Segoe UI', sans-serif;
+    color: var(--ink);
+    display:flex;
+    justify-content:center;
+    padding: 40px 16px;
   }
-
-  #canvasbg{ position:fixed; inset:0; z-index:0; pointer-events:none; }
-  #ink-rain{ position:fixed; inset:0; z-index:2; pointer-events:none; }
-
-  /* ---------- SCENE ---------- */
-  #scene{
-    position:fixed;inset:0;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    z-index:1;
-    perspective:1400px;
+  .book{
+    width:100%;
+    max-width: 480px;
   }
-
-  .aura{
-    position:absolute;
-    width:680px;height:680px;
-    background:radial-gradient(circle, rgba(200,112,58,0.22) 0%, rgba(79,184,171,0.12) 45%, transparent 72%);
-    filter:blur(16px);
-    animation:auraPulse 8s ease-in-out infinite;
-    z-index:0;
+  .title-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--ink);
   }
-  @keyframes auraPulse{
-    0%,100%{ transform:scale(1) rotate(0deg); opacity:0.75; }
-    50%{ transform:scale(1.18) rotate(8deg); opacity:1; }
+  .title-row h1{
+    font-size: 22px;
+    margin:0;
+    letter-spacing: 1px;
   }
-
-  /* ---------- fractured 3D orb (art piece, not literal heart) ---------- */
-  #orb-stage{
-    width:210px;height:210px;
-    position:relative;
-    transform-style:preserve-3d;
-    animation:rotateOrb 14s linear infinite;
-    z-index:2;
-    margin-bottom:8px;
+  .title-row span{
+    font-size: 12px;
+    color: var(--muted);
   }
-  @keyframes rotateOrb{
-    from{ transform:rotateY(0deg) rotateX(14deg); }
-    to{ transform:rotateY(360deg) rotateX(14deg); }
+  textarea{
+    width:100%;
+    min-height: 170px;
+    resize: vertical;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-family: inherit;
+    font-size: 18px;
+    line-height: 34px;
+    color: var(--ink);
+    padding: 0;
   }
-  .shard{
-    position:absolute;
-    left:50%; top:50%;
-    width:100px; height:130px;
-    margin:-65px 0 0 -50px;
-    background:linear-gradient(155deg, var(--copper) 0%, var(--plum) 55%, var(--ink) 100%);
-    clip-path:polygon(50% 0%, 100% 30%, 78% 100%, 22% 100%, 0% 30%);
-    box-shadow:0 0 30px rgba(200,112,58,0.4), 0 0 50px rgba(79,184,171,0.15);
-    opacity:0.92;
+  textarea::placeholder{
+    color: var(--muted);
   }
-  .shard:nth-child(1){ transform:rotateY(0deg) translateZ(60px) translateX(-6px); }
-  .shard:nth-child(2){ transform:rotateY(60deg) translateZ(60px) translateX(6px); }
-  .shard:nth-child(3){ transform:rotateY(120deg) translateZ(60px) translateX(-4px); }
-  .shard:nth-child(4){ transform:rotateY(180deg) translateZ(60px) translateX(8px); }
-  .shard:nth-child(5){ transform:rotateY(240deg) translateZ(60px) translateX(-8px); }
-  .shard:nth-child(6){ transform:rotateY(300deg) translateZ(60px) translateX(4px); }
-
-  .crack-glow{
-    position:absolute;
-    left:50%; top:8%;
-    width:2px; height:84%;
-    background:linear-gradient(180deg, transparent, var(--tealight), var(--amber), transparent);
-    box-shadow:0 0 14px var(--tealight);
-    transform:translateX(-50%) translateZ(65px);
-    opacity:0.9;
-    z-index:6;
+  .divider{
+    height: 1px;
+    background: var(--line);
+    margin: 6px 0 18px;
   }
-
-  /* orbiting ink drops */
-  #orbit{
-    position:absolute;
-    width:360px;height:360px;
-    transform-style:preserve-3d;
-    animation:rotateOrbit 18s linear infinite;
-    z-index:3;
+  .actions{
+    display:flex;
+    gap:10px;
+    margin-bottom: 18px;
   }
-  @keyframes rotateOrbit{
-    from{ transform:rotateY(0deg) rotateX(70deg); }
-    to{ transform:rotateY(-360deg) rotateX(70deg); }
+  button{
+    font-family: inherit;
+    cursor:pointer;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    padding: 12px 16px;
+    transition: transform .12s ease, opacity .12s ease;
   }
-  .drop{
-    position:absolute;
-    width:7px;height:10px;
-    border-radius:50% 50% 50% 0;
-    background:var(--amber);
-    box-shadow:0 0 12px var(--amber);
-    top:50%;left:50%;
-    margin:-4px;
+  button:active{ transform: scale(0.97); }
+  #saveBtn{
+    flex:1;
+    background: var(--ink);
+    color: var(--paper);
   }
-  .drop.t{ background:var(--tealight); box-shadow:0 0 12px var(--tealight); }
-
-  /* Sofia name */
-  .name-wrap{
-    z-index:4;
+  #saveBtn:disabled{
+    opacity:.5;
+    cursor:default;
+  }
+  .result-card{
+    display:none;
+    background:#fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 0 var(--line);
+  }
+  .result-card.show{ display:block; }
+  .result-label{
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    direction: ltr;
+    text-align: left;
+  }
+  .result-text{
+    direction: ltr;
+    text-align: left;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--ink);
+  }
+  #shareBtn{
+    width:100%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: bold;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  #shareBtn.show{ display:flex; }
+  #shareBtn:hover{ background: var(--accent-dark); }
+  .status{
+    font-size: 12px;
+    color: var(--muted);
     text-align:center;
-    margin-top:16px;
-  }
-  #sofia-name{
-    font-family:'Great Vibes', cursive;
-    font-size:min(18vw, 120px);
-    line-height:1;
-    background:linear-gradient(90deg, var(--amber), var(--copper) 35%, var(--tealight) 65%, var(--amber));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    filter:drop-shadow(0 0 24px rgba(200,112,58,0.4));
-    animation:nameFloat 5s ease-in-out infinite, shine 6s linear infinite;
-    background-size:220% auto;
-  }
-  @keyframes nameFloat{
-    0%,100%{ transform:translateY(0); }
-    50%{ transform:translateY(-6px); }
-  }
-  @keyframes shine{
-    0%{ background-position:0% center; }
-    100%{ background-position:220% center; }
-  }
-  .subtitle{
-    font-family:'Tajawal', sans-serif;
-    font-style:normal;
-    font-weight:500;
-    font-size:clamp(15px,2.3vw,21px);
-    letter-spacing:1px;
-    color:#c9a98f;
-    margin-top:10px;
-  }
-
-  .msg{
-    z-index:4;
-    max-width:640px;
-    margin-top:32px;
-    padding:0 24px;
-    text-align:center;
-    font-size:clamp(17px,2.2vw,22px);
-    font-weight:400;
-    line-height:2.15;
-    color:#e6d9cb;
-    opacity:0;
-    animation:fadeIn 2.2s ease forwards 0.6s;
-  }
-  @keyframes fadeIn{ to{ opacity:1; } }
-  .msg span{
-    color:var(--tealight);
-    font-weight:700;
-  }
-
-  /* lone silhouette standing under the rain — pure CSS, no emoji */
-  #silhouette{
-    position:absolute;
-    bottom:6vh;
-    width:46px; height:120px;
-    z-index:3;
-    opacity:0.65;
-  }
-  .sil-head{
-    width:22px;height:22px;
-    border-radius:50%;
-    background:linear-gradient(180deg,#241333,#0f0818);
-    margin:0 auto;
-    box-shadow:0 0 14px rgba(79,184,171,0.25);
-  }
-  .sil-body{
-    width:38px;height:80px;
-    margin:2px auto 0;
-    background:linear-gradient(180deg,#241333,#0f0818 80%);
-    border-radius:18px 18px 8px 8px;
-    box-shadow:0 0 20px rgba(200,112,58,0.15);
-  }
-
-  .footer-note{
-    position:absolute;
-    bottom:22px;
-    font-size:12px;
-    letter-spacing:3px;
-    color:rgba(230,217,203,0.35);
-    z-index:4;
-    font-style:italic;
-  }
-
-  /* falling ink-rain */
-  .drip{
-    position:fixed;
-    top:-30px;
-    width:3px; height:16px;
-    border-radius:50%;
-    background:linear-gradient(180deg, rgba(79,184,171,0.85), rgba(200,112,58,0.15));
-    pointer-events:none;
-    z-index:2;
-    animation-name:fall;
-    animation-timing-function:linear;
-    animation-iteration-count:infinite;
-    filter:drop-shadow(0 0 4px rgba(79,184,171,0.5));
-  }
-  @keyframes fall{
-    0%{ transform:translateY(0) translateX(0); opacity:0; }
-    8%{ opacity:0.85; }
-    100%{ transform:translateY(110vh) translateX(var(--drift,0px)); opacity:0; }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; }
+    margin-top: 10px;
+    min-height: 16px;
   }
 </style>
 </head>
 <body>
 
-<canvas id="canvasbg"></canvas>
-<div id="ink-rain"></div>
-
-<div id="scene">
-  <div class="aura"></div>
-
-  <div id="orb-stage">
-    <div class="shard"></div>
-    <div class="shard"></div>
-    <div class="shard"></div>
-    <div class="shard"></div>
-    <div class="shard"></div>
-    <div class="shard"></div>
-    <div class="crack-glow"></div>
+<div class="book">
+  <div class="title-row">
+    <h1>مفكرتي</h1>
+    <span id="dateLabel"></span>
   </div>
 
-  <div id="orbit"></div>
+  <textarea id="noteInput" placeholder="اكتب ملاحظتك هنا..."></textarea>
+  <div class="divider"></div>
 
-  <div class="name-wrap">
-    <div id="sofia-name">Sofia</div>
-    <div class="subtitle">Sofia left quietly, and I'm still standing here alone</div>
+  <div class="actions">
+    <button id="saveBtn">حفظ الملاحظة</button>
   </div>
 
-  <div class="msg">
-    I wanted <span>Sofia</span> like I never wanted anything else in this world,<br>
-    and she walked away quietly, leaving me alone in this dark.<br>
-    Every day I still think of her, and my heart breaks like the shard above.<br>
-    No one knows this weight of pain but me.<br>
-    This kind of goodbye is heavy — I'll never forget her voice.
+  <div class="result-card" id="resultCard">
+    <div class="result-label">Saved note</div>
+    <div class="result-text" id="resultText"></div>
   </div>
 
-  <div id="silhouette">
-    <div class="sil-head"></div>
-    <div class="sil-body"></div>
-  </div>
-
-  <div class="footer-note">Alone without Sofia — it's not easy</div>
+  <button id="shareBtn">📌 مشاركة على TikTok</button>
+  <div class="status" id="statusMsg"></div>
 </div>
 
 <script>
-  /* ---------- Orbit ink drops ---------- */
-  const orbit = document.getElementById('orbit');
-  const N = 16;
-  for(let i=0;i<N;i++){
-    const s = document.createElement('div');
-    s.className = 'drop' + (i % 2 === 0 ? '' : ' t');
-    const angle = (i/N)*360;
-    const radius = 165;
-    s.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
-    orbit.appendChild(s);
-  }
+  const noteInput = document.getElementById('noteInput');
+  const saveBtn = document.getElementById('saveBtn');
+  const resultCard = document.getElementById('resultCard');
+  const resultText = document.getElementById('resultText');
+  const shareBtn = document.getElementById('shareBtn');
+  const statusMsg = document.getElementById('statusMsg');
+  const dateLabel = document.getElementById('dateLabel');
 
-  /* ---------- Background canvas: drifting ink particles ---------- */
-  const canvas = document.getElementById('canvasbg');
-  const ctx = canvas.getContext('2d');
-  let W,H,particles=[];
-  function resize(){
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resize);
-  resize();
-  const colors = ['200,112,58', '79,184,171', '232,161,92'];
-  for(let i=0;i<110;i++){
-    particles.push({
-      x:Math.random()*W, y:Math.random()*H,
-      r:Math.random()*1.6+0.4,
-      s:Math.random()*0.25+0.08,
-      c:colors[Math.floor(Math.random()*colors.length)],
-      tw:Math.random()*Math.PI*2
-    });
-  }
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    for(const p of particles){
-      p.tw += 0.012;
-      const alpha = 0.15+Math.sin(p.tw)*0.15;
-      ctx.beginPath();
-      ctx.fillStyle = `rgba(${p.c},${alpha})`;
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fill();
-      p.y -= p.s;
-      if(p.y < -5){ p.y = H+5; p.x = Math.random()*W; }
+  dateLabel.textContent = new Date().toLocaleDateString('ar-EG', { day:'numeric', month:'long' });
+
+  let lastTranslation = '';
+
+  async function translateText(text){
+    const url = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=ar|en';
+    const res = await fetch(url);
+    if(!res.ok) throw new Error('http ' + res.status);
+    const data = await res.json();
+    if(!data || !data.responseData || !data.responseData.translatedText){
+      throw new Error('bad response');
     }
-    requestAnimationFrame(draw);
+    return data.responseData.translatedText;
   }
-  draw();
 
-  /* ---------- Falling ink-rain ---------- */
-  const rainLayer = document.getElementById('ink-rain');
-  function spawnDrip(){
-    const d = document.createElement('div');
-    d.className='drip';
-    d.style.left = Math.random()*100+'vw';
-    d.style.setProperty('--drift', (Math.random()*24-12)+'px');
-    d.style.opacity = (0.25+Math.random()*0.4);
-    d.style.transform = `scale(${0.6+Math.random()*0.9})`;
-    const dur = 2.6+Math.random()*2.4;
-    d.style.animationDuration = dur+'s';
-    rainLayer.appendChild(d);
-    setTimeout(()=>d.remove(), dur*1000+300);
-  }
-  setInterval(spawnDrip, 110);
+  saveBtn.addEventListener('click', async () => {
+    const text = noteInput.value.trim();
+    if(!text){
+      statusMsg.textContent = 'اكتب شيئًا أولاً';
+      return;
+    }
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'جارٍ الحفظ...';
+    statusMsg.textContent = '';
+
+    try{
+      const translated = await translateText(text);
+      lastTranslation = translated;
+      resultText.textContent = translated;
+      resultCard.classList.add('show');
+      shareBtn.classList.add('show');
+      statusMsg.textContent = 'تم الحفظ';
+    }catch(err){
+      statusMsg.textContent = 'حدث خطأ: ' + err.message;
+    }finally{
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'حفظ الملاحظة';
+    }
+  });
+
+  shareBtn.addEventListener('click', async () => {
+    try{
+      await navigator.clipboard.writeText(lastTranslation);
+      statusMsg.textContent = 'تم نسخ النص، جارٍ التوجيه إلى TikTok...';
+    }catch(err){
+      statusMsg.textContent = 'جارٍ التوجيه إلى TikTok...';
+    }
+    setTimeout(() => {
+      window.open('https://www.tiktok.com', '_blank');
+    }, 400);
+  });
 </script>
+
 </body>
 </html>
