@@ -3,299 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Dashaa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;600&family=Playfair+Display:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <title>TikTok Account Marketplace | SOFIAAAAAAA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #131825;
+            --accent-primary: #fe2c55;
+            --accent-secondary: #25f4ee;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --glow: 0 0 30px rgba(254, 44, 85, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
         body {
-            background: #050508;
-            overflow: hidden;
-            font-family: 'Cinzel', 'Playfair Display', serif;
-            cursor: crosshair;
-        }
-        #scene-container {
-            width: 100%;
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-        #main-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-        #content-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .background-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(254, 44, 85, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(37, 244, 238, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), var(--glow);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-verified {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(37, 244, 238, 0.1);
+            color: var(--accent-secondary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid rgba(37, 244, 238, 0.2);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 15px;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-secondary);
+            box-shadow: 0 0 20px rgba(37, 244, 238, 0.3);
+        }
+
+        .username {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+
+        .handle {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 15px 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .stat-item .number {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .stat-item .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+            text-transform: uppercase;
+        }
+
+        .price-section {
+            background: linear-gradient(135deg, rgba(254, 44, 85, 0.1), rgba(37, 244, 238, 0.05));
+            border: 1px solid rgba(254, 44, 85, 0.3);
+            border-radius: 16px;
+            padding: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .price-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .price-value {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-main);
+            text-shadow: 0 0 10px rgba(254, 44, 85, 0.4);
+        }
+
+        .info-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 25px;
+        }
+
+        .info-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-key {
+            color: var(--text-muted);
+        }
+
+        .info-val {
+            font-weight: 600;
+            color: var(--text-main);
+            font-family: monospace;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            color: var(--text-muted);
+            font-size: 20px;
+        }
+
+        .buy-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-primary), #ff4d6d);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(254, 44, 85, 0.3);
+            display: flex;
             align-items: center;
             justify-content: center;
-            pointer-events: none;
+            gap: 10px;
+            text-decoration: none;
+            margin-bottom: 15px;
         }
-        #title-card {
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(254, 44, 85, 0.4);
+        }
+
+        .contact-section {
             text-align: center;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 2.5s cubic-bezier(.22,1,.36,1);
+            font-size: 14px;
+            color: var(--text-muted);
         }
-        .subtitle {
-            font-size: clamp(0.9rem, 2vw, 1.3rem);
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            color: #a89f91;
-            margin-bottom: 24px;
-            font-weight: 300;
+
+        .contact-section a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            font-weight: 700;
+            margin-left: 5px;
+            transition: opacity 0.2s;
         }
-        h1 {
-            font-size: clamp(3rem, 10vw, 8rem);
-            margin: 0;
-            background: linear-gradient(135deg, #f5e6d3 0%, #c9a87c 30%, #e8dcc8 50%, #b8956a 70%, #f0e2cc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 12px;
-            font-weight: 200;
-            line-height: 1.1;
-        }
-        .divider {
-            width: 120px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #c9a87c, transparent);
-            margin: 32px auto;
-        }
-        #typewriter {
-            font-size: clamp(0.95rem, 2.2vw, 1.5rem);
-            color: #b8b0a4;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.8;
-            font-weight: 300;
-            letter-spacing: 1px;
-            min-height: 80px;
-            font-family: 'Playfair Display', serif;
-        }
-        #scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            opacity: 0;
-            transition: opacity 2s ease 4s;
-        }
-        .line {
-            width: 1px;
-            height: 60px;
-            background: linear-gradient(to bottom, #c9a87c, transparent);
-            margin: 0 auto;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
+
+        .contact-section a:hover {
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
-    <div id="scene-container">
-        <canvas id="main-canvas"></canvas>
-        <div id="content-layer">
-            <div id="title-card">
-                <div class="subtitle">A Declaration</div>
-                <h1>DASHAA</h1>
-                <div class="divider"></div>
-                <p id="typewriter"></p>
+
+    <div class="background-glow"></div>
+
+    <div class="container">
+        <div class="badge-verified">
+            <i class="fa-solid fa-shield-check"></i> Secure Escrow
+        </div>
+
+        <div class="profile-header">
+            <div class="avatar-container">
+                <img src="https://i.ibb.co/6y4jGZp/billie.jpg" alt="SOFIAAAAAAA" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300'">
             </div>
-            <div id="scroll-indicator">
-                <div class="line"></div>
+            <div class="username">SOFIAAAAAAA</div>
+            <div class="handle">@lailasuliman98</div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="number">1,487</div>
+                <div class="label">Following</div>
             </div>
+            <div class="stat-item">
+                <div class="number">90</div>
+                <div class="label">Followers</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">32</div>
+                <div class="label">Likes</div>
+            </div>
+        </div>
+
+        <div class="price-section">
+            <span class="price-label">Listing Price</span>
+            <span class="price-value">$570.00</span>
+        </div>
+
+        <div class="info-card">
+            <div class="info-title">
+                <i class="fa-solid fa-lock"></i> Account Credentials Preview
+            </div>
+            <div class="info-row">
+                <span class="info-key">Gmail</span>
+                <span class="info-val">sofia98_secure***@gmail.com</span>
+            </div>
+            <div class="info-row">
+                <span class="info-key">Password</span>
+                <span class="info-val">••••••••••••</span>
+            </div>
+            <div class="info-row">
+                <span class="info-key">Phone Number</span>
+                <span class="info-val">+1 (555) ***-8921</span>
+            </div>
+        </div>
+
+        <div class="payment-methods">
+            <i class="fa-brands fa-cc-visa" title="Visa"></i>
+            <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+            <i class="fa-brands fa-bitcoin" title="Crypto"></i>
+            <i class="fa-brands fa-paypal" title="PayPal"></i>
+            <i class="fa-solid fa-wallet" title="USDT"></i>
+        </div>
+
+        <a href="https://www.tiktok.com/@chems0off" target="_blank" class="buy-btn">
+            <i class="fa-solid fa-cart-shopping"></i> Purchase Account Now
+        </a>
+
+        <div class="contact-section">
+            For direct inquiries & middleman, contact TikTok: <a href="https://www.tiktok.com/@chems0off" target="_blank">@chems0off</a>
         </div>
     </div>
 
-    <script>
-        (function(){
-            const canvas = document.getElementById('main-canvas');
-            const ctx = canvas.getContext('2d');
-            let W, H, mouse = {x: 0, y: 0};
-            
-            function resize(){
-                W = canvas.width = window.innerWidth;
-                H = canvas.height = window.innerHeight;
-                mouse.x = W/2;
-                mouse.y = H/2;
-            }
-            resize();
-            window.addEventListener('resize', resize);
-            
-            // 3D Heart particle system
-            const particles = [];
-            const PARTICLE_COUNT = 800;
-            
-            class Particle {
-                constructor(){
-                    this.reset();
-                }
-                reset(){
-                    const t = Math.random() * Math.PI * 2;
-                    // Heart surface parametric equation
-                    this.baseX = 16 * Math.pow(Math.sin(t), 3);
-                    this.baseY = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
-                    this.baseZ = (Math.random() - 0.5) * 60;
-                    this.size = Math.random() * 2.5 + 0.5;
-                    this.speed = Math.random() * 0.008 + 0.003;
-                    this.angle = Math.random() * Math.PI * 2;
-                    this.hue = 340 + Math.random() * 40;
-                    this.brightness = 40 + Math.random() * 40;
-                    this.alpha = Math.random() * 0.6 + 0.2;
-                    this.pulse = Math.random() * Math.PI * 2;
-                }
-                update(time){
-                    this.angle += this.speed;
-                    const rotX = this.angle;
-                    const rotY = this.angle * 0.7;
-                    
-                    let x = this.baseX * Math.cos(rotY) - this.baseZ * Math.sin(rotY);
-                    let z = this.baseX * Math.sin(rotY) + this.baseZ * Math.cos(rotY);
-                    let y = this.baseY * Math.cos(rotX) - z * Math.sin(rotX);
-                    z = this.baseY * Math.sin(rotX) + z * Math.cos(rotX);
-                    
-                    const dx = (mouse.x - W/2) * 0.0003;
-                    const dy = (mouse.y - H/2) * 0.0003;
-                    x += dx * z;
-                    y += dy * z;
-                    
-                    const breath = Math.sin(time * 0.001 + this.pulse) * 3;
-                    x += breath * 0.3;
-                    y += breath * 0.3;
-                    
-                    this.screenX = W/2 + x * 4;
-                    this.screenY = H/2 - y * 4;
-                    this.depth = z;
-                    this.currentAlpha = this.alpha * (0.5 + 0.5 * Math.sin(time * 0.002 + this.pulse));
-                }
-                draw(ctx){
-                    const scale = 1 + this.depth * 0.003;
-                    const alpha = Math.max(0, Math.min(1, this.currentAlpha * (1 - this.depth * 0.002)));
-                    ctx.beginPath();
-                    ctx.arc(this.screenX, this.screenY, this.size * scale, 0, Math.PI * 2);
-                    ctx.fillStyle = `hsla(${this.hue}, 70%, ${this.brightness}%, ${alpha})`;
-                    ctx.fill();
-                }
-            }
-            
-            for(let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
-            
-            // Ambient floating dust
-            const dust = [];
-            for(let i = 0; i < 150; i++){
-                dust.push({
-                    x: Math.random() * W,
-                    y: Math.random() * H,
-                    size: Math.random() * 1.5,
-                    speedY: -Math.random() * 0.3 - 0.1,
-                    speedX: (Math.random() - 0.5) * 0.2,
-                    alpha: Math.random() * 0.3 + 0.1,
-                    hue: 30 + Math.random() * 30
-                });
-            }
-            
-            // Typewriter effect
-            const messages = [
-                "In the vast silence between stars,",
-                "your name echoes with the weight of eternity.",
-                "From the steppes of Russia to the depths of my soul,",
-                "you have carved a place no one else could reach.",
-                "This is not infatuation. This is recognition.",
-                "Dashaa — you are the architecture of my devotion."
-            ];
-            let msgIndex = 0, charIndex = 0;
-            const typewriterEl = document.getElementById('typewriter');
-            
-            function typeWriter(){
-                if(msgIndex < messages.length){
-                    if(charIndex < messages[msgIndex].length){
-                        typewriterEl.textContent += messages[msgIndex][charIndex];
-                        charIndex++;
-                        setTimeout(typeWriter, 45 + Math.random() * 40);
-                    } else {
-                        typewriterEl.innerHTML += '<br><br>';
-                        msgIndex++;
-                        charIndex = 0;
-                        setTimeout(typeWriter, 800);
-                    }
-                }
-            }
-            
-            // Reveal sequence
-            setTimeout(() => {
-                document.getElementById('title-card').style.opacity = '1';
-                document.getElementById('title-card').style.transform = 'translateY(0)';
-                setTimeout(typeWriter, 1500);
-            }, 800);
-            setTimeout(() => {
-                document.getElementById('scroll-indicator').style.opacity = '1';
-            }, 4000);
-            
-            // Mouse tracking
-            document.addEventListener('mousemove', (e) => {
-                mouse.x = e.clientX;
-                mouse.y = e.clientY;
-            });
-            
-            // Click creates ripple burst
-            document.addEventListener('click', (e) => {
-                for(let i = 0; i < 20; i++){
-                    const p = new Particle();
-                    p.baseX = (e.clientX - W/2) / 4 + (Math.random()-0.5)*30;
-                    p.baseY = -(e.clientY - H/2) / 4 + (Math.random()-0.5)*30;
-                    p.baseZ = (Math.random()-0.5)*20;
-                    p.size = Math.random()*3+1;
-                    p.hue = 340 + Math.random()*50;
-                    particles.push(p);
-                }
-                setTimeout(() => {
-                    particles.splice(PARTICLE_COUNT, 20);
-                }, 3000);
-            });
-            
-            // Main render loop
-            let time = 0;
-            function animate(){
-                time++;
-                ctx.fillStyle = 'rgba(5,5,8,0.15)';
-                ctx.fillRect(0, 0, W, H);
-                
-                dust.forEach(d => {
-                    d.y += d.speedY;
-                    d.x += d.speedX + Math.sin(time*0.01 + d.y*0.01)*0.1;
-                    if(d.y < -10) { d.y = H+10; d.x = Math.random()*W; }
-                    if(d.x < -10) d.x = W+10;
-                    if(d.x > W+10) d.x = -10;
-                    ctx.beginPath();
-                    ctx.arc(d.x, d.y, d.size, 0, Math.PI*2);
-                    ctx.fillStyle = `hsla(${d.hue}, 40%, 70%, ${d.alpha})`;
-                    ctx.fill();
-                });
-                
-                particles.forEach(p => p.update(time));
-                particles.sort((a,b) => b.depth - a.depth);
-                particles.forEach(p => p.draw(ctx));
-                
-                const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.max(W,H)*0.7);
-                grad.addColorStop(0, 'rgba(5,5,8,0)');
-                grad.addColorStop(1, 'rgba(5,5,8,0.4)');
-                ctx.fillStyle = grad;
-                ctx.fillRect(0, 0, W, H);
-                
-                requestAnimationFrame(animate);
-            }
-            animate();
-        })();
-    </script>
 </body>
 </html>
