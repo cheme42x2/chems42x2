@@ -1,1 +1,544 @@
-. 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alicia — Beyond The Stars</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Orbitron:wght@400;700;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #020205;
+      overflow-x: hidden;
+    }
+
+    .alicia-cosmic {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .alicia-cosmic::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(76, 0, 130, 0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 60%, rgba(0, 100, 200, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 50% 20%, rgba(200, 50, 150, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 40% at 70% 30%, rgba(0, 200, 180, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(10, 5, 20, 0.8) 0%, #020205 100%);
+      z-index: 0;
+      animation: nebulaShift 20s ease-in-out infinite;
+    }
+
+    @keyframes nebulaShift {
+      0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+      33% { filter: hue-rotate(15deg) brightness(1.1); }
+      66% { filter: hue-rotate(-10deg) brightness(0.95); }
+    }
+
+    .star-field {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: starTwinkle var(--duration) ease-in-out infinite;
+    }
+
+    @keyframes starTwinkle {
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px currentColor; }
+    }
+
+    .shooting-star {
+      position: absolute;
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+      transform: rotate(-45deg);
+      opacity: 0;
+      animation: shoot 4s linear infinite;
+      z-index: 2;
+    }
+
+    @keyframes shoot {
+      0% { opacity: 0; transform: translateX(-100px) translateY(-100px) rotate(-45deg); }
+      10% { opacity: 1; }
+      20% { opacity: 0; transform: translateX(300px) translateY(300px) rotate(-45deg); }
+      100% { opacity: 0; }
+    }
+
+    .cosmic-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 950px;
+      width: 100%;
+    }
+
+    .cosmic-ornament {
+      font-family: 'Syncopate', sans-serif;
+      font-size: 11px;
+      letter-spacing: 12px;
+      color: rgba(255,255,255,0.25);
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      text-shadow: 0 0 20px rgba(255,255,255,0.1);
+    }
+
+    .name-display {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .name-line-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 15px;
+    }
+
+    .name-line-top .orn-line {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.6));
+    }
+
+    .name-line-top .orn-line-right {
+      background: linear-gradient(90deg, rgba(212,175,55,0.6), transparent);
+    }
+
+    .name-line-top .orn-dot {
+      width: 6px;
+      height: 6px;
+      background: #d4af37;
+      transform: rotate(45deg);
+      box-shadow: 0 0 15px rgba(212,175,55,0.6);
+    }
+
+    .alicia-name {
+      font-family: 'Cinzel', serif;
+      font-size: 72px;
+      font-weight: 900;
+      color: #f5f0e8;
+      letter-spacing: 20px;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 40px rgba(212,175,55,0.3),
+        0 0 80px rgba(212,175,55,0.1),
+        0 4px 20px rgba(0,0,0,0.8);
+      position: relative;
+      background: linear-gradient(180deg, #ffffff 0%, #d4af37 50%, #8b7355 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .name-subtitle {
+      font-family: 'Great Vibes', cursive;
+      font-size: 28px;
+      color: rgba(212,175,55,0.7);
+      margin-top: 12px;
+      letter-spacing: 8px;
+      text-shadow: 0 0 20px rgba(212,175,55,0.2);
+    }
+
+    .elegant-sep {
+      width: 300px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), rgba(212,175,55,0.7), rgba(212,175,55,0.4), transparent);
+      margin: 0 auto 50px;
+      position: relative;
+    }
+
+    .elegant-sep::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      width: 8px;
+      height: 8px;
+      background: #d4af37;
+      box-shadow: 0 0 20px rgba(212,175,55,0.5);
+    }
+
+    .cosmic-card {
+      max-width: 780px;
+      width: 100%;
+      padding: 55px 65px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(212,175,55,0.12);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: relative;
+      margin-bottom: 50px;
+    }
+
+    .cosmic-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
+    }
+
+    .cosmic-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
+    }
+
+    .card-corner {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      border-color: rgba(212,175,55,0.3);
+      border-style: solid;
+    }
+    .c-tl { top: 12px; left: 12px; border-width: 1px 0 0 1px; }
+    .c-tr { top: 12px; right: 12px; border-width: 1px 1px 0 0; }
+    .c-bl { bottom: 12px; left: 12px; border-width: 0 0 1px 1px; }
+    .c-br { bottom: 12px; right: 12px; border-width: 0 1px 1px 0; }
+
+    .cosmic-text {
+      font-size: 19px;
+      line-height: 2.4;
+      color: rgba(255,255,255,0.85);
+      text-align: center;
+      font-style: italic;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      letter-spacing: 0.5px;
+    }
+
+    .cosmic-text .accent-gold {
+      color: #d4af37;
+      font-weight: 700;
+      font-style: normal;
+      text-shadow: 0 0 15px rgba(212,175,55,0.3);
+    }
+
+    .cosmic-text .accent-crimson {
+      color: #c0392b;
+      font-weight: 700;
+      font-style: normal;
+      text-shadow: 0 0 15px rgba(192,57,43,0.2);
+    }
+
+    .stats-cosmic {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .stat-cosmic {
+      text-align: center;
+      padding: 20px 0;
+      min-width: 120px;
+      position: relative;
+    }
+
+    .stat-cosmic::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 20%;
+      right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent);
+      transition: all 0.4s ease;
+    }
+
+    .stat-cosmic:hover::after {
+      left: 5%;
+      right: 5%;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.7), transparent);
+    }
+
+    .stat-cosmic .sc-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #d4af37;
+      text-shadow: 0 0 25px rgba(212,175,55,0.3);
+      display: block;
+      margin-bottom: 6px;
+      letter-spacing: 2px;
+    }
+
+    .stat-cosmic .sc-label {
+      font-size: 9px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-weight: 500;
+    }
+
+    .cosmic-bottom {
+      text-align: center;
+      z-index: 10;
+    }
+
+    .cosmic-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 35px;
+    }
+
+    .cosmic-divider .cd-line {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5));
+    }
+
+    .cosmic-divider .cd-line-r {
+      background: linear-gradient(90deg, rgba(212,175,55,0.5), transparent);
+    }
+
+    .cosmic-divider .cd-icon {
+      color: #d4af37;
+      font-size: 14px;
+      text-shadow: 0 0 15px rgba(212,175,55,0.5);
+      letter-spacing: 8px;
+    }
+
+    .cosmic-sig {
+      font-family: 'Great Vibes', cursive;
+      font-size: 38px;
+      color: rgba(212,175,55,0.85);
+      text-shadow: 0 0 25px rgba(212,175,55,0.2);
+      margin-bottom: 12px;
+    }
+
+    .cosmic-quote {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+    }
+
+    .cosmic-ring {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border: 1px solid rgba(212,175,55,0.05);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      pointer-events: none;
+      animation: ringSpin 30s linear infinite;
+    }
+
+    .cosmic-ring::before {
+      content: '';
+      position: absolute;
+      inset: 60px;
+      border: 1px solid rgba(212,175,55,0.08);
+      border-radius: 50%;
+      animation: ringSpin 20s linear infinite reverse;
+    }
+
+    .cosmic-ring::after {
+      content: '';
+      position: absolute;
+      inset: 120px;
+      border: 1px solid rgba(212,175,55,0.06);
+      border-radius: 50%;
+      animation: ringSpin 15s linear infinite;
+    }
+
+    @keyframes ringSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .cosmic-dust {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      overflow: hidden;
+    }
+
+    .dust-particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: dustFloat linear infinite;
+    }
+
+    @keyframes dustFloat {
+      0% { opacity: 0; transform: translateY(110vh) translateX(0) scale(0); }
+      10% { opacity: var(--opacity); }
+      90% { opacity: var(--opacity); }
+      100% { opacity: 0; transform: translateY(-20vh) translateX(var(--drift)) scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      .alicia-name { font-size: 48px; letter-spacing: 10px; }
+      .cosmic-card { padding: 35px 30px; }
+      .cosmic-text { font-size: 16px; }
+      .stats-cosmic { gap: 25px; }
+      .stat-cosmic .sc-value { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="alicia-cosmic">
+  <div class="star-field" id="starField"></div>
+  <div class="cosmic-dust" id="cosmicDust"></div>
+  <div class="cosmic-ring"></div>
+
+  <div class="cosmic-content">
+    <div class="cosmic-ornament">Beyond The Stars</div>
+
+    <div class="name-display">
+      <div class="name-line-top">
+        <div class="orn-line"></div>
+        <div class="orn-dot"></div>
+        <div class="orn-line orn-line-right"></div>
+      </div>
+
+      <div class="alicia-name">Alicia</div>
+      <div class="name-subtitle">My Universe, My Everything</div>
+    </div>
+
+    <div class="elegant-sep"></div>
+
+    <div class="cosmic-card">
+      <div class="card-corner c-tl"></div>
+      <div class="card-corner c-tr"></div>
+      <div class="card-corner c-bl"></div>
+      <div class="card-corner c-br"></div>
+
+      <p class="cosmic-text">
+        In a universe of billions, <span class="accent-gold">I found you</span>.<br>
+        They say nothing lasts forever — <span class="accent-crimson">I'd prove them wrong for you</span>.<br>
+        You are not just someone I love, <span class="accent-gold">you are my reason to exist</span>.<br>
+        Stars burn out, galaxies fade, but <span class="accent-crimson">what I feel for you is eternal</span>.<br>
+        In this life and the next, <span class="accent-gold">it has always been you</span>.
+      </p>
+    </div>
+
+    <div class="stats-cosmic">
+      <div class="stat-cosmic">
+        <span class="sc-value">∞</span>
+        <span class="sc-label">Eternity</span>
+      </div>
+      <div class="stat-cosmic">
+        <span class="sc-value">100%</span>
+        <span class="sc-label">Loyalty</span>
+      </div>
+      <div class="stat-cosmic">
+        <span class="sc-value">1</span>
+        <span class="sc-label">Only You</span>
+      </div>
+      <div class="stat-cosmic">
+        <span class="sc-value">0</span>
+        <span class="sc-label">Doubts</span>
+      </div>
+    </div>
+
+    <div class="cosmic-bottom">
+      <div class="cosmic-divider">
+        <div class="cd-line"></div>
+        <div class="cd-icon">&#9670; &#9670; &#9670;</div>
+        <div class="cd-line cd-line-r"></div>
+      </div>
+
+      <div class="cosmic-sig">Forever Yours</div>
+      <div class="cosmic-quote">"Beyond The Stars, Beyond Time"</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Generate stars
+  const sf = document.getElementById('starField');
+  for (let i = 0; i < 150; i++) {
+    const star = document.createElement('div');
+    star    star.className = 'star';
+    const size = 0.5 + Math.random() * 2.className = 'star';
+    const size = 0.5 + Math.random() * 2.5;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.setProperty('--duration', (2 + Math.random() * 4) + 's');
+    star.style.animationDelay = Math.random() * 4 + 's';
+
+    const colors = ['#ffffff', '#d4af37', '#87ceeb', '#dda0dd', '#f0e68c'];
+    star.style.color = colors[Math.floor(Math.random() * colors.length)];
+    star.style.boxShadow = `0 0 ${size * 3}px currentColor`;
+
+    sf.appendChild(star);
+  }
+
+  // Generate shooting stars
+  const container = document.querySelector('.alicia-cosmic');
+  for (let i = 0; i < 3; i++) {
+    const ss = document.createElement('div');
+    ss.className = 'shooting-star';
+    ss.style.top = (Math.random() * 50) + '%';
+    ss.style.left = (Math.random() * 50) + '%';
+    ss.style.animationDelay = (i * 2 + Math.random() * 3) + 's';
+    ss.style.animationDuration = (3 + Math.random() * 2) + 's';
+    container.appendChild(ss);
+  }
+
+  // Generate cosmic dust
+  const cd = document.getElementById('cosmicDust');
+  const dustColors = ['#d4af37', '#c0392b', '#87ceeb', '#dda0dd', '#f0e68c'];
+  for (let i = 0; i < 40; i++) {
+    const dp = document.createElement('div');
+    dp.className = 'dust-particle';
+    const size = 1 + Math.random() * 4;
+    dp.style.width = size + 'px';
+    dp.style.height = size + 'px';
+    dp.style.left = Math.random() * 100 + '%';
+    dp.style.background = dustColors[Math.floor(Math.random() * dustColors.length)];
+    dp.style.setProperty('--opacity', 0.3 + Math.random() * 0.5);
+    dp.style.setProperty('--drift', (Math.random() * 100 - 50) + 'px');
+    dp.style.animationDuration = (12 + Math.random() * 15) + 's';
+    dp.style.animationDelay = Math.random() * 15 + 's';
+    dp.style.boxShadow = `0 0 ${size * 2}px currentColor`;
+    cd.appendChild(dp);
+  }
+
+  // Parallax on mouse move
+  document.querySelector('.alicia-cosmic').addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    sf.style.transform = `translate(${x}px, ${y}px)`;
+  });
+</script>
+
+</body>
+</html>
