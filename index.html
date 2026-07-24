@@ -1,674 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHEMS42X2 — Private Intelligence</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --obsidian:#050505;
-    --obsidian-2:#0a0908;
-    --panel: rgba(20,18,15,0.45);
-    --panel-border: rgba(212,175,122,0.16);
-    --gold:#d4af7a;
-    --gold-soft:#e8cfa3;
-    --gold-dim:#7a6440;
-    --chrome-1:#f2f0ec;
-    --chrome-2:#8b8984;
-    --ink:#eae6dd;
-    --ink-dim:#8a8478;
-    --ease: cubic-bezier(.16,.84,.32,1);
-    --ease-soft: cubic-bezier(.22,.61,.36,1);
-  }
-
-  *{ margin:0; padding:0; box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  html,body{
-    background:var(--obsidian);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    overflow-x:hidden;
-    cursor:none;
-  }
-  ::selection{ background:var(--gold); color:#0a0908; }
-  ::-webkit-scrollbar{ width:6px; }
-  ::-webkit-scrollbar-track{ background:var(--obsidian); }
-  ::-webkit-scrollbar-thumb{ background:var(--gold-dim); border-radius:3px; }
-
-  a, button{ font-family:inherit; }
-
-  .serif{ font-family:'Cormorant Garamond', serif; }
-  .mono{ font-family:'IBM Plex Mono', monospace; }
-
-  /* ---------- custom cursor ---------- */
-  #cursor-dot{
-    position:fixed; width:6px; height:6px; border-radius:50%;
-    background:var(--gold-soft); pointer-events:none; z-index:9999;
-    transform:translate(-50%,-50%);
-    box-shadow:0 0 8px rgba(232,207,163,0.8);
-    transition: opacity 0.3s var(--ease);
-  }
-  #cursor-ring{
-    position:fixed; width:34px; height:34px; border-radius:50%;
-    border:1px solid rgba(212,175,122,0.5);
-    pointer-events:none; z-index:9998;
-    transform:translate(-50%,-50%);
-    transition: transform 0.15s var(--ease-soft), width 0.3s var(--ease), height 0.3s var(--ease), border-color 0.3s;
-  }
-  #cursor-ring.hover{ width:60px; height:60px; border-color:var(--gold); background:rgba(212,175,122,0.05); }
-  @media (max-width:860px){ #cursor-dot,#cursor-ring{ display:none; } body{ cursor:auto; } }
-
-  /* ---------- ambient background ---------- */
-  canvas#field{ position:fixed; inset:0; z-index:0; }
-
-  #ambient-glow{
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-    background:
-      radial-gradient(700px 500px at var(--mx,50%) var(--my,30%), rgba(212,175,122,0.07), transparent 60%),
-      radial-gradient(1000px 700px at 80% 90%, rgba(212,175,122,0.04), transparent 60%);
-    transition: background 0.4s var(--ease-soft);
-  }
-
-  #grain{
-    position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0.035; mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  #vignette{
-    position:fixed; inset:0; z-index:2; pointer-events:none;
-    box-shadow: inset 0 0 240px rgba(0,0,0,0.85);
-  }
-
-  /* ---------- shell ---------- */
-  main{ position:relative; z-index:3; }
-  .wrap{ max-width:1320px; margin:0 auto; padding:0 40px; }
-  @media (max-width:640px){ .wrap{ padding:0 20px; } }
-
-  nav.top{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:26px 40px;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    background:linear-gradient(to bottom, rgba(5,5,5,0.7), transparent);
-  }
-  .wordmark{
-    font-family:'Cormorant Garamond', serif;
-    font-size:22px; letter-spacing:6px; font-weight:500;
-    color:var(--chrome-1);
-    background:linear-gradient(120deg, var(--chrome-1) 20%, var(--gold-soft) 40%, var(--chrome-1) 60%, var(--gold) 80%);
-    background-size:220% auto;
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    animation: chromeShift 9s ease-in-out infinite;
-  }
-  @keyframes chromeShift{
-    0%,100%{ background-position:0% 50%; }
-    50%{ background-position:100% 50%; }
-  }
-  .nav-links{ display:flex; gap:42px; }
-  @media (max-width:760px){ .nav-links{ display:none; } }
-  .nav-links a{
-    text-decoration:none; color:var(--ink-dim);
-    font-size:12px; letter-spacing:2px; text-transform:uppercase;
-    position:relative; transition: color 0.4s var(--ease);
-  }
-  .nav-links a::after{
-    content:""; position:absolute; left:0; bottom:-6px; height:1px; width:0;
-    background:var(--gold); transition:width 0.4s var(--ease);
-  }
-  .nav-links a:hover{ color:var(--ink); }
-  .nav-links a:hover::after{ width:100%; }
-
-  /* ---------- hero ---------- */
-  .hero{
-    min-height:100vh; display:flex; flex-direction:column;
-    align-items:center; justify-content:center; text-align:center;
-    padding-top:100px; position:relative;
-  }
-  .eyebrow{
-    font-size:11px; letter-spacing:4px; text-transform:uppercase;
-    color:var(--gold-soft); margin-bottom:26px;
-    opacity:0; animation: riseIn 1s var(--ease) 0.1s forwards;
-    display:flex; align-items:center; gap:10px;
-  }
-  .eyebrow .line{ width:34px; height:1px; background:var(--gold-dim); }
-
-  h1.hero-title{
-    font-family:'Cormorant Garamond', serif;
-    font-weight:400;
-    font-size:clamp(48px, 9vw, 128px);
-    line-height:0.98;
-    letter-spacing:-1px;
-    opacity:0; animation: riseIn 1.1s var(--ease) 0.3s forwards;
-  }
-  h1.hero-title em{
-    font-style:italic;
-    background:linear-gradient(120deg, var(--gold-soft), var(--gold) 40%, var(--chrome-1) 60%, var(--gold-soft));
-    background-size:220% auto;
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    animation: chromeShift 8s ease-in-out infinite;
-  }
-
-  .hero-sub{
-    max-width:560px; margin:28px auto 44px;
-    font-size:16px; line-height:1.7; color:var(--ink-dim); font-weight:300;
-    opacity:0; animation: riseIn 1.1s var(--ease) 0.55s forwards;
-  }
-
-  @keyframes riseIn{
-    from{ opacity:0; transform:translateY(18px); filter:blur(6px); }
-    to{ opacity:1; transform:translateY(0); filter:blur(0); }
-  }
-
-  .hero-actions{
-    display:flex; gap:20px; flex-wrap:wrap; justify-content:center;
-    opacity:0; animation: riseIn 1.1s var(--ease) 0.75s forwards;
-  }
-
-  /* ---------- magnetic buttons ---------- */
-  .magnetic{
-    position:relative; display:inline-flex;
-  }
-  .btn{
-    position:relative; display:inline-flex; align-items:center; gap:10px;
-    padding:16px 34px; border-radius:100px;
-    font-size:12px; letter-spacing:2px; text-transform:uppercase;
-    text-decoration:none; color:var(--obsidian);
-    background:linear-gradient(120deg, var(--gold-soft), var(--gold));
-    border:1px solid transparent;
-    transition: transform 0.5s var(--ease-soft), box-shadow 0.5s var(--ease);
-    will-change: transform;
-    overflow:hidden;
-  }
-  .btn::before{
-    content:""; position:absolute; inset:0; border-radius:100px;
-    background:radial-gradient(120px 80px at var(--gx,50%) var(--gy,50%), rgba(255,255,255,0.55), transparent 60%);
-    opacity:0; transition:opacity 0.4s var(--ease);
-  }
-  .btn:hover::before{ opacity:1; }
-  .btn:hover{ box-shadow:0 12px 40px -8px rgba(212,175,122,0.55); }
-
-  .btn.ghost{
-    background:transparent; color:var(--ink);
-    border:1px solid rgba(234,230,221,0.22);
-  }
-  .btn.ghost::before{
-    background:radial-gradient(120px 80px at var(--gx,50%) var(--gy,50%), rgba(212,175,122,0.35), transparent 60%);
-  }
-  .btn.ghost:hover{ border-color:var(--gold-dim); box-shadow:0 12px 40px -12px rgba(212,175,122,0.3); }
-
-  /* ---------- scroll cue ---------- */
-  .scroll-cue{
-    position:absolute; bottom:38px; left:50%; transform:translateX(-50%);
-    display:flex; flex-direction:column; align-items:center; gap:10px;
-    color:var(--ink-dim); font-size:10px; letter-spacing:3px; text-transform:uppercase;
-    opacity:0; animation: riseIn 1s var(--ease) 1.1s forwards;
-  }
-  .scroll-cue .stem{
-    width:1px; height:38px;
-    background:linear-gradient(to bottom, var(--gold), transparent);
-    position:relative; overflow:hidden;
-  }
-  .scroll-cue .stem::after{
-    content:""; position:absolute; top:-40%; left:0; width:100%; height:40%;
-    background:var(--gold-soft);
-    animation: scrollDrip 2s var(--ease) infinite;
-  }
-  @keyframes scrollDrip{
-    0%{ top:-40%; } 100%{ top:100%; }
-  }
-
-  /* ---------- section common ---------- */
-  section{ padding:150px 0; position:relative; }
-  .section-head{ margin-bottom:64px; max-width:640px; }
-  .section-head .eyebrow{ animation:none; opacity:1; margin-bottom:18px; }
-  .section-head h2{
-    font-family:'Cormorant Garamond', serif; font-weight:400;
-    font-size:clamp(32px,4.5vw,56px); line-height:1.05; letter-spacing:-0.5px;
-  }
-  .section-head p{ margin-top:18px; color:var(--ink-dim); font-weight:300; line-height:1.7; font-size:15px; }
-
-  .reveal{ opacity:0; transform:translateY(40px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
-  .reveal.in{ opacity:1; transform:translateY(0); }
-
-  /* ---------- dashboard grid ---------- */
-  .console-grid{
-    display:grid; grid-template-columns:repeat(12,1fr); gap:22px;
-  }
-  .g-4{ grid-column:span 4; } .g-5{ grid-column:span 5; } .g-7{ grid-column:span 7; }
-  .g-8{ grid-column:span 8; } .g-12{ grid-column:span 12; } .g-6{ grid-column:span 6; }
-  @media (max-width:900px){ .g-4,.g-5,.g-7,.g-8,.g-6{ grid-column:span 12; } }
-
-  .glass{
-    background:var(--panel);
-    border:1px solid var(--panel-border);
-    border-radius:20px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding:30px;
-    position:relative;
-    overflow:hidden;
-    transition: border-color 0.5s var(--ease), transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
-  }
-  .glass::before{
-    content:""; position:absolute; top:0; left:0; right:0; height:1px;
-    background:linear-gradient(90deg, transparent, rgba(212,175,122,0.5), transparent);
-  }
-  .glass:hover{
-    border-color: rgba(212,175,122,0.32);
-    box-shadow: 0 24px 60px -30px rgba(212,175,122,0.25);
-  }
-
-  .card-label{
-    font-size:11px; letter-spacing:2px; text-transform:uppercase;
-    color:var(--gold-soft); display:flex; justify-content:space-between; align-items:center;
-    margin-bottom:22px;
-  }
-  .card-label .tag{
-    font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink-dim);
-    border:1px solid var(--panel-border); padding:3px 8px; border-radius:20px; letter-spacing:1px;
-  }
-
-  /* metrics */
-  .metric-row{ margin-bottom:20px; }
-  .metric-row:last-child{ margin-bottom:0; }
-  .metric-top{ display:flex; justify-content:space-between; font-size:12px; color:var(--ink-dim); margin-bottom:9px; letter-spacing:0.5px; }
-  .metric-top .v{ color:var(--ink); font-family:'IBM Plex Mono',monospace; font-size:12px; }
-  .track{ height:5px; border-radius:4px; background:rgba(255,255,255,0.06); overflow:hidden; }
-  .fill{
-    height:100%; border-radius:4px;
-    background:linear-gradient(90deg, var(--gold-dim), var(--gold-soft));
-    transition:width 0.7s var(--ease-soft);
-  }
-
-  /* activity nodes */
-  .node-list{ display:flex; flex-direction:column; gap:16px; }
-  .node{ display:flex; align-items:center; gap:14px; }
-  .node .pip{
-    width:8px; height:8px; border-radius:50%; background:var(--gold-soft);
-    box-shadow:0 0 10px rgba(232,207,163,0.8);
-    animation:pipPulse 2.4s ease-in-out infinite;
-    flex-shrink:0;
-  }
-  @keyframes pipPulse{ 0%,100%{ opacity:1; transform:scale(1);} 50%{ opacity:0.35; transform:scale(0.75);} }
-  .node .info{ flex:1; }
-  .node .title{ font-size:13px; color:var(--ink); }
-  .node .meta{ font-size:11px; color:var(--ink-dim); font-family:'IBM Plex Mono',monospace; margin-top:2px; }
-
-  /* log terminal */
-  .log{
-    font-family:'IBM Plex Mono',monospace; font-size:12px; line-height:2;
-    height:210px; overflow-y:auto; color:var(--ink-dim);
-  }
-  .log .entry{ opacity:0; animation:logIn 0.5s var(--ease) forwards; }
-  @keyframes logIn{ from{ opacity:0; transform:translateY(4px);} to{ opacity:1; transform:translateY(0);} }
-  .log .entry .t{ color:var(--gold-soft); margin-right:10px; }
-  .log-caret{ display:inline-block; width:6px; height:12px; background:var(--gold-soft); animation:caretBlink 1s steps(1) infinite; vertical-align:middle; }
-  @keyframes caretBlink{ 50%{ opacity:0; } }
-
-  /* route map */
-  .route-map{ position:relative; height:220px; }
-  .route-map svg{ width:100%; height:100%; }
-  .route-path{ stroke-dasharray:6 6; }
-  .route-dot{ animation:travel 5s linear infinite; }
-
-  /* orbit signature */
-  .orbit-wrap{
-    display:flex; align-items:center; justify-content:center; height:100%;
-  }
-  .orbit{
-    position:relative; width:220px; height:220px;
-  }
-  .orbit .core{
-    position:absolute; inset:38%; border-radius:50%;
-    background:radial-gradient(circle at 35% 30%, var(--chrome-1), var(--gold) 55%, var(--gold-dim) 100%);
-    box-shadow:0 0 50px rgba(212,175,122,0.5), inset -6px -6px 14px rgba(0,0,0,0.4);
-  }
-  .orbit .ring{
-    position:absolute; inset:0; border-radius:50%;
-    border:1px solid rgba(212,175,122,0.25);
-    animation: orbitspin linear infinite;
-  }
-  .orbit .ring.r1{ animation-duration:14s; }
-  .orbit .ring.r2{ inset:14px; animation-duration:22s; animation-direction:reverse; border-color:rgba(234,230,221,0.15); }
-  .orbit .ring.r3{ inset:30px; animation-duration:9s; border-color:rgba(212,175,122,0.35); }
-  @keyframes orbitspin{ to{ transform:rotate(360deg); } }
-  .orbit .satellite{
-    position:absolute; width:7px; height:7px; border-radius:50%;
-    background:var(--gold-soft); top:-4px; left:50%;
-    box-shadow:0 0 10px var(--gold-soft);
-  }
-
-  /* footer */
-  footer{
-    padding:60px 0 50px; text-align:center;
-    border-top:1px solid var(--panel-border);
-    color:var(--ink-dim); font-size:11px; letter-spacing:2px;
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chems42x2 Interstellar Command</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Google Fonts for futuristic typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #010204;
+            font-family: 'Share Tech Mono', monospace;
+            color: #00f0ff;
+        }
+        h1, h2, h3, .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        /* Glassmorphism Panel Styling */
+        .glass-panel {
+            background: rgba(2, 6, 23, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1), inset 0 0 15px rgba(0, 240, 255, 0.05);
+        }
+        /* Custom Glowing Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00f0ff;
+            box-shadow: 0 0 10px #00f0ff;
+        }
+        /* Scanline Overlay Effect for Multi-Million Dollar Cyber Feel */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 6px 100%;
+            z-index: 99;
+            opacity: 0.6;
+        }
+        .neon-glow {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+        .btn-sciFi {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-sciFi:hover, .btn-sciFi.active {
+            background: rgba(0, 240, 255, 0.25);
+            border-color: #00f0ff;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+            color: #ffffff;
+        }
+    </style>
 </head>
-<body>
+<body class="relative w-screen h-screen">
 
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
+    <!-- Scanline overlay -->
+    <div class="scanlines"></div>
 
-<canvas id="field"></canvas>
-<div id="ambient-glow"></div>
-<div id="grain"></div>
-<div id="vignette"></div>
+    <!-- WebGL Canvas Container -->
+    <div id="canvas-container" class="absolute inset-0 z-0"></div>
 
-<nav class="top">
-  <div class="wordmark">CHEMS42X2</div>
-  <div class="nav-links">
-    <a href="#console" data-hover>Console</a>
-    <a href="#network" data-hover>Network</a>
-    <a href="#access" data-hover>Access</a>
-  </div>
-  <div class="magnetic" data-magnetic>
-    <a href="#access" class="btn ghost" data-hover style="padding:10px 24px;">Request Access</a>
-  </div>
-</nav>
-
-<main>
-
-  <section class="hero">
-    <div class="eyebrow"><span class="line"></span> PRIVATE FLEET INTELLIGENCE <span class="line"></span></div>
-    <h1 class="hero-title">The art of<br><em>quiet arrival</em></h1>
-    <p class="hero-sub">Chems42x2 orchestrates a global network of private aircraft with the precision of an instrument and the discretion of a concierge. One console. Every mile accounted for.</p>
-    <div class="hero-actions">
-      <div class="magnetic" data-magnetic>
-        <a href="#console" class="btn" data-hover>Enter the Console</a>
-      </div>
-      <div class="magnetic" data-magnetic>
-        <a href="#network" class="btn ghost" data-hover>View Network</a>
-      </div>
-    </div>
-    <div class="scroll-cue"><span>Scroll</span><span class="stem"></span></div>
-  </section>
-
-  <section id="console">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div class="eyebrow"><span class="line"></span> LIVE CONSOLE</div>
-        <h2>Every system, whispering in real time.</h2>
-        <p>Telemetry from the fleet, the ground crews, and the atmosphere itself — reduced to a single unhurried glance.</p>
-      </div>
-
-      <div class="console-grid">
-
-        <div class="glass g-4 reveal">
-          <div class="card-label">Fleet Vitals <span class="tag">LIVE</span></div>
-          <div class="metric-row">
-            <div class="metric-top"><span>Cabin Pressure Sync</span><span class="v" id="m1v">--%</span></div>
-            <div class="track"><div class="fill" id="m1"></div></div>
-          </div>
-          <div class="metric-row">
-            <div class="metric-top"><span>Fuel Reserve Index</span><span class="v" id="m2v">--%</span></div>
-            <div class="track"><div class="fill" id="m2"></div></div>
-          </div>
-          <div class="metric-row">
-            <div class="metric-top"><span>Concierge Load</span><span class="v" id="m3v">--%</span></div>
-            <div class="track"><div class="fill" id="m3"></div></div>
-          </div>
-          <div class="metric-row">
-            <div class="metric-top"><span>Route Optimization</span><span class="v" id="m4v">--%</span></div>
-            <div class="track"><div class="fill" id="m4"></div></div>
-          </div>
-        </div>
-
-        <div class="glass g-4 reveal" style="transition-delay:0.08s">
-          <div class="card-label">Active Departures <span class="tag">6 IN AIR</span></div>
-          <div class="node-list" id="node-list"></div>
-        </div>
-
-        <div class="glass g-4 reveal" style="transition-delay:0.16s">
-          <div class="card-label">Signature <span class="tag">AUR-01</span></div>
-          <div class="orbit-wrap">
-            <div class="orbit">
-              <div class="ring r1"></div>
-              <div class="ring r2"></div>
-              <div class="ring r3"></div>
-              <div class="core"></div>
-              <div class="satellite"></div>
+    <!-- UI Overlay Layer -->
+    <div class="absolute inset-0 z-10 pointer-events-none flex flex-col justify-between p-6">
+        
+        <!-- Header Branding -->
+        <header class="flex justify-between items-center pointer-events-auto">
+            <div class="glass-panel px-6 py-3 rounded-xl flex items-center space-x-4">
+                <div class="w-3 h-3 rounded-full bg-cyan-400 animate-ping"></div>
+                <div>
+                    <h1 class="text-xl font-black tracking-widest text-white neon-glow">CHEMS42X2</h1>
+                    <p class="text-xs text-cyan-400 tracking-wider">INTERSTELLAR COMMAND HUB // v4.2</p>
+                </div>
             </div>
-          </div>
-        </div>
+            
+            <div class="glass-panel px-5 py-2 rounded-xl text-right hidden sm:block">
+                <div class="text-xs text-gray-400">SYSTEM TIME</div>
+                <div id="live-clock" class="text-sm font-bold text-cyan-300">00:00:00 UTC</div>
+            </div>
+        </header>
 
-        <div class="glass g-7 reveal">
-          <div class="card-label">Concierge Log <span class="tag" id="log-tag">SYNC</span></div>
-          <div class="log" id="log"></div>
-        </div>
+        <!-- Main Interaction Layout: Left Sidebar Dashboard -->
+        <main class="flex flex-col lg:flex-row justify-between items-start lg:items-center w-full my-auto pointer-events-none">
+            
+            <!-- Planet Control Panel (Left) -->
+            <div class="glass-panel w-full lg:w-96 p-6 rounded-2xl pointer-events-auto flex flex-col space-y-4 shadow-2xl transition-all duration-500">
+                <div class="border-b border-cyan-500/30 pb-3 flex justify-between items-center">
+                    <span class="text-xs text-cyan-400 tracking-widest font-bold">NAVIGATION MATRIX</span>
+                    <span class="text-xs px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">ONLINE</span>
+                </div>
 
-        <div class="glass g-5 reveal" style="transition-delay:0.1s">
-          <div class="card-label">Active Corridor <span class="tag">TEB → LFPB</span></div>
-          <div class="route-map">
-            <svg viewBox="0 0 340 220">
-              <path d="M20,190 C90,60 250,160 320,30" fill="none" stroke="rgba(212,175,122,0.25)" stroke-width="1.4" class="route-path"/>
-              <circle cx="20" cy="190" r="4" fill="#e8cfa3"/>
-              <circle cx="320" cy="30" r="4" fill="#e8cfa3"/>
-              <circle r="4" fill="#f2f0ec" class="route-dot">
-                <animateMotion dur="5s" repeatCount="indefinite" path="M20,190 C90,60 250,160 320,30"/>
-              </circle>
-            </svg>
-          </div>
-        </div>
+                <!-- Planet Selector Buttons -->
+                <div id="planet-buttons" class="grid grid-cols-2 gap-2">
+                    <!-- Injected via JS -->
+                </div>
 
-      </div>
+                <!-- Active Planet Info Display -->
+                <div class="mt-4 pt-4 border-t border-cyan-500/30 space-y-3">
+                    <div>
+                        <h2 id="target-name" class="text-2xl font-black text-white tracking-wide">MERCURY</h2>
+                        <p id="target-type" class="text-xs text-cyan-400 uppercase tracking-widest">Inner Terrestrial World</p>
+                    </div>
+
+                    <div class="bg-black/40 p-3 rounded-xl border border-cyan-500/20 space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">DISTANCE:</span>
+                            <span id="target-distance" class="text-cyan-300 font-bold">57.9M KM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">ORBIT SPEED:</span>
+                            <span id="target-speed" class="text-cyan-300 font-bold">47.87 KM/S</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">STATUS:</span>
+                            <span class="text-emerald-400 font-bold">STABLE ORBIT</span>
+                        </div>
+                    </div>
+
+                    <p id="target-desc" class="text-xs text-gray-300 leading-relaxed h-16 overflow-y-auto pr-1">
+                        Loading telemetry data from Chems42x2 deep space array...
+                    </p>
+                </div>
+
+                <!-- Universal View Reset Button -->
+                <button id="reset-view" class="btn-sciFi w-full py-3 rounded-xl font-bold tracking-widest text-xs text-cyan-300 uppercase cursor-pointer shadow-lg">
+                    Reset Galaxy Overview
+                </button>
+            </div>
+
+            <!-- Right Side HUD Element (Aesthetic Graph / Radar) -->
+            <div class="hidden lg:flex glass-panel p-5 rounded-2xl flex-col items-center justify-center w-64 space-y-3 pointer-events-auto">
+                <div class="text-xs text-cyan-400 font-bold tracking-widest">RADAR TELEMETRY</div>
+                <div class="relative w-40 h-40 rounded-full border border-cyan-500/30 flex items-center justify-center bg-black/40">
+                    <div class="absolute inset-2 rounded-full border border-dashed border-cyan-500/20 animate-spin" style="animation-duration: 20s;"></div>
+                    <div class="absolute inset-8 rounded-full border border-cyan-500/40"></div>
+                    <div id="radar-sweep" class="absolute w-1/2 h-0.5 bg-gradient-to-r from-transparent to-cyan-400 top-1/2 left-1/2 origin-left animate-spin" style="animation-duration: 4s;"></div>
+                    <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#00f0ff]"></div>
+                </div>
+                <div class="text-[10px] text-cyan-400 tracking-wider">SECTOR: ALPHA-9 // 360° ACTIVE</div>
+            </div>
+
+        </main>
+
+        <!-- Footer Instructions -->
+        <footer class="flex justify-center pointer-events-auto">
+            <div class="glass-panel px-6 py-2 rounded-full text-center text-xs text-cyan-300 tracking-widest border border-cyan-500/30">
+                DRAG TO ROTATE 360° // SCROLL TO ZOOM // CLICK PLANET TO ENGAGE
+            </div>
+        </footer>
+
     </div>
-  </section>
 
-  <section id="network">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div class="eyebrow"><span class="line"></span> THE NETWORK</div>
-        <h2>Forty-two cities. One standard.</h2>
-        <p>Every hangar, handler, and runway in the Chems42x2 network is held to the same unreasonable standard of quiet excellence.</p>
-      </div>
-      <div class="console-grid">
-        <div class="glass g-6 reveal">
-          <div class="card-label">Coverage <span class="tag">GLOBAL</span></div>
-          <p style="font-family:'Cormorant Garamond',serif; font-size:26px; line-height:1.5; color:var(--ink); font-weight:400;">
-            From Teterboro to Le Bourget, Van Nuys to Doha — the same crew, the same silence, the same arrival.
-          </p>
-        </div>
-        <div class="glass g-6 reveal" style="transition-delay:0.08s">
-          <div class="card-label">Response <span class="tag">&lt; 90 MIN</span></div>
-          <p style="font-family:'Cormorant Garamond',serif; font-size:26px; line-height:1.5; color:var(--ink); font-weight:400;">
-            A single message summons an aircraft, a route, and a reason to trust the sky again.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Three.js Application Logic -->
+    <script>
+        // Planet Data Configuration
+        const planetsData = [
+            { id: 'mercury', name: 'Mercury', type: 'Inner Terrestrial', distance: '57.9M KM', speed: '47.87 KM/S', size: 1.2, orbitRadius: 18, color: 0x888888, desc: 'The smallest planet in our solar system and closest to the Sun. Features extreme temperature fluctuations.' },
+            { id: 'venus', name: 'Venus', type: 'Terrestrial Sister', distance: '108.2M KM', speed: '35.02 KM/S', size: 1.8, orbitRadius: 26, color: 0xe3bb76, desc: 'A toxic atmosphere with crushing surface pressure and runaway greenhouse effect.' },
+            { id: 'earth', name: 'Earth', type: 'Prime Cradle', distance: '149.6M KM', speed: '29.78 KM/S', size: 2.0, orbitRadius: 36, color: 0x2277ff, desc: 'The flagship world of the Chems42x2 network. Abundant liquid water and complex carbon-based biosphere.' },
+            { id: 'mars', name: 'Mars', type: 'The Red Outpost', distance: '227.9M KM', speed: '24.07 KM/S', size: 1.5, orbitRadius: 48, color: 0xc1440e, desc: 'A dusty, cold, desert world with a very thin atmosphere and prime target for colonization.' },
+            { id: 'jupiter', name: 'Jupiter', type: 'Gas Giant Titan', distance: '778.5M KM', speed: '13.07 KM/S', size: 4.5, orbitRadius: 66, color: 0xd8ca9d, desc: 'By far the largest planet in the system, more than twice as massive as all the other planets combined.' },
+            { id: 'saturn', name: 'Saturn', type: 'Ringed Jewel', distance: '1.43B KM', speed: '9.69 KM/S', size: 3.8, orbitRadius: 88, color: 0xf4e5c0, hasRings: true, desc: 'Adorned with a dazzling, complex system of icy rings, uniquely majestic in the deep cosmos.' }
+        ];
 
-  <section id="access">
-    <div class="wrap" style="text-align:center;">
-      <div class="eyebrow" style="justify-content:center;"><span class="line"></span> BY INVITATION <span class="line"></span></div>
-      <h2 class="serif" style="font-weight:400; font-size:clamp(32px,5vw,58px); max-width:720px; margin:0 auto 30px;">
-        Chems42x2 is not booked.<br>It is <em style="font-style:italic; background:linear-gradient(120deg,var(--gold-soft),var(--gold) 40%,var(--chrome-1) 60%); -webkit-background-clip:text; background-clip:text; color:transparent;">arranged.</em>
-      </h2>
-      <div class="magnetic" data-magnetic style="display:inline-flex;">
-        <a href="#" class="btn" data-hover>Request Private Access</a>
-      </div>
-    </div>
-  </section>
+        // Scene Setup
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x010204, 0.003);
 
-  <footer>CHEMS42X2 &middot; PRIVATE FLEET INTELLIGENCE &middot; EST. QUIET</footer>
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
+        camera.position.set(0, 30, 70);
 
-</main>
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
 
-<script>
-// ---------- custom cursor ----------
-const dot = document.getElementById('cursor-dot');
-const ring = document.getElementById('cursor-ring');
-let mx=innerWidth/2, my=innerHeight/2, rx=mx, ry=my;
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        scene.add(ambientLight);
 
-window.addEventListener('mousemove', e=>{
-  mx = e.clientX; my = e.clientY;
-  dot.style.left = mx+'px'; dot.style.top = my+'px';
-  document.documentElement.style.setProperty('--mx', mx+'px');
-  document.documentElement.style.setProperty('--my', my+'px');
-});
-function animCursor(){
-  rx += (mx-rx)*0.18; ry += (my-ry)*0.18;
-  ring.style.left = rx+'px'; ring.style.top = ry+'px';
-  requestAnimationFrame(animCursor);
-}
-animCursor();
+        const sunLight = new THREE.PointLight(0xffffff, 2.5, 500);
+        sunLight.position.set(0, 0, 0);
+        scene.add(sunLight);
 
-document.querySelectorAll('[data-hover]').forEach(el=>{
-  el.addEventListener('mouseenter', ()=> ring.classList.add('hover'));
-  el.addEventListener('mouseleave', ()=> ring.classList.remove('hover'));
-});
+        // Starfield Background
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsCount = 3000;
+        const starPositions = new Float32Array(starsCount * 3);
 
-// ---------- magnetic buttons ----------
-document.querySelectorAll('[data-magnetic]').forEach(wrap=>{
-  const btn = wrap.querySelector('a');
-  wrap.addEventListener('mousemove', e=>{
-    const r = wrap.getBoundingClientRect();
-    const relX = e.clientX - r.left - r.width/2;
-    const relY = e.clientY - r.top - r.height/2;
-    btn.style.transform = `translate(${relX*0.35}px, ${relY*0.45}px)`;
-    btn.style.setProperty('--gx', ((e.clientX-r.left)/r.width*100)+'%');
-    btn.style.setProperty('--gy', ((e.clientY-r.top)/r.height*100)+'%');
-  });
-  wrap.addEventListener('mouseleave', ()=>{
-    btn.style.transform = 'translate(0,0)';
-  });
-});
+        for(let i = 0; i < starsCount * 3; i += 3) {
+            starPositions[i] = (Math.random() - 0.5) * 800;
+            starPositions[i+1] = (Math.random() - 0.5) * 800;
+            starPositions[i+2] = (Math.random() - 0.5) * 800;
+        }
+        starsGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+        const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.8, transparent: true, opacity: 0.8 });
+        const starField = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(starField);
 
-// ---------- particle field reacting to cursor ----------
-const canvas = document.getElementById('field');
-const ctx = canvas.getContext('2d');
-let W,H, particles=[];
-function resize(){ W=canvas.width=innerWidth; H=canvas.height=innerHeight; }
-window.addEventListener('resize', resize);
-resize();
+        // Central Sun Element
+        const sunGeometry = new THREE.SphereGeometry(6, 32, 32);
+        const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa00 });
+        const sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
+        scene.add(sunMesh);
 
-function initParticles(){
-  particles = [];
-  const count = Math.min(140, Math.floor(innerWidth/12));
-  for(let i=0;i<count;i++){
-    particles.push({
-      x: Math.random()*W, y: Math.random()*H,
-      ox: 0, oy:0,
-      r: Math.random()*1.3+0.3,
-      vx:(Math.random()-0.5)*0.12, vy:(Math.random()-0.5)*0.12,
-      a: Math.random()*0.5+0.15
-    });
-  }
-}
-initParticles();
+        // Sun Glow Effect
+        const sunGlowGeo = new THREE.SphereGeometry(7, 32, 32);
+        const sunGlowMat = new THREE.MeshBasicMaterial({ color: 0xff4500, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending });
+        const sunGlow = new THREE.Mesh(sunGlowGeo, sunGlowMat);
+        scene.add(sunGlow);
 
-let pmx = W/2, pmy = H/2;
-window.addEventListener('mousemove', e=>{ pmx=e.clientX; pmy=e.clientY; });
+        // Build Planets & Orbits
+        const planetMeshes = [];
+        const planetObjects = {};
 
-function drawField(){
-  ctx.clearRect(0,0,W,H);
-  particles.forEach(p=>{
-    p.x += p.vx; p.y += p.vy;
-    if(p.x<0) p.x=W; if(p.x>W) p.x=0;
-    if(p.y<0) p.y=H; if(p.y>H) p.y=0;
+        planetsData.forEach((data, index) => {
+            // Orbit Ring Line
+            const orbitGeo = new THREE.RingGeometry(data.orbitRadius - 0.1, data.orbitRadius + 0.1, 64);
+            const orbitMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, side: THREE.DoubleSide, transparent: true, opacity: 0.15 });
+            const orbitRing = new THREE.Mesh(orbitGeo, orbitMat);
+            orbitRing.rotation.x = Math.PI / 2;
+            scene.add(orbitRing);
 
-    const dx = p.x - pmx, dy = p.y - pmy;
-    const dist = Math.sqrt(dx*dx+dy*dy);
-    const influence = Math.max(0, 1 - dist/220);
-    const pushX = influence * dx * 0.02;
-    const pushY = influence * dy * 0.02;
+            // Planet Mesh
+            const planetGeo = new THREE.SphereGeometry(data.size, 32, 32);
+            const planetMat = new THREE.MeshStandardMaterial({ color: data.color, roughness: 0.7, metalness: 0.2 });
+            const planetMesh = new THREE.Mesh(planetGeo, planetMat);
+            
+            // Optional Saturn Rings
+            if(data.hasRings) {
+                const ringGeo = new THREE.RingGeometry(data.size * 1.4, data.size * 2.3, 32);
+                const ringMat = new THREE.MeshBasicMaterial({ color: 0xd8ca9d, side: THREE.DoubleSide, transparent: true, opacity: 0.8 });
+                const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+                ringMesh.rotation.x = Math.PI / 2;
+                planetMesh.add(ringMesh);
+            }
 
-    const drawX = p.x + pushX*8;
-    const drawY = p.y + pushY*8;
+            scene.add(planetMesh);
+            planetMeshes.push({ mesh: planetMesh, data: data, angle: Math.random() * Math.PI * 2 });
+            planetObjects[data.id] = planetMesh;
+        });
 
-    ctx.beginPath();
-    ctx.arc(drawX, drawY, p.r + influence*1.5, 0, Math.PI*2);
-    ctx.fillStyle = `rgba(212,175,122,${p.a + influence*0.5})`;
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = 'rgba(212,175,122,0.6)';
-    ctx.fill();
-  });
-  requestAnimationFrame(drawField);
-}
-drawField();
+        // Populate HTML Buttons
+        const buttonsContainer = document.getElementById('planet-buttons');
+        planetsData.forEach(data => {
+            const btn = document.createElement('button');
+            btn.className = `btn-sciFi py-2 px-3 rounded-xl text-xs font-bold text-cyan-300 tracking-wider uppercase text-left truncate`;
+            btn.id = `btn-${data.id}`;
+            btn.innerText = data.name;
+            btn.onclick = () => selectPlanet(data.id);
+            buttonsContainer.appendChild(btn);
+        });
 
-// ---------- metrics ----------
-const metricIds = ['m1','m2','m3','m4'];
-let targets = [78, 91, 46, 88];
-let current = [78, 91, 46, 88];
+        // Camera & Interaction Control States
+        let selectedPlanetId = null;
+        let isUserInteracting = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        let cameraAngleX = 0;
+        let cameraAngleY = 0.4;
+        let cameraDistance = 80;
+        let targetCameraPosition = new THREE.Vector3(0, 30, 70);
+        let targetLookAtPosition = new THREE.Vector3(0, 0, 0);
 
-function refreshTargets(){
-  targets = targets.map(()=> 40 + Math.random()*58);
-}
-setInterval(refreshTargets, 2600);
+        function selectPlanet(id) {
+            selectedPlanetId = id;
+            const target = planetsData.find(p => p.id === id);
+            if (!target) return;
 
-function renderMetrics(){
-  current = current.map((c,i)=> c + (targets[i]-c)*0.05);
-  metricIds.forEach((id,i)=>{
-    document.getElementById(id).style.width = current[i]+'%';
-    document.getElementById(id+'v').textContent = Math.round(current[i])+'%';
-  });
-  requestAnimationFrame(renderMetrics);
-}
-renderMetrics();
+            // Update UI Sidebar
+            document.getElementById('target-name').innerText = target.name;
+            document.getElementById('target-type').innerText = target.type;
+            document.getElementById('target-distance').innerText = target.distance;
+            document.getElementById('target-speed').innerText = target.speed;
+            document.getElementById('target-desc').innerText = target.desc;
 
-// ---------- activity nodes ----------
-const flights = [
-  {t:'G650ER · TEB → LFPB', m:'Cruising FL410 · ETA 41m'},
-  {t:'Global 7500 · VNY → OMDB', m:'Climbing FL380 · ETA 6h12m'},
-  {t:'Falcon 8X · LFPG → KPBI', m:'Cruising FL430 · ETA 2h05m'},
-  {t:'Praetor 600 · KMIA → SEQM', m:'Descending FL220 · ETA 18m'},
-  {t:'Phenom 300 · KTEB → KASE', m:'Cruising FL410 · ETA 1h32m'},
-  {t:'ACJ319 · OTHH → EGLL', m:'Cruising FL390 · ETA 3h48m'}
-];
-const nodeList = document.getElementById('node-list');
-flights.forEach((f,i)=>{
-  const el = document.createElement('div');
-  el.className = 'node';
-  el.innerHTML = `<span class="pip" style="animation-delay:${i*0.3}s"></span>
-    <span class="info"><span class="title">${f.t}</span><span class="meta">${f.m}</span></span>`;
-  nodeList.appendChild(el);
-});
+            // Highlight Active Button
+            document.querySelectorAll('.btn-sciFi').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById(`btn-${id}`);
+            if(activeBtn) activeBtn.classList.add('active');
+        }
 
-// ---------- concierge log typewriter-style ----------
-const logMessages = [
-  'Ground handling confirmed at Le Bourget — chocks 06:40 local.',
-  'Catering profile synced: client dietary preferences applied.',
-  'Weather corridor clear across North Atlantic track NAT-B.',
-  'Customs pre-clearance filed for Doha arrival.',
-  'Cabin crew briefing completed — quiet-hours protocol active.',
-  'Alternate airfield reserved at Farnborough as contingency.',
-  'Fuel uplift confirmed: 8,200 kg at Van Nuys ramp.',
-  'Concierge dispatched to arrivals — ground transport staged.'
-];
-const logEl = document.getElementById('log');
-const logTag = document.getElementById('log-tag');
-const tags = ['SYNC','TRACE','RELAY','ARCHV'];
-let li = 0;
-function addLog(){
-  const entry = document.createElement('div');
-  entry.className = 'entry';
-  const time = new Date().toISOString().substr(11,8);
-  entry.innerHTML = `<span class="t">${time}</span>${logMessages[li % logMessages.length]}`;
-  logEl.appendChild(entry);
-  logEl.scrollTop = logEl.scrollHeight;
-  while(logEl.children.length > 30) logEl.removeChild(logEl.firstChild);
-  logTag.textContent = tags[Math.floor(Math.random()*tags.length)];
-  li++;
-}
-for(let i=0;i<5;i++) addLog();
-setInterval(addLog, 2600);
+        document.getElementById('reset-view').onclick = () => {
+            selectedPlanetId = null;
+            document.querySelectorAll('.btn-sciFi').forEach(b => b.classList.remove('active'));
+            document.getElementById('target-name').innerText = "SOLAR MATRIX";
+            document.getElementById('target-type').innerText = "Interstellar System Overview";
+            document.getElementById('target-distance').innerText = "0.00 AU";
+            document.getElementById('target-speed').innerText = "STABLE";
+            document.getElementById('target-desc').innerText = "Overview mode active. Select any planetary body from the telemetry matrix for cinematic close-up zoom.";
+        };
 
-// ---------- reveal on scroll ----------
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold:0.15 });
-document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
-</script>
+        // Mouse Controls for 360° Free Look
+        window.addEventListener('mousedown', (e) => {
+            if (e.target.closest('#canvas-container') === null) return;
+            isUserInteracting = true;
+            previousMousePosition = { x: e.clientX, y: e.clientY };
+        });
 
+        window.addEventListener('mousemove', (e) => {
+            if (!isUserInteracting) return;
+            const deltaX = e.clientX - previousMousePosition.x;
+            const deltaY = e.clientY - previousMousePosition.y;
+
+            cameraAngleX -= deltaX * 0.005;
+            cameraAngleY = Math.max(0.05, Math.min(Math.PI / 2 - 0.05, cameraAngleY + deltaY * 0.005));
+
+            previousMousePosition = { x: e.clientX, y: e.clientY };
+        });
+
+        window.addEventListener('mouseup', () => { isUserInteracting = false; });
+
+        // Scroll Zoom
+        window.addEventListener('wheel', (e) => {
+            cameraDistance = Math.max(15, Math.min(180, cameraDistance + e.deltaY * 0.05));
+        });
+
+        // Clock Updater
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('live-clock').innerText = now.toUTCString().split(' ')[4] + " UTC";
+        }, 1000);
+
+        // Resize Handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Default selection on load
+        selectPlanet('earth');
+
+        // Animation Loop (60 FPS Butter Smooth)
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const delta = clock.getDelta();
+
+            // Rotate Sun
+            sunMesh.rotation.y += 0.002;
+
+            // Update Planets Orbit & Rotation
+            planetMeshes.forEach(item => {
+                item.angle += (item.data.speed * 0.0001);
+                item.mesh.position.x = Math.cos(item.angle) * item.data.orbitRadius;
+                item.mesh.position.z = Math.sin(item.angle) * item.data.orbitRadius;
+                item.mesh.rotation.y += 0.01;
+            });
+
+            // Camera Handling & Cinematic Transitions
+            if (selectedPlanetId) {
+                const targetObj = planetObjects[selectedPlanetId];
+                if (targetObj) {
+                    const targetPos = targetObj.position;
+                    targetLookAtPosition.lerp(targetPos, 0.05);
+
+                    // Position camera smoothly near the selected planet
+                    const offsetX = targetPos.x + 12;
+                    const offsetZ = targetPos.z + 12;
+                    const desiredCamPos = new THREE.Vector3(offsetX, targetPos.y + 6, offsetZ);
+                    camera.position.lerp(desiredCamPos, 0.05);
+                }
+            } else if (!isUserInteracting) {
+                // Default Orbit View when no planet is locked
+                targetLookAtPosition.set(0, 0, 0);
+                const x = cameraDistance * Math.sin(cameraAngleX) * Math.cos(cameraAngleY);
+                const y = cameraDistance * Math.sin(cameraAngleY);
+                const z = cameraDistance * Math.cos(cameraAngleX) * Math.cos(cameraAngleY);
+                camera.position.lerp(new THREE.Vector3(x, y, z), 0.05);
+            } else {
+                // User Manual Dragging Camera Position
+                const x = cameraDistance * Math.sin(cameraAngleX) * Math.cos(cameraAngleY);
+                const y = cameraDistance * Math.sin(cameraAngleY);
+                const z = cameraDistance * Math.cos(cameraAngleX) * Math.cos(cameraAngleY);
+                camera.position.lerp(new THREE.Vector3(x, y, z), 0.1);
+            }
+
+            camera.lookAt(targetLookAtPosition);
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    </script>
 </body>
 </html>
