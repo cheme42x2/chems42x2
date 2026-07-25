@@ -1,641 +1,188 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aetheris AI: Quantum Multiverse Nexus</title>
-<link href="[https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Inter:wght@300;400;500;700&display=swap](https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Inter:wght@300;400;500;700&display=swap)" rel="stylesheet">
-<style>
-:root {
---bg-deep: #030308;
---cyan-glow: #00f0ff;
---violet-glow: #9d00ff;
---laser-white: #ffffff;
---glass-bg: rgba(5, 5, 15, 0.65);
---glass-border: rgba(0, 240, 255, 0.2);
---glass-border-active: rgba(0, 240, 255, 0.8);
---font-display: 'Orbitron', sans-serif;
---font-body: 'Inter', sans-serif;
-}
-* {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-user-select: none;
-}
-body {
-background-color: var(--bg-deep);
-color: var(--laser-white);
-font-family: var(--font-body);
-overflow: hidden;
-width: 100vw;
-height: 100vh;
-}
-#webgl-container {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: 1;
-pointer-events: auto;
-}
-/* Cinematic Startup Intro */
-#intro-overlay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: #000;
-z-index: 1000;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), visibility 1s;
-}
-#intro-overlay.fade-out {
-opacity: 0;
-visibility: hidden;
-}
-.intro-core {
-width: 120px;
-height: 120px;
-border-radius: 50%;
-background: radial-gradient(circle, var(--cyan-glow) 0%, rgba(157,0,255,0.4) 50%, transparent 70%);
-box-shadow: 0 0 50px var(--cyan-glow), inset 0 0 20px var(--violet-glow);
-animation: pulse-core 1.5s infinite alternate;
-margin-bottom: 30px;
-}
-@keyframes pulse-core {
-0% { transform: scale(0.9); box-shadow: 0 0 30px var(--cyan-glow); }
-100% { transform: scale(1.1); box-shadow: 0 0 80px var(--cyan-glow), 0 0 30px var(--violet-glow); }
-}
-.intro-title {
-font-family: var(--font-display);
-font-size: 2rem;
-font-weight: 900;
-letter-spacing: 0.5em;
-color: var(--laser-white);
-text-shadow: 0 0 20px var(--cyan-glow);
-margin-bottom: 15px;
-}
-.intro-counter {
-font-family: var(--font-display);
-font-size: 1rem;
-color: var(--cyan-glow);
-letter-spacing: 0.2em;
-}
-/* UI HUD Layout */
-.hud-layer {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: 10;
-pointer-events: none;
-display: grid;
-grid-template-columns: 380px 1fr 380px;
-grid-template-rows: 80px 1fr 60px;
-padding: 25px;
-gap: 20px;
-opacity: 0;
-transition: opacity 1.5s ease 0.5s;
-}
-.hud-layer.visible {
-opacity: 1;
-}
-/* Glassmorphism Panel Base */
-.glass-panel {
-background: var(--glass-bg);
-backdrop-filter: blur(20px);
--webkit-backdrop-filter: blur(20px);
-border: 1px solid var(--glass-border);
-border-radius: 12px;
-padding: 20px;
-pointer-events: auto;
-box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-position: relative;
-overflow: hidden;
-}
-.glass-panel::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 2px;
-background: linear-gradient(90deg, transparent, var(--cyan-glow), transparent);
-}
-/* Header */
-.hud-header {
-grid-column: 1 / -1;
-display: flex;
-justify-content: space-between;
-align-items: center;
-height: 100%;
-}
-.brand {
-display: flex;
-align-items: center;
-gap: 15px;
-}
-.brand-logo {
-width: 36px;
-height: 36px;
-border: 2px solid var(--cyan-glow);
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-box-shadow: 0 0 15px var(--cyan-glow);
-background: rgba(0, 240, 255, 0.1);
-}
-.brand-logo::after {
-content: '';
-width: 14px;
-height: 14px;
-background: var(--cyan-glow);
-border-radius: 50%;
-box-shadow: 0 0 10px var(--cyan-glow);
-}
-.brand-name {
-font-family: var(--font-display);
-font-size: 1.25rem;
-font-weight: 800;
-letter-spacing: 0.2em;
-color: var(--laser-white);
-text-shadow: 0 0 10px rgba(255,255,255,0.5);
-}
-.system-status {
-display: flex;
-gap: 20px;
-font-family: var(--font-display);
-font-size: 0.75rem;
-letter-spacing: 0.1em;
-}
-.status-badge {
-display: flex;
-align-items: center;
-gap: 8px;
-padding: 6px 12px;
-background: rgba(0, 240, 255, 0.05);
-border: 1px solid var(--glass-border);
-border-radius: 20px;
-}
-.status-dot {
-width: 8px;
-height: 8px;
-background: var(--cyan-glow);
-border-radius: 50%;
-box-shadow: 0 0 8px var(--cyan-glow);
-animation: blink 2s infinite;
-}
-@keyframes blink {
-0%, 100% { opacity: 1; }
-50% { opacity: 0.4; }
-}
-/* Left Panel - Telemetry */
-.left-panel {
-grid-column: 1;
-grid-row: 2;
-display: flex;
-flex-direction: column;
-gap: 20px;
-}
-.panel-title {
-font-family: var(--font-display);
-font-size: 0.85rem;
-font-weight: 600;
-letter-spacing: 0.15em;
-color: var(--cyan-glow);
-margin-bottom: 15px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-.metric-group {
-margin-bottom: 15px;
-}
-.metric-label {
-display: flex;
-justify-content: space-between;
-font-size: 0.75rem;
-color: rgba(255,255,255,0.7);
-margin-bottom: 6px;
-font-family: var(--font-display);
-letter-spacing: 0.05em;
-}
-.metric-bar-bg {
-width: 100%;
-height: 6px;
-background: rgba(255,255,255,0.05);
-border-radius: 3px;
-overflow: hidden;
-border: 1px solid rgba(255,255,255,0.1);
-}
-.metric-bar-fill {
-height: 100%;
-background: linear-gradient(90deg, var(--cyan-glow), var(--violet-glow));
-box-shadow: 0 0 10px var(--cyan-glow);
-transition: width 0.4s ease;
-}
-/* Right Panel - Dimension Matrix */
-.right-panel {
-grid-column: 3;
-grid-row: 2;
-display: flex;
-flex-direction: column;
-gap: 15px;
-}
-.node-btn {
-width: 100%;
-padding: 16px 20px;
-background: rgba(0, 240, 255, 0.03);
-border: 1px solid var(--glass-border);
-border-radius: 8px;
-color: var(--laser-white);
-font-family: var(--font-display);
-font-size: 0.8rem;
-letter-spacing: 0.15em;
-text-align: left;
-cursor: pointer;
-transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-position: relative;
-overflow: hidden;
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-.node-btn::before {
-content: '';
-position: absolute;
-top: 0;
-left: -100%;
-width: 100%;
-height: 100%;
-background: linear-gradient(90deg, transparent, rgba(0,240,255,0.1), transparent);
-transition: 0.5s;
-}
-.node-btn:hover::before {
-left: 100%;
-}
-.node-btn:hover, .node-btn.active {
-background: rgba(0, 240, 255, 0.1);
-border-color: var(--cyan-glow);
-box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
-transform: translateX(-4px);
-}
-.node-btn span {
-font-size: 0.65rem;
-color: var(--cyan-glow);
-opacity: 0.7;
-}
-/* Bottom Status Log */
-.bottom-panel {
-grid-column: 1 / -1;
-grid-row: 3;
-display: flex;
-align-items: center;
-padding: 0 20px;
-font-family: var(--font-display);
-font-size: 0.75rem;
-letter-spacing: 0.1em;
-color: rgba(255,255,255,0.8);
-}
-.log-prefix {
-color: var(--cyan-glow);
-margin-right: 15px;
-font-weight: 700;
-}
-.typewriter {
-overflow: hidden;
-white-space: nowrap;
-border-right: 2px solid var(--cyan-glow);
-animation: caret 1s steps(1) infinite;
-}
-@keyframes caret {
-0%, 50% { border-color: var(--cyan-glow); }
-51%, 100% { border-color: transparent; }
-}
-/* Responsive */
-@media(max-width: 1024px) {
-.hud-layer {
-grid-template-columns: 1fr;
-grid-template-rows: auto;
-overflow-y: auto;
-}
-.left-panel, .right-panel {
-grid-column: 1;
-grid-row: auto;
-}
-}
-</style>
-</head>
-<body>
-<!-- Cinematic Startup Intro -->
-<div id="intro-overlay">
-<div class="intro-core"></div>
-<div class="intro-title">AETHERIS NEXUS</div>
-<div class="intro-counter" id="loading-counter">INITIALIZING QUANTUM MATRIX... 0%</div>
-</div>
-<!-- WebGL Container -->
-<div id="webgl-container"></div>
-<!-- UI HUD -->
-<div class="hud-layer" id="hud-layer">
-<!-- Header -->
-<header class="glass-panel hud-header">
-<div class="brand">
-<div class="brand-logo"></div>
-<div class="brand-name">AETHERIS AI</div>
-</div>
-<div class="system-status">
-<div class="status-badge">
-<div class="status-dot"></div>
-<span>QUANTUM SYNC: OPTIMAL</span>
-</div>
-<div class="status-badge">
-<span>FPS: <strong id="fps-counter">60</strong></span>
-</div>
-</div>
-</header>
-<!-- Left Panel: Telemetry -->
-<aside class="glass-panel left-panel">
-<div class="panel-title">
-<span>NEXUS CORE TELEMETRY</span>
-<span>[LIVE]</span>
-</div>
-<div class="metric-group">
-<div class="metric-label">
-<span>QUANTUM DENSITY</span>
-<span id="val-density">98.4%</span>
-</div>
-<div class="metric-bar-bg">
-<div class="metric-bar-fill" id="bar-density" style="width: 98.4%;"></div>
-</div>
-</div>
-<div class="metric-group">
-<div class="metric-label">
-<span>NEURAL LOAD</span>
-<span id="val-neural">42.1%</span>
-</div>
-<div class="metric-bar-bg">
-<div class="metric-bar-fill" id="bar-neural" style="width: 42.1%;"></div>
-</div>
-</div>
-<div class="metric-group">
-<div class="metric-label">
-<span>DIMENSIONAL STABILITY</span>
-<span id="val-stability">99.9%</span>
-</div>
-<div class="metric-bar-bg">
-<div class="metric-bar-fill" id="bar-stability" style="width: 99.9%;"></div>
-</div>
-</div>
-<div class="metric-group">
-<div class="metric-label">
-<span>ENTROPY FLUX</span>
-<span id="val-entropy">12.3 THz</span>
-</div>
-<div class="metric-bar-bg">
-<div class="metric-bar-fill" id="bar-entropy" style="width: 25%;"></div>
-</div>
-</div>
-</aside>
-<!-- Right Panel: Dimension Matrix -->
-<aside class="glass-panel right-panel">
-<div class="panel-title">
-<span>DIMENSION MATRIX</span>
-<span>[NODES]</span>
-</div>
-<button class="node-btn active" data-node="nexus">
-Nexus Prime
-<span>[ROOT]</span>
-</button>
-<button class="node-btn" data-node="alpha">
-Alpha Stream
-<span>[NODE-01]</span>
-</button>
-<button class="node-btn" data-node="omega">
-Omega Void
-<span>[NODE-02]</span>
-</button>
-<button class="node-btn" data-node="solaris">
-Solaris Prime
-<span>[NODE-03]</span>
-</button>
-</aside>
-<!-- Bottom Log -->
-<footer class="glass-panel bottom-panel">
-<span class="log-prefix">SYS_LOG:</span>
-<span class="typewriter" id="typewriter-text">Quantum matrix stabilized. Awaiting direct operator input...</span>
-</footer>
-</div>
-<!-- Three.js CDN -->
-<script src="[https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js](https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js)"></script>
-<script>
-// --- Loading Sequence Simulation ---
-let loadProgress = 0;
-const counterEl = document.getElementById('loading-counter');
-const introOverlay = document.getElementById('intro-overlay');
-const hudLayer = document.getElementById('hud-layer');
-const loadInterval = setInterval(() => {
-loadProgress += Math.floor(Math.random() * 15) + 8;
-if (loadProgress >= 100) {
-loadProgress = 100;
-clearInterval(loadInterval);
-setTimeout(() => {
-introOverlay.classList.add('fade-out');
-hudLayer.classList.add('visible');
-initThreeJS();
-}, 400);
-}
-counterEl.innerText = INITIALIZING QUANTUM MATRIX... ${loadProgress}%;
-}, 150);
-// --- Three.js Multiverse Engine ---
-let scene, camera, renderer, coreSphere, rings = [], particleField;
-let mouseX = 0, mouseY = 0, targetRotationX = 0, targetRotationY = 0;
-let currentTargetPosition = new THREE.Vector3(0, 0, 0);
-let cameraTargetLookAt = new THREE.Vector3(0, 0, 0);
-function initThreeJS() {
-const container = document.getElementById('webgl-container');
-// Scene & Camera
-scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x030308, 0.015);
-camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 0, 18);
-// Renderer
-renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-container.appendChild(renderer.domElement);
-// Lighting
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-scene.add(ambientLight);
-const pointLightCyan = new THREE.PointLight(0x00f0ff, 3, 50);
-pointLightCyan.position.set(10, 10, 10);
-scene.add(pointLightCyan);
-const pointLightViolet = new THREE.PointLight(0x9d00ff, 3, 50);
-pointLightViolet.position.set(-10, -10, -10);
-scene.add(pointLightViolet);
-// --- Central Quantum Hyper-Sphere ---
-const sphereGeo = new THREE.IcosahedronGeometry(3.5, 4);
-const sphereMat = new THREE.MeshPhysicalMaterial({
-color: 0x050515,
-metalness: 0.9,
-roughness: 0.1,
-transmission: 0.6,
-thickness: 1.2,
-wireframe: false,
-transparent: true,
-opacity: 0.85
-});
-coreSphere = new THREE.Mesh(sphereGeo, sphereMat);
-scene.add(coreSphere);
-// Inner glowing core mesh
-const innerGeo = new THREE.SphereGeometry(2, 32, 32);
-const innerMat = new THREE.MeshBasicMaterial({
-color: 0x00f0ff,
-wireframe: true
-});
-const innerMesh = new THREE.Mesh(innerGeo, innerMat);
-coreSphere.add(innerMesh);
-// --- Orbiting Holographic Rings ---
-const ringConfigs = [
-{ radius: 5.5, tube: 0.02, color: 0x00f0ff, speedX: 0.01, speedY: 0.005 },
-{ radius: 7.0, tube: 0.015, color: 0x9d00ff, speedX: -0.008, speedY: 0.012 },
-{ radius: 8.8, tube: 0.01, color: 0xffffff, speedX: 0.015, speedY: -0.007 }
-];
-ringConfigs.forEach(config => {
-const ringGeo = new THREE.TorusGeometry(config.radius, config.tube, 16, 100);
-const ringMat = new THREE.MeshStandardMaterial({
-color: config.color,
-emissive: config.color,
-emissiveIntensity: 0.8,
-roughness: 0.2,
-metalness: 0.8
-});
-const ring = new THREE.Mesh(ringGeo, ringMat);
-ring.userData = { speedX: config.speedX, speedY: config.speedY };
-scene.add(ring);
-rings.push(ring);
-});
-// --- Particle Dust Fields (Parallel Dimensions) ---
-const particleCount = 1500;
-const particleGeo = new THREE.BufferGeometry();
-const positions = new Float32Array(particleCount * 3);
-for (let i = 0; i < particleCount * 3; i += 3) {
-positions[i] = (Math.random() - 0.5) * 40;
-positions[i + 1] = (Math.random() - 0.5) * 40;
-positions[i + 2] = (Math.random() - 0.5) * 40;
-}
-particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-const particleMat = new THREE.PointsMaterial({
-color: 0x00f0ff,
-size: 0.08,
-transparent: true,
-opacity: 0.7,
-blending: THREE.AdditiveBlending
-});
-particleField = new THREE.Points(particleGeo, particleMat);
-scene.add(particleField);
-// --- Event Listeners ---
-window.addEventListener('resize', onWindowResize);
-document.addEventListener('mousemove', onMouseMove);
-// Drag to rotate setup
-let isDragging = false;
-let previousMousePosition = { x: 0, y: 0 };
-window.addEventListener('mousedown', (e) => {
-isDragging = true;
-previousMousePosition = { x: e.clientX, y: e.clientY };
-});
-window.addEventListener('mousemove', (e) => {
-if (!isDragging) return;
-const deltaX = e.clientX - previousMousePosition.x;
-const deltaY = e.clientY - previousMousePosition.y;
-targetRotationY += deltaX * 0.005;
-targetRotationX += deltaY * 0.005;
-previousMousePosition = { x: e.clientX, y: e.clientY };
-});
-window.addEventListener('mouseup', () => { isDragging = false; });
-// Dimension Node Switching Logic
-const nodeButtons = document.querySelectorAll('.node-btn');
-const typewriter = document.getElementById('typewriter-text');
-const nodeData = {
-nexus: { pos: [0, 0, 0], text: "Quantum matrix stabilized at root node. Core operating at maximum output." },
-alpha: { pos: [4, 2, -3], text: "Shifted focus to Alpha Stream. High-bandwidth dimensional packets processing." },
-omega: { pos: [-5, -2, -4], text: "Connected to Omega Void. Extreme entropy levels detected. Shielding active." },
-solaris: { pos: [0, 5, 2], text: "Locked onto Solaris Prime stellar node. Solar photon flux synchronized." }
-};
-nodeButtons.forEach(btn => {
-btn.addEventListener('click', () => {
-nodeButtons.forEach(b => b.classList.remove('active'));
-btn.classList.add('active');
-const nodeKey = btn.getAttribute('data-node');
-const target = nodeData[nodeKey];
-currentTargetPosition.set(...target.pos);
-typewriter.innerText = target.text;
-});
-});
-// Start Render Loop
-animate();
-}
-function onMouseMove(e) {
-mouseX = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
-mouseY = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
-}
-function onWindowResize() {
-camera.aspect = window.innerWidth / window.innerHeight;
-camera.updateProjectionMatrix();
-renderer.setSize(window.innerWidth, window.innerHeight);
-}
-// --- Render & Animation Loop ---
-let clock = new THREE.Clock();
-let frameCount = 0;
-let lastTime = performance.now();
-function animate() {
-requestAnimationFrame(animate);
-const delta = clock.getDelta();
-const time = clock.getElapsedTime();
-// FPS Calculation for HUD
-frameCount++;
-const now = performance.now();
-if (now - lastTime >= 1000) {
-document.getElementById('fps-counter').innerText = Math.round((frameCount * 1000) / (now - lastTime));
-frameCount = 0;
-lastTime = now;
-}
-// Smooth rotation momentum
-coreSphere.rotation.y += 0.004 + (targetRotationY - coreSphere.rotation.y) * 0.05;
-coreSphere.rotation.x += 0.002 + (targetRotationX - coreSphere.rotation.x) * 0.05;
-// Auto gentle idle rotation when not dragging heavily
-targetRotationY *= 0.95;
-targetRotationX *= 0.95;
-// Rotate Rings
-rings.forEach(ring => {
-ring.rotation.x += ring.userData.speedX;
-ring.rotation.y += ring.userData.speedY;
-});
-// Rotate Particle Field
-particleField.rotation.y = time * 0.03;
-// Smooth Camera Transition to Selected Nodes
-camera.position.x += (currentTargetPosition.x + mouseX * 1.5 - camera.position.x) * 0.05;
-camera.position.y += (currentTargetPosition.y - mouseY * 1.5 - camera.position.y) * 0.05;
-camera.lookAt(cameraTargetLookAt);
-// Dynamic Live Telemetry Fluctuations
-if (Math.random() < 0.1) {
-const density = (98 + Math.random() * 1.9).toFixed(1);
-const neural = (40 + Math.sin(time) * 5).toFixed(1);
-document.getElementById('val-density').innerText = density + '%';
-document.getElementById('bar-density').style.width = density + '%';
-document.getElementById('val-neural').innerText = neural + '%';
-document.getElementById('bar-neural').style.width = neural + '%';
-}
-renderer.render(scene, camera);
-}
-</script>
-</body>
-</html>
+#canvas-container { position: fixed; inset: 0; z-index: 1; }
+
+    /* Cinematic Overlays */
+    .vignette {
+      position: fixed; inset: 0; z-index: 4; pointer-events: none;
+      background: radial-gradient(circle at center, transparent 0%, transparent 40%, rgba(0,0,0,0.8) 100%);
+    }
+    .scanlines {
+      position: fixed; inset: 0; z-index: 4; pointer-events: none;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px);
+      opacity: 0.4;
+    }
+
+    /* Loader */
+    #loader {
+      position: fixed; inset: 0; z-index: 1000; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1); opacity: 1;
+    }
+    #loader.fade-out { opacity: 0; pointer-events: none; }
+    .loader-ring {
+      position: relative; width: 140px; height: 140px; border-radius: 50%;
+      border: 1px solid rgba(0, 255, 255, 0.08);
+      border-top: 2px solid #00ffff; border-right: 2px solid #a855f7;
+      animation: spin 1.2s linear infinite;
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.15), inset 0 0 30px rgba(168, 85, 247, 0.1);
+      margin-bottom: 48px;
+    }
+    .loader-ring::after {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 70px; height: 70px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,255,0.9) 0%, rgba(168,85,247,0.2) 40%, transparent 70%);
+      animation: pulseCore 1.8s ease-in-out infinite;
+    }
+    .loader-text {
+      font-family: 'Orbitron', sans-serif; font-size: 2.8rem; font-weight: 900; letter-spacing: 0.35em;
+      color: #fff; text-shadow: 0 0 30px rgba(0,255,255,0.4);
+      animation: glitchText 4s infinite;
+    }
+    .loader-sub {
+      font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 0.4em; color: #64748b; margin-top: 12px;
+    }
+    .loader-percent {
+      font-family: 'Orbitron', monospace; font-size: 1.1rem; color: #00ffff; margin-top: 24px; letter-spacing: 0.2em;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes pulseCore { 0%, 100% { opacity: 0.5; transform: translate(-50%,-50%) scale(1); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.25); } }
+    @keyframes glitchText {
+      0%, 90%, 100% { text-shadow: 0 0 30px rgba(0,255,255,0.4); transform: translate(0); }
+      91% { text-shadow: 3px 0 30px rgba(255,0,0,0.6), -3px 0 30px rgba(0,255,255,0.6); transform: translate(2px); }
+      92% { text-shadow: -3px 0 30px rgba(255,0,0,0.6), 3px 0 30px rgba(0,255,255,0.6); transform: translate(-2px); }
+      93% { text-shadow: 0 0 30px rgba(0,255,255,0.4); transform: translate(0); }
+    }
+
+    /* UI Layer */
+    .ui-layer { position: fixed; inset: 0; z-index: 10; pointer-events: none; }
+    .ui-panel {
+      pointer-events: auto;
+      background: rgba(8, 8, 16, 0.55);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.04);
+      position: relative; overflow: hidden;
+    }
+    .ui-panel::before {
+      content: ''; position: absolute; inset: 0; border-radius: 20px; padding: 1px;
+      background: linear-gradient(135deg, rgba(0,255,255,0.15), transparent 40%, transparent 60%, rgba(168,85,247,0.15));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+    }
+
+    .panel-header {
+      font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #00ffff; margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
+    }
+    .panel-header::before {
+      content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #00ffff;
+      box-shadow: 0 0 12px #00ffff; animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+    .left-panel { position: absolute; top: 48px; left: 48px; width: 340px; }
+    .right-panel { position: absolute; top: 48px; right: 48px; width: 300px; }
+    .bottom-log { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 860px; }
+
+    .telemetry-row { margin-bottom: 18px; }
+    .telemetry-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: #64748b; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+    .telemetry-value { font-family: 'Orbitron', monospace; font-size: 0.85rem; color: #e2e8f0; }
+    .bar-track { width: 100%; height: 3px; background: rgba(255,255,255,0.04); border-radius: 2px; overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 2px; position: relative; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .bar-fill::after {
+      content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 30px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5));
+    }
+    .cyan { background: linear-gradient(90deg, #00ffff, #0088ff); box-shadow: 0 0 12px rgba(0,255,255,0.25); }
+    .violet { background: linear-gradient(90deg, #a855f7, #6366f1); box-shadow: 0 0 12px rgba(168,85,247,0.25); }
+    .white { background: linear-gradient(90deg, #ffffff, #94a3b8); box-shadow: 0 0 12px rgba(255,255,255,0.15); }
+
+    .status-row { margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: space-between; }
+    .status-indicator { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; color: #22c55e; font-weight: 600; letter-spacing: 0.05em; }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px #22c55e; }
+    .build-id { font-size: 0.6rem; color: #475569; letter-spacing: 0.08em; font-family: 'Orbitron', monospace; }
+
+    .dimension-btn {
+      width: 100%; padding: 16px; margin-bottom: 14px;
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px; color: #cbd5e1; font-family: 'Orbitron', sans-serif; font-size: 0.78rem;
+      letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; position: relative; overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-align: left;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .dimension-btn:hover { background: rgba(0,255,255,0.06); border-color: rgba(0,255,255,0.25); color: #fff; transform: translateX(6px); }
+    .dimension-btn::after { content: '→'; opacity: 0; transition: opacity 0.3s; color: #00ffff; font-size: 1rem; }
+    .dimension-btn:hover::after { opacity: 1; }
+    .dimension-btn.active { background: rgba(0,255,255,0.1); border-color: rgba(0,255,255,0.4); color: #fff; box-shadow: 0 0 24px rgba(0,255,255,0.08); }
+    .dimension-btn.active::after { opacity: 1; color: #00ffff; }
+
+    .active-node-display { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.04); }
+    .active-node-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: #475569; margin-bottom: 6px; }
+    .active-node-value { font-family: 'Orbitron', monospace; font-size: 1.1rem; color: #a855f7; text-shadow: 0 0 20px rgba(168,85,247,0.3); }
+
+    .log-container {
+      background: rgba(0,0,0,0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.04); border-radius: 14px;
+      padding: 18px 24px; font-family: 'Inter', monospace; font-size: 0.78rem;
+      color: #94a3b8; height: 90px; overflow: hidden; position: relative;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    }
+    .log-text { line-height: 1.7; white-space: pre-wrap; }
+    .cursor { display: inline-block; width: 7px; height: 13px; background: #00ffff; animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 4px; box-shadow: 0 0 8px #00ffff; }
+
+    /* Decorative HUD corners on panels */
+    .hud-corner { position: absolute; width: 10px; height: 10px; border-color: rgba(0,255,255,0.25); border-style: solid; pointer-events: none; }
+    .hud-tl { top: 0; left: 0; border-width: 2px 0 0 2px; }
+    .hud-tr { top: 0; right: 0; border-width: 2px 2px 0 0; }
+    .hud-bl { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
+    .hud-br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+
+      <div class="telemetry-row">
+        <div class="telemetry-label">Quantum Energy Output <span id="val-energy" class="telemetry-value">84.2%</span></div>
+        <div class="bar-track"><div class="bar-fill cyan" id="bar-energy" style="width: 84.2%"></div></div>
+      </div>
+
+      <div class="telemetry-row">
+        <div class="telemetry-label">Dimensional Stability <span id="val-stability" class="telemetry-value">OPTIMAL</span></div>
+        <div class="bar-track"><div class="bar-fill white" id="bar-stability" style="width: 96.4%"></div></div>
+      </div>
+
+      <div class="telemetry-row">
+        <div class="telemetry-label">Neural Load <span id="val-neural" class="telemetry-value">67.4%</span></div>
+        <div class="bar-track"><div class="bar-fill violet" id="bar-neural" style="width: 67.4%"></div></div>
+      </div>
+
+      <div class="telemetry-row">
+        <div class="telemetry-label">CPU Thread Allocation <span id="val-cpu" class="telemetry-value">45.1%</span></div>
+        <div class="bar-track"><div class="bar-fill cyan" id="bar-cpu" style="width: 45.1%"></div></div>
+      </div>
+
+      <div class="status-row">
+        <div class="status-indicator"><span class="status-dot"></span> SYSTEM OPERATIONAL</div>
+        <div class="build-id">v4.9.2-qntm // b8921</div>
+      </div>
+    </div>
+
+    <!-- Right: Dimension Matrix -->
+    <div class="ui-panel right-panel">
+      <div class="hud-corner hud-tl"></div><div class="hud-corner hud-tr"></div>
+      <div class="hud-corner hud-bl"></div><div class="hud-corner hud-br"></div>
+      <div class="panel-header">Dimension Matrix</div>
+
+      <button class="dimension-btn" data-target="alpha">Alpha Stream</button>
+      <button class="dimension-btn" data-target="omega">Omega Void</button>
+      <button class="dimension-btn" data-target="solaris">Solaris Prime</button>
+      <button class="dimension-btn" data-target="nebula">Nebula Gate</button>
+
+      <div class="active-node-display">
+        <div class="active-node-label">Active Node</div>
+        <div class="active-node-value" id="active-node">CORE NEXUS</div>
+      </div>
+    </div>
+
+    <!-- Bottom: Status Log -->
+    <div class="bottom-log">
+      <div class="log-container">
+        <div class="log-text" id="log-text"></div><span class="cursor"></span>
+      </div>
+    </div>
