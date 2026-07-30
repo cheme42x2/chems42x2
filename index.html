@@ -1,607 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aetheris AI: Quantum Multiverse Nexus</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; overflow: hidden; background: #000; color: #fff; font-family: 'Inter', sans-serif; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Watch Store</title>
 
-    #canvas-container { position: fixed; inset: 0; z-index: 1; }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
 
-    /* Cinematic Overlays */
-    .vignette {
-      position: fixed; inset: 0; z-index: 4; pointer-events: none;
-      background: radial-gradient(circle at center, transparent 0%, transparent 40%, rgba(0,0,0,0.8) 100%);
-    }
-    .scanlines {
-      position: fixed; inset: 0; z-index: 4; pointer-events: none;
-      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px);
-      opacity: 0.4;
-    }
+body{
+    background:#0f0f0f;
+    color:#fff;
+}
 
-    /* Loader */
-    #loader {
-      position: fixed; inset: 0; z-index: 1000; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1); opacity: 1;
-    }
-    #loader.fade-out { opacity: 0; pointer-events: none; }
-    .loader-ring {
-      position: relative; width: 140px; height: 140px; border-radius: 50%;
-      border: 1px solid rgba(0, 255, 255, 0.08);
-      border-top: 2px solid #00ffff; border-right: 2px solid #a855f7;
-      animation: spin 1.2s linear infinite;
-      box-shadow: 0 0 40px rgba(0, 255, 255, 0.15), inset 0 0 30px rgba(168, 85, 247, 0.1);
-      margin-bottom: 48px;
-    }
-    .loader-ring::after {
-      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 70px; height: 70px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,255,255,0.9) 0%, rgba(168,85,247,0.2) 40%, transparent 70%);
-      animation: pulseCore 1.8s ease-in-out infinite;
-    }
-    .loader-text {
-      font-family: 'Orbitron', sans-serif; font-size: 2.8rem; font-weight: 900; letter-spacing: 0.35em;
-      color: #fff; text-shadow: 0 0 30px rgba(0,255,255,0.4);
-      animation: glitchText 4s infinite;
-    }
-    .loader-sub {
-      font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 0.4em; color: #64748b; margin-top: 12px;
-    }
-    .loader-percent {
-      font-family: 'Orbitron', monospace; font-size: 1.1rem; color: #00ffff; margin-top: 24px; letter-spacing: 0.2em;
-    }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    @keyframes pulseCore { 0%, 100% { opacity: 0.5; transform: translate(-50%,-50%) scale(1); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.25); } }
-    @keyframes glitchText {
-      0%, 90%, 100% { text-shadow: 0 0 30px rgba(0,255,255,0.4); transform: translate(0); }
-      91% { text-shadow: 3px 0 30px rgba(255,0,0,0.6), -3px 0 30px rgba(0,255,255,0.6); transform: translate(2px); }
-      92% { text-shadow: -3px 0 30px rgba(255,0,0,0.6), 3px 0 30px rgba(0,255,255,0.6); transform: translate(-2px); }
-      93% { text-shadow: 0 0 30px rgba(0,255,255,0.4); transform: translate(0); }
-    }
+header{
+    background:#000;
+    padding:25px;
+    text-align:center;
+    border-bottom:2px solid gold;
+}
 
-    /* UI Layer */
-    .ui-layer { position: fixed; inset: 0; z-index: 10; pointer-events: none; }
-    .ui-panel {
-      pointer-events: auto;
-      background: rgba(8, 8, 16, 0.55);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.04);
-      position: relative; overflow: hidden;
-    }
-    .ui-panel::before {
-      content: ''; position: absolute; inset: 0; border-radius: 20px; padding: 1px;
-      background: linear-gradient(135deg, rgba(0,255,255,0.15), transparent 40%, transparent 60%, rgba(168,85,247,0.15));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
-    }
+header h1{
+    color:gold;
+    letter-spacing:2px;
+    font-size:34px;
+}
 
-    .panel-header {
-      font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
-      color: #00ffff; margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
-    }
-    .panel-header::before {
-      content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #00ffff;
-      box-shadow: 0 0 12px #00ffff; animation: blink 2s infinite;
-    }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+header p{
+    color:#bbb;
+    margin-top:8px;
+}
 
-    .left-panel { position: absolute; top: 48px; left: 48px; width: 340px; }
-    .right-panel { position: absolute; top: 48px; right: 48px; width: 300px; }
-    .bottom-log { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 860px; }
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
 
-    .telemetry-row { margin-bottom: 18px; }
-    .telemetry-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: #64748b; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
-    .telemetry-value { font-family: 'Orbitron', monospace; font-size: 0.85rem; color: #e2e8f0; }
-    .bar-track { width: 100%; height: 3px; background: rgba(255,255,255,0.04); border-radius: 2px; overflow: hidden; position: relative; }
-    .bar-fill { height: 100%; border-radius: 2px; position: relative; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .bar-fill::after {
-      content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 30px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5));
-    }
-    .cyan { background: linear-gradient(90deg, #00ffff, #0088ff); box-shadow: 0 0 12px rgba(0,255,255,0.25); }
-    .violet { background: linear-gradient(90deg, #a855f7, #6366f1); box-shadow: 0 0 12px rgba(168,85,247,0.25); }
-    .white { background: linear-gradient(90deg, #ffffff, #94a3b8); box-shadow: 0 0 12px rgba(255,255,255,0.15); }
+.hero{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+    margin:50px 0;
+}
 
-    .status-row { margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: space-between; }
-    .status-indicator { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; color: #22c55e; font-weight: 600; letter-spacing: 0.05em; }
-    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px #22c55e; }
-    .build-id { font-size: 0.6rem; color: #475569; letter-spacing: 0.08em; font-family: 'Orbitron', monospace; }
+.card{
+    background:#1b1b1b;
+    border:1px solid #333;
+    border-radius:15px;
+    overflow:hidden;
+    transition:.3s;
+    box-shadow:0 0 15px rgba(255,215,0,.08);
+}
 
-    .dimension-btn {
-      width: 100%; padding: 16px; margin-bottom: 14px;
-      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 14px; color: #cbd5e1; font-family: 'Orbitron', sans-serif; font-size: 0.78rem;
-      letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; position: relative; overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-align: left;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .dimension-btn:hover { background: rgba(0,255,255,0.06); border-color: rgba(0,255,255,0.25); color: #fff; transform: translateX(6px); }
-    .dimension-btn::after { content: '→'; opacity: 0; transition: opacity 0.3s; color: #00ffff; font-size: 1rem; }
-    .dimension-btn:hover::after { opacity: 1; }
-    .dimension-btn.active { background: rgba(0,255,255,0.1); border-color: rgba(0,255,255,0.4); color: #fff; box-shadow: 0 0 24px rgba(0,255,255,0.08); }
-    .dimension-btn.active::after { opacity: 1; color: #00ffff; }
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 25px rgba(255,215,0,.25);
+}
 
-    .active-node-display { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.04); }
-    .active-node-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: #475569; margin-bottom: 6px; }
-    .active-node-value { font-family: 'Orbitron', monospace; font-size: 1.1rem; color: #a855f7; text-shadow: 0 0 20px rgba(168,85,247,0.3); }
+.card img{
+    width:100%;
+    height:330px;
+    object-fit:cover;
+}
 
-    .log-container {
-      background: rgba(0,0,0,0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.04); border-radius: 14px;
-      padding: 18px 24px; font-family: 'Inter', monospace; font-size: 0.78rem;
-      color: #94a3b8; height: 90px; overflow: hidden; position: relative;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
-    }
-    .log-text { line-height: 1.7; white-space: pre-wrap; }
-    .cursor { display: inline-block; width: 7px; height: 13px; background: #00ffff; animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 4px; box-shadow: 0 0 8px #00ffff; }
+.card-content{
+    padding:20px;
+}
 
-    /* Decorative HUD corners on panels */
-    .hud-corner { position: absolute; width: 10px; height: 10px; border-color: rgba(0,255,255,0.25); border-style: solid; pointer-events: none; }
-    .hud-tl { top: 0; left: 0; border-width: 2px 0 0 2px; }
-    .hud-tr { top: 0; right: 0; border-width: 2px 2px 0 0; }
-    .hud-bl { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
-    .hud-br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
-  </style>
+.card h2{
+    color:gold;
+    margin-bottom:10px;
+}
 
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-    }
-  }
-  </script>
+.price{
+    font-size:30px;
+    font-weight:bold;
+    color:#fff;
+    margin-top:15px;
+}
+
+.bundle{
+    margin-top:40px;
+    background:linear-gradient(135deg,#222,#111);
+    border:2px solid gold;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+    background:gold;
+    color:#000;
+    font-weight:bold;
+    padding:8px 18px;
+    border-radius:50px;
+    margin-bottom:15px;
+}
+
+.bundle h2{
+    color:gold;
+}
+
+.bundle .bundle-price{
+    font-size:42px;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+form{
+    margin:60px auto;
+    max-width:600px;
+    background:#181818;
+    padding:30px;
+    border-radius:15px;
+    border:1px solid #333;
+}
+
+form h2{
+    text-align:center;
+    color:gold;
+    margin-bottom:25px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin-bottom:18px;
+    border:none;
+    border-radius:8px;
+    background:#2b2b2b;
+    color:white;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:8px;
+    background:gold;
+    color:black;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#f3c400;
+}
+
+footer{
+    text-align:center;
+    color:#888;
+    padding:30px;
+}
+</style>
+
 </head>
 <body>
 
-  <!-- Loading Sequence -->
-  <div id="loader">
-    <div class="loader-ring"></div>
-    <div class="loader-text">AETHERIS NEXUS</div>
-    <div class="loader-sub">QUANTUM MULTIVERSE INTERFACE</div>
-    <div class="loader-percent" id="loader-percent">0%</div>
-  </div>
+<header>
+    <h1>Luxury Watch Collection</h1>
+    <p>Premium Oyster Perpetual Style Watches</p>
+</header>
 
-  <!-- Cinematic Overlays -->
-  <div class="vignette"></div>
-  <div class="scanlines"></div>
+<div class="container">
 
-  <!-- 3D Canvas -->
-  <div id="canvas-container"></div>
+<div class="hero">
 
-  <!-- UI Overlay -->
-  <div class="ui-layer">
-    <!-- Left: Telemetry -->
-    <div class="ui-panel left-panel">
-      <div class="hud-corner hud-tl"></div><div class="hud-corner hud-tr"></div>
-      <div class="hud-corner hud-bl"></div><div class="hud-corner hud-br"></div>
-      <div class="panel-header">Nexus Core Telemetry</div>
-
-      <div class="telemetry-row">
-        <div class="telemetry-label">Quantum Energy Output <span id="val-energy" class="telemetry-value">84.2%</span></div>
-        <div class="bar-track"><div class="bar-fill cyan" id="bar-energy" style="width: 84.2%"></div></div>
-      </div>
-
-      <div class="telemetry-row">
-        <div class="telemetry-label">Dimensional Stability <span id="val-stability" class="telemetry-value">OPTIMAL</span></div>
-        <div class="bar-track"><div class="bar-fill white" id="bar-stability" style="width: 96.4%"></div></div>
-      </div>
-
-      <div class="telemetry-row">
-        <div class="telemetry-label">Neural Load <span id="val-neural" class="telemetry-value">67.4%</span></div>
-        <div class="bar-track"><div class="bar-fill violet" id="bar-neural" style="width: 67.4%"></div></div>
-      </div>
-
-      <div class="telemetry-row">
-        <div class="telemetry-label">CPU Thread Allocation <span id="val-cpu" class="telemetry-value">45.1%</span></div>
-        <div class="bar-track"><div class="bar-fill cyan" id="bar-cpu" style="width: 45.1%"></div></div>
-      </div>
-
-      <div class="status-row">
-        <div class="status-indicator"><span class="status-dot"></span> SYSTEM OPERATIONAL</div>
-        <div class="build-id">v4.9.2-qntm // b8921</div>
-      </div>
+<div class="card">
+    <img src="1000023476.jpg" alt="Silver Watch">
+    <div class="card-content">
+        <h2>Silver Edition</h2>
+        <p>Elegant stainless-steel luxury style watch with premium appearance.</p>
+        <div class="price">6,900 DZD</div>
     </div>
+</div>
 
-    <!-- Right: Dimension Matrix -->
-    <div class="ui-panel right-panel">
-      <div class="hud-corner hud-tl"></div><div class="hud-corner hud-tr"></div>
-      <div class="hud-corner hud-bl"></div><div class="hud-corner hud-br"></div>
-      <div class="panel-header">Dimension Matrix</div>
-
-      <button class="dimension-btn" data-target="alpha">Alpha Stream</button>
-      <button class="dimension-btn" data-target="omega">Omega Void</button>
-      <button class="dimension-btn" data-target="solaris">Solaris Prime</button>
-      <button class="dimension-btn" data-target="nebula">Nebula Gate</button>
-
-      <div class="active-node-display">
-        <div class="active-node-label">Active Node</div>
-        <div class="active-node-value" id="active-node">CORE NEXUS</div>
-      </div>
+<div class="card">
+    <img src="1000023475.jpg" alt="Gold Watch">
+    <div class="card-content">
+        <h2>Gold Edition</h2>
+        <p>Luxury black & gold finish designed for a timeless classic look.</p>
+        <div class="price">6,900 DZD</div>
     </div>
+</div>
 
-    <!-- Bottom: Status Log -->
-    <div class="bottom-log">
-      <div class="log-container">
-        <div class="log-text" id="log-text"></div><span class="cursor"></span>
-      </div>
-    </div>
-  </div>
+</div>
 
-  <script type="module">
-    import * as THREE from 'three';
-    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+<div class="bundle">
+    <div class="badge">⭐ BEST SELLER</div>
+    <h2>Bundle Offer - 2 Watches</h2>
+    <p>Get both luxury watches together.</p>
+    <div class="bundle-price">12,500 DZD</div>
+</div>
 
-    /* ================= LOADING SEQUENCE ================= */
-    const loader = document.getElementById('loader');
-    const loaderPercent = document.getElementById('loader-percent');
-    let loadProgress = 0;
-    const loadInterval = setInterval(() => {
-      loadProgress += 2;
-      if (loadProgress >= 100) {
-        loadProgress = 100;
-        loaderPercent.textContent = '100%';
-        clearInterval(loadInterval);
-        setTimeout(() => {
-          loader.classList.add('fade-out');
-          setTimeout(() => { loader.style.display = 'none'; }, 1200);
-        }, 400);
-      } else {
-        loaderPercent.textContent = Math.floor(loadProgress) + '%';
-      }
-    }, 50);
+<form id="orderForm">
+    <h2>Order Form</h2>
 
-    /* ================= THREE.JS SCENE ================= */
-    const container = document.getElementById('canvas-container');
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x000000, 0.015);
+    <input type="text" placeholder="Full Name" required>
 
-    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 0, 20);
+    <input type="text" placeholder="الولاية" required>
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.3;
-    container.appendChild(renderer.domElement);
+    <input type="text" placeholder="البلدية" required>
 
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-    controls.enableZoom = true;
-    controls.zoomSpeed = 0.6;
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.4;
-    controls.enablePan = false;
-    controls.minDistance = 12;
-    controls.maxDistance = 35;
+    <input type="tel" placeholder="Phone Number" required>
 
-    /* Lighting */
-    const ambientLight = new THREE.AmbientLight(0x111122, 3);
-    scene.add(ambientLight);
+    <button type="submit">Confirm Order</button>
+</form>
 
-    const pLight1 = new THREE.PointLight(0x00ffff, 150, 80);
-    pLight1.position.set(8, 8, 8);
-    scene.add(pLight1);
+</div>
 
-    const pLight2 = new THREE.PointLight(0xa855f7, 150, 80);
-    pLight2.position.set(-8, -8, 8);
-    scene.add(pLight2);
+<footer>
+    © 2026 Luxury Watch Showcase
+</footer>
 
-    const pLight3 = new THREE.PointLight(0xffffff, 80, 60);
-    pLight3.position.set(0, 0, -10);
-    scene.add(pLight3);
+<script>
+document.getElementById("orderForm").addEventListener("submit", function(e){
+    e.preventDefault();
 
-    /* ================= CENTRAL HYPER-SPHERE ================= */
-    const coreGroup = new THREE.Group();
-    scene.add(coreGroup);
+    alert(
+`✅ Order Confirmed Successfully!
 
-    // Inner solid core
-    const innerGeo = new THREE.IcosahedronGeometry(2.6, 3);
-    const innerMat = new THREE.MeshStandardMaterial({
-      color: 0x001122, emissive: 0x00ffff, emissiveIntensity: 0.6,
-      roughness: 0.3, metalness: 0.95, transparent: true, opacity: 0.95
-    });
-    const innerCore = new THREE.Mesh(innerGeo, innerMat);
-    coreGroup.add(innerCore);
+Thank you for your order.
+Our team will contact you shortly to confirm delivery.`
+    );
 
-    // Mid wireframe
-    const midGeo = new THREE.IcosahedronGeometry(3.2, 2);
-    const midMat = new THREE.MeshBasicMaterial({ color: 0x00ffff, wireframe: true, transparent: true, opacity: 0.12 });
-    const midMesh = new THREE.Mesh(midGeo, midMat);
-    coreGroup.add(midMesh);
+    this.reset();
+});
+</script>
 
-    // Outer wireframe shell
-    const outerGeo = new THREE.IcosahedronGeometry(4.2, 1);
-    const outerMat = new THREE.MeshBasicMaterial({ color: 0xa855f7, wireframe: true, transparent: true, opacity: 0.08 });
-    const outerMesh = new THREE.Mesh(outerGeo, outerMat);
-    coreGroup.add(outerMesh);
-
-    // Core glow sprite
-    function createGlowSprite(size, colorStops) {
-      const c = document.createElement('canvas');
-      c.width = 128; c.height = 128;
-      const ctx = c.getContext('2d');
-      const grad = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
-      colorStops.forEach(s => grad.addColorStop(s.pos, s.color));
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 128, 128);
-      const tex = new THREE.CanvasTexture(c);
-      return new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
-    }
-
-    const coreGlow = createGlowSprite(1, [{pos:0, color:'rgba(0,255,255,0.35)'}, {pos:0.5, color:'rgba(168,85,247,0.08)'}, {pos:1, color:'rgba(0,0,0,0)'}]);
-    coreGlow.scale.set(28, 28, 1);
-    scene.add(coreGlow);
-
-    /* ================= ORBITING RINGS ================= */
-    const rings = [];
-    const ringData = [
-      { r: 5.5, tube: 0.03, color: 0x00ffff, speed: 0.003, axis: new THREE.Vector3(1, 0.3, 0).normalize() },
-      { r: 7.0, tube: 0.025, color: 0xa855f7, speed: -0.002, axis: new THREE.Vector3(0.2, 1, 0.1).normalize() },
-      { r: 8.5, tube: 0.02, color: 0xffffff, speed: 0.0015, axis: new THREE.Vector3(0, 0.5, 1).normalize() },
-      { r: 6.0, tube: 0.035, color: 0x00ffff, speed: 0.004, axis: new THREE.Vector3(1, 1, 0).normalize() },
-      { r: 9.5, tube: 0.015, color: 0xa855f7, speed: -0.001, axis: new THREE.Vector3(-0.5, 1, 0.3).normalize() }
-    ];
-
-    ringData.forEach(cfg => {
-      const geo = new THREE.TorusGeometry(cfg.r, cfg.tube, 16, 120);
-      const mat = new THREE.MeshBasicMaterial({ color: cfg.color, transparent: true, opacity: 0.25, side: THREE.DoubleSide });
-      const ring = new THREE.Mesh(geo, mat);
-      ring.userData = { speed: cfg.speed, axis: cfg.axis };
-      ring.rotation.set(Math.random()*Math.PI, Math.random()*Math.PI, Math.random()*Math.PI);
-      coreGroup.add(ring);
-      rings.push(ring);
-    });
-
-    /* ================= PARTICLE DUST FIELD ================= */
-    const particleCount = 3500;
-    const posArray = new Float32Array(particleCount * 3);
-    const colArray = new Float32Array(particleCount * 3);
-    const palette = [new THREE.Color(0x00ffff), new THREE.Color(0xa855f7), new THREE.Color(0xffffff)];
-
-    for (let i = 0; i < particleCount; i++) {
-      const r = 10 + Math.random() * 25;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
-      posArray[i*3] = r * Math.sin(phi) * Math.cos(theta);
-      posArray[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
-      posArray[i*3+2] = r * Math.cos(phi);
-      const col = palette[Math.floor(Math.random() * palette.length)];
-      colArray[i*3] = col.r; colArray[i*3+1] = col.g; colArray[i*3+2] = col.b;
-    }
-
-    const pGeo = new THREE.BufferGeometry();
-    pGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    pGeo.setAttribute('color', new THREE.BufferAttribute(colArray, 3));
-    const pMat = new THREE.PointsMaterial({ size: 0.06, vertexColors: true, transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false });
-    const particles = new THREE.Points(pGeo, pMat);
-    scene.add(particles);
-
-    /* ================= DIMENSION NODES ================= */
-    const nodePositions = {
-      alpha: new THREE.Vector3(14, 6, -6),
-      omega: new THREE.Vector3(-12, -8, 6),
-      solaris: new THREE.Vector3(10, -7, 9),
-      nebula: new THREE.Vector3(-14, 7, -9)
-    };
-
-    const nodeMeshes = {};
-    Object.entries(nodePositions).forEach(([key, pos]) => {
-      const geo = new THREE.SphereGeometry(0.35, 24, 24);
-      const mat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-      const mesh = new THREE.Mesh(geo, mat);
-      mesh.position.copy(pos);
-
-      const sprite = createGlowSprite(1, [{pos:0, color:'rgba(255,255,255,0.8)'}, {pos:0.4, color:'rgba(0,255,255,0.3)'}, {pos:1, color:'rgba(0,0,0,0)'}]);
-      sprite.scale.set(5, 5, 1);
-      mesh.add(sprite);
-
-      scene.add(mesh);
-      nodeMeshes[key] = mesh;
-    });
-
-    /* ================= CAMERA TRANSITION SYSTEM ================= */
-    let isTransitioning = false;
-    let transProgress = 0;
-    let transStartPos = new THREE.Vector3();
-    let transEndPos = new THREE.Vector3();
-    let transStartTarget = new THREE.Vector3();
-    let transEndTarget = new THREE.Vector3();
-
-    function startTransition(targetKey) {
-      if (isTransitioning) return;
-      const targetPos = nodePositions[targetKey];
-      if (!targetPos) return;
-
-      isTransitioning = true;
-      transProgress = 0;
-      transStartPos.copy(camera.position);
-      transEndPos.copy(targetPos).add(new THREE.Vector3(4, 2, 6).normalize().multiplyScalar(7));
-      transStartTarget.copy(controls.target);
-      transEndTarget.copy(targetPos);
-
-      controls.enabled = false;
-      controls.autoRotate = false;
-
-      const name = document.querySelector(`[data-target="${targetKey}"]`).textContent;
-      addLog(`> INITIATING TRANSITION SEQUENCE: ${name.toUpperCase()}`);
-      addLog(`> LOCKING QUANTUM COORDINATES: [${targetPos.x.toFixed(1)}, ${targetPos.y.toFixed(1)}, ${targetPos.z.toFixed(1)}]`);
-    }
-
-    /* ================= UI INTERACTIONS ================= */
-    const buttons = document.querySelectorAll('.dimension-btn');
-    const activeNodeDisplay = document.getElementById('active-node');
-
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        activeNodeDisplay.textContent = btn.textContent;
-        startTransition(btn.dataset.target);
-      });
-    });
-
-    /* ================= TELEMETRY UPDATES ================= */
-    function updateTelemetry() {
-      const energy = 72 + Math.random() * 24;
-      const stability = 91 + Math.random() * 8.5;
-      const neural = 55 + Math.random() * 38;
-      const cpu = 32 + Math.random() * 48;
-
-      document.getElementById('bar-energy').style.width = energy + '%';
-      document.getElementById('val-energy').textContent = energy.toFixed(1) + '%';
-
-      document.getElementById('bar-stability').style.width = stability + '%';
-      document.getElementById('val-stability').textContent = stability > 96 ? 'OPTIMAL' : (stability > 93 ? 'STABLE' : 'NOMINAL');
-
-      document.getElementById('bar-neural').style.width = neural + '%';
-      document.getElementById('val-neural').textContent = neural.toFixed(1) + '%';
-
-      document.getElementById('bar-cpu').style.width = cpu + '%';
-      document.getElementById('val-cpu').textContent = cpu.toFixed(1) + '%';
-    }
-    setInterval(updateTelemetry, 1200);
-
-    /* ================= TYPEWRITER LOG SYSTEM ================= */
-    const logEl = document.getElementById('log-text');
-    let logQueue = [];
-    let isTypingLog = false;
-    let displayedLines = [];
-
-    function addLog(text) {
-      logQueue.push(text);
-      if (!isTypingLog) processLogQueue();
-    }
-
-    function processLogQueue() {
-      if (logQueue.length === 0) { isTypingLog = false; return; }
-      isTypingLog = true;
-      const text = logQueue.shift();
-      let charIdx = 0;
-      displayedLines.push("");
-      const interval = setInterval(() => {
-        displayedLines[displayedLines.length - 1] += text[charIdx];
-        charIdx++;
-        logEl.textContent = displayedLines.join("\n");
-        if (charIdx >= text.length) {
-          clearInterval(interval);
-          if (displayedLines.length > 5) displayedLines.shift();
-          processLogQueue();
-        }
-      }, 18);
-    }
-
-    [
-      "> AETHERIS NEXUS v4.9.2 ONLINE...",
-      "> QUANTUM ENTANGLEMENT PROTOCOLS ACTIVE",
-      "> MONITORING 4,192 PARALLEL DIMENSIONS",
-      "> NEURAL LINK STABILIZED AT 99.9%"
-    ].forEach(l => addLog(l));
-
-    setInterval(() => {
-      if (logQueue.length < 4) {
-        const msgs = [
-          "> SYNCHRONIZING QUANTUM STATE...",
-          "> SCANNING DIMENSIONAL FREQUENCIES...",
-          "> NEURAL PATHWAY OPTIMIZATION COMPLETE",
-          "> PACKET LOSS: 0.0001%",
-          "> REROUTING AUXILIARY CORE POWER...",
-          "> TEMPORAL ALIGNMENT VERIFIED",
-          "> DIMENSIONAL BARRIER INTEGRITY: NOMINAL",
-          "> MINOR FLUCTUATION DETECTED IN SECTOR 7G",
-          "> AUTO-CORRECTION APPLIED",
-          "> BACKGROUND RADIATION: 0.003 Sv",
-          "> TACHYON STREAM BUFFER CLEARED"
-        ];
-        addLog(msgs[Math.floor(Math.random() * msgs.length)]);
-      }
-    }, 2800);
-
-    /* ================= MOUSE PARALLAX ================= */
-    let mouseX = 0, mouseY = 0;
-    let targetMouseX = 0, targetMouseY = 0;
-    document.addEventListener('mousemove', (e) => {
-      targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
-      targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-    });
-
-    /* ================= ANIMATION LOOP ================= */
-    const clock = new THREE.Clock();
-
-    function animate() {
-      requestAnimationFrame(animate);
-      const time = clock.getElapsedTime();
-
-      // Core rotation
-      innerCore.rotation.y += 0.003;
-      innerCore.rotation.z += 0.001;
-      midMesh.rotation.y -= 0.004;
-      midMesh.rotation.x += 0.002;
-      outerMesh.rotation.y += 0.001;
-      outerMesh.rotation.x -= 0.001;
-
-      // Core pulse
-      const pulse = 1 + Math.sin(time * 2.5) * 0.04;
-      innerCore.scale.set(pulse, pulse, pulse);
-
-      // Rings
-      rings.forEach(ring => {
-        ring.rotation.x += ring.userData.speed * ring.userData.axis.x;
-        ring.rotation.y += ring.userData.speed * ring.userData.axis.y;
-        ring.rotation.z += ring.userData.speed * ring.userData.axis.z;
-      });
-
-      // Particles drift
-      particles.rotation.y = time * 0.015;
-
-      // Mouse parallax smoothing
-      mouseX += (targetMouseX - mouseX) * 0.04;
-      mouseY += (targetMouseY - mouseY) * 0.04;
-      coreGroup.rotation.x = mouseY * 0.08;
-      coreGroup.rotation.y = mouseX * 0.08;
-      particles.rotation.x = mouseY * 0.02;
-
-      // Node idle bob
-      Object.values(nodeMeshes).forEach((mesh, i) => {
-        mesh.position.y += Math.sin(time * 1.5 + i) * 0.003;
-      });
-
-      // Camera transition
-      if (isTransitioning) {
-        transProgress += 0.015;
-        if (transProgress >= 1) {
-          transProgress = 1;
-          isTransitioning = false;
-          controls.enabled = true;
-          controls.autoRotate = true;
-          addLog("> TRANSITION COMPLETE. NODE LOCKED.");
-        }
-        const t = 1 - Math.pow(1 - transProgress, 4);
-        camera.position.lerpVectors(transStartPos, transEndPos, t);
-        controls.target.lerpVectors(transStartTarget, transEndTarget, t);
-      }
-
-      controls.update();
-      renderer.render(scene, camera);
-    }
-
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    animate();
-  </script>
 </body>
 </html>
