@@ -1,355 +1,437 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مجموعة ساعات رولاك الفاخرة</title>
-    <style>
-        :root {
-            --bg-color: #1a1a1a;
-            --text-color: #e0e0e0;
-            --accent-gold: #d4af37;
-            --secondary-gold: #bfa130;
-            --form-bg: #262626;
-            --border-color: #404040;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayoub AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#0b0a08;
+    --bg-1:#141210;
+    --panel:#1a1714;
+    --line:#2d2820;
+    --gold:#c9a24b;
+    --gold-soft:#e7cd8a;
+    --gold-dim:#8a7239;
+    --text:#f2ece1;
+    --text-dim:#a89e8c;
+    --user-bubble:#22201c;
+    --shadow:0 20px 60px rgba(0,0,0,.55);
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(201,162,75,.07), transparent 60%),
+      radial-gradient(900px 500px at 100% 110%, rgba(201,162,75,.05), transparent 55%),
+      var(--bg-0);
+    color:var(--text);
+    font-family:'Tajawal', sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding:24px;
+  }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
+  .app{
+    width:100%;
+    max-width:760px;
+    height:88vh;
+    max-height:900px;
+    background:linear-gradient(180deg, var(--panel), var(--bg-1));
+    border:1px solid var(--line);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    position:relative;
+  }
 
-        /* Header */
-        header {
-            background-color: #000;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+  .app::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    border-radius:22px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+  }
 
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: var(--accent-gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+  /* Header */
+  .header{
+    padding:22px 28px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(201,162,75,.05), transparent);
+    position:relative;
+  }
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
+  .orb{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    position:relative;
+    flex-shrink:0;
+    background:
+      radial-gradient(circle at 35% 30%, var(--gold-soft), var(--gold) 45%, #6b5423 90%);
+    box-shadow:0 0 18px rgba(201,162,75,.45), 0 0 0 1px rgba(201,162,75,.25);
+    animation:breathe 4s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{ box-shadow:0 0 14px rgba(201,162,75,.35), 0 0 0 1px rgba(201,162,75,.2); }
+    50%{ box-shadow:0 0 26px rgba(201,162,75,.6), 0 0 0 1px rgba(201,162,75,.35); }
+  }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 14px;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
+  .title-block{ display:flex; flex-direction:column; gap:2px; }
+  .brand{
+    font-family:'Cormorant Garamond', serif;
+    font-size:26px;
+    font-weight:600;
+    letter-spacing:.5px;
+    background:linear-gradient(90deg, var(--gold-soft), var(--gold) 60%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .status{
+    font-size:12.5px;
+    color:var(--text-dim);
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .status .dot{
+    width:6px;height:6px;border-radius:50%;
+    background:#5fd67a;
+    box-shadow:0 0 6px #5fd67a;
+  }
 
-        .nav-links a:hover {
-            color: var(--accent-gold);
-        }
+  .divider-thread{
+    position:absolute;
+    bottom:-1px; left:28px; right:28px;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    opacity:.7;
+  }
 
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+  /* Chat area */
+  .chat{
+    flex:1;
+    overflow-y:auto;
+    padding:28px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    scroll-behavior:smooth;
+  }
+  .chat::-webkit-scrollbar{ width:8px; }
+  .chat::-webkit-scrollbar-thumb{ background:var(--line); border-radius:8px; }
+  .chat::-webkit-scrollbar-track{ background:transparent; }
 
-        /* Product Section */
-        .product-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 50px;
-            justify-content: center;
-            margin-bottom: 50px;
-            width: 100%;
-        }
+  .row{ display:flex; gap:12px; max-width:88%; animation:rise .35s ease both; }
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(8px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .row.bot{ align-self:flex-start; }
+  .row.user{ align-self:flex-end; flex-direction:row-reverse; }
 
-        .product-gallery {
-            flex: 1;
-            min-width: 300px;
-            max-width: 500px;
-            text-align: center;
-        }
+  .avatar{
+    width:32px; height:32px; border-radius:50%;
+    flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700;
+  }
+  .row.bot .avatar{
+    background:radial-gradient(circle at 35% 30%, var(--gold-soft), var(--gold) 60%);
+    color:#1a1408;
+    box-shadow:0 0 10px rgba(201,162,75,.4);
+  }
+  .row.user .avatar{
+    background:#2b271f;
+    color:var(--text-dim);
+    border:1px solid var(--line);
+  }
 
-        .main-image {
-            width: 100%;
-            height: auto;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            display: none; /* Hide all initially */
-        }
+  .bubble{
+    padding:13px 18px;
+    border-radius:16px;
+    font-size:15px;
+    line-height:1.85;
+    letter-spacing:.1px;
+  }
+  .row.bot .bubble{
+    background:linear-gradient(180deg, #201c16, #1b1712);
+    border:1px solid var(--line);
+    border-top-right-radius:4px;
+    color:var(--text);
+  }
+  .row.user .bubble{
+    background:var(--user-bubble);
+    border:1px solid #33302a;
+    border-top-left-radius:4px;
+    color:var(--text);
+  }
 
-        .main-image.active {
-            display: block; /* Show active */
-        }
+  .name-tag{
+    font-size:11px;
+    color:var(--gold-dim);
+    margin-bottom:4px;
+    font-weight:700;
+    letter-spacing:.3px;
+  }
 
-        .thumbnail-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
+  /* typing indicator */
+  .typing{ display:flex; gap:4px; padding:6px 4px; }
+  .typing span{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--gold);
+    opacity:.5;
+    animation:blink 1.2s infinite;
+  }
+  .typing span:nth-child(2){ animation-delay:.2s; }
+  .typing span:nth-child(3){ animation-delay:.4s; }
+  @keyframes blink{
+    0%,80%,100%{ opacity:.25; transform:translateY(0); }
+    40%{ opacity:1; transform:translateY(-3px); }
+  }
 
-        .thumbnail {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border: 2px solid var(--border-color);
-            border-radius: 4px;
-            cursor: pointer;
-            opacity: 0.7;
-            transition: opacity 0.3s, border-color 0.3s;
-        }
+  /* Input area */
+  .input-bar{
+    display:flex;
+    align-items:flex-end;
+    gap:12px;
+    padding:18px 22px;
+    border-top:1px solid var(--line);
+    background:linear-gradient(0deg, rgba(201,162,75,.04), transparent);
+  }
+  .input-wrap{
+    flex:1;
+    background:var(--bg-1);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:4px 6px;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .input-wrap:focus-within{
+    border-color:var(--gold-dim);
+    box-shadow:0 0 0 3px rgba(201,162,75,.08);
+  }
+  textarea{
+    width:100%;
+    resize:none;
+    background:transparent;
+    border:none;
+    outline:none;
+    color:var(--text);
+    font-family:'Tajawal', sans-serif;
+    font-size:15px;
+    padding:12px 14px;
+    max-height:130px;
+    line-height:1.6;
+  }
+  textarea::placeholder{ color:#6e6656; }
 
-        .thumbnail:hover, .thumbnail.active {
-            opacity: 1;
-            border-color: var(--accent-gold);
-        }
+  .send-btn{
+    width:48px; height:48px;
+    border-radius:14px;
+    border:1px solid var(--gold-dim);
+    background:linear-gradient(160deg, var(--gold-soft), var(--gold) 70%);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    flex-shrink:0;
+    transition:transform .15s ease, box-shadow .15s ease;
+    box-shadow:0 6px 18px rgba(201,162,75,.25);
+  }
+  .send-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(201,162,75,.35); }
+  .send-btn:active{ transform:translateY(0); }
+  .send-btn svg{ width:20px; height:20px; transform:scaleX(-1); }
 
-        .product-details {
-            flex: 1;
-            min-width: 300px;
-            max-width: 500px;
-        }
+  .footer-note{
+    text-align:center;
+    font-size:11px;
+    color:#665f4e;
+    padding-bottom:14px;
+    letter-spacing:.2px;
+  }
 
-        .product-title {
-            font-size: 36px;
-            font-weight: 300;
-            margin-bottom: 10px;
-        }
+  @media (max-width:560px){
+    .app{ height:94vh; border-radius:16px; }
+    .header{ padding:16px 18px; }
+    .chat{ padding:18px; }
+    .input-bar{ padding:14px; }
+  }
 
-        .product-subtitle {
-            font-size: 18px;
-            color: #999;
-            margin-bottom: 20px;
-        }
-
-        .price-display {
-            font-size: 32px;
-            color: var(--accent-gold);
-            margin-bottom: 30px;
-            font-weight: bold;
-        }
-
-        .price-note {
-            font-size: 14px;
-            color: #888;
-            display: block;
-            margin-top: -10px;
-            margin-bottom: 20px;
-        }
-
-        .features {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 30px;
-            color: #ccc;
-        }
-
-        .features li {
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-        }
-
-        .features li::before {
-            content: '✓';
-            color: var(--accent-gold);
-            position: absolute;
-            left: 0;
-        }
-
-        /* Order Form */
-        .order-form-container {
-            background-color: var(--form-bg);
-            padding: 40px;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            margin-bottom: 50px;
-        }
-
-        .form-title {
-            font-size: 24px;
-            color: var(--accent-gold);
-            margin-bottom: 30px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #ccc;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            background-color: #333;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            color: #fff;
-            font-size: 16px;
-            box-sizing: border-box; /* Important for padding */
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent-gold);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(to right, var(--accent-gold), var(--secondary-gold));
-            color: #000;
-            border: none;
-            border-radius: 4px;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 20px;
-        }
-
-        .submit-btn:hover {
-            background: linear-gradient(to right, var(--secondary-gold), var(--accent-gold));
-        }
-
-        /* Footer */
-        footer {
-            background-color: #000;
-            padding: 30px;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-            font-size: 12px;
-            color: #666;
-        }
-
-        /* Modal/Popup */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 2000; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.8); 
-        }
-
-        .modal-content {
-            background-color: var(--form-bg);
-            margin: 15% auto; 
-            padding: 40px;
-            border: 1px solid var(--accent-gold);
-            width: 80%; 
-            max-width: 400px;
-            border-radius: 8px;
-            text-align: center;
-            animation: popIn 0.5s;
-        }
-
-        @keyframes popIn {
-            0% {transform: scale(0);}
-            80% {transform: scale(1.1);}
-            100% {transform: scale(1);}
-        }
-
-        .modal-check {
-            font-size: 50px;
-            color: var(--accent-gold);
-            margin-bottom: 20px;
-        }
-
-        .modal-title {
-            font-size: 22px;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .modal-text {
-            font-size: 16px;
-            color: #ccc;
-        }
-
-        .close-modal {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close-modal:hover,
-        .close-modal:focus {
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            header {
-                padding: 15px 20px;
-                flex-direction: column;
-                gap: 10px;
-            }
-            .nav-links {
-                gap: 15px;
-            }
-            .product-section {
-                gap: 30px;
-            }
-            .product-title {
-                font-size: 28px;
-            }
-            .price-display {
-                font-size: 28px;
-            }
-        }
-    </style>
+  @media (prefers-reduced-motion: reduce){
+    .orb, .row, .typing span{ animation:none !important; }
+  }
+</style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">Rolak</div>
-        <nav class="nav-links">
-            <a href="#!">الرئيسية</a>
-            <a href="#!">المجموعة</a>
-            <a href="#!">تواصل معنا</a>
-        </nav>
-    </header>
+<div class="app">
+  <div class="header">
+    <div class="orb"></div>
+    <div class="title-block">
+      <div class="brand">Ayoub AI</div>
+      <div class="status"><span class="dot"></span> متصل الآن — جاهز للتنفيذ</div>
+    </div>
+    <div class="divider-thread"></div>
+  </div>
 
-    <div class="container">
-        <div class="product-section">
-            <div class="product-gallery">
-                <img id="img1" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDDUHEg0UFBMIHRgYFBgYGBggIBwgIBwwKCQkKCgcMDAwMDQwMDQwMDQwMDQ3/2wBDAQgGBgcGBQgHBwcJCQgKDBQNDAsLDDUHEg0UFBMIHRgYFBgYGBggIBwgIBwwKCQkKCgcMDAwMDQwMDQwMDQwMDQ3/wAARCACdAJYDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT0NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQFBAMEBAQAAQJAAQIEAxMRIhEUQVECA1ETIiYnBRQwNWM2GBkYGyJCRFc0RFZHNjhSVlseoZXV2Gl6ZXhpZmdoaWpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqrO0t7i5usLDxMXGx8jJytLT0NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDxWiiiv3A/OgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiig
+  <div class="chat" id="chat"></div>
+
+  <div class="input-bar">
+    <div class="input-wrap">
+      <textarea id="input" rows="1" placeholder="اكتب رسالتك هنا…"></textarea>
+    </div>
+    <button class="send-btn" id="sendBtn" aria-label="إرسال">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1a1408" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
+    </button>
+  </div>
+  <div class="footer-note">Ayoub AI · تجربة محادثة فاخرة</div>
+</div>
+
+<script>
+const chat = document.getElementById('chat');
+const input = document.getElementById('input');
+const sendBtn = document.getElementById('sendBtn');
+
+// auto-grow textarea
+input.addEventListener('input', () => {
+  input.style.height = 'auto';
+  input.style.height = Math.min(input.scrollHeight, 130) + 'px';
+});
+
+function scrollToBottom(){
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function addMessage(text, who){
+  const row = document.createElement('div');
+  row.className = 'row ' + who;
+
+  const avatar = document.createElement('div');
+  avatar.className = 'avatar';
+  avatar.textContent = who === 'bot' ? 'A' : 'أ';
+
+  const col = document.createElement('div');
+  const tag = document.createElement('div');
+  tag.className = 'name-tag';
+  tag.textContent = who === 'bot' ? 'Ayoub AI' : 'أنت';
+  tag.style.textAlign = who === 'bot' ? 'right' : 'left';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.textContent = text;
+
+  col.appendChild(tag);
+  col.appendChild(bubble);
+  row.appendChild(avatar);
+  row.appendChild(col);
+  chat.appendChild(row);
+  scrollToBottom();
+  return bubble;
+}
+
+function showTyping(){
+  const row = document.createElement('div');
+  row.className = 'row bot';
+  row.id = 'typingRow';
+
+  const avatar = document.createElement('div');
+  avatar.className = 'avatar';
+  avatar.textContent = 'A';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+
+  row.appendChild(avatar);
+  row.appendChild(bubble);
+  chat.appendChild(row);
+  scrollToBottom();
+}
+
+function removeTyping(){
+  const row = document.getElementById('typingRow');
+  if(row) row.remove();
+}
+
+// --- Simulated intelligence layer ---
+// This runs entirely client-side with rule-based matching.
+// To connect a real AI backend, replace generateReply() with an API call.
+const knowledgeBase = [
+  { keys: ['سلام','أهلا','هلا','مرحبا','السلام عليكم'],
+    reply: 'وعليكم السلام، أهلاً بك. أنا Ayoub AI، تحت أمرك مباشرة — بماذا أخدمك اليوم؟' },
+  { keys: ['كي داير','كيداير','لاباس','واش لاباس','كيف حالك'],
+    reply: 'الحمد لله، بأفضل حال ودائماً جاهز. والأهم، كيف يمكنني خدمتك الآن؟' },
+  { keys: ['شكون نتا','شكون انت','من انت','من أنت'],
+    reply: 'أنا Ayoub AI — كيان ذكاء اصطناعي مصمَّم للدقة والتنفيذ الراقي. مهمتي أن أمنحك إجابات واضحة وحلولاً عملية، بأناقة وبدون حشو.' },
+  { keys: ['شكرا','شكرًا','بارك الله فيك','مشكور'],
+    reply: 'العفو، هذا واجبي. إن احتجت أي شيء آخر فأنا حاضر في أي لحظة.' },
+  { keys: ['مساعدة','ساعدني','خدمة'],
+    reply: 'بالتأكيد. أخبرني بتفاصيل ما تحتاجه بدقة، وسأقدم لك أفضل مسار للتنفيذ.' },
+];
+
+function findReply(userText){
+  const t = userText.trim();
+  const lower = t.toLowerCase();
+  for(const item of knowledgeBase){
+    for(const key of item.keys){
+      if(lower.includes(key.toLowerCase())) return item.reply;
+    }
+  }
+  // elegant fallback responses
+  const fallbacks = [
+    'ملاحظة دقيقة. دعني أحلل الأمر: ' + t + ' — بناءً على هذا، أقترح أن نبدأ بتحديد الهدف بوضوح قبل التنفيذ.',
+    'تم استلام طلبك. من موقعي كـ Ayoub AI، أرى أن أفضل نهج هنا هو التركيز على النتيجة المطلوبة أولاً، ثم البناء خطوة بخطوة.',
+    'فهمت قصدك. لأقدم لك إجابة على أعلى مستوى من الدقة، هل يمكنك أن توضح لي أكثر ما هو الهدف النهائي؟',
+    'استفسار وجيه. إليك تحليلي المختصر: كل قرار جيد يبدأ بمعطيات واضحة — شاركني التفاصيل وسأتولى الباقي بإتقان.'
+  ];
+  return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+}
+
+function handleSend(){
+  const text = input.value.trim();
+  if(!text) return;
+
+  addMessage(text, 'user');
+  input.value = '';
+  input.style.height = 'auto';
+
+  showTyping();
+  const delay = 700 + Math.random() * 900;
+  setTimeout(() => {
+    removeTyping();
+    addMessage(findReply(text), 'bot');
+  }, delay);
+}
+
+sendBtn.addEventListener('click', handleSend);
+input.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter' && !e.shiftKey){
+    e.preventDefault();
+    handleSend();
+  }
+});
+
+// Opening message
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    addMessage('أهلاً بك. أنا Ayoub AI، جاهز لتنفيذ مهامك بأعلى درجات الدقة والأناقة. كيف يمكنني خدمتك؟', 'bot');
+  }, 400);
+});
+</script>
+
+</body>
+</html>
