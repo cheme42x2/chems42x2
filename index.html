@@ -1,722 +1,830 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>ماكياجي · My Makeup</title>
-  <!-- Font & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Quicksand', sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ماكياجي - Makyaji</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #fcfbfa;
+            --primary: #2c221e;
+            --accent: #d4af37; /* Luxury Gold */
+            --rose-accent: #e0a9a7;
+            --text-dark: #222;
+            --text-light: #777;
+            --white: #ffffff;
+            --border: #f0eae1;
+            --shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
 
-    body {
-      background: #1a1410;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 12px;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    /* main phone frame */
-    .app-frame {
-      max-width: 400px;
-      width: 100%;
-      background: #f7f2ed;
-      border-radius: 44px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 0 2px #d9c6b0 inset;
-      overflow: hidden;
-      position: relative;
-      height: 780px;
-      display: flex;
-      flex-direction: column;
-    }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            padding-bottom: 90px;
+            overflow-x: hidden;
+        }
 
-    /* splash screen */
-    .splash {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 30% 20%, #d8b89a, #2c1e17);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      transition: opacity 0.9s ease, transform 0.6s ease;
-      pointer-events: none;
-      border-radius: 44px;
-    }
-    .splash.hide {
-      opacity: 0;
-      transform: scale(1.04);
-      pointer-events: none;
-    }
-    .splash-logo {
-      font-size: 3.8rem;
-      font-weight: 700;
-      color: #f2e0d0;
-      text-shadow: 0 8px 20px rgba(0,0,0,0.4);
-      letter-spacing: 4px;
-      background: rgba(255, 215, 190, 0.15);
-      backdrop-filter: blur(6px);
-      padding: 20px 40px;
-      border-radius: 60px;
-      border: 1px solid rgba(255, 215, 190, 0.3);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-    .splash-sub {
-      margin-top: 14px;
-      color: #eedccd;
-      font-weight: 300;
-      letter-spacing: 6px;
-      font-size: 1rem;
-      background: rgba(0,0,0,0.2);
-      padding: 8px 24px;
-      border-radius: 40px;
-      backdrop-filter: blur(4px);
-    }
-    .splash-icon {
-      font-size: 3rem;
-      color: #f0d5c0;
-      margin-top: 20px;
-      opacity: 0.6;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { opacity: 0.4; transform: scale(0.98); }
-      50% { opacity: 0.9; transform: scale(1.04); }
-      100% { opacity: 0.4; transform: scale(0.98); }
-    }
+        /* --- INTRO SPLASH SCREEN --- */
+        #intro-splash {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #1a1412 0%, #3a2e2b 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #intro-splash.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .intro-logo-icon {
+            width: 80px; height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+            animation: pulse 2s infinite;
+        }
+        .intro-title {
+            font-size: 2.5rem;
+            color: var(--white);
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .intro-subtitle {
+            color: var(--accent);
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
 
-    /* main content */
-    .main-content {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      background: #f7f2ed;
-      border-radius: 44px;
-      overflow: hidden;
-      position: relative;
-    }
+        /* --- HEADER --- */
+        header {
+            background: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-brand {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .lang-selector {
+            display: flex;
+            background: #f7f3ee;
+            padding: 3px;
+            border-radius: 20px;
+            gap: 2px;
+        }
+        .lang-btn {
+            border: none;
+            background: none;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 15px;
+            color: var(--text-light);
+            transition: all 0.3s;
+        }
+        .lang-btn.active {
+            background: var(--primary);
+            color: var(--accent);
+        }
 
-    /* header + language switcher */
-    .header {
-      background: rgba(255, 247, 240, 0.85);
-      backdrop-filter: blur(12px);
-      padding: 16px 20px 8px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(210, 180, 160, 0.3);
-    }
-    .app-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #3e2a1e;
-      letter-spacing: 1px;
-    }
-    .app-title i {
-      color: #b2805e;
-      margin-right: 6px;
-    }
-    .lang-switcher {
-      display: flex;
-      gap: 6px;
-      background: #e7dbd0;
-      padding: 4px 8px;
-      border-radius: 30px;
-    }
-    .lang-btn {
-      background: transparent;
-      border: none;
-      padding: 4px 10px;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: #3e2a1e;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .lang-btn.active {
-      background: #b2805e;
-      color: white;
-      box-shadow: 0 2px 8px rgba(178, 128, 94, 0.3);
-    }
+        /* --- CONTAINER --- */
+        .container {
+            padding: 20px;
+        }
 
-    /* scrollable content */
-    .scroll-area {
-      flex: 1;
-      overflow-y: auto;
-      padding: 12px 16px 80px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      background: #f7f2ed;
-    }
+        /* Banner Slider Simulation */
+        .promo-banner {
+            background: linear-gradient(135deg, #2c221e, #4a3b35);
+            border-radius: 16px;
+            padding: 20px;
+            color: var(--white);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .promo-banner h3 { font-size: 1.2rem; color: var(--accent); margin-bottom: 5px; }
+        .promo-banner p { font-size: 0.85rem; opacity: 0.8; }
 
-    /* shop cards */
-    .shop-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .shop-card {
-      background: rgba(255, 248, 242, 0.7);
-      backdrop-filter: blur(4px);
-      border-radius: 28px;
-      padding: 14px 14px 10px 14px;
-      box-shadow: 0 6px 18px rgba(80, 50, 30, 0.08);
-      border: 1px solid rgba(255, 215, 190, 0.3);
-      transition: 0.2s;
-    }
-    .shop-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-    .shop-avatar {
-      width: 54px;
-      height: 54px;
-      border-radius: 20px;
-      background: #dccfc4;
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      border: 2px solid #e6d3c4;
-    }
-    .shop-name {
-      font-weight: 700;
-      font-size: 1rem;
-      color: #2d1e14;
-    }
-    .shop-desc {
-      font-size: 0.7rem;
-      color: #7d6554;
-      font-weight: 400;
-    }
+        /* Section Headings */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .section-header h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
 
-    /* product row inside shop */
-    .product-row {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding: 8px 0 4px 0;
-      scrollbar-width: thin;
-      scrollbar-color: #d9c6b0 #f0e6dc;
-    }
-    .product-item {
-      min-width: 98px;
-      background: white;
-      border-radius: 24px;
-      padding: 8px 6px 10px 6px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(100, 70, 40, 0.06);
-      border: 1px solid #efe4da;
-      flex-shrink: 0;
-      position: relative;
-    }
-    .product-img {
-      width: 70px;
-      height: 70px;
-      border-radius: 30px;
-      background: #f0e4d8;
-      margin: 0 auto 6px;
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-      transition: 0.2s;
-      cursor: pointer;
-    }
-    .product-img:active {
-      transform: scale(0.96);
-    }
-    .product-name {
-      font-size: 0.6rem;
-      font-weight: 600;
-      color: #2d1e14;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .product-price {
-      font-size: 0.65rem;
-      font-weight: 600;
-      color: #b2805e;
-      margin: 2px 0;
-    }
-    .add-btn {
-      background: #b2805e;
-      border: none;
-      color: white;
-      width: 28px;
-      height: 28px;
-      border-radius: 40px;
-      font-size: 1rem;
-      font-weight: 300;
-      box-shadow: 0 4px 8px rgba(178, 128, 94, 0.2);
-      cursor: pointer;
-      transition: 0.15s;
-      margin-top: 2px;
-    }
-    .add-btn:active {
-      transform: scale(0.9);
-      background: #9a6d4e;
-    }
+        /* Shops Grid (5 Shops) */
+        .shops-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .shop-card {
+            background: var(--white);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .shop-card:active { transform: scale(0.97); }
+        .shop-img-wrap {
+            height: 110px;
+            position: relative;
+        }
+        .shop-img-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .delivery-badge {
+            position: absolute;
+            bottom: 8px; right: 8px;
+            background: rgba(0,0,0,0.7);
+            color: var(--white);
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            border-radius: 6px;
+        }
+        .shop-info {
+            padding: 12px;
+        }
+        .shop-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+            color: var(--primary);
+        }
+        .shop-meta {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            display: flex;
+            justify-content: space-between;
+        }
+        .shop-rating {
+            color: var(--accent);
+        }
 
-    /* bottom cart bar */
-    .cart-bar {
-      position: absolute;
-      bottom: 70px;
-      left: 16px;
-      right: 16px;
-      background: rgba(30, 20, 15, 0.85);
-      backdrop-filter: blur(18px);
-      border-radius: 60px;
-      padding: 10px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-      border: 1px solid rgba(255, 215, 190, 0.2);
-      color: #f2e0d0;
-      z-index: 50;
-    }
-    .cart-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .cart-total {
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-    .cart-price {
-      font-weight: 600;
-      color: #f0cfb0;
-    }
-    .checkout-btn {
-      background: #dbb594;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 40px;
-      color: #1f140e;
-      font-weight: 700;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: 0.2s;
-      box-shadow: 0 4px 12px rgba(219, 181, 148, 0.3);
-    }
-    .checkout-btn:active {
-      transform: scale(0.94);
-    }
+        /* Products View inside Shop */
+        #shop-view {
+            display: none;
+        }
+        .back-to-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f0eae1;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .product-card {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+        .product-img {
+            width: 100%;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .product-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            height: 38px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        .product-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .product-price {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .add-btn {
+            background: var(--primary);
+            color: var(--accent);
+            border: none;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        .add-btn:active { background: var(--accent); color: var(--white); }
 
-    /* bottom nav */
-    .bottom-nav {
-      display: flex;
-      justify-content: space-around;
-      background: rgba(255, 247, 240, 0.85);
-      backdrop-filter: blur(16px);
-      padding: 8px 0 10px 0;
-      border-top: 1px solid rgba(210, 180, 160, 0.25);
-      border-radius: 0 0 44px 44px;
-      margin-top: auto;
-      flex-shrink: 0;
-    }
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #7d6554;
-      font-size: 0.6rem;
-      font-weight: 500;
-      transition: 0.2s;
-      cursor: default;
-    }
-    .nav-item i {
-      font-size: 1.4rem;
-      margin-bottom: 2px;
-      color: #5d4334;
-    }
-    .nav-item.active i {
-      color: #b2805e;
-    }
+        /* --- PRODUCT DETAIL MODAL (360 Simulation) --- */
+        #product-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .modal-content {
+            background: var(--white);
+            width: 100%;
+            max-height: 85vh;
+            border-radius: 24px 24px 0 0;
+            padding: 25px;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px; left: 15px;
+            background: #f0eae1;
+            border: none;
+            width: 35px; height: 35px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        .modal-img-container {
+            width: 100%;
+            height: 220px;
+            background: #faf8f5;
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .modal-img-container img {
+            max-height: 80%;
+            object-fit: contain;
+        }
+        .rotate-hint {
+            position: absolute;
+            bottom: 10px;
+            background: rgba(0,0,0,0.6);
+            color: var(--white);
+            padding: 3px 10px;
+            font-size: 0.75rem;
+            border-radius: 12px;
+        }
+        .modal-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 5px; }
+        .modal-price { font-size: 1.3rem; font-weight: 800; color: var(--accent); margin-bottom: 15px; }
+        .modal-desc { font-size: 0.85rem; color: var(--text-light); line-height: 1.5; margin-bottom: 20px; }
+        .modal-add-cart-btn {
+            background: var(--primary);
+            color: var(--accent);
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
 
-    /* modal */
-    .modal-overlay {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.4);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 200;
-      border-radius: 44px;
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.25s;
-    }
-    .modal-overlay.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .modal-box {
-      background: #fcf5ee;
-      padding: 30px 28px;
-      border-radius: 48px;
-      max-width: 300px;
-      width: 90%;
-      box-shadow: 0 40px 60px rgba(0,0,0,0.4);
-      border: 1px solid rgba(255, 215, 190, 0.3);
-      transform: scale(0.92);
-      transition: 0.25s;
-      text-align: center;
-    }
-    .modal-overlay.show .modal-box {
-      transform: scale(1);
-    }
-    .modal-box h3 {
-      color: #2d1e14;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-    .modal-box input {
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: 40px;
-      border: 1px solid #dccfc4;
-      background: white;
-      font-size: 1rem;
-      margin: 8px 0 18px 0;
-      outline: none;
-    }
-    .modal-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-    }
-    .modal-actions button {
-      padding: 10px 30px;
-      border-radius: 40px;
-      border: none;
-      background: #b2805e;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.15s;
-    }
-    .modal-actions button:active { transform: scale(0.94); }
-    .modal-actions .cancel-btn {
-      background: #d0bfb2;
-      color: #2d1e14;
-    }
+        /* --- CART & CHECKOUT BAR --- */
+        .cart-bar {
+            position: fixed;
+            bottom: 75px; left: 15px; right: 15px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 90;
+            display: none;
+        }
+        .cart-bar-info span { display: block; font-size: 0.75rem; opacity: 0.7; }
+        .cart-bar-info b { font-size: 1.1rem; color: var(--accent); }
+        .cart-bar-btn {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
 
-    .toast {
-      position: absolute;
-      bottom: 150px;
-      left: 20px;
-      right: 20px;
-      background: #2d1e14;
-      color: #f2e0d0;
-      padding: 14px 18px;
-      border-radius: 40px;
-      text-align: center;
-      font-weight: 500;
-      font-size: 0.8rem;
-      z-index: 100;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-      opacity: 0;
-      transition: 0.3s;
-      pointer-events: none;
-    }
-    .toast.show {
-      opacity: 1;
-      pointer-events: none;
-    }
+        /* --- CHECKOUT MODAL --- */
+        #checkout-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .checkout-box {
+            background: var(--white);
+            width: 100%;
+            max-width: 380px;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+        }
+        .checkout-box h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); }
+        .checkout-box p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 20px; }
+        .phone-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .phone-input:focus { border-color: var(--accent); }
+        .confirm-order-btn {
+            background: var(--accent);
+            color: var(--primary);
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+        }
 
-    /* scrollbar */
-    .scroll-area::-webkit-scrollbar { width: 4px; }
-    .scroll-area::-webkit-scrollbar-track { background: #e7dbd0; border-radius: 10px; }
-    .scroll-area::-webkit-scrollbar-thumb { background: #b2805e; border-radius: 10px; }
-  </style>
+        /* --- BOTTOM NAVIGATION BAR --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            height: 70px;
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+        }
+        .nav-item {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            cursor: pointer;
+            position: relative;
+        }
+        .nav-item i {
+            font-size: 1.3rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .nav-item.active {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        .nav-badge {
+            position: absolute;
+            top: -3px; right: 8px;
+            background: #d9534f;
+            color: var(--white);
+            font-size: 0.65rem;
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-<div class="app-frame" id="app">
-  <!-- SPLASH -->
-  <div class="splash" id="splash">
-    <div class="splash-logo">ماكياجي</div>
-    <div class="splash-sub">MY MAKEUP</div>
-    <div class="splash-icon"><i class="fas fa-spa"></i></div>
-  </div>
 
-  <!-- MAIN -->
-  <div class="main-content" id="mainContent">
-    <!-- header -->
-    <div class="header">
-      <div class="app-title"><i class="fas fa-crown"></i> ماكياجي</div>
-      <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="ar">AR</button>
-        <button class="lang-btn" data-lang="fr">FR</button>
-        <button class="lang-btn" data-lang="en">EN</button>
-      </div>
+    <div id="intro-splash">
+        <div class="intro-logo-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <div class="intro-title">ماكياجي</div>
+        <div class="intro-subtitle">LUXURY MAKEUP</div>
     </div>
 
-    <!-- scroll -->
-    <div class="scroll-area" id="scrollArea">
-      <div class="shop-grid" id="shopGrid"></div>
-    </div>
-
-    <!-- cart bar -->
-    <div class="cart-bar" id="cartBar">
-      <div class="cart-info">
-        <span><i class="fas fa-shopping-bag"></i> <span id="cartCount">0</span></span>
-        <span class="cart-price" id="cartTotalPrice">0 دج</span>
-        <span style="font-size:0.7rem; opacity:0.7;">+200 دج</span>
-      </div>
-      <button class="checkout-btn" id="checkoutBtn">تأكيد الطلب</button>
-    </div>
-
-    <!-- bottom nav -->
-    <div class="bottom-nav">
-      <div class="nav-item active"><i class="fas fa-home"></i><span>Home</span></div>
-      <div class="nav-item"><i class="fas fa-heart"></i><span>Shops</span></div>
-      <div class="nav-item"><i class="fas fa-bell"></i><span>Alerts</span></div>
-      <div class="nav-item"><i class="fas fa-user"></i><span>Profile</span></div>
-    </div>
-
-    <!-- modal -->
-    <div class="modal-overlay" id="modalOverlay">
-      <div class="modal-box">
-        <h3><i class="fas fa-phone-alt" style="color:#b2805e;"></i> رقم الهاتف</h3>
-        <input type="tel" id="phoneInput" placeholder="05 xx xx xx xx" />
-        <div class="modal-actions">
-          <button class="cancel-btn" id="modalCancel">إلغاء</button>
-          <button id="modalConfirm">تأكيد</button>
+    <header>
+        <div class="header-brand" id="header-title">ماكياجي</div>
+        <div class="lang-selector">
+            <button class="lang-btn active" onclick="setLang('ar')">AR</button>
+            <button class="lang-btn" onclick="setLang('fr')">FR</button>
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
         </div>
-      </div>
+    </header>
+
+    <div class="container">
+        <div id="home-view">
+            <div class="promo-banner">
+                <h3 id="banner-title">✨ فخامة التجميل بين يديك</h3>
+                <p id="banner-desc">اكتشفي أرقى 5 محلات مكياج وعطور أصلية بتوصيل سريع جداً بـ 200 دج فقط!</p>
+            </div>
+
+            <div class="section-header">
+                <h2 id="shops-heading">المتاجر المختارة (5)</h2>
+            </div>
+
+            <div class="shops-grid" id="shops-container">
+                </div>
+        </div>
+
+        <div id="shop-view">
+            <div class="back-to-home" onclick="goHome()">
+                <i class="fa-solid fa-arrow-right"></i> <span id="back-text">العودة للمتاجر</span>
+            </div>
+            <div class="section-header">
+                <h2 id="current-shop-name">محلات المكياج</h2>
+            </div>
+            <div class="products-grid" id="products-container">
+                </div>
+        </div>
     </div>
 
-    <!-- toast -->
-    <div class="toast" id="toast"></div>
-  </div>
-</div>
+    <div id="product-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-img-container">
+                <img id="modal-img" src="" alt="">
+                <div class="rotate-hint" id="rotate-hint-text"><i class="fa-solid fa-arrows-rotate"></i> اسحبي للتدوير 360°</div>
+            </div>
+            <div class="modal-title" id="modal-name">اسم المنتج</div>
+            <div class="modal-price" id="modal-price">0 دج</div>
+            <div class="modal-desc" id="modal-desc">وصف المنتج الفاخر...</div>
+            <button class="modal-add-cart-btn" id="modal-add-btn" onclick="addCurrentProductToCart()">أضفي إلى السلة 🛍️</button>
+        </div>
+    </div>
 
-<script>
-  (function(){
-    // ----- DATA -----
-    const shops = [
-      { id:0, name: 'Chanel Luxe', avatar: 'https://picsum.photos/id/1/100/100', products: [
-        { name: 'Rouge Coco', price: 8500, img: 'https://picsum.photos/id/152/80/80' },
-        { name: 'Sublimage', price: 22000, img: 'https://picsum.photos/id/225/80/80' },
-        { name: 'Le Vernis', price: 4800, img: 'https://picsum.photos/id/248/80/80' }
-      ]},
-      { id:1, name: 'Dior Privé', avatar: 'https://picsum.photos/id/100/100/100', products: [
-        { name: 'J\'adore', price: 12000, img: 'https://picsum.photos/id/180/80/80' },
-        { name: 'Rouge 999', price: 7600, img: 'https://picsum.photos/id/196/80/80' },
-        { name: 'Backstage', price: 9400, img: 'https://picsum.photos/id/231/80/80' }
-      ]},
-      { id:2, name: 'YSL Beauty', avatar: 'https://picsum.photos/id/104/100/100', products: [
-        { name: 'Touche Éclat', price: 8900, img: 'https://picsum.photos/id/279/80/80' },
-        { name: 'Black Opium', price: 13500, img: 'https://picsum.photos/id/258/80/80' },
-        { name: 'Rouge Pur', price: 7800, img: 'https://picsum.photos/id/277/80/80' }
-      ]},
-      { id:3, name: 'Guerlain', avatar: 'https://picsum.photos/id/124/100/100', products: [
-        { name: 'Meteorites', price: 11200, img: 'https://picsum.photos/id/203/80/80' },
-        { name: 'L\'Or Rouge', price: 28000, img: 'https://picsum.photos/id/173/80/80' },
-        { name: 'KissKiss', price: 6300, img: 'https://picsum.photos/id/185/80/80' }
-      ]},
-      { id:4, name: 'Clarins', avatar: 'https://picsum.photos/id/147/100/100', products: [
-        { name: 'Double Serum', price: 14200, img: 'https://picsum.photos/id/267/80/80' },
-        { name: 'Lip Perfector', price: 5200, img: 'https://picsum.photos/id/286/80/80' },
-        { name: 'Eau Dynamisante', price: 9800, img: 'https://picsum.photos/id/192/80/80' }
-      ]}
-    ];
+    <div class="cart-bar" id="cart-bar">
+        <div class="cart-bar-info">
+            <span id="cart-items-count">0 عناصر + 200 دج توصيل</span>
+            <b id="cart-bar-total">0 دج</b>
+        </div>
+        <button class="cart-bar-btn" id="checkout-trigger-btn" onclick="openCheckout()">تأكيد الطلب</button>
+    </div>
 
-    const translations = {
-      ar: { checkout: 'تأكيد الطلب', cart: 'السلة', total: 'المجموع', delivery: 'التوصيل', phonePlaceholder: '05 xx xx xx xx', confirm: 'تأكيد', cancel: 'إلغاء', toastOrder: 'تم إرسال الطلب إلى المسؤول' },
-      fr: { checkout: 'Confirmer', cart: 'Panier', total: 'Total', delivery: 'Livraison', phonePlaceholder: '05 xx xx xx xx', confirm: 'Confirmer', cancel: 'Annuler', toastOrder: 'Commande envoyée' },
-      en: { checkout: 'Confirm Order', cart: 'Cart', total: 'Total', delivery: 'Delivery', phonePlaceholder: '05 xx xx xx xx', confirm: 'Confirm', cancel: 'Cancel', toastOrder: 'Order sent to admin' }
-    };
-    let currentLang = 'ar';
-    let cart = []; // { shopId, productIndex, name, price }
-    let cartCount = 0;
-    let totalPrice = 0;
-    const DELIVERY = 200;
+    <div id="checkout-modal">
+        <div class="checkout-box">
+            <h3 id="chk-title">تأكيد سريع للطلب</h3>
+            <p id="chk-desc">ضعي رقم هاتفك فقط، وسنتصل بكِ لتأكيد مكان الاستلام وتفاصيل التوصيل بكل راحة.</p>
+            <input type="tel" id="phone-number" class="phone-input" placeholder="07xxxxxxxx" maxlength="10">
+            <button class="confirm-order-btn" id="chk-btn" onclick="submitOrder()">تأكيد وإرسال الطلب ✨</button>
+            <br><br>
+            <span style="font-size: 0.75rem; color: #999; cursor: pointer;" onclick="closeCheckout()">إلغاء</span>
+        </div>
+    </div>
 
-    // DOM refs
-    const shopGrid = document.getElementById('shopGrid');
-    const cartCountEl = document.getElementById('cartCount');
-    const cartTotalPrice = document.getElementById('cartTotalPrice');
-    const modalOverlay = document.getElementById('modalOverlay');
-    const phoneInput = document.getElementById('phoneInput');
-    const toast = document.getElementById('toast');
-    const splash = document.getElementById('splash');
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="switchNav(this)">
+            <i class="fa-solid fa-house"></i>
+            <span id="nav-home">الرئيسية</span>
+        </div>
+        <div class="nav-item" onclick="switchNav(this)">
+            <i class="fa-solid fa-store"></i>
+            <span id="nav-shops">المتاجر</span>
+        </div>
+        <div class="nav-item" onclick="switchNav(this)" style="position:relative;">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span id="nav-cart">السلة</span>
+            <div class="nav-badge" id="nav-badge">0</div>
+        </div>
+        <div class="nav-item" onclick="switchNav(this)">
+            <i class="fa-solid fa-bell"></i>
+            <span id="nav-notif">الإشعارات</span>
+        </div>
+        <div class="nav-item" onclick="switchNav(this)">
+            <i class="fa-solid fa-user"></i>
+            <span id="nav-profile">حسابي</span>
+        </div>
+    </div>
 
-    // ----- RENDER SHOPS -----
-    function renderShops() {
-      let html = '';
-      shops.forEach((shop, idx) => {
-        html += `<div class="shop-card" data-shop-id="${shop.id}">
-          <div class="shop-header">
-            <div class="shop-avatar" style="background-image: url('${shop.avatar}')"></div>
-            <div><div class="shop-name">${shop.name}</div><div class="shop-desc">✨ 5 produits</div></div>
-          </div>
-          <div class="product-row">`;
-        shop.products.forEach((p, pIdx) => {
-          html += `<div class="product-item" data-shop="${shop.id}" data-product="${pIdx}">
-            <div class="product-img" style="background-image: url('${p.img}')" onclick="rotateProduct(this)"></div>
-            <div class="product-name">${p.name}</div>
-            <div class="product-price">${p.price} دج</div>
-            <button class="add-btn" data-shop="${shop.id}" data-product="${pIdx}">+</button>
-          </div>`;
-        });
-        html += `</div></div>`;
-      });
-      shopGrid.innerHTML = html;
-      // attach add events
-      document.querySelectorAll('.add-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const shopId = parseInt(this.dataset.shop);
-          const prodIdx = parseInt(this.dataset.product);
-          addToCart(shopId, prodIdx);
-        });
-      });
-    }
+    <script>
+        // --- 3 SECONDS INTRO SPLASH REMOVAL ---
+        setTimeout(() => {
+            document.getElementById('intro-splash').classList.add('fade-out');
+        }, 2500);
 
-    // 360 rotation simulation (multi-angle)
-    window.rotateProduct = function(imgEl) {
-      const current = imgEl.style.backgroundImage;
-      const base = current.slice(5, -2).replace(/"/g, ''); 
-      // simulate angle change by loading a different pic from picsum
-      const newId = Math.floor(Math.random() * 100) + 200;
-      imgEl.style.backgroundImage = `url('https://picsum.photos/id/${newId}/80/80')`;
-      imgEl.style.transition = '0.3s';
-      setTimeout(() => {
-        imgEl.style.backgroundImage = current;
-      }, 800);
-      showToast('🔄 360° view');
-    };
+        // --- DATA STRUCTURE (5 Luxury Makeup Shops & Real Products) ---
+        const shopsData = [
+            { id: 1, name: "أوركيد الذهبي", cat: "مكياج عيون وشفاه", rating: "4.9", img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80", products: [
+                { id: 101, name: "أحمر شفاه ماغنوليا مطفي", price: 4800, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&auto=format&fit=crop&q=80", desc: "ألوان جريئة وقوام مخملي يدوم طوال اليوم دون جفاف الشفاه." },
+                { id: 102, name: "باليت ظلال العيون الذهبية الملكية", price: 9500, img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&auto=format&fit=crop&q=80", desc: "12 لوناً فخماً مستوحى من بريق الذهب الخالص لتألق استثنائي." }
+            ]},
+            { id: 2, name: "إليغانس باريس", cat: "عطور وأساس فاخر", rating: "4.8", img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&auto=format&fit=crop&q=80", products: [
+                { id: 201, name: "عطر عود الذهب الملكي", price: 21500, img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&auto=format&fit=crop&q=80", desc: "عطر شرقي فخم يجمع بين نفحات العود الأصيل والورد الجوري." },
+                { id: 202, name: "كريم أساس سائل مخملي", price: 6200, img: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=400&auto=format&fit=crop&q=80", desc: "تغطية مثالية تدوم طويلاً مع ترطيب عميق ومظهر طبيعي." }
+            ]},
+            { id: 3, name: "سحر الشرق للتجميل", cat: "إضاءة ومحددات", rating: "4.7", img: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&auto=format&fit=crop&q=80", products: [
+                { id: 301, name: "هايلايتر لؤلؤي براق", price: 3900, img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&auto=format&fit=crop&q=80", desc: "يمنح وجهك إشراقة ساحرة ولمسة مخملية لا تقاوم." },
+                { id: 302, name: "قلم تحديد حواجب دقيق", price: 2400, img: "https://images.unsplash.com/photo-1583241800695-e8d1a7407524?w=400&auto=format&fit=crop&q=80", desc: "رسمة احترافية وثبات عالي تحت كل الظروف." }
+            ]},
+            { id: 4, name: "ميك أب ديلايت", cat: "مجموعات العناية", rating: "4.9", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&auto=format&fit=crop&q=80", products: [
+                { id: 401, name: "مجموعة العروس الملكية المتكاملة", price: 18000, img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80", desc: "تحتوي على كل ما تحتاجينه لإطلالة ساحرة في يومك المميز." },
+                { id: 402, name: "ملمع شفاه كريستالي لامع", price: 3100, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&auto=format&fit=crop&q=80", desc: "لمعان برّاق مع ترطيب فوري ومظهر ممتلئ للشفاه." }
+            ]},
+            { id: 5, name: "بلاتينيوم بيوتي", cat: "ماسكات وأرقى الماركات", rating: "4.6", img: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=400&auto=format&fit=crop&q=80", products: [
+                { id: 501, name: "سيروم الذهب النقي للوجه", price: 7500, img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&auto=format&fit=crop&q=80", desc: "يغذي البشرة ويعيد إليها شبابها ونضارتها الطبيعية." },
+                { id: 502, name: "ماسكارا تكثيف الرموش الفائقة", price: 4200, img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&auto=format&fit=crop&q=80", desc: "حجم مضاعف وسواد فاحم يمنحك نظرة درامية ساحرة." }
+            ]}
+        ];
 
-    // ----- CART -----
-    function addToCart(shopId, prodIdx) {
-      const shop = shops.find(s => s.id === shopId);
-      if (!shop) return;
-      const product = shop.products[prodIdx];
-      if (!product) return;
-      cart.push({ shopId, productIdx: prodIdx, name: product.name, price: product.price });
-      updateCartUI();
-      showToast(`✨ ${product.name} +1`);
-    }
+        let cart = [];
+        let currentShop = null;
+        let selectedProductForModal = null;
 
-    function updateCartUI() {
-      cartCount = cart.length;
-      totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
-      cartCountEl.textContent = cartCount;
-      const totalWithDelivery = totalPrice + DELIVERY;
-      cartTotalPrice.textContent = totalWithDelivery + ' دج';
-    }
+        // --- RENDER SHOPS ON HOME ---
+        function renderShops() {
+            const container = document.getElementById('shops-container');
+            container.innerHTML = '';
+            shopsData.forEach(shop => {
+                container.innerHTML += `
+                    <div class="shop-card" onclick="openShop(${shop.id})">
+                        <div class="shop-img-wrap">
+                            <img src="${shop.img}" alt="${shop.name}">
+                            <div class="delivery-badge">توصيل 200 دج</div>
+                        </div>
+                        <div class="shop-info">
+                            <div class="shop-title">${shop.name}</div>
+                            <div class="shop-meta">
+                                <span>${shop.cat}</span>
+                                <span class="shop-rating">⭐ ${shop.rating}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
 
-    // ----- CHECKOUT -----
-    function openCheckout() {
-      if (cart.length === 0) {
-        showToast('🛒 السلة فارغة');
-        return;
-      }
-      modalOverlay.classList.add('show');
-      phoneInput.value = '';
-    }
+        // --- OPEN SHOP ---
+        function openShop(shopId) {
+            currentShop = shopsData.find(s => s.id === shopId);
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('shop-view').style.display = 'block';
+            document.getElementById('current-shop-name').innerText = currentShop.name;
 
-    function confirmOrder() {
-      const phone = phoneInput.value.trim();
-      if (!phone || phone.length < 8) {
-        showToast('📱 الرجاء إدخال رقم هاتف صحيح');
-        return;
-      }
-      // build order message
-      let items = cart.map(i => `${i.name} (${i.price} دج)`).join(', ');
-      const total = totalPrice + DELIVERY;
-      const msg = `📦 طلب جديد\n📞 ${phone}\n🛍️ ${items}\n💰 المجموع: ${total} دج (شامل التوصيل 200 دج)`;
-      // simulate whatsapp / admin alert
-      console.log('ORDER:', msg);
-      alert('✅ تم إرسال الطلب إلى المسؤول (محاكاة) \n' + msg);
-      // reset cart
-      cart = [];
-      updateCartUI();
-      modalOverlay.classList.remove('show');
-      showToast('📨 تم تأكيد الطلب');
-    }
+            const prodContainer = document.getElementById('products-container');
+            prodContainer.innerHTML = '';
+            currentShop.products.forEach(prod => {
+                prodContainer.innerHTML += `
+                    <div class="product-card">
+                        <img class="product-img" src="${prod.img}" alt="${prod.name}" onclick="openProductModal(${prod.id})">
+                        <div class="product-name">${prod.name}</div>
+                        <div class="product-price-row">
+                            <span class="product-price">${prod.price} دج</span>
+                            <button class="add-btn" onclick="addToCart(${prod.id})"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+            window.scrollTo(0, 0);
+        }
 
-    // ----- TOAST -----
-    function showToast(msg) {
-      toast.textContent = msg;
-      toast.classList.add('show');
-      clearTimeout(toast._timer);
-      toast._timer = setTimeout(() => toast.classList.remove('show'), 2500);
-    }
+        function goHome() {
+            document.getElementById('shop-view').style.display = 'none';
+            document.getElementById('home-view').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
 
-    // ----- LANGUAGE -----
-    function setLanguage(lang) {
-      currentLang = lang;
-      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add('active');
-      const t = translations[lang];
-      document.getElementById('checkoutBtn').textContent = t.checkout;
-      document.querySelector('.cart-info span:first-child i + span').textContent = t.cart;
-      document.querySelector('.cart-info span:last-child').textContent = `+${DELIVERY} دج`;
-      document.getElementById('phoneInput').placeholder = t.phonePlaceholder;
-      document.querySelector('.modal-actions .cancel-btn').textContent = t.cancel;
-      document.querySelector('#modalConfirm').textContent = t.confirm;
-    }
+        // --- PRODUCT MODAL (360) ---
+        function openProductModal(prodId) {
+            selectedProductForModal = currentShop.products.find(p => p.id === prodId);
+            document.getElementById('modal-img').src = selectedProductForModal.img;
+            document.getElementById('modal-name').innerText = selectedProductForModal.name;
+            document.getElementById('modal-price').innerText = selectedProductForModal.price + ' دج';
+            document.getElementById('modal-desc').innerText = selectedProductForModal.desc;
+            document.getElementById('product-modal').style.display = 'flex';
+        }
 
-    // ----- INIT -----
-    function init() {
-      renderShops();
-      updateCartUI();
+        function closeModal() {
+            document.getElementById('product-modal').style.display = 'none';
+        }
 
-      // splash hide after 2.4s
-      setTimeout(() => {
-        splash.classList.add('hide');
-        setTimeout(() => { splash.style.display = 'none'; }, 600);
-      }, 2400);
+        function addCurrentProductToCart() {
+            if (selectedProductForModal) {
+                addToCart(selectedProductForModal.id);
+                closeModal();
+            }
+        }
 
-      // lang buttons
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const lang = this.dataset.lang;
-          setLanguage(lang);
-        });
-      });
+        // --- CART LOGIC ---
+        function addToCart(prodId) {
+            // Find product in current shop or across all shops
+            let prod = null;
+            if (currentShop) {
+                prod = currentShop.products.find(p => p.id === prodId);
+            } else {
+                for(let s of shopsData) {
+                    let found = s.products.find(p => p.id === prodId);
+                    if(found) prod = found;
+                }
+            }
 
-      // checkout
-      document.getElementById('checkoutBtn').addEventListener('click', openCheckout);
-      document.getElementById('modalCancel').addEventListener('click', () => {
-        modalOverlay.classList.remove('show');
-      });
-      document.getElementById('modalConfirm').addEventListener('click', confirmOrder);
-      // close modal on overlay click
-      modalOverlay.addEventListener('click', function(e) {
-        if (e.target === this) modalOverlay.classList.remove('show');
-      });
+            if(prod) {
+                cart.push(prod);
+                updateCartUI();
+            }
+        }
 
-      setLanguage('ar');
-    }
+        function updateCartUI() {
+            const count = cart.length;
+            const badge = document.getElementById('nav-badge');
+            const cartBar = document.getElementById('cart-bar');
 
-    init();
-  })();
-</script>
+            if(count > 0) {
+                badge.innerText = count;
+                badge.style.display = 'flex';
+                cartBar.style.display = 'flex';
+
+                let itemsTotal = cart.reduce((sum, item) => sum + item.price, 0);
+                let totalWithDelivery = itemsTotal + 200; // Fixed 200 DZD delivery fee
+
+                document.getElementById('cart-items-count').innerText = `${count} عناصر + 200 دج توصيل`;
+                document.getElementById('cart-bar-total').innerText = `${totalWithDelivery} دج`;
+            } else {
+                badge.style.display = 'none';
+                cartBar.style.display = 'none';
+            }
+        }
+
+        // --- CHECKOUT ---
+        function openCheckout() {
+            document.getElementById('checkout-modal').style.display = 'flex';
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkout-modal').style.display = 'none';
+        }
+
+        function submitOrder() {
+            const phone = document.getElementById('phone-number').value;
+            if(phone.length < 9) {
+                alert("الرجاء إدخال رقم هاتف صحيح لتأكيد الطلب.");
+                return;
+            }
+
+            alert(`تم تأكيد طلبك بنجاح! 🎉\nسيقوم مشرف المتجر بالاتصال بك فوراً على الرقم: ${phone} لتأكيد مكان الاستلام والتوصيل.`);
+            cart = [];
+            updateCartUI();
+            closeCheckout();
+            goHome();
+        }
+
+        // --- NAVIGATION ---
+        function switchNav(el) {
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        // --- MULTI-LANGUAGE SUPPORT (AR, FR, EN) ---
+        const translations = {
+            ar: {
+                brand: "ماكياجي",
+                bannerTitle: "✨ فخامة التجميل بين يديك",
+                bannerDesc: "اكتشفي أرقى 5 محلات مكياج وعطور أصلية بتوصيل سريع جداً بـ 200 دج فقط!",
+                shopsHeading: "المتاجر المختارة (5)",
+                backText: "العودة للمتاجر",
+                navHome: "الرئيسية",
+                navShops: "المتاجر",
+                navCart: "السلة",
+                navNotif: "الإشعارات",
+                navProfile: "حسابي",
+                chkTitle: "تأكيد سريع للطلب",
+                chkDesc: "ضعي رقم هاتفك فقط، وسنتصل بكِ لتأكيد مكان الاستلام وتفاصيل التوصيل بكل راحة.",
+                chkBtn: "تأكيد وإرسال الطلب ✨"
+            },
+            fr: {
+                brand: "Makyaji",
+                bannerTitle: "✨ Le Luxe de la Beauté",
+                bannerDesc: "Découvrez 5 boutiques de maquillage de luxe avec livraison rapide à 200 DZD !",
+                shopsHeading: "Boutiques Sélectionnées (5)",
+                backText: "Retour aux boutiques",
+                navHome: "Accueil",
+                navShops: "Boutiques",
+                navCart: "Panier",
+                navNotif: "Notifications",
+                navProfile: "Compte",
+                chkTitle: "Confirmation Rapide",
+                chkDesc: "Entrez votre numéro de téléphone, nous vous appellerons pour confirmer la livraison.",
+                chkBtn: "Confirmer la Commande ✨"
+            },
+            en: {
+                brand: "Makyaji",
+                bannerTitle: "✨ Luxury Beauty at Your Hands",
+                bannerDesc: "Discover 5 high-end makeup stores with fast delivery for only 200 DZD!",
+                shopsHeading: "Featured Shops (5)",
+                backText: "Back to Shops",
+                navHome: "Home",
+                navShops: "Shops",
+                navCart: "Cart",
+                navNotif: "Notifications",
+                navProfile: "Profile",
+                chkTitle: "Quick Order Confirmation",
+                chkDesc: "Enter your phone number only, and we will call you to confirm your delivery details.",
+                chkBtn: "Confirm Order ✨"
+            }
+        };
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Apply direction
+            if(lang === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+            }
+
+            // Translate texts
+            const t = translations[lang];
+            document.getElementById('header-title').innerText = t.brand;
+            document.getElementById('banner-title').innerText = t.bannerTitle;
+            document.getElementById('banner-desc').innerText = t.bannerDesc;
+            document.getElementById('shops-heading').innerText = t.shopsHeading;
+            document.getElementById('back-text').innerText = t.backText;
+            document.getElementById('nav-home').innerText = t.navHome;
+            document.getElementById('nav-shops').innerText = t.navShops;
+            document.getElementById('nav-cart').innerText = t.navCart;
+            document.getElementById('nav-notif').innerText = t.navNotif;
+            document.getElementById('nav-profile').innerText = t.navProfile;
+            document.getElementById('chk-title').innerText = t.chkTitle;
+            document.getElementById('chk-desc').innerText = t.chkDesc;
+            document.getElementById('chk-btn').innerText = t.chkBtn;
+        }
+
+        // Initialize Home Render
+        renderShops();
+    </script>
 </body>
 </html>
