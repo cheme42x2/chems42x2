@@ -49,13 +49,11 @@
             box-shadow: var(--shadow-lux);
         }
 
-        /* Utility */
         .hidden { display: none !important; }
 
-        /* Header */
         header {
-            padding: 25px 20px 15px;
-            background: linear-gradient(to bottom, rgba(5,5,5,0.95) 50%, transparent);
+            padding: 20px 20px 10px;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.98) 70%, transparent);
             z-index: 10;
             position: absolute;
             top: 0;
@@ -67,7 +65,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .location-box {
@@ -79,7 +77,6 @@
         .location-icon {
             color: var(--accent-gold);
             font-size: 1.4rem;
-            filter: drop-shadow(0 0 5px var(--accent-gold));
         }
 
         .location-text {
@@ -90,13 +87,11 @@
         .location-label {
             font-size: 0.75rem;
             color: var(--text-secondary);
-            letter-spacing: 1px;
         }
 
         .location-title {
             font-size: 1.1rem;
             font-weight: 800;
-            color: var(--text-primary);
         }
 
         .search-container {
@@ -105,19 +100,16 @@
 
         .search-container input {
             width: 100%;
-            padding: 14px 45px 14px 20px;
+            padding: 12px 45px 12px 20px;
             background: var(--bg-glass);
             border: 1px solid var(--border-glow);
-            border-radius: 16px;
+            border-radius: 14px;
             color: var(--text-primary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             outline: none;
-            transition: border 0.3s;
         }
 
-        .search-container input:focus {
-            border-color: var(--accent-gold);
-        }
+        .search-container input:focus { border-color: var(--accent-gold); }
 
         .search-icon {
             position: absolute;
@@ -127,26 +119,23 @@
             color: var(--accent-gold);
         }
 
-        /* Dhikr Banner */
         .dhikr-banner {
             background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
             border-top: 1px solid var(--border-glow);
             border-bottom: 1px solid var(--border-glow);
-            padding: 8px 0;
-            margin: 15px 0;
+            padding: 6px 0;
+            margin: 10px 0;
             text-align: center;
             overflow: hidden;
             white-space: nowrap;
-            position: relative;
         }
 
         .dhikr-text {
             display: inline-block;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--accent-gold);
-            letter-spacing: 1px;
-            animation: scroll-left 15s linear infinite;
+            animation: scroll-left 20s linear infinite;
         }
 
         @keyframes scroll-left {
@@ -154,98 +143,81 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* Main Content */
         .main-content {
             flex: 1;
             overflow-y: auto;
-            padding: 130px 0 var(--nav-height) 0;
+            padding: 135px 0 var(--nav-height) 0;
             scrollbar-width: none;
         }
         .main-content::-webkit-scrollbar { display: none; }
 
-        /* Horizontal Stores */
         .section-header {
             padding: 0 20px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            margin-bottom: 12px;
         }
 
         .section-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 900;
-            color: var(--text-primary);
         }
 
         .stores-horizontal {
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            padding: 0 20px 20px;
-            gap: 20px;
+            padding: 0 20px 15px;
+            gap: 15px;
             scrollbar-width: none;
         }
         .stores-horizontal::-webkit-scrollbar { display: none; }
 
         .store-card {
-            min-width: 280px;
+            min-width: 260px;
+            max-width: 260px;
             background: var(--bg-card);
             border: 1px solid var(--border-glow);
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
-            scroll-snap-align: center;
+            scroll-snap-align: start;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: transform 0.2s;
-        }
-
-        .store-card:active {
-            transform: scale(0.97);
+            flex-shrink: 0;
         }
 
         .store-cover {
-            height: 160px;
+            height: 140px;
             width: 100%;
             background-size: cover;
             background-position: center;
             position: relative;
         }
 
-        .store-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, var(--bg-card) 0%, transparent 100%);
-        }
-
         .store-status {
             position: absolute;
-            top: 12px;
-            left: 12px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
             font-weight: 800;
             border: 1px solid;
-            z-index: 2;
         }
         
         .status-open { color: var(--success); border-color: var(--success); }
         .status-closed { color: var(--accent-rose); border-color: var(--accent-rose); }
 
         .store-info {
-            padding: 15px;
-            position: relative;
-            z-index: 2;
-            margin-top: -30px;
+            padding: 12px;
         }
 
         .store-name {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 800;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .store-meta {
@@ -253,22 +225,20 @@
             justify-content: space-between;
             align-items: center;
             color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-bottom: 10px;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
         }
 
-        .store-rating {
-            color: var(--accent-gold);
-            font-weight: 700;
-        }
+        .store-rating { color: var(--accent-gold); font-weight: 700; }
 
         .delivery-pill {
             background: var(--bg-glass);
-            padding: 5px 10px;
-            border-radius: 10px;
-            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.75rem;
             color: var(--accent-gold);
             border: 1px solid var(--border-glow);
+            display: inline-block;
         }
 
         /* Store View - Vertical Products */
@@ -283,33 +253,25 @@
             display: flex;
             flex-direction: column;
             transform: translateY(100%);
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: transform 0.3s ease;
         }
 
-        #store-view.active {
-            transform: translateY(0);
-        }
+        #store-view.active { transform: translateY(0); }
 
         .store-view-header {
-            height: 220px;
+            height: 180px;
             background-size: cover;
             background-position: center;
             position: relative;
             flex-shrink: 0;
         }
 
-        .store-view-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, var(--bg-deep) 0%, rgba(5,5,5,0.4) 100%);
-        }
-
         .back-btn {
             position: absolute;
-            top: 25px;
+            top: 20px;
             right: 20px;
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             background: var(--bg-glass);
             backdrop-filter: blur(10px);
             border-radius: 50%;
@@ -320,21 +282,20 @@
             cursor: pointer;
             z-index: 2;
             color: var(--text-primary);
-            font-size: 1.2rem;
         }
 
         .store-view-details {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px;
             right: 20px;
             left: 20px;
             z-index: 2;
         }
 
         .sv-title {
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 900;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
         }
 
         .products-vertical {
@@ -342,18 +303,17 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
             overflow-y: auto;
-            padding-bottom: 120px;
+            padding-bottom: 100px;
             scrollbar-width: none;
         }
-
         .products-vertical::-webkit-scrollbar { display: none; }
 
         .product-card-large {
             background: var(--bg-card);
             border: 1px solid var(--border-glow);
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -361,8 +321,7 @@
 
         .product-image-container {
             width: 100%;
-            height: 250px;
-            position: relative;
+            height: 200px;
         }
 
         .product-image-container img {
@@ -372,27 +331,26 @@
         }
 
         .product-info-large {
-            padding: 20px;
+            padding: 15px;
         }
 
         .product-title-large {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 800;
-            margin-bottom: 10px;
-            color: var(--text-primary);
+            margin-bottom: 8px;
         }
 
         .product-action-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 15px;
-            padding-top: 15px;
+            margin-top: 10px;
+            padding-top: 10px;
             border-top: 1px solid rgba(255,255,255,0.05);
         }
 
         .product-price-large {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 900;
             color: var(--accent-gold);
         }
@@ -401,19 +359,14 @@
             background: var(--accent-rose);
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 12px;
+            padding: 10px 20px;
+            border-radius: 10px;
             font-weight: 800;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: background 0.2s;
-        }
-
-        .add-to-cart-btn:active {
-            background: #6b2634;
+            gap: 6px;
         }
 
         /* Bottom Nav */
@@ -429,45 +382,39 @@
             justify-content: space-around;
             align-items: center;
             z-index: 30;
-            padding-bottom: env(safe-area-inset-bottom);
         }
 
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             color: var(--text-secondary);
             cursor: pointer;
-            transition: color 0.3s;
             position: relative;
         }
 
-        .nav-item.active {
-            color: var(--accent-gold);
-        }
-
-        .nav-icon { font-size: 1.3rem; }
-        .nav-label { font-size: 0.75rem; font-weight: 700; }
+        .nav-item.active { color: var(--accent-gold); }
+        .nav-icon { font-size: 1.2rem; }
+        .nav-label { font-size: 0.7rem; font-weight: 700; }
 
         .cart-badge {
             position: absolute;
-            top: -6px;
-            left: -12px;
+            top: -5px;
+            left: -10px;
             background: var(--accent-rose);
             color: white;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 900;
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid var(--bg-deep);
         }
 
-        /* Full Screen Modals */
+        /* Modal Cart */
         .modal {
             position: absolute;
             top: 0;
@@ -485,7 +432,7 @@
         .modal.active { transform: translateX(0); }
 
         .modal-header {
-            padding: 25px 20px;
+            padding: 20px;
             border-bottom: 1px solid var(--border-glow);
             display: flex;
             align-items: center;
@@ -493,57 +440,50 @@
             background: var(--bg-card);
         }
 
-        .modal-title { font-size: 1.4rem; font-weight: 900; }
-        .close-modal { font-size: 1.5rem; cursor: pointer; color: var(--text-secondary); }
+        .modal-title { font-size: 1.2rem; font-weight: 900; }
+        .close-modal { font-size: 1.4rem; cursor: pointer; color: var(--text-secondary); }
 
-        /* Cart Content */
         .cart-scroll {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
+            padding: 15px;
         }
 
         .cart-item {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             background: var(--bg-card);
-            padding: 15px;
-            border-radius: 16px;
-            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 14px;
+            margin-bottom: 12px;
             border: 1px solid var(--border-glow);
         }
 
         .cart-img {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 10px;
             object-fit: cover;
         }
 
         .cart-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .cart-name { font-size: 1rem; font-weight: 800; }
-        .cart-price { font-size: 1rem; color: var(--accent-gold); font-weight: 900; }
+        .cart-name { font-size: 0.95rem; font-weight: 800; }
+        .cart-price { font-size: 0.95rem; color: var(--accent-gold); font-weight: 900; }
         
         .qty-controls {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             background: var(--bg-glass);
-            padding: 5px 10px;
-            border-radius: 10px;
+            padding: 4px 8px;
+            border-radius: 8px;
             width: fit-content;
         }
 
-        .qty-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
+        .qty-btn { background: transparent; border: none; color: var(--text-primary); font-size: 1rem; cursor: pointer; }
 
         .cart-summary {
-            padding: 25px 20px;
+            padding: 20px;
             background: var(--bg-card);
             border-top: 1px solid var(--border-glow);
         }
@@ -551,40 +491,38 @@
         .summary-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 12px;
-            font-size: 1rem;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
             color: var(--text-secondary);
         }
 
         .summary-total {
             display: flex;
             justify-content: space-between;
-            margin-top: 15px;
-            padding-top: 15px;
+            margin-top: 12px;
+            padding-top: 12px;
             border-top: 1px dashed var(--border-glow);
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 900;
-            color: var(--text-primary);
         }
 
         .main-btn {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: var(--accent-gold);
             color: var(--bg-deep);
             border: none;
-            border-radius: 14px;
-            font-size: 1.1rem;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 900;
-            margin-top: 20px;
+            margin-top: 15px;
             cursor: pointer;
         }
 
-        /* Order Form */
         #order-form {
             display: none;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             padding: 20px;
             background: var(--bg-card);
             border-top: 1px solid var(--border-glow);
@@ -596,25 +534,16 @@
 
         .styled-input {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: var(--bg-glass);
             border: 1px solid var(--border-glow);
-            border-radius: 14px;
+            border-radius: 12px;
             color: white;
-            font-size: 1rem;
+            font-size: 0.95rem;
             outline: none;
         }
 
-        .styled-input:focus { border-color: var(--accent-gold); }
-
-        .empty-cart {
-            text-align: center;
-            color: var(--text-secondary);
-            margin-top: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
+        .empty-cart { text-align: center; color: var(--text-secondary); margin-top: 40px; font-size: 1.1rem; }
     </style>
 </head>
 <body>
@@ -630,7 +559,7 @@
                     <span class="location-title">قالمة، الجزائر</span>
                 </div>
             </div>
-            <i class="fa-regular fa-bell" style="font-size: 1.4rem; color: var(--text-primary);"></i>
+            <i class="fa-regular fa-bell" style="font-size: 1.3rem;"></i>
         </div>
         <div class="search-container">
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
@@ -639,7 +568,6 @@
     </header>
 
     <main class="main-content" id="home-view">
-        
         <div class="dhikr-banner">
             <span class="dhikr-text">اللهم صل وسلم على نبينا محمد وعلى آله وصحبه أجمعين • سبحان الله وبحمده سبحان الله العظيم •</span>
         </div>
@@ -648,43 +576,26 @@
             <h2 class="section-title">أفخم المتاجر</h2>
         </div>
         
-        <!-- Horizontal Scrolling Stores -->
-        <div class="stores-horizontal" id="stores-list">
-            <!-- Stores Injected by JS -->
-        </div>
-
-        <!-- Extra spacing element -->
-        <div style="height: 30px;"></div>
-
+        <div class="stores-horizontal" id="stores-list"></div>
+        <div style="height: 20px;"></div>
     </main>
 
-    <!-- Store View Modal -->
     <div id="store-view">
         <div class="store-view-header" id="sv-cover">
-            <div class="store-view-overlay"></div>
-            <div class="back-btn" id="close-store">
-                <i class="fa-solid fa-arrow-right"></i>
-            </div>
+            <div class="back-btn" id="close-store"><i class="fa-solid fa-arrow-right"></i></div>
             <div class="store-view-details">
                 <h1 class="sv-title" id="sv-name">اسم المتجر</h1>
             </div>
         </div>
-        
-        <!-- Vertical Products List -->
-        <div class="products-vertical" id="products-list">
-            <!-- Products Injected by JS -->
-        </div>
+        <div class="products-vertical" id="products-list"></div>
     </div>
 
-    <!-- Cart Modal -->
     <div class="modal" id="cart-modal">
         <div class="modal-header">
             <h2 class="modal-title">سلة المشتريات</h2>
             <i class="fa-solid fa-xmark close-modal" id="close-cart"></i>
         </div>
-        <div class="cart-scroll" id="cart-items-container">
-            <!-- Cart Items -->
-        </div>
+        <div class="cart-scroll" id="cart-items-container"></div>
         <div class="cart-summary" id="cart-summary-box">
             <div class="summary-row">
                 <span>المجموع الفرعي</span>
@@ -701,16 +612,14 @@
             <button class="main-btn" id="btn-checkout">تأكيد الطلب والدفع</button>
         </div>
 
-        <!-- Phone Form -->
         <div id="order-form">
-            <h3 style="margin-bottom: 10px;">إتمام الطلب</h3>
-            <input type="tel" id="user-phone" class="styled-input" placeholder="رقم الهاتف (مثال: 0555)">
-            <button class="main-btn" style="margin-top: 10px;" id="btn-submit-order">إرسال الطلب للمتجر</button>
-            <button class="main-btn" style="background: transparent; color: var(--text-secondary); border: 1px solid var(--text-secondary); margin-top: 10px;" id="btn-cancel-order">إلغاء</button>
+            <h3 style="margin-bottom: 5px;">إتمام الطلب</h3>
+            <input type="tel" id="user-phone" class="styled-input" placeholder="رقم الهاتف (مثال: 0555...)">
+            <button class="main-btn" style="margin-top: 5px;" id="btn-submit-order">إرسال الطلب للمتجر</button>
+            <button class="main-btn" style="background: transparent; color: var(--text-secondary); border: 1px solid var(--text-secondary); margin-top: 5px;" id="btn-cancel-order">إلغاء</button>
         </div>
     </div>
 
-    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <div class="nav-item active" id="nav-home">
             <i class="fa-solid fa-house nav-icon"></i>
@@ -730,51 +639,61 @@
             <span class="nav-label">حسابي</span>
         </div>
     </nav>
-
 </div>
 
 <script>
-/* Real Makeup Image URLs */
-const imgPalettes = "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80";
-const imgLips = "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80";
-const imgFoundation = "https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&w=800&q=80";
-const imgMascara = "https://images.unsplash.com/photo-1631214500515-873b5eb5a1a7?auto=format&fit=crop&w=800&q=80";
-const imgBrush = "https://images.unsplash.com/photo-1590156546946-cb5afb12361b?auto=format&fit=crop&w=800&q=80";
-const imgSkin = "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=800&q=80";
-
 const storeData = [
-    { id: 1, name: "بوتيك العيون الملكية", rating: "4.9", cover: imgPalettes, open: true, tags: "باليت، ظلال" },
-    { id: 2, name: "قصر الشفاه المخملية", rating: "4.8", cover: imgLips, open: true, tags: "مات، جلوس" },
-    { id: 3, name: "تغطية مثالية الأساس", rating: "4.7", cover: imgFoundation, open: true, tags: "كريم أساس" },
-    { id: 4, name: "رموش وخطوط المحترفين", rating: "4.9", cover: imgMascara, open: false, tags: "ماسكارا، لاينر" },
-    { id: 5, name: "أدوات التجميل الفاخرة", rating: "4.6", cover: imgBrush, open: true, tags: "فرش، إسفنجات" },
-    { id: 6, name: "عناية وتحضير البشرة", rating: "4.8", cover: imgSkin, open: true, tags: "برايمر، سيروم" }
+    { id: 1, name: "بوتيك العيون الملكية", rating: "4.9", cover: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80", open: true, tags: "باليت، ظلال" },
+    { id: 2, name: "قصر الشفاه المخملية", rating: "4.8", cover: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80", open: true, tags: "مات، جلوس" },
+    { id: 3, name: "تغطية مثالية الأساس", rating: "4.7", cover: "https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&w=800&q=80", open: true, tags: "كريم أساس" },
+    { id: 4, name: "رموش وخطوط المحترفين", rating: "4.9", cover: "https://images.unsplash.com/photo-1631214500515-873b5eb5a1a7?auto=format&fit=crop&w=800&q=80", open: false, tags: "ماسكارا" },
+    { id: 5, name: "أدوات التجميل الفاخرة", rating: "4.6", cover: "https://images.unsplash.com/photo-1590156546946-cb5afb12361b?auto=format&fit=crop&w=800&q=80", open: true, tags: "فرش" },
+    { id: 6, name: "عناية وتحضير البشرة", rating: "4.8", cover: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=800&q=80", open: true, tags: "برايمر" }
 ];
 
-const productNames = {
-    1: ["باليت الألوان الترابية", "ظلال العيون الذهبية", "مجموعة السموكي الفاخرة", "باليت الألماس اللامع", "صبغة اللؤلؤ النقية"],
-    2: ["أحمر شفاه قرمزي مات", "جلوس وردي لامع", "تنت الشفاه الطبيعي", "محدد شفاه مخملي", "أحمر شفاه كشمير"],
-    3: ["كريم أساس سيلك الفاخر", "كونسيلر التغطية الكاملة", "قطرات الإضاءة الذهبية", "بودرة التثبيت الشفافة", "برونزر مخبوز فاخر"],
-    4: ["ماسكارا الكثافة المضاعفة", "آيلاينر جل مقاوم للماء", "قلم كحل أسود داكن", "جل تثبيت الحواجب", "قلم حواجب دقيق"],
-    5: ["طقم فرش احترافي كامل", "إسفنجة دمج ناعمة", "فرشاة كريم الأساس", "فرشاة الكنتور الدقيقة", "فرشاة إضاءة مروحية"],
-    6: ["سيروم فيتامين سي", "برايمر الذهب عيار 24", "رذاذ الورد المنعش", "كريم ترطيب عميق", "ماسك ليلي لتجديد البشرة"]
+const productDetails = {
+    1: [
+        { name: "باليت الألوان الترابية", img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=600&q=80" },
+        { name: "ظلال العيون الذهبية", img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80" },
+        { name: "مجموعة السموكي الفاخرة", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=600&q=80" },
+        { name: "باليت الألماس اللامع", img: "https://images.unsplash.com/photo-1583241793484-bc42d6313fbb?auto=format&fit=crop&w=600&q=80" }
+    ],
+    2: [
+        { name: "أحمر شفاه قرمزي مات", img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=600&q=80" },
+        { name: "جلوس وردي لامع", img: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?auto=format&fit=crop&w=600&q=80" },
+        { name: "تنت الشفاه الطبيعي", img: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=600&q=80" }
+    ],
+    3: [
+        { name: "كريم أساس سيلك الفاخر", img: "https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&w=600&q=80" },
+        { name: "كونسيلر التغطية الكاملة", img: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=600&q=80" }
+    ],
+    4: [
+        { name: "ماسكارا الكثافة المضاعفة", img: "https://images.unsplash.com/photo-1631214500515-873b5eb5a1a7?auto=format&fit=crop&w=600&q=80" },
+        { name: "آيلاينر جل مقاوم للماء", img: "https://images.unsplash.com/photo-1512290900672-8cb3c2a67bc4?auto=format&fit=crop&w=600&q=80" }
+    ],
+    5: [
+        { name: "طقم فرش احترافي كامل", img: "https://images.unsplash.com/photo-1590156546946-cb5afb12361b?auto=format&fit=crop&w=600&q=80" },
+        { name: "إسفنجة دمج ناعمة", img: "https://images.unsplash.com/photo-1563178406-4cdc2923acbc?auto=format&fit=crop&w=600&q=80" }
+    ],
+    6: [
+        { name: "سيروم فيتامين سي", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=600&q=80" },
+        { name: "برايمر الذهب عيار 24", img: "https://images.unsplash.com/photo-1608248597359-f5383796d193?auto=format&fit=crop&w=600&q=80" }
+    ]
 };
 
-const imagesMap = { 1: imgPalettes, 2: imgLips, 3: imgFoundation, 4: imgMascara, 5: imgBrush, 6: imgSkin };
-const productsData = [];
-
-for (let storeId = 1; storeId <= 6; storeId++) {
-    const names = productNames[storeId];
-    names.forEach((name, idx) => {
+let productsData = [];
+storeData.forEach(store => {
+    const items = productDetails[store.id];
+    items.forEach((item, idx) => {
         productsData.push({
-            id: parseInt(`${storeId}00${idx}`),
-            storeId: storeId,
-            name: name,
-            price: Math.floor(Math.random() * 20 + 10) * 100, // 1000 to 3000 DZD
-            image: imagesMap[storeId]
+            id: parseInt(`${store.id}0${idx}`),
+            storeId: store.id,
+            name: item.name,
+            price: Math.floor(Math.random() * 20 + 10) * 100,
+            image: item.img
         });
     });
-}
+});
 
 let cart = [];
 const deliveryFee = 200;
@@ -798,7 +717,6 @@ function renderStores() {
         
         card.innerHTML = `
             <div class="store-cover" style="background-image: url('${store.cover}')">
-                <div class="store-overlay"></div>
                 <div class="store-status ${statusClass}">${statusText}</div>
             </div>
             <div class="store-info">
@@ -807,9 +725,7 @@ function renderStores() {
                     <span>${store.tags}</span>
                     <span class="store-rating"><i class="fa-solid fa-star"></i> ${store.rating}</span>
                 </div>
-                <div class="delivery-pill">
-                    <i class="fa-solid fa-motorcycle"></i> التوصيل: 200 د.ج
-                </div>
+                <div class="delivery-pill"><i class="fa-solid fa-motorcycle"></i> التوصيل: 200 د.ج</div>
             </div>
         `;
         list.appendChild(card);
@@ -830,7 +746,6 @@ function openStore(id) {
     sProducts.forEach(prod => {
         const pCard = document.createElement('div');
         pCard.className = 'product-card-large';
-        // Using an explicit IMG tag now for guaranteed visibility
         pCard.innerHTML = `
             <div class="product-image-container">
                 <img src="${prod.image}" alt="${prod.name}" loading="lazy">
@@ -856,22 +771,19 @@ function addToCart(productId, e) {
     const product = productsData.find(p => p.id === productId);
     const existing = cart.find(i => i.product.id === productId);
     
-    if (existing) {
-        existing.quantity += 1;
-    } else {
-        cart.push({ product, quantity: 1 });
-    }
+    if (existing) { existing.quantity += 1; } 
+    else { cart.push({ product, quantity: 1 }); }
     
     updateBadge();
     
     const btn = e.currentTarget;
     const ogHtml = btn.innerHTML;
-    btn.innerHTML = '<i class="fa-solid fa-check"></i> تمت الإضافة';
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> تمت';
     btn.style.background = 'var(--success)';
     setTimeout(() => {
         btn.innerHTML = ogHtml;
         btn.style.background = '';
-    }, 1200);
+    }, 1000);
 }
 
 function updateBadge() {
@@ -910,7 +822,7 @@ function renderCart() {
                 <div class="cart-price">${item.product.price} د.ج</div>
                 <div class="qty-controls">
                     <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
-                    <span style="font-weight: 800; width: 20px; text-align: center;">${item.quantity}</span>
+                    <span style="font-weight: 850; width: 18px; text-align: center;">${item.quantity}</span>
                     <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
                 </div>
             </div>
@@ -983,7 +895,7 @@ function bindEvents() {
         orders.push(orderPayload);
         localStorage.setItem('guelma_makeup_orders', JSON.stringify(orders));
         
-        alert("تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً.");
+        alert("تم إرسال طلبك بنجاح!");
         cart = [];
         updateBadge();
         document.getElementById('order-form').style.display = 'none';
