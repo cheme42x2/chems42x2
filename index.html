@@ -10,7 +10,7 @@
         :root {
             --bg-deep: #050505;
             --bg-card: #121212;
-            --bg-glass: rgba(18, 18, 18, 0.85);
+            --bg-glass: rgba(18, 18, 18, 0.90);
             --gold: #d4af37;
             --gold-light: #f3e5ab;
             --gold-grad: linear-gradient(135deg, #d4af37 0%, #aa771c 100%);
@@ -35,64 +35,7 @@
             overflow-x: hidden;
         }
 
-        /* --- INTRO CINEMATIC SPLASH (FROM ANOTHER WORLD) --- */
-        #intro-splash {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            transition: opacity 1s ease, visibility 1s ease;
-        }
-        #intro-splash.fade-out { opacity: 0; visibility: hidden; }
-        
-        .intro-emblem {
-            width: 120px; height: 120px;
-            background: var(--gold-grad);
-            border-radius: 35px;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 3.5rem; color: #050505;
-            margin-bottom: 30px;
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.6);
-            animation: supremePulse 2s infinite ease-in-out;
-        }
-        .intro-title {
-            font-size: 3rem; font-weight: 900; color: #fff;
-            letter-spacing: 4px; margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .intro-subtitle {
-            color: var(--gold); font-size: 0.9rem; letter-spacing: 6px;
-            text-transform: uppercase; margin-bottom: 40px; font-weight: 700;
-        }
-        
-        /* Loading Dots Animation */
-        .loading-dots {
-            display: flex; gap: 10px; align-items: center;
-        }
-        .dot {
-            width: 12px; height: 12px; background: var(--gold);
-            border-radius: 50%;
-            animation: dotBounce 1.4s infinite ease-in-out both;
-        }
-        .dot:nth-child(1) { animation-delay: -0.32s; }
-        .dot:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes dotBounce {
-            0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
-            40% { transform: scale(1.0); opacity: 1; }
-        }
-        @keyframes supremePulse {
-            0% { transform: scale(1); box-shadow: 0 0 30px rgba(212,175,55,0.4); }
-            50% { transform: scale(1.1); box-shadow: 0 0 70px rgba(212,175,55,0.8); }
-            100% { transform: scale(1); box-shadow: 0 0 30px rgba(212,175,55,0.4); }
-        }
-
-        /* --- HEADER & LOCATION --- */
+        /* HEADER & LANGUAGE BAR */
         .header-bar {
             background: var(--bg-glass);
             backdrop-filter: blur(15px);
@@ -101,9 +44,17 @@
             border-bottom: 1px solid var(--border-gold);
             position: sticky; top: 0; z-index: 100;
         }
-        .brand-logo { font-size: 1.4rem; font-weight: 900; color: var(--gold); letter-spacing: 1px; }
+        .brand-logo { font-size: 1.4rem; font-weight: 900; color: var(--gold); letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        
+        .lang-switcher {
+            display: flex; background: #000; border: 1px solid var(--border-gold); border-radius: 20px; padding: 2px;
+        }
+        .lang-btn {
+            background: none; border: none; color: var(--text-muted); padding: 4px 10px; font-size: 0.75rem; font-weight: 700; cursor: pointer; border-radius: 15px;
+        }
+        .lang-btn.active { background: var(--gold); color: #050505; }
 
-        /* --- SEARCH SECTION --- */
+        /* SEARCH SECTION */
         .search-area { padding: 15px 20px; background: var(--bg-deep); }
         .search-input-box {
             background: var(--bg-card);
@@ -120,39 +71,29 @@
 
         .container { padding: 0 20px; }
 
-        /* --- SUBHANALLAH LUXURY BANNER --- */
+        /* HERO BANNER */
         .divine-banner {
             background: linear-gradient(135deg, #1c180b, #0d0b04);
             border: 1px solid var(--border-gold);
             border-radius: 20px;
-            padding: 20px; text-align: center; margin-bottom: 25px;
+            padding: 24px 20px; text-align: center; margin-bottom: 25px;
             box-shadow: var(--shadow-gold);
         }
-        .divine-banner p { font-size: 0.75rem; color: var(--gold-light); margin-bottom: 6px; font-weight: 600; }
-        .divine-banner h3 { font-size: 1.1rem; color: var(--gold); font-weight: 900; line-height: 1.6; letter-spacing: 1px; }
+        .divine-banner p { font-size: 0.75rem; color: var(--gold-light); margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+        .divine-banner h3 { font-size: 1.2rem; color: var(--gold); font-weight: 900; line-height: 1.6; letter-spacing: 1px; margin-bottom: 15px; }
+        
+        .hero-btn {
+            background: var(--gold-grad); color: #050505; border: none; padding: 10px 22px;
+            border-radius: 14px; font-weight: 900; font-size: 0.85rem; cursor: pointer;
+            box-shadow: 0 0 15px rgba(212,175,55,0.4);
+        }
 
         .section-title {
             font-size: 1.15rem; font-weight: 900; color: #fff;
             margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;
         }
 
-        /* --- HORIZONTAL CATEGORIES SCROLL --- */
-        .categories-scroll {
-            display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 25px;
-            scrollbar-width: none;
-        }
-        .categories-scroll::-webkit-scrollbar { display: none; }
-        .cat-pill {
-            background: var(--bg-card); border: 1px solid var(--border-gold);
-            padding: 10px 18px; border-radius: 30px; font-size: 0.85rem; font-weight: 700;
-            white-space: nowrap; cursor: pointer; color: var(--text-muted); transition: 0.3s;
-            display: flex; align-items: center; gap: 8px; flex-shrink: 0;
-        }
-        .cat-pill.active, .cat-pill:hover {
-            background: var(--gold-grad); color: #050505; border-color: transparent; box-shadow: 0 0 15px rgba(212,175,55,0.4);
-        }
-
-        /* --- SHOPS GRID (NO GAPS, ULTRA CLEAN) --- */
+        /* SHOPS GRID */
         .shops-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 20px; }
         .shop-card {
             background: var(--bg-card); border-radius: 20px; overflow: hidden;
@@ -160,7 +101,7 @@
             cursor: pointer; transition: transform 0.2s;
         }
         .shop-card:active { transform: scale(0.98); }
-        .shop-img-box { height: 160px; position: relative; }
+        .shop-img-box { height: 160px; position: relative; background: #1a1a1a; }
         .shop-img-box img { width: 100%; height: 100%; object-fit: cover; }
         .shop-delivery-tag {
             position: absolute; bottom: 12px; right: 12px;
@@ -174,7 +115,7 @@
         .shop-rating { background: rgba(212,175,55,0.15); color: var(--gold); padding: 3px 8px; border-radius: 8px; font-size: 0.75rem; font-weight: 900; }
         .shop-desc { font-size: 0.8rem; color: var(--text-muted); }
 
-        /* --- PRODUCTS GRID (INSIDE SHOP) --- */
+        /* PRODUCTS GRID */
         .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
         .product-card {
             background: var(--bg-card); border-radius: 18px; padding: 14px;
@@ -195,11 +136,11 @@
             box-shadow: 0 0 10px rgba(212,175,55,0.3);
         }
 
-        /* --- VIEWS CONTAINER --- */
+        /* VIEWS */
         .app-view { display: none; }
         .app-view.active { display: block; }
 
-        /* --- FLOATING CART BAR --- */
+        /* FLOATING CART BAR */
         .cart-bar {
             position: fixed; bottom: 80px; left: 20px; right: 20px;
             background: linear-gradient(135deg, #1a170e, #0d0b04);
@@ -216,7 +157,32 @@
             box-shadow: 0 0 15px rgba(212,175,55,0.4);
         }
 
-        /* --- CHECKOUT MODAL --- */
+        /* GOOGLE AUTH MODAL (EXACT GMAIL SELECTOR) */
+        #auth-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+            z-index: 4000; display: none; justify-content: center; align-items: center; padding: 20px;
+        }
+        .auth-box {
+            background: #181818; width: 100%; max-width: 380px;
+            border-radius: 24px; padding: 25px; text-align: center;
+            border: 1px solid var(--border-gold); box-shadow: 0 0 40px rgba(0,0,0,0.9);
+        }
+        .google-logo { font-size: 2rem; color: var(--gold); margin-bottom: 15px; }
+        .auth-box h3 { font-size: 1.2rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
+        .auth-box p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; }
+        
+        .gmail-account-item {
+            background: #222; border: 1px solid var(--border-gold); border-radius: 14px;
+            padding: 12px 15px; display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+            cursor: pointer; text-align: right; transition: 0.2s;
+        }
+        .gmail-account-item:hover { background: #2a2a2a; border-color: var(--gold); }
+        .gmail-avatar { width: 35px; height: 35px; background: var(--gold-grad); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; color: #050505; }
+        .gmail-info b { display: block; font-size: 0.85rem; color: #fff; }
+        .gmail-info span { font-size: 0.7rem; color: var(--text-muted); }
+
+        /* CHECKOUT MODAL */
         #checkout-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
@@ -227,19 +193,19 @@
             border-radius: 25px; padding: 30px; text-align: center;
             border: 2px solid var(--gold); box-shadow: 0 0 50px rgba(212,175,55,0.3);
         }
-        .checkout-box h3 { font-size: 1.4rem; font-weight: 900; color: var(--gold); margin-bottom: 10px; }
-        .checkout-box p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
+        .checkout-box h3 { font-size: 1.3rem; font-weight: 900; color: var(--gold); margin-bottom: 10px; }
+        .checkout-box p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
         .phone-input {
-            width: 100%; padding: 15px; background: #050505; border: 2px solid var(--border-gold);
-            color: #fff; border-radius: 14px; font-size: 1.1rem; text-align: center; margin-bottom: 20px; outline: none;
+            width: 100%; padding: 14px; background: #050505; border: 2px solid var(--border-gold);
+            color: #fff; border-radius: 14px; font-size: 1rem; text-align: center; margin-bottom: 20px; outline: none;
         }
         .confirm-order-btn {
-            background: var(--gold-grad); color: #050505; width: 100%; padding: 15px;
-            border: none; border-radius: 14px; font-weight: 900; font-size: 1.1rem; cursor: pointer;
+            background: var(--gold-grad); color: #050505; width: 100%; padding: 14px;
+            border: none; border-radius: 14px; font-weight: 900; font-size: 1rem; cursor: pointer;
             box-shadow: 0 0 20px rgba(212,175,55,0.4);
         }
 
-        /* --- BOTTOM NAVIGATION BAR --- */
+        /* BOTTOM NAVIGATION */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; width: 100%; height: 75px;
             background: var(--bg-glass); backdrop-filter: blur(15px);
@@ -247,7 +213,7 @@
             display: flex; justify-content: space-around; align-items: center; z-index: 200;
         }
         .nav-item { text-align: center; font-size: 0.75rem; color: var(--text-muted); cursor: pointer; position: relative; flex: 1; }
-        .nav-item i { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+        .nav-item i { font-size: 1.3rem; display: block; margin-bottom: 4px; }
         .nav-item.active { color: var(--gold); font-weight: 900; }
         .nav-badge {
             position: absolute; top: -5px; right: 28%; background: #e11d48; color: #fff;
@@ -257,107 +223,236 @@
 </head>
 <body>
 
-    <div id="intro-splash">
-        <div class="intro-emblem"><i class="fa-solid fa-crown"></i></div>
-        <div class="intro-title">ماكياجي</div>
-        <div class="intro-subtitle">ULTIMATE LUXURY EXPERIENCE</div>
-        <div class="loading-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+    <!-- HEADER -->
+    <div class="header-bar">
+        <div class="brand-logo"><i class="fa-solid fa-gem"></i> <span id="txt-brand">ماكياجي</span></div>
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="setLang('ar')">AR</button>
+            <button class="lang-btn" onclick="setLang('fr')">FR</button>
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
         </div>
     </div>
 
-    <div class="header-bar">
-        <div class="brand-logo"><i class="fa-solid fa-gem"></i> ماكياجي</div>
-        <div style="font-size: 0.8rem; color: var(--gold); font-weight: 700;"><i class="fa-solid fa-location-dot"></i> الجزائر العاصمة</div>
-    </div>
-
+    <!-- SEARCH -->
     <div class="search-area">
         <div class="search-input-box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="ابحث عن أقوى منتجات التجميل والعطور...">
+            <input type="text" id="search-input" placeholder="ابحث عن أقوى منتجات التجميل والعطور...">
         </div>
     </div>
 
+    <!-- HOME VIEW -->
     <div id="view-home" class="app-view active">
         <div class="container">
             <div class="divine-banner">
-                <p>كلمتان خفيفتان على اللسان، ثقيلتان في الميزان</p>
-                <h3>سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ✦ سُبْحَانَ اللَّهِ الْعَظِيمِ</h3>
+                <p id="txt-sub-banner">الفخامة الملكية المطلقة</p>
+                <h3 id="txt-main-banner">تشكيلة حصرية من أرقى دور المكياج والعطور العالمية</h3>
+                <button class="hero-btn" onclick="scrollToShops()" id="txt-hero-btn">تصفح المتاجر الآن</button>
             </div>
 
-            <div class="section-title"><span>المتاجر الملكية (5)</span></div>
+            <div class="section-title"><span id="txt-shops-title">المتاجر الملكية المعتمدة (5)</span></div>
             <div class="shops-grid" id="shops-container"></div>
         </div>
     </div>
 
+    <!-- SHOP PRODUCTS VIEW -->
     <div id="view-shop" class="app-view">
         <div class="container">
             <div style="margin-bottom:15px; cursor:pointer; color:var(--gold); font-weight:800; display:flex; align-items:center; gap:8px;" onclick="goHome()">
-                <i class="fa-solid fa-arrow-right"></i> العودة للمتاجر الرئيسية
+                <i class="fa-solid fa-arrow-right"></i> <span id="txt-back-home">العودة للمتاجر الرئيسية</span>
             </div>
             <div class="section-title"><span id="current-shop-title">منتجات المتجر</span></div>
             <div class="products-grid" id="products-container"></div>
         </div>
     </div>
 
+    <!-- CART VIEW -->
     <div id="view-cart" class="app-view">
         <div class="container">
-            <div class="section-title"><span>سلة المشتريات الملكية</span></div>
+            <div class="section-title"><span id="txt-cart-title">سلة المشتريات الملكية</span></div>
             <div id="cart-items-list" style="margin-bottom: 20px;"></div>
         </div>
     </div>
 
+    <!-- PROFILE VIEW -->
     <div id="view-profile" class="app-view">
         <div class="container">
-            <div class="section-title"><span>حساب الزبون والإعدادات</span></div>
-            <div style="background:var(--bg-card); padding:20px; border-radius:18px; border:1px solid var(--border-gold);">
+            <div class="section-title"><span id="txt-profile-title">حساب الزبون والإعدادات</span></div>
+            <div style="background:var(--bg-card); padding:20px; border-radius:18px; border:1px solid var(--border-gold);" id="profile-card-content">
                 <h4 style="color:var(--gold); margin-bottom:8px;">منصة ماكياجي الرسمية</h4>
-                <p style="color:var(--text-muted); font-size:0.85rem; line-height:1.6;">جميع الطلبات تُراجع مباشرة من طرف المشرف وتصلك مع توصيل سريع لجميع الولايات بـ 200 دج فقط.</p>
+                <p style="color:var(--text-muted); font-size:0.85rem; line-height:1.6;" id="txt-profile-desc">لم تقم بتسجيل الدخول بعد. عند إتمام الطلب سيُطلب منك ربط حساب جيميل وتأكيد رقم هاتفك.</p>
             </div>
         </div>
     </div>
 
+    <!-- FLOATING CART BAR -->
     <div class="cart-bar" id="cart-bar">
         <div class="cart-info">
             <span id="cart-count-txt">0 منتجات + 200 دج توصيل</span>
             <b id="cart-total-txt">0 دج</b>
         </div>
-        <button class="cart-checkout-btn" onclick="openCheckout()">تأكيد الطلب 🛍️</button>
+        <button class="cart-checkout-btn" onclick="initiateCheckout()" id="txt-checkout-bar">إتمام الطلب</button>
     </div>
 
-    <div id="checkout-modal">
-        <div class="checkout-box">
-            <h3>تأكيد الطلب الفوري</h3>
-            <p>أدخل رقم هاتفك بصدق، وسيتصل بك المشرف فوراً لتأكيد طلبك وتوصيله إليك.</p>
-            <input type="tel" id="client-phone" class="phone-input" placeholder="07xxxxxxxx" maxlength="10">
-            <button class="confirm-order-btn" onclick="submitOrder()">تأكيد الطلب وإرسال للمشرف ✨</button>
-            <br><br>
-            <span style="font-size:0.8rem; color:var(--text-muted); cursor:pointer; font-weight:700;" onclick="closeCheckout()">إلغاء والتراجع</span>
+    <!-- GOOGLE ACCOUNT SELECTOR MODAL (GMAIL CHOOSE UI) -->
+    <div id="auth-modal">
+        <div class="auth-box">
+            <div class="google-logo"><i class="fa-brands fa-google"></i></div>
+            <h3 id="txt-auth-title">تسجيل الدخول عبر جوجل</h3>
+            <p id="txt-auth-desc">اختر حساب جيميل الخاص بك للمتابعة وإتمام الطلبية:</p>
+            
+            <div class="gmail-account-item" onclick="selectGmail('sarah.beauty99@gmail.com', 'سارة جمال')">
+                <div class="gmail-avatar">س</div>
+                <div class="gmail-info">
+                    <b>سارة جمال</b>
+                    <span>sarah.beauty99@gmail.com</span>
+                </div>
+            </div>
+
+            <div class="gmail-account-item" onclick="selectGmail('amina.makeup24@gmail.com', 'أمينة وعاصي')">
+                <div class="gmail-avatar">أ</div>
+                <div class="gmail-info">
+                    <b>أمينة وعاصي</b>
+                    <span>amina.makeup24@gmail.com</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <span style="font-size: 0.75rem; color: var(--text-muted); cursor: pointer;" onclick="closeAuthModal()">إلغاء والعودة</span>
+            </div>
         </div>
     </div>
 
+    <!-- CHECKOUT MODAL -->
+    <div id="checkout-modal">
+        <div class="checkout-box">
+            <h3 id="txt-modal-head">تأكيد الطلب الفوري</h3>
+            <p id="txt-modal-desc">أدخل رقم هاتفك بصدق، وسيتصل بك المشرف فوراً لتأكيد طلبك وتوصيله إليك.</p>
+            <input type="tel" id="client-phone" class="phone-input" placeholder="07xxxxxxxx" maxlength="10">
+            <button class="confirm-order-btn" onclick="submitOrder()" id="txt-modal-btn">تأكيد الطلب وإرسال للمشرف</button>
+            <br><br>
+            <span style="font-size:0.8rem; color:var(--text-muted); cursor:pointer; font-weight:700;" onclick="closeCheckout()" id="txt-modal-cancel">إلغاء والتراجع</span>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVIGATION -->
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('home', this)"><i class="fa-solid fa-house"></i>الرئيسية</div>
-        <div class="nav-item" onclick="switchTab('cart', this)"><i class="fa-solid fa-bag-shopping"></i>السلة<div class="nav-badge" id="nav-badge">0</div></div>
-        <div class="nav-item" onclick="switchTab('profile', this)"><i class="fa-solid fa-user"></i>حسابي</div>
+        <div class="nav-item active" onclick="switchTab('home', this)"><i class="fa-solid fa-house"></i><span id="nav-home">الرئيسية</span></div>
+        <div class="nav-item" onclick="switchTab('cart', this)"><i class="fa-solid fa-bag-shopping"></i><span id="nav-cart">السلة</span><div class="nav-badge" id="nav-badge">0</div></div>
+        <div class="nav-item" onclick="switchTab('profile', this)"><i class="fa-solid fa-user"></i><span id="nav-profile">حسابي</span></div>
     </div>
 
     <script>
-        // Intro Splash Fade out after 3.2 seconds
-        setTimeout(() => { document.getElementById('intro-splash').classList.add('fade-out'); }, 3200);
+        // Multi-language dictionary
+        const translations = {
+            ar: {
+                brand: "ماكياجي",
+                subBanner: "الفخامة الملكية المطلقة",
+                mainBanner: "تشكيلة حصرية من أرقى دور المكياج والعطور العالمية",
+                heroBtn: "تصفح المتاجر الآن",
+                shopsTitle: "المتاجر الملكية المعتمدة (5)",
+                backHome: "العودة للمتاجر الرئيسية",
+                cartTitle: "سلة المشتريات الملكية",
+                profileTitle: "حساب الزبون والإعدادات",
+                profileDesc: "لم تقم بتسجيل الدخول بعد. عند إتمام الطلب سيُطلب منك ربط حساب جيميل وتأكيد رقم هاتفك.",
+                checkoutBar: "إتمام الطلب",
+                authTitle: "تسجيل الدخول عبر جوجل",
+                authDesc: "اختر حساب جيميل الخاص بك للمتابعة وإتمام الطلبية:",
+                modalHead: "تأكيد الطلب الفوري",
+                modalDesc: "أدخل رقم هاتفك بصدق، وسيتصل بك المشرف فوراً لتأكيد طلبك وتوصيله إليك.",
+                modalBtn: "تأكيد الطلب وإرسال للمشرف",
+                modalCancel: "إلغاء والتراجع",
+                navHome: "الرئيسية",
+                navCart: "السلة",
+                navProfile: "حسابي"
+            },
+            fr: {
+                brand: "Makyaji",
+                subBanner: "Luxe Royal Absolu",
+                mainBanner: "Collection exclusive des plus grandes maisons de maquillage",
+                heroBtn: "Explorer les boutiques",
+                shopsTitle: "Boutiques Royales (5)",
+                backHome: "Retour aux boutiques",
+                cartTitle: "Panier d'achat royal",
+                profileTitle: "Compte Client & Paramètres",
+                profileDesc: "Vous n'êtes pas connecté. Lors de la commande, un compte Gmail et un numéro seront requis.",
+                checkoutBar: "Commander",
+                authTitle: "Connexion Google",
+                authDesc: "Choisissez votre compte Gmail pour continuer :",
+                modalHead: "Confirmation de commande",
+                modalDesc: "Entrez votre numéro de téléphone pour que l'administrateur confirme votre livraison.",
+                modalBtn: "Confirmer et envoyer",
+                modalCancel: "Annuler",
+                navHome: "Accueil",
+                navCart: "Panier",
+                navProfile: "Profil"
+            },
+            en: {
+                brand: "Makyaji",
+                subBanner: "Absolute Royal Luxury",
+                mainBanner: "Exclusive collection from top global makeup and perfume houses",
+                heroBtn: "Browse Shops Now",
+                shopsTitle: "Verified Royal Shops (5)",
+                backHome: "Back to Shops",
+                cartTitle: "Royal Shopping Cart",
+                profileTitle: "Customer Account & Settings",
+                profileDesc: "Not logged in. You will be prompted to link your Gmail and phone during checkout.",
+                checkoutBar: "Checkout",
+                authTitle: "Sign in with Google",
+                authDesc: "Choose your Gmail account to proceed with the order:",
+                modalHead: "Instant Order Confirmation",
+                modalDesc: "Enter your phone number so the admin can call you immediately to confirm delivery.",
+                modalBtn: "Confirm & Send to Admin",
+                modalCancel: "Cancel",
+                navHome: "Home",
+                navCart: "Cart",
+                navProfile: "Profile"
+            }
+        };
 
-        // Generating 5 Luxury Shops with 15+ real products each (prices between 500 and 3000 DZD)
+        let currentLang = 'ar';
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const t = translations[lang];
+            document.getElementById('txt-brand').innerText = t.brand;
+            document.getElementById('txt-sub-banner').innerText = t.subBanner;
+            document.getElementById('txt-main-banner').innerText = t.mainBanner;
+            document.getElementById('txt-hero-btn').innerText = t.heroBtn;
+            document.getElementById('txt-shops-title').innerText = t.shopsTitle;
+            document.getElementById('txt-back-home').innerText = t.backHome;
+            document.getElementById('txt-cart-title').innerText = t.cartTitle;
+            document.getElementById('txt-profile-title').innerText = t.profileTitle;
+            document.getElementById('txt-checkout-bar').innerText = t.checkoutBar;
+            document.getElementById('txt-auth-title').innerText = t.authTitle;
+            document.getElementById('txt-auth-desc').innerText = t.authDesc;
+            document.getElementById('txt-modal-head').innerText = t.modalHead;
+            document.getElementById('txt-modal-desc').innerText = t.modalDesc;
+            document.getElementById('txt-modal-btn').innerText = t.modalBtn;
+            document.getElementById('txt-modal-cancel').innerText = t.modalCancel;
+            document.getElementById('nav-home').innerText = t.navHome;
+            document.getElementById('nav-cart').innerText = t.navCart;
+            document.getElementById('nav-profile').innerText = t.navProfile;
+
+            if(currentLang === 'en' || currentLang === 'fr') {
+                document.documentElement.setAttribute('dir', 'ltr');
+            } else {
+                document.documentElement.setAttribute('dir', 'rtl');
+            }
+        }
+
+        // Reliable High-Stability Images for Makeup & Cosmetics
         const sampleImages = [
-            "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=400&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583241800695-e8d1a7407524?w=400&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&auto=format&fit=crop&q=80"
+            "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=500&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=500&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=500&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=500&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1583241800695-e8d1a7407524?w=500&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500&auto=format&fit=crop&q=80"
         ];
 
         const shopNames = [
@@ -373,13 +468,12 @@
 
         for(let i=0; i<5; i++) {
             let products = [];
-            // Generating 16 products per shop (more than 15 as requested)
             for(let j=1; j<=16; j++) {
                 let randomPrice = Math.floor(Math.random() * (3000 - 600 + 1)) + 600;
                 let imgIndex = (i + j) % sampleImages.length;
                 products.push({
                     id: globalId++,
-                    name: `منتج ماكياجي فاخر إصدار ${j}`,
+                    name: `منتج فاخر اصدار رقم ${j}`,
                     price: randomPrice,
                     img: sampleImages[imgIndex]
                 });
@@ -396,6 +490,7 @@
 
         let cart = [];
         let currentShop = null;
+        let loggedUser = null;
 
         function renderShops() {
             const container = document.getElementById('shops-container');
@@ -404,15 +499,15 @@
                 container.innerHTML += `
                     <div class="shop-card" onclick="openShop(${shop.id})">
                         <div class="shop-img-box">
-                            <img src="${shop.img}" alt="${shop.name}">
+                            <img src="${shop.img}" alt="${shop.name}" loading="lazy">
                             <div class="shop-delivery-tag">توصيل 200 دج</div>
                         </div>
                         <div class="shop-info">
                             <div class="shop-row">
                                 <div class="shop-name">${shop.name}</div>
-                                <div class="shop-rating">⭐ ${shop.rating}</div>
+                                <div class="shop-rating">4.9</div>
                             </div>
-                            <div class="shop-desc">${shop.desc} • 16 منتج متاح</div>
+                            <div class="shop-desc">${shop.desc} - 16 منتج متاح</div>
                         </div>
                     </div>
                 `;
@@ -427,11 +522,11 @@
             currentShop.products.forEach(prod => {
                 prodContainer.innerHTML += `
                     <div class="product-card">
-                        <img class="product-img" src="${prod.img}" alt="${prod.name}">
+                        <img class="product-img" src="${prod.img}" alt="${prod.name}" loading="lazy">
                         <div class="product-name">${prod.name}</div>
                         <div class="product-bottom">
                             <span class="product-price">${prod.price} دج</span>
-                            <button class="add-btn" onclick="addToCart(${prod.id})"><i class="fa-solid fa-plus"></i></button>
+                            <button class="add-btn" onclick="addToCart(${prod.id})">+</button>
                         </div>
                     </div>
                 `;
@@ -441,6 +536,7 @@
         }
 
         function goHome() { switchTab('home', document.querySelector('.bottom-nav .nav-item')); }
+        function scrollToShops() { window.scrollTo({top: 300, behavior: 'smooth'}); }
 
         function switchTab(viewName, el) {
             document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
@@ -450,6 +546,13 @@
                 el.classList.add('active');
             }
             if(viewName === 'cart') renderCartView();
+            if(viewName === 'profile' && loggedUser) {
+                document.getElementById('profile-card-content').innerHTML = `
+                    <h4 style="color:var(--gold); margin-bottom:8px;">حساب المستخدم النشط</h4>
+                    <p style="color:#fff; font-size:0.9rem;">الاسم: <b>${loggedUser.name}</b></p>
+                    <p style="color:var(--text-muted); font-size:0.85rem;">البريد: ${loggedUser.email}</p>
+                `;
+            }
             window.scrollTo(0, 0);
         }
 
@@ -496,13 +599,13 @@
                 list.innerHTML += `
                     <div style="background:var(--bg-card); border-radius:14px; padding:12px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--border-gold);">
                         <div style="display:flex; align-items:center; gap:12px;">
-                            <img src="${item.img}" style="width:45px; height:45px; object-fit:cover; border-radius:8px;">
+                            <img src="${item.img}" style="width:45px; height:45px; object-fit:cover; border-radius:8px;" loading="lazy">
                             <div>
                                 <h5 style="font-size:0.85rem; color:#fff;">${item.name}</h5>
                                 <span style="font-size:0.8rem; color:var(--gold); font-weight:900;">${item.price} دج</span>
                             </div>
                         </div>
-                        <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:#e11d48; font-size:1.1rem; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+                        <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:#e11d48; font-size:1.1rem; cursor:pointer;">حذف</button>
                     </div>
                 `;
             });
@@ -512,13 +615,32 @@
                     <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:0.85rem;"><span>سعر المنتجات:</span> <b>${itemsTotal} دج</b></div>
                     <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:0.85rem;"><span>تكلفة التوصيل:</span> <b>200 دج</b></div>
                     <div style="display:flex; justify-content:space-between; font-size:1.1rem; color:var(--gold); font-weight:900; border-top:1px solid var(--border-gold); padding-top:10px;"><span>المجموع الكلي:</span> <b>${itemsTotal + 200} دج</b></div>
-                    <button class="confirm-order-btn" style="margin-top:18px;" onclick="openCheckout()">تأكيد الطلب الآن ✨</button>
+                    <button class="confirm-order-btn" style="margin-top:18px;" onclick="initiateCheckout()">إتمام الطلب الآن</button>
                 </div>
             `;
         }
 
         function removeFromCart(index) { cart.splice(index, 1); updateCartUI(); renderCartView(); }
-        function openCheckout() { document.getElementById('checkout-modal').style.display = 'flex'; }
+
+        // CHECKOUT & GOOGLE AUTH FLOW
+        function initiateCheckout() {
+            if(!loggedUser) {
+                // Open Google Auth Gmail Selector Modal
+                document.getElementById('auth-modal').style.display = 'flex';
+            } else {
+                // Proceed to Phone verification modal
+                document.getElementById('checkout-modal').style.display = 'flex';
+            }
+        }
+
+        function selectGmail(email, name) {
+            loggedUser = { email: email, name: name };
+            document.getElementById('auth-modal').style.display = 'none';
+            // Open phone confirmation modal immediately after selecting Gmail
+            document.getElementById('checkout-modal').style.display = 'flex';
+        }
+
+        function closeAuthModal() { document.getElementById('auth-modal').style.display = 'none'; }
         function closeCheckout() { document.getElementById('checkout-modal').style.display = 'none'; }
 
         function submitOrder() {
@@ -528,18 +650,19 @@
             let itemsTotal = cart.reduce((sum, item) => sum + item.price, 0);
             const newOrder = {
                 id: 'ORD-' + Math.floor(1000 + Math.random() * 9000),
+                user: loggedUser,
                 phone: phone,
                 items: cart,
                 total: itemsTotal + 200,
                 date: new Date().toLocaleTimeString(),
-                status: 'قيد الانتظار ⏳'
+                status: 'قيد الانتظار'
             };
 
             let allOrders = JSON.parse(localStorage.getItem('makyaji_orders') || '[]');
             allOrders.unshift(newOrder);
             localStorage.setItem('makyaji_orders', JSON.stringify(allOrders));
 
-            alert(`تم إرسال طلبك بنجاح تام! 👑\nسيتصل بك المشرف قريباً جداً على الرقم: ${phone}`);
+            alert("تم إرسال طلبك بنجاح تام وتم ربط الحساب ورقم الهاتف. سيتصل بك المشرف قريباً.");
             cart = [];
             updateCartUI();
             closeCheckout();
