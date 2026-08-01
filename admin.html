@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المدير - ماكياجي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0c0a09;
+            --bg-card: #1c1917;
+            --accent: #d4af37;
+            --text-dark: #fafaf9;
+            --text-light: #a8a29e;
+            --border: #292524;
+            --shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-dark); padding: 20px; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 20px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 20px; }
+        .admin-header h1 { color: var(--accent); font-size: 1.5rem; }
+        .refresh-btn { background: var(--accent); color: #0c0a09; border: none; padding: 10px 18px; border-radius: 10px; font-weight: 900; cursor: pointer; }
+        .orders-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .order-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); position: relative; }
+        .order-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .order-id { color: var(--accent); font-weight: 900; font-size: 1.1rem; }
+        .order-phone { font-size: 1.1rem; font-weight: bold; background: rgba(212,175,55,0.1); padding: 5px 10px; border-radius: 8px; color: var(--accent); }
+        .order-items-list { font-size: 0.85rem; color: var(--text-light); margin-bottom: 12px; line-height: 1.5; }
+        .order-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 12px; }
+        .order-total { font-size: 1.1rem; font-weight: 900; color: var(--accent); }
+        .actions-btns { display: flex; gap: 10px; }
+        .btn-accept { background: #10b981; color: white; border: none; padding: 8px 15px; border-radius: 8px; font-weight: 700; cursor: pointer; }
+        .btn-delete { background: #e11d48; color: white; border: none; padding: 8px 15px; border-radius: 8px; font-weight: 700; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-header">
+        <h1>👑 لوحة التحكم والإدارة (الطلبات الحقيقية)</h1>
+        <button class="refresh-btn" onclick="loadAdminOrders()"><i class="fa-solid fa-rotate"></i> تحديث القائمة</button>
+    </div>
+
+    <div class="orders-grid" id="admin-orders-container">
+        </div>
+
+    <script>
+        function loadAdminOrders() {
+            const container = document.getElementById('admin-orders-container');
+            let orders = JSON.parse(localStorage.getItem('makyaji_orders') || '[]');
+
+            if(orders.length === 0) {
+                container.innerHTML = `<p style="text-align:center; color:var(--text-light); padding:50px; font-size:1.1rem;">لا توجد طلبات جديدة حالياً. تنتظر زبائن حقيقيين... ✨</p>`;
+                return;
+            }
+
+            container.innerHTML = '';
+            orders.forEach((order, index) => {
+                let itemsHtml = order.items.map(i => `• ${i.name} (${i.price} دج)`).join('<br>');
+                container.innerHTML += `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <span class="order-id">${order.id} - (${order.date})</span>
+                            <span class="order-phone"><i class="fa-solid fa-phone"></i> ${order.phone}</span>
+                        </div>
+                        <div class="order-items-list">
+                            <b>المنتجات المطلوبة:</b><br>
+                            ${itemsHtml}
+                        </div>
+                        <div class="order-footer">
+                            <div class="order-total">المجموع (مع التوصيل): ${order.total} دج</div>
+                            <div class="actions-btns">
+                                <span style="font-size:0.85rem; align-self:center; color:var(--accent);"><b>الحالة:</b> ${order.status}</span>
+                                <button class="btn-accept" onclick="acceptOrder(${index})">قبول ✅</button>
+                                <button class="btn-delete" onclick="deleteOrder(${index})">حذف ❌</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function acceptOrder(index) {
+            let orders = JSON.parse(localStorage.getItem('makyaji_orders') || '[]');
+            orders[index].status = 'تم القبول وجاري التحضير ✅';
+            localStorage.setItem('makyaji_orders', JSON.stringify(orders));
+            loadAdminOrders();
+        }
+
+        function deleteOrder(index) {
+            if(confirm("هل أنت متأكد من حذف هذه الطلبية؟")) {
+                let orders = JSON.parse(localStorage.getItem('makyaji_orders') || '[]');
+                orders.splice(index, 1);
+                localStorage.setItem('makyaji_orders', JSON.stringify(orders));
+                loadAdminOrders();
+            }
+        }
+
+        // تحميل الطلبات مباشرة عند فتح الصفحة
+        loadAdminOrders();
+        // تحديث تلقائي كل 5 ثوانٍ لتلتقط أي طلبية جديدة فور حدوثها
+        setInterval(loadAdminOrders, 5000);
+    </script>
+</body>
+</html>
