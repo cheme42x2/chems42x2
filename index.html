@@ -3,20 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ماكياجي - Makyaji</title>
+    <title>ماكياجي - Makyaji Luxury</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #fcfbfa;
-            --primary: #2c221e;
+            --bg-main: #0c0a09;
+            --bg-card: #1c1917;
+            --primary: #f5f5f4;
             --accent: #d4af37; /* Luxury Gold */
-            --rose-accent: #e0a9a7;
-            --text-dark: #222;
-            --text-light: #777;
-            --white: #ffffff;
-            --border: #f0eae1;
-            --shadow: 0 4px 20px rgba(0,0,0,0.05);
+            --accent-hover: #e6c547;
+            --text-dark: #fafaf9;
+            --text-light: #a8a29e;
+            --border: #292524;
+            --shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .light-mode {
+            --bg-main: #fcfbfa;
+            --bg-card: #ffffff;
+            --primary: #1c1917;
+            --accent: #b59410;
+            --accent-hover: #96780c;
+            --text-dark: #1c1917;
+            --text-light: #78716c;
+            --border: #e7e5e4;
+            --shadow: 0 8px 25px rgba(0,0,0,0.06);
         }
 
         * {
@@ -25,6 +37,7 @@
             padding: 0;
             font-family: 'Tajawal', sans-serif;
             -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
@@ -34,57 +47,58 @@
             overflow-x: hidden;
         }
 
-        /* --- INTRO SPLASH SCREEN --- */
+        /* --- PLAY STORE INTRO SPLASH --- */
         #intro-splash {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #1a1412 0%, #3a2e2b 100%);
+            background: #050505;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            z-index: 99999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
         #intro-splash.fade-out {
             opacity: 0;
             visibility: hidden;
         }
-        .intro-logo-icon {
-            width: 80px; height: 80px;
-            background: var(--accent);
-            border-radius: 50%;
+        .intro-emblem {
+            width: 100px; height: 100px;
+            background: linear-gradient(135deg, #d4af37, #8a7122);
+            border-radius: 28px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2.5rem;
-            color: var(--white);
-            margin-bottom: 20px;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
-            animation: pulse 2s infinite;
+            font-size: 3rem;
+            color: #0c0a09;
+            margin-bottom: 25px;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.4);
+            animation: appPulse 1.8s infinite;
         }
-        .intro-title {
-            font-size: 2.5rem;
-            color: var(--white);
-            font-weight: 800;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+        .intro-brand-name {
+            font-size: 2.8rem;
+            color: #ffffff;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
         }
-        .intro-subtitle {
+        .intro-brand-sub {
             color: var(--accent);
-            font-size: 1.1rem;
-            letter-spacing: 3px;
+            font-size: 0.95rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        @keyframes appPulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(212,175,55,0.3); }
+            50% { transform: scale(1.08); box-shadow: 0 0 50px rgba(212,175,55,0.6); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(212,175,55,0.3); }
         }
 
         /* --- HEADER --- */
         header {
-            background: var(--white);
-            padding: 15px 20px;
+            background: var(--bg-card);
+            padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -94,13 +108,14 @@
             z-index: 100;
         }
         .header-brand {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--accent);
+            letter-spacing: 1px;
         }
         .lang-selector {
             display: flex;
-            background: #f7f3ee;
+            background: var(--border);
             padding: 3px;
             border-radius: 20px;
             gap: 2px;
@@ -109,60 +124,57 @@
             border: none;
             background: none;
             padding: 5px 12px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             cursor: pointer;
             border-radius: 15px;
             color: var(--text-light);
-            transition: all 0.3s;
         }
         .lang-btn.active {
-            background: var(--primary);
-            color: var(--accent);
+            background: var(--accent);
+            color: #0c0a09;
         }
 
-        /* --- CONTAINER --- */
-        .container {
-            padding: 20px;
-        }
+        /* --- APP VIEWS --- */
+        .app-view { display: none; }
+        .app-view.active { display: block; }
+        .container { padding: 20px; }
 
-        /* Banner Slider Simulation */
-        .promo-banner {
-            background: linear-gradient(135deg, #2c221e, #4a3b35);
-            border-radius: 16px;
-            padding: 20px;
-            color: var(--white);
+        /* BANNER */
+        .luxury-banner {
+            background: linear-gradient(135deg, #1c1917, #292524);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 22px;
+            color: #fff;
             margin-bottom: 25px;
+            box-shadow: var(--shadow);
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow);
         }
-        .promo-banner h3 { font-size: 1.2rem; color: var(--accent); margin-bottom: 5px; }
-        .promo-banner p { font-size: 0.85rem; opacity: 0.8; }
+        .luxury-banner h3 { font-size: 1.3rem; color: var(--accent); margin-bottom: 8px; font-weight: 800; }
+        .luxury-banner p { font-size: 0.85rem; opacity: 0.85; line-height: 1.4; }
 
-        /* Section Headings */
-        .section-header {
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-        }
-        .section-header h2 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary);
         }
 
-        /* Shops Grid (5 Shops) */
+        /* SHOPS GRID */
         .shops-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         .shop-card {
-            background: var(--white);
-            border-radius: 14px;
+            background: var(--bg-card);
+            border-radius: 16px;
             overflow: hidden;
             border: 1px solid var(--border);
             box-shadow: var(--shadow);
@@ -170,213 +182,208 @@
             transition: transform 0.2s;
         }
         .shop-card:active { transform: scale(0.97); }
-        .shop-img-wrap {
-            height: 110px;
+        .shop-img-box {
+            height: 120px;
             position: relative;
         }
-        .shop-img-wrap img {
-            width: 100%; height: 100%;
-            object-fit: cover;
+        .shop-img-box img {
+            width: 100%; height: 100%; object-fit: cover;
         }
-        .delivery-badge {
+        .delivery-tag {
             position: absolute;
             bottom: 8px; right: 8px;
-            background: rgba(0,0,0,0.7);
-            color: var(--white);
-            padding: 2px 8px;
-            font-size: 0.7rem;
-            border-radius: 6px;
-        }
-        .shop-info {
-            padding: 12px;
-        }
-        .shop-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 3px;
-            color: var(--primary);
-        }
-        .shop-meta {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            display: flex;
-            justify-content: space-between;
-        }
-        .shop-rating {
+            background: rgba(0,0,0,0.8);
             color: var(--accent);
+            padding: 3px 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: 6px;
+            border: 1px solid rgba(212,175,55,0.3);
         }
+        .shop-details { padding: 12px; }
+        .shop-name { font-size: 0.95rem; font-weight: 800; margin-bottom: 4px; color: var(--text-dark); }
+        .shop-sub { font-size: 0.75rem; color: var(--text-light); display: flex; justify-content: space-between; }
 
-        /* Products View inside Shop */
-        #shop-view {
-            display: none;
-        }
-        .back-to-home {
+        /* BACK BUTTON */
+        .back-btn-bar {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: #f0eae1;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            gap: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             cursor: pointer;
-            color: var(--primary);
+            color: var(--accent);
+            box-shadow: var(--shadow);
         }
+
+        /* PRODUCTS GRID */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
         .product-card {
-            background: var(--white);
-            border-radius: 14px;
+            background: var(--bg-card);
+            border-radius: 16px;
             padding: 12px;
             border: 1px solid var(--border);
             box-shadow: var(--shadow);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
         }
         .product-img {
             width: 100%;
-            height: 120px;
+            height: 130px;
             object-fit: contain;
             margin-bottom: 10px;
             cursor: pointer;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            padding: 5px;
         }
         .product-name {
             font-size: 0.85rem;
             font-weight: 700;
             height: 38px;
             overflow: hidden;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            line-height: 1.3;
         }
         .product-price-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 10px;
         }
         .product-price {
             font-size: 0.95rem;
-            font-weight: 800;
-            color: var(--primary);
+            font-weight: 900;
+            color: var(--accent);
         }
         .add-btn {
-            background: var(--primary);
-            color: var(--accent);
+            background: var(--accent);
+            color: #0c0a09;
             border: none;
-            width: 32px; height: 32px;
+            width: 34px; height: 34px;
             border-radius: 50%;
             font-size: 1rem;
+            font-weight: 900;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: background 0.2s;
+            box-shadow: 0 4px 10px rgba(212,175,55,0.3);
         }
-        .add-btn:active { background: var(--accent); color: var(--white); }
 
-        /* --- PRODUCT DETAIL MODAL (360 Simulation) --- */
+        /* --- 360° INSPECTION MODAL --- */
         #product-modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85);
-            z-index: 1000;
+            z-index: 2000;
             display: none;
             justify-content: center;
             align-items: flex-end;
         }
-        .modal-content {
-            background: var(--white);
+        .modal-box {
+            background: var(--bg-card);
             width: 100%;
             max-height: 85vh;
-            border-radius: 24px 24px 0 0;
+            border-radius: 28px 28px 0 0;
             padding: 25px;
             overflow-y: auto;
-            animation: slideUp 0.3s ease;
+            border-top: 2px solid var(--accent);
             position: relative;
         }
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-        .close-modal {
+        .modal-close {
             position: absolute;
             top: 15px; left: 15px;
-            background: #f0eae1;
+            background: var(--border);
             border: none;
-            width: 35px; height: 35px;
+            width: 36px; height: 36px;
             border-radius: 50%;
             font-size: 1.1rem;
+            color: var(--text-dark);
             cursor: pointer;
         }
-        .modal-img-container {
+        .modal-img-area {
             width: 100%;
-            height: 220px;
-            background: #faf8f5;
-            border-radius: 16px;
+            height: 230px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 18px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             position: relative;
+            border: 1px solid var(--border);
         }
-        .modal-img-container img {
-            max-height: 80%;
+        .modal-img-area img {
+            max-height: 85%;
             object-fit: contain;
         }
-        .rotate-hint {
+        .inspection-360-badge {
             position: absolute;
-            bottom: 10px;
-            background: rgba(0,0,0,0.6);
-            color: var(--white);
-            padding: 3px 10px;
-            font-size: 0.75rem;
-            border-radius: 12px;
-        }
-        .modal-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 5px; }
-        .modal-price { font-size: 1.3rem; font-weight: 800; color: var(--accent); margin-bottom: 15px; }
-        .modal-desc { font-size: 0.85rem; color: var(--text-light); line-height: 1.5; margin-bottom: 20px; }
-        .modal-add-cart-btn {
-            background: var(--primary);
+            bottom: 12px;
+            background: rgba(0,0,0,0.7);
             color: var(--accent);
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
+            padding: 4px 12px;
+            font-size: 0.75rem;
             font-weight: 700;
+            border-radius: 15px;
+            border: 1px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .modal-title { font-size: 1.25rem; font-weight: 900; color: var(--text-dark); margin-bottom: 6px; }
+        .modal-price { font-size: 1.35rem; font-weight: 900; color: var(--accent); margin-bottom: 15px; }
+        .modal-desc { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; margin-bottom: 25px; }
+        .modal-cart-btn {
+            background: var(--accent);
+            color: #0c0a09;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 14px;
+            font-weight: 900;
+            font-size: 1.05rem;
             cursor: pointer;
+            box-shadow: 0 5px 20px rgba(212,175,55,0.4);
         }
 
-        /* --- CART & CHECKOUT BAR --- */
+        /* --- CART SUMMARY BAR --- */
         .cart-bar {
             position: fixed;
             bottom: 75px; left: 15px; right: 15px;
-            background: var(--primary);
-            color: var(--white);
-            padding: 12px 20px;
-            border-radius: 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--accent);
+            color: var(--text-dark);
+            padding: 14px 20px;
+            border-radius: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            z-index: 90;
+            box-shadow: var(--shadow);
+            z-index: 150;
             display: none;
         }
-        .cart-bar-info span { display: block; font-size: 0.75rem; opacity: 0.7; }
-        .cart-bar-info b { font-size: 1.1rem; color: var(--accent); }
-        .cart-bar-btn {
+        .cart-info span { display: block; font-size: 0.75rem; color: var(--text-light); }
+        .cart-info b { font-size: 1.15rem; color: var(--accent); }
+        .cart-checkout-btn {
             background: var(--accent);
-            color: var(--primary);
+            color: #0c0a09;
             border: none;
-            padding: 8px 18px;
-            border-radius: 8px;
-            font-weight: 800;
-            font-size: 0.9rem;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 900;
+            font-size: 0.95rem;
             cursor: pointer;
         }
 
@@ -384,58 +391,61 @@
         #checkout-modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 2000;
+            background: rgba(0,0,0,0.85);
+            z-index: 3000;
             display: none;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
         .checkout-box {
-            background: var(--white);
+            background: var(--bg-card);
             width: 100%;
             max-width: 380px;
-            border-radius: 20px;
+            border-radius: 22px;
             padding: 25px;
             text-align: center;
+            border: 1px solid var(--accent);
+            box-shadow: var(--shadow);
         }
-        .checkout-box h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); }
-        .checkout-box p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 20px; }
+        .checkout-box h3 { font-size: 1.3rem; font-weight: 900; color: var(--text-dark); margin-bottom: 10px; }
+        .checkout-box p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 20px; line-height: 1.5; }
         .phone-input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px;
+            background: var(--bg-main);
             border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 1rem;
+            color: var(--text-dark);
+            border-radius: 12px;
+            font-size: 1.1rem;
             text-align: center;
             margin-bottom: 15px;
             outline: none;
-            transition: border-color 0.3s;
         }
         .phone-input:focus { border-color: var(--accent); }
         .confirm-order-btn {
             background: var(--accent);
-            color: var(--primary);
+            color: #0c0a09;
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: none;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 1rem;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 1.05rem;
             cursor: pointer;
         }
 
-        /* --- BOTTOM NAVIGATION BAR --- */
+        /* --- STATIC BOTTOM NAVIGATION --- */
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; width: 100%;
-            height: 70px;
-            background: var(--white);
+            height: 75px;
+            background: var(--bg-card);
             border-top: 1px solid var(--border);
             display: flex;
             justify-content: space-around;
             align-items: center;
-            z-index: 100;
+            z-index: 200;
         }
         .nav-item {
             text-align: center;
@@ -443,37 +453,60 @@
             color: var(--text-light);
             cursor: pointer;
             position: relative;
+            flex: 1;
         }
         .nav-item i {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
         }
         .nav-item.active {
             color: var(--accent);
-            font-weight: 700;
+            font-weight: 900;
         }
         .nav-badge {
             position: absolute;
-            top: -3px; right: 8px;
-            background: #d9534f;
-            color: var(--white);
+            top: -4px; right: 28%;
+            background: #e11d48;
+            color: #fff;
             font-size: 0.65rem;
-            width: 16px; height: 16px;
+            width: 17px; height: 17px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
+            font-weight: 800;
             display: none;
+        }
+
+        /* PROFILE VIEW STYLING */
+        .profile-card {
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mode-toggle-btn {
+            background: var(--accent);
+            color: #0c0a09;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 900;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
     <div id="intro-splash">
-        <div class="intro-logo-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-        <div class="intro-title">ماكياجي</div>
-        <div class="intro-subtitle">LUXURY MAKEUP</div>
+        <div class="intro-emblem"><i class="fa-solid fa-crown"></i></div>
+        <div class="intro-brand-name">ماكياجي</div>
+        <div class="intro-brand-sub">LUXURY STORE</div>
     </div>
 
     <header>
@@ -485,140 +518,191 @@
         </div>
     </header>
 
-    <div class="container">
-        <div id="home-view">
-            <div class="promo-banner">
-                <h3 id="banner-title">✨ فخامة التجميل بين يديك</h3>
-                <p id="banner-desc">اكتشفي أرقى 5 محلات مكياج وعطور أصلية بتوصيل سريع جداً بـ 200 دج فقط!</p>
+    <div id="view-home" class="app-view active">
+        <div class="container">
+            <div class="luxury-banner">
+                <h3 id="banner-title">✨ عالم الفخامة والجمال الأصلي</h3>
+                <p id="banner-desc">أرقى 30+ منتج مكياج وعطور من 5 محلات عالمية، مع توصيل سريع وثابت بـ 200 دج فقط.</p>
             </div>
-
-            <div class="section-header">
-                <h2 id="shops-heading">المتاجر المختارة (5)</h2>
+            <div class="section-title">
+                <span id="shops-heading">المتاجر المختارة (5)</span>
             </div>
-
-            <div class="shops-grid" id="shops-container">
-                </div>
+            <div class="shops-grid" id="shops-container"></div>
         </div>
+    </div>
 
-        <div id="shop-view">
-            <div class="back-to-home" onclick="goHome()">
-                <i class="fa-solid fa-arrow-right"></i> <span id="back-text">العودة للمتاجر</span>
+    <div id="view-shop" class="app-view">
+        <div class="container">
+            <div class="back-btn-bar" onclick="goHome()">
+                <i class="fa-solid fa-arrow-right"></i> <span id="back-text">العودة للمتاجر الرئيسية</span>
             </div>
-            <div class="section-header">
-                <h2 id="current-shop-name">محلات المكياج</h2>
+            <div class="section-title">
+                <span id="current-shop-title">معرض المنتجات</span>
             </div>
-            <div class="products-grid" id="products-container">
+            <div class="products-grid" id="products-container"></div>
+        </div>
+    </div>
+
+    <div id="view-cart" class="app-view">
+        <div class="container">
+            <div class="section-title"><span>سلة المشتريات الخاصة بك</span></div>
+            <div id="cart-items-list" style="margin-bottom: 20px;"></div>
+        </div>
+    </div>
+
+    <div id="view-notif" class="app-view">
+        <div class="container">
+            <div class="section-title"><span>الإشعارات والعروض</span></div>
+            <div class="profile-card">
+                <div>
+                    <h4 style="color: var(--accent); margin-bottom: 5px;">توصيل خاص 200 دج</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-light);">جميع الطلبات تشمل توصيل فائق السرعة لجميع الولايات.</p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="view-profile" class="app-view">
+        <div class="container">
+            <div class="section-title"><span>حسابي الشخصي والإعدادات</span></div>
+            <div class="profile-card">
+                <div>
+                    <h4 style="margin-bottom: 4px;" id="theme-title">مظهر التطبيق</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-light);" id="theme-sub">التبديل بين الوضع الليلي والوضع الفاتح</p>
+                </div>
+                <button class="mode-toggle-btn" onclick="toggleTheme()" id="theme-btn">الوضع الفاتح ☀️</button>
+            </div>
         </div>
     </div>
 
     <div id="product-modal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-img-container">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-img-area">
                 <img id="modal-img" src="" alt="">
-                <div class="rotate-hint" id="rotate-hint-text"><i class="fa-solid fa-arrows-rotate"></i> اسحبي للتدوير 360°</div>
+                <div class="inspection-360-badge"><i class="fa-solid fa-arrows-rotate"></i> معاينة وتدوير دقيق 360°</div>
             </div>
             <div class="modal-title" id="modal-name">اسم المنتج</div>
             <div class="modal-price" id="modal-price">0 دج</div>
-            <div class="modal-desc" id="modal-desc">وصف المنتج الفاخر...</div>
-            <button class="modal-add-cart-btn" id="modal-add-btn" onclick="addCurrentProductToCart()">أضفي إلى السلة 🛍️</button>
+            <div class="modal-desc" id="modal-desc">وصف دقيق...</div>
+            <button class="modal-cart-btn" onclick="addModalProductToCart()">أضف إلى السلة الآن 🛍️</button>
         </div>
     </div>
 
     <div class="cart-bar" id="cart-bar">
-        <div class="cart-bar-info">
-            <span id="cart-items-count">0 عناصر + 200 دج توصيل</span>
-            <b id="cart-bar-total">0 دج</b>
+        <div class="cart-info">
+            <span id="cart-count-txt">0 منتجات + 200 دج توصيل</span>
+            <b id="cart-total-txt">0 دج</b>
         </div>
-        <button class="cart-bar-btn" id="checkout-trigger-btn" onclick="openCheckout()">تأكيد الطلب</button>
+        <button class="cart-checkout-btn" onclick="openCheckout()">تأكيد الطلب</button>
     </div>
 
     <div id="checkout-modal">
         <div class="checkout-box">
-            <h3 id="chk-title">تأكيد سريع للطلب</h3>
-            <p id="chk-desc">ضعي رقم هاتفك فقط، وسنتصل بكِ لتأكيد مكان الاستلام وتفاصيل التوصيل بكل راحة.</p>
-            <input type="tel" id="phone-number" class="phone-input" placeholder="07xxxxxxxx" maxlength="10">
-            <button class="confirm-order-btn" id="chk-btn" onclick="submitOrder()">تأكيد وإرسال الطلب ✨</button>
+            <h3 id="chk-title">تأكيد الطلب الفوري</h3>
+            <p id="chk-desc">اكتبي رقم هاتفك فقط، وسيتصل بك المشرف فوراً لتأكيد مكان الاستلام وتفاصيل التوصيل.</p>
+            <input type="tel" id="client-phone" class="phone-input" placeholder="07xxxxxxxx" maxlength="10">
+            <button class="confirm-order-btn" onclick="submitOrder()" id="chk-btn">تأكيد الطلب ✨</button>
             <br><br>
-            <span style="font-size: 0.75rem; color: #999; cursor: pointer;" onclick="closeCheckout()">إلغاء</span>
+            <span style="font-size: 0.75rem; color: var(--text-light); cursor: pointer;" onclick="closeCheckout()">إلغاء</span>
         </div>
     </div>
 
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="switchNav(this)">
+        <div class="nav-item active" onclick="switchTab('home', this)">
             <i class="fa-solid fa-house"></i>
             <span id="nav-home">الرئيسية</span>
         </div>
-        <div class="nav-item" onclick="switchNav(this)">
+        <div class="nav-item" onclick="switchTab('shop', this)">
             <i class="fa-solid fa-store"></i>
             <span id="nav-shops">المتاجر</span>
         </div>
-        <div class="nav-item" onclick="switchNav(this)" style="position:relative;">
+        <div class="nav-item" onclick="switchTab('cart', this)">
             <i class="fa-solid fa-bag-shopping"></i>
             <span id="nav-cart">السلة</span>
             <div class="nav-badge" id="nav-badge">0</div>
         </div>
-        <div class="nav-item" onclick="switchNav(this)">
+        <div class="nav-item" onclick="switchTab('notif', this)">
             <i class="fa-solid fa-bell"></i>
             <span id="nav-notif">الإشعارات</span>
         </div>
-        <div class="nav-item" onclick="switchNav(this)">
+        <div class="nav-item" onclick="switchTab('profile', this)">
             <i class="fa-solid fa-user"></i>
             <span id="nav-profile">حسابي</span>
         </div>
     </div>
 
     <script>
-        // --- 3 SECONDS INTRO SPLASH REMOVAL ---
+        // INTRO SPLASH TIMER (3 seconds)
         setTimeout(() => {
             document.getElementById('intro-splash').classList.add('fade-out');
-        }, 2500);
+        }, 2800);
 
-        // --- DATA STRUCTURE (5 Luxury Makeup Shops & Real Products) ---
+        // 30+ RICH PRODUCTS ACROSS 5 SHOPS
         const shopsData = [
-            { id: 1, name: "أوركيد الذهبي", cat: "مكياج عيون وشفاه", rating: "4.9", img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80", products: [
-                { id: 101, name: "أحمر شفاه ماغنوليا مطفي", price: 4800, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&auto=format&fit=crop&q=80", desc: "ألوان جريئة وقوام مخملي يدوم طوال اليوم دون جفاف الشفاه." },
-                { id: 102, name: "باليت ظلال العيون الذهبية الملكية", price: 9500, img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&auto=format&fit=crop&q=80", desc: "12 لوناً فخماً مستوحى من بريق الذهب الخالص لتألق استثنائي." }
+            { id: 1, name: "أوركيد الذهبي للمكياج", cat: "أرواج وباليتات أصلية", rating: "4.9", img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80", products: [
+                { id: 101, name: "أحمر شفاه ماغنوليا الفاخر", price: 4800, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&auto=format&fit=crop&q=80", desc: "ألوان مخملية ثابتة طوال اليوم." },
+                { id: 102, name: "باليت ظلال العيون الملكية", price: 9500, img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&auto=format&fit=crop&q=80", desc: "12 لوناً ببريق الذهب الخالص." },
+                { id: 103, name: "جلوس شفاه كريستالي لامع", price: 3200, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&auto=format&fit=crop&q=80", desc: "ترطيب ولمعان مضاعف." },
+                { id: 104, name: "قلم تحديد شفاه مخملي", price: 2200, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&auto=format&fit=crop&q=80", desc: "ثبات عالي ورسمة دقيقة." },
+                { id: 105, name: "مجموعة أحمر شفاه مصغرة", price: 6900, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&auto=format&fit=crop&q=80", desc: "تحتوي على 4 ألوان أساسية فاخرة." },
+                { id: 106, name: "باليت إضاءة مدمجة", price: 5400, img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&auto=format&fit=crop&q=80", desc: "إشراقة طبيعية تناسب كافة السهرات." }
             ]},
-            { id: 2, name: "إليغانس باريس", cat: "عطور وأساس فاخر", rating: "4.8", img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&auto=format&fit=crop&q=80", products: [
-                { id: 201, name: "عطر عود الذهب الملكي", price: 21500, img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&auto=format&fit=crop&q=80", desc: "عطر شرقي فخم يجمع بين نفحات العود الأصيل والورد الجوري." },
-                { id: 202, name: "كريم أساس سائل مخملي", price: 6200, img: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=400&auto=format&fit=crop&q=80", desc: "تغطية مثالية تدوم طويلاً مع ترطيب عميق ومظهر طبيعي." }
+            { id: 2, name: "إليغانس باريس للعطور والأساس", cat: "عطور ملكية وفونديشن", rating: "4.8", img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&auto=format&fit=crop&q=80", products: [
+                { id: 201, name: "عطر عود الذهب الملكي", price: 21500, img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&auto=format&fit=crop&q=80", desc: "عبير شرقي فخم يدوم طويلاً." },
+                { id: 202, name: "كريم أساس سائل مخملي HD", price: 6200, img: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=400&auto=format&fit=crop&q=80", desc: "تغطية مثالية ومظهر طبيعي للوجه." },
+                { id: 203, name: "عطر ليالي باريس النسائي", price: 17800, img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&auto=format&fit=crop&q=80", desc: "نفحات زهرية ساحرة." },
+                { id: 204, name: "كونسيلر إخفاء العيوب", price: 3800, img: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=400&auto=format&fit=crop&q=80", desc: "تغطية فائقة للهالات السوداء." },
+                { id: 205, name: "بودرة تثبيت شفافة", price: 4500, img: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=400&auto=format&fit=crop&q=80", desc: "تحافظ على المكياج طوال اليوم." },
+                { id: 206, name: "بخاخ تثبيت المكياج الفاخر", price: 4100, img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&auto=format&fit=crop&q=80", desc: "انتعاش وثبات مضاعف." }
             ]},
-            { id: 3, name: "سحر الشرق للتجميل", cat: "إضاءة ومحددات", rating: "4.7", img: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&auto=format&fit=crop&q=80", products: [
-                { id: 301, name: "هايلايتر لؤلؤي براق", price: 3900, img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&auto=format&fit=crop&q=80", desc: "يمنح وجهك إشراقة ساحرة ولمسة مخملية لا تقاوم." },
-                { id: 302, name: "قلم تحديد حواجب دقيق", price: 2400, img: "https://images.unsplash.com/photo-1583241800695-e8d1a7407524?w=400&auto=format&fit=crop&q=80", desc: "رسمة احترافية وثبات عالي تحت كل الظروف." }
+            { id: 3, name: "سحر الشرق للتجميل", cat: "هايلايتر ومحددات عيون", rating: "4.7", img: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&auto=format&fit=crop&q=80", products: [
+                { id: 301, name: "هايلايتر لؤلؤي براق", price: 3900, img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&auto=format&fit=crop&q=80", desc: "إشراقة لا تقاوم." },
+                { id: 302, name: "قلم تحديد حواجب دقيق", price: 2400, img: "https://images.unsplash.com/photo-1583241800695-e8d1a7407524?w=400&auto=format&fit=crop&q=80", desc: "رسمة احترافية بكل سهولة." },
+                { id: 303, name: "آيلاينر أسود فاحم مقاوم للماء", price: 2900, img: "https://images.unsplash.com/photo-1583241800695-e8d1a7407524?w=400&auto=format&fit=crop&q=80", desc: "عيون جذابة وثبات تام." },
+                { id: 304, name: "ماسكراتك المكثفة للرموش", price: 4200, img: "https://images.unsplash.com/photo-1583241800695-e8d1a7407524?w=400&auto=format&fit=crop&q=80", desc: "حجم مضاعف ونظرة درامية." },
+                { id: 305, name: "باليت حواجب بودرة وكريم", price: 4600, img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&auto=format&fit=crop&q=80", desc: "مظهر طبيعي ومتناسق." },
+                { id: 306, name: "جل تسبيل الحواجب الشفاف", price: 2500, img: "https://images.unsplash.com/photo-1583241800695-e8d1a7407524?w=400&auto=format&fit=crop&q=80", desc: "ترتيب يدوم طويلاً." }
             ]},
-            { id: 4, name: "ميك أب ديلايت", cat: "مجموعات العناية", rating: "4.9", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&auto=format&fit=crop&q=80", products: [
-                { id: 401, name: "مجموعة العروس الملكية المتكاملة", price: 18000, img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80", desc: "تحتوي على كل ما تحتاجينه لإطلالة ساحرة في يومك المميز." },
-                { id: 402, name: "ملمع شفاه كريستالي لامع", price: 3100, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&auto=format&fit=crop&q=80", desc: "لمعان برّاق مع ترطيب فوري ومظهر ممتلئ للشفاه." }
+            { id: 4, name: "ميك أب ديلايت الملكي", cat: "مجموعات العناية والعرائس", rating: "4.9", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&auto=format&fit=crop&q=80", products: [
+                { id: 401, name: "مجموعة العروس الملكية المتكاملة", price: 18000, img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80", desc: "كل ما تحتاجينه لإطلالة يومك المميز." },
+                { id: 402, name: "فرش مكياج احترافية (12 قطعة)", price: 7200, img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80", desc: "شعيرات ناعمة لتوزيع مثالي." },
+                { id: 403, name: "حقيبة مكياج جلدية فاخرة", price: 5500, img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80", desc: "تصميم عصري ومنظم." },
+                { id: 404, name: "إسفنجة دمج المكياج الأصلية", price: 1500, img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80", desc: "نعومة فائقة لدمج السوائل." },
+                { id: 405, name: "مرآة مكياج مضيئة بـ LED", price: 6500, img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80", desc: "إضاءة نقية للاستخدام الدقيق." },
+                { id: 406, name: "مناديل إزالة المكياج اللطيفة", price: 1200, img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&auto=format&fit=crop&q=80", desc: "تنظيف عميق دون تهيج." }
             ]},
-            { id: 5, name: "بلاتينيوم بيوتي", cat: "ماسكات وأرقى الماركات", rating: "4.6", img: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=400&auto=format&fit=crop&q=80", products: [
-                { id: 501, name: "سيروم الذهب النقي للوجه", price: 7500, img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&auto=format&fit=crop&q=80", desc: "يغذي البشرة ويعيد إليها شبابها ونضارتها الطبيعية." },
-                { id: 502, name: "ماسكارا تكثيف الرموش الفائقة", price: 4200, img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&auto=format&fit=crop&q=80", desc: "حجم مضاعف وسواد فاحم يمنحك نظرة درامية ساحرة." }
+            { id: 5, name: "بلاتينيوم بيوتي سكين", cat: "سيروم الذهب وعناية بالبشرة", rating: "4.6", img: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=400&auto=format&fit=crop&q=80", products: [
+                { id: 501, name: "سيروم الذهب النقي للوجه", price: 7500, img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&auto=format&fit=crop&q=80", desc: "يغذي البشرة ويعيد شبابها." },
+                { id: 502, name: "ك్రీم مرطب ومغذي بالهيالورونيك", price: 4900, img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&auto=format&fit=crop&q=80", desc: "ترطيب عميق طوال الليل." },
+                { id: 503, name: "ماسك الذهب الكولاجين للوجه", price: 2800, img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&auto=format&fit=crop&q=80", desc: "نضارة فورية وإشراقة باهرة." },
+                { id: 504, name: "غسول وجه لطيف للبشرة الحساسة", price: 3400, img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&auto=format&fit=crop&q=80", desc: "تنظيف ناعم بدون جفاف." },
+                { id: 505, name: "زيت ترطيب الشفاه بالفيتامينات", price: 2100, img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&auto=format&fit=crop&q=80", desc: "علاج شفاه جافة ومانح للنعومة." },
+                { id: 506, name: "كريم واقي شمس بحماية عالية SPF50", price: 5100, img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&auto=format&fit=crop&q=80", desc: "حماية تامة من الأشعة الضارة." }
             ]}
         ];
 
         let cart = [];
         let currentShop = null;
-        let selectedProductForModal = null;
+        let selectedModalProduct = null;
+        let isDarkMode = true;
 
-        // --- RENDER SHOPS ON HOME ---
+        // RENDER SHOPS
         function renderShops() {
             const container = document.getElementById('shops-container');
             container.innerHTML = '';
             shopsData.forEach(shop => {
                 container.innerHTML += `
                     <div class="shop-card" onclick="openShop(${shop.id})">
-                        <div class="shop-img-wrap">
+                        <div class="shop-img-box">
                             <img src="${shop.img}" alt="${shop.name}">
-                            <div class="delivery-badge">توصيل 200 دج</div>
+                            <div class="delivery-tag">توصيل 200 دج</div>
                         </div>
-                        <div class="shop-info">
-                            <div class="shop-title">${shop.name}</div>
-                            <div class="shop-meta">
+                        <div class="shop-details">
+                            <div class="shop-name">${shop.name}</div>
+                            <div class="shop-sub">
                                 <span>${shop.cat}</span>
-                                <span class="shop-rating">⭐ ${shop.rating}</span>
+                                <span style="color:var(--accent);">⭐ ${shop.rating}</span>
                             </div>
                         </div>
                     </div>
@@ -626,13 +710,11 @@
             });
         }
 
-        // --- OPEN SHOP ---
+        // OPEN SHOP
         function openShop(shopId) {
             currentShop = shopsData.find(s => s.id === shopId);
-            document.getElementById('home-view').style.display = 'none';
-            document.getElementById('shop-view').style.display = 'block';
-            document.getElementById('current-shop-name').innerText = currentShop.name;
-
+            document.getElementById('current-shop-title').innerText = currentShop.name;
+            
             const prodContainer = document.getElementById('products-container');
             prodContainer.innerHTML = '';
             currentShop.products.forEach(prod => {
@@ -647,22 +729,54 @@
                     </div>
                 `;
             });
+
+            switchView('shop');
             window.scrollTo(0, 0);
         }
 
         function goHome() {
-            document.getElementById('shop-view').style.display = 'none';
-            document.getElementById('home-view').style.display = 'block';
+            switchTab('home', document.querySelector('.bottom-nav .nav-item'));
+        }
+
+        // NAVIGATION TABS
+        function switchTab(viewName, el) {
+            document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+            document.getElementById('view-' + viewName).classList.add('active');
+
+            if(el) {
+                document.querySelectorAll('.bottom-nav .nav-item').forEach(i => i.classList.remove('active'));
+                el.classList.add('active');
+            }
+
+            if(viewName === 'cart') {
+                renderCartView();
+            }
             window.scrollTo(0, 0);
         }
 
-        // --- PRODUCT MODAL (360) ---
+        function switchView(viewName) {
+            document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+            document.getElementById('view-' + viewName).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // 360° INSPECTION MODAL
         function openProductModal(prodId) {
-            selectedProductForModal = currentShop.products.find(p => p.id === prodId);
-            document.getElementById('modal-img').src = selectedProductForModal.img;
-            document.getElementById('modal-name').innerText = selectedProductForModal.name;
-            document.getElementById('modal-price').innerText = selectedProductForModal.price + ' دج';
-            document.getElementById('modal-desc').innerText = selectedProductForModal.desc;
+            let prod = null;
+            if(currentShop) prod = currentShop.products.find(p => p.id === prodId);
+            if(!prod) {
+                for(let s of shopsData) {
+                    let f = s.products.find(p => p.id === prodId);
+                    if(f) prod = f;
+                }
+            }
+            if(!prod) return;
+
+            selectedModalProduct = prod;
+            document.getElementById('modal-img').src = prod.img;
+            document.getElementById('modal-name').innerText = prod.name;
+            document.getElementById('modal-price').innerText = prod.price + ' دج';
+            document.getElementById('modal-desc').innerText = prod.desc;
             document.getElementById('product-modal').style.display = 'flex';
         }
 
@@ -670,26 +784,23 @@
             document.getElementById('product-modal').style.display = 'none';
         }
 
-        function addCurrentProductToCart() {
-            if (selectedProductForModal) {
-                addToCart(selectedProductForModal.id);
+        function addModalProductToCart() {
+            if(selectedModalProduct) {
+                addToCart(selectedModalProduct.id);
                 closeModal();
             }
         }
 
-        // --- CART LOGIC ---
+        // CART LOGIC
         function addToCart(prodId) {
-            // Find product in current shop or across all shops
             let prod = null;
-            if (currentShop) {
-                prod = currentShop.products.find(p => p.id === prodId);
-            } else {
+            if(currentShop) prod = currentShop.products.find(p => p.id === prodId);
+            if(!prod) {
                 for(let s of shopsData) {
-                    let found = s.products.find(p => p.id === prodId);
-                    if(found) prod = found;
+                    let f = s.products.find(p => p.id === prodId);
+                    if(f) prod = f;
                 }
             }
-
             if(prod) {
                 cart.push(prod);
                 updateCartUI();
@@ -707,17 +818,55 @@
                 cartBar.style.display = 'flex';
 
                 let itemsTotal = cart.reduce((sum, item) => sum + item.price, 0);
-                let totalWithDelivery = itemsTotal + 200; // Fixed 200 DZD delivery fee
+                let finalTotal = itemsTotal + 200;
 
-                document.getElementById('cart-items-count').innerText = `${count} عناصر + 200 دج توصيل`;
-                document.getElementById('cart-bar-total').innerText = `${totalWithDelivery} دج`;
+                document.getElementById('cart-count-txt').innerText = `${count} منتجات + 200 دج توصيل`;
+                document.getElementById('cart-total-txt').innerText = `${finalTotal} دج`;
             } else {
                 badge.style.display = 'none';
                 cartBar.style.display = 'none';
             }
         }
 
-        // --- CHECKOUT ---
+        function renderCartView() {
+            const list = document.getElementById('cart-items-list');
+            if(cart.length === 0) {
+                list.innerHTML = `<p style="text-align:center; color:var(--text-light); padding:30px;">سلة المشتريات فارغة حالياً.</p>`;
+                return;
+            }
+            list.innerHTML = '';
+            cart.forEach((item, idx) => {
+                list.innerHTML += `
+                    <div class="profile-card" style="margin-bottom:10px; padding:12px;">
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <img src="${item.img}" style="width:45px; height:45px; object-fit:contain;">
+                            <div>
+                                <h5 style="font-size:0.85rem; color:var(--text-dark);">${item.name}</h5>
+                                <span style="font-size:0.8rem; color:var(--accent); font-weight:900;">${item.price} دج</span>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:#e11d48; font-size:1.1rem; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+            let itemsTotal = cart.reduce((sum, item) => sum + item.price, 0);
+            list.innerHTML += `
+                <div style="background:var(--bg-card); border:1px solid var(--border); padding:15px; border-radius:14px; margin-top:15px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:0.85rem;"><span>سعر المنتجات:</span> <b>${itemsTotal} دج</b></div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:0.85rem;"><span>تكلفة التوصيل:</span> <b>200 دج</b></div>
+                    <div style="display:flex; justify-content:space-between; font-size:1.05rem; color:var(--accent); font-weight:900; border-top:1px solid var(--border); pt:8px;"><span>المجموع الكلي:</span> <b>${itemsTotal + 200} دج</b></div>
+                    <button class="modal-cart-btn" style="margin-top:15px;" onclick="openCheckout()">تأكيد الطلب الآن ✨</button>
+                </div>
+            `;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+            renderCartView();
+        }
+
+        // CHECKOUT & PHONE SUBMISSION
         function openCheckout() {
             document.getElementById('checkout-modal').style.display = 'flex';
         }
@@ -727,87 +876,71 @@
         }
 
         function submitOrder() {
-            const phone = document.getElementById('phone-number').value;
+            const phone = document.getElementById('client-phone').value;
             if(phone.length < 9) {
-                alert("الرجاء إدخال رقم هاتف صحيح لتأكيد الطلب.");
+                alert("الرجاء إدخال رقم هاتف صحيح.");
                 return;
             }
-
-            alert(`تم تأكيد طلبك بنجاح! 🎉\nسيقوم مشرف المتجر بالاتصال بك فوراً على الرقم: ${phone} لتأكيد مكان الاستلام والتوصيل.`);
+            alert(`تم إرسال طلبك بنجاح! 👑\nسيتصل بك المشرف فوراً على الرقم: ${phone} لتأكيد الاستلام.`);
             cart = [];
             updateCartUI();
             closeCheckout();
             goHome();
         }
 
-        // --- NAVIGATION ---
-        function switchNav(el) {
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            el.classList.add('active');
+        // THEME TOGGLE (Dark / Light Mode)
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            const btn = document.getElementById('theme-btn');
+            if(isDarkMode) {
+                document.body.classList.remove('light-mode');
+                btn.innerText = "الوضع الفاتح ☀️";
+            } else {
+                document.body.classList.add('light-mode');
+                btn.innerText = "الوضع الليلي 🌙";
+            }
         }
 
-        // --- MULTI-LANGUAGE SUPPORT (AR, FR, EN) ---
-        const translations = {
+        // MULTI-LANGUAGE (AR, FR, EN)
+        const trans = {
             ar: {
                 brand: "ماكياجي",
-                bannerTitle: "✨ فخامة التجميل بين يديك",
-                bannerDesc: "اكتشفي أرقى 5 محلات مكياج وعطور أصلية بتوصيل سريع جداً بـ 200 دج فقط!",
+                bannerTitle: "✨ عالم الفخامة والجمال الأصلي",
+                bannerDesc: "أرقى 30+ منتج مكياج وعطور من 5 محلات عالمية، مع توصيل سريع وثابت بـ 200 دج فقط.",
                 shopsHeading: "المتاجر المختارة (5)",
-                backText: "العودة للمتاجر",
-                navHome: "الرئيسية",
-                navShops: "المتاجر",
-                navCart: "السلة",
-                navNotif: "الإشعارات",
-                navProfile: "حسابي",
-                chkTitle: "تأكيد سريع للطلب",
-                chkDesc: "ضعي رقم هاتفك فقط، وسنتصل بكِ لتأكيد مكان الاستلام وتفاصيل التوصيل بكل راحة.",
-                chkBtn: "تأكيد وإرسال الطلب ✨"
+                backText: "العودة للمتاجر الرئيسية",
+                navHome: "الرئيسية", navShops: "المتاجر", navCart: "السلة", navNotif: "الإشعارات", navProfile: "حسابي",
+                themeTitle: "مظهر التطبيق", themeSub: "التبديل بين الوضع الليلي والوضع الفاتح",
+                chkTitle: "تأكيد الطلب الفوري", chkDesc: "اكتبي رقم هاتفك فقط، وسيتصل بك المشرف فوراً.", chkBtn: "تأكيد الطلب ✨"
             },
             fr: {
                 brand: "Makyaji",
-                bannerTitle: "✨ Le Luxe de la Beauté",
-                bannerDesc: "Découvrez 5 boutiques de maquillage de luxe avec livraison rapide à 200 DZD !",
-                shopsHeading: "Boutiques Sélectionnées (5)",
+                bannerTitle: "✨ Le Monde du Luxe et de la Beauté",
+                bannerDesc: "+30 produits de maquillage et parfums de 5 boutiques, livraison fixe à 200 DZD.",
+                shopsHeading: "Boutiques (5)",
                 backText: "Retour aux boutiques",
-                navHome: "Accueil",
-                navShops: "Boutiques",
-                navCart: "Panier",
-                navNotif: "Notifications",
-                navProfile: "Compte",
-                chkTitle: "Confirmation Rapide",
-                chkDesc: "Entrez votre numéro de téléphone, nous vous appellerons pour confirmer la livraison.",
-                chkBtn: "Confirmer la Commande ✨"
+                navHome: "Accueil", navShops: "Boutiques", navCart: "Panier", navNotif: "Notifs", navProfile: "Compte",
+                themeTitle: "Apparence", themeSub: "Basculer entre mode sombre et clair",
+                chkTitle: "Confirmation", chkDesc: "Entrez votre numéro, nous vous appellerons.", chkBtn: "Confirmer ✨"
             },
             en: {
                 brand: "Makyaji",
-                bannerTitle: "✨ Luxury Beauty at Your Hands",
-                bannerDesc: "Discover 5 high-end makeup stores with fast delivery for only 200 DZD!",
+                bannerTitle: "✨ Luxury & True Beauty World",
+                bannerDesc: "Over 30+ luxury makeup & perfume items from 5 shops, 200 DZD flat delivery.",
                 shopsHeading: "Featured Shops (5)",
                 backText: "Back to Shops",
-                navHome: "Home",
-                navShops: "Shops",
-                navCart: "Cart",
-                navNotif: "Notifications",
-                navProfile: "Profile",
-                chkTitle: "Quick Order Confirmation",
-                chkDesc: "Enter your phone number only, and we will call you to confirm your delivery details.",
-                chkBtn: "Confirm Order ✨"
+                navHome: "Home", navShops: "Shops", navCart: "Cart", navNotif: "Notifs", navProfile: "Profile",
+                themeTitle: "App Theme", themeSub: "Toggle between Dark and Light mode",
+                chkTitle: "Quick Checkout", chkDesc: "Enter your phone number only, we will call you.", chkBtn: "Confirm Order ✨"
             }
         };
 
         function setLang(lang) {
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
+            document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
 
-            // Apply direction
-            if(lang === 'ar') {
-                document.documentElement.setAttribute('dir', 'rtl');
-            } else {
-                document.documentElement.setAttribute('dir', 'ltr');
-            }
-
-            // Translate texts
-            const t = translations[lang];
+            const t = trans[lang];
             document.getElementById('header-title').innerText = t.brand;
             document.getElementById('banner-title').innerText = t.bannerTitle;
             document.getElementById('banner-desc').innerText = t.bannerDesc;
@@ -818,6 +951,8 @@
             document.getElementById('nav-cart').innerText = t.navCart;
             document.getElementById('nav-notif').innerText = t.navNotif;
             document.getElementById('nav-profile').innerText = t.navProfile;
+            document.getElementById('theme-title').innerText = t.themeTitle;
+            document.getElementById('theme-sub').innerText = t.themeSub;
             document.getElementById('chk-title').innerText = t.chkTitle;
             document.getElementById('chk-desc').innerText = t.chkDesc;
             document.getElementById('chk-btn').innerText = t.chkBtn;
