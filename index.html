@@ -6,13 +6,13 @@
     <title>مركز الشحن الرسمي - Garena</title>
     <style>
         :root {
-            --bg-body: #f4f6f9;
-            --card-bg: #ffffff;
-            --primary-red: #ea1d24;
-            --primary-red-hover: #c8141a;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
+            --bg-body: #0f172a;
+            --card-bg: #1e293b;
+            --primary-red: #ef4444;
+            --primary-red-hover: #dc2626;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
             --success: #10b981;
         }
 
@@ -31,28 +31,28 @@
             flex-direction: column;
         }
 
-        /* شريط التنقل العلوي المعدل بدقة لعدم التداخل */
+        /* شريط التنقل العلوي */
         header {
-            background-color: #ffffff;
+            background-color: #1e293b;
             border-bottom: 1px solid var(--border-color);
-            padding: 12px 20px;
+            padding: 14px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         .header-right {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .brand-text {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 900;
             color: var(--primary-red);
             letter-spacing: 0.5px;
@@ -63,7 +63,7 @@
             font-weight: 700;
             color: var(--text-muted);
             border-right: 2px solid var(--border-color);
-            padding-right: 10px;
+            padding-right: 12px;
         }
 
         .header-left {
@@ -73,44 +73,42 @@
         }
 
         .region-badge {
-            background: #f1f5f9;
+            background: #0f172a;
             border: 1px solid var(--border-color);
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 8px;
             font-size: 12px;
             font-weight: 600;
             white-space: nowrap;
         }
 
-        /* رصيد المستخدم العلوي */
+        /* رصيد المستخدم الضخم بالفواصل */
         .my-balance-box {
-            background: #fff5f5;
-            border: 1px solid #fed7d7;
-            padding: 5px 12px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: 700;
-            color: var(--primary-red);
+            color: #fca5a5;
             white-space: nowrap;
         }
 
-        /* حاوية المحتوى الرئيسية */
         .container {
             max-width: 750px;
-            margin: 20px auto 40px;
+            margin: 25px auto 50px;
             padding: 0 15px;
             width: 100%;
         }
 
-        /* العناوين والأقسام المرقمة */
         .section-header-num {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-size: 18px;
             font-weight: 800;
             color: var(--text-main);
-            margin: 25px 0 15px;
+            margin: 30px 0 15px;
         }
 
         .section-header-num span.num {
@@ -121,8 +119,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 15px;
+            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.4);
         }
 
         /* كارد تسجيل الدخول */
@@ -131,7 +130,7 @@
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 25px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
         }
 
         .login-top-row {
@@ -150,27 +149,30 @@
             background-color: var(--primary-red);
             color: #fff;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 0 25px;
-            height: 46px;
+            height: 48px;
             font-size: 15px;
             font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.3);
         }
 
         .login-action-btn:hover {
             background-color: var(--primary-red-hover);
+            transform: translateY(-1px);
         }
 
         .player-id-input {
             flex: 1;
-            height: 46px;
-            background-color: #f8fafc;
+            height: 48px;
+            background-color: #0f172a;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 0 15px;
             font-size: 16px;
+            color: #fff;
             outline: none;
             transition: border 0.2s;
         }
@@ -183,49 +185,53 @@
             text-align: center;
             font-size: 13px;
             color: var(--text-muted);
-            margin: 15px 0;
+            margin: 18px 0;
         }
 
-        /* أيقونات السوشيال ميديا */
         .social-icons-grid {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .social-icon {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #fff;
+            background: #0f172a;
             cursor: pointer;
             font-size: 15px;
             font-weight: bold;
             color: var(--text-muted);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.2s;
         }
 
-        /* بطاقة ترحيب باللاعب */
+        .social-icon:hover {
+            border-color: var(--primary-red);
+            color: #fff;
+            transform: scale(1.05);
+        }
+
         .player-welcome-box {
             display: none;
-            background: #e6fffa;
-            border: 1px solid #b2f5ea;
-            padding: 12px 15px;
-            border-radius: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 14px 16px;
+            border-radius: 10px;
             margin-top: 15px;
             font-size: 14px;
-            color: #234e52;
+            color: #d1fae5;
             font-weight: 600;
             justify-content: space-between;
             align-items: center;
         }
 
         .player-welcome-box span {
-            color: #319795;
+            color: #34d399;
             font-weight: 800;
         }
 
@@ -233,7 +239,7 @@
         .packages-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 14px;
             margin-bottom: 25px;
         }
 
@@ -246,32 +252,36 @@
         .pkg-box {
             background-color: var(--card-bg);
             border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 18px 10px;
+            border-radius: 14px;
+            padding: 20px 10px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             position: relative;
+            overflow: hidden;
         }
 
         .pkg-box:hover {
             border-color: var(--primary-red);
+            transform: translateY(-2px);
         }
 
         .pkg-box.selected {
             border-color: var(--primary-red);
-            background-color: #fff5f5;
+            background-color: rgba(239, 68, 68, 0.05);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
         }
 
         .gem-svg {
-            width: 32px;
-            height: 32px;
-            margin: 0 auto 8px;
+            width: 36px;
+            height: 36px;
+            margin: 0 auto 10px;
             display: block;
+            filter: drop-shadow(0 2px 4px rgba(0, 210, 255, 0.4));
         }
 
         .pkg-amount {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 800;
             color: var(--text-main);
             margin-bottom: 4px;
@@ -283,7 +293,6 @@
             font-weight: 600;
         }
 
-        /* زر الشحن النهائي */
         .main-recharge-btn {
             width: 100%;
             background-color: var(--primary-red);
@@ -294,28 +303,25 @@
             font-size: 17px;
             font-weight: 800;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-            box-shadow: 0 4px 12px rgba(234, 29, 36, 0.3);
+            transition: all 0.2s;
+            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
             margin-top: 10px;
         }
 
         .main-recharge-btn:hover {
             background-color: var(--primary-red-hover);
+            transform: translateY(-1px);
         }
 
-        .main-recharge-btn:active {
-            transform: scale(0.98);
-        }
-
-        /* النوافذ المنبثقة */
+        /* نافذة الانتظار والنجاح */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(4px);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(6px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -323,13 +329,14 @@
         }
 
         .modal-box {
-            background: #fff;
-            border-radius: 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
             padding: 30px;
             text-align: center;
             max-width: 380px;
             width: 90%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
             animation: scaleIn 0.25s ease;
         }
 
@@ -339,9 +346,9 @@
         }
 
         .spinner {
-            width: 45px;
-            height: 45px;
-            border: 4px solid #f3f3f3;
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border-color);
             border-top: 4px solid var(--primary-red);
             border-radius: 50%;
             margin: 0 auto 15px;
@@ -354,21 +361,21 @@
         }
 
         .success-check {
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             background-color: var(--success);
             color: #fff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 30px;
             margin: 0 auto 15px;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
         }
 
         .modal-title {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 800;
             color: var(--text-main);
             margin-bottom: 8px;
@@ -377,42 +384,78 @@
         .modal-desc {
             font-size: 13px;
             color: var(--text-muted);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .modal-close-btn {
             margin-top: 20px;
-            background-color: #f1f5f9;
+            background-color: var(--border-color);
             color: var(--text-main);
             border: none;
             padding: 10px 25px;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 700;
             cursor: pointer;
+            transition: background 0.2s;
         }
 
         .modal-close-btn:hover {
-            background-color: #e2e8f0;
+            background-color: #475569;
+        }
+
+        /* تنبيهات السحب (Toast) */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #1e293b;
+            color: #fff;
+            text-align: center;
+            border-radius: 10px;
+            padding: 14px;
+            position: fixed;
+            z-index: 2000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @keyframes fadein {
+            from { bottom: 0; opacity: 0; }
+            to { bottom: 30px; opacity: 1; }
+        }
+
+        @keyframes fadeout {
+            from { bottom: 30px; opacity: 1; }
+            to { bottom: 0; opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- الشريط العلوي المعدل (مرتب ومنضبط تماماً) -->
+    <!-- الشريط العلوي -->
     <header>
         <div class="header-right">
             <span class="brand-text">Garena</span>
             <span class="store-title">مركز الشحن الرسمي</span>
         </div>
         <div class="header-left">
-            <div class="my-balance-box">رصيدك: <span id="userBalanceText">14,500 دج</span></div>
+            <div class="my-balance-box">الرصيد: <span id="userBalanceText">1,450,399.82</span> دج</div>
             <div class="region-badge">🇩🇿 الجزائر</div>
         </div>
     </header>
 
     <div class="container">
         
-        <!-- 1. تسجيل الدخول -->
+        <!-- قسم تسجيل الدخول -->
         <div class="section-header-num">
             <span class="num">1</span>
             <span>تسجيل الدخول</span>
@@ -424,10 +467,9 @@
                 <button class="login-action-btn" onclick="verifyPlayerId()">تسجيل الدخول</button>
             </div>
 
-            <!-- عرض اسم اللاعب العشوائي -->
             <div id="playerWelcomeBox" class="player-welcome-box">
                 <div>مرحباً باللاعب: <span id="detectedPlayerName"></span></div>
-                <span style="font-size:11px; background:#fff; padding:2px 6px; border-radius:4px; border:1px solid #319795;">موثق ✓</span>
+                <span style="font-size:11px; background:rgba(52, 211, 153, 0.2); padding:2px 8px; border-radius:6px; border:1px solid #34d399;">موثق ✓</span>
             </div>
 
             <div class="login-sub-text">أو سجل دخولك بحساب اللعبة الخاص بك</div>
@@ -437,11 +479,11 @@
                 <div class="social-icon" title="VK">VK</div>
                 <div class="social-icon" title="Twitter">X</div>
                 <div class="social-icon" title="Google">G</div>
-                <div class="social-icon" title="Facebook" style="color:#1877f2; font-weight:bold;">f</div>
+                <div class="social-icon" title="Facebook" style="color:#3b82f6;">f</div>
             </div>
         </div>
 
-        <!-- 2. كمية الشحن -->
+        <!-- قسم كمية الشحن -->
         <div class="section-header-num">
             <span class="num">2</span>
             <span>كمية الشحن</span>
@@ -449,43 +491,41 @@
 
         <!-- شبكة الباقات -->
         <div class="packages-grid">
-            
-            <div class="pkg-box selected" onclick="selectPkg(this, 100, 1200)">
+            <div class="pkg-box selected" onclick="selectPkg(this, 100, 1200.50)">
                 <svg class="gem-svg" viewBox="0 0 100 100"><polygon points="50,5 90,30 50,95 10,30" fill="url(#dGrad)" stroke="#00d2ff" stroke-width="3"/><defs><linearGradient id="dGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00f2fe"/><stop offset="100%" stop-color="#0072ff"/></linearGradient></defs></svg>
-                <div class="pkg-amount">100</div>
-                <div class="pkg-price">1,200 دج</div>
+                <div class="pkg-amount">100 جوهرة</div>
+                <div class="pkg-price">1,200.50 دج</div>
             </div>
 
-            <div class="pkg-box" onclick="selectPkg(this, 210, 2500)">
+            <div class="pkg-box" onclick="selectPkg(this, 210, 2500.25)">
                 <svg class="gem-svg" viewBox="0 0 100 100"><polygon points="50,5 90,30 50,95 10,30" fill="url(#dGrad)" stroke="#00d2ff" stroke-width="3"/></svg>
-                <div class="pkg-amount">210</div>
-                <div class="pkg-price">2,500 دج</div>
+                <div class="pkg-amount">210 جوهرة</div>
+                <div class="pkg-price">2,500.25 دج</div>
             </div>
 
-            <div class="pkg-box" onclick="selectPkg(this, 310, 3500)">
+            <div class="pkg-box" onclick="selectPkg(this, 310, 3500.00)">
                 <svg class="gem-svg" viewBox="0 0 100 100"><polygon points="50,5 90,30 50,95 10,30" fill="url(#dGrad)" stroke="#00d2ff" stroke-width="3"/></svg>
-                <div class="pkg-amount">310</div>
-                <div class="pkg-price">3,500 دج</div>
+                <div class="pkg-amount">310 جوهرة</div>
+                <div class="pkg-price">3,500.00 دج</div>
             </div>
 
-            <div class="pkg-box" onclick="selectPkg(this, 520, 5800)">
+            <div class="pkg-box" onclick="selectPkg(this, 520, 5800.75)">
                 <svg class="gem-svg" viewBox="0 0 100 100"><polygon points="50,5 90,30 50,95 10,30" fill="url(#dGrad)" stroke="#00d2ff" stroke-width="3"/></svg>
-                <div class="pkg-amount">520</div>
-                <div class="pkg-price">5,800 دج</div>
+                <div class="pkg-amount">520 جوهرة</div>
+                <div class="pkg-price">5,800.75 دج</div>
             </div>
 
-            <div class="pkg-box" onclick="selectPkg(this, 1060, 11500)">
+            <div class="pkg-box" onclick="selectPkg(this, 1060, 11500.50)">
                 <svg class="gem-svg" viewBox="0 0 100 100"><polygon points="50,5 90,30 50,95 10,30" fill="url(#dGrad)" stroke="#00d2ff" stroke-width="3"/></svg>
-                <div class="pkg-amount">1,060</div>
-                <div class="pkg-price">11,500 دج</div>
+                <div class="pkg-amount">1,060 جوهرة</div>
+                <div class="pkg-price">11,500.50 دج</div>
             </div>
 
-            <div class="pkg-box" onclick="selectPkg(this, 2180, 23000)">
+            <div class="pkg-box" onclick="selectPkg(this, 2180, 23000.00)">
                 <svg class="gem-svg" viewBox="0 0 100 100"><polygon points="50,5 90,30 50,95 10,30" fill="url(#dGrad)" stroke="#00d2ff" stroke-width="3"/></svg>
-                <div class="pkg-amount">2,180</div>
-                <div class="pkg-price">23,000 دج</div>
+                <div class="pkg-amount">2,180 جوهرة</div>
+                <div class="pkg-price">23,000.00 دج</div>
             </div>
-
         </div>
 
         <button class="main-recharge-btn" onclick="startFinalRecharge()">متابعة إلى دفع المبلغ</button>
@@ -496,8 +536,8 @@
     <div class="modal-overlay" id="loadingModal">
         <div class="modal-box">
             <div class="spinner"></div>
-            <div class="modal-title">يرجى الانتظار من فضلك</div>
-            <div class="modal-desc">جاري معالجة أمر الشحن عبر السيرفر الرسمي وإرسال الجواهر للحساب...</div>
+            <div class="modal-title">جاري معالجة الطلب</div>
+            <div class="modal-desc">يرجى الانتظار، يتم تحويل المبلغ بدقة وإرسال الجواهر للسيرفر الرسمي...</div>
         </div>
     </div>
 
@@ -511,20 +551,31 @@
         </div>
     </div>
 
+    <!-- إشعار Toast -->
+    <div id="toast">رسالة تنبيه</div>
+
     <script>
-        let userBalance = 14500;
+        // رصيد ضخم يبدأ بـ 1,450,399.82
+        let userBalance = 1450399.82;
         let selectedAmount = 100;
-        let selectedPrice = 1200;
+        let selectedPrice = 1200.50;
 
         const randomPlayerNames = [
             "⚡COBRA๛99", "VIP٭LEGEND", "ALGERIAN_7", "SULTAN٭FF", 
             "M16٭GHOST", "BAD_BOY⚡7", "NOOB_KILLER", "ZIZO٭DZ", "FREE_FIRE_99"
         ];
 
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            toast.textContent = msg;
+            toast.className = "show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
         function verifyPlayerId() {
             const idVal = document.getElementById('playerIdInput').value.trim();
             if(idVal === "") {
-                alert("الرجاء إدخال معرف اللاعب (ID) أولاً!");
+                showToast("الرجاء إدخال معرف اللاعب (ID) أولاً!");
                 return;
             }
 
@@ -533,6 +584,7 @@
 
             document.getElementById('detectedPlayerName').textContent = chosenName + " (ID: " + idVal + ")";
             document.getElementById('playerWelcomeBox').style.display = 'flex';
+            showToast("تم التحقق من حساب اللاعب بنجاح!");
         }
 
         function selectPkg(el, amount, price) {
@@ -545,12 +597,12 @@
         function startFinalRecharge() {
             const idVal = document.getElementById('playerIdInput').value.trim();
             if(idVal === "") {
-                alert("يرجى إدخال الآيدي وتسجيل الدخول أولاً!");
+                showToast("يرجى إدخال الآيدي وتسجيل الدخول أولاً!");
                 return;
             }
 
             if(userBalance < selectedPrice) {
-                alert("عذراً، رصيدك الحالي غير كافٍ لإتمام الشحن!");
+                showToast("عذراً، رصيدك الحالي غير كافٍ!");
                 return;
             }
 
@@ -559,14 +611,15 @@
             setTimeout(() => {
                 document.getElementById('loadingModal').style.display = 'none';
 
+                // خصم المبلغ بدقة مع الفواصل
                 userBalance -= selectedPrice;
-                document.getElementById('userBalanceText').textContent = userBalance.toLocaleString() + " دج";
+                document.getElementById('userBalanceText').textContent = userBalance.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
-                document.getElementById('successMessageDesc').innerHTML = `تم شحن <b>${selectedAmount} جوهرة</b> بنجاح للآيدي:<br><span style="color:#ea1d24; font-weight:700;">${idVal}</span>`;
+                document.getElementById('successMessageDesc').innerHTML = `تم شحن <b>${selectedAmount} جوهرة</b> بنجاح للآيدي:<br><span style="color:#ef4444; font-weight:700;">${idVal}</span><br><br>تم خصم: <b>${selectedPrice.toLocaleString('en-US', {minimumFractionDigits: 2})} دج</b>`;
 
                 document.getElementById('successModal').style.display = 'flex';
 
-            }, 3000);
+            }, 2500);
         }
 
         function closeSuccessModal() {
