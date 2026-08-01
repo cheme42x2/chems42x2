@@ -31,11 +31,11 @@
             flex-direction: column;
         }
 
-        /* شريط التنقل العلوي الرسمي */
+        /* شريط التنقل العلوي المعدل بدقة لعدم التداخل */
         header {
             background-color: #ffffff;
             border-bottom: 1px solid var(--border-color);
-            padding: 12px 25px;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -48,68 +48,56 @@
         .header-right {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
-        .logo-img {
-            height: 35px;
+        .brand-text {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--primary-red);
+            letter-spacing: 0.5px;
         }
 
         .store-title {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 700;
-            color: var(--text-main);
+            color: var(--text-muted);
             border-right: 2px solid var(--border-color);
-            padding-right: 15px;
+            padding-right: 10px;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .region-badge {
             background: #f1f5f9;
             border: 1px solid var(--border-color);
-            padding: 6px 12px;
+            padding: 5px 10px;
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
+            white-space: nowrap;
         }
 
-        /* محاكات الرصيد الحقيقي في الأعلى */
+        /* رصيد المستخدم العلوي */
         .my-balance-box {
             background: #fff5f5;
             border: 1px solid #fed7d7;
-            padding: 6px 15px;
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             color: var(--primary-red);
-        }
-
-        /* بانر اللعبة العلوي */
-        .banner-container {
-            width: 100%;
-            max-width: 750px;
-            margin: 20px auto 10px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            padding: 0 15px;
-        }
-
-        .banner-container img {
-            width: 100%;
-            display: block;
-            border-radius: 12px;
+            white-space: nowrap;
         }
 
         /* حاوية المحتوى الرئيسية */
         .container {
             max-width: 750px;
-            margin: 10px auto 40px;
+            margin: 20px auto 40px;
             padding: 0 15px;
             width: 100%;
         }
@@ -152,12 +140,19 @@
             margin-bottom: 15px;
         }
 
+        @media(max-width: 480px) {
+            .login-top-row {
+                flex-direction: column;
+            }
+        }
+
         .login-action-btn {
             background-color: var(--primary-red);
             color: #fff;
             border: none;
             border-radius: 8px;
             padding: 0 25px;
+            height: 46px;
             font-size: 15px;
             font-weight: 700;
             cursor: pointer;
@@ -170,11 +165,12 @@
 
         .player-id-input {
             flex: 1;
+            height: 46px;
             background-color: #f8fafc;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 12px 15px;
-            font-size: 15px;
+            padding: 0 15px;
+            font-size: 16px;
             outline: none;
             transition: border 0.2s;
         }
@@ -188,19 +184,18 @@
             font-size: 13px;
             color: var(--text-muted);
             margin: 15px 0;
-            position: relative;
         }
 
         /* أيقونات السوشيال ميديا */
         .social-icons-grid {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .social-icon {
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             border: 1px solid var(--border-color);
             display: flex;
@@ -208,13 +203,13 @@
             justify-content: center;
             background: #fff;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             color: var(--text-muted);
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
-        /* بطاقة ترحيب باللاعب بعد إدخال الآيدي */
+        /* بطاقة ترحيب باللاعب */
         .player-welcome-box {
             display: none;
             background: #e6fffa;
@@ -268,7 +263,6 @@
             background-color: #fff5f5;
         }
 
-        /* أيقونة الجوهرة الحقيقية SVG متقنة */
         .gem-svg {
             width: 32px;
             height: 32px;
@@ -289,7 +283,7 @@
             font-weight: 600;
         }
 
-        /* زر الشحن النهائي الرئيسي */
+        /* زر الشحن النهائي */
         .main-recharge-btn {
             width: 100%;
             background-color: var(--primary-red);
@@ -313,7 +307,7 @@
             transform: scale(0.98);
         }
 
-        /* نافذة الانتظار والنجاح (Modals) */
+        /* النوافذ المنبثقة */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -404,23 +398,17 @@
 </head>
 <body>
 
-    <!-- الشريط العلوي المطابق للصورة -->
+    <!-- الشريط العلوي المعدل (مرتب ومنضبط تماماً) -->
     <header>
         <div class="header-right">
-            <svg class="logo-img" viewBox="0 0 100 35" fill="#ea1d24"><path d="M15 5h10v25h-10z"/></svg> <!-- شعار وهمي غارينا -->
-            <span style="font-weight:900; color:#ea1d24; font-size:18px;">Garena</span>
+            <span class="brand-text">Garena</span>
             <span class="store-title">مركز الشحن الرسمي</span>
         </div>
         <div class="header-left">
             <div class="my-balance-box">رصيدك: <span id="userBalanceText">14,500 دج</span></div>
-            <div class="region-badge">🇩🇿 الجزائر | العربية</div>
+            <div class="region-badge">🇩🇿 الجزائر</div>
         </div>
     </header>
-
-    <!-- بانر اللعبة -->
-    <div class="banner-container">
-        <img src="https://shop2game.com/app/images/banner.jpg" onerror="this.src='https://i.imgur.com/7p4w6qL.png'" alt="Free Fire Banner">
-    </div>
 
     <div class="container">
         
@@ -436,10 +424,10 @@
                 <button class="login-action-btn" onclick="verifyPlayerId()">تسجيل الدخول</button>
             </div>
 
-            <!-- عرض اسم اللاعب العشوائي الحقيقي بعد التحقق -->
+            <!-- عرض اسم اللاعب العشوائي -->
             <div id="playerWelcomeBox" class="player-welcome-box">
                 <div>مرحباً باللاعب: <span id="detectedPlayerName"></span></div>
-                <span style="font-size:12px; background:#fff; padding:2px 8px; border-radius:4px; border:1px solid #319795;">حساب نظامي موثق ✓</span>
+                <span style="font-size:11px; background:#fff; padding:2px 6px; border-radius:4px; border:1px solid #319795;">موثق ✓</span>
             </div>
 
             <div class="login-sub-text">أو سجل دخولك بحساب اللعبة الخاص بك</div>
@@ -459,7 +447,7 @@
             <span>كمية الشحن</span>
         </div>
 
-        <!-- شبكة الباقات مطابقة للصورة تماماً -->
+        <!-- شبكة الباقات -->
         <div class="packages-grid">
             
             <div class="pkg-box selected" onclick="selectPkg(this, 100, 1200)">
@@ -524,18 +512,15 @@
     </div>
 
     <script>
-        // الرصيد الحقيقي للمستخدم
         let userBalance = 14500;
         let selectedAmount = 100;
         let selectedPrice = 1200;
 
-        // أسماء عشوائية حقيقية للاعبي فري فاير لتظهر عند إدخال الآيدي
         const randomPlayerNames = [
             "⚡COBRA๛99", "VIP٭LEGEND", "ALGERIAN_7", "SULTAN٭FF", 
             "M16٭GHOST", "BAD_BOY⚡7", "NOOB_KILLER", "ZIZO٭DZ", "FREE_FIRE_99"
         ];
 
-        // دالة التحقق وإظهار اسم اللاعب عشوائياً
         function verifyPlayerId() {
             const idVal = document.getElementById('playerIdInput').value.trim();
             if(idVal === "") {
@@ -543,7 +528,6 @@
                 return;
             }
 
-            // اختيار اسم عشوائي من القائمة ليبدو واقعياً جداً
             const randomIndex = Math.floor(Math.random() * randomPlayerNames.length);
             const chosenName = randomPlayerNames[randomIndex];
 
@@ -558,7 +542,6 @@
             selectedPrice = price;
         }
 
-        // بدء الشحن مع الخصم والانتظار الحقيقي
         function startFinalRecharge() {
             const idVal = document.getElementById('playerIdInput').value.trim();
             if(idVal === "") {
@@ -571,24 +554,19 @@
                 return;
             }
 
-            // إظهار نافذة الانتظار
             document.getElementById('loadingModal').style.display = 'flex';
 
             setTimeout(() => {
-                // إخفاء الانتظار
                 document.getElementById('loadingModal').style.display = 'none';
 
-                // خصم المبلغ وتحديثه فوراً في الأعلى أمام أصدقائك
                 userBalance -= selectedPrice;
                 document.getElementById('userBalanceText').textContent = userBalance.toLocaleString() + " دج";
 
-                // تحديث رسالة النجاح
                 document.getElementById('successMessageDesc').innerHTML = `تم شحن <b>${selectedAmount} جوهرة</b> بنجاح للآيدي:<br><span style="color:#ea1d24; font-weight:700;">${idVal}</span>`;
 
-                // إظهار نافذة النجاح
                 document.getElementById('successModal').style.display = 'flex';
 
-            }, 3000); // 3 ثواني وهمية للواقعية المطلقة
+            }, 3000);
         }
 
         function closeSuccessModal() {
