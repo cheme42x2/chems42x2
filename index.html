@@ -9,13 +9,12 @@
     <style>
         :root {
             --primary-red: #e11b22;
-            --primary-red-hover: #c1171d;
-            --active-bg: #fff0f0;
+            --active-red: #ffebec;
             --text-dark: #333;
             --text-gray: #777;
             --bg-color: #f5f5f5;
+            --border-color: #e0e0e0;
             --btn-pink: #f49b9c;
-            --border-color: #ddd;
         }
 
         * {
@@ -23,6 +22,7 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -31,14 +31,14 @@
             justify-content: center;
         }
 
-        /* حاوية الهاتف المحمول */
+        /* حاوية التطبيق */
         .app-container {
             width: 100%;
             max-width: 420px;
             background-color: #ffffff;
             min-height: 100vh;
             position: relative;
-            padding-bottom: 80px; /* مساحة للفوتر الثابت */
+            padding-bottom: 90px;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
 
@@ -55,7 +55,7 @@
             z-index: 100;
         }
 
-        .header-left {
+        .header-right {
             display: flex;
             align-items: center;
             gap: 10px;
@@ -63,7 +63,7 @@
 
         .user-icon {
             font-size: 24px;
-            color: #ccc;
+            color: #d1d1d1;
         }
 
         .region-selector {
@@ -75,55 +75,29 @@
             align-items: center;
             gap: 5px;
             color: var(--text-dark);
-            cursor: pointer;
         }
 
-        .header-right {
+        .header-left {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .header-right span {
+        .header-left span {
             font-weight: bold;
             font-size: 14px;
-            text-align: left;
+            text-align: right;
+            line-height: 1.2;
         }
 
-        .logo {
+        .logo i {
             color: var(--primary-red);
-            font-size: 24px;
-            font-weight: 900;
-            font-style: italic;
+            font-size: 28px;
         }
 
-        /* --- Banners --- */
-        .banner-carousel {
-            width: 100%;
-            height: 120px;
-            background: linear-gradient(90deg, #d32f2f, #f44336);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-        }
-
-        .security-banner {
-            margin: 15px;
-            background: #4a4a4a;
-            border-radius: 8px;
-            padding: 10px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
-        }
-
-        /* --- Sections General --- */
+        /* --- Sections --- */
         .section {
-            padding: 15px;
+            padding: 20px 15px;
             border-bottom: 8px solid var(--bg-color);
         }
 
@@ -157,7 +131,8 @@
         .login-input-group {
             display: flex;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            margin-top: 5px;
         }
 
         .login-input-group input {
@@ -167,6 +142,7 @@
             border-radius: 6px;
             font-size: 14px;
             outline: none;
+            direction: rtl;
         }
 
         .btn-login {
@@ -177,49 +153,74 @@
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
+            font-size: 14px;
+        }
+
+        .player-info {
+            display: none;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-weight: bold;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .player-info.active {
+            display: flex;
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: 1px solid #2e7d32;
+            color: #2e7d32;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
         }
 
         .social-login {
             text-align: center;
             font-size: 12px;
             color: var(--text-gray);
+            margin-top: 15px;
         }
         
         .social-icons {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             margin-top: 10px;
         }
 
         .social-icons i {
-            font-size: 20px;
-            width: 36px;
-            height: 36px;
+            font-size: 18px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
-            cursor: pointer;
         }
-
-        .ic-fb { background: #1877f2; }
-        .ic-google { background: #ea4335; }
-        .ic-x { background: #000; }
-        .ic-vk { background: #4680c2; }
         .ic-apple { background: #000; }
+        .ic-vk { background: #4680c2; }
+        .ic-x { background: #000; }
+        .ic-google { background: #ea4335; }
+        .ic-fb { background: #1877f2; }
 
-        /* --- Topup Amount Section --- */
+        /* --- Diamonds Section --- */
         .toggle-btns {
             display: flex;
-            justify-content: flex-end;
             gap: 10px;
             margin-bottom: 15px;
         }
 
         .toggle-btn {
-            padding: 6px 15px;
+            padding: 6px 20px;
             border: 1px solid var(--border-color);
             border-radius: 20px;
             background: white;
@@ -242,36 +243,41 @@
         .item-card {
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 15px 5px;
+            padding: 12px 5px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s ease;
             display: flex;
+            flex-direction: row-reverse;
             justify-content: center;
             align-items: center;
             gap: 5px;
             font-weight: bold;
             font-size: 15px;
             color: var(--text-dark);
+            transition: 0.2s;
         }
 
-        .item-card .fa-gem {
-            color: #00bcd4;
-            font-size: 14px;
-        }
+        .item-card .fa-gem { color: #00bcd4; font-size: 13px; }
 
         .item-card.active {
             border-color: var(--primary-red);
-            background-color: var(--active-bg);
-            color: var(--primary-red);
+            background-color: var(--active-red);
         }
 
         /* --- Special Offers --- */
+        .offers-header {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: var(--text-gray);
+            font-size: 15px;
+            text-align: right;
+        }
+
         .offers-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-            margin-top: 15px;
         }
         
         .offer-card {
@@ -279,25 +285,27 @@
             border-radius: 8px;
             overflow: hidden;
             text-align: center;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
+            background: #fff;
         }
 
-        .offer-img {
-            height: 80px;
-            background: linear-gradient(45deg, #ffd700, #ff8c00);
-            margin-bottom: 10px;
-        }
-
-        .offer-img.weekly { background: linear-gradient(45deg, #9c27b0, #673ab7); }
-        .offer-img.booyah { background: linear-gradient(45deg, #795548, #3e2723); }
+        .offer-img { height: 90px; }
+        .offer-img.weekly { background: linear-gradient(135deg, #8e2de2, #4a00e0); }
+        .offer-img.monthly { background: linear-gradient(135deg, #fceabb, #f8b500); }
+        .offer-img.booyah { background: linear-gradient(135deg, #5d4157, #a8caba); height: 100px; }
 
         .offer-title {
+            margin-top: 10px;
             font-size: 13px;
             font-weight: bold;
             color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
         }
 
-        /* --- Payment Methods --- */
+        /* --- Payment Section --- */
         .payment-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -307,26 +315,25 @@
         .payment-card {
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 15px;
+            padding: 15px 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         .payment-card.active {
             border-color: var(--primary-red);
-            background-color: var(--active-bg);
+            background-color: var(--active-red);
         }
 
-        .payment-info {
-            text-align: right;
-        }
-
+        .payment-info { text-align: left; }
+        
         .payment-price {
             font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 5px;
+            font-size: 15px;
+            margin-bottom: 3px;
         }
 
         .payment-diamonds {
@@ -334,15 +341,34 @@
             color: var(--text-gray);
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
         }
 
         .payment-logo {
             font-weight: bold;
             font-size: 14px;
+            text-align: right;
         }
-        .logo-djezzy { color: #e11b22; }
-        .logo-ooredoo { color: #ed1c24; }
+        .logo-ooredoo { color: #ed1c24; font-size: 16px; }
+        .logo-djezzy { color: #e11b22; font-size: 13px; }
+
+        /* --- Footer Main --- */
+        .main-footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: var(--text-gray);
+            background: #fff;
+        }
+        .footer-links {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .footer-links a { color: var(--text-gray); text-decoration: none; }
 
         /* --- Sticky Footer --- */
         .sticky-footer {
@@ -361,27 +387,27 @@
         }
 
         .footer-info {
-            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .footer-amount {
             font-weight: bold;
-            font-size: 16px;
+            font-size: 18px;
             display: flex;
             align-items: center;
             gap: 5px;
+            flex-direction: row-reverse;
         }
 
-        .footer-desc {
-            font-size: 12px;
-            color: var(--text-gray);
-        }
+        .footer-desc { font-size: 12px; color: var(--text-gray); }
 
         .btn-buy {
             background-color: var(--btn-pink);
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 14px 40px;
             border-radius: 6px;
             font-weight: bold;
             font-size: 16px;
@@ -390,26 +416,71 @@
             gap: 8px;
             cursor: pointer;
         }
-
-        .btn-buy i { font-size: 14px; }
-
-        /* --- Main Footer --- */
-        .main-footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 12px;
-            color: var(--text-gray);
-            background: #fff;
+        
+        .btn-buy.active {
+            background-color: var(--primary-red);
         }
-        .footer-links {
-            margin-top: 10px;
+
+        /* --- Modal (النافذة المنبثقة للتحميل) --- */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
             display: flex;
             justify-content: center;
-            gap: 15px;
+            align-items: center;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
         }
-        .footer-links a {
-            color: var(--text-gray);
-            text-decoration: none;
+        .overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .modal-box {
+            background: white;
+            width: 80%;
+            max-width: 300px;
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-red);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .success-icon {
+            color: #4CAF50;
+            font-size: 50px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .modal-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .btn-close-modal {
+            margin-top: 20px;
+            padding: 8px 20px;
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+            width: 100%;
         }
     </style>
 </head>
@@ -419,28 +490,17 @@
     
     <!-- Header -->
     <header class="header">
-        <div class="header-left">
-            <i class="fa-solid fa-circle-user user-icon"></i>
+        <div class="header-right">
             <div class="region-selector">
                 الجزائر | العربية <i class="fa-solid fa-caret-down"></i>
             </div>
+            <i class="fa-solid fa-circle-user user-icon"></i>
         </div>
-        <div class="header-right">
+        <div class="header-left">
             <span>مركز الشحن<br>الرسمي</span>
             <div class="logo"><i class="fa-solid fa-dragon"></i></div>
         </div>
     </header>
-
-    <!-- Fake Banner -->
-    <div class="banner-carousel">
-        صورة العرض الترويجي (Ooredoo / Free Fire)
-    </div>
-
-    <!-- Security Banner -->
-    <div class="security-banner">
-        <div>100% الدفع الآمن <i class="fa-solid fa-shield-check"></i></div>
-        <div style="font-weight: bold;">Free Fire</div>
-    </div>
 
     <!-- Step 1: Login -->
     <div class="section">
@@ -448,19 +508,29 @@
             <div class="step-badge">1</div>
             <div class="section-title">تسجيل الدخول</div>
         </div>
-        <div style="font-size: 13px; color: var(--text-gray); margin-bottom: 8px;">معرّف اللاعب <i class="fa-regular fa-circle-question"></i></div>
-        <div class="login-input-group">
-            <button class="btn-login">تسجيل الدخول</button>
-            <input type="text" placeholder="يرجى إدخال معرف اللاعب هنا">
+        
+        <div id="login-area">
+            <div style="font-size: 12px; color: var(--text-gray);">معرّف اللاعب <i class="fa-regular fa-circle-question"></i></div>
+            <div class="login-input-group">
+                <button class="btn-login" id="btn-login">تسجيل الدخول</button>
+                <input type="number" id="player-id" placeholder="يرجى إدخال معرف اللاعب هنا">
+            </div>
         </div>
+
+        <!-- رسالة نجاح تسجيل الدخول (مخفية افتراضياً) -->
+        <div class="player-info" id="player-info">
+            <span id="player-name-display"></span>
+            <button class="btn-logout" id="btn-logout">خروج</button>
+        </div>
+
         <div class="social-login">
             أو سجل دخولك بحساب اللعبة الخاص بك
             <div class="social-icons">
-                <i class="fa-brands fa-facebook-f ic-fb"></i>
-                <i class="fa-brands fa-google ic-google"></i>
-                <i class="fa-brands fa-x-twitter ic-x"></i>
-                <i class="fa-brands fa-vk ic-vk"></i>
                 <i class="fa-brands fa-apple ic-apple"></i>
+                <i class="fa-brands fa-vk ic-vk"></i>
+                <i class="fa-brands fa-x-twitter ic-x"></i>
+                <i class="fa-brands fa-google ic-google"></i>
+                <i class="fa-brands fa-facebook-f ic-fb"></i>
             </div>
         </div>
     </div>
@@ -473,8 +543,8 @@
         </div>
         
         <div class="toggle-btns">
-            <div class="toggle-btn">استرداد</div>
             <div class="toggle-btn active">شراء</div>
+            <div class="toggle-btn">استرداد</div>
         </div>
 
         <div class="grid-3" id="diamond-grid">
@@ -488,18 +558,18 @@
         </div>
 
         <!-- Special Offers -->
-        <h4 style="margin-top: 20px; color: var(--text-gray);">العروض الخاصة</h4>
+        <div class="offers-header">العروض الخاصة</div>
         <div class="offers-grid">
-            <div class="offer-card">
-                <div class="offer-img"></div>
-                <div class="offer-title">العضوية الشهرية <i class="fa-solid fa-circle-info" style="color:var(--primary-red)"></i></div>
-            </div>
             <div class="offer-card">
                 <div class="offer-img weekly"></div>
                 <div class="offer-title">العضوية الأسبوعية <i class="fa-solid fa-circle-info" style="color:var(--primary-red)"></i></div>
             </div>
+            <div class="offer-card">
+                <div class="offer-img monthly"></div>
+                <div class="offer-title">العضوية الشهرية <i class="fa-solid fa-circle-info" style="color:var(--primary-red)"></i></div>
+            </div>
             <div class="offer-card" style="grid-column: span 2;">
-                <div class="offer-img booyah" style="height: 100px;"></div>
+                <div class="offer-img booyah"></div>
                 <div class="offer-title">تصريح بوياه <i class="fa-solid fa-circle-info" style="color:var(--primary-red)"></i></div>
             </div>
         </div>
@@ -513,19 +583,19 @@
         </div>
         
         <div class="payment-grid">
-            <div class="payment-card active">
-                <div class="payment-info">
-                    <div class="payment-price">DZD 240</div>
-                    <div class="payment-diamonds">100 <i class="fa-solid fa-gem" style="color:#00bcd4;"></i></div>
-                </div>
-                <div class="payment-logo logo-ooredoo">ooredoo</div>
-            </div>
             <div class="payment-card">
+                <div class="payment-logo logo-djezzy">DJEZZY<br>جيزي</div>
                 <div class="payment-info">
                     <div class="payment-price">DZD 240</div>
                     <div class="payment-diamonds">100 <i class="fa-solid fa-gem" style="color:#00bcd4;"></i></div>
                 </div>
-                <div class="payment-logo logo-djezzy">DJEZZY<br>جيزي</div>
+            </div>
+            <div class="payment-card active">
+                <div class="payment-logo logo-ooredoo">ooredoo</div>
+                <div class="payment-info">
+                    <div class="payment-price">DZD 240</div>
+                    <div class="payment-diamonds">100 <i class="fa-solid fa-gem" style="color:#00bcd4;"></i></div>
+                </div>
             </div>
         </div>
     </div>
@@ -543,45 +613,128 @@
 
     <!-- Sticky Footer Bar -->
     <div class="sticky-footer">
-        <button class="btn-buy">
-            شراء الآن <i class="fa-regular fa-circle-check"></i>
-        </button>
         <div class="footer-info">
             <div class="footer-amount" id="footer-amount-display">100 <i class="fa-solid fa-gem" style="color:#00bcd4;"></i></div>
             <div class="footer-desc">اختيار طريقة الدفع</div>
         </div>
+        <button class="btn-buy" id="btn-buy">
+            شراء الآن <i class="fa-regular fa-circle-check"></i>
+        </button>
     </div>
 
 </div>
 
-<!-- JavaScript Logic للتفاعل مع الأزرار -->
+<!-- Modal (النافذة المنبثقة للشحن) -->
+<div class="overlay" id="loading-overlay">
+    <div class="modal-box">
+        <div class="spinner" id="modal-spinner"></div>
+        <i class="fa-solid fa-circle-check success-icon" id="modal-success-icon"></i>
+        <div class="modal-text" id="modal-text">يرجى الانتظار... جاري التحقق</div>
+        <button class="btn-close-modal" id="btn-close-modal">حسناً</button>
+    </div>
+</div>
+
+<!-- البرمجة (JavaScript) -->
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const diamondCards = document.querySelectorAll('.item-card');
-        const footerAmountDisplay = document.getElementById('footer-amount-display');
-        const paymentCards = document.querySelectorAll('.payment-card');
+    // أسماء فري فاير عشوائية مزخرفة
+    const ffNames = ["亗 Ｏ Ｖ Ｅ Ｒ 亗", "B O S S 么", "K I L L E R ✓", "꧁ঔৣ☬GHOST☬ঔৣ꧂", "M A S T E R", "S N I P E R 🎯", "A L I E N 👽", "V I P E R 🐍", "A K I R A 〆"];
+    
+    // متغيرات تسجيل الدخول
+    let isLoggedIn = false;
+    const btnLogin = document.getElementById('btn-login');
+    const inputId = document.getElementById('player-id');
+    const loginArea = document.getElementById('login-area');
+    const playerInfo = document.getElementById('player-info');
+    const playerNameDisplay = document.getElementById('player-name-display');
+    const btnLogout = document.getElementById('btn-logout');
+    const btnBuy = document.getElementById('btn-buy');
 
-        // منطق اختيار كمية الشحن (الجواهر)
-        diamondCards.forEach(card => {
-            card.addEventListener('click', function() {
-                // إزالة التحديد من جميع البطاقات
-                diamondCards.forEach(c => c.classList.remove('active'));
-                // إضافة التحديد للبطاقة المنقورة
-                this.classList.add('active');
-                
-                // تحديث الرقم في الفوتر السفلي
-                const amount = this.getAttribute('data-amount');
-                footerAmountDisplay.innerHTML = `${amount} <i class="fa-solid fa-gem" style="color:#00bcd4;"></i>`;
-            });
-        });
+    // زر تسجيل الدخول
+    btnLogin.addEventListener('click', () => {
+        if(inputId.value.trim().length > 4) { // التحقق من أن الآيدي ليس فارغاً
+            // اختيار اسم عشوائي
+            const randomName = ffNames[Math.floor(Math.random() * ffNames.length)];
+            
+            // إظهار الاسم وإخفاء الإدخال
+            loginArea.style.display = 'none';
+            playerNameDisplay.innerHTML = `مرحباً بك: <span style="color:#000;">${randomName}</span>`;
+            playerInfo.classList.add('active');
+            
+            // تفعيل زر الشراء
+            btnBuy.classList.add('active');
+            isLoggedIn = true;
+        } else {
+            alert("يرجى إدخال معرّف لاعب (ID) صحيح");
+        }
+    });
 
-        // منطق اختيار طريقة الدفع
-        paymentCards.forEach(card => {
-            card.addEventListener('click', function() {
-                paymentCards.forEach(c => c.classList.remove('active'));
-                this.classList.add('active');
-            });
+    // زر تسجيل الخروج
+    btnLogout.addEventListener('click', () => {
+        loginArea.style.display = 'block';
+        playerInfo.classList.remove('active');
+        inputId.value = '';
+        btnBuy.classList.remove('active');
+        isLoggedIn = false;
+    });
+
+    // منطق اختيار كمية الجواهر
+    const diamondCards = document.querySelectorAll('.item-card');
+    const footerAmountDisplay = document.getElementById('footer-amount-display');
+    
+    diamondCards.forEach(card => {
+        card.addEventListener('click', function() {
+            diamondCards.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            const amount = this.getAttribute('data-amount');
+            footerAmountDisplay.innerHTML = `${amount} <i class="fa-solid fa-gem" style="color:#00bcd4;"></i>`;
         });
+    });
+
+    // منطق اختيار طريقة الدفع
+    const paymentCards = document.querySelectorAll('.payment-card');
+    paymentCards.forEach(card => {
+        card.addEventListener('click', function() {
+            paymentCards.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // نظام الشحن الوهمي (النافذة المنبثقة)
+    const overlay = document.getElementById('loading-overlay');
+    const spinner = document.getElementById('modal-spinner');
+    const successIcon = document.getElementById('modal-success-icon');
+    const modalText = document.getElementById('modal-text');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+
+    btnBuy.addEventListener('click', () => {
+        if (!isLoggedIn) {
+            alert("يرجى تسجيل الدخول أولاً عن طريق إدخال معرّف اللاعب (ID)!");
+            // تمرير الشاشة للأعلى للتسجيل
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+
+        // إظهار نافذة التحميل
+        overlay.classList.add('show');
+        spinner.style.display = 'block';
+        successIcon.style.display = 'none';
+        btnCloseModal.style.display = 'none';
+        modalText.innerText = "يرجى الانتظار... جاري معالجة الطلب";
+        modalText.style.color = "var(--text-dark)";
+
+        // محاكاة وقت التحميل (2 ثانية)
+        setTimeout(() => {
+            spinner.style.display = 'none';
+            successIcon.style.display = 'block';
+            modalText.innerText = "تم الشحن بنجاح!";
+            modalText.style.color = "#4CAF50";
+            btnCloseModal.style.display = 'block';
+        }, 2000); // 2000 مللي ثانية = ثانيتين
+    });
+
+    // إغلاق النافذة
+    btnCloseModal.addEventListener('click', () => {
+        overlay.classList.remove('show');
     });
 </script>
 
