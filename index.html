@@ -1,2384 +1,1489 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Maison Éclat — Curated Makeup, Delivered</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-<style>
-/* ============================================================
-   MAISON ÉCLAT — DESIGN TOKENS
-   Palette: velvet charcoal / matte obsidian / rosewood / bronze
-   Type: Fraunces (display serif) + Manrope (UI body) + Tajawal (Arabic)
-   ============================================================ */
-:root{
-  --obsidian:#0a0908;
-  --charcoal:#15120f;
-  --charcoal-2:#1c1815;
-  --charcoal-3:#241f1a;
-  --hairline:rgba(230,214,190,0.09);
-  --hairline-strong:rgba(230,214,190,0.16);
-  --glass:rgba(255,255,255,0.045);
-  --glass-strong:rgba(255,255,255,0.075);
-  --rosewood:#7a2f40;
-  --rosewood-light:#a04a5e;
-  --rosewood-deep:#4f1d2a;
-  --bronze:#b9945e;
-  --bronze-light:#d9bd8c;
-  --bronze-deep:#8a6a3c;
-  --cream:#efe6d8;
-  --cream-dim:#c9bda9;
-  --muted:#8f8578;
-  --muted-2:#6b6255;
-  --success:#5e9d76;
-  --success-dim:#3c6349;
-  --danger:#b0584a;
-  --shadow-lg:0 24px 60px -20px rgba(0,0,0,0.65);
-  --shadow-md:0 12px 30px -12px rgba(0,0,0,0.55);
-  --radius-lg:26px;
-  --radius-md:18px;
-  --radius-sm:12px;
-  --font-display:'Fraunces',serif;
-  --font-body:'Manrope',sans-serif;
-  --font-arabic:'Tajawal',sans-serif;
-  --safe-bottom:env(safe-area-inset-bottom,0px);
-  --safe-top:env(safe-area-inset-top,0px);
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>L'Élite Beauté - Bespoke Cosmetics Delivery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Haute-Couture Theme Colors */
+            --obsidian-dark: #0a0a0c;
+            --obsidian-light: #16161a;
+            --velvet-charcoal: #1c1c21;
+            --rosewood-deep: #4a000f;
+            --rosewood-main: #650015;
+            --rosewood-light: #8b001d;
+            --bronze-muted: #b08d57;
+            --bronze-bright: #cd7f32;
+            --text-primary: #f8f8f2;
+            --text-secondary: #a0a0a8;
+            --glass-bg: rgba(22, 22, 26, 0.75);
+            --glass-border: rgba(205, 127, 50, 0.15);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            
+            /* Typography */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            
+            /* Layout */
+            --bottom-nav-height: 72px;
+            --header-height: 120px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-pill: 50px;
+        }
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{-webkit-tap-highlight-color:transparent;}
-body{
-  min-height:100vh;
-  background:
-    radial-gradient(120% 60% at 15% -10%, rgba(122,47,64,0.16), transparent 55%),
-    radial-gradient(90% 50% at 100% 0%, rgba(185,148,94,0.10), transparent 50%),
-    var(--obsidian);
-  color:var(--cream);
-  font-family:var(--font-body);
-  font-size:15px;
-  line-height:1.45;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-body.lang-ar, body.lang-ar input, body.lang-ar button, body.lang-ar select{
-  font-family:var(--font-arabic);
-}
-button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer;}
-input{font-family:inherit;color:inherit;}
-a{color:inherit;text-decoration:none;}
-img{display:block;max-width:100%;}
-::selection{background:var(--bronze);color:var(--obsidian);}
-::-webkit-scrollbar{width:0;height:0;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-/* Focus visibility for accessibility */
-a:focus-visible,button:focus-visible,input:focus-visible{
-  outline:2px solid var(--bronze-light);
-  outline-offset:2px;
-  border-radius:8px;
-}
+        body {
+            background-color: var(--obsidian-dark);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: var(--bottom-nav-height);
+        }
 
-@media (prefers-reduced-motion: reduce){
-  *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;}
-}
+        /* Typography Utilities */
+        h1, h2, h3, .heading { font-family: var(--font-heading); font-weight: 600; }
+        .text-rosewood { color: var(--rosewood-main); }
+        .text-bronze { color: var(--bronze-muted); }
+        .text-sm { font-size: 0.85rem; }
+        .text-xs { font-size: 0.75rem; }
+        .font-medium { font-weight: 500; }
+        
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
 
-/* ============================================================
-   APP SHELL
-   ============================================================ */
-.app-shell{
-  max-width:480px;
-  min-height:100vh;
-  margin:0 auto;
-  position:relative;
-  background:linear-gradient(180deg,var(--obsidian) 0%, var(--charcoal) 100%);
-  display:flex;
-  flex-direction:column;
-  box-shadow:0 0 90px rgba(0,0,0,0.6);
-}
+        /* Reusable Components */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            outline: none;
+        }
 
-/* Faint gold foil texture overlay for luxury matte finish */
-.app-shell::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  max-width:480px;
-  margin:0 auto;
-  pointer-events:none;
-  background-image:
-    repeating-linear-gradient(115deg, rgba(217,189,140,0.018) 0px, rgba(217,189,140,0.018) 1px, transparent 1px, transparent 3px);
-  z-index:0;
-  opacity:0.5;
-}
+        .btn-primary {
+            background: linear-gradient(135deg, var(--rosewood-main), var(--rosewood-deep));
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-/* ============================================================
-   TOP HEADER
-   ============================================================ */
-.top-header{
-  position:sticky;
-  top:0;
-  z-index:40;
-  padding:calc(14px + var(--safe-top)) 18px 12px;
-  background:linear-gradient(180deg, rgba(10,9,8,0.97) 60%, rgba(10,9,8,0.88));
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--hairline);
-}
-.header-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-.location-block{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  min-width:0;
-  cursor:pointer;
-}
-.location-icon{
-  width:34px;height:34px;flex:0 0 34px;
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(155deg,var(--rosewood),var(--rosewood-deep));
-  border:1px solid var(--hairline-strong);
-}
-.location-text{min-width:0;}
-.location-label{
-  font-size:10.5px;
-  letter-spacing:0.09em;
-  text-transform:uppercase;
-  color:var(--muted);
-  font-weight:600;
-}
-.location-name{
-  font-family:var(--font-display);
-  font-size:16px;
-  font-weight:500;
-  color:var(--cream);
-  display:flex;
-  align-items:center;
-  gap:5px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.lang-switch{
-  display:flex;
-  background:var(--glass);
-  border:1px solid var(--hairline);
-  border-radius:999px;
-  padding:3px;
-  gap:2px;
-  flex:0 0 auto;
-}
-.lang-btn{
-  padding:6px 10px;
-  border-radius:999px;
-  font-size:11.5px;
-  font-weight:700;
-  letter-spacing:0.03em;
-  color:var(--muted);
-  transition:all .25s ease;
-}
-.lang-btn.active{
-  background:linear-gradient(155deg,var(--bronze-light),var(--bronze-deep));
-  color:var(--obsidian);
-}
+        .btn-primary:active { transform: scale(0.98); }
 
-.search-bar{
-  margin-top:14px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  background:var(--glass);
-  border:1px solid var(--hairline);
-  border-radius:16px;
-  padding:12px 14px;
-  transition:border-color .2s ease, background .2s ease;
-}
-.search-bar:focus-within{
-  border-color:var(--bronze);
-  background:var(--glass-strong);
-}
-.search-bar svg{flex:0 0 auto;color:var(--muted);}
-.search-bar input{
-  flex:1;
-  background:none;
-  border:none;
-  outline:none;
-  font-size:14.5px;
-  color:var(--cream);
-}
-.search-bar input::placeholder{color:var(--muted-2);}
+        .btn-outline {
+            background: transparent;
+            color: var(--bronze-bright);
+            border: 1px solid var(--bronze-muted);
+        }
 
-/* Category pills */
-.category-pills{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  margin-top:14px;
-  padding-bottom:2px;
-  scrollbar-width:none;
-}
-.category-pills::-webkit-scrollbar{display:none;}
-.pill{
-  flex:0 0 auto;
-  padding:9px 16px;
-  border-radius:999px;
-  font-size:12.5px;
-  font-weight:600;
-  letter-spacing:0.01em;
-  background:var(--glass);
-  border:1px solid var(--hairline);
-  color:var(--cream-dim);
-  white-space:nowrap;
-  transition:all .22s ease;
-}
-.pill.active{
-  background:linear-gradient(140deg,var(--rosewood-light),var(--rosewood-deep));
-  border-color:transparent;
-  color:var(--cream);
-  box-shadow:0 8px 20px -8px rgba(122,47,64,0.7);
-}
+        .icon {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
 
-/* ============================================================
-   MAIN CONTENT
-   ============================================================ */
-.app-main{
-  flex:1;
-  position:relative;
-  z-index:1;
-  padding-bottom:calc(96px + var(--safe-bottom));
-}
-.section{padding:22px 18px 6px;}
-.section-head{
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  margin-bottom:14px;
-}
-.section-title{
-  font-family:var(--font-display);
-  font-size:21px;
-  font-weight:500;
-  letter-spacing:0.01em;
-  color:var(--cream);
-}
-.section-link{
-  font-size:12px;
-  font-weight:700;
-  color:var(--bronze-light);
-  letter-spacing:0.02em;
-}
+        /* Top Header */
+        .app-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            border-bottom: 1px solid var(--glass-border);
+        }
 
-/* Banner Slider */
-.banner-wrap{
-  padding:18px 18px 0;
-}
-.banner-viewport{
-  position:relative;
-  border-radius:var(--radius-lg);
-  overflow:hidden;
-  height:168px;
-  box-shadow:var(--shadow-md);
-  border:1px solid var(--hairline-strong);
-}
-.banner-track{
-  display:flex;
-  height:100%;
-  transition:transform .55s cubic-bezier(.65,0,.35,1);
-}
-.banner-slide{
-  flex:0 0 100%;
-  height:100%;
-  position:relative;
-  display:flex;
-  align-items:flex-end;
-  padding:20px;
-  background-size:cover;
-  background-position:center;
-}
-.banner-slide::after{
-  content:"";
-  position:absolute;inset:0;
-  background:linear-gradient(0deg, rgba(10,8,7,0.92) 10%, rgba(10,8,7,0.25) 55%, rgba(10,8,7,0.15) 100%);
-}
-.banner-copy{position:relative;z-index:1;}
-.banner-eyebrow{
-  font-size:10.5px;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  color:var(--bronze-light);
-  font-weight:700;
-  margin-bottom:6px;
-}
-.banner-title{
-  font-family:var(--font-display);
-  font-size:22px;
-  font-weight:600;
-  color:var(--cream);
-  max-width:280px;
-  line-height:1.15;
-}
-.banner-dots{
-  position:absolute;
-  bottom:14px;
-  inset-inline-end:16px;
-  display:flex;
-  gap:6px;
-  z-index:2;
-}
-.banner-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:rgba(239,230,216,0.35);
-  transition:all .3s ease;
-}
-.banner-dot.active{
-  width:18px;
-  background:var(--bronze-light);
-}
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-/* Store & Category grid tiles (home quick categories) */
-.tile-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-.cat-tile{
-  background:var(--glass);
-  border:1px solid var(--hairline);
-  border-radius:var(--radius-md);
-  padding:14px 10px 12px;
-  text-align:center;
-  transition:transform .2s ease, border-color .2s ease, background .2s ease;
-}
-.cat-tile:active{transform:scale(0.96);}
-.cat-tile-icon{
-  width:44px;height:44px;
-  margin:0 auto 8px;
-  border-radius:14px;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(150deg,var(--bronze),var(--bronze-deep));
-  color:var(--obsidian);
-}
-.cat-tile-label{
-  font-size:11.5px;
-  font-weight:700;
-  color:var(--cream-dim);
-  line-height:1.25;
-}
+        .location-display {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .location-text {
+            display: flex;
+            flex-direction: column;
+        }
 
-/* Store Card */
-.store-list{display:flex;flex-direction:column;gap:14px;}
-.store-card{
-  background:linear-gradient(160deg,var(--charcoal-2),var(--charcoal));
-  border:1px solid var(--hairline);
-  border-radius:var(--radius-lg);
-  overflow:hidden;
-  box-shadow:var(--shadow-md);
-  transition:transform .2s ease, border-color .2s ease;
-}
-.store-card:active{transform:scale(0.985);}
-.store-cover{
-  position:relative;
-  height:132px;
-  background-size:cover;
-  background-position:center;
-}
-.store-cover::after{
-  content:"";
-  position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(10,8,7,0) 45%, rgba(10,8,7,0.85) 100%);
-}
-.status-chip{
-  position:absolute;
-  top:12px;
-  inset-inline-start:12px;
-  z-index:2;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  padding:5px 11px 5px 8px;
-  border-radius:999px;
-  font-size:10.5px;
-  font-weight:800;
-  letter-spacing:0.04em;
-  text-transform:uppercase;
-  backdrop-filter:blur(10px);
-}
-body.lang-ar .status-chip{padding:5px 8px 5px 11px;}
-.status-chip.open{background:rgba(94,157,118,0.22);color:#9fe3ba;border:1px solid rgba(159,227,186,0.35);}
-.status-chip.closed{background:rgba(176,88,74,0.22);color:#f0a99a;border:1px solid rgba(240,169,154,0.3);}
-.status-dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
-.status-dot.pulse{animation:pulse-dot 1.8s ease-in-out infinite;}
-@keyframes pulse-dot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(159,227,186,0.55);}50%{opacity:0.7;box-shadow:0 0 0 5px rgba(159,227,186,0);}}
+        .location-label { font-size: 0.75rem; color: var(--bronze-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .location-value { font-weight: 600; font-size: 0.95rem; }
 
-.rating-chip{
-  position:absolute;
-  top:12px;
-  inset-inline-end:12px;
-  z-index:2;
-  display:flex;
-  align-items:center;
-  gap:4px;
-  padding:5px 10px;
-  border-radius:999px;
-  font-size:11.5px;
-  font-weight:800;
-  background:rgba(10,8,7,0.55);
-  border:1px solid var(--hairline-strong);
-  backdrop-filter:blur(10px);
-  color:var(--bronze-light);
-}
-.store-cover-title{
-  position:absolute;
-  bottom:12px;
-  inset-inline-start:16px;
-  inset-inline-end:16px;
-  z-index:2;
-}
-.store-name{
-  font-family:var(--font-display);
-  font-size:19px;
-  font-weight:600;
-  color:var(--cream);
-}
-.store-body{padding:12px 16px 16px;}
-.store-tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-bottom:10px;
-}
-.tag{
-  font-size:10.5px;
-  font-weight:700;
-  padding:4px 9px;
-  border-radius:999px;
-  background:var(--glass);
-  border:1px solid var(--hairline);
-  color:var(--cream-dim);
-  letter-spacing:0.01em;
-}
-.store-meta-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  font-size:12px;
-  color:var(--muted);
-}
-.meta-item{display:flex;align-items:center;gap:5px;}
-.meta-item svg{flex:0 0 auto;}
-.meta-strong{color:var(--cream-dim);font-weight:700;}
+        .language-selector select {
+            background: var(--velvet-charcoal);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+            padding: 6px 12px;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            outline: none;
+            cursor: pointer;
+        }
 
-/* ============================================================
-   STORE DETAIL SCREEN
-   ============================================================ */
-.detail-hero{
-  position:relative;
-  height:220px;
-  background-size:cover;
-  background-position:center;
-}
-.detail-hero::after{
-  content:"";
-  position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(10,8,7,0.35) 0%, rgba(10,8,7,0.55) 55%, var(--obsidian) 100%);
-}
-.detail-nav{
-  position:absolute;
-  top:calc(14px + var(--safe-top));
-  inset-inline-start:16px;
-  inset-inline-end:16px;
-  display:flex;
-  justify-content:space-between;
-  z-index:3;
-}
-.circle-btn{
-  width:38px;height:38px;
-  border-radius:50%;
-  background:rgba(10,8,7,0.55);
-  border:1px solid var(--hairline-strong);
-  backdrop-filter:blur(10px);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--cream);
-}
-.detail-header-info{
-  position:relative;
-  z-index:2;
-  padding:0 18px 18px;
-  margin-top:-58px;
-}
-.detail-title{
-  font-family:var(--font-display);
-  font-size:27px;
-  font-weight:600;
-  color:var(--cream);
-  margin-bottom:8px;
-}
-.detail-sub{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  align-items:center;
-  margin-bottom:12px;
-}
-.detail-desc{
-  font-size:13px;
-  color:var(--muted);
-  line-height:1.6;
-  max-width:100%;
-}
-.product-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  padding:6px 18px 18px;
-}
-.product-card{
-  background:var(--charcoal-2);
-  border:1px solid var(--hairline);
-  border-radius:var(--radius-md);
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  box-shadow:var(--shadow-md);
-}
-.product-img-wrap{
-  position:relative;
-  height:132px;
-  background-size:cover;
-  background-position:center;
-}
-.product-add-btn{
-  position:absolute;
-  bottom:8px;
-  inset-inline-end:8px;
-  width:32px;height:32px;
-  border-radius:10px;
-  background:linear-gradient(150deg,var(--bronze-light),var(--bronze-deep));
-  color:var(--obsidian);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 8px 18px -6px rgba(185,148,94,0.65);
-  transition:transform .15s ease;
-}
-.product-add-btn:active{transform:scale(0.88);}
-.product-info{padding:10px 12px 12px;flex:1;display:flex;flex-direction:column;gap:4px;}
-.product-name{
-  font-size:13px;
-  font-weight:700;
-  color:var(--cream);
-  line-height:1.3;
-  min-height:34px;
-}
-.product-rating{
-  display:flex;
-  align-items:center;
-  gap:4px;
-  font-size:11px;
-  color:var(--bronze-light);
-  font-weight:700;
-}
-.product-price-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-top:4px;
-}
-.product-price{
-  font-family:var(--font-display);
-  font-size:15.5px;
-  font-weight:600;
-  color:var(--cream);
-}
-.product-price small{font-size:10.5px;color:var(--muted);font-weight:600;margin-inline-start:2px;}
-.qty-stepper{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  background:var(--glass-strong);
-  border:1px solid var(--hairline-strong);
-  border-radius:10px;
-  padding:3px 6px;
-}
-.qty-stepper button{
-  width:20px;height:20px;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--bronze-light);
-  font-weight:800;
-  font-size:14px;
-}
-.qty-stepper span{font-size:12px;font-weight:800;min-width:14px;text-align:center;}
+        .search-container {
+            position: relative;
+            width: 100%;
+        }
 
-/* ============================================================
-   FLOATING CART BAR
-   ============================================================ */
-.floating-cart{
-  position:fixed;
-  left:50%;
-  transform:translateX(-50%) translateY(0);
-  bottom:calc(78px + var(--safe-bottom));
-  width:calc(100% - 36px);
-  max-width:444px;
-  z-index:45;
-  background:linear-gradient(135deg,var(--rosewood-light),var(--rosewood-deep));
-  border-radius:18px;
-  padding:13px 16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  box-shadow:0 18px 40px -14px rgba(122,47,64,0.75);
-  border:1px solid rgba(217,189,140,0.25);
-  transition:transform .35s cubic-bezier(.34,1.56,.64,1), opacity .3s ease;
-}
-.floating-cart.hidden{
-  transform:translateX(-50%) translateY(120%);
-  opacity:0;
-  pointer-events:none;
-}
-.fc-left{display:flex;align-items:center;gap:10px;}
-.fc-badge{
-  width:30px;height:30px;
-  border-radius:9px;
-  background:rgba(10,8,7,0.35);
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:800;color:var(--cream);
-}
-.fc-text{display:flex;flex-direction:column;line-height:1.2;}
-.fc-title{font-size:12.5px;font-weight:800;color:var(--cream);}
-.fc-sub{font-size:10.5px;color:rgba(239,230,216,0.75);}
-.fc-cta{
-  display:flex;align-items:center;gap:6px;
-  background:rgba(10,8,7,0.32);
-  padding:8px 14px;
-  border-radius:11px;
-  font-size:12px;font-weight:800;color:var(--cream);
-}
+        .search-input {
+            width: 100%;
+            background: var(--obsidian-dark);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 14px 16px;
+            padding-inline-start: 48px;
+            border-radius: var(--radius-lg);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
 
-/* ============================================================
-   BOTTOM NAVIGATION
-   ============================================================ */
-.bottom-nav{
-  position:fixed;
-  left:0;right:0;bottom:0;
-  z-index:50;
-  max-width:480px;
-  margin:0 auto;
-  padding:10px 10px calc(10px + var(--safe-bottom));
-  background:rgba(10,9,8,0.92);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border-top:1px solid var(--hairline);
-  display:flex;
-  justify-content:space-between;
-}
-.nav-item{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:4px;
-  padding:6px 2px;
-  color:var(--muted);
-  position:relative;
-  transition:color .2s ease;
-}
-.nav-item.active{color:var(--bronze-light);}
-.nav-item svg{width:21px;height:21px;}
-.nav-label{font-size:9.5px;font-weight:700;letter-spacing:0.01em;}
-.nav-badge{
-  position:absolute;
-  top:0px;
-  inset-inline-end:22%;
-  min-width:15px;
-  height:15px;
-  padding:0 3px;
-  border-radius:999px;
-  background:var(--rosewood-light);
-  color:var(--cream);
-  font-size:9px;
-  font-weight:800;
-  display:flex;align-items:center;justify-content:center;
-  border:1.5px solid var(--obsidian);
-}
+        .search-input:focus {
+            border-color: var(--bronze-muted);
+            outline: none;
+        }
 
-/* ============================================================
-   CART SCREEN
-   ============================================================ */
-.screen-header{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:calc(16px + var(--safe-top)) 18px 16px;
-  border-bottom:1px solid var(--hairline);
-  position:sticky;top:0;z-index:20;
-  background:rgba(10,9,8,0.96);
-  backdrop-filter:blur(16px);
-}
-.screen-title{
-  font-family:var(--font-display);
-  font-size:22px;
-  font-weight:600;
-}
-.cart-item{
-  display:flex;
-  gap:12px;
-  padding:14px 18px;
-  border-bottom:1px solid var(--hairline);
-}
-.cart-item-img{
-  width:64px;height:64px;
-  border-radius:12px;
-  background-size:cover;
-  background-position:center;
-  flex:0 0 auto;
-  border:1px solid var(--hairline);
-}
-.cart-item-info{flex:1;min-width:0;}
-.cart-item-name{font-size:13.5px;font-weight:700;color:var(--cream);margin-bottom:3px;}
-.cart-item-store{font-size:11px;color:var(--muted);margin-bottom:8px;}
-.cart-item-row{display:flex;align-items:center;justify-content:space-between;}
-.cart-item-price{font-family:var(--font-display);font-size:14.5px;font-weight:600;color:var(--bronze-light);}
-.remove-btn{color:var(--muted);}
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            inset-inline-start: 16px;
+            color: var(--text-secondary);
+        }
 
-.summary-block{
-  margin:18px;
-  background:var(--glass);
-  border:1px solid var(--hairline);
-  border-radius:var(--radius-md);
-  padding:16px;
-}
-.summary-row{
-  display:flex;
-  justify-content:space-between;
-  font-size:13px;
-  color:var(--muted);
-  padding:6px 0;
-}
-.summary-row.total{
-  border-top:1px solid var(--hairline-strong);
-  margin-top:6px;
-  padding-top:12px;
-  font-size:15.5px;
-  font-weight:800;
-  color:var(--cream);
-}
-.summary-row.total .amt{font-family:var(--font-display);color:var(--bronze-light);}
+        /* Main Content Area */
+        .main-content {
+            padding-top: calc(var(--header-height) + 20px);
+            min-height: 100vh;
+        }
 
-.field-block{margin:0 18px 14px;}
-.field-label{
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:0.04em;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin-bottom:8px;
-  display:block;
-}
-.field-input{
-  width:100%;
-  padding:14px 16px;
-  border-radius:14px;
-  background:var(--glass);
-  border:1px solid var(--hairline);
-  color:var(--cream);
-  font-size:14.5px;
-  outline:none;
-  transition:border-color .2s ease;
-}
-.field-input:focus{border-color:var(--bronze);}
-.field-hint{font-size:11px;color:var(--muted-2);margin-top:6px;}
+        /* Horizontal Category Pills */
+        .category-scroll {
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding: var(--spacing-md);
+            gap: var(--spacing-md);
+            margin-top: 10px;
+        }
+        .category-scroll::-webkit-scrollbar { display: none; }
 
-.btn-primary{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  width:100%;
-  padding:15px;
-  border-radius:14px;
-  background:linear-gradient(135deg,var(--bronze-light),var(--bronze-deep));
-  color:var(--obsidian);
-  font-size:14.5px;
-  font-weight:800;
-  letter-spacing:0.01em;
-  box-shadow:0 14px 30px -12px rgba(185,148,94,0.65);
-  transition:transform .15s ease, box-shadow .15s ease;
-}
-.btn-primary:active{transform:scale(0.98);}
-.btn-primary:disabled{opacity:0.45;box-shadow:none;}
-.btn-secondary{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  background:var(--glass-strong);
-  border:1px solid var(--hairline-strong);
-  color:var(--cream);
-  font-size:13.5px;
-  font-weight:700;
-}
+        .category-pill {
+            white-space: nowrap;
+            padding: 10px 20px;
+            background: var(--velvet-charcoal);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-pill);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-.empty-state{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  padding:60px 30px;
-  color:var(--muted);
-}
-.empty-icon{
-  width:64px;height:64px;
-  border-radius:50%;
-  background:var(--glass);
-  border:1px solid var(--hairline);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:16px;
-  color:var(--bronze);
-}
-.empty-title{
-  font-family:var(--font-display);
-  font-size:18px;
-  color:var(--cream);
-  margin-bottom:6px;
-  font-weight:500;
-}
-.empty-text{font-size:13px;max-width:260px;}
+        .category-pill.active {
+            background: var(--rosewood-main);
+            color: var(--text-primary);
+            border-color: var(--rosewood-light);
+        }
 
-/* ============================================================
-   NOTIFICATIONS
-   ============================================================ */
-.notif-item{
-  display:flex;
-  gap:12px;
-  padding:16px 18px;
-  border-bottom:1px solid var(--hairline);
-}
-.notif-icon{
-  width:40px;height:40px;flex:0 0 auto;
-  border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(150deg,var(--rosewood-light),var(--rosewood-deep));
-  color:var(--cream);
-}
-.notif-icon.bronze{background:linear-gradient(150deg,var(--bronze-light),var(--bronze-deep));color:var(--obsidian);}
-.notif-title{font-size:13.5px;font-weight:700;color:var(--cream);margin-bottom:3px;}
-.notif-text{font-size:12.5px;color:var(--muted);line-height:1.5;}
-.notif-time{font-size:10.5px;color:var(--muted-2);margin-top:5px;}
+        /* Promotional Banners */
+        .banner-container {
+            padding: 0 var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
 
-/* ============================================================
-   PROFILE
-   ============================================================ */
-.profile-hero{
-  padding:26px 18px 22px;
-  text-align:center;
-  border-bottom:1px solid var(--hairline);
-}
-.avatar{
-  width:76px;height:76px;
-  border-radius:50%;
-  margin:0 auto 14px;
-  background:linear-gradient(150deg,var(--rosewood-light),var(--bronze-deep));
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-display);
-  font-size:28px;
-  font-weight:600;
-  color:var(--cream);
-  border:2px solid var(--hairline-strong);
-}
-.profile-name{font-family:var(--font-display);font-size:20px;font-weight:600;margin-bottom:4px;}
-.profile-phone{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12.5px;color:var(--muted);}
-.verified-badge{
-  display:inline-flex;align-items:center;gap:3px;
-  color:var(--success);
-  font-weight:700;
-  font-size:11px;
-}
-.profile-menu{padding:8px 18px;}
-.menu-row{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:15px 4px;
-  border-bottom:1px solid var(--hairline);
-}
-.menu-icon{
-  width:38px;height:38px;
-  border-radius:11px;
-  background:var(--glass);
-  border:1px solid var(--hairline);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--bronze-light);
-}
-.menu-label{flex:1;font-size:13.5px;font-weight:600;color:var(--cream-dim);}
-.menu-chevron{color:var(--muted-2);}
-.logout-row .menu-label{color:var(--danger);}
-.logout-row .menu-icon{color:var(--danger);}
+        .promo-banner {
+            width: 100%;
+            height: 180px;
+            border-radius: var(--radius-lg);
+            background-image: linear-gradient(to right, rgba(10, 10, 12, 0.9), rgba(10, 10, 12, 0.2)), url('https://images.unsplash.com/photo-1512496015851-a1c8ce84594c?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: var(--spacing-lg);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
 
-.order-card{
-  margin:0 18px 12px;
-  background:var(--glass);
-  border:1px solid var(--hairline);
-  border-radius:var(--radius-md);
-  padding:14px 16px;
-}
-.order-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.order-id{font-size:12px;font-weight:800;color:var(--bronze-light);}
-.order-date{font-size:10.5px;color:var(--muted);}
-.order-items-text{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:8px;}
-.order-total{display:flex;justify-content:space-between;font-size:13px;font-weight:800;color:var(--cream);}
+        .promo-title { font-size: 1.5rem; margin-bottom: 8px; }
+        .promo-subtitle { font-size: 0.9rem; color: var(--bronze-muted); }
 
-/* ============================================================
-   MODALS
-   ============================================================ */
-.modal-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(6,5,4,0.72);
-  backdrop-filter:blur(6px);
-  z-index:100;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .3s ease;
-}
-.modal-overlay.show{opacity:1;pointer-events:auto;}
-.modal-sheet{
-  width:100%;
-  max-width:480px;
-  max-height:88vh;
-  overflow-y:auto;
-  background:linear-gradient(180deg,var(--charcoal-2),var(--charcoal));
-  border:1px solid var(--hairline-strong);
-  border-bottom:none;
-  border-radius:26px 26px 0 0;
-  padding:14px 22px calc(28px + var(--safe-bottom));
-  transform:translateY(100%);
-  transition:transform .38s cubic-bezier(.32,.72,0,1);
-  box-shadow:0 -20px 60px rgba(0,0,0,0.6);
-}
-.modal-overlay.show .modal-sheet{transform:translateY(0);}
-.modal-handle{
-  width:38px;height:4px;
-  border-radius:99px;
-  background:var(--hairline-strong);
-  margin:6px auto 18px;
-}
-.modal-close{
-  position:absolute;
-  top:18px;
-  inset-inline-end:20px;
-  color:var(--muted);
-  width:32px;height:32px;
-  display:flex;align-items:center;justify-content:center;
-  border-radius:50%;
-  background:var(--glass);
-}
-.modal-title{
-  font-family:var(--font-display);
-  font-size:23px;
-  font-weight:600;
-  margin-bottom:6px;
-}
-.modal-sub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.5;}
+        /* Store Cards List */
+        .section-header {
+            padding: 0 var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.emblem{
-  width:52px;height:52px;
-  margin:2px auto 16px;
-  border-radius:50%;
-  background:linear-gradient(150deg,var(--bronze-light),var(--bronze-deep));
-  display:flex;align-items:center;justify-content:center;
-  color:var(--obsidian);
-  box-shadow:0 12px 26px -10px rgba(185,148,94,0.7);
-}
+        .stores-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+            padding: 0 var(--spacing-md);
+        }
 
-.password-wrap{position:relative;}
-.password-toggle{
-  position:absolute;
-  top:50%;
-  inset-inline-end:14px;
-  transform:translateY(-50%);
-  color:var(--muted);
-  padding:4px;
-}
-.divider-row{
-  display:flex;align-items:center;gap:12px;
-  margin:20px 0;
-  color:var(--muted-2);
-  font-size:11.5px;
-  font-weight:700;
-  letter-spacing:0.03em;
-  text-transform:uppercase;
-}
-.divider-row::before,.divider-row::after{
-  content:"";flex:1;height:1px;background:var(--hairline-strong);
-}
-.google-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  background:#ffffff;
-  color:#1f1f1f;
-  font-size:14px;
-  font-weight:700;
-  box-shadow:0 10px 24px -12px rgba(0,0,0,0.5);
-  transition:transform .15s ease;
-}
-.google-btn:active{transform:scale(0.98);}
-.google-btn.loading{opacity:0.7;pointer-events:none;}
-.auth-footer{
-  text-align:center;
-  margin-top:18px;
-  font-size:12.5px;
-  color:var(--muted);
-}
-.auth-footer button{color:var(--bronze-light);font-weight:700;}
-.auth-switch{display:flex;gap:8px;margin-bottom:18px;background:var(--glass);border:1px solid var(--hairline);border-radius:12px;padding:4px;}
-.auth-switch button{flex:1;padding:9px;border-radius:9px;font-size:12.5px;font-weight:700;color:var(--muted);}
-.auth-switch button.active{background:linear-gradient(150deg,var(--bronze-light),var(--bronze-deep));color:var(--obsidian);}
+        .store-card {
+            background: var(--obsidian-light);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
 
-.toast{
-  position:fixed;
-  bottom:calc(100px + var(--safe-bottom));
-  left:50%;
-  transform:translateX(-50%) translateY(20px);
-  max-width:calc(100% - 48px);
-  background:linear-gradient(140deg,var(--charcoal-3),var(--charcoal-2));
-  border:1px solid var(--hairline-strong);
-  border-radius:14px;
-  padding:13px 18px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:12.5px;
-  font-weight:700;
-  color:var(--cream);
-  box-shadow:var(--shadow-lg);
-  z-index:200;
-  opacity:0;
-  pointer-events:none;
-  transition:all .3s cubic-bezier(.34,1.56,.64,1);
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-.toast-icon{color:var(--success);flex:0 0 auto;}
+        .store-card:active { transform: scale(0.98); }
 
-.order-success{
-  text-align:center;
-  padding:40px 24px 20px;
-}
-.success-ring{
-  width:84px;height:84px;
-  margin:0 auto 20px;
-  border-radius:50%;
-  background:radial-gradient(circle at 30% 30%, var(--success), var(--success-dim));
-  display:flex;align-items:center;justify-content:center;
-  color:var(--cream);
-  box-shadow:0 18px 40px -14px rgba(94,157,118,0.6);
-}
+        .store-cover {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--glass-border);
+        }
 
-/* Utility */
-.hide{display:none !important;}
-.row-between{display:flex;align-items:center;justify-content:space-between;}
-.mt-8{margin-top:8px;}
-.fade-in{animation:fadeIn .4s ease;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+        .store-info {
+            padding: var(--spacing-md);
+            position: relative;
+        }
 
-@media (max-width:360px){
-  .banner-title{font-size:19px;}
-  .product-grid{gap:10px;}
-}
-</style>
+        .store-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .store-name { font-size: 1.15rem; font-family: var(--font-heading); }
+        .store-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--velvet-charcoal);
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            color: var(--bronze-bright);
+        }
+
+        .store-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 12px;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: var(--radius-pill);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .status-open { background: rgba(101, 0, 21, 0.2); color: #ff4d6d; border: 1px solid var(--rosewood-main); }
+
+        /* Store Catalog View */
+        #catalog-view {
+            display: none;
+            padding-bottom: var(--spacing-lg);
+        }
+
+        .catalog-header {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .catalog-header-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--obsidian-dark) 0%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--spacing-md);
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            inset-inline-start: 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+        }
+
+        .product-card {
+            background: var(--obsidian-light);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .product-name {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .product-price {
+            color: var(--bronze-bright);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .add-to-cart-btn {
+            background: var(--velvet-charcoal);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .add-to-cart-btn:active {
+            background: var(--rosewood-main);
+            border-color: var(--rosewood-light);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--bottom-nav-height);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+            border-top: 1px solid var(--glass-border);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            cursor: pointer;
+            width: 20%;
+            transition: color 0.3s;
+        }
+
+        .nav-item.active {
+            color: var(--bronze-bright);
+        }
+
+        .nav-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .cart-badge-container {
+            position: relative;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            inset-inline-end: -8px;
+            background: var(--rosewood-main);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: bold;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            border: 1px solid var(--obsidian-dark);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .cart-badge.visible { opacity: 1; }
+
+        /* Modals & Overlays */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 400px;
+            background: var(--obsidian-light);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 16px;
+            inset-inline-end: 16px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-md);
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            color: var(--bronze-muted);
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--velvet-charcoal);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-input:focus { border-color: var(--rosewood-main); }
+
+        .password-toggle {
+            position: absolute;
+            inset-inline-end: 12px;
+            top: 34px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .google-btn {
+            width: 100%;
+            background: white;
+            color: #333;
+            border: none;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: var(--spacing-md);
+            cursor: pointer;
+        }
+
+        /* Cart Slide Panel */
+        .cart-panel {
+            position: fixed;
+            top: 0;
+            inset-inline-end: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--obsidian-dark);
+            z-index: 900;
+            transition: inset-inline-end 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            border-inline-start: 1px solid var(--glass-border);
+        }
+
+        .cart-panel.active { inset-inline-end: 0; }
+
+        .cart-header {
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--glass-bg);
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .cart-item {
+            display: flex;
+            gap: var(--spacing-md);
+            background: var(--velvet-charcoal);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--glass-border);
+        }
+
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+        }
+
+        .cart-item-details { flex-grow: 1; }
+        .cart-item-title { font-size: 0.9rem; font-weight: 500; margin-bottom: 4px; }
+        .cart-item-price { color: var(--bronze-bright); font-size: 0.85rem; }
+
+        .cart-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .qty-btn {
+            background: var(--obsidian-light);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .cart-footer {
+            padding: var(--spacing-lg);
+            background: var(--obsidian-light);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--glass-border);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            margin-top: var(--spacing-lg);
+        }
+
+        /* Profile View */
+        #profile-view {
+            display: none;
+            padding: var(--spacing-lg);
+            padding-top: calc(var(--header-height) + 20px);
+        }
+
+        .profile-card {
+            background: var(--velvet-charcoal);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .avatar-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--rosewood-main), var(--bronze-muted));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: 2rem;
+            font-family: var(--font-heading);
+            color: white;
+        }
+
+        .profile-name { font-size: 1.5rem; margin-bottom: 4px; font-family: var(--font-heading); }
+        .profile-phone { color: var(--bronze-muted); font-size: 0.9rem; margin-bottom: var(--spacing-lg); }
+
+        .profile-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .menu-item {
+            background: var(--obsidian-light);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .menu-item:hover { border-color: var(--bronze-muted); }
+
+        /* General Utilities */
+        .hidden { display: none !important; }
+    </style>
 </head>
 <body>
 
-<div class="app-shell" id="appShell">
-
-  <!-- ============ TOP HEADER (shown on home/stores) ============ -->
-  <header class="top-header" id="topHeader">
-    <div class="header-row">
-      <div class="location-block" data-action="open-location">
-        <div class="location-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#efe6d8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div class="location-text">
-          <div class="location-label" data-i18n="deliverTo">Deliver to</div>
-          <div class="location-name"><span id="locationName">Algiers — Hydra</span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8f8578" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
-        </div>
-      </div>
-      <div class="lang-switch" id="langSwitch">
-        <button class="lang-btn" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="fr">FR</button>
-        <button class="lang-btn" data-lang="ar">AR</button>
-      </div>
-    </div>
-
-    <div class="search-bar">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Search palettes, lipsticks, brushes...">
-    </div>
-
-    <div class="category-pills" id="categoryPills"></div>
-  </header>
-
-  <!-- ============ MAIN CONTENT ============ -->
-  <main class="app-main" id="appMain"></main>
-
-  <!-- ============ FLOATING CART BAR ============ -->
-  <div class="floating-cart hidden" id="floatingCart" data-action="go-cart">
-    <div class="fc-left">
-      <div class="fc-badge" id="fcCount">0</div>
-      <div class="fc-text">
-        <div class="fc-title" data-i18n="viewCart">View cart</div>
-        <div class="fc-sub" id="fcSub">0 DZD</div>
-      </div>
-    </div>
-    <div class="fc-cta">
-      <span data-i18n="checkout">Checkout</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-    </div>
-  </div>
-
-  <!-- ============ BOTTOM NAVIGATION ============ -->
-  <nav class="bottom-nav" id="bottomNav">
-    <button class="nav-item" data-route="home" data-action="nav">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
-      <span class="nav-label" data-i18n="navHome">Home</span>
-    </button>
-    <button class="nav-item" data-route="stores" data-action="nav">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18M5 9V6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3m-14 0v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V9"/><path d="M9 21v-5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5"/></svg>
-      <span class="nav-label" data-i18n="navStores">Stores</span>
-    </button>
-    <button class="nav-item" data-route="cart" data-action="nav" style="position:relative;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-      <span class="nav-label" data-i18n="navCart">Cart</span>
-      <span class="nav-badge hide" id="navCartBadge">0</span>
-    </button>
-    <button class="nav-item" data-route="notifications" data-action="nav">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-      <span class="nav-label" data-i18n="navAlerts">Alerts</span>
-      <span class="nav-badge hide" id="navNotifBadge">0</span>
-    </button>
-    <button class="nav-item" data-route="profile" data-action="nav">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>
-      <span class="nav-label" data-i18n="navProfile">Profile</span>
-    </button>
-  </nav>
-
-  <!-- ============ AUTH MODAL ============ -->
-  <div class="modal-overlay" id="authModal">
-    <div class="modal-sheet" style="position:relative;">
-      <div class="modal-handle"></div>
-      <button class="modal-close" data-action="close-modal" data-modal="authModal">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-      </button>
-      <div class="emblem">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>
-      </div>
-      <h2 class="modal-title" style="text-align:center;" data-i18n="authTitle">Welcome to Maison Éclat</h2>
-      <p class="modal-sub" style="text-align:center;" data-i18n="authSub">Sign in to check out securely and track your orders.</p>
-
-      <div class="auth-switch">
-        <button class="active" data-action="auth-tab" data-tab="signin" data-i18n="signIn">Sign in</button>
-        <button data-action="auth-tab" data-tab="signup" data-i18n="createAccount">Create account</button>
-      </div>
-
-      <form id="authForm">
-        <div class="field-block" style="margin:0 0 14px;">
-          <label class="field-label" data-i18n="emailLabel">Email address</label>
-          <input class="field-input" type="email" id="authEmail" data-i18n-placeholder="emailPlaceholder" placeholder="you@example.com" required>
-        </div>
-        <div class="field-block" style="margin:0 0 6px;">
-          <label class="field-label" data-i18n="passwordLabel">Password</label>
-          <div class="password-wrap">
-            <input class="field-input" type="password" id="authPassword" data-i18n-placeholder="passwordPlaceholder" placeholder="Minimum 6 characters" minlength="6" required style="padding-inline-end:44px;">
-            <button type="button" class="password-toggle" data-action="toggle-password">
-              <svg id="eyeIcon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-            </button>
-          </div>
-        </div>
-        <p class="field-hint" id="authError" style="color:var(--danger);display:none;" data-i18n="authError">Please enter a valid email and a 6+ character password.</p>
-        <button type="submit" class="btn-primary mt-8" id="authSubmitBtn" data-i18n="signIn">Sign in</button>
-      </form>
-
-      <div class="divider-row" data-i18n="orContinueWith">or continue with</div>
-
-      <button class="google-btn" id="googleBtn" data-action="google-signin">
-        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.9 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.1 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.6 15.9 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.3 0 10.2-2 13.9-5.4l-6.4-5.4C29.4 34.7 26.8 35.6 24 35.6c-5.3 0-9.7-3.5-11.3-8.4l-6.6 5.1C9.6 39.7 16.3 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.2 5.6l6.4 5.4C39.9 37 44 31.9 44 24c0-1.3-.1-2.7-.4-3.5z"/></svg>
-        <span id="googleBtnText" data-i18n="continueGoogle">Continue with Google</span>
-      </button>
-
-      <p class="auth-footer" data-i18n="authTerms">By continuing you agree to our Terms of Service and Privacy Policy.</p>
-    </div>
-  </div>
-
-  <!-- ============ TOAST ============ -->
-  <div class="toast" id="toast">
-    <svg class="toast-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-    <span id="toastText">Added to cart</span>
-  </div>
-
-</div>
-
-<script>
-"use strict";
-
-/* ============================================================
-   I18N
-   ============================================================ */
-const I18N = {
-  en:{
-    deliverTo:"Deliver to", searchPlaceholder:"Search palettes, lipsticks, brushes...",
-    navHome:"Home", navStores:"Stores", navCart:"Cart", navAlerts:"Alerts", navProfile:"Profile",
-    viewCart:"View cart", checkout:"Checkout",
-    catAll:"All", catEyes:"Eye Palettes", catLips:"Lipsticks", catFace:"Foundations", catMascara:"Mascara & Liner", catBrushes:"Brushes", catSkin:"Skincare Prep",
-    bannerEyebrow1:"New Arrival", bannerTitle1:"The Velour Eye Collection has landed",
-    bannerEyebrow2:"Free Delivery", bannerTitle2:"Spend 4000 DZD, delivery is on us",
-    bannerEyebrow3:"Editor's Pick", bannerTitle3:"Royal Matte — the lipstick everyone wants",
-    sectionCategories:"Shop by category", sectionFeatured:"Featured boutiques", seeAll:"See all",
-    open:"Open", closed:"Closed", minAway:"25–40 min", delivery:"Delivery", storesTitle:"All boutiques",
-    addToCart:"Add", cartTitle:"Your cart", cartEmptyTitle:"Your cart is empty",
-    cartEmptyText:"Browse our boutiques and add a few favourites to get started.",
-    browseStores:"Browse boutiques", subtotal:"Subtotal", deliveryFee:"Delivery fee", total:"Total",
-    phoneLabel:"Phone number", phonePlaceholder:"05XX XX XX XX", phoneHint:"We use this number to confirm and dispatch your order.",
-    placeOrder:"Place order", notifTitle:"Notifications", notifEmptyTitle:"Nothing here yet",
-    notifEmptyText:"Order updates and offers will appear here.",
-    profileTitle:"Profile", signInCta:"Sign in to manage your profile", signInCtaText:"Track orders, save addresses and check out faster.",
-    myOrders:"My orders", savedAddresses:"Saved addresses", paymentMethods:"Payment methods", helpCenter:"Help centre",
-    logout:"Log out", authTitle:"Welcome to Maison Éclat", authSub:"Sign in to check out securely and track your orders.",
-    signIn:"Sign in", createAccount:"Create account", emailLabel:"Email address", emailPlaceholder:"you@example.com",
-    passwordLabel:"Password", passwordPlaceholder:"Minimum 6 characters", authError:"Please enter a valid email and a 6+ character password.",
-    orContinueWith:"or continue with", continueGoogle:"Continue with Google", authTerms:"By continuing you agree to our Terms of Service and Privacy Policy.",
-    addedToCart:"Added to cart", orderPlaced:"Order placed successfully", signedIn:"Signed in successfully", signedOut:"Signed out",
-    verifiedPhone:"Verified phone", noOrdersYet:"No orders yet", noOrdersText:"Your placed orders will appear here.",
-    orderConfirmed:"Order confirmed", orderConfirmedText:"Your order has been placed. The boutique is preparing it now.",
-    backToHome:"Back to home", items:"items", item:"item", deliverToShort:"Delivering to",
-    storeClosedNotice:"This boutique is currently closed. You can browse, but ordering opens during their hours.",
-    ratingLabel:"rating", dzd:"DZD", searchNoResults:"No products match your search.",
-    notifOrderTitle:"Order confirmed", notifOrderText:"Your order has been placed and is being prepared.",
-    notifPromoTitle:"New in: Royal Matte", notifPromoText:"Ten new shades just landed at Rouge Royale Maison.",
-    notifDeliveryTitle:"Free delivery weekend", notifDeliveryText:"Enjoy free delivery on all orders above 4000 DZD this weekend.",
-    guestName:"Guest", editProfile:"Edit profile", myFavourites:"My favourites"
-  },
-  fr:{
-    deliverTo:"Livrer à", searchPlaceholder:"Rechercher palettes, rouges à lèvres, pinceaux...",
-    navHome:"Accueil", navStores:"Boutiques", navCart:"Panier", navAlerts:"Alertes", navProfile:"Profil",
-    viewCart:"Voir le panier", checkout:"Commander",
-    catAll:"Tout", catEyes:"Palettes yeux", catLips:"Rouges à lèvres", catFace:"Fonds de teint", catMascara:"Mascara & Eye-liner", catBrushes:"Pinceaux", catSkin:"Préparation peau",
-    bannerEyebrow1:"Nouveauté", bannerTitle1:"La collection Velour Eye est arrivée",
-    bannerEyebrow2:"Livraison gratuite", bannerTitle2:"Dès 4000 DZD, la livraison est offerte",
-    bannerEyebrow3:"Coup de cœur", bannerTitle3:"Royal Matte — le rouge à lèvres convoité",
-    sectionCategories:"Acheter par catégorie", sectionFeatured:"Boutiques en vedette", seeAll:"Tout voir",
-    open:"Ouvert", closed:"Fermé", minAway:"25–40 min", delivery:"Livraison", storesTitle:"Toutes les boutiques",
-    addToCart:"Ajouter", cartTitle:"Votre panier", cartEmptyTitle:"Votre panier est vide",
-    cartEmptyText:"Parcourez nos boutiques et ajoutez vos coups de cœur.",
-    browseStores:"Voir les boutiques", subtotal:"Sous-total", deliveryFee:"Frais de livraison", total:"Total",
-    phoneLabel:"Numéro de téléphone", phonePlaceholder:"05XX XX XX XX", phoneHint:"Ce numéro sert à confirmer et livrer votre commande.",
-    placeOrder:"Passer la commande", notifTitle:"Notifications", notifEmptyTitle:"Rien à afficher",
-    notifEmptyText:"Les mises à jour et offres apparaîtront ici.",
-    profileTitle:"Profil", signInCta:"Connectez-vous pour gérer votre profil", signInCtaText:"Suivez vos commandes et commandez plus vite.",
-    myOrders:"Mes commandes", savedAddresses:"Adresses enregistrées", paymentMethods:"Moyens de paiement", helpCenter:"Centre d'aide",
-    logout:"Se déconnecter", authTitle:"Bienvenue chez Maison Éclat", authSub:"Connectez-vous pour commander en toute sécurité.",
-    signIn:"Se connecter", createAccount:"Créer un compte", emailLabel:"Adresse e-mail", emailPlaceholder:"vous@exemple.com",
-    passwordLabel:"Mot de passe", passwordPlaceholder:"6 caractères minimum", authError:"Veuillez saisir un e-mail valide et un mot de passe de 6 caractères minimum.",
-    orContinueWith:"ou continuer avec", continueGoogle:"Continuer avec Google", authTerms:"En continuant, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité.",
-    addedToCart:"Ajouté au panier", orderPlaced:"Commande passée avec succès", signedIn:"Connexion réussie", signedOut:"Déconnecté",
-    verifiedPhone:"Téléphone vérifié", noOrdersYet:"Aucune commande", noOrdersText:"Vos commandes apparaîtront ici.",
-    orderConfirmed:"Commande confirmée", orderConfirmedText:"Votre commande a été passée. La boutique la prépare.",
-    backToHome:"Retour à l'accueil", items:"articles", item:"article", deliverToShort:"Livraison à",
-    storeClosedNotice:"Cette boutique est actuellement fermée. Vous pouvez parcourir le catalogue.",
-    ratingLabel:"note", dzd:"DZD", searchNoResults:"Aucun produit ne correspond à votre recherche.",
-    notifOrderTitle:"Commande confirmée", notifOrderText:"Votre commande a été passée et est en préparation.",
-    notifPromoTitle:"Nouveau : Royal Matte", notifPromoText:"Dix nouvelles teintes chez Rouge Royale Maison.",
-    notifDeliveryTitle:"Week-end livraison gratuite", notifDeliveryText:"Livraison gratuite dès 4000 DZD ce week-end.",
-    guestName:"Invité", editProfile:"Modifier le profil", myFavourites:"Mes favoris"
-  },
-  ar:{
-    deliverTo:"التوصيل إلى", searchPlaceholder:"ابحث عن باليتات، أحمر شفاه، فرش...",
-    navHome:"الرئيسية", navStores:"المتاجر", navCart:"السلة", navAlerts:"التنبيهات", navProfile:"الملف الشخصي",
-    viewCart:"عرض السلة", checkout:"إتمام الطلب",
-    catAll:"الكل", catEyes:"باليتات العيون", catLips:"أحمر الشفاه", catFace:"كريم الأساس", catMascara:"مسكارا وآيلاينر", catBrushes:"الفرش", catSkin:"تحضير البشرة",
-    bannerEyebrow1:"وصل حديثاً", bannerTitle1:"مجموعة فيلور للعيون وصلت الآن",
-    bannerEyebrow2:"توصيل مجاني", bannerTitle2:"عند الشراء بـ 4000 دج التوصيل مجاني",
-    bannerEyebrow3:"اختيار المحررين", bannerTitle3:"رويال مات — أحمر الشفاه الأكثر طلباً",
-    sectionCategories:"تسوق حسب الفئة", sectionFeatured:"متاجر مميزة", seeAll:"عرض الكل",
-    open:"مفتوح", closed:"مغلق", minAway:"25–40 دقيقة", delivery:"التوصيل", storesTitle:"جميع المتاجر",
-    addToCart:"إضافة", cartTitle:"سلتك", cartEmptyTitle:"سلتك فارغة",
-    cartEmptyText:"تصفحي متاجرنا وأضيفي مفضلاتك للبدء.",
-    browseStores:"تصفح المتاجر", subtotal:"المجموع الفرعي", deliveryFee:"رسوم التوصيل", total:"الإجمالي",
-    phoneLabel:"رقم الهاتف", phonePlaceholder:"05XX XX XX XX", phoneHint:"نستخدم هذا الرقم لتأكيد طلبك وتوصيله.",
-    placeOrder:"تأكيد الطلب", notifTitle:"التنبيهات", notifEmptyTitle:"لا يوجد شيء هنا بعد",
-    notifEmptyText:"ستظهر تحديثات الطلبات والعروض هنا.",
-    profileTitle:"الملف الشخصي", signInCta:"سجلي الدخول لإدارة ملفك", signInCtaText:"تتبعي طلباتك واحفظي عناوينك.",
-    myOrders:"طلباتي", savedAddresses:"العناوين المحفوظة", paymentMethods:"وسائل الدفع", helpCenter:"مركز المساعدة",
-    logout:"تسجيل الخروج", authTitle:"مرحباً بك في ميزون إكلا", authSub:"سجلي الدخول لإتمام الطلب بأمان ومتابعة طلباتك.",
-    signIn:"تسجيل الدخول", createAccount:"إنشاء حساب", emailLabel:"البريد الإلكتروني", emailPlaceholder:"you@example.com",
-    passwordLabel:"كلمة المرور", passwordPlaceholder:"6 أحرف على الأقل", authError:"يرجى إدخال بريد إلكتروني صحيح وكلمة مرور من 6 أحرف على الأقل.",
-    orContinueWith:"أو تابعي باستخدام", continueGoogle:"المتابعة عبر جوجل", authTerms:"بالمتابعة، أنتِ توافقين على شروط الخدمة وسياسة الخصوصية.",
-    addedToCart:"أُضيف إلى السلة", orderPlaced:"تم تأكيد الطلب بنجاح", signedIn:"تم تسجيل الدخول بنجاح", signedOut:"تم تسجيل الخروج",
-    verifiedPhone:"رقم موثّق", noOrdersYet:"لا توجد طلبات بعد", noOrdersText:"ستظهر طلباتك هنا.",
-    orderConfirmed:"تم تأكيد الطلب", orderConfirmedText:"تم إرسال طلبك، والمتجر يقوم بتجهيزه الآن.",
-    backToHome:"العودة للرئيسية", items:"منتجات", item:"منتج", deliverToShort:"التوصيل إلى",
-    storeClosedNotice:"هذا المتجر مغلق حالياً. يمكنك التصفح فقط.",
-    ratingLabel:"التقييم", dzd:"دج", searchNoResults:"لا توجد منتجات مطابقة لبحثك.",
-    notifOrderTitle:"تم تأكيد الطلب", notifOrderText:"تم إرسال طلبك وهو قيد التحضير الآن.",
-    notifPromoTitle:"جديد: رويال مات", notifPromoText:"عشر درجات جديدة وصلت إلى روج رويال ميزون.",
-    notifDeliveryTitle:"عطلة نهاية أسبوع بتوصيل مجاني", notifDeliveryText:"استمتعي بتوصيل مجاني للطلبات فوق 4000 دج.",
-    guestName:"زائر", editProfile:"تعديل الملف الشخصي", myFavourites:"مفضلاتي"
-  }
-};
-
-/* ============================================================
-   IMAGE POOL — verified real Unsplash photographs (makeup only)
-   ============================================================ */
-const IMG = {
-  eyeshadow1:"https://images.unsplash.com/photo-1536507789696-9ced44de40bd?w=800&q=80&auto=format&fit=crop",
-  eyeshadow2:"https://images.unsplash.com/photo-1548954638-082b560e0a66?w=800&q=80&auto=format&fit=crop",
-  lipstick1:"https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?w=800&q=80&auto=format&fit=crop",
-  lipstick2:"https://images.unsplash.com/photo-1549153052-247abe00d6d9?w=800&q=80&auto=format&fit=crop",
-  foundation1:"https://images.unsplash.com/photo-1512495967160-4e815a64fba6?w=800&q=80&auto=format&fit=crop",
-  foundation2:"https://images.unsplash.com/photo-1664334673947-39746cafbc83?w=800&q=80&auto=format&fit=crop",
-  brush1:"https://images.unsplash.com/photo-1621171373168-ff76afc1c7de?w=800&q=80&auto=format&fit=crop",
-  brush2:"https://images.unsplash.com/photo-1583241800698-e8ab01830a07?w=800&q=80&auto=format&fit=crop",
-  skincare1:"https://images.unsplash.com/photo-1768881187102-ca0131989c8a?w=800&q=80&auto=format&fit=crop",
-  mascara1:"https://images.unsplash.com/photo-1512207159096-c2c91b1dfadd?w=800&q=80&auto=format&fit=crop",
-  mascara2:"https://images.unsplash.com/photo-1512053572163-a1a0ea7fe738?w=800&q=80&auto=format&fit=crop"
-};
-function crop(url, seed){
-  // varies the visible crop slightly per-product so the same source photo
-  // reads as a distinct product tile within a category grid
-  const positions=["center","top","bottom","left","right"];
-  const p=positions[seed % positions.length];
-  return url.replace("fit=crop", "fit=crop&crop="+p);
-}
-
-/* ============================================================
-   STORE + PRODUCT DATA — 6 boutiques x 10 products = 60 items
-   ============================================================ */
-const STORES = [
-  {
-    id:"velour-eye", nameKey:"catEyes", name:"Velour Eye Atelier",
-    tagline:"High-pigment eye palettes and pressed pigments",
-    tags:["Eyeshadow","Palettes","Pigments"], rating:4.8, location:"Hydra, Algiers",
-    cover:IMG.eyeshadow1, openHour:9, closeHour:22, category:"eyes"
-  },
-  {
-    id:"rouge-royale", nameKey:"catLips", name:"Rouge Royale Maison",
-    tagline:"Matte, satin and velvet lip couture",
-    tags:["Lipstick","Lip Liner","Gloss"], rating:4.9, location:"Kouba, Algiers",
-    cover:IMG.lipstick1, openHour:9, closeHour:21, category:"lips"
-  },
-  {
-    id:"lumiere-complexion", nameKey:"catFace", name:"Lumière Complexion House",
-    tagline:"Foundations, concealers and luminous finishes",
-    tags:["Foundation","Concealer","Powder"], rating:4.7, location:"Bab Ezzouar, Algiers",
-    cover:IMG.foundation1, openHour:8, closeHour:22, category:"face"
-  },
-  {
-    id:"noir-line", nameKey:"catMascara", name:"Noir Line Studio",
-    tagline:"Precision mascaras, liners and brow definition",
-    tags:["Mascara","Eyeliner","Brow"], rating:4.6, location:"Cheraga, Algiers",
-    cover:IMG.mascara1, openHour:10, closeHour:23, category:"mascara"
-  },
-  {
-    id:"atelier-pinceaux", nameKey:"catBrushes", name:"Atelier des Pinceaux",
-    tagline:"Hand-tied artisanal brushes and applicators",
-    tags:["Brushes","Sponges","Tools"], rating:4.9, location:"Dely Ibrahim, Algiers",
-    cover:IMG.brush1, openHour:9, closeHour:20, category:"brushes"
-  },
-  {
-    id:"bronze-bloom", nameKey:"catSkin", name:"Bronze Bloom Skin Lab",
-    tagline:"Primers, setting mists and makeup-prep skincare",
-    tags:["Primer","Setting Spray","Prep"], rating:4.7, location:"Ben Aknoun, Algiers",
-    cover:IMG.skincare1, openHour:9, closeHour:22, category:"skin"
-  }
-];
-
-const PRODUCTS = [
-  // ---- Velour Eye Atelier (eyes) ----
-  {id:"e1", storeId:"velour-eye", name:"Nocturne 12-Shade Velvet Palette", price:2850, rating:4.9, img:IMG.eyeshadow1},
-  {id:"e2", storeId:"velour-eye", name:"Bronzed Dusk Pressed Pigment Duo", price:1450, rating:4.7, img:IMG.eyeshadow2},
-  {id:"e3", storeId:"velour-eye", name:"Rosewood Smoke Quad", price:1690, rating:4.8, img:IMG.eyeshadow1},
-  {id:"e4", storeId:"velour-eye", name:"Champagne Foil Single Pot", price:890, rating:4.6, img:IMG.eyeshadow2},
-  {id:"e5", storeId:"velour-eye", name:"Midnight Garnet 9-Pan Palette", price:2200, rating:4.9, img:IMG.eyeshadow1},
-  {id:"e6", storeId:"velour-eye", name:"Satin Taupe Everyday Trio", price:1250, rating:4.5, img:IMG.eyeshadow2},
-  {id:"e7", storeId:"velour-eye", name:"Amber Glow Duo-Chrome Pot", price:980, rating:4.7, img:IMG.eyeshadow1},
-  {id:"e8", storeId:"velour-eye", name:"Obsidian Matte Crease Kit", price:1590, rating:4.6, img:IMG.eyeshadow2},
-  {id:"e9", storeId:"velour-eye", name:"Sable Shimmer 6-Shade Set", price:1980, rating:4.8, img:IMG.eyeshadow1},
-  {id:"e10", storeId:"velour-eye", name:"Terracotta Bloom Mini Palette", price:1150, rating:4.6, img:IMG.eyeshadow2},
-
-  // ---- Rouge Royale Maison (lips) ----
-  {id:"l1", storeId:"rouge-royale", name:"Royal Matte Lipstick — Grenat", price:1350, rating:4.9, img:IMG.lipstick1},
-  {id:"l2", storeId:"rouge-royale", name:"Royal Matte Lipstick — Rosewood", price:1350, rating:4.8, img:IMG.lipstick2},
-  {id:"l3", storeId:"rouge-royale", name:"Velvet Crème Lip Duo — Nude Set", price:2100, rating:4.7, img:IMG.lipstick1},
-  {id:"l4", storeId:"rouge-royale", name:"Satin Finish Lipstick — Bordeaux", price:1250, rating:4.6, img:IMG.lipstick2},
-  {id:"l5", storeId:"rouge-royale", name:"Precision Lip Liner — Cocoa", price:650, rating:4.5, img:IMG.lipstick1},
-  {id:"l6", storeId:"rouge-royale", name:"High-Shine Lip Gloss — Amber", price:790, rating:4.6, img:IMG.lipstick2},
-  {id:"l7", storeId:"rouge-royale", name:"Royal Matte Lipstick — Blush Nude", price:1350, rating:4.8, img:IMG.lipstick1},
-  {id:"l8", storeId:"rouge-royale", name:"Long-Wear Liquid Lip — Terracotta", price:1480, rating:4.7, img:IMG.lipstick2},
-  {id:"l9", storeId:"rouge-royale", name:"Tinted Lip Balm Trio", price:1590, rating:4.6, img:IMG.lipstick1},
-  {id:"l10", storeId:"rouge-royale", name:"Royal Matte Lipstick — Wine Noir", price:1350, rating:4.9, img:IMG.lipstick2},
-
-  // ---- Lumière Complexion House (face) ----
-  {id:"f1", storeId:"lumiere-complexion", name:"Second Skin Foundation — Porcelain", price:2450, rating:4.8, img:IMG.foundation1},
-  {id:"f2", storeId:"lumiere-complexion", name:"Second Skin Foundation — Amber", price:2450, rating:4.8, img:IMG.foundation2},
-  {id:"f3", storeId:"lumiere-complexion", name:"Featherlight Concealer — Ivory", price:1350, rating:4.7, img:IMG.foundation1},
-  {id:"f4", storeId:"lumiere-complexion", name:"Sculpt & Glow Contour Duo", price:1890, rating:4.6, img:IMG.foundation2},
-  {id:"f5", storeId:"lumiere-complexion", name:"Silk Setting Powder — Translucent", price:1590, rating:4.7, img:IMG.foundation1},
-  {id:"f6", storeId:"lumiere-complexion", name:"Radiance Cream Blush — Rosewood", price:1250, rating:4.8, img:IMG.foundation2},
-  {id:"f7", storeId:"lumiere-complexion", name:"Bronze Halo Highlighter", price:1450, rating:4.9, img:IMG.foundation1},
-  {id:"f8", storeId:"lumiere-complexion", name:"Second Skin Foundation — Honey", price:2450, rating:4.7, img:IMG.foundation2},
-  {id:"f9", storeId:"lumiere-complexion", name:"Blurring Loose Powder", price:1690, rating:4.6, img:IMG.foundation1},
-  {id:"f10", storeId:"lumiere-complexion", name:"Dewy Finish BB Cream", price:1990, rating:4.5, img:IMG.foundation2},
-
-  // ---- Noir Line Studio (mascara & liner) ----
-  {id:"m1", storeId:"noir-line", name:"Volume Noir Mascara", price:1290, rating:4.8, img:IMG.mascara1},
-  {id:"m2", storeId:"noir-line", name:"Lengthening Fibre Mascara", price:1390, rating:4.7, img:IMG.mascara2},
-  {id:"m3", storeId:"noir-line", name:"Precision Felt-Tip Eyeliner", price:890, rating:4.9, img:IMG.mascara1},
-  {id:"m4", storeId:"noir-line", name:"Waterproof Curl Mascara", price:1350, rating:4.6, img:IMG.mascara2},
-  {id:"m5", storeId:"noir-line", name:"Sculpting Brow Pomade — Espresso", price:1150, rating:4.8, img:IMG.mascara1},
-  {id:"m6", storeId:"noir-line", name:"Kohl Eye Pencil — Onyx", price:650, rating:4.7, img:IMG.mascara2},
-  {id:"m7", storeId:"noir-line", name:"Micro-Fine Brow Pencil — Taupe", price:980, rating:4.6, img:IMG.mascara1},
-  {id:"m8", storeId:"noir-line", name:"Tinted Brow Gel — Clear Hold", price:790, rating:4.5, img:IMG.mascara2},
-  {id:"m9", storeId:"noir-line", name:"Gel Eyeliner Pot — Deep Bronze", price:1090, rating:4.7, img:IMG.mascara1},
-  {id:"m10", storeId:"noir-line", name:"Voluminous Noir Mascara — Waterproof", price:1390, rating:4.8, img:IMG.mascara2},
-
-  // ---- Atelier des Pinceaux (brushes) ----
-  {id:"b1", storeId:"atelier-pinceaux", name:"Signature 8-Piece Brush Set", price:2950, rating:4.9, img:IMG.brush1},
-  {id:"b2", storeId:"atelier-pinceaux", name:"Precision Crease Brush", price:690, rating:4.7, img:IMG.brush2},
-  {id:"b3", storeId:"atelier-pinceaux", name:"Domed Powder Brush — Bronze Handle", price:990, rating:4.8, img:IMG.brush1},
-  {id:"b4", storeId:"atelier-pinceaux", name:"Dual-Ended Blending Duo", price:790, rating:4.6, img:IMG.brush2},
-  {id:"b5", storeId:"atelier-pinceaux", name:"Complexion Sponge — Rosewood Pack of 2", price:650, rating:4.7, img:IMG.brush1},
-  {id:"b6", storeId:"atelier-pinceaux", name:"Angled Contour Brush", price:850, rating:4.8, img:IMG.brush2},
-  {id:"b7", storeId:"atelier-pinceaux", name:"Fine-Tip Liner Brush", price:590, rating:4.6, img:IMG.brush1},
-  {id:"b8", storeId:"atelier-pinceaux", name:"Fluffy Highlighter Fan Brush", price:790, rating:4.9, img:IMG.brush2},
-  {id:"b9", storeId:"atelier-pinceaux", name:"Travel Brush Roll — 6 Piece", price:1690, rating:4.7, img:IMG.brush1},
-  {id:"b10", storeId:"atelier-pinceaux", name:"Kabuki Buffing Brush", price:890, rating:4.6, img:IMG.brush2},
-
-  // ---- Bronze Bloom Skin Lab (skincare prep) ----
-  {id:"s1", storeId:"bronze-bloom", name:"Velvet Grip Makeup Primer", price:1590, rating:4.8, img:IMG.skincare1},
-  {id:"s2", storeId:"bronze-bloom", name:"Rosewood Hydrating Setting Mist", price:1290, rating:4.7, img:IMG.skincare1},
-  {id:"s3", storeId:"bronze-bloom", name:"Pore-Blur Priming Serum", price:1890, rating:4.9, img:IMG.skincare1},
-  {id:"s4", storeId:"bronze-bloom", name:"Illuminating Prep Drops — Bronze", price:1750, rating:4.6, img:IMG.skincare1},
-  {id:"s5", storeId:"bronze-bloom", name:"Matte Balance Primer — Oil Control", price:1490, rating:4.7, img:IMG.skincare1},
-  {id:"s6", storeId:"bronze-bloom", name:"Lip Prep Balm — Plumping", price:790, rating:4.5, img:IMG.skincare1},
-  {id:"s7", storeId:"bronze-bloom", name:"24-Hour Hold Setting Spray", price:1350, rating:4.8, img:IMG.skincare1},
-  {id:"s8", storeId:"bronze-bloom", name:"Under-Eye Prep Patches — Set of 12", price:990, rating:4.6, img:IMG.skincare1},
-  {id:"s9", storeId:"bronze-bloom", name:"Hydra Glow Priming Mist", price:1290, rating:4.7, img:IMG.skincare1},
-  {id:"s10", storeId:"bronze-bloom", name:"Smoothing Skin Perfector Primer", price:1690, rating:4.8, img:IMG.skincare1}
-].map((p,idx)=>({...p, img:crop(p.img, idx)}));
-
-const CATEGORIES = [
-  {key:"all", i18n:"catAll"},
-  {key:"eyes", i18n:"catEyes"},
-  {key:"lips", i18n:"catLips"},
-  {key:"face", i18n:"catFace"},
-  {key:"mascara", i18n:"catMascara"},
-  {key:"brushes", i18n:"catBrushes"},
-  {key:"skin", i18n:"catSkin"}
-];
-
-const BANNERS = [
-  {eyebrowKey:"bannerEyebrow1", titleKey:"bannerTitle1", img:IMG.eyeshadow1},
-  {eyebrowKey:"bannerEyebrow2", titleKey:"bannerTitle2", img:IMG.brush1},
-  {eyebrowKey:"bannerEyebrow3", titleKey:"bannerTitle3", img:IMG.lipstick1}
-];
-
-/* ============================================================
-   STATE
-   ============================================================ */
-const State = {
-  lang: localStorage.getItem("me_lang") || "en",
-  route: "home",
-  activeCategory: "all",
-  searchQuery: "",
-  cart: JSON.parse(localStorage.getItem("me_cart") || "[]"),
-  user: JSON.parse(localStorage.getItem("me_user") || "null"),
-  notifications: JSON.parse(localStorage.getItem("me_notifs") || "null"),
-  activeStoreId: null,
-  bannerIndex: 0,
-  authTab: "signin",
-  passwordVisible: false,
-  pendingAction: null // route to go to after successful auth
-};
-
-function t(key){
-  return (I18N[State.lang] && I18N[State.lang][key]) || I18N.en[key] || key;
-}
-function saveCart(){ localStorage.setItem("me_cart", JSON.stringify(State.cart)); }
-function saveUser(){ localStorage.setItem("me_user", JSON.stringify(State.user)); }
-function saveNotifs(){ localStorage.setItem("me_notifs", JSON.stringify(State.notifications)); }
-
-function defaultNotifications(){
-  return [
-    {id:"n1", type:"promo", titleKey:"notifPromoTitle", textKey:"notifPromoText", time:"2h"},
-    {id:"n2", type:"delivery", titleKey:"notifDeliveryTitle", textKey:"notifDeliveryText", time:"1d"}
-  ];
-}
-if(!State.notifications){
-  State.notifications = defaultNotifications();
-  saveNotifs();
-}
-
-/* ============================================================
-   HELPERS
-   ============================================================ */
-function fmt(n){ return n.toLocaleString(State.lang==="ar" ? "ar-DZ" : (State.lang==="fr"?"fr-FR":"en-US")); }
-
-function isStoreOpen(store){
-  const now = new Date();
-  const h = now.getHours() + now.getMinutes()/60;
-  if(store.openHour < store.closeHour){
-    return h >= store.openHour && h < store.closeHour;
-  }
-  return h >= store.openHour || h < store.closeHour;
-}
-
-function getStore(id){ return STORES.find(s=>s.id===id); }
-function getProductsByStore(id){ return PRODUCTS.filter(p=>p.storeId===id); }
-
-function cartTotalCount(){ return State.cart.reduce((sum,i)=>sum+i.qty,0); }
-function cartSubtotal(){
-  return State.cart.reduce((sum,i)=>{
-    const p = PRODUCTS.find(pp=>pp.id===i.productId);
-    return sum + (p ? p.price*i.qty : 0);
-  },0);
-}
-const DELIVERY_FEE = 200;
-
-function cartStoreIds(){
-  return [...new Set(State.cart.map(i=>{
-    const p = PRODUCTS.find(pp=>pp.id===i.productId);
-    return p ? p.storeId : null;
-  }).filter(Boolean))];
-}
-
-function addToCart(productId){
-  const existing = State.cart.find(i=>i.productId===productId);
-  if(existing){ existing.qty += 1; }
-  else{ State.cart.push({productId, qty:1}); }
-  saveCart();
-  renderCartBadges();
-  showToast(t("addedToCart"));
-}
-function decrementCart(productId){
-  const existing = State.cart.find(i=>i.productId===productId);
-  if(!existing) return;
-  existing.qty -= 1;
-  if(existing.qty <= 0){
-    State.cart = State.cart.filter(i=>i.productId!==productId);
-  }
-  saveCart();
-  renderCartBadges();
-}
-function removeFromCart(productId){
-  State.cart = State.cart.filter(i=>i.productId!==productId);
-  saveCart();
-  renderCartBadges();
-  render();
-}
-function qtyInCart(productId){
-  const item = State.cart.find(i=>i.productId===productId);
-  return item ? item.qty : 0;
-}
-
-let toastTimer = null;
-function showToast(msg){
-  const toast = document.getElementById("toast");
-  document.getElementById("toastText").textContent = msg;
-  toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>toast.classList.remove("show"), 2200);
-}
-
-/* ============================================================
-   ICONS (inline, reused across cards)
-   ============================================================ */
-const ICONS = {
-  star:'<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.6 7.1.6-5.4 4.7 1.7 7L12 17.8 5.7 21.4l1.7-7L2 9.7l7.1-.6L12 2.5z"/></svg>',
-  pin:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
-  bike:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M6 18V9h9l3 9M6 9l3-5h5"/></svg>',
-  plus:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>',
-  minus:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>',
-  trash:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6"/></svg>',
-  chevronRight:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>',
-  bag:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>',
-  bell:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>',
-  box:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 8-9-5-9 5 9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></svg>',
-  mapPin2:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
-  card:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>',
-  help:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4"/><path d="M12 17h.01"/></svg>',
-  logout:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>',
-  check:'<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
-  back:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>',
-  heart:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>'
-};
-
-/* ============================================================
-   RENDER: HEADER (category pills, search state) — persists across home/stores
-   ============================================================ */
-function renderHeaderChrome(){
-  const pillsWrap = document.getElementById("categoryPills");
-  pillsWrap.innerHTML = CATEGORIES.map(c=>`
-    <button class="pill ${State.activeCategory===c.key?'active':''}" data-action="set-category" data-cat="${c.key}">
-      ${t(c.i18n)}
-    </button>
-  `).join("");
-
-  document.getElementById("searchInput").value = State.searchQuery;
-
-  const showHeader = (State.route==="home" || State.route==="stores");
-  document.getElementById("topHeader").classList.toggle("hide", !showHeader);
-}
-
-/* ============================================================
-   RENDER: HOME
-   ============================================================ */
-function renderHome(){
-  const filteredStores = filterStores();
-  return `
-    <div class="fade-in">
-      <div class="banner-wrap">
-        <div class="banner-viewport">
-          <div class="banner-track" id="bannerTrack" style="transform:translateX(${State.lang==='ar'? (State.bannerIndex*100) : (-State.bannerIndex*100)}%)">
-            ${BANNERS.map(b=>`
-              <div class="banner-slide" style="background-image:url('${b.img}')">
-                <div class="banner-copy">
-                  <div class="banner-eyebrow">${t(b.eyebrowKey)}</div>
-                  <div class="banner-title">${t(b.titleKey)}</div>
+    <div id="app">
+        <!-- Top Header -->
+        <header class="app-header glass-panel" id="main-header">
+            <div class="header-top">
+                <div class="location-display">
+                    <svg class="icon text-rosewood" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <div class="location-text">
+                        <span class="location-label" data-i18n="deliveringTo">Delivering to</span>
+                        <span class="location-value">Algiers, Hydra</span>
+                    </div>
                 </div>
-              </div>
-            `).join("")}
-          </div>
-          <div class="banner-dots">
-            ${BANNERS.map((_,i)=>`<div class="banner-dot ${i===State.bannerIndex?'active':''}"></div>`).join("")}
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-head">
-          <div class="section-title">${t("sectionCategories")}</div>
-        </div>
-        <div class="tile-grid">
-          ${CATEGORIES.filter(c=>c.key!=="all").map(c=>`
-            <button class="cat-tile" data-action="quick-category" data-cat="${c.key}">
-              <div class="cat-tile-icon">${categoryIcon(c.key)}</div>
-              <div class="cat-tile-label">${t(c.i18n)}</div>
-            </button>
-          `).join("")}
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-head">
-          <div class="section-title">${t("sectionFeatured")}</div>
-          <button class="section-link" data-action="nav" data-route="stores">${t("seeAll")}</button>
-        </div>
-        ${renderStoreList(filteredStores)}
-      </div>
-    </div>
-  `;
-}
-
-function categoryIcon(key){
-  const map = {
-    eyes:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0908" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>',
-    lips:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0908" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2-3 4.5-4 6-1 1 2 3 2 4 0 1.5-3 4-2 6 1-2 3-4.5 4-6 1-1-2-3-2-4 0-1.5 3-4 2-6-1Z"/></svg>',
-    face:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0908" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="3"/><path d="M7 9h10"/></svg>',
-    mascara:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0908" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 18 6M18 6l2-2M18 6l2 2M4 20l-2-2M4 20l2 2"/></svg>',
-    brushes:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0908" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15 3 21m6-6 9-9a2.1 2.1 0 0 0-3-3l-9 9m3 3-3-3m3 3-6 3"/></svg>',
-    skin:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0908" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 6 5 10 5 14a7 7 0 0 0 14 0c0-4-3-8-7-12Z"/></svg>'
-  };
-  return map[key] || map.eyes;
-}
-
-function filterStores(){
-  let list = STORES;
-  if(State.activeCategory !== "all"){
-    list = list.filter(s=>s.category===State.activeCategory);
-  }
-  if(State.searchQuery.trim()){
-    const q = State.searchQuery.trim().toLowerCase();
-    const matchingStoreIds = new Set(
-      PRODUCTS.filter(p=>p.name.toLowerCase().includes(q)).map(p=>p.storeId)
-    );
-    list = list.filter(s=> s.name.toLowerCase().includes(q) || matchingStoreIds.has(s.id));
-  }
-  return list;
-}
-
-function renderStoreList(stores){
-  if(stores.length===0){
-    return `<div class="empty-state"><div class="empty-icon">${ICONS.bag}</div><div class="empty-title">${t("searchNoResults")}</div></div>`;
-  }
-  return `<div class="store-list">${stores.map(renderStoreCard).join("")}</div>`;
-}
-
-function renderStoreCard(store){
-  const open = isStoreOpen(store);
-  return `
-    <div class="store-card" data-action="open-store" data-store="${store.id}">
-      <div class="store-cover" style="background-image:url('${store.cover}')">
-        <div class="status-chip ${open?'open':'closed'}">
-          <span class="status-dot ${open?'pulse':''}"></span>
-          ${open ? t("open") : t("closed")}
-        </div>
-        <div class="rating-chip">${ICONS.star} ${store.rating}</div>
-        <div class="store-cover-title">
-          <div class="store-name">${store.name}</div>
-        </div>
-      </div>
-      <div class="store-body">
-        <div class="store-tags">
-          ${store.tags.map(tag=>`<span class="tag">${tag}</span>`).join("")}
-        </div>
-        <div class="store-meta-row">
-          <div class="meta-item">${ICONS.pin} <span>${store.location}</span></div>
-          <div class="meta-item">${ICONS.bike} <span class="meta-strong">${DELIVERY_FEE} ${t("dzd")}</span></div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-/* ============================================================
-   RENDER: STORES (full list screen)
-   ============================================================ */
-function renderStores(){
-  const filtered = filterStores();
-  return `
-    <div class="section fade-in">
-      <div class="section-head">
-        <div class="section-title">${t("storesTitle")}</div>
-      </div>
-      ${renderStoreList(filtered)}
-    </div>
-  `;
-}
-
-/* ============================================================
-   RENDER: STORE DETAIL
-   ============================================================ */
-function renderStoreDetail(){
-  const store = getStore(State.activeStoreId);
-  if(!store) return renderStores();
-  const products = getProductsByStore(store.id);
-  const open = isStoreOpen(store);
-
-  return `
-    <div class="fade-in">
-      <div class="detail-hero" style="background-image:url('${store.cover}')">
-        <div class="detail-nav">
-          <button class="circle-btn" data-action="nav" data-route="stores">${ICONS.back}</button>
-          <button class="circle-btn">${ICONS.heart}</button>
-        </div>
-      </div>
-      <div class="detail-header-info">
-        <div class="detail-title">${store.name}</div>
-        <div class="detail-sub">
-          <div class="status-chip ${open?'open':'closed'}" style="position:static;">
-            <span class="status-dot ${open?'pulse':''}"></span>${open ? t("open") : t("closed")}
-          </div>
-          <div class="tag">${ICONS.star} ${store.rating}</div>
-          <div class="tag">${ICONS.pin} ${store.location}</div>
-          <div class="tag">${ICONS.bike} ${DELIVERY_FEE} ${t("dzd")}</div>
-        </div>
-        <div class="detail-desc">${store.tagline}</div>
-        ${!open ? `<p class="field-hint" style="margin-top:10px;color:var(--bronze-light);">${t("storeClosedNotice")}</p>` : ""}
-      </div>
-      <div class="product-grid">
-        ${products.map(renderProductCard).join("")}
-      </div>
-    </div>
-  `;
-}
-
-function renderProductCard(product){
-  const qty = qtyInCart(product.id);
-  return `
-    <div class="product-card">
-      <div class="product-img-wrap" style="background-image:url('${product.img}')">
-        ${qty===0 ? `
-          <button class="product-add-btn" data-action="add-cart" data-product="${product.id}">${ICONS.plus}</button>
-        ` : `
-          <div class="qty-stepper" style="position:absolute;bottom:8px;inset-inline-end:8px;">
-            <button data-action="dec-cart" data-product="${product.id}">${ICONS.minus}</button>
-            <span>${qty}</span>
-            <button data-action="add-cart" data-product="${product.id}">${ICONS.plus}</button>
-          </div>
-        `}
-      </div>
-      <div class="product-info">
-        <div class="product-name">${product.name}</div>
-        <div class="product-rating">${ICONS.star} ${product.rating}</div>
-        <div class="product-price-row">
-          <div class="product-price">${fmt(product.price)}<small>${t("dzd")}</small></div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-/* ============================================================
-   RENDER: CART
-   ============================================================ */
-function renderCart(){
-  if(State.cart.length===0){
-    return `
-      <div class="screen-header"><div class="screen-title">${t("cartTitle")}</div></div>
-      <div class="empty-state">
-        <div class="empty-icon">${ICONS.bag}</div>
-        <div class="empty-title">${t("cartEmptyTitle")}</div>
-        <div class="empty-text">${t("cartEmptyText")}</div>
-        <button class="btn-primary" style="margin-top:22px;max-width:220px;" data-action="nav" data-route="stores">${t("browseStores")}</button>
-      </div>
-    `;
-  }
-
-  const subtotal = cartSubtotal();
-  const total = subtotal + DELIVERY_FEE;
-
-  return `
-    <div class="fade-in">
-      <div class="screen-header"><div class="screen-title">${t("cartTitle")}</div></div>
-      <div>
-        ${State.cart.map(item=>{
-          const p = PRODUCTS.find(pp=>pp.id===item.productId);
-          if(!p) return "";
-          const store = getStore(p.storeId);
-          return `
-            <div class="cart-item">
-              <div class="cart-item-img" style="background-image:url('${p.img}')"></div>
-              <div class="cart-item-info">
-                <div class="cart-item-name">${p.name}</div>
-                <div class="cart-item-store">${store ? store.name : ""}</div>
-                <div class="cart-item-row">
-                  <div class="qty-stepper">
-                    <button data-action="dec-cart" data-product="${p.id}">${ICONS.minus}</button>
-                    <span>${item.qty}</span>
-                    <button data-action="add-cart" data-product="${p.id}">${ICONS.plus}</button>
-                  </div>
-                  <div class="cart-item-price">${fmt(p.price*item.qty)} ${t("dzd")}</div>
+                <div class="language-selector">
+                    <select id="lang-switch" onchange="switchLanguage(this.value)">
+                        <option value="en">ENG</option>
+                        <option value="fr">FRA</option>
+                        <option value="ar">عربي</option>
+                    </select>
                 </div>
-              </div>
-              <button class="remove-btn" data-action="remove-cart" data-product="${p.id}">${ICONS.trash}</button>
             </div>
-          `;
-        }).join("")}
-      </div>
-
-      <div class="summary-block">
-        <div class="summary-row"><span>${t("subtotal")}</span><span>${fmt(subtotal)} ${t("dzd")}</span></div>
-        <div class="summary-row"><span>${t("deliveryFee")}</span><span>${fmt(DELIVERY_FEE)} ${t("dzd")}</span></div>
-        <div class="summary-row total"><span>${t("total")}</span><span class="amt">${fmt(total)} ${t("dzd")}</span></div>
-      </div>
-
-      <div class="field-block">
-        <label class="field-label">${t("phoneLabel")}</label>
-        <input class="field-input" type="tel" id="checkoutPhone" placeholder="${t("phonePlaceholder")}" value="${State.user && State.user.phone ? State.user.phone : ''}">
-        <div class="field-hint">${t("phoneHint")}</div>
-      </div>
-
-      <div class="field-block">
-        <button class="btn-primary" id="placeOrderBtn" data-action="place-order">${t("placeOrder")}</button>
-      </div>
-    </div>
-  `;
-}
-
-/* ============================================================
-   RENDER: NOTIFICATIONS
-   ============================================================ */
-function renderNotifications(){
-  if(State.notifications.length===0){
-    return `
-      <div class="screen-header"><div class="screen-title">${t("notifTitle")}</div></div>
-      <div class="empty-state">
-        <div class="empty-icon">${ICONS.bell}</div>
-        <div class="empty-title">${t("notifEmptyTitle")}</div>
-        <div class="empty-text">${t("notifEmptyText")}</div>
-      </div>
-    `;
-  }
-  return `
-    <div class="fade-in">
-      <div class="screen-header"><div class="screen-title">${t("notifTitle")}</div></div>
-      <div>
-        ${State.notifications.map(n=>`
-          <div class="notif-item">
-            <div class="notif-icon ${n.type==='order'?'':'bronze'}">
-              ${n.type==='order' ? ICONS.box : (n.type==='delivery' ? ICONS.bike : ICONS.heart)}
+            <div class="search-container">
+                <svg class="icon search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" class="search-input" data-i18n-placeholder="searchPlaceholder" placeholder="Search for luxury cosmetics...">
             </div>
-            <div>
-              <div class="notif-title">${t(n.titleKey)}</div>
-              <div class="notif-text">${t(n.textKey)}</div>
-              <div class="notif-time">${n.time}</div>
-            </div>
-          </div>
-        `).join("")}
-      </div>
-    </div>
-  `;
-}
+        </header>
 
-/* ============================================================
-   RENDER: PROFILE
-   ============================================================ */
-function renderProfile(){
-  if(!State.user){
-    return `
-      <div class="fade-in">
-        <div class="screen-header"><div class="screen-title">${t("navProfile")}</div></div>
-        <div class="empty-state">
-          <div class="empty-icon">${ICONS.mapPin2.replace('width="18" height="18"','width="24" height="24"')}</div>
-          <div class="empty-title">${t("signInCta")}</div>
-          <div class="empty-text">${t("signInCtaText")}</div>
-          <button class="btn-primary" style="margin-top:22px;max-width:220px;" data-action="require-auth">${t("signIn")}</button>
+        <!-- Main Home View -->
+        <main id="home-view" class="main-content">
+            <!-- Categories -->
+            <div class="category-scroll" id="category-container">
+                <!-- Injected via JS -->
+            </div>
+
+            <!-- Banner -->
+            <div class="banner-container">
+                <div class="promo-banner">
+                    <h2 class="heading promo-title text-primary" data-i18n="promoTitle">L'Or Rouge Collection</h2>
+                    <p class="promo-subtitle" data-i18n="promoSubtitle">Exclusive pre-release access</p>
+                </div>
+            </div>
+
+            <!-- Stores -->
+            <div class="section-header">
+                <h3 class="heading" data-i18n="premiumBoutiques">Premium Boutiques</h3>
+            </div>
+            <div class="stores-grid" id="stores-container">
+                <!-- Injected via JS -->
+            </div>
+        </main>
+
+        <!-- Store Catalog View -->
+        <section id="catalog-view" class="main-content" style="padding-top: 0;">
+            <div class="catalog-header" id="catalog-header-bg">
+                <button class="back-btn" onclick="navigate('home')">
+                    <svg class="icon" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                </button>
+                <div class="catalog-header-overlay">
+                    <h2 class="heading" id="catalog-title" style="font-size: 2rem;">Store Name</h2>
+                    <div style="display: flex; gap: 10px; margin-top: 8px;">
+                        <span class="status-badge status-open" data-i18n="openNow">Open Now</span>
+                        <span class="store-rating" style="background: transparent; padding: 0;"><svg class="icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> <span id="catalog-rating">4.9</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="category-scroll" id="catalog-categories">
+                <!-- Categories filter inside store injected via JS -->
+            </div>
+            <div class="products-grid" id="products-container">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+
+        <!-- Profile View -->
+        <section id="profile-view">
+            <div class="profile-card">
+                <div class="avatar-circle" id="profile-initial">M</div>
+                <h2 class="profile-name" id="profile-name">Mademoiselle</h2>
+                <p class="profile-phone" id="profile-phone">+213 555 00 00 00</p>
+                <button class="btn btn-outline" style="width: 100%; margin-top: 10px;" onclick="handleLogout()" data-i18n="logout">Sign Out</button>
+            </div>
+            <div class="profile-menu">
+                <div class="menu-item">
+                    <svg class="icon text-bronze" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    <span data-i18n="orderHistory">Order History</span>
+                </div>
+                <div class="menu-item">
+                    <svg class="icon text-bronze" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                    <span data-i18n="savedAddresses">Saved Addresses</span>
+                </div>
+                <div class="menu-item">
+                    <svg class="icon text-bronze" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    <span data-i18n="settings">Settings</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav glass-panel">
+            <a class="nav-item active" onclick="navigate('home')" id="nav-home">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span class="nav-label" data-i18n="navHome">Home</span>
+            </a>
+            <a class="nav-item" onclick="navigate('stores')" id="nav-stores">
+                <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                <span class="nav-label" data-i18n="navStores">Stores</span>
+            </a>
+            <a class="nav-item" onclick="toggleCart(true)">
+                <div class="cart-badge-container">
+                    <svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    <div class="cart-badge" id="cart-badge">0</div>
+                </div>
+                <span class="nav-label" data-i18n="navCart">Cart</span>
+            </a>
+            <a class="nav-item" onclick="navigate('profile')" id="nav-profile">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span class="nav-label" data-i18n="navProfile">Profile</span>
+            </a>
+        </nav>
+
+        <!-- Cart Panel -->
+        <div class="cart-panel" id="cart-panel">
+            <div class="cart-header">
+                <h3 class="heading" data-i18n="yourCart">Your Cart</h3>
+                <button class="close-modal" onclick="toggleCart(false)" style="position: static;">
+                    <svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="cart-items" id="cart-items-container">
+                <!-- Injected via JS -->
+            </div>
+            
+            <!-- Phone Number Input for Checkout (Hidden by default) -->
+            <div id="checkout-phone-section" class="hidden" style="padding: var(--spacing-md); background: var(--obsidian-dark);">
+                <label class="form-label" data-i18n="confirmPhone">Confirm Phone Number for Dispatch</label>
+                <input type="tel" id="checkout-phone" class="form-input" placeholder="+213 555 00 00 00">
+            </div>
+
+            <div class="cart-footer">
+                <div class="summary-row">
+                    <span data-i18n="subtotal">Subtotal</span>
+                    <span id="cart-subtotal">0 DZD</span>
+                </div>
+                <div class="summary-row">
+                    <span data-i18n="deliveryFee">Delivery Fee (Fixed)</span>
+                    <span>200 DZD</span>
+                </div>
+                <div class="summary-total">
+                    <span data-i18n="total">Total</span>
+                    <span id="cart-total" class="text-rosewood">0 DZD</span>
+                </div>
+                <button class="btn btn-primary checkout-btn" id="checkout-btn-main" onclick="processCheckout()">
+                    <span data-i18n="proceedCheckout">Proceed to Checkout</span>
+                </button>
+            </div>
         </div>
-      </div>
-    `;
-  }
 
-  const orders = JSON.parse(localStorage.getItem("me_orders") || "[]").filter(o=>o.userEmail===State.user.email).reverse();
+        <!-- Login Modal -->
+        <div class="modal-overlay" id="login-modal">
+            <div class="modal-content">
+                <button class="close-modal" onclick="closeLoginModal()">
+                    <svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+                <h2 class="heading" style="margin-bottom: 24px; text-align: center;" data-i18n="welcomeBack">Welcome Back</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="emailAddress">Email Address</label>
+                    <input type="email" id="login-email" class="form-input" placeholder="elite@beaute.com">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="password">Password</label>
+                    <input type="password" id="login-password" class="form-input" placeholder="••••••••">
+                    <button class="password-toggle" onclick="togglePasswordVisibility()">
+                        <svg class="icon" id="eye-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    </button>
+                </div>
 
-  return `
-    <div class="fade-in">
-      <div class="profile-hero">
-        <div class="avatar">${(State.user.name||"G").charAt(0).toUpperCase()}</div>
-        <div class="profile-name">${State.user.name}</div>
-        <div class="profile-phone">
-          ${ICONS.pin.replace('width="12" height="12"','width="13" height="13"')}
-          <span>${State.user.phone || "—"}</span>
-          ${State.user.phone ? `<span class="verified-badge">${ICONS.check.replace('width="34" height="34"','width="13" height="13"')} ${t("verifiedPhone")}</span>` : ""}
-        </div>
-      </div>
-
-      <div class="section" style="padding-top:18px;">
-        <div class="section-head"><div class="section-title" style="font-size:17px;">${t("myOrders")}</div></div>
-        ${orders.length===0 ? `
-          <div class="empty-state" style="padding:30px 20px;">
-            <div class="empty-title" style="font-size:15px;">${t("noOrdersYet")}</div>
-            <div class="empty-text">${t("noOrdersText")}</div>
-          </div>
-        ` : orders.map(o=>`
-          <div class="order-card">
-            <div class="order-card-top">
-              <div class="order-id">#${o.orderId}</div>
-              <div class="order-date">${o.date}</div>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="executeLogin()" data-i18n="signInBtn">Sign In</button>
+                
+                <div style="text-align: center; margin: 20px 0; color: var(--text-secondary); font-size: 0.85rem;">OR</div>
+                
+                <button class="google-btn" onclick="executeGoogleLogin()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Continue with Google
+                </button>
             </div>
-            <div class="order-items-text">${o.itemsSummary}</div>
-            <div class="order-total"><span>${t("total")}</span><span>${fmt(o.total)} ${t("dzd")}</span></div>
-          </div>
-        `).join("")}
-      </div>
-
-      <div class="profile-menu">
-        <div class="menu-row"><div class="menu-icon">${ICONS.mapPin2}</div><div class="menu-label">${t("savedAddresses")}</div><div class="menu-chevron">${ICONS.chevronRight}</div></div>
-        <div class="menu-row"><div class="menu-icon">${ICONS.card}</div><div class="menu-label">${t("paymentMethods")}</div><div class="menu-chevron">${ICONS.chevronRight}</div></div>
-        <div class="menu-row"><div class="menu-icon">${ICONS.heart}</div><div class="menu-label">${t("myFavourites")}</div><div class="menu-chevron">${ICONS.chevronRight}</div></div>
-        <div class="menu-row"><div class="menu-icon">${ICONS.help}</div><div class="menu-label">${t("helpCenter")}</div><div class="menu-chevron">${ICONS.chevronRight}</div></div>
-        <div class="menu-row logout-row" data-action="logout" style="cursor:pointer;">
-          <div class="menu-icon">${ICONS.logout}</div><div class="menu-label">${t("logout")}</div>
         </div>
-      </div>
+
     </div>
-  `;
-}
 
-/* ============================================================
-   MAIN RENDER
-   ============================================================ */
-function render(){
-  renderHeaderChrome();
-  const main = document.getElementById("appMain");
-  let html = "";
-  switch(State.route){
-    case "home": html = renderHome(); break;
-    case "stores": html = renderStores(); break;
-    case "store": html = renderStoreDetail(); break;
-    case "cart": html = renderCart(); break;
-    case "notifications": html = renderNotifications(); break;
-    case "profile": html = renderProfile(); break;
-    default: html = renderHome();
-  }
-  main.innerHTML = html;
-  renderNavActiveState();
-  renderCartBadges();
-  window.scrollTo(0,0);
-}
+    <script>
+        // --- Core Configuration & Data ---
+        const CONSTANTS = {
+            DELIVERY_FEE: 200,
+            CURRENCY: 'DZD'
+        };
 
-function renderNavActiveState(){
-  document.querySelectorAll(".nav-item").forEach(el=>{
-    el.classList.toggle("active", el.dataset.route === State.route);
-  });
-}
+        const IMAGES = {
+            eye: 'https://images.unsplash.com/photo-1512496015851-a1c8ce84594c?auto=format&fit=crop&w=600&q=80',
+            lip: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=600&q=80',
+            face: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=600&q=80',
+            mascara: 'https://images.unsplash.com/photo-1631214500515-e4a1f0d36279?auto=format&fit=crop&w=600&q=80',
+            brush: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=600&q=80',
+            skin: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=600&q=80',
+            store1: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80',
+            store2: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',
+            store3: 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=800&q=80'
+        };
 
-function renderCartBadges(){
-  const count = cartTotalCount();
-  const badge = document.getElementById("navCartBadge");
-  badge.textContent = count;
-  badge.classList.toggle("hide", count===0);
+        const CATEGORIES = [
+            { id: 'cat-1', name: 'Luxury Eye Palettes', type: 'eye', img: IMAGES.eye },
+            { id: 'cat-2', name: 'Royal Matte Lipsticks', type: 'lip', img: IMAGES.lip },
+            { id: 'cat-3', name: 'Complexion Glow', type: 'face', img: IMAGES.face },
+            { id: 'cat-4', name: 'Pro Mascara & Liners', type: 'mascara', img: IMAGES.mascara },
+            { id: 'cat-5', name: 'Artisanal Brushes', type: 'brush', img: IMAGES.brush },
+            { id: 'cat-6', name: 'Skincare Prep', type: 'skin', img: IMAGES.skin }
+        ];
 
-  const notifBadge = document.getElementById("navNotifBadge");
-  const unread = State.notifications.length;
-  notifBadge.textContent = unread;
-  notifBadge.classList.toggle("hide", unread===0);
+        // Meticulous Generation of exactly 60 Unique Products (6 categories x 10 products)
+        const generateProducts = () => {
+            const arr = [];
+            const prefixes = ["Royal", "Velvet", "Obsidian", "Luminous", "Gilded", "Matte", "Crystal", "Imperial", "Midnight", "Aura"];
+            const suffixes = {
+                'eye': ["Palette", "Shadow", "Quartet", "Pigment", "Dust", "Glimmer", "Smoke", "Haze", "Prism", "Glow"],
+                'lip': ["Rouge", "Lipstick", "Stain", "Velvet", "Gloss", "Tint", "Balm", "Elixir", "Crème", "Matte"],
+                'face': ["Foundation", "Concealer", "Powder", "Bronzer", "Blush", "Highlighter", "Contour", "Base", "Glow", "Drops"],
+                'mascara': ["Mascara", "Liner", "Kohl", "Ink", "Precision", "Volume", "Length", "Definition", "Stylus", "Glide"],
+                'brush': ["Brush", "Blender", "Buffer", "Sweeper", "Detailer", "Kabuki", "Sculpt", "Fan", "Crease", "Sponges"],
+                'skin': ["Serum", "Essence", "Cream", "Toner", "Elixir", "Mist", "Oil", "Prep", "Primer", "Mask"]
+            };
 
-  const fc = document.getElementById("floatingCart");
-  const showFc = count > 0 && (State.route==="home" || State.route==="stores" || State.route==="store");
-  fc.classList.toggle("hidden", !showFc);
-  document.getElementById("fcCount").textContent = count;
-  document.getElementById("fcSub").textContent = fmt(cartSubtotal()) + " " + t("dzd");
-}
+            let idCounter = 1;
+            CATEGORIES.forEach(cat => {
+                for(let i=0; i<10; i++) {
+                    arr.push({
+                        id: `prod-${idCounter}`,
+                        categoryId: cat.id,
+                        name: `${prefixes[i]} ${cat.name.split(' ')[0]} ${suffixes[cat.type][i]}`,
+                        price: Math.floor(Math.random() * 25 + 5) * 100, // 500 to 3000
+                        rating: (Math.random() * 1 + 4).toFixed(1),
+                        image: cat.img
+                    });
+                    idCounter++;
+                }
+            });
+            return arr;
+        };
 
-/* ============================================================
-   NAVIGATION
-   ============================================================ */
-function goTo(route){
-  State.route = route;
-  render();
-}
+        const PRODUCTS = generateProducts();
 
-/* ============================================================
-   AUTH MODAL LOGIC
-   ============================================================ */
-function openAuthModal(pendingAction){
-  State.pendingAction = pendingAction || null;
-  document.getElementById("authModal").classList.add("show");
-  document.getElementById("authError").style.display = "none";
-}
-function closeModal(id){
-  document.getElementById(id).classList.remove("show");
-}
+        const STORES = [
+            { id: 'store-1', name: 'Maison Beauté', cover: IMAGES.store1, rating: 4.9, tags: 'All Categories', location: 'Hydra' },
+            { id: 'store-2', name: 'Velvet & Bronze', cover: IMAGES.store2, rating: 4.8, tags: 'Lips, Face', location: 'Sidi Yahia' },
+            { id: 'store-3', name: 'Obsidian Aesthetics', cover: IMAGES.store3, rating: 5.0, tags: 'Eyes, Tools', location: 'El Biar' }
+        ];
 
-function setAuthTab(tabName){
-  State.authTab = tabName;
-  document.querySelectorAll('[data-action="auth-tab"]').forEach(btn=>{
-    btn.classList.toggle("active", btn.dataset.tab === tabName);
-  });
-  const submitBtn = document.getElementById("authSubmitBtn");
-  submitBtn.textContent = tabName==="signin" ? t("signIn") : t("createAccount");
-}
+        // --- I18N Dictionary ---
+        const I18N = {
+            en: {
+                deliveringTo: "Delivering to",
+                searchPlaceholder: "Search for luxury cosmetics...",
+                promoTitle: "L'Or Rouge Collection",
+                promoSubtitle: "Exclusive pre-release access",
+                premiumBoutiques: "Premium Boutiques",
+                openNow: "Open Now",
+                logout: "Sign Out",
+                orderHistory: "Order History",
+                savedAddresses: "Saved Addresses",
+                settings: "Settings",
+                navHome: "Home",
+                navStores: "Stores",
+                navCart: "Cart",
+                navProfile: "Profile",
+                yourCart: "Your Cart",
+                subtotal: "Subtotal",
+                deliveryFee: "Delivery Fee (Fixed)",
+                total: "Total",
+                proceedCheckout: "Proceed to Checkout",
+                confirmCheckout: "Confirm & Dispatch",
+                welcomeBack: "Welcome Back",
+                emailAddress: "Email Address",
+                password: "Password",
+                signInBtn: "Sign In",
+                confirmPhone: "Confirm Phone Number for Dispatch",
+                successDispatch: "Order Dispatched Successfully!"
+            },
+            fr: {
+                deliveringTo: "Livraison à",
+                searchPlaceholder: "Rechercher des cosmétiques de luxe...",
+                promoTitle: "Collection L'Or Rouge",
+                promoSubtitle: "Accès exclusif en avant-première",
+                premiumBoutiques: "Boutiques Premium",
+                openNow: "Ouvert",
+                logout: "Se Déconnecter",
+                orderHistory: "Historique des Commandes",
+                savedAddresses: "Adresses Enregistrées",
+                settings: "Paramètres",
+                navHome: "Accueil",
+                navStores: "Boutiques",
+                navCart: "Panier",
+                navProfile: "Profil",
+                yourCart: "Votre Panier",
+                subtotal: "Sous-total",
+                deliveryFee: "Frais de Livraison (Fixe)",
+                total: "Total",
+                proceedCheckout: "Passer à la Caisse",
+                confirmCheckout: "Confirmer et Expédier",
+                welcomeBack: "Bon Retour",
+                emailAddress: "Adresse Email",
+                password: "Mot de Passe",
+                signInBtn: "Se Connecter",
+                confirmPhone: "Confirmez le Numéro pour l'Expédition",
+                successDispatch: "Commande Expédiée avec Succès !"
+            },
+            ar: {
+                deliveringTo: "التوصيل إلى",
+                searchPlaceholder: "ابحث عن مستحضرات التجميل الفاخرة...",
+                promoTitle: "مجموعة الذهب الأحمر",
+                promoSubtitle: "وصول حصري قبل الإصدار",
+                premiumBoutiques: "متاجر فاخرة",
+                openNow: "مفتوح الآن",
+                logout: "تسجيل الخروج",
+                orderHistory: "سجل الطلبات",
+                savedAddresses: "العناوين المحفوظة",
+                settings: "الإعدادات",
+                navHome: "الرئيسية",
+                navStores: "المتاجر",
+                navCart: "السلة",
+                navProfile: "الحساب",
+                yourCart: "سلة التسوق",
+                subtotal: "المجموع الفرعي",
+                deliveryFee: "رسوم التوصيل (ثابتة)",
+                total: "الإجمالي",
+                proceedCheckout: "متابعة الدفع",
+                confirmCheckout: "تأكيد وإرسال",
+                welcomeBack: "مرحباً بعودتك",
+                emailAddress: "البريد الإلكتروني",
+                password: "كلمة المرور",
+                signInBtn: "تسجيل الدخول",
+                confirmPhone: "قم بتأكيد رقم الهاتف للإرسال",
+                successDispatch: "تم إرسال الطلب بنجاح!"
+            }
+        };
 
-function togglePasswordVisibility(){
-  const input = document.getElementById("authPassword");
-  State.passwordVisible = !State.passwordVisible;
-  input.type = State.passwordVisible ? "text" : "password";
-  document.getElementById("eyeIcon").innerHTML = State.passwordVisible
-    ? '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="21" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>'
-    : '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>';
-}
+        // --- Application State ---
+        let state = {
+            lang: 'en',
+            user: null,
+            cart: [],
+            currentView: 'home',
+            activeStore: null,
+            activeCategory: null
+        };
 
-function completeSignIn(name, email, avatarSeed){
-  State.user = {
-    name: name,
-    email: email,
-    phone: (State.user && State.user.phone) || "",
-    signedInAt: new Date().toISOString()
-  };
-  saveUser();
-  closeModal("authModal");
-  showToast(t("signedIn"));
-  if(State.pendingAction === "checkout"){
-    goTo("cart");
-  } else if(State.pendingAction === "profile"){
-    goTo("profile");
-  } else {
-    render();
-  }
-  State.pendingAction = null;
-}
+        // --- Core Engine & DOM Manipulations ---
+        const DOM = {
+            app: document.getElementById('app'),
+            homeView: document.getElementById('home-view'),
+            catalogView: document.getElementById('catalog-view'),
+            profileView: document.getElementById('profile-view'),
+            categoryContainer: document.getElementById('category-container'),
+            storesContainer: document.getElementById('stores-container'),
+            productsContainer: document.getElementById('products-container'),
+            cartPanel: document.getElementById('cart-panel'),
+            cartItems: document.getElementById('cart-items-container'),
+            cartBadge: document.getElementById('cart-badge'),
+            loginModal: document.getElementById('login-modal'),
+            header: document.getElementById('main-header')
+        };
 
-function handleAuthSubmit(e){
-  e.preventDefault();
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-  const errorEl = document.getElementById("authError");
-  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  if(!emailValid || password.length < 6){
-    errorEl.style.display = "block";
-    return;
-  }
-  errorEl.style.display = "none";
-  const name = email.split("@")[0].replace(/[._]/g," ").replace(/\b\w/g, c=>c.toUpperCase());
-  completeSignIn(name, email);
-}
+        const renderCategories = (container, onClickFilter = false) => {
+            container.innerHTML = '';
+            
+            if (onClickFilter) {
+                const allPill = document.createElement('div');
+                allPill.className = `category-pill ${!state.activeCategory ? 'active' : ''}`;
+                allPill.textContent = "All";
+                allPill.onclick = () => filterProducts(null);
+                container.appendChild(allPill);
+            }
 
-function handleGoogleSignIn(){
-  const btn = document.getElementById("googleBtn");
-  const btnText = document.getElementById("googleBtnText");
-  btn.classList.add("loading");
-  const originalText = btnText.textContent;
-  btnText.textContent = "...";
-  setTimeout(()=>{
-    btn.classList.remove("loading");
-    btnText.textContent = originalText;
-    completeSignIn("Amina Belkacem", "amina.belkacem@gmail.com");
-  }, 950);
-}
+            CATEGORIES.forEach(cat => {
+                const el = document.createElement('div');
+                el.className = `category-pill ${state.activeCategory === cat.id ? 'active' : ''}`;
+                el.textContent = cat.name;
+                if (onClickFilter) {
+                    el.onclick = () => filterProducts(cat.id);
+                }
+                container.appendChild(el);
+            });
+        };
 
-/* ============================================================
-   ORDER PLACEMENT
-   ============================================================ */
-function placeOrder(){
-  const phoneInput = document.getElementById("checkoutPhone");
-  const phone = phoneInput ? phoneInput.value.trim() : "";
+        const renderStores = () => {
+            DOM.storesContainer.innerHTML = '';
+            STORES.forEach(store => {
+                const card = document.createElement('div');
+                card.className = 'store-card';
+                card.onclick = () => openStore(store.id);
+                card.innerHTML = `
+                    <img src="${store.cover}" class="store-cover" alt="Store Cover">
+                    <div class="store-info">
+                        <div class="store-header">
+                            <h4 class="store-name">${store.name}</h4>
+                            <span class="store-rating">
+                                <svg class="icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                ${store.rating}
+                            </span>
+                        </div>
+                        <p class="text-sm text-secondary">${store.tags}</p>
+                        <div class="store-meta">
+                            <span>Fee: ${CONSTANTS.DELIVERY_FEE} ${CONSTANTS.CURRENCY} • ${store.location}</span>
+                            <span class="status-badge status-open" data-i18n="openNow">${I18N[state.lang].openNow}</span>
+                        </div>
+                    </div>
+                `;
+                DOM.storesContainer.appendChild(card);
+            });
+        };
 
-  if(!State.user){
-    openAuthModal("checkout");
-    return;
-  }
-  if(!phone || phone.length < 8){
-    phoneInput.style.borderColor = "var(--danger)";
-    phoneInput.focus();
-    return;
-  }
+        const renderProducts = (storeId, categoryId = null) => {
+            DOM.productsContainer.innerHTML = '';
+            // In a real app, products are filtered by store. Here we use the global pool for demo density.
+            let displayProducts = PRODUCTS;
+            if (categoryId) {
+                displayProducts = PRODUCTS.filter(p => p.categoryId === categoryId);
+            }
 
-  State.user.phone = phone;
-  saveUser();
+            displayProducts.forEach(prod => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${prod.image}" class="product-image" alt="Product">
+                    <div class="product-details">
+                        <h5 class="product-name">${prod.name}</h5>
+                        <div class="product-footer">
+                            <span class="product-price">${prod.price} ${CONSTANTS.CURRENCY}</span>
+                            <button class="add-to-cart-btn" onclick="addToCart('${prod.id}')">
+                                <svg class="icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                DOM.productsContainer.appendChild(card);
+            });
+        };
 
-  const subtotal = cartSubtotal();
-  const total = subtotal + DELIVERY_FEE;
-  const orderId = "ME" + Date.now().toString().slice(-8);
-  const itemsDetailed = State.cart.map(item=>{
-    const p = PRODUCTS.find(pp=>pp.id===item.productId);
-    return { productId:item.productId, name:p ? p.name : "", qty:item.qty, price:p ? p.price : 0, storeId:p ? p.storeId : "" };
-  });
-  const itemsSummary = itemsDetailed.map(i=>`${i.qty}x ${i.name}`).join(", ");
+        const openStore = (storeId) => {
+            state.activeStore = storeId;
+            state.activeCategory = null;
+            const store = STORES.find(s => s.id === storeId);
+            
+            document.getElementById('catalog-title').textContent = store.name;
+            document.getElementById('catalog-rating').textContent = store.rating;
+            document.getElementById('catalog-header-bg').style.backgroundImage = `url(${store.cover})`;
+            
+            renderCategories(document.getElementById('catalog-categories'), true);
+            renderProducts(storeId);
+            navigate('store');
+        };
 
-  const order = {
-    orderId,
-    userEmail: State.user.email,
-    userName: State.user.name,
-    phone,
-    items: itemsDetailed,
-    subtotal,
-    deliveryFee: DELIVERY_FEE,
-    total,
-    date: new Date().toLocaleString(State.lang==="ar" ? "ar-DZ" : (State.lang==="fr"?"fr-FR":"en-US")),
-    timestamp: Date.now(),
-    itemsSummary
-  };
+        const filterProducts = (categoryId) => {
+            state.activeCategory = categoryId;
+            renderCategories(document.getElementById('catalog-categories'), true);
+            renderProducts(state.activeStore, categoryId);
+        };
 
-  const allOrders = JSON.parse(localStorage.getItem("me_orders") || "[]");
-  allOrders.push(order);
-  localStorage.setItem("me_orders", JSON.stringify(allOrders));
+        // --- Cart Engine ---
+        const addToCart = (productId) => {
+            const product = PRODUCTS.find(p => p.id === productId);
+            const existing = state.cart.find(item => item.id === productId);
+            
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                state.cart.push({ ...product, qty: 1 });
+            }
+            updateCartUI();
+        };
 
-  State.notifications.unshift({
-    id:"n"+Date.now(), type:"order", titleKey:"notifOrderTitle", textKey:"notifOrderText", time: t("dzd")==="دج" ? "الآن" : "now"
-  });
-  saveNotifs();
+        const updateCartQty = (productId, delta) => {
+            const item = state.cart.find(i => i.id === productId);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                state.cart = state.cart.filter(i => i.id !== productId);
+            }
+            updateCartUI();
+        };
 
-  State.cart = [];
-  saveCart();
+        const updateCartUI = () => {
+            const count = state.cart.reduce((acc, item) => acc + item.qty, 0);
+            if (count > 0) {
+                DOM.cartBadge.textContent = count;
+                DOM.cartBadge.classList.add('visible');
+            } else {
+                DOM.cartBadge.classList.remove('visible');
+            }
 
-  showOrderSuccess(order);
-}
+            DOM.cartItems.innerHTML = '';
+            let subtotal = 0;
 
-function showOrderSuccess(order){
-  const main = document.getElementById("appMain");
-  main.innerHTML = `
-    <div class="order-success fade-in">
-      <div class="success-ring">${ICONS.check}</div>
-      <div class="modal-title" style="text-align:center;">${t("orderConfirmed")}</div>
-      <p class="modal-sub" style="text-align:center;">${t("orderConfirmedText")}</p>
-      <div class="summary-block" style="text-align:${State.lang==='ar'?'right':'left'};">
-        <div class="summary-row"><span>${t("total")}</span><span>${fmt(order.total)} ${t("dzd")}</span></div>
-        <div class="summary-row"><span>#</span><span>${order.orderId}</span></div>
-      </div>
-      <div style="padding:0 18px;">
-        <button class="btn-primary" data-action="nav" data-route="home">${t("backToHome")}</button>
-      </div>
-    </div>
-  `;
-  document.getElementById("topHeader").classList.add("hide");
-  document.getElementById("floatingCart").classList.add("hidden");
-  State.route = "order-success";
-  renderNavActiveState();
-  renderCartBadges();
-}
+            state.cart.forEach(item => {
+                subtotal += item.price * item.qty;
+                const el = document.createElement('div');
+                el.className = 'cart-item';
+                el.innerHTML = `
+                    <img src="${item.image}" class="cart-item-img" alt="Item">
+                    <div class="cart-item-details">
+                        <h5 class="cart-item-title">${item.name}</h5>
+                        <span class="cart-item-price">${item.price} ${CONSTANTS.CURRENCY}</span>
+                        <div class="cart-controls">
+                            <button class="qty-btn" onclick="updateCartQty('${item.id}', -1)">-</button>
+                            <span>${item.qty}</span>
+                            <button class="qty-btn" onclick="updateCartQty('${item.id}', 1)">+</button>
+                        </div>
+                    </div>
+                `;
+                DOM.cartItems.appendChild(el);
+            });
 
-/* ============================================================
-   BANNER AUTOPLAY
-   ============================================================ */
-let bannerTimer = null;
-function startBannerAutoplay(){
-  clearInterval(bannerTimer);
-  bannerTimer = setInterval(()=>{
-    if(State.route !== "home") return;
-    State.bannerIndex = (State.bannerIndex + 1) % BANNERS.length;
-    const track = document.getElementById("bannerTrack");
-    if(track){
-      const dir = State.lang==="ar" ? 1 : -1;
-      track.style.transform = `translateX(${dir*State.bannerIndex*100}%)`;
-      document.querySelectorAll(".banner-dot").forEach((d,i)=>d.classList.toggle("active", i===State.bannerIndex));
-    }
-  }, 4200);
-}
+            const total = subtotal > 0 ? subtotal + CONSTANTS.DELIVERY_FEE : 0;
+            document.getElementById('cart-subtotal').textContent = `${subtotal} ${CONSTANTS.CURRENCY}`;
+            document.getElementById('cart-total').textContent = `${total} ${CONSTANTS.CURRENCY}`;
+        };
 
-/* ============================================================
-   LANGUAGE SWITCHING
-   ============================================================ */
-function applyLanguage(lang){
-  State.lang = lang;
-  localStorage.setItem("me_lang", lang);
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang==="ar" ? "rtl" : "ltr";
-  document.body.classList.toggle("lang-ar", lang==="ar");
-  document.querySelectorAll(".lang-btn").forEach(btn=>{
-    btn.classList.toggle("active", btn.dataset.lang===lang);
-  });
-  document.querySelectorAll("[data-i18n]").forEach(el=>{
-    el.textContent = t(el.dataset.i18n);
-  });
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
-    el.setAttribute("placeholder", t(el.dataset.i18nPlaceholder));
-  });
-  setAuthTab(State.authTab);
-  render();
-}
+        const toggleCart = (show) => {
+            if (show) {
+                DOM.cartPanel.classList.add('active');
+                resetCheckoutView();
+            } else {
+                DOM.cartPanel.classList.remove('active');
+            }
+        };
 
-/* ============================================================
-   EVENT DELEGATION
-   ============================================================ */
-document.addEventListener("click", function(e){
-  const el = e.target.closest("[data-action]");
-  if(!el) return;
-  const action = el.dataset.action;
+        // --- Authentication & Checkout Flow ---
+        const requireAuth = (callback) => {
+            if (state.user) {
+                callback();
+            } else {
+                DOM.loginModal.classList.add('active');
+            }
+        };
 
-  switch(action){
-    case "nav": {
-      const route = el.dataset.route;
-      if((route==="cart") ){
-        goTo("cart");
-      } else if(route==="profile"){
-        goTo("profile");
-      } else {
-        goTo(route);
-      }
-      break;
-    }
-    case "go-cart": goTo("cart"); break;
-    case "set-category": {
-      State.activeCategory = el.dataset.cat;
-      goTo(State.route==="home" ? "stores" : State.route);
-      break;
-    }
-    case "quick-category": {
-      State.activeCategory = el.dataset.cat;
-      goTo("stores");
-      break;
-    }
-    case "open-store": {
-      State.activeStoreId = el.dataset.store;
-      goTo("store");
-      break;
-    }
-    case "add-cart": {
-      addToCart(el.dataset.product);
-      render();
-      break;
-    }
-    case "dec-cart": {
-      decrementCart(el.dataset.product);
-      render();
-      break;
-    }
-    case "remove-cart": {
-      removeFromCart(el.dataset.product);
-      break;
-    }
-    case "require-auth": {
-      openAuthModal("profile");
-      break;
-    }
-    case "place-order": {
-      placeOrder();
-      break;
-    }
-    case "logout": {
-      State.user = null;
-      localStorage.removeItem("me_user");
-      showToast(t("signedOut"));
-      render();
-      break;
-    }
-    case "close-modal": {
-      closeModal(el.dataset.modal);
-      break;
-    }
-    case "auth-tab": {
-      setAuthTab(el.dataset.tab);
-      break;
-    }
-    case "toggle-password": {
-      togglePasswordVisibility();
-      break;
-    }
-    case "google-signin": {
-      handleGoogleSignIn();
-      break;
-    }
-    case "open-location": {
-      // Lightweight, non-blocking location display — cycles through preset delivery zones
-      const zones = ["Algiers — Hydra","Algiers — Kouba","Algiers — Bab Ezzouar","Algiers — Cheraga"];
-      const current = document.getElementById("locationName").textContent;
-      const idx = zones.indexOf(current);
-      document.getElementById("locationName").textContent = zones[(idx+1) % zones.length];
-      break;
-    }
-  }
+        const closeLoginModal = () => DOM.loginModal.classList.remove('active');
 
-  // Close modal by clicking overlay background
-  if(e.target.classList.contains("modal-overlay")){
-    e.target.classList.remove("show");
-  }
-});
+        const executeLogin = () => {
+            const email = document.getElementById('login-email').value || "user@beaute.com";
+            state.user = { name: email.split('@')[0], email: email, phone: "+213 555 12 34 56" };
+            closeLoginModal();
+            updateProfileUI();
+            if (DOM.cartPanel.classList.contains('active')) {
+                processCheckout(); // Resume checkout if triggered from cart
+            } else {
+                navigate('profile');
+            }
+        };
 
-document.getElementById("authForm").addEventListener("submit", handleAuthSubmit);
+        const executeGoogleLogin = () => {
+            state.user = { name: "Google User", email: "google@beaute.com", phone: "+213 555 99 88 77" };
+            closeLoginModal();
+            updateProfileUI();
+            if (DOM.cartPanel.classList.contains('active')) {
+                processCheckout();
+            } else {
+                navigate('profile');
+            }
+        };
 
-document.getElementById("langSwitch").addEventListener("click", function(e){
-  const btn = e.target.closest(".lang-btn");
-  if(!btn) return;
-  applyLanguage(btn.dataset.lang);
-});
+        const handleLogout = () => {
+            state.user = null;
+            navigate('home');
+        };
 
-document.getElementById("searchInput").addEventListener("input", function(e){
-  State.searchQuery = e.target.value;
-  if(State.route==="home"){
-    render();
-  } else if(State.route==="stores"){
-    render();
-  }
-});
+        const updateProfileUI = () => {
+            if (state.user) {
+                document.getElementById('profile-name').textContent = state.user.name;
+                document.getElementById('profile-phone').textContent = state.user.phone;
+                document.getElementById('profile-initial').textContent = state.user.name.charAt(0).toUpperCase();
+                document.getElementById('checkout-phone').value = state.user.phone;
+            }
+        };
 
-/* Cart checkout also requires auth: intercept floating cart if needed on cart screen */
-document.getElementById("appMain").addEventListener("click", function(e){
-  const btn = e.target.closest('[data-action="place-order"]');
-  if(btn && !State.user){
-    // handled inside placeOrder() via openAuthModal
-  }
-});
+        const resetCheckoutView = () => {
+            const btn = document.getElementById('checkout-btn-main');
+            const phoneSec = document.getElementById('checkout-phone-section');
+            btn.innerHTML = `<span>${I18N[state.lang].proceedCheckout}</span>`;
+            btn.onclick = processCheckout;
+            phoneSec.classList.add('hidden');
+        };
 
-/* ============================================================
-   INIT
-   ============================================================ */
-function init(){
-  applyLanguage(State.lang);
-  startBannerAutoplay();
-  render();
-}
-init();
-</script>
+        const processCheckout = () => {
+            if (state.cart.length === 0) return;
+
+            requireAuth(() => {
+                const phoneSec = document.getElementById('checkout-phone-section');
+                const btn = document.getElementById('checkout-btn-main');
+                
+                if (phoneSec.classList.contains('hidden')) {
+                    // Show phone confirmation
+                    phoneSec.classList.remove('hidden');
+                    btn.innerHTML = `<span>${I18N[state.lang].confirmCheckout}</span>`;
+                    btn.onclick = dispatchOrder;
+                }
+            });
+        };
+
+        const dispatchOrder = () => {
+            const phone = document.getElementById('checkout-phone').value;
+            const payload = {
+                user: state.user,
+                phone: phone,
+                items: state.cart,
+                subtotal: state.cart.reduce((a, b) => a + (b.price * b.qty), 0),
+                deliveryFee: CONSTANTS.DELIVERY_FEE,
+                timestamp: new Date().toISOString()
+            };
+
+            // Dispatch to mock backend (localStorage)
+            localStorage.setItem('lastOrder', JSON.stringify(payload));
+            
+            state.cart = [];
+            updateCartUI();
+            toggleCart(false);
+            
+            // Minimal UI Feedback
+            const btn = document.getElementById('checkout-btn-main');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<span>${I18N[state.lang].successDispatch}</span>`;
+            setTimeout(() => {
+                resetCheckoutView();
+            }, 3000);
+        };
+
+        let passwordVisible = false;
+        const togglePasswordVisibility = () => {
+            passwordVisible = !passwordVisible;
+            const input = document.getElementById('login-password');
+            const icon = document.getElementById('eye-icon');
+            input.type = passwordVisible ? 'text' : 'password';
+            
+            if (passwordVisible) {
+                icon.innerHTML = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>`;
+            } else {
+                icon.innerHTML = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>`;
+            }
+        };
+
+        // --- Navigation & Localization Engine ---
+        const navigate = (view) => {
+            if (view === 'profile' && !state.user) {
+                requireAuth(() => navigate('profile'));
+                return;
+            }
+
+            state.currentView = view;
+            
+            DOM.homeView.classList.add('hidden');
+            DOM.catalogView.classList.add('hidden');
+            DOM.profileView.classList.add('hidden');
+            DOM.header.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+            if (view === 'home') {
+                DOM.homeView.classList.remove('hidden');
+                document.getElementById('nav-home').classList.add('active');
+            } else if (view === 'stores') {
+                DOM.homeView.classList.remove('hidden'); // Simplified: Stores are on home view
+                document.getElementById('nav-stores').classList.add('active');
+                window.scrollTo({ top: DOM.storesContainer.offsetTop - 140, behavior: 'smooth' });
+            } else if (view === 'store') {
+                DOM.catalogView.classList.remove('hidden');
+                DOM.header.classList.add('hidden'); // Hide header in store for full immersion
+                window.scrollTo(0, 0);
+            } else if (view === 'profile') {
+                DOM.profileView.classList.remove('hidden');
+                document.getElementById('nav-profile').classList.add('active');
+            }
+        };
+
+        const switchLanguage = (lang) => {
+            state.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = lang;
+            
+            const dict = I18N[lang];
+            
+            // Translate text nodes
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.textContent = dict[key];
+            });
+
+            // Translate placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (dict[key]) el.placeholder = dict[key];
+            });
+
+            // Re-render specific dynamic blocks to apply new strings
+            if (state.activeStore) {
+                document.querySelector('.status-badge').textContent = dict.openNow;
+            }
+            renderStores(); // Re-render to update dynamic badges
+            resetCheckoutView(); // Re-render button text
+        };
+
+        // --- Initialization ---
+        const init = () => {
+            renderCategories(DOM.categoryContainer, false);
+            renderStores();
+            updateCartUI();
+            navigate('home');
+        };
+
+        // Boot
+        document.addEventListener('DOMContentLoaded', init);
+
+    </script>
 </body>
 </html>
