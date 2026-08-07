@@ -532,7 +532,7 @@ function initLoaderScene(){
   const light2 = new THREE.PointLight(0xa8626b, 2, 10); light2.position.set(-2,-1,2); scene.add(light2);
   scene.add(new THREE.AmbientLight(0x222222, 1));
 
-  const geo = new THREE.IcosahedronGeometry(1, 64);
+  const geo = new THREE.SphereGeometry(1, 96, 96);
   const uniforms = { uTime:{value:0} };
   const vert = `
     uniform float uTime;
@@ -590,8 +590,22 @@ function initLoaderScene(){
 
 /* ---------------- Intro sequence ---------------- */
 function runIntro(){
-  const stop = initLoaderScene();
-  const tl = gsap.timeline();
+  let stop = ()=>{};
+  try{
+    if(window.THREE) stop = initLoaderScene();
+  }catch(e){ console.warn('3D loader failed, continuing without it', e); }
+
+  // Safety net: whatever happens with WebGL/fonts/CDNs, never leave the user stuck on the loader.
+  const forceReveal = setTimeout(()=>{
+    const loader = document.getElementById('loader');
+    if(loader && !loader.classList.contains('hide')){
+      loader.classList.add('hide');
+      loader.style.display='none';
+      document.getElementById('app').style.opacity='1';
+    }
+  }, 6000);
+
+  const tl = gsap.timeline({ onComplete:()=> clearTimeout(forceReveal) });
   tl.to('#loaderWord', {opacity:1, y:0, duration:1, ease:'power3.out'}, 0.3)
     .to('#loaderSub', {opacity:1, duration:.8}, 0.6)
     .to('.loader-bar', {opacity:1, duration:.5}, 0.8)
@@ -977,7 +991,12 @@ function applyLang(lang){
 
 /* ---------------- Wire up events ---------------- */
 document.addEventListener('DOMContentLoaded', ()=>{
-  runIntro();
+  try{ runIntro(); }catch(e){
+    console.warn('Intro failed, revealing app directly', e);
+    const loader = document.getElementById('loader');
+    loader.classList.add('hide'); loader.style.display='none';
+    document.getElementById('app').style.opacity='1';
+  }
   renderStores();
   initRailPhysics();
   renderCart();
