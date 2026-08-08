@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Manrope:wght@300..800&family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <style>
 /* ============ VELVET LUXURY DESIGN TOKENS ============ */
 :root{
@@ -739,6 +741,33 @@ STORES.forEach((s,i)=> CATALOG[s.id] = buildCatalog(s,i));
 const State = { view:'home', activeStore:null, activeCat:'all', cart:{}, user:null, orderNum:null, authMode:'register' };
 const DELIVERY_FEE = 200;
 
+/* =========================================================================
+   REAL Google Sign-In via Firebase Authentication.
+   ------------------------------------------------------------------------
+   ⚠️ TO ACTIVATE: replace the placeholder values below with YOUR OWN
+   Firebase project's config (Firebase console → Project settings → your
+   web app → "SDK setup and configuration"). This is 100% free, needs no
+   backend server, and works from GitHub Pages once your domain is added
+   under Authentication → Settings → Authorized domains.
+   Until you paste real values here, the app automatically falls back to
+   a simulated sign-in (as before) so nothing breaks.
+   ========================================================================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyCn0Zas2gDWbuj1o3VLeWGV4nXV2YxQNuA",
+  authDomain: "makiaji-d95de.firebaseapp.com",
+  projectId: "makiaji-d95de",
+  appId: "1:137007583363:web:492b6cd27418d18785cbb6"
+};
+const FIREBASE_READY = firebaseConfig.apiKey !== "YOUR_API_KEY";
+let fbAuth = null;
+if(FIREBASE_READY && window.firebase){
+  try{
+    firebase.initializeApp(firebaseConfig);
+    fbAuth = firebase.auth();
+  }catch(e){ console.warn('Firebase init failed, falling back to simulated auth', e); }
+}
+
+
 /* ---------------- Web Audio + Haptics ---------------- */
 let actx;
 function playTick(freq=880, dur=0.045, vol=0.05){
@@ -1080,10 +1109,29 @@ function renderAuthView(){
 function doGoogleLogin(){
   const btn = document.getElementById('googleBtn');
   btn.style.opacity='.6'; btn.style.pointerEvents='none';
+
+  if(fbAuth){
+    // REAL Google account sign-in via Firebase Auth popup.
+    const provider = new firebase.auth.GoogleAuthProvider();
+    fbAuth.signInWithPopup(provider).then((result)=>{
+      const u = result.user;
+      State.user = { name: u.displayName || u.email || t('welcomeName'), initial: (u.displayName||u.email||'Y').charAt(0).toUpperCase(), photo: u.photoURL || null, email: u.email || null, real: true };
+      btn.style.opacity='1'; btn.style.pointerEvents='auto';
+      toast(LANG==='ar'?'تم تسجيل الدخول بحسابك فعلياً':'Signed in with your real account');
+      haptic(15); renderAccountView(); showView('account');
+    }).catch((err)=>{
+      btn.style.opacity='1'; btn.style.pointerEvents='auto';
+      console.warn('Google sign-in error', err);
+      toast(LANG==='ar' ? 'تعذّر تسجيل الدخول: '+(err.code||'') : 'Sign-in failed: '+(err.code||''));
+    });
+    return;
+  }
+
+  // Fallback: Firebase not configured yet — simulated sign-in so the app still works.
   setTimeout(()=>{
-    State.user = {name:t('welcomeName'), initial: (t('welcomeName')||'Y').charAt(0)};
+    State.user = {name:t('welcomeName'), initial: (t('welcomeName')||'Y').charAt(0), real:false};
     btn.style.opacity='1'; btn.style.pointerEvents='auto';
-    toast(LANG==='ar'?'تم تسجيل الدخول بنجاح':'Signed in successfully');
+    toast(LANG==='ar' ? 'وضع تجريبي — أضف مفاتيح Firebase لتفعيل حساب Google حقيقي' : 'Demo mode — add your Firebase keys to enable real Google sign-in');
     haptic(15); renderAccountView(); showView('account');
   }, 900);
 }
@@ -1091,18 +1139,23 @@ function doManualAuth(){
   const phone = document.getElementById('phoneAuthInput').value;
   const name = document.getElementById('nameInput').value;
   if(phone.replace(/\D/g,'').length < 8){ toast(t('needPhone')); return; }
-  State.user = {name: State.authMode==='register' ? (name || t('welcomeName')) : t('welcomeName'), initial: (name||t('welcomeName')||'Y').charAt(0)};
+  State.user = {name: State.authMode==='register' ? (name || t('welcomeName')) : t('welcomeName'), initial: (name||t('welcomeName')||'Y').charAt(0), real:false};
   toast(LANG==='ar'?'تم بنجاح':'Success'); haptic(15);
   renderAccountView(); showView('account');
 }
-function doLogout(){ State.user=null; renderAccountView(); }
+function doLogout(){
+  if(fbAuth && State.user && State.user.real){ fbAuth.signOut().catch(()=>{}); }
+  State.user=null; renderAccountView();
+}
 
 /* ---------------- Account view ---------------- */
 function renderAccountView(){
   document.getElementById('accountTitle').textContent = t('accountTitle');
   const avatarWrap = document.getElementById('accountAvatarWrap');
   if(State.user){
-    avatarWrap.innerHTML = `<div class="avatar-circ">${State.user.initial}</div>`;
+    avatarWrap.innerHTML = State.user.photo
+      ? `<img src="${State.user.photo}" alt="" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-soft);">`
+      : `<div class="avatar-circ">${State.user.initial}</div>`;
   } else {
     avatarWrap.innerHTML = `<span>${t('loginPrompt')}</span><div class="avatar-circ">?</div>`;
     avatarWrap.style.cursor='pointer';
