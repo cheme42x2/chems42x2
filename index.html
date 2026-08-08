@@ -858,6 +858,7 @@ function renderStores(){
 /* ---------------- Custom smooth-scroll (Lenis-inspired physics) ---------------- */
 function initRailPhysics(){
   const rail = document.getElementById('rail');
+  if(!rail) return;
   let isDown=false, startX=0, scrollLeft=0, velocity=0, lastX=0, lastT=0, raf=null;
   rail.addEventListener('pointerdown', e=>{
     isDown=true; rail.classList.add('dragging');
@@ -1317,51 +1318,99 @@ function applyLang(lang){
 
 /* ---------------- Wire up events ---------------- */
 document.addEventListener('DOMContentLoaded', ()=>{
-  try{ runIntro(); }catch(e){
-    console.warn('Intro failed, revealing app directly', e);
-    const loader = document.getElementById('loader');
-    loader.classList.add('hide'); loader.style.display='none';
-    document.getElementById('app').style.opacity='1';
+  // Every single init step below runs in its own try/catch: if ANY one of
+  // them fails for any reason, all the others still run and the app stays
+  // interactive instead of freezing entirely.
+  function safe(fn, label){
+    try{ fn(); }catch(e){ console.warn('[init] '+label+' failed, continuing anyway:', e); }
   }
-  try{ initRippleCanvas(); }catch(e){}
 
-  renderStores(); initRailPhysics(); renderCart(); renderAccountView(); renderAuthView(); renderNotifView();
-  document.getElementById('jadFooterHome').innerHTML = footerSignatureHTML();
-  wireFooterSignature('jadFooterHome');
+  safe(()=>{
+    try{ runIntro(); }catch(e){
+      console.warn('Intro failed, revealing app directly', e);
+      const loader = document.getElementById('loader');
+      loader.classList.add('hide'); loader.style.display='none';
+      document.getElementById('app').style.opacity='1';
+    }
+  }, 'runIntro');
 
-  document.getElementById('cartBtn').addEventListener('click', openDrawer);
-  document.getElementById('closeDrawer').addEventListener('click', closeDrawer);
-  document.getElementById('overlay').addEventListener('click', ()=>{ closeDrawer(); closeCheckout(); });
-  document.getElementById('backBtn').addEventListener('click', closeStore);
-  document.getElementById('checkoutBtn').addEventListener('click', openCheckout);
-  document.getElementById('closeCheckout').addEventListener('click', closeCheckout);
-  document.getElementById('checkoutModalBg').addEventListener('click', closeCheckout);
-  document.getElementById('confirmOrderBtn').addEventListener('click', confirmOrder);
-  document.getElementById('resetGame').addEventListener('click', resetGame);
-  document.getElementById('langSelect').addEventListener('change', e=> applyLang(e.target.value));
-  document.getElementById('notifTopBtn').addEventListener('click', ()=> showView('notif'));
+  safe(initRippleCanvas, 'initRippleCanvas');
+  safe(renderStores, 'renderStores');
+  safe(initRailPhysics, 'initRailPhysics');
+  safe(renderCart, 'renderCart');
+  safe(renderAccountView, 'renderAccountView');
+  safe(renderAuthView, 'renderAuthView');
+  safe(renderNotifView, 'renderNotifView');
+  safe(()=>{
+    document.getElementById('jadFooterHome').innerHTML = footerSignatureHTML();
+    wireFooterSignature('jadFooterHome');
+  }, 'footerSignature');
 
-  document.getElementById('googleBtn').addEventListener('click', doGoogleLogin);
-  document.getElementById('authSubmitBtn').addEventListener('click', doManualAuth);
-  document.getElementById('authSkip').addEventListener('click', ()=> showView('home'));
+  safe(()=>{
+    document.getElementById('cartBtn').addEventListener('click', openDrawer);
+    document.getElementById('closeDrawer').addEventListener('click', closeDrawer);
+    document.getElementById('overlay').addEventListener('click', ()=>{ closeDrawer(); closeCheckout(); });
+    document.getElementById('backBtn').addEventListener('click', closeStore);
+    document.getElementById('checkoutBtn').addEventListener('click', openCheckout);
+    document.getElementById('closeCheckout').addEventListener('click', closeCheckout);
+    document.getElementById('checkoutModalBg').addEventListener('click', closeCheckout);
+    document.getElementById('confirmOrderBtn').addEventListener('click', confirmOrder);
+    document.getElementById('resetGame').addEventListener('click', resetGame);
+    document.getElementById('langSelect').addEventListener('change', e=> applyLang(e.target.value));
+    document.getElementById('notifTopBtn').addEventListener('click', ()=> showView('notif'));
+  }, 'coreListeners');
 
-  document.getElementById('closeLangSheet').addEventListener('click', closeLangSheet);
-  document.getElementById('langSheetBg').addEventListener('click', closeLangSheet);
-  document.getElementById('langSearch').addEventListener('input', e=> renderLangList(e.target.value));
+  safe(()=>{
+    document.getElementById('googleBtn').addEventListener('click', doGoogleLogin);
+    document.getElementById('authSubmitBtn').addEventListener('click', doManualAuth);
+    document.getElementById('authSkip').addEventListener('click', ()=> showView('home'));
+  }, 'authListeners');
 
-  document.querySelectorAll('.nav-btn').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      haptic(8); playTick(820,.03,.03);
-      const v = btn.dataset.view;
-      if(v==='cart'){ openDrawer(); return; }
-      if(v==='grid' && !State.activeStore){ showView('home'); toast(LANG==='ar'?'اختر متجراً للدخول إليه':'Pick a store to enter'); return; }
-      showView(v);
+  safe(()=>{
+    document.getElementById('closeLangSheet').addEventListener('click', closeLangSheet);
+    document.getElementById('langSheetBg').addEventListener('click', closeLangSheet);
+    document.getElementById('langSearch').addEventListener('input', e=> renderLangList(e.target.value));
+  }, 'langSheetListeners');
+
+  safe(()=>{
+    document.querySelectorAll('.nav-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        haptic(8); playTick(820,.03,.03);
+        const v = btn.dataset.view;
+        if(v==='cart'){ openDrawer(); return; }
+        if(v==='grid' && !State.activeStore){ showView('home'); toast(LANG==='ar'?'اختر متجراً للدخول إليه':'Pick a store to enter'); return; }
+        showView(v);
+      });
     });
-  });
+  }, 'navListeners');
 
-  document.querySelectorAll('.icon-btn, .store-card, .cta-btn, .google-btn, .gold-btn').forEach(el=>{
-    el.addEventListener('pointerenter', ()=> playTick(1200,.02,.015));
-  });
+  safe(()=>{
+    document.querySelectorAll('.icon-btn, .store-card, .cta-btn, .google-btn, .gold-btn').forEach(el=>{
+      el.addEventListener('pointerenter', ()=> playTick(1200,.02,.015));
+    });
+  }, 'hoverSoundListeners');
+
+  // Absolute last resort: whatever happens, never leave the user staring at
+  // a black screen forever.
+  setTimeout(()=>{
+    const loader = document.getElementById('loader');
+    if(loader && loader.style.display !== 'none'){
+      loader.classList.add('hide'); loader.style.display='none';
+      document.getElementById('app').style.opacity='1';
+    }
+  }, 7000);
+});
+
+// Ultimate safety net: ANY uncaught error anywhere in the page (including
+// ones outside DOMContentLoaded, e.g. a blocked CDN script) will force the
+// loader away so the page is never stuck black.
+window.addEventListener('error', function(){
+  const loader = document.getElementById('loader');
+  if(loader && loader.style.display !== 'none'){
+    loader.classList.add('hide'); loader.style.display='none';
+    const app = document.getElementById('app');
+    if(app) app.style.opacity='1';
+  }
 });
 </script>
 </body>
