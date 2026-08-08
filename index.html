@@ -294,11 +294,11 @@ main{padding-top:82px;}
 .nav-btn .nb-badge{position:absolute;top:-2px;inset-inline-end:2px;background:var(--gold-bright);color:var(--obsidian);font-size:9px;min-width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;}
 
 /* ============ FOOTER SIGNATURE ============ */
-.jad-footer{margin:34px clamp(14px,4vw,36px) 20px;padding:26px 24px;border-radius:var(--radius-lg);text-align:center;position:relative;overflow:hidden;}
-.jad-footer .jad-glow{position:absolute;inset:0;background:radial-gradient(circle at 50% 0%, var(--gold-soft), transparent 60%);opacity:.6;pointer-events:none;}
-.jad-signature{font-family:var(--font-display-ar);font-size:clamp(18px,3.6vw,26px);color:var(--gold-bright);letter-spacing:.03em;display:inline-block;transition:transform .15s ease-out, text-shadow .15s;position:relative;}
-.jad-footer .made-by{font-size:10.5px;color:var(--ink-dim);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px;}
-.wa-line{margin-top:18px;display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:30px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.28);color:var(--ink);font-size:13px;}
+.jad-footer{margin:34px clamp(14px,4vw,36px) 20px;padding:16px 20px;border-radius:var(--radius-md);text-align:center;position:relative;overflow:hidden;}
+.jad-footer .jad-glow{position:absolute;inset:0;background:radial-gradient(circle at 50% 0%, var(--gold-soft), transparent 60%);opacity:.5;pointer-events:none;}
+.jad-signature{font-family:var(--font-display-ar);font-size:clamp(13px,2vw,15px);color:var(--gold-bright);letter-spacing:.03em;display:inline-block;transition:transform .15s ease-out, text-shadow .15s;position:relative;}
+.jad-footer .made-by{font-size:9px;color:var(--ink-dim);letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px;}
+.wa-line{margin-top:12px;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:30px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.28);color:var(--ink);font-size:12px;}
 .wa-icon{width:22px;height:22px;color:var(--whatsapp);animation:waPulse 2.2s ease-in-out infinite;flex-shrink:0;}
 @keyframes waPulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(37,211,102,.5))}50%{transform:scale(1.12);filter:drop-shadow(0 0 6px rgba(37,211,102,.6))}}
 .wa-line b{color:#7fe6a3;direction:ltr;}
@@ -669,13 +669,43 @@ const STORE_NAMES = [
 const CATEGORIES = ['أحمر شفاه','كريم أساس','ماسكرا','بالتة ظلال','بلاشر','هايلايتر','كونسيلر','بودرة تثبيت','آيلاينر','برايمر','لمعان شفاه','قلم حواجب','مزيل مكياج','عطر فاخر','مقوّم شفاه','واقي شمس','برونزر','فرشاة مكياج','رموش صناعية','سيروم بشرة'];
 const CATEGORIES_EN = ['Lipstick','Foundation','Mascara','Eyeshadow Palette','Blush','Highlighter','Concealer','Setting Powder','Eyeliner','Primer','Lip Gloss','Brow Pencil','Makeup Remover','Luxury Perfume','Lip Liner','Sunscreen','Bronzer','Makeup Brush','False Lashes','Face Serum'];
 
+/* Real makeup/cosmetics photography (Unsplash, free-to-use), curated per
+   category so every product shows something actually relevant — no more
+   random stock photos of unrelated subjects. Each category has a small
+   pool of real photo IDs that gets cycled through for variety. */
+const CATEGORY_IMG_KEYS = ['lipstick','foundation','mascara','palette','blush','highlighter','concealer','powder','eyeliner','primer','gloss','brow','remover','perfume','lipliner','sunscreen','bronzer','brush','lashes','serum'];
+const REAL_IMG = {
+  lipstick:   ['1625093742435-6fa192b6fb10','1586495777744-4413f21062fa','1619352520578-8fefbfa2f904','1626895872564-b691b6877b83','1542452255191-c85a98f2c5d1','1555050455-f96634b5cba6','1571646034647-52e6ea84b28c'],
+  foundation: ['1557205465-f3762edea6d3','1560879311-370fd4561a0d','1570797919067-2dbfd3ebc071'],
+  mascara:    ['1512207159096-c2c91b1dfadd','1670832209136-fad04d9920f9','1706170498499-235824fd317c'],
+  palette:    ['1512207576147-99bc3066b621','1512207855369-643452a63d46','1521840233161-295ed621e056'],
+  blush:      ['1512495967160-4e815a64fba6','1571875257727-256c39da42af'],
+  highlighter:['1546951400-c106ca5fc813','1512496015851-a90fb38ba796'],
+  concealer:  ['1557205465-f3762edea6d3','1560879311-370fd4561a0d'],
+  powder:     ['1521840233161-295ed621e056','1512207855369-643452a63d46'],
+  eyeliner:   ['1650664370914-f026578ec2a4','1512207159096-c2c91b1dfadd'],
+  primer:     ['1577036251102-9cf1285e487a','1570797919067-2dbfd3ebc071'],
+  gloss:      ['1619352520578-8fefbfa2f904','1586495777744-4413f21062fa'],
+  brow:       ['1650664370914-f026578ec2a4','1512207159096-c2c91b1dfadd'],
+  remover:    ['1560879311-370fd4561a0d','1546951400-c106ca5fc813'],
+  perfume:    ['1599733589046-10c005739ef9','1577036251102-9cf1285e487a'],
+  lipliner:   ['1542452255191-c85a98f2c5d1','1571646034647-52e6ea84b28c'],
+  sunscreen:  ['1557205465-f3762edea6d3','1570797919067-2dbfd3ebc071'],
+  bronzer:    ['1512207576147-99bc3066b621','1512495967160-4e815a64fba6'],
+  brush:      ['1453761816053-ed5ba727b5b7','1596462502278-27bfdc403348','1620464003286-a5b0d79f32c2','1500840216050-6ffa99d75160'],
+  lashes:     ['1512207159096-c2c91b1dfadd','1670832209136-fad04d9920f9'],
+  serum:      ['1560879311-370fd4561a0d','1577036251102-9cf1285e487a']
+};
+const STORE_IMG_IDS = ['1512496015851-a90fb38ba796','1512495967160-4e815a64fba6','1571875257727-256c39da42af','1546951400-c106ca5fc813','1512207576147-99bc3066b621','1512207855369-643452a63d46','1521840233161-295ed621e056','1596462502278-27bfdc403348','1453761816053-ed5ba727b5b7','1620464003286-a5b0d79f32c2'];
+function unsplashUrl(photoId, w){ return `https://images.unsplash.com/photo-${photoId}?q=80&w=${w||700}&auto=format&fit=crop`; }
+
 function seededRand(seed){ let x = Math.sin(seed) * 10000; return x - Math.floor(x); }
 
 function buildStores(){
   return STORE_NAMES.map((s, i)=>{
     const delivery = 22 + Math.round(seededRand(i*7+1)*28);
     return { id:'store'+i, name:s.name, nameEn:s.en, tag:s.tag,
-      img:`https://picsum.photos/seed/maisonvl${i}/600/500`,
+      img: unsplashUrl(STORE_IMG_IDS[i % STORE_IMG_IDS.length], 700),
       deliveryMin: delivery, priceIndex: 0.85 + seededRand(i*3+2)*0.4, open: seededRand(i*11+3) > 0.15 };
   });
 }
@@ -683,23 +713,27 @@ const STORES = buildStores();
 
 function buildCatalog(store, storeIndex){
   const items = [];
-  const count = 20 + (storeIndex % 3);
+  const count = 24 + (storeIndex % 4); // 24-27 real products per store — a bigger, richer store to browse
   for(let i=0;i<count;i++){
     const catIdx = i % CATEGORIES.length;
     const seed = storeIndex*100 + i;
     const base = 1800 + Math.round(seededRand(seed)*7200);
     const price = Math.round(base * store.priceIndex / 10) * 10;
     const rating = (4 + seededRand(seed*2)*1).toFixed(1);
+    const imgKey = CATEGORY_IMG_KEYS[catIdx];
+    const pool = REAL_IMG[imgKey];
+    const photoId = pool[(storeIndex + i) % pool.length];
     items.push({ id: store.id+'-p'+i, storeId: store.id,
       name: `${CATEGORIES[catIdx]} ${store.name.split(' ')[0]} No.${(i%9)+1}`,
       nameEn: `${CATEGORIES_EN[catIdx]} — ${store.nameEn} No.${(i%9)+1}`,
       cat: CATEGORIES[catIdx], catEn: CATEGORIES_EN[catIdx], price, rating,
-      img:`https://picsum.photos/seed/prodvl${seed}/500/620` });
+      img: unsplashUrl(photoId, 600) });
   }
   return items;
 }
 const CATALOG = {};
 STORES.forEach((s,i)=> CATALOG[s.id] = buildCatalog(s,i));
+
 
 /* ---------------- FSM State ---------------- */
 const State = { view:'home', activeStore:null, activeCat:'all', cart:{}, user:null, orderNum:null, authMode:'register' };
@@ -1251,7 +1285,7 @@ function footerSignatureHTML(){
     <div class="jad-glow"></div>
     <div class="made-by">${t('madeBy')}</div>
     <div class="jad-signature" id="jadSig-${Math.random().toString(36).slice(2,7)}">${t('signedTo')}</div>
-    <div style="color:var(--ink-dim);font-size:10.5px;margin-top:4px;">${t('signedTag')}</div>
+    <div style="color:var(--ink-dim);font-size:9px;margin-top:2px;">${t('signedTag')}</div>
     <div><a class="wa-line" href="https://wa.me/213775819209" target="_blank" rel="noopener">
       <svg class="wa-icon" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.3 8.7 3.3 15.7c0 2.5.7 4.8 1.9 6.8L3 29l6.7-2.1c1.9 1 4.1 1.6 6.3 1.6 7 0 12.7-5.7 12.7-12.7C28.7 8.7 23 3 16 3zm0 23.1c-2 0-3.9-.5-5.5-1.5l-.4-.2-4 1.2 1.2-3.9-.3-.4a10.3 10.3 0 01-1.6-5.6C5.4 9.9 10.2 5.1 16 5.1S26.6 9.9 26.6 15.7 21.8 26.1 16 26.1zm5.8-7.7c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2s-.8 1-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6.1-.1.3-.4.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.8-1-2.4-.3-.6-.5-.6-.7-.6h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>
       <span>${LANG==='ar'?'للتواصل واتساب':'WhatsApp'}: <b>0775819209</b></span>
